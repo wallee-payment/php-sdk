@@ -1,0 +1,37 @@
+{
+    "name": "wallee/sdk",
+    "description": "",
+    "keywords": [
+        "wallee",
+        "payment",
+        "php",
+        "sdk",
+        "api"
+    ],
+    "homepage": "http://wallee.com",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "customweb GmbH",
+            "homepage": "https://wallee.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8",
+        "satooshi/php-coveralls": "~1.0",
+        "squizlabs/php_codesniffer": "~2.6",
+        "friendsofphp/php-cs-fixer": "~1.12"
+    },
+    "autoload": {
+        "psr-4": { "Wallee\\Sdk\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Wallee\\Sdk\\" : "test/" }
+    }
+}

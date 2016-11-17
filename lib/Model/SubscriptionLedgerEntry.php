@@ -1,0 +1,600 @@
+<?php
+/**
+ * Wallee SDK
+ *
+ * This library allows to interact with the Wallee payment service.
+ * Wallee SDK: 1.0.0
+ * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace Wallee\Sdk\Model;
+
+use \Wallee\Sdk\ValidationException;
+
+/**
+ * SubscriptionLedgerEntry model
+ *
+ * @category    Class
+ * @description The subscription ledger entry represents a single change on the subscription balance.
+ * @package     Wallee\Sdk
+ * @author      customweb GmbH
+ * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @link        https://github.com/wallee-payment/wallee-php-sdk
+ */
+class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
+
+    /**
+     * The original name of the model.
+     *
+     * @var string
+     */
+    private static $swaggerModelName = 'SubscriptionLedgerEntry';
+
+    /**
+     * An array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
+    private static $swaggerTypes = array(
+        'aggregatedTaxRate' => 'float',
+        'amountExcludingTax' => 'float',
+        'amountIncludingTax' => 'float',
+        'createdBy' => '\Wallee\Sdk\Model\EntityReference',
+        'createdOn' => 'string',
+        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+        'plannedPurgeDate' => 'string',
+        'quantity' => 'float',
+        'state' => 'string',
+        'subscriptionVersion' => '\Wallee\Sdk\Model\EntityReference',
+        'taxAmount' => 'float',
+        'taxes' => '\Wallee\Sdk\Model\Tax[]',
+        'title' => 'string',
+        'version' => 'int'    );
+
+	/**
+	 * Returns an array of property to type mappings.
+	 *
+	 * @return string[]
+	 */
+    public static function swaggerTypes() {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
+    
+    
+    /**
+     * Values of state.
+     */ 
+    const STATE_OPEN = 'OPEN';
+    const STATE_SCHEDULED = 'SCHEDULED';
+    const STATE_PAID = 'PAID';
+    
+    /**
+     * Returns allowable values of state.
+     *
+     * @return string[]
+     */
+    public function getStateAllowableValues() {
+        return [
+            self::STATE_OPEN,
+            self::STATE_SCHEDULED,
+            self::STATE_PAID,
+        ];
+    }
+    
+    
+    /**
+     * 
+     *
+     * @var float
+     */
+    private $aggregatedTaxRate;
+    
+    /**
+     * 
+     *
+     * @var float
+     */
+    private $amountExcludingTax;
+    
+    /**
+     * 
+     *
+     * @var float
+     */
+    private $amountIncludingTax;
+    
+    /**
+     * @var \Wallee\Sdk\Model\EntityReference
+     */
+    private $createdBy;
+    
+    /**
+     * The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @var string
+     */
+    private $createdOn;
+    
+    /**
+     * @var \Wallee\Sdk\Model\EntityReference
+     */
+    private $linkedSpaceId;
+    
+    /**
+     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @var string
+     */
+    private $plannedPurgeDate;
+    
+    /**
+     * 
+     *
+     * @var float
+     */
+    private $quantity;
+    
+    /**
+     * 
+     *
+     * @var string
+     */
+    private $state;
+    
+    /**
+     * @var \Wallee\Sdk\Model\EntityReference
+     */
+    private $subscriptionVersion;
+    
+    /**
+     * 
+     *
+     * @var float
+     */
+    private $taxAmount;
+    
+    /**
+     * 
+     *
+     * @var \Wallee\Sdk\Model\Tax[]
+     */
+    private $taxes;
+    
+    /**
+     * 
+     *
+     * @var string
+     */
+    private $title;
+    
+    /**
+     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @var int
+     */
+    private $version;
+    
+
+    /**
+     * Constructor.
+     *
+     * @param mixed[] $data an associated array of property values initializing the model
+     */
+    public function __construct(array $data = null) {
+        parent::__construct($data);
+
+        $this->setCreatedBy(isset($data['createdBy']) ? $data['createdBy'] : null);
+        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+        $this->setSubscriptionVersion(isset($data['subscriptionVersion']) ? $data['subscriptionVersion'] : null);
+        $this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
+    }
+
+
+    /**
+     * Returns aggregatedTaxRate.
+     *
+     * 
+     *
+     * @return float
+     */
+    public function getAggregatedTaxRate() {
+        return $this->aggregatedTaxRate;
+    }
+
+    /**
+     * Sets aggregatedTaxRate.
+     *
+     * @param float $aggregatedTaxRate
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setAggregatedTaxRate($aggregatedTaxRate) {
+        $this->aggregatedTaxRate = $aggregatedTaxRate;
+
+        return $this;
+    }
+
+    /**
+     * Returns amountExcludingTax.
+     *
+     * 
+     *
+     * @return float
+     */
+    public function getAmountExcludingTax() {
+        return $this->amountExcludingTax;
+    }
+
+    /**
+     * Sets amountExcludingTax.
+     *
+     * @param float $amountExcludingTax
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setAmountExcludingTax($amountExcludingTax) {
+        $this->amountExcludingTax = $amountExcludingTax;
+
+        return $this;
+    }
+
+    /**
+     * Returns amountIncludingTax.
+     *
+     * 
+     *
+     * @return float
+     */
+    public function getAmountIncludingTax() {
+        return $this->amountIncludingTax;
+    }
+
+    /**
+     * Sets amountIncludingTax.
+     *
+     * @param float $amountIncludingTax
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setAmountIncludingTax($amountIncludingTax) {
+        $this->amountIncludingTax = $amountIncludingTax;
+
+        return $this;
+    }
+
+    /**
+     * Returns createdBy.
+     *
+     * @return \Wallee\Sdk\Model\EntityReference
+     */
+    public function getCreatedBy() {
+        return $this->createdBy;
+    }
+
+    /**
+     * Sets createdBy.
+     *
+     * @param \Wallee\Sdk\Model\EntityReference $createdBy
+     * @return SubscriptionLedgerEntry
+     */
+    public function setCreatedBy($createdBy) {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Returns createdOn.
+     *
+     * The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return string
+     */
+    public function getCreatedOn() {
+        return $this->createdOn;
+    }
+
+    /**
+     * Sets createdOn.
+     *
+     * @param string $createdOn
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setCreatedOn($createdOn) {
+        $this->createdOn = $createdOn;
+
+        return $this;
+    }
+
+    /**
+     * Returns externalId.
+     *
+     * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     *
+     * @return string
+     */
+    public function getExternalId() {
+        return parent::getExternalId();
+    }
+
+    /**
+     * Sets externalId.
+     *
+     * @param string $externalId
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setExternalId($externalId) {
+        return parent::setExternalId($externalId);
+    }
+
+    /**
+     * Returns linkedSpaceId.
+     *
+     * @return \Wallee\Sdk\Model\EntityReference
+     */
+    public function getLinkedSpaceId() {
+        return $this->linkedSpaceId;
+    }
+
+    /**
+     * Sets linkedSpaceId.
+     *
+     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+     * @return SubscriptionLedgerEntry
+     */
+    public function setLinkedSpaceId($linkedSpaceId) {
+        $this->linkedSpaceId = $linkedSpaceId;
+
+        return $this;
+    }
+
+    /**
+     * Returns plannedPurgeDate.
+     *
+     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     *
+     * @return string
+     */
+    public function getPlannedPurgeDate() {
+        return $this->plannedPurgeDate;
+    }
+
+    /**
+     * Sets plannedPurgeDate.
+     *
+     * @param string $plannedPurgeDate
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setPlannedPurgeDate($plannedPurgeDate) {
+        $this->plannedPurgeDate = $plannedPurgeDate;
+
+        return $this;
+    }
+
+    /**
+     * Returns quantity.
+     *
+     * 
+     *
+     * @return float
+     */
+    public function getQuantity() {
+        return $this->quantity;
+    }
+
+    /**
+     * Sets quantity.
+     *
+     * @param float $quantity
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setQuantity($quantity) {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Returns state.
+     *
+     * 
+     *
+     * @return string
+     */
+    public function getState() {
+        return $this->state;
+    }
+
+    /**
+     * Sets state.
+     *
+     * @param string $state
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setState($state) {
+        $allowed_values = array('OPEN', 'SCHEDULED', 'PAID');
+        if (!is_null($state) && (!in_array($state, $allowed_values))) {
+            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'OPEN', 'SCHEDULED', 'PAID'");
+        }
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Returns subscriptionVersion.
+     *
+     * @return \Wallee\Sdk\Model\EntityReference
+     */
+    public function getSubscriptionVersion() {
+        return $this->subscriptionVersion;
+    }
+
+    /**
+     * Sets subscriptionVersion.
+     *
+     * @param \Wallee\Sdk\Model\EntityReference $subscriptionVersion
+     * @return SubscriptionLedgerEntry
+     */
+    public function setSubscriptionVersion($subscriptionVersion) {
+        $this->subscriptionVersion = $subscriptionVersion;
+
+        return $this;
+    }
+
+    /**
+     * Returns taxAmount.
+     *
+     * 
+     *
+     * @return float
+     */
+    public function getTaxAmount() {
+        return $this->taxAmount;
+    }
+
+    /**
+     * Sets taxAmount.
+     *
+     * @param float $taxAmount
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setTaxAmount($taxAmount) {
+        $this->taxAmount = $taxAmount;
+
+        return $this;
+    }
+
+    /**
+     * Returns taxes.
+     *
+     * 
+     *
+     * @return \Wallee\Sdk\Model\Tax[]
+     */
+    public function getTaxes() {
+        return $this->taxes;
+    }
+
+    /**
+     * Sets taxes.
+     *
+     * @param \Wallee\Sdk\Model\Tax[] $taxes
+     * @return SubscriptionLedgerEntry
+     */
+    public function setTaxes($taxes) {
+        $this->taxes = $taxes;
+
+        return $this;
+    }
+
+    /**
+     * Returns title.
+     *
+     * 
+     *
+     * @return string
+     */
+    public function getTitle() {
+        return $this->title;
+    }
+
+    /**
+     * Sets title.
+     *
+     * @param string $title
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setTitle($title) {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Returns version.
+     *
+     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     *
+     * @return int
+     */
+    public function getVersion() {
+        return $this->version;
+    }
+
+    /**
+     * Sets version.
+     *
+     * @param int $version
+     * @return SubscriptionLedgerEntry
+     */
+    protected function setVersion($version) {
+        $this->version = $version;
+
+        return $this;
+    }
+    
+    /**
+     * Validates the model's properties and throws a ValidationException if the validation fails.
+     *
+     * @throws ValidationException
+     */
+    public function validate() {
+        parent::validate();
+        
+        if ($this->getAmountIncludingTax() === null) {
+        	throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
+        }
+        if ($this->getExternalId() === null) {
+        	throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+        }
+        if ($this->getQuantity() === null) {
+        	throw new ValidationException("'quantity' can't be null", 'quantity', $this);
+        }
+        $allowed_values = ["OPEN", "SCHEDULED", "PAID"];
+        if (!in_array($this->getState(), $allowed_values)) {
+            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+        }
+
+        if ($this->getTitle() === null) {
+        	throw new ValidationException("'title' can't be null", 'title', $this);
+        }
+    }
+
+    /**
+     * Returns true if all the properties in the model are valid.
+     *
+     * @return boolean
+     */
+    public function isValid() {
+    	try {
+    		$this->validate();
+    		return true;
+    	} catch (ValidationException $e) {
+    		return false;
+    	}
+    }
+
+    /**
+     * Returns the string presentation of the object.
+     *
+     * @return string
+     */
+    public function __toString() {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        }
+
+        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+    }
+    
+}

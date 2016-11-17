@@ -1,0 +1,248 @@
+<?php
+/**
+ * Wallee SDK
+ *
+ * This library allows to interact with the Wallee payment service.
+ * Wallee SDK: 1.0.0
+ * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace Wallee\Sdk\Model;
+
+use \Wallee\Sdk\ValidationException;
+
+/**
+ * ProductSetupFeeUpdate model
+ *
+ * @category    Class
+ * @description 
+ * @package     Wallee\Sdk
+ * @author      customweb GmbH
+ * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @link        https://github.com/wallee-payment/wallee-php-sdk
+ */
+class ProductSetupFeeUpdate extends ProductSetupFee  {
+
+    /**
+     * The original name of the model.
+     *
+     * @var string
+     */
+    private static $swaggerModelName = 'ProductSetupFee.Update';
+
+    /**
+     * An array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
+    private static $swaggerTypes = array(
+    );
+
+	/**
+	 * Returns an array of property to type mappings.
+	 *
+	 * @return string[]
+	 */
+    public static function swaggerTypes() {
+        return self::$swaggerTypes + parent::swaggerTypes();
+    }
+    
+    
+    
+
+    /**
+     * Constructor.
+     *
+     * @param mixed[] $data an associated array of property values initializing the model
+     */
+    public function __construct(array $data = null) {
+        parent::__construct($data);
+
+        $this->setComponent(isset($data['component']) ? $data['component'] : null);
+        $this->setDescription(isset($data['description']) ? $data['description'] : null);
+        $this->setName(isset($data['name']) ? $data['name'] : null);
+        $this->setOnDowngradeCreditedAmount(isset($data['onDowngradeCreditedAmount']) ? $data['onDowngradeCreditedAmount'] : null);
+        $this->setOnUpgradeCreditedAmount(isset($data['onUpgradeCreditedAmount']) ? $data['onUpgradeCreditedAmount'] : null);
+        $this->setSetupFee(isset($data['setupFee']) ? $data['setupFee'] : null);
+    }
+
+
+    /**
+     * Returns component.
+     *
+     * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+     */
+    public function getComponent() {
+        return parent::getComponent();
+    }
+
+    /**
+     * Sets component.
+     *
+     * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+     * @return ProductSetupFeeUpdate
+     */
+    public function setComponent($component) {
+        return parent::setComponent($component);
+    }
+
+    /**
+     * Returns description.
+     *
+     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+     */
+    public function getDescription() {
+        return parent::getDescription();
+    }
+
+    /**
+     * Sets description.
+     *
+     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+     * @return ProductSetupFeeUpdate
+     */
+    public function setDescription($description) {
+        return parent::setDescription($description);
+    }
+
+    /**
+     * Returns name.
+     *
+     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+     */
+    public function getName() {
+        return parent::getName();
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+     * @return ProductSetupFeeUpdate
+     */
+    public function setName($name) {
+        return parent::setName($name);
+    }
+
+    /**
+     * Returns onDowngradeCreditedAmount.
+     *
+     * When the subscription is changed and the change is considered as a downgrade the amount defined by this property will be credited to the subscriber.
+     *
+     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+     */
+    public function getOnDowngradeCreditedAmount() {
+        return parent::getOnDowngradeCreditedAmount();
+    }
+
+    /**
+     * Sets onDowngradeCreditedAmount.
+     *
+     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $onDowngradeCreditedAmount
+     * @return ProductSetupFeeUpdate
+     */
+    public function setOnDowngradeCreditedAmount($onDowngradeCreditedAmount) {
+        return parent::setOnDowngradeCreditedAmount($onDowngradeCreditedAmount);
+    }
+
+    /**
+     * Returns onUpgradeCreditedAmount.
+     *
+     * When the subscription is changed and the change is considered as a upgrade the amount defined by this property will be credited to the subscriber.
+     *
+     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+     */
+    public function getOnUpgradeCreditedAmount() {
+        return parent::getOnUpgradeCreditedAmount();
+    }
+
+    /**
+     * Sets onUpgradeCreditedAmount.
+     *
+     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $onUpgradeCreditedAmount
+     * @return ProductSetupFeeUpdate
+     */
+    public function setOnUpgradeCreditedAmount($onUpgradeCreditedAmount) {
+        return parent::setOnUpgradeCreditedAmount($onUpgradeCreditedAmount);
+    }
+
+    /**
+     * Returns setupFee.
+     *
+     * The setup fee is charged when the subscriber subscribes to this component. The setup fee is debited with the first charge for the subscriptions.
+     *
+     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+     */
+    public function getSetupFee() {
+        return parent::getSetupFee();
+    }
+
+    /**
+     * Sets setupFee.
+     *
+     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $setupFee
+     * @return ProductSetupFeeUpdate
+     */
+    public function setSetupFee($setupFee) {
+        return parent::setSetupFee($setupFee);
+    }
+    
+    /**
+     * Validates the model's properties and throws a ValidationException if the validation fails.
+     *
+     * @throws ValidationException
+     */
+    public function validate() {
+        parent::validate();
+        
+        if ($this->getOnDowngradeCreditedAmount() === null) {
+        	throw new ValidationException("'onDowngradeCreditedAmount' can't be null", 'onDowngradeCreditedAmount', $this);
+        }
+        if ($this->getOnUpgradeCreditedAmount() === null) {
+        	throw new ValidationException("'onUpgradeCreditedAmount' can't be null", 'onUpgradeCreditedAmount', $this);
+        }
+        if ($this->getSetupFee() === null) {
+        	throw new ValidationException("'setupFee' can't be null", 'setupFee', $this);
+        }
+    }
+
+    /**
+     * Returns true if all the properties in the model are valid.
+     *
+     * @return boolean
+     */
+    public function isValid() {
+    	try {
+    		$this->validate();
+    		return true;
+    	} catch (ValidationException $e) {
+    		return false;
+    	}
+    }
+
+    /**
+     * Returns the string presentation of the object.
+     *
+     * @return string
+     */
+    public function __toString() {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+        }
+
+        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+    }
+    
+}
