@@ -35,294 +35,294 @@ use \Wallee\Sdk\ValidationException;
  */
 class Token extends IdempotentJpaEntity  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Token';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Token';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'createdOn' => 'string',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'plannedPurgeDate' => 'string',
-        'state' => 'string',
-        'tokenReference' => 'string',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'createdOn' => 'string',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'plannedPurgeDate' => 'string',
+		'state' => 'string',
+		'tokenReference' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_CREATE = 'CREATE';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_INACTIVE = 'INACTIVE';
-    const STATE_DELETING = 'DELETING';
-    const STATE_DELETED = 'DELETED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_CREATE,
-            self::STATE_ACTIVE,
-            self::STATE_INACTIVE,
-            self::STATE_DELETING,
-            self::STATE_DELETED,
-        ];
-    }
-    
-    
-    /**
-     * The created on date indicates the date on which the entity was stored into the database.
-     *
-     * @var string
-     */
-    private $createdOn;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
-     *
-     * @var string
-     */
-    private $tokenReference;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_DELETING = 'DELETING';
+	const STATE_DELETED = 'DELETED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_DELETING,
+			self::STATE_DELETED,
+		];
+	}
+	
 
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-    }
+	/**
+	 * The created on date indicates the date on which the entity was stored into the database.
+	 *
+	 * @var string
+	 */
+	private $createdOn;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
+	 *
+	 * @var string
+	 */
+	private $tokenReference;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns createdOn.
-     *
-     * The created on date indicates the date on which the entity was stored into the database.
-     *
-     * @return string
-     */
-    public function getCreatedOn() {
-        return $this->createdOn;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets createdOn.
-     *
-     * @param string $createdOn
-     * @return Token
-     */
-    protected function setCreatedOn($createdOn) {
-        $this->createdOn = $createdOn;
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+	}
 
-        return $this;
-    }
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Returns createdOn.
+	 *
+	 * The created on date indicates the date on which the entity was stored into the database.
+	 *
+	 * @return string
+	 */
+	public function getCreatedOn() {
+		return $this->createdOn;
+	}
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return Token
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+	/**
+	 * Sets createdOn.
+	 *
+	 * @param string $createdOn
+	 * @return Token
+	 */
+	protected function setCreatedOn($createdOn) {
+		$this->createdOn = $createdOn;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return Token
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return Token
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return Token
-     */
-    protected function setState($state) {
-        $allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-        if (!is_null($state) && (!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-        }
-        $this->state = $state;
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return Token
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns tokenReference.
-     *
-     * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
-     *
-     * @return string
-     */
-    public function getTokenReference() {
-        return $this->tokenReference;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Sets tokenReference.
-     *
-     * @param string $tokenReference
-     * @return Token
-     */
-    protected function setTokenReference($tokenReference) {
-        $this->tokenReference = $tokenReference;
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return Token
+	 */
+	protected function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
+		}
+		$this->state = $state;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Returns tokenReference.
+	 *
+	 * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
+	 *
+	 * @return string
+	 */
+	public function getTokenReference() {
+		return $this->tokenReference;
+	}
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return Token
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+	/**
+	 * Sets tokenReference.
+	 *
+	 * @param string $tokenReference
+	 * @return Token
+	 */
+	protected function setTokenReference($tokenReference) {
+		$this->tokenReference = $tokenReference;
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        $allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+		return $this;
+	}
 
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return Token
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

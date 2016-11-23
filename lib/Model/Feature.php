@@ -35,322 +35,322 @@ use \Wallee\Sdk\ValidationException;
  */
 class Feature  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Feature';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Feature';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'beta' => 'bool',
-        'description' => 'map[string,string]',
-        'id' => 'int',
-        'logoPath' => 'string',
-        'name' => 'map[string,string]',
-        'requiredFeatures' => '\Wallee\Sdk\Model\EntityReference',
-        'sortOrder' => 'int',
-        'visible' => 'bool'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'beta' => 'bool',
+		'description' => 'map[string,string]',
+		'id' => 'int',
+		'logoPath' => 'string',
+		'name' => 'map[string,string]',
+		'requiredFeatures' => '\Wallee\Sdk\Model\EntityReference',
+		'sortOrder' => 'int',
+		'visible' => 'bool'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var bool
-     */
-    private $beta;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $description;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $logoPath;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $name;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $requiredFeatures;
-    
-    /**
-     * 
-     *
-     * @var int
-     */
-    private $sortOrder;
-    
-    /**
-     * 
-     *
-     * @var bool
-     */
-    private $visible;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setRequiredFeatures(isset($data['requiredFeatures']) ? $data['requiredFeatures'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $beta;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $description;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $logoPath;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $name;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $requiredFeatures;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $sortOrder;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $visible;
 
 
-    /**
-     * Returns beta.
-     *
-     * 
-     *
-     * @return bool
-     */
-    public function getBeta() {
-        return $this->beta;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setRequiredFeatures(isset($data['requiredFeatures']) ? $data['requiredFeatures'] : null);
+	}
 
-    /**
-     * Sets beta.
-     *
-     * @param bool $beta
-     * @return Feature
-     */
-    protected function setBeta($beta) {
-        $this->beta = $beta;
 
-        return $this;
-    }
+	/**
+	 * Returns beta.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getBeta() {
+		return $this->beta;
+	}
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets beta.
+	 *
+	 * @param bool $beta
+	 * @return Feature
+	 */
+	protected function setBeta($beta) {
+		$this->beta = $beta;
 
-    /**
-     * Sets description.
-     *
-     * @param map[string,string] $description
-     * @return Feature
-     */
-    public function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param map[string,string] $description
+	 * @return Feature
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return Feature
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns logoPath.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLogoPath() {
-        return $this->logoPath;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Feature
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets logoPath.
-     *
-     * @param string $logoPath
-     * @return Feature
-     */
-    protected function setLogoPath($logoPath) {
-        $this->logoPath = $logoPath;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns logoPath.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLogoPath() {
+		return $this->logoPath;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets logoPath.
+	 *
+	 * @param string $logoPath
+	 * @return Feature
+	 */
+	protected function setLogoPath($logoPath) {
+		$this->logoPath = $logoPath;
 
-    /**
-     * Sets name.
-     *
-     * @param map[string,string] $name
-     * @return Feature
-     */
-    public function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns requiredFeatures.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getRequiredFeatures() {
-        return $this->requiredFeatures;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param map[string,string] $name
+	 * @return Feature
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets requiredFeatures.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $requiredFeatures
-     * @return Feature
-     */
-    public function setRequiredFeatures($requiredFeatures) {
-        $this->requiredFeatures = $requiredFeatures;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns requiredFeatures.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getRequiredFeatures() {
+		return $this->requiredFeatures;
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * 
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return $this->sortOrder;
-    }
+	/**
+	 * Sets requiredFeatures.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $requiredFeatures
+	 * @return Feature
+	 */
+	public function setRequiredFeatures($requiredFeatures) {
+		$this->requiredFeatures = $requiredFeatures;
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return Feature
-     */
-    protected function setSortOrder($sortOrder) {
-        $this->sortOrder = $sortOrder;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
 
-    /**
-     * Returns visible.
-     *
-     * 
-     *
-     * @return bool
-     */
-    public function getVisible() {
-        return $this->visible;
-    }
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return Feature
+	 */
+	protected function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 
-    /**
-     * Sets visible.
-     *
-     * @param bool $visible
-     * @return Feature
-     */
-    protected function setVisible($visible) {
-        $this->visible = $visible;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns visible.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getVisible() {
+		return $this->visible;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets visible.
+	 *
+	 * @param bool $visible
+	 * @return Feature
+	 */
+	protected function setVisible($visible) {
+		$this->visible = $visible;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

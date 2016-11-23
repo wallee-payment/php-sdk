@@ -28,7 +28,7 @@ namespace Wallee\Sdk\Http;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class HttpClientFactory {
 
@@ -55,12 +55,12 @@ final class HttpClientFactory {
 	 * @return HttpClientFactory
 	 */
 	private static function getInstance() {
-        if (null === self::$instance) {
-            self::$instance = new HttpClientFactory();
-        }
-        return self::$instance;
-    }
-	
+		if (null === self::$instance) {
+			self::$instance = new HttpClientFactory();
+		}
+		return self::$instance;
+	}
+
 	/**
 	 * Returns an HTTP client instance.
 	 *
@@ -82,7 +82,7 @@ final class HttpClientFactory {
 	 * Returns an HTTP client instance.
 	 *
 	 * @return IHttpClient
-	 */ 
+	 */
 	private function getClientInternal($type = null) {
 		if ($type != null) {
 			if (isset($this->clients[$type])) {
@@ -91,13 +91,13 @@ final class HttpClientFactory {
 				throw new \Exception("No http client with type '$type' found.");
 			}
 		} else {
-	    	foreach ($this->clients as $client) {
+			foreach ($this->clients as $client) {
 				if ($client->isSupported()) {
 					return $client;
 				}
 			}
 			throw new \Exception('No supported http client found.');
 		}
-    }
-	
+	}
+
 }

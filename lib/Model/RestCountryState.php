@@ -35,199 +35,199 @@ use \Wallee\Sdk\ValidationException;
  */
 class RestCountryState  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'RestCountryState';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'RestCountryState';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'code' => 'string',
-        'countryCode' => 'string',
-        'id' => 'string',
-        'name' => 'string'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'code' => 'string',
+		'countryCode' => 'string',
+		'id' => 'string',
+		'name' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $code;
-    
-    /**
-     * The country code in ISO two letter format (e.g. UK, DE, CH, US).
-     *
-     * @var string
-     */
-    private $countryCode;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $name;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $code;
+
+	/**
+	 * The country code in ISO two letter format (e.g. UK, DE, CH, US).
+	 *
+	 * @var string
+	 */
+	private $countryCode;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $name;
 
 
-    /**
-     * Returns code.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCode() {
-        return $this->code;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets code.
-     *
-     * @param string $code
-     * @return RestCountryState
-     */
-    protected function setCode($code) {
-        $this->code = $code;
 
-        return $this;
-    }
+	/**
+	 * Returns code.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCode() {
+		return $this->code;
+	}
 
-    /**
-     * Returns countryCode.
-     *
-     * The country code in ISO two letter format (e.g. UK, DE, CH, US).
-     *
-     * @return string
-     */
-    public function getCountryCode() {
-        return $this->countryCode;
-    }
+	/**
+	 * Sets code.
+	 *
+	 * @param string $code
+	 * @return RestCountryState
+	 */
+	protected function setCode($code) {
+		$this->code = $code;
 
-    /**
-     * Sets countryCode.
-     *
-     * @param string $countryCode
-     * @return RestCountryState
-     */
-    protected function setCountryCode($countryCode) {
-        $this->countryCode = $countryCode;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns countryCode.
+	 *
+	 * The country code in ISO two letter format (e.g. UK, DE, CH, US).
+	 *
+	 * @return string
+	 */
+	public function getCountryCode() {
+		return $this->countryCode;
+	}
 
-    /**
-     * Returns id.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets countryCode.
+	 *
+	 * @param string $countryCode
+	 * @return RestCountryState
+	 */
+	protected function setCountryCode($countryCode) {
+		$this->countryCode = $countryCode;
 
-    /**
-     * Sets id.
-     *
-     * @param string $id
-     * @return RestCountryState
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param string $id
+	 * @return RestCountryState
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return RestCountryState
-     */
-    protected function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return RestCountryState
+	 */
+	protected function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

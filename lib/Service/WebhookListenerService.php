@@ -33,622 +33,622 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class WebhookListenerService {
 
-    /**
-     * The API client instance.
-     *
-     * @var ApiClient
-     */
-    private $apiClient;
+	/**
+	 * The API client instance.
+	 *
+	 * @var ApiClient
+	 */
+	private $apiClient;
 
-    /**
-     * Constructor.
-     *
-     * @param ApiClient $apiClient the api client
-     */
-    public function __construct(ApiClient $apiClient) {
-    	if ($apiClient == null) {
-    		throw new \InvalidArgumentException('The api client is required.');
-    	}
-    	
-        $this->apiClient = $apiClient;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param ApiClient $apiClient the api client
+	 */
+	public function __construct(ApiClient $apiClient) {
+		if ($apiClient == null) {
+			throw new \InvalidArgumentException('The api client is required.');
+		}
 
-    /**
-     * Returns the API client instance.
-     *
-     * @return ApiClient
-     */
-    public function getApiClient() {
-        return $this->apiClient;
-    }
+		$this->apiClient = $apiClient;
+	}
+
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
 
 
-    /**
-     * Operation webhookListenerCountPost
-     *
-     * count
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-     * @throws \Wallee\Sdk\ApiException
-     * @return int
-     */
-    public function webhookListenerCountPost($spaceId, $filter = null) {
-        return $this->webhookListenerCountPostWithHttpInfo($spaceId, $filter)->getData();
-    }
+	/**
+	 * Operation webhookListenerCountPost
+	 *
+	 * count
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return int
+	 */
+	public function webhookListenerCountPost($spaceId, $filter = null) {
+		return $this->webhookListenerCountPostWithHttpInfo($spaceId, $filter)->getData();
+	}
 
-    /**
-     * Operation webhookListenerCountPostWithHttpInfo
-     *
-     * count
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function webhookListenerCountPostWithHttpInfo($spaceId, $filter = null) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerCountPost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/webhook-listener/count";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($filter)) {
-            $tempBody = $filter;
-        }
-
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                'int',
-                '/webhook-listener/count'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation webhookListenerCreatePost
-     *
-     * create
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\WebhookListenerCreate $entity The webhook listener object with the properties which should be created. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\WebhookListenerCreate
-     */
-    public function webhookListenerCreatePost($spaceId, $entity) {
-        return $this->webhookListenerCreatePostWithHttpInfo($spaceId, $entity)->getData();
-    }
-
-    /**
-     * Operation webhookListenerCreatePostWithHttpInfo
-     *
-     * create
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\WebhookListenerCreate $entity The webhook listener object with the properties which should be created. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function webhookListenerCreatePostWithHttpInfo($spaceId, $entity) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerCreatePost');
-        }
-        // verify the required parameter 'entity' is set
-        if ($entity === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $entity when calling webhookListenerCreatePost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation webhookListenerCountPostWithHttpInfo
+	 *
+	 * count
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function webhookListenerCountPostWithHttpInfo($spaceId, $filter = null) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerCountPost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/webhook-listener/create";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/webhook-listener/count";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($entity)) {
-            $tempBody = $entity;
-        }
+		// body params
+		$tempBody = null;
+		if (isset($filter)) {
+			$tempBody = $filter;
+		}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\WebhookListenerCreate',
-                '/webhook-listener/create'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListenerCreate', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListenerCreate', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'int',
+				'/webhook-listener/count'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-            throw $e;
-        }
-    }
+			throw $e;
+		}
+	}
 
-    /**
-     * Operation webhookListenerDeletePost
-     *
-     * delete
-     *
-     * @param int $spaceId  (required)
-     * @param int $id  (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return void
-     */
-    public function webhookListenerDeletePost($spaceId, $id) {
-        return $this->webhookListenerDeletePostWithHttpInfo($spaceId, $id)->getData();
-    }
+	/**
+	 * Operation webhookListenerCreatePost
+	 *
+	 * create
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\WebhookListenerCreate $entity The webhook listener object with the properties which should be created. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\WebhookListenerCreate
+	 */
+	public function webhookListenerCreatePost($spaceId, $entity) {
+		return $this->webhookListenerCreatePostWithHttpInfo($spaceId, $entity)->getData();
+	}
 
-    /**
-     * Operation webhookListenerDeletePostWithHttpInfo
-     *
-     * delete
-     *
-     * @param int $spaceId  (required)
-     * @param int $id  (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function webhookListenerDeletePostWithHttpInfo($spaceId, $id) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerDeletePost');
-        }
-        // verify the required parameter 'id' is set
-        if ($id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $id when calling webhookListenerDeletePost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation webhookListenerCreatePostWithHttpInfo
+	 *
+	 * create
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\WebhookListenerCreate $entity The webhook listener object with the properties which should be created. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function webhookListenerCreatePostWithHttpInfo($spaceId, $entity) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerCreatePost');
+		}
+		// verify the required parameter 'entity' is set
+		if ($entity === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling webhookListenerCreatePost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/webhook-listener/delete";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/webhook-listener/create";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($id)) {
-            $tempBody = $id;
-        }
+		// body params
+		$tempBody = null;
+		if (isset($entity)) {
+			$tempBody = $entity;
+		}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                null,
-                '/webhook-listener/delete'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders());
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\WebhookListenerCreate',
+				'/webhook-listener/create'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListenerCreate', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListenerCreate', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-            throw $e;
-        }
-    }
+			throw $e;
+		}
+	}
 
-    /**
-     * Operation webhookListenerReadGet
-     *
-     * read
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The id of the webhook listener which should be returned. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\WebhookListener
-     */
-    public function webhookListenerReadGet($spaceId, $id) {
-        return $this->webhookListenerReadGetWithHttpInfo($spaceId, $id)->getData();
-    }
+	/**
+	 * Operation webhookListenerDeletePost
+	 *
+	 * delete
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id  (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return void
+	 */
+	public function webhookListenerDeletePost($spaceId, $id) {
+		return $this->webhookListenerDeletePostWithHttpInfo($spaceId, $id)->getData();
+	}
 
-    /**
-     * Operation webhookListenerReadGetWithHttpInfo
-     *
-     * read
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The id of the webhook listener which should be returned. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function webhookListenerReadGetWithHttpInfo($spaceId, $id) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerReadGet');
-        }
-        // verify the required parameter 'id' is set
-        if ($id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $id when calling webhookListenerReadGet');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation webhookListenerDeletePostWithHttpInfo
+	 *
+	 * delete
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id  (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function webhookListenerDeletePostWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerDeletePost');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling webhookListenerDeletePost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        if ($id !== null) {
-            $queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-        }
-        
-        // path params
-        $resourcePath = "/webhook-listener/read";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/webhook-listener/delete";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'GET',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\WebhookListener',
-                '/webhook-listener/read'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListener', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListener', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		// body params
+		$tempBody = null;
+		if (isset($id)) {
+			$tempBody = $id;
+		}
 
-            throw $e;
-        }
-    }
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/webhook-listener/delete'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-    /**
-     * Operation webhookListenerSearchPost
-     *
-     * search
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the webhook listeners which are returned by the search. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\WebhookListener[]
-     */
-    public function webhookListenerSearchPost($spaceId, $query) {
-        return $this->webhookListenerSearchPostWithHttpInfo($spaceId, $query)->getData();
-    }
+			throw $e;
+		}
+	}
 
-    /**
-     * Operation webhookListenerSearchPostWithHttpInfo
-     *
-     * search
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the webhook listeners which are returned by the search. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function webhookListenerSearchPostWithHttpInfo($spaceId, $query) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerSearchPost');
-        }
-        // verify the required parameter 'query' is set
-        if ($query === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $query when calling webhookListenerSearchPost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation webhookListenerReadGet
+	 *
+	 * read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the webhook listener which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\WebhookListener
+	 */
+	public function webhookListenerReadGet($spaceId, $id) {
+		return $this->webhookListenerReadGetWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation webhookListenerReadGetWithHttpInfo
+	 *
+	 * read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the webhook listener which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function webhookListenerReadGetWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerReadGet');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling webhookListenerReadGet');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/webhook-listener/search";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/webhook-listener/read";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($query)) {
-            $tempBody = $query;
-        }
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\WebhookListener',
+				'/webhook-listener/read'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListener', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListener', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\WebhookListener[]',
-                '/webhook-listener/search'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListener[]', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListener[]', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+			throw $e;
+		}
+	}
 
-            throw $e;
-        }
-    }
+	/**
+	 * Operation webhookListenerSearchPost
+	 *
+	 * search
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the webhook listeners which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\WebhookListener[]
+	 */
+	public function webhookListenerSearchPost($spaceId, $query) {
+		return $this->webhookListenerSearchPostWithHttpInfo($spaceId, $query)->getData();
+	}
 
-    /**
-     * Operation webhookListenerUpdatePost
-     *
-     * update
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\WebhookListenerUpdate $entity The webhook listener object with all the properties which should be updated. The id and the version are required properties. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\WebhookListenerUpdate
-     */
-    public function webhookListenerUpdatePost($spaceId, $entity) {
-        return $this->webhookListenerUpdatePostWithHttpInfo($spaceId, $entity)->getData();
-    }
-
-    /**
-     * Operation webhookListenerUpdatePostWithHttpInfo
-     *
-     * update
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\WebhookListenerUpdate $entity The webhook listener object with all the properties which should be updated. The id and the version are required properties. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function webhookListenerUpdatePostWithHttpInfo($spaceId, $entity) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerUpdatePost');
-        }
-        // verify the required parameter 'entity' is set
-        if ($entity === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $entity when calling webhookListenerUpdatePost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation webhookListenerSearchPostWithHttpInfo
+	 *
+	 * search
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the webhook listeners which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function webhookListenerSearchPostWithHttpInfo($spaceId, $query) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerSearchPost');
+		}
+		// verify the required parameter 'query' is set
+		if ($query === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling webhookListenerSearchPost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/webhook-listener/update";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/webhook-listener/search";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($entity)) {
-            $tempBody = $entity;
-        }
+		// body params
+		$tempBody = null;
+		if (isset($query)) {
+			$tempBody = $query;
+		}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\WebhookListenerUpdate',
-                '/webhook-listener/update'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListenerUpdate', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListenerUpdate', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\WebhookListener[]',
+				'/webhook-listener/search'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListener[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListener[]', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-            throw $e;
-        }
-    }
-    
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation webhookListenerUpdatePost
+	 *
+	 * update
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\WebhookListenerUpdate $entity The webhook listener object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\WebhookListenerUpdate
+	 */
+	public function webhookListenerUpdatePost($spaceId, $entity) {
+		return $this->webhookListenerUpdatePostWithHttpInfo($spaceId, $entity)->getData();
+	}
+
+	/**
+	 * Operation webhookListenerUpdatePostWithHttpInfo
+	 *
+	 * update
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\WebhookListenerUpdate $entity The webhook listener object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function webhookListenerUpdatePostWithHttpInfo($spaceId, $entity) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling webhookListenerUpdatePost');
+		}
+		// verify the required parameter 'entity' is set
+		if ($entity === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling webhookListenerUpdatePost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+
+		// query params
+		$queryParams = [];
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/webhook-listener/update";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = [];
+		// body params
+		$tempBody = null;
+		if (isset($entity)) {
+			$tempBody = $entity;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\WebhookListenerUpdate',
+				'/webhook-listener/update'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebhookListenerUpdate', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\WebhookListenerUpdate', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
 }

@@ -35,287 +35,287 @@ use \Wallee\Sdk\ValidationException;
  */
 class PaymentMethod  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'PaymentMethod';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'PaymentMethod';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'dataCollectionTypes' => 'string[]',
-        'description' => 'map[string,string]',
-        'id' => 'int',
-        'imagePath' => 'string',
-        'name' => 'map[string,string]',
-        'supportedCurrencies' => 'string[]'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'dataCollectionTypes' => 'string[]',
+		'description' => 'map[string,string]',
+		'id' => 'int',
+		'imagePath' => 'string',
+		'name' => 'map[string,string]',
+		'supportedCurrencies' => 'string[]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of dataCollectionTypes.
-     */ 
-    const DATA_COLLECTION_TYPES_ONSITE = 'ONSITE';
-    const DATA_COLLECTION_TYPES_OFFSITE = 'OFFSITE';
-    
-    /**
-     * Returns allowable values of dataCollectionTypes.
-     *
-     * @return string[]
-     */
-    public function getDataCollectionTypesAllowableValues() {
-        return [
-            self::DATA_COLLECTION_TYPES_ONSITE,
-            self::DATA_COLLECTION_TYPES_OFFSITE,
-        ];
-    }
-    
-    
-    /**
-     * 
-     *
-     * @var string[]
-     */
-    private $dataCollectionTypes;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $description;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $imagePath;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $name;
-    
-    /**
-     * 
-     *
-     * @var string[]
-     */
-    private $supportedCurrencies;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setDataCollectionTypes(isset($data['dataCollectionTypes']) ? $data['dataCollectionTypes'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setSupportedCurrencies(isset($data['supportedCurrencies']) ? $data['supportedCurrencies'] : null);
-    }
+	
+	/**
+	 * Values of dataCollectionTypes.
+	 */
+	const DATA_COLLECTION_TYPES_ONSITE = 'ONSITE';
+	const DATA_COLLECTION_TYPES_OFFSITE = 'OFFSITE';
+	
+	/**
+	 * Returns allowable values of dataCollectionTypes.
+	 *
+	 * @return string[]
+	 */
+	public function getDataCollectionTypesAllowableValues() {
+		return [
+			self::DATA_COLLECTION_TYPES_ONSITE,
+			self::DATA_COLLECTION_TYPES_OFFSITE,
+		];
+	}
+	
+
+	/**
+	 * 
+	 *
+	 * @var string[]
+	 */
+	private $dataCollectionTypes;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $description;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $imagePath;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $name;
+
+	/**
+	 * 
+	 *
+	 * @var string[]
+	 */
+	private $supportedCurrencies;
 
 
-    /**
-     * Returns dataCollectionTypes.
-     *
-     * 
-     *
-     * @return string[]
-     */
-    public function getDataCollectionTypes() {
-        return $this->dataCollectionTypes;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setDataCollectionTypes(isset($data['dataCollectionTypes']) ? $data['dataCollectionTypes'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setSupportedCurrencies(isset($data['supportedCurrencies']) ? $data['supportedCurrencies'] : null);
+	}
 
-    /**
-     * Sets dataCollectionTypes.
-     *
-     * @param string[] $dataCollectionTypes
-     * @return PaymentMethod
-     */
-    public function setDataCollectionTypes($dataCollectionTypes) {
-        $allowed_values = array('ONSITE', 'OFFSITE');
-        if (!is_null($dataCollectionTypes) && (array_diff($dataCollectionTypes, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'dataCollectionTypes', must be one of 'ONSITE', 'OFFSITE'");
-        }
-        $this->dataCollectionTypes = $dataCollectionTypes;
 
-        return $this;
-    }
+	/**
+	 * Returns dataCollectionTypes.
+	 *
+	 * 
+	 *
+	 * @return string[]
+	 */
+	public function getDataCollectionTypes() {
+		return $this->dataCollectionTypes;
+	}
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets dataCollectionTypes.
+	 *
+	 * @param string[] $dataCollectionTypes
+	 * @return PaymentMethod
+	 */
+	public function setDataCollectionTypes($dataCollectionTypes) {
+		$allowed_values = array('ONSITE', 'OFFSITE');
+		if (!is_null($dataCollectionTypes) && (array_diff($dataCollectionTypes, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'dataCollectionTypes', must be one of 'ONSITE', 'OFFSITE'");
+		}
+		$this->dataCollectionTypes = $dataCollectionTypes;
 
-    /**
-     * Sets description.
-     *
-     * @param map[string,string] $description
-     * @return PaymentMethod
-     */
-    public function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param map[string,string] $description
+	 * @return PaymentMethod
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return PaymentMethod
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns imagePath.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getImagePath() {
-        return $this->imagePath;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return PaymentMethod
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets imagePath.
-     *
-     * @param string $imagePath
-     * @return PaymentMethod
-     */
-    protected function setImagePath($imagePath) {
-        $this->imagePath = $imagePath;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns imagePath.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getImagePath() {
+		return $this->imagePath;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets imagePath.
+	 *
+	 * @param string $imagePath
+	 * @return PaymentMethod
+	 */
+	protected function setImagePath($imagePath) {
+		$this->imagePath = $imagePath;
 
-    /**
-     * Sets name.
-     *
-     * @param map[string,string] $name
-     * @return PaymentMethod
-     */
-    public function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns supportedCurrencies.
-     *
-     * 
-     *
-     * @return string[]
-     */
-    public function getSupportedCurrencies() {
-        return $this->supportedCurrencies;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param map[string,string] $name
+	 * @return PaymentMethod
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets supportedCurrencies.
-     *
-     * @param string[] $supportedCurrencies
-     * @return PaymentMethod
-     */
-    public function setSupportedCurrencies($supportedCurrencies) {
-        $this->supportedCurrencies = $supportedCurrencies;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns supportedCurrencies.
+	 *
+	 * 
+	 *
+	 * @return string[]
+	 */
+	public function getSupportedCurrencies() {
+		return $this->supportedCurrencies;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets supportedCurrencies.
+	 *
+	 * @param string[] $supportedCurrencies
+	 * @return PaymentMethod
+	 */
+	public function setSupportedCurrencies($supportedCurrencies) {
+		$this->supportedCurrencies = $supportedCurrencies;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -33,117 +33,117 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class CountryService {
 
-    /**
-     * The API client instance.
-     *
-     * @var ApiClient
-     */
-    private $apiClient;
+	/**
+	 * The API client instance.
+	 *
+	 * @var ApiClient
+	 */
+	private $apiClient;
 
-    /**
-     * Constructor.
-     *
-     * @param ApiClient $apiClient the api client
-     */
-    public function __construct(ApiClient $apiClient) {
-    	if ($apiClient == null) {
-    		throw new \InvalidArgumentException('The api client is required.');
-    	}
-    	
-        $this->apiClient = $apiClient;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param ApiClient $apiClient the api client
+	 */
+	public function __construct(ApiClient $apiClient) {
+		if ($apiClient == null) {
+			throw new \InvalidArgumentException('The api client is required.');
+		}
 
-    /**
-     * Returns the API client instance.
-     *
-     * @return ApiClient
-     */
-    public function getApiClient() {
-        return $this->apiClient;
-    }
+		$this->apiClient = $apiClient;
+	}
+
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
 
 
-    /**
-     * Operation countryAllGet
-     *
-     * all
-     *
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\RestCountry[]
-     */
-    public function countryAllGet() {
-        return $this->countryAllGetWithHttpInfo()->getData();
-    }
+	/**
+	 * Operation countryAllGet
+	 *
+	 * all
+	 *
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\RestCountry[]
+	 */
+	public function countryAllGet() {
+		return $this->countryAllGetWithHttpInfo()->getData();
+	}
 
-    /**
-     * Operation countryAllGetWithHttpInfo
-     *
-     * all
-     *
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function countryAllGetWithHttpInfo() {
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation countryAllGetWithHttpInfo
+	 *
+	 * all
+	 *
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function countryAllGetWithHttpInfo() {
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        
-        // path params
-        $resourcePath = "/country/all";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// path params
+		$resourcePath = "/country/all";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'GET',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\RestCountry[]',
-                '/country/all'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RestCountry[]', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\RestCountry[]', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\RestCountry[]',
+				'/country/all'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RestCountry[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\RestCountry[]', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-            throw $e;
-        }
-    }
-    
+			throw $e;
+		}
+	}
+
 }

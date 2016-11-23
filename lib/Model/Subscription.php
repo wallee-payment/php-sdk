@@ -35,571 +35,571 @@ use \Wallee\Sdk\ValidationException;
  */
 class Subscription  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Subscription';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Subscription';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'createdOn' => 'string',
-        'description' => 'string',
-        'id' => 'int',
-        'initializedOn' => 'string',
-        'language' => 'string',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'plannedPurgeDate' => 'string',
-        'plannedTerminationDate' => 'string',
-        'reference' => 'string',
-        'state' => 'string',
-        'subscriber' => '\Wallee\Sdk\Model\Subscriber',
-        'terminatedOn' => 'string',
-        'terminatingOn' => 'string',
-        'token' => '\Wallee\Sdk\Model\Token',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'createdOn' => 'string',
+		'description' => 'string',
+		'id' => 'int',
+		'initializedOn' => 'string',
+		'language' => 'string',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'plannedPurgeDate' => 'string',
+		'plannedTerminationDate' => 'string',
+		'reference' => 'string',
+		'state' => 'string',
+		'subscriber' => '\Wallee\Sdk\Model\Subscriber',
+		'terminatedOn' => 'string',
+		'terminatingOn' => 'string',
+		'token' => '\Wallee\Sdk\Model\Token',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_PENDING = 'PENDING';
-    const STATE_INITIALIZING = 'INITIALIZING';
-    const STATE_FAILED = 'FAILED';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_SUSPENDED = 'SUSPENDED';
-    const STATE_TERMINATING = 'TERMINATING';
-    const STATE_TERMINATED = 'TERMINATED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_PENDING,
-            self::STATE_INITIALIZING,
-            self::STATE_FAILED,
-            self::STATE_ACTIVE,
-            self::STATE_SUSPENDED,
-            self::STATE_TERMINATING,
-            self::STATE_TERMINATED,
-        ];
-    }
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $createdOn;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $description;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $initializedOn;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $language;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $plannedTerminationDate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $reference;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Subscriber
-     */
-    private $subscriber;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $terminatedOn;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $terminatingOn;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Token
-     */
-    private $token;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setSubscriber(isset($data['subscriber']) ? $data['subscriber'] : null);
-        $this->setToken(isset($data['token']) ? $data['token'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_PENDING = 'PENDING';
+	const STATE_INITIALIZING = 'INITIALIZING';
+	const STATE_FAILED = 'FAILED';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_SUSPENDED = 'SUSPENDED';
+	const STATE_TERMINATING = 'TERMINATING';
+	const STATE_TERMINATED = 'TERMINATED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_PENDING,
+			self::STATE_INITIALIZING,
+			self::STATE_FAILED,
+			self::STATE_ACTIVE,
+			self::STATE_SUSPENDED,
+			self::STATE_TERMINATING,
+			self::STATE_TERMINATED,
+		];
+	}
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $createdOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $description;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $initializedOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $plannedTerminationDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $reference;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Subscriber
+	 */
+	private $subscriber;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $terminatedOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $terminatingOn;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Token
+	 */
+	private $token;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns createdOn.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCreatedOn() {
-        return $this->createdOn;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setSubscriber(isset($data['subscriber']) ? $data['subscriber'] : null);
+		$this->setToken(isset($data['token']) ? $data['token'] : null);
+	}
 
-    /**
-     * Sets createdOn.
-     *
-     * @param string $createdOn
-     * @return Subscription
-     */
-    protected function setCreatedOn($createdOn) {
-        $this->createdOn = $createdOn;
 
-        return $this;
-    }
+	/**
+	 * Returns createdOn.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCreatedOn() {
+		return $this->createdOn;
+	}
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets createdOn.
+	 *
+	 * @param string $createdOn
+	 * @return Subscription
+	 */
+	protected function setCreatedOn($createdOn) {
+		$this->createdOn = $createdOn;
 
-    /**
-     * Sets description.
-     *
-     * @param string $description
-     * @return Subscription
-     */
-    protected function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param string $description
+	 * @return Subscription
+	 */
+	protected function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return Subscription
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns initializedOn.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getInitializedOn() {
-        return $this->initializedOn;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Subscription
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets initializedOn.
-     *
-     * @param string $initializedOn
-     * @return Subscription
-     */
-    protected function setInitializedOn($initializedOn) {
-        $this->initializedOn = $initializedOn;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns initializedOn.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getInitializedOn() {
+		return $this->initializedOn;
+	}
 
-    /**
-     * Returns language.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * Sets initializedOn.
+	 *
+	 * @param string $initializedOn
+	 * @return Subscription
+	 */
+	protected function setInitializedOn($initializedOn) {
+		$this->initializedOn = $initializedOn;
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return Subscription
-     */
-    protected function setLanguage($language) {
-        $this->language = $language;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return Subscription
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return Subscription
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return Subscription
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return Subscription
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns plannedTerminationDate.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getPlannedTerminationDate() {
-        return $this->plannedTerminationDate;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return Subscription
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets plannedTerminationDate.
-     *
-     * @param string $plannedTerminationDate
-     * @return Subscription
-     */
-    protected function setPlannedTerminationDate($plannedTerminationDate) {
-        $this->plannedTerminationDate = $plannedTerminationDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedTerminationDate.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getPlannedTerminationDate() {
+		return $this->plannedTerminationDate;
+	}
 
-    /**
-     * Returns reference.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getReference() {
-        return $this->reference;
-    }
+	/**
+	 * Sets plannedTerminationDate.
+	 *
+	 * @param string $plannedTerminationDate
+	 * @return Subscription
+	 */
+	protected function setPlannedTerminationDate($plannedTerminationDate) {
+		$this->plannedTerminationDate = $plannedTerminationDate;
 
-    /**
-     * Sets reference.
-     *
-     * @param string $reference
-     * @return Subscription
-     */
-    protected function setReference($reference) {
-        $this->reference = $reference;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns reference.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getReference() {
+		return $this->reference;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets reference.
+	 *
+	 * @param string $reference
+	 * @return Subscription
+	 */
+	protected function setReference($reference) {
+		$this->reference = $reference;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return Subscription
-     */
-    protected function setState($state) {
-        $allowed_values = array('PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'SUSPENDED', 'TERMINATING', 'TERMINATED');
-        if (!is_null($state) && (!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'SUSPENDED', 'TERMINATING', 'TERMINATED'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns subscriber.
-     *
-     * @return \Wallee\Sdk\Model\Subscriber
-     */
-    public function getSubscriber() {
-        return $this->subscriber;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return Subscription
+	 */
+	protected function setState($state) {
+		$allowed_values = array('PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'SUSPENDED', 'TERMINATING', 'TERMINATED');
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'SUSPENDED', 'TERMINATING', 'TERMINATED'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets subscriber.
-     *
-     * @param \Wallee\Sdk\Model\Subscriber $subscriber
-     * @return Subscription
-     */
-    public function setSubscriber($subscriber) {
-        $this->subscriber = $subscriber;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns subscriber.
+	 *
+	 * @return \Wallee\Sdk\Model\Subscriber
+	 */
+	public function getSubscriber() {
+		return $this->subscriber;
+	}
 
-    /**
-     * Returns terminatedOn.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTerminatedOn() {
-        return $this->terminatedOn;
-    }
+	/**
+	 * Sets subscriber.
+	 *
+	 * @param \Wallee\Sdk\Model\Subscriber $subscriber
+	 * @return Subscription
+	 */
+	public function setSubscriber($subscriber) {
+		$this->subscriber = $subscriber;
 
-    /**
-     * Sets terminatedOn.
-     *
-     * @param string $terminatedOn
-     * @return Subscription
-     */
-    protected function setTerminatedOn($terminatedOn) {
-        $this->terminatedOn = $terminatedOn;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns terminatedOn.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTerminatedOn() {
+		return $this->terminatedOn;
+	}
 
-    /**
-     * Returns terminatingOn.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTerminatingOn() {
-        return $this->terminatingOn;
-    }
+	/**
+	 * Sets terminatedOn.
+	 *
+	 * @param string $terminatedOn
+	 * @return Subscription
+	 */
+	protected function setTerminatedOn($terminatedOn) {
+		$this->terminatedOn = $terminatedOn;
 
-    /**
-     * Sets terminatingOn.
-     *
-     * @param string $terminatingOn
-     * @return Subscription
-     */
-    protected function setTerminatingOn($terminatingOn) {
-        $this->terminatingOn = $terminatingOn;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns terminatingOn.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTerminatingOn() {
+		return $this->terminatingOn;
+	}
 
-    /**
-     * Returns token.
-     *
-     * @return \Wallee\Sdk\Model\Token
-     */
-    public function getToken() {
-        return $this->token;
-    }
+	/**
+	 * Sets terminatingOn.
+	 *
+	 * @param string $terminatingOn
+	 * @return Subscription
+	 */
+	protected function setTerminatingOn($terminatingOn) {
+		$this->terminatingOn = $terminatingOn;
 
-    /**
-     * Sets token.
-     *
-     * @param \Wallee\Sdk\Model\Token $token
-     * @return Subscription
-     */
-    public function setToken($token) {
-        $this->token = $token;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns token.
+	 *
+	 * @return \Wallee\Sdk\Model\Token
+	 */
+	public function getToken() {
+		return $this->token;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets token.
+	 *
+	 * @param \Wallee\Sdk\Model\Token $token
+	 * @return Subscription
+	 */
+	public function setToken($token) {
+		$this->token = $token;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return Subscription
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getReference() === null) {
-        	throw new ValidationException("'reference' can't be null", 'reference', $this);
-        }
-        $allowed_values = ["PENDING", "INITIALIZING", "FAILED", "ACTIVE", "SUSPENDED", "TERMINATING", "TERMINATED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return Subscription
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getReference() === null) {
+			throw new ValidationException("'reference' can't be null", 'reference', $this);
+		}
+		$allowed_values = ["PENDING", "INITIALIZING", "FAILED", "ACTIVE", "SUSPENDED", "TERMINATING", "TERMINATED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,398 +35,398 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProductComponent  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProductComponent';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProductComponent';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'componentChangeWeight' => 'int',
-        'componentGroup' => '\Wallee\Sdk\Model\SubscriptionProductComponentGroup',
-        'defaultComponent' => 'bool',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-        'reference' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference',
-        'sortOrder' => 'int',
-        'taxClass' => '\Wallee\Sdk\Model\TaxClass',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'componentChangeWeight' => 'int',
+		'componentGroup' => '\Wallee\Sdk\Model\SubscriptionProductComponentGroup',
+		'defaultComponent' => 'bool',
+		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+		'reference' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference',
+		'sortOrder' => 'int',
+		'taxClass' => '\Wallee\Sdk\Model\TaxClass',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
-     *
-     * @var int
-     */
-    private $componentChangeWeight;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProductComponentGroup
-     */
-    private $componentGroup;
-    
-    /**
-     * When a component is marked as a 'default' component it is used when no other component is selected by the user.
-     *
-     * @var bool
-     */
-    private $defaultComponent;
-    
-    /**
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    private $description;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    private $name;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference
-     */
-    private $reference;
-    
-    /**
-     * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
-     *
-     * @var int
-     */
-    private $sortOrder;
-    
-    /**
-     * @var \Wallee\Sdk\Model\TaxClass
-     */
-    private $taxClass;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setComponentGroup(isset($data['componentGroup']) ? $data['componentGroup'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setReference(isset($data['reference']) ? $data['reference'] : null);
-        $this->setTaxClass(isset($data['taxClass']) ? $data['taxClass'] : null);
-    }
+	
+
+	/**
+	 * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+	 *
+	 * @var int
+	 */
+	private $componentChangeWeight;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProductComponentGroup
+	 */
+	private $componentGroup;
+
+	/**
+	 * When a component is marked as a 'default' component it is used when no other component is selected by the user.
+	 *
+	 * @var bool
+	 */
+	private $defaultComponent;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $description;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $name;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference
+	 */
+	private $reference;
+
+	/**
+	 * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+	 *
+	 * @var int
+	 */
+	private $sortOrder;
+
+	/**
+	 * @var \Wallee\Sdk\Model\TaxClass
+	 */
+	private $taxClass;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns componentChangeWeight.
-     *
-     * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
-     *
-     * @return int
-     */
-    public function getComponentChangeWeight() {
-        return $this->componentChangeWeight;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setComponentGroup(isset($data['componentGroup']) ? $data['componentGroup'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
+		$this->setTaxClass(isset($data['taxClass']) ? $data['taxClass'] : null);
+	}
 
-    /**
-     * Sets componentChangeWeight.
-     *
-     * @param int $componentChangeWeight
-     * @return SubscriptionProductComponent
-     */
-    protected function setComponentChangeWeight($componentChangeWeight) {
-        $this->componentChangeWeight = $componentChangeWeight;
 
-        return $this;
-    }
+	/**
+	 * Returns componentChangeWeight.
+	 *
+	 * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+	 *
+	 * @return int
+	 */
+	public function getComponentChangeWeight() {
+		return $this->componentChangeWeight;
+	}
 
-    /**
-     * Returns componentGroup.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponentGroup
-     */
-    public function getComponentGroup() {
-        return $this->componentGroup;
-    }
+	/**
+	 * Sets componentChangeWeight.
+	 *
+	 * @param int $componentChangeWeight
+	 * @return SubscriptionProductComponent
+	 */
+	protected function setComponentChangeWeight($componentChangeWeight) {
+		$this->componentChangeWeight = $componentChangeWeight;
 
-    /**
-     * Sets componentGroup.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroup $componentGroup
-     * @return SubscriptionProductComponent
-     */
-    public function setComponentGroup($componentGroup) {
-        $this->componentGroup = $componentGroup;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns componentGroup.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentGroup
+	 */
+	public function getComponentGroup() {
+		return $this->componentGroup;
+	}
 
-    /**
-     * Returns defaultComponent.
-     *
-     * When a component is marked as a 'default' component it is used when no other component is selected by the user.
-     *
-     * @return bool
-     */
-    public function getDefaultComponent() {
-        return $this->defaultComponent;
-    }
+	/**
+	 * Sets componentGroup.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroup $componentGroup
+	 * @return SubscriptionProductComponent
+	 */
+	public function setComponentGroup($componentGroup) {
+		$this->componentGroup = $componentGroup;
 
-    /**
-     * Sets defaultComponent.
-     *
-     * @param bool $defaultComponent
-     * @return SubscriptionProductComponent
-     */
-    protected function setDefaultComponent($defaultComponent) {
-        $this->defaultComponent = $defaultComponent;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns defaultComponent.
+	 *
+	 * When a component is marked as a 'default' component it is used when no other component is selected by the user.
+	 *
+	 * @return bool
+	 */
+	public function getDefaultComponent() {
+		return $this->defaultComponent;
+	}
 
-    /**
-     * Returns description.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets defaultComponent.
+	 *
+	 * @param bool $defaultComponent
+	 * @return SubscriptionProductComponent
+	 */
+	protected function setDefaultComponent($defaultComponent) {
+		$this->defaultComponent = $defaultComponent;
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description
-     * @return SubscriptionProductComponent
-     */
-    public function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description
+	 * @return SubscriptionProductComponent
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return SubscriptionProductComponent
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductComponent
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return SubscriptionProductComponent
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return SubscriptionProductComponent
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name
-     * @return SubscriptionProductComponent
-     */
-    public function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns reference.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference
-     */
-    public function getReference() {
-        return $this->reference;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name
+	 * @return SubscriptionProductComponent
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets reference.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference $reference
-     * @return SubscriptionProductComponent
-     */
-    public function setReference($reference) {
-        $this->reference = $reference;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns reference.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference
+	 */
+	public function getReference() {
+		return $this->reference;
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return $this->sortOrder;
-    }
+	/**
+	 * Sets reference.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference $reference
+	 * @return SubscriptionProductComponent
+	 */
+	public function setReference($reference) {
+		$this->reference = $reference;
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return SubscriptionProductComponent
-     */
-    protected function setSortOrder($sortOrder) {
-        $this->sortOrder = $sortOrder;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
 
-    /**
-     * Returns taxClass.
-     *
-     * @return \Wallee\Sdk\Model\TaxClass
-     */
-    public function getTaxClass() {
-        return $this->taxClass;
-    }
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return SubscriptionProductComponent
+	 */
+	protected function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 
-    /**
-     * Sets taxClass.
-     *
-     * @param \Wallee\Sdk\Model\TaxClass $taxClass
-     * @return SubscriptionProductComponent
-     */
-    public function setTaxClass($taxClass) {
-        $this->taxClass = $taxClass;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns taxClass.
+	 *
+	 * @return \Wallee\Sdk\Model\TaxClass
+	 */
+	public function getTaxClass() {
+		return $this->taxClass;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets taxClass.
+	 *
+	 * @param \Wallee\Sdk\Model\TaxClass $taxClass
+	 * @return SubscriptionProductComponent
+	 */
+	public function setTaxClass($taxClass) {
+		$this->taxClass = $taxClass;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return SubscriptionProductComponent
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductComponent
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

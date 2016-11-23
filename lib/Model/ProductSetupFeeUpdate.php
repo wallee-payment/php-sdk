@@ -35,214 +35,214 @@ use \Wallee\Sdk\ValidationException;
  */
 class ProductSetupFeeUpdate extends ProductSetupFee  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'ProductSetupFee.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'ProductSetupFee.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setComponent(isset($data['component']) ? $data['component'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setOnDowngradeCreditedAmount(isset($data['onDowngradeCreditedAmount']) ? $data['onDowngradeCreditedAmount'] : null);
-        $this->setOnUpgradeCreditedAmount(isset($data['onUpgradeCreditedAmount']) ? $data['onUpgradeCreditedAmount'] : null);
-        $this->setSetupFee(isset($data['setupFee']) ? $data['setupFee'] : null);
-    }
+	
 
 
-    /**
-     * Returns component.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponent
-     */
-    public function getComponent() {
-        return parent::getComponent();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets component.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
-     * @return ProductSetupFeeUpdate
-     */
-    public function setComponent($component) {
-        return parent::setComponent($component);
-    }
+		$this->setComponent(isset($data['component']) ? $data['component'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setOnDowngradeCreditedAmount(isset($data['onDowngradeCreditedAmount']) ? $data['onDowngradeCreditedAmount'] : null);
+		$this->setOnUpgradeCreditedAmount(isset($data['onUpgradeCreditedAmount']) ? $data['onUpgradeCreditedAmount'] : null);
+		$this->setSetupFee(isset($data['setupFee']) ? $data['setupFee'] : null);
+	}
 
-    /**
-     * Returns description.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getDescription() {
-        return parent::getDescription();
-    }
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
-     * @return ProductSetupFeeUpdate
-     */
-    public function setDescription($description) {
-        return parent::setDescription($description);
-    }
+	/**
+	 * Returns component.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+	 */
+	public function getComponent() {
+		return parent::getComponent();
+	}
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Sets component.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setComponent($component) {
+		return parent::setComponent($component);
+	}
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
-     * @return ProductSetupFeeUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+	/**
+	 * Returns description.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getDescription() {
+		return parent::getDescription();
+	}
 
-    /**
-     * Returns onDowngradeCreditedAmount.
-     *
-     * When the subscription is changed and the change is considered as a downgrade the amount defined by this property will be credited to the subscriber.
-     *
-     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
-     */
-    public function getOnDowngradeCreditedAmount() {
-        return parent::getOnDowngradeCreditedAmount();
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setDescription($description) {
+		return parent::setDescription($description);
+	}
 
-    /**
-     * Sets onDowngradeCreditedAmount.
-     *
-     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $onDowngradeCreditedAmount
-     * @return ProductSetupFeeUpdate
-     */
-    public function setOnDowngradeCreditedAmount($onDowngradeCreditedAmount) {
-        return parent::setOnDowngradeCreditedAmount($onDowngradeCreditedAmount);
-    }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns onUpgradeCreditedAmount.
-     *
-     * When the subscription is changed and the change is considered as a upgrade the amount defined by this property will be credited to the subscriber.
-     *
-     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
-     */
-    public function getOnUpgradeCreditedAmount() {
-        return parent::getOnUpgradeCreditedAmount();
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Sets onUpgradeCreditedAmount.
-     *
-     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $onUpgradeCreditedAmount
-     * @return ProductSetupFeeUpdate
-     */
-    public function setOnUpgradeCreditedAmount($onUpgradeCreditedAmount) {
-        return parent::setOnUpgradeCreditedAmount($onUpgradeCreditedAmount);
-    }
+	/**
+	 * Returns onDowngradeCreditedAmount.
+	 *
+	 * When the subscription is changed and the change is considered as a downgrade the amount defined by this property will be credited to the subscriber.
+	 *
+	 * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+	 */
+	public function getOnDowngradeCreditedAmount() {
+		return parent::getOnDowngradeCreditedAmount();
+	}
 
-    /**
-     * Returns setupFee.
-     *
-     * The setup fee is charged when the subscriber subscribes to this component. The setup fee is debited with the first charge for the subscriptions.
-     *
-     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
-     */
-    public function getSetupFee() {
-        return parent::getSetupFee();
-    }
+	/**
+	 * Sets onDowngradeCreditedAmount.
+	 *
+	 * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $onDowngradeCreditedAmount
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setOnDowngradeCreditedAmount($onDowngradeCreditedAmount) {
+		return parent::setOnDowngradeCreditedAmount($onDowngradeCreditedAmount);
+	}
 
-    /**
-     * Sets setupFee.
-     *
-     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $setupFee
-     * @return ProductSetupFeeUpdate
-     */
-    public function setSetupFee($setupFee) {
-        return parent::setSetupFee($setupFee);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getOnDowngradeCreditedAmount() === null) {
-        	throw new ValidationException("'onDowngradeCreditedAmount' can't be null", 'onDowngradeCreditedAmount', $this);
-        }
-        if ($this->getOnUpgradeCreditedAmount() === null) {
-        	throw new ValidationException("'onUpgradeCreditedAmount' can't be null", 'onUpgradeCreditedAmount', $this);
-        }
-        if ($this->getSetupFee() === null) {
-        	throw new ValidationException("'setupFee' can't be null", 'setupFee', $this);
-        }
-    }
+	/**
+	 * Returns onUpgradeCreditedAmount.
+	 *
+	 * When the subscription is changed and the change is considered as a upgrade the amount defined by this property will be credited to the subscriber.
+	 *
+	 * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+	 */
+	public function getOnUpgradeCreditedAmount() {
+		return parent::getOnUpgradeCreditedAmount();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets onUpgradeCreditedAmount.
+	 *
+	 * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $onUpgradeCreditedAmount
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setOnUpgradeCreditedAmount($onUpgradeCreditedAmount) {
+		return parent::setOnUpgradeCreditedAmount($onUpgradeCreditedAmount);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns setupFee.
+	 *
+	 * The setup fee is charged when the subscriber subscribes to this component. The setup fee is debited with the first charge for the subscriptions.
+	 *
+	 * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+	 */
+	public function getSetupFee() {
+		return parent::getSetupFee();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets setupFee.
+	 *
+	 * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $setupFee
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setSetupFee($setupFee) {
+		return parent::setSetupFee($setupFee);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getOnDowngradeCreditedAmount() === null) {
+			throw new ValidationException("'onDowngradeCreditedAmount' can't be null", 'onDowngradeCreditedAmount', $this);
+		}
+		if ($this->getOnUpgradeCreditedAmount() === null) {
+			throw new ValidationException("'onUpgradeCreditedAmount' can't be null", 'onUpgradeCreditedAmount', $this);
+		}
+		if ($this->getSetupFee() === null) {
+			throw new ValidationException("'setupFee' can't be null", 'setupFee', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,163 +35,163 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProductComponentGroupUpdate extends SubscriptionProductComponentGroup  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProductComponentGroup.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProductComponentGroup.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setOptional(isset($data['optional']) ? $data['optional'] : null);
-        $this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-        $this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
-    }
+	
 
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
-     * @return SubscriptionProductComponentGroupUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setOptional(isset($data['optional']) ? $data['optional'] : null);
+		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
+		$this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
+	}
 
-    /**
-     * Returns optional.
-     *
-     * The component group can be optional. This means no component has to be selected by the subscriber.
-     *
-     * @return bool
-     */
-    public function getOptional() {
-        return parent::getOptional();
-    }
 
-    /**
-     * Sets optional.
-     *
-     * @param bool $optional
-     * @return SubscriptionProductComponentGroupUpdate
-     */
-    public function setOptional($optional) {
-        return parent::setOptional($optional);
-    }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns productVersion.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductVersion
-     */
-    public function getProductVersion() {
-        return parent::getProductVersion();
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @return SubscriptionProductComponentGroupUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Sets productVersion.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
-     * @return SubscriptionProductComponentGroupUpdate
-     */
-    public function setProductVersion($productVersion) {
-        return parent::setProductVersion($productVersion);
-    }
+	/**
+	 * Returns optional.
+	 *
+	 * The component group can be optional. This means no component has to be selected by the subscriber.
+	 *
+	 * @return bool
+	 */
+	public function getOptional() {
+		return parent::getOptional();
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return parent::getSortOrder();
-    }
+	/**
+	 * Sets optional.
+	 *
+	 * @param bool $optional
+	 * @return SubscriptionProductComponentGroupUpdate
+	 */
+	public function setOptional($optional) {
+		return parent::setOptional($optional);
+	}
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return SubscriptionProductComponentGroupUpdate
-     */
-    public function setSortOrder($sortOrder) {
-        return parent::setSortOrder($sortOrder);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-    }
+	/**
+	 * Returns productVersion.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
+	 */
+	public function getProductVersion() {
+		return parent::getProductVersion();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets productVersion.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
+	 * @return SubscriptionProductComponentGroupUpdate
+	 */
+	public function setProductVersion($productVersion) {
+		return parent::setProductVersion($productVersion);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return parent::getSortOrder();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return SubscriptionProductComponentGroupUpdate
+	 */
+	public function setSortOrder($sortOrder) {
+		return parent::setSortOrder($sortOrder);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

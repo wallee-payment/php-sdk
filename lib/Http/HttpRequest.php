@@ -30,7 +30,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class HttpRequest {
 
@@ -44,32 +44,32 @@ final class HttpRequest {
 
 	/**
 	 * The key of the 'user-agent' header.
-	 * 
+	 *
 	 * @var string
 	 */
 	const HEADER_KEY_USER_AGENT = 'user-agent';
-	
+
 	/**
 	 * The key of the 'host' header.
 	 *
 	 * @var string
 	 */
 	const HEADER_KEY_HOST = 'host';
-	
+
 	/**
 	 * The key of the 'content-type' header.
 	 *
 	 * @var string
 	 */
 	const HEADER_KEY_CONTENT_TYPE = 'content-type';
-	
+
 	/**
 	 * The key of the 'content-length' header.
 	 *
 	 * @var string
 	 */
 	const HEADER_KEY_CONTENT_LENGTH = 'content-length';
-	
+
 	/**
 	 * The key of the 'accept' header.
 	 *
@@ -90,56 +90,56 @@ final class HttpRequest {
 	 * @var string
 	 */
 	private $url;
-	
+
 	/**
 	 * The request method (typically GET or POST).
 	 *
 	 * @var string
 	 */
 	private $method;
-	
+
 	/**
 	 * The path part of the request including the query and fragment.
 	 *
 	 * @var string
 	 */
 	private $path;
-	
+
 	/**
 	 * The HTTP protocol used (typically HTTPS or HTTP).
 	 *
 	 * @var string
 	 */
 	private $protocol;
-	
+
 	/**
 	 * The host on which the request was executed.
 	 *
 	 * @var string
 	 */
 	private $host;
-	
+
 	/**
 	 * The port number of the request.
 	 *
 	 * @var integer
 	 */
 	private $port;
-	
+
 	/**
 	 * An array of HTTP headers.
 	 *
 	 * @var array
 	 */
 	private $headers = array();
-	
+
 	/**
 	 * The query part of the request as string.
 	 *
 	 * @var string
 	 */
 	private $query;
-	
+
 	/**
 	 * The HTTP body.
 	 *
@@ -173,28 +173,28 @@ final class HttpRequest {
 
 		$this->addHeader(self::HEADER_KEY_HOST, $this->host);
 	}
-	
+
 	/**
 	 * Returns the full qualified URL on which the request is executed.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getUrl() {
 		return $this->url;
 	}
-	
+
 	/**
 	 * Returns the request method (typically GET or POST).
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getMethod() {
 		return $this->method;
 	}
-	
+
 	/**
 	 * Returns the path part of the request including the query and fragment.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getPath() {
@@ -203,7 +203,7 @@ final class HttpRequest {
 
 	/**
 	 * Returns true when the connection is secure.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public function isSecureConnection() {
@@ -212,16 +212,16 @@ final class HttpRequest {
 
 	/**
 	 * Returns the host on which the request was executed.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getHost() {
 		return $this->host;
 	}
-	
+
 	/**
 	 * Returns the port number of the request.
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getPort() {
@@ -230,7 +230,7 @@ final class HttpRequest {
 
 	/**
 	 * Returns a list of strings which represent the HTTP headers.
-	 * 
+	 *
 	 * @return string[]
 	 */
 	public function getHeaders() {
@@ -290,16 +290,16 @@ final class HttpRequest {
 
 	/**
 	 * Returns the user agent header.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getUserAgent(){
 		return $this->userAgent;
 	}
-	
+
 	/**
 	 * Sets the user agent header.
-	 * 
+	 *
 	 * @param string $userAgent the user agent header value
 	 * @return Customweb_Core_Http_Request
 	 */
@@ -309,25 +309,25 @@ final class HttpRequest {
 		$this->addHeader(self::HEADER_KEY_USER_AGENT, $userAgent);
 		return $this;
 	}
-	
+
 	/**
 	 * Returns the query part of the request as string.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getQuery() {
 		return $this->query;
 	}
-	
+
 	/**
 	 * Returns the HTTP body.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getBody() {
 		if ($this->body && isset($this->headers[self::HEADER_KEY_CONTENT_TYPE]) && $this->headers[self::HEADER_KEY_CONTENT_TYPE] == 'application/x-www-form-urlencoded') {
 			return http_build_query($this->body);
-		} elseif ((is_object($this->body) || is_array($this->body)) && 
+		} elseif ((is_object($this->body) || is_array($this->body)) &&
 			(!isset($this->headers[self::HEADER_KEY_CONTENT_TYPE]) || $this->headers[self::HEADER_KEY_CONTENT_TYPE] != 'multipart/form-data')) {
 			return json_encode($this->serializer->sanitizeForSerialization($this->body));
 		}
@@ -365,7 +365,7 @@ final class HttpRequest {
 	 * @return string
 	 */
 	private function getStatusLine() {
-		return $this->getMethod() . ' ' . $this->getPath() . ' ' . 'HTTP/1.1'; 
+		return $this->getMethod() . ' ' . $this->getPath() . ' ' . 'HTTP/1.1';
 	}
 
 	/**

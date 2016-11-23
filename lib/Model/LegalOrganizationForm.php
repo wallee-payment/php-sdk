@@ -35,232 +35,232 @@ use \Wallee\Sdk\ValidationException;
  */
 class LegalOrganizationForm  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'LegalOrganizationForm';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'LegalOrganizationForm';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'country' => 'string',
-        'description' => '\Wallee\Sdk\Model\LocalizedString[]',
-        'englishDescription' => 'string',
-        'id' => 'int',
-        'shortcut' => '\Wallee\Sdk\Model\LocalizedString[]'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'country' => 'string',
+		'description' => '\Wallee\Sdk\Model\LocalizedString[]',
+		'englishDescription' => 'string',
+		'id' => 'int',
+		'shortcut' => '\Wallee\Sdk\Model\LocalizedString[]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $country;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\LocalizedString[]
-     */
-    private $description;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $englishDescription;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\LocalizedString[]
-     */
-    private $shortcut;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setShortcut(isset($data['shortcut']) ? $data['shortcut'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $country;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LocalizedString[]
+	 */
+	private $description;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $englishDescription;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LocalizedString[]
+	 */
+	private $shortcut;
 
 
-    /**
-     * Returns country.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCountry() {
-        return $this->country;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setShortcut(isset($data['shortcut']) ? $data['shortcut'] : null);
+	}
 
-    /**
-     * Sets country.
-     *
-     * @param string $country
-     * @return LegalOrganizationForm
-     */
-    protected function setCountry($country) {
-        $this->country = $country;
 
-        return $this;
-    }
+	/**
+	 * Returns country.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\LocalizedString[]
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets country.
+	 *
+	 * @param string $country
+	 * @return LegalOrganizationForm
+	 */
+	protected function setCountry($country) {
+		$this->country = $country;
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\LocalizedString[] $description
-     * @return LegalOrganizationForm
-     */
-    public function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\LocalizedString[]
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns englishDescription.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getEnglishDescription() {
-        return $this->englishDescription;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\LocalizedString[] $description
+	 * @return LegalOrganizationForm
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets englishDescription.
-     *
-     * @param string $englishDescription
-     * @return LegalOrganizationForm
-     */
-    protected function setEnglishDescription($englishDescription) {
-        $this->englishDescription = $englishDescription;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns englishDescription.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getEnglishDescription() {
+		return $this->englishDescription;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets englishDescription.
+	 *
+	 * @param string $englishDescription
+	 * @return LegalOrganizationForm
+	 */
+	protected function setEnglishDescription($englishDescription) {
+		$this->englishDescription = $englishDescription;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return LegalOrganizationForm
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns shortcut.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\LocalizedString[]
-     */
-    public function getShortcut() {
-        return $this->shortcut;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return LegalOrganizationForm
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets shortcut.
-     *
-     * @param \Wallee\Sdk\Model\LocalizedString[] $shortcut
-     * @return LegalOrganizationForm
-     */
-    public function setShortcut($shortcut) {
-        $this->shortcut = $shortcut;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns shortcut.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\LocalizedString[]
+	 */
+	public function getShortcut() {
+		return $this->shortcut;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets shortcut.
+	 *
+	 * @param \Wallee\Sdk\Model\LocalizedString[] $shortcut
+	 * @return LegalOrganizationForm
+	 */
+	public function setShortcut($shortcut) {
+		$this->shortcut = $shortcut;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

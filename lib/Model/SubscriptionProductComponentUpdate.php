@@ -35,245 +35,245 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProductComponent.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProductComponent.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setComponentChangeWeight(isset($data['componentChangeWeight']) ? $data['componentChangeWeight'] : null);
-        $this->setComponentGroup(isset($data['componentGroup']) ? $data['componentGroup'] : null);
-        $this->setDefaultComponent(isset($data['defaultComponent']) ? $data['defaultComponent'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setReference(isset($data['reference']) ? $data['reference'] : null);
-        $this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
-        $this->setTaxClass(isset($data['taxClass']) ? $data['taxClass'] : null);
-    }
+	
 
 
-    /**
-     * Returns componentChangeWeight.
-     *
-     * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
-     *
-     * @return int
-     */
-    public function getComponentChangeWeight() {
-        return parent::getComponentChangeWeight();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets componentChangeWeight.
-     *
-     * @param int $componentChangeWeight
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setComponentChangeWeight($componentChangeWeight) {
-        return parent::setComponentChangeWeight($componentChangeWeight);
-    }
+		$this->setComponentChangeWeight(isset($data['componentChangeWeight']) ? $data['componentChangeWeight'] : null);
+		$this->setComponentGroup(isset($data['componentGroup']) ? $data['componentGroup'] : null);
+		$this->setDefaultComponent(isset($data['defaultComponent']) ? $data['defaultComponent'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
+		$this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
+		$this->setTaxClass(isset($data['taxClass']) ? $data['taxClass'] : null);
+	}
 
-    /**
-     * Returns componentGroup.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponentGroup
-     */
-    public function getComponentGroup() {
-        return parent::getComponentGroup();
-    }
 
-    /**
-     * Sets componentGroup.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroup $componentGroup
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setComponentGroup($componentGroup) {
-        return parent::setComponentGroup($componentGroup);
-    }
+	/**
+	 * Returns componentChangeWeight.
+	 *
+	 * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+	 *
+	 * @return int
+	 */
+	public function getComponentChangeWeight() {
+		return parent::getComponentChangeWeight();
+	}
 
-    /**
-     * Returns defaultComponent.
-     *
-     * When a component is marked as a 'default' component it is used when no other component is selected by the user.
-     *
-     * @return bool
-     */
-    public function getDefaultComponent() {
-        return parent::getDefaultComponent();
-    }
+	/**
+	 * Sets componentChangeWeight.
+	 *
+	 * @param int $componentChangeWeight
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setComponentChangeWeight($componentChangeWeight) {
+		return parent::setComponentChangeWeight($componentChangeWeight);
+	}
 
-    /**
-     * Sets defaultComponent.
-     *
-     * @param bool $defaultComponent
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setDefaultComponent($defaultComponent) {
-        return parent::setDefaultComponent($defaultComponent);
-    }
+	/**
+	 * Returns componentGroup.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentGroup
+	 */
+	public function getComponentGroup() {
+		return parent::getComponentGroup();
+	}
 
-    /**
-     * Returns description.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getDescription() {
-        return parent::getDescription();
-    }
+	/**
+	 * Sets componentGroup.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroup $componentGroup
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setComponentGroup($componentGroup) {
+		return parent::setComponentGroup($componentGroup);
+	}
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setDescription($description) {
-        return parent::setDescription($description);
-    }
+	/**
+	 * Returns defaultComponent.
+	 *
+	 * When a component is marked as a 'default' component it is used when no other component is selected by the user.
+	 *
+	 * @return bool
+	 */
+	public function getDefaultComponent() {
+		return parent::getDefaultComponent();
+	}
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Sets defaultComponent.
+	 *
+	 * @param bool $defaultComponent
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setDefaultComponent($defaultComponent) {
+		return parent::setDefaultComponent($defaultComponent);
+	}
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+	/**
+	 * Returns description.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getDescription() {
+		return parent::getDescription();
+	}
 
-    /**
-     * Returns reference.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference
-     */
-    public function getReference() {
-        return parent::getReference();
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setDescription($description) {
+		return parent::setDescription($description);
+	}
 
-    /**
-     * Sets reference.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference $reference
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setReference($reference) {
-        return parent::setReference($reference);
-    }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return parent::getSortOrder();
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setSortOrder($sortOrder) {
-        return parent::setSortOrder($sortOrder);
-    }
+	/**
+	 * Returns reference.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference
+	 */
+	public function getReference() {
+		return parent::getReference();
+	}
 
-    /**
-     * Returns taxClass.
-     *
-     * @return \Wallee\Sdk\Model\TaxClass
-     */
-    public function getTaxClass() {
-        return parent::getTaxClass();
-    }
+	/**
+	 * Sets reference.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference $reference
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setReference($reference) {
+		return parent::setReference($reference);
+	}
 
-    /**
-     * Sets taxClass.
-     *
-     * @param \Wallee\Sdk\Model\TaxClass $taxClass
-     * @return SubscriptionProductComponentUpdate
-     */
-    public function setTaxClass($taxClass) {
-        return parent::setTaxClass($taxClass);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-    }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return parent::getSortOrder();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setSortOrder($sortOrder) {
+		return parent::setSortOrder($sortOrder);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns taxClass.
+	 *
+	 * @return \Wallee\Sdk\Model\TaxClass
+	 */
+	public function getTaxClass() {
+		return parent::getTaxClass();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets taxClass.
+	 *
+	 * @param \Wallee\Sdk\Model\TaxClass $taxClass
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setTaxClass($taxClass) {
+		return parent::setTaxClass($taxClass);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

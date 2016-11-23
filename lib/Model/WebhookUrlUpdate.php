@@ -35,129 +35,129 @@ use \Wallee\Sdk\ValidationException;
  */
 class WebhookUrlUpdate extends WebhookUrl  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'WebhookUrl.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'WebhookUrl.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setUrl(isset($data['url']) ? $data['url'] : null);
-    }
+	
 
 
-    /**
-     * Returns name.
-     *
-     * The URL name is used internally to identify the URL in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return string
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return WebhookUrlUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setUrl(isset($data['url']) ? $data['url'] : null);
+	}
 
-    /**
-     * Returns url.
-     *
-     * The URL to which the HTTP requests are sent to. An example URL could look like https://www.example.com/some/path?some-query-parameter=value.
-     *
-     * @return string
-     */
-    public function getUrl() {
-        return parent::getUrl();
-    }
 
-    /**
-     * Sets url.
-     *
-     * @param string $url
-     * @return WebhookUrlUpdate
-     */
-    public function setUrl($url) {
-        return parent::setUrl($url);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getUrl() === null) {
-        	throw new ValidationException("'url' can't be null", 'url', $this);
-        }
-    }
+	/**
+	 * Returns name.
+	 *
+	 * The URL name is used internally to identify the URL in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return WebhookUrlUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns url.
+	 *
+	 * The URL to which the HTTP requests are sent to. An example URL could look like https://www.example.com/some/path?some-query-parameter=value.
+	 *
+	 * @return string
+	 */
+	public function getUrl() {
+		return parent::getUrl();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets url.
+	 *
+	 * @param string $url
+	 * @return WebhookUrlUpdate
+	 */
+	public function setUrl($url) {
+		return parent::setUrl($url);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getUrl() === null) {
+			throw new ValidationException("'url' can't be null", 'url', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

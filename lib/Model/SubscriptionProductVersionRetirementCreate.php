@@ -35,141 +35,141 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProductVersionRetirementCreate extends SubscriptionProductVersionRetirement  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProductVersionRetirement.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProductVersionRetirement.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-        $this->setRespectTerminiationPeriodsEnabled(isset($data['respectTerminiationPeriodsEnabled']) ? $data['respectTerminiationPeriodsEnabled'] : null);
-        $this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
-    }
+	
 
 
-    /**
-     * Returns productVersion.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductVersion
-     */
-    public function getProductVersion() {
-        return parent::getProductVersion();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets productVersion.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
-     * @return SubscriptionProductVersionRetirementCreate
-     */
-    public function setProductVersion($productVersion) {
-        return parent::setProductVersion($productVersion);
-    }
+		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
+		$this->setRespectTerminiationPeriodsEnabled(isset($data['respectTerminiationPeriodsEnabled']) ? $data['respectTerminiationPeriodsEnabled'] : null);
+		$this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
+	}
 
-    /**
-     * Returns respectTerminiationPeriodsEnabled.
-     *
-     * 
-     *
-     * @return bool
-     */
-    public function getRespectTerminiationPeriodsEnabled() {
-        return parent::getRespectTerminiationPeriodsEnabled();
-    }
 
-    /**
-     * Sets respectTerminiationPeriodsEnabled.
-     *
-     * @param bool $respectTerminiationPeriodsEnabled
-     * @return SubscriptionProductVersionRetirementCreate
-     */
-    public function setRespectTerminiationPeriodsEnabled($respectTerminiationPeriodsEnabled) {
-        return parent::setRespectTerminiationPeriodsEnabled($respectTerminiationPeriodsEnabled);
-    }
+	/**
+	 * Returns productVersion.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
+	 */
+	public function getProductVersion() {
+		return parent::getProductVersion();
+	}
 
-    /**
-     * Returns targetProduct.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    public function getTargetProduct() {
-        return parent::getTargetProduct();
-    }
+	/**
+	 * Sets productVersion.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
+	 * @return SubscriptionProductVersionRetirementCreate
+	 */
+	public function setProductVersion($productVersion) {
+		return parent::setProductVersion($productVersion);
+	}
 
-    /**
-     * Sets targetProduct.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProduct $targetProduct
-     * @return SubscriptionProductVersionRetirementCreate
-     */
-    public function setTargetProduct($targetProduct) {
-        return parent::setTargetProduct($targetProduct);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-    }
+	/**
+	 * Returns respectTerminiationPeriodsEnabled.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getRespectTerminiationPeriodsEnabled() {
+		return parent::getRespectTerminiationPeriodsEnabled();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets respectTerminiationPeriodsEnabled.
+	 *
+	 * @param bool $respectTerminiationPeriodsEnabled
+	 * @return SubscriptionProductVersionRetirementCreate
+	 */
+	public function setRespectTerminiationPeriodsEnabled($respectTerminiationPeriodsEnabled) {
+		return parent::setRespectTerminiationPeriodsEnabled($respectTerminiationPeriodsEnabled);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns targetProduct.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	public function getTargetProduct() {
+		return parent::getTargetProduct();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets targetProduct.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProduct $targetProduct
+	 * @return SubscriptionProductVersionRetirementCreate
+	 */
+	public function setTargetProduct($targetProduct) {
+		return parent::setTargetProduct($targetProduct);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

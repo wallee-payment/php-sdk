@@ -35,356 +35,356 @@ use \Wallee\Sdk\ValidationException;
  */
 class EmailTemplateType  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'EmailTemplateType';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'EmailTemplateType';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'attachmentResources' => '\Wallee\Sdk\Model\AttachmentResource[]',
-        'description' => 'map[string,string]',
-        'documentAttachments' => '\Wallee\Sdk\Model\DocumentTemplateType[]',
-        'feature' => '\Wallee\Sdk\Model\EntityReference',
-        'htmlBodyTemplateResource' => 'string',
-        'id' => 'int',
-        'name' => 'map[string,string]',
-        'subject' => 'map[string,string]',
-        'textBodyTemplateResource' => 'string'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'attachmentResources' => '\Wallee\Sdk\Model\AttachmentResource[]',
+		'description' => 'map[string,string]',
+		'documentAttachments' => '\Wallee\Sdk\Model\DocumentTemplateType[]',
+		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'htmlBodyTemplateResource' => 'string',
+		'id' => 'int',
+		'name' => 'map[string,string]',
+		'subject' => 'map[string,string]',
+		'textBodyTemplateResource' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\AttachmentResource[]
-     */
-    private $attachmentResources;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $description;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\DocumentTemplateType[]
-     */
-    private $documentAttachments;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $feature;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $htmlBodyTemplateResource;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $name;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $subject;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $textBodyTemplateResource;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setAttachmentResources(isset($data['attachmentResources']) ? $data['attachmentResources'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setDocumentAttachments(isset($data['documentAttachments']) ? $data['documentAttachments'] : null);
-        $this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setSubject(isset($data['subject']) ? $data['subject'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\AttachmentResource[]
+	 */
+	private $attachmentResources;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $description;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\DocumentTemplateType[]
+	 */
+	private $documentAttachments;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $feature;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $htmlBodyTemplateResource;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $name;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $subject;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $textBodyTemplateResource;
 
 
-    /**
-     * Returns attachmentResources.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\AttachmentResource[]
-     */
-    public function getAttachmentResources() {
-        return $this->attachmentResources;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setAttachmentResources(isset($data['attachmentResources']) ? $data['attachmentResources'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setDocumentAttachments(isset($data['documentAttachments']) ? $data['documentAttachments'] : null);
+		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setSubject(isset($data['subject']) ? $data['subject'] : null);
+	}
 
-    /**
-     * Sets attachmentResources.
-     *
-     * @param \Wallee\Sdk\Model\AttachmentResource[] $attachmentResources
-     * @return EmailTemplateType
-     */
-    public function setAttachmentResources($attachmentResources) {
-        $this->attachmentResources = $attachmentResources;
 
-        return $this;
-    }
+	/**
+	 * Returns attachmentResources.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\AttachmentResource[]
+	 */
+	public function getAttachmentResources() {
+		return $this->attachmentResources;
+	}
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets attachmentResources.
+	 *
+	 * @param \Wallee\Sdk\Model\AttachmentResource[] $attachmentResources
+	 * @return EmailTemplateType
+	 */
+	public function setAttachmentResources($attachmentResources) {
+		$this->attachmentResources = $attachmentResources;
 
-    /**
-     * Sets description.
-     *
-     * @param map[string,string] $description
-     * @return EmailTemplateType
-     */
-    public function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns documentAttachments.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\DocumentTemplateType[]
-     */
-    public function getDocumentAttachments() {
-        return $this->documentAttachments;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param map[string,string] $description
+	 * @return EmailTemplateType
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets documentAttachments.
-     *
-     * @param \Wallee\Sdk\Model\DocumentTemplateType[] $documentAttachments
-     * @return EmailTemplateType
-     */
-    public function setDocumentAttachments($documentAttachments) {
-        $this->documentAttachments = $documentAttachments;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns documentAttachments.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\DocumentTemplateType[]
+	 */
+	public function getDocumentAttachments() {
+		return $this->documentAttachments;
+	}
 
-    /**
-     * Returns feature.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getFeature() {
-        return $this->feature;
-    }
+	/**
+	 * Sets documentAttachments.
+	 *
+	 * @param \Wallee\Sdk\Model\DocumentTemplateType[] $documentAttachments
+	 * @return EmailTemplateType
+	 */
+	public function setDocumentAttachments($documentAttachments) {
+		$this->documentAttachments = $documentAttachments;
 
-    /**
-     * Sets feature.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $feature
-     * @return EmailTemplateType
-     */
-    public function setFeature($feature) {
-        $this->feature = $feature;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns feature.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getFeature() {
+		return $this->feature;
+	}
 
-    /**
-     * Returns htmlBodyTemplateResource.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getHtmlBodyTemplateResource() {
-        return $this->htmlBodyTemplateResource;
-    }
+	/**
+	 * Sets feature.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @return EmailTemplateType
+	 */
+	public function setFeature($feature) {
+		$this->feature = $feature;
 
-    /**
-     * Sets htmlBodyTemplateResource.
-     *
-     * @param string $htmlBodyTemplateResource
-     * @return EmailTemplateType
-     */
-    protected function setHtmlBodyTemplateResource($htmlBodyTemplateResource) {
-        $this->htmlBodyTemplateResource = $htmlBodyTemplateResource;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns htmlBodyTemplateResource.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getHtmlBodyTemplateResource() {
+		return $this->htmlBodyTemplateResource;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets htmlBodyTemplateResource.
+	 *
+	 * @param string $htmlBodyTemplateResource
+	 * @return EmailTemplateType
+	 */
+	protected function setHtmlBodyTemplateResource($htmlBodyTemplateResource) {
+		$this->htmlBodyTemplateResource = $htmlBodyTemplateResource;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return EmailTemplateType
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return EmailTemplateType
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets name.
-     *
-     * @param map[string,string] $name
-     * @return EmailTemplateType
-     */
-    public function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns subject.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getSubject() {
-        return $this->subject;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param map[string,string] $name
+	 * @return EmailTemplateType
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets subject.
-     *
-     * @param map[string,string] $subject
-     * @return EmailTemplateType
-     */
-    public function setSubject($subject) {
-        $this->subject = $subject;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns subject.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getSubject() {
+		return $this->subject;
+	}
 
-    /**
-     * Returns textBodyTemplateResource.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTextBodyTemplateResource() {
-        return $this->textBodyTemplateResource;
-    }
+	/**
+	 * Sets subject.
+	 *
+	 * @param map[string,string] $subject
+	 * @return EmailTemplateType
+	 */
+	public function setSubject($subject) {
+		$this->subject = $subject;
 
-    /**
-     * Sets textBodyTemplateResource.
-     *
-     * @param string $textBodyTemplateResource
-     * @return EmailTemplateType
-     */
-    protected function setTextBodyTemplateResource($textBodyTemplateResource) {
-        $this->textBodyTemplateResource = $textBodyTemplateResource;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns textBodyTemplateResource.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTextBodyTemplateResource() {
+		return $this->textBodyTemplateResource;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets textBodyTemplateResource.
+	 *
+	 * @param string $textBodyTemplateResource
+	 * @return EmailTemplateType
+	 */
+	protected function setTextBodyTemplateResource($textBodyTemplateResource) {
+		$this->textBodyTemplateResource = $textBodyTemplateResource;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

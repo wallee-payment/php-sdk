@@ -35,221 +35,221 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionLedgerEntry.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionLedgerEntry.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setAmountIncludingTax(isset($data['amountIncludingTax']) ? $data['amountIncludingTax'] : null);
-        $this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-        $this->setQuantity(isset($data['quantity']) ? $data['quantity'] : null);
-        $this->setSubscriptionVersion(isset($data['subscriptionVersion']) ? $data['subscriptionVersion'] : null);
-        $this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
-        $this->setTitle(isset($data['title']) ? $data['title'] : null);
-    }
+	
 
 
-    /**
-     * Returns amountIncludingTax.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getAmountIncludingTax() {
-        return parent::getAmountIncludingTax();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets amountIncludingTax.
-     *
-     * @param float $amountIncludingTax
-     * @return SubscriptionLedgerEntryCreate
-     */
-    public function setAmountIncludingTax($amountIncludingTax) {
-        return parent::setAmountIncludingTax($amountIncludingTax);
-    }
+		$this->setAmountIncludingTax(isset($data['amountIncludingTax']) ? $data['amountIncludingTax'] : null);
+		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
+		$this->setQuantity(isset($data['quantity']) ? $data['quantity'] : null);
+		$this->setSubscriptionVersion(isset($data['subscriptionVersion']) ? $data['subscriptionVersion'] : null);
+		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
+		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+	}
 
-    /**
-     * Returns externalId.
-     *
-     * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-     *
-     * @return string
-     */
-    public function getExternalId() {
-        return parent::getExternalId();
-    }
 
-    /**
-     * Sets externalId.
-     *
-     * @param string $externalId
-     * @return SubscriptionLedgerEntryCreate
-     */
-    public function setExternalId($externalId) {
-        return parent::setExternalId($externalId);
-    }
+	/**
+	 * Returns amountIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getAmountIncludingTax() {
+		return parent::getAmountIncludingTax();
+	}
 
-    /**
-     * Returns quantity.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getQuantity() {
-        return parent::getQuantity();
-    }
+	/**
+	 * Sets amountIncludingTax.
+	 *
+	 * @param float $amountIncludingTax
+	 * @return SubscriptionLedgerEntryCreate
+	 */
+	public function setAmountIncludingTax($amountIncludingTax) {
+		return parent::setAmountIncludingTax($amountIncludingTax);
+	}
 
-    /**
-     * Sets quantity.
-     *
-     * @param float $quantity
-     * @return SubscriptionLedgerEntryCreate
-     */
-    public function setQuantity($quantity) {
-        return parent::setQuantity($quantity);
-    }
+	/**
+	 * Returns externalId.
+	 *
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return parent::getExternalId();
+	}
 
-    /**
-     * Returns subscriptionVersion.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getSubscriptionVersion() {
-        return parent::getSubscriptionVersion();
-    }
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return SubscriptionLedgerEntryCreate
+	 */
+	public function setExternalId($externalId) {
+		return parent::setExternalId($externalId);
+	}
 
-    /**
-     * Sets subscriptionVersion.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $subscriptionVersion
-     * @return SubscriptionLedgerEntryCreate
-     */
-    public function setSubscriptionVersion($subscriptionVersion) {
-        return parent::setSubscriptionVersion($subscriptionVersion);
-    }
+	/**
+	 * Returns quantity.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getQuantity() {
+		return parent::getQuantity();
+	}
 
-    /**
-     * Returns taxes.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\TaxCreate[]
-     */
-    public function getTaxes() {
-        return parent::getTaxes();
-    }
+	/**
+	 * Sets quantity.
+	 *
+	 * @param float $quantity
+	 * @return SubscriptionLedgerEntryCreate
+	 */
+	public function setQuantity($quantity) {
+		return parent::setQuantity($quantity);
+	}
 
-    /**
-     * Sets taxes.
-     *
-     * @param \Wallee\Sdk\Model\TaxCreate[] $taxes
-     * @return SubscriptionLedgerEntryCreate
-     */
-    public function setTaxes($taxes) {
-        return parent::setTaxes($taxes);
-    }
+	/**
+	 * Returns subscriptionVersion.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getSubscriptionVersion() {
+		return parent::getSubscriptionVersion();
+	}
 
-    /**
-     * Returns title.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTitle() {
-        return parent::getTitle();
-    }
+	/**
+	 * Sets subscriptionVersion.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $subscriptionVersion
+	 * @return SubscriptionLedgerEntryCreate
+	 */
+	public function setSubscriptionVersion($subscriptionVersion) {
+		return parent::setSubscriptionVersion($subscriptionVersion);
+	}
 
-    /**
-     * Sets title.
-     *
-     * @param string $title
-     * @return SubscriptionLedgerEntryCreate
-     */
-    public function setTitle($title) {
-        return parent::setTitle($title);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getAmountIncludingTax() === null) {
-        	throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
-        }
-        if ($this->getExternalId() === null) {
-        	throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-        }
-        if ($this->getQuantity() === null) {
-        	throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-        }
-        if ($this->getTitle() === null) {
-        	throw new ValidationException("'title' can't be null", 'title', $this);
-        }
-    }
+	/**
+	 * Returns taxes.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\TaxCreate[]
+	 */
+	public function getTaxes() {
+		return parent::getTaxes();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets taxes.
+	 *
+	 * @param \Wallee\Sdk\Model\TaxCreate[] $taxes
+	 * @return SubscriptionLedgerEntryCreate
+	 */
+	public function setTaxes($taxes) {
+		return parent::setTaxes($taxes);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns title.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTitle() {
+		return parent::getTitle();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets title.
+	 *
+	 * @param string $title
+	 * @return SubscriptionLedgerEntryCreate
+	 */
+	public function setTitle($title) {
+		return parent::setTitle($title);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getAmountIncludingTax() === null) {
+			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
+		}
+		if ($this->getExternalId() === null) {
+			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+		}
+		if ($this->getQuantity() === null) {
+			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
+		}
+		if ($this->getTitle() === null) {
+			throw new ValidationException("'title' can't be null", 'title', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,328 +35,328 @@ use \Wallee\Sdk\ValidationException;
  */
 class User  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'User';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'User';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'id' => 'int',
-        'plannedPurgeDate' => 'string',
-        'scope' => '\Wallee\Sdk\Model\Scope',
-        'state' => 'string',
-        'userType' => 'string',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'id' => 'int',
+		'plannedPurgeDate' => 'string',
+		'scope' => '\Wallee\Sdk\Model\Scope',
+		'state' => 'string',
+		'userType' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_CREATE = 'CREATE';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_INACTIVE = 'INACTIVE';
-    const STATE_DELETING = 'DELETING';
-    const STATE_DELETED = 'DELETED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_CREATE,
-            self::STATE_ACTIVE,
-            self::STATE_INACTIVE,
-            self::STATE_DELETING,
-            self::STATE_DELETED,
-        ];
-    }
-    
-    /**
-     * Values of userType.
-     */ 
-    const USER_TYPE_HUMAN_USER = 'HUMAN_USER';
-    const USER_TYPE_APPLICATION_USER = 'APPLICATION_USER';
-    const USER_TYPE_ANONYMOUS_USER = 'ANONYMOUS_USER';
-    const USER_TYPE_SERVER_USER = 'SERVER_USER';
-    
-    /**
-     * Returns allowable values of userType.
-     *
-     * @return string[]
-     */
-    public function getUserTypeAllowableValues() {
-        return [
-            self::USER_TYPE_HUMAN_USER,
-            self::USER_TYPE_APPLICATION_USER,
-            self::USER_TYPE_ANONYMOUS_USER,
-            self::USER_TYPE_SERVER_USER,
-        ];
-    }
-    
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Scope
-     */
-    private $scope;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $userType;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setScope(isset($data['scope']) ? $data['scope'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_DELETING = 'DELETING';
+	const STATE_DELETED = 'DELETED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_DELETING,
+			self::STATE_DELETED,
+		];
+	}
+	
+	/**
+	 * Values of userType.
+	 */
+	const USER_TYPE_HUMAN_USER = 'HUMAN_USER';
+	const USER_TYPE_APPLICATION_USER = 'APPLICATION_USER';
+	const USER_TYPE_ANONYMOUS_USER = 'ANONYMOUS_USER';
+	const USER_TYPE_SERVER_USER = 'SERVER_USER';
+	
+	/**
+	 * Returns allowable values of userType.
+	 *
+	 * @return string[]
+	 */
+	public function getUserTypeAllowableValues() {
+		return [
+			self::USER_TYPE_HUMAN_USER,
+			self::USER_TYPE_APPLICATION_USER,
+			self::USER_TYPE_ANONYMOUS_USER,
+			self::USER_TYPE_SERVER_USER,
+		];
+	}
+	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Scope
+	 */
+	private $scope;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $userType;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setScope(isset($data['scope']) ? $data['scope'] : null);
+	}
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return User
-     */
-    protected function setId($id) {
-        $this->id = $id;
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return User
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return User
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns scope.
-     *
-     * @return \Wallee\Sdk\Model\Scope
-     */
-    public function getScope() {
-        return $this->scope;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return User
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets scope.
-     *
-     * @param \Wallee\Sdk\Model\Scope $scope
-     * @return User
-     */
-    public function setScope($scope) {
-        $this->scope = $scope;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns scope.
+	 *
+	 * @return \Wallee\Sdk\Model\Scope
+	 */
+	public function getScope() {
+		return $this->scope;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets scope.
+	 *
+	 * @param \Wallee\Sdk\Model\Scope $scope
+	 * @return User
+	 */
+	public function setScope($scope) {
+		$this->scope = $scope;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return User
-     */
-    protected function setState($state) {
-        $allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-        if ((!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns userType.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getUserType() {
-        return $this->userType;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return User
+	 */
+	protected function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets userType.
-     *
-     * @param string $userType
-     * @return User
-     */
-    protected function setUserType($userType) {
-        $allowed_values = array('HUMAN_USER', 'APPLICATION_USER', 'ANONYMOUS_USER', 'SERVER_USER');
-        if ((!in_array($userType, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'userType', must be one of 'HUMAN_USER', 'APPLICATION_USER', 'ANONYMOUS_USER', 'SERVER_USER'");
-        }
-        $this->userType = $userType;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns userType.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getUserType() {
+		return $this->userType;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets userType.
+	 *
+	 * @param string $userType
+	 * @return User
+	 */
+	protected function setUserType($userType) {
+		$allowed_values = array('HUMAN_USER', 'APPLICATION_USER', 'ANONYMOUS_USER', 'SERVER_USER');
+		if ((!in_array($userType, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'userType', must be one of 'HUMAN_USER', 'APPLICATION_USER', 'ANONYMOUS_USER', 'SERVER_USER'");
+		}
+		$this->userType = $userType;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return User
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getState() === null) {
-        	throw new ValidationException("'state' can't be null", 'state', $this);
-        }
-        $allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-        if ($this->getUserType() === null) {
-        	throw new ValidationException("'userType' can't be null", 'userType', $this);
-        }
-        $allowed_values = ["HUMAN_USER", "APPLICATION_USER", "ANONYMOUS_USER", "SERVER_USER"];
-        if (!in_array($this->getUserType(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'userType', must be one of #{allowed_values}.", 'userType', $this);
-        }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return User
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    }
+		return $this;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getUserType() === null) {
+			throw new ValidationException("'userType' can't be null", 'userType', $this);
+		}
+		$allowed_values = ["HUMAN_USER", "APPLICATION_USER", "ANONYMOUS_USER", "SERVER_USER"];
+		if (!in_array($this->getUserType(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'userType', must be one of #{allowed_values}.", 'userType', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,168 +35,168 @@ use \Wallee\Sdk\ValidationException;
  */
 class RestCurrency  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'RestCurrency';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'RestCurrency';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'currencyCode' => 'string',
-        'fractionDigits' => 'int',
-        'numericCode' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'currencyCode' => 'string',
+		'fractionDigits' => 'int',
+		'numericCode' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $currencyCode;
-    
-    /**
-     * 
-     *
-     * @var int
-     */
-    private $fractionDigits;
-    
-    /**
-     * 
-     *
-     * @var int
-     */
-    private $numericCode;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $currencyCode;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $fractionDigits;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $numericCode;
 
 
-    /**
-     * Returns currencyCode.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCurrencyCode() {
-        return $this->currencyCode;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets currencyCode.
-     *
-     * @param string $currencyCode
-     * @return RestCurrency
-     */
-    protected function setCurrencyCode($currencyCode) {
-        $this->currencyCode = $currencyCode;
 
-        return $this;
-    }
+	/**
+	 * Returns currencyCode.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCurrencyCode() {
+		return $this->currencyCode;
+	}
 
-    /**
-     * Returns fractionDigits.
-     *
-     * 
-     *
-     * @return int
-     */
-    public function getFractionDigits() {
-        return $this->fractionDigits;
-    }
+	/**
+	 * Sets currencyCode.
+	 *
+	 * @param string $currencyCode
+	 * @return RestCurrency
+	 */
+	protected function setCurrencyCode($currencyCode) {
+		$this->currencyCode = $currencyCode;
 
-    /**
-     * Sets fractionDigits.
-     *
-     * @param int $fractionDigits
-     * @return RestCurrency
-     */
-    protected function setFractionDigits($fractionDigits) {
-        $this->fractionDigits = $fractionDigits;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns fractionDigits.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getFractionDigits() {
+		return $this->fractionDigits;
+	}
 
-    /**
-     * Returns numericCode.
-     *
-     * 
-     *
-     * @return int
-     */
-    public function getNumericCode() {
-        return $this->numericCode;
-    }
+	/**
+	 * Sets fractionDigits.
+	 *
+	 * @param int $fractionDigits
+	 * @return RestCurrency
+	 */
+	protected function setFractionDigits($fractionDigits) {
+		$this->fractionDigits = $fractionDigits;
 
-    /**
-     * Sets numericCode.
-     *
-     * @param int $numericCode
-     * @return RestCurrency
-     */
-    protected function setNumericCode($numericCode) {
-        $this->numericCode = $numericCode;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns numericCode.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getNumericCode() {
+		return $this->numericCode;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets numericCode.
+	 *
+	 * @param int $numericCode
+	 * @return RestCurrency
+	 */
+	protected function setNumericCode($numericCode) {
+		$this->numericCode = $numericCode;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,123 +35,123 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionUpdate extends Subscription  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Subscription.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Subscription.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setPlannedTerminationDate(isset($data['plannedTerminationDate']) ? $data['plannedTerminationDate'] : null);
-    }
+	
 
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getDescription() {
-        return parent::getDescription();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets description.
-     *
-     * @param string $description
-     * @return SubscriptionUpdate
-     */
-    public function setDescription($description) {
-        return parent::setDescription($description);
-    }
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setPlannedTerminationDate(isset($data['plannedTerminationDate']) ? $data['plannedTerminationDate'] : null);
+	}
 
-    /**
-     * Returns plannedTerminationDate.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getPlannedTerminationDate() {
-        return parent::getPlannedTerminationDate();
-    }
 
-    /**
-     * Sets plannedTerminationDate.
-     *
-     * @param string $plannedTerminationDate
-     * @return SubscriptionUpdate
-     */
-    public function setPlannedTerminationDate($plannedTerminationDate) {
-        return parent::setPlannedTerminationDate($plannedTerminationDate);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return parent::getDescription();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param string $description
+	 * @return SubscriptionUpdate
+	 */
+	public function setDescription($description) {
+		return parent::setDescription($description);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns plannedTerminationDate.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getPlannedTerminationDate() {
+		return parent::getPlannedTerminationDate();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets plannedTerminationDate.
+	 *
+	 * @param string $plannedTerminationDate
+	 * @return SubscriptionUpdate
+	 */
+	public function setPlannedTerminationDate($plannedTerminationDate) {
+		return parent::setPlannedTerminationDate($plannedTerminationDate);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

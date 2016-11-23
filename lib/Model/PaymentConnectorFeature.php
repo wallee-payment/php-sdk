@@ -35,165 +35,165 @@ use \Wallee\Sdk\ValidationException;
  */
 class PaymentConnectorFeature  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'PaymentConnectorFeature';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'PaymentConnectorFeature';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'displayName' => 'string',
-        'feature' => '\Wallee\Sdk\Model\Feature',
-        'id' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'displayName' => 'string',
+		'feature' => '\Wallee\Sdk\Model\Feature',
+		'id' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $displayName;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Feature
-     */
-    private $feature;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $displayName;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Feature
+	 */
+	private $feature;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 
-    /**
-     * Returns displayName.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getDisplayName() {
-        return $this->displayName;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
+	}
 
-    /**
-     * Sets displayName.
-     *
-     * @param string $displayName
-     * @return PaymentConnectorFeature
-     */
-    protected function setDisplayName($displayName) {
-        $this->displayName = $displayName;
 
-        return $this;
-    }
+	/**
+	 * Returns displayName.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDisplayName() {
+		return $this->displayName;
+	}
 
-    /**
-     * Returns feature.
-     *
-     * @return \Wallee\Sdk\Model\Feature
-     */
-    public function getFeature() {
-        return $this->feature;
-    }
+	/**
+	 * Sets displayName.
+	 *
+	 * @param string $displayName
+	 * @return PaymentConnectorFeature
+	 */
+	protected function setDisplayName($displayName) {
+		$this->displayName = $displayName;
 
-    /**
-     * Sets feature.
-     *
-     * @param \Wallee\Sdk\Model\Feature $feature
-     * @return PaymentConnectorFeature
-     */
-    public function setFeature($feature) {
-        $this->feature = $feature;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns feature.
+	 *
+	 * @return \Wallee\Sdk\Model\Feature
+	 */
+	public function getFeature() {
+		return $this->feature;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets feature.
+	 *
+	 * @param \Wallee\Sdk\Model\Feature $feature
+	 * @return PaymentConnectorFeature
+	 */
+	public function setFeature($feature) {
+		$this->feature = $feature;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return PaymentConnectorFeature
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return PaymentConnectorFeature
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

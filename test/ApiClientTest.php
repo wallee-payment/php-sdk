@@ -31,31 +31,31 @@ use \Wallee\Sdk\Http\HttpClientFactory;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class BasicTest extends \PHPUnit_Framework_TestCase {
-	
+
 	/**
 	 * Test the API client.
 	 */
 	public function testApiClient() {
 		$this->callApi(HttpClientFactory::TYPE_CURL);
 	}
-	
+
 	/**
 	 * Test the cURL HTTP client.
 	 */
 	public function testCurlHttpClient() {
 		$this->callApi(HttpClientFactory::TYPE_CURL);
 	}
-	
+
 	/**
 	 * Test the socket HTTP client.
 	 */
 	public function testSocketHttpClient() {
 		$this->callApi(HttpClientFactory::TYPE_SOCKET);
 	}
-	
+
 	/**
 	 * Send an API request with the given http client.
 	 *
@@ -73,5 +73,5 @@ final class BasicTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(1, $response->getData()->getId());
 		$this->assertEquals('SDK Test Webhook Url', $response->getData()->getName());
 	}
-	
+
 }

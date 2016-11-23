@@ -35,260 +35,260 @@ use \Wallee\Sdk\ValidationException;
  */
 class PaymentMethodBrand  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'PaymentMethodBrand';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'PaymentMethodBrand';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'description' => 'map[string,string]',
-        'grayImagePath' => 'string',
-        'id' => 'int',
-        'imagePath' => 'string',
-        'name' => 'map[string,string]',
-        'paymentMethod' => '\Wallee\Sdk\Model\EntityReference'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'description' => 'map[string,string]',
+		'grayImagePath' => 'string',
+		'id' => 'int',
+		'imagePath' => 'string',
+		'name' => 'map[string,string]',
+		'paymentMethod' => '\Wallee\Sdk\Model\EntityReference'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $description;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $grayImagePath;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $imagePath;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $name;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $paymentMethod;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setPaymentMethod(isset($data['paymentMethod']) ? $data['paymentMethod'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $description;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $grayImagePath;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $imagePath;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $name;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $paymentMethod;
 
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setPaymentMethod(isset($data['paymentMethod']) ? $data['paymentMethod'] : null);
+	}
 
-    /**
-     * Sets description.
-     *
-     * @param map[string,string] $description
-     * @return PaymentMethodBrand
-     */
-    public function setDescription($description) {
-        $this->description = $description;
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns grayImagePath.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getGrayImagePath() {
-        return $this->grayImagePath;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param map[string,string] $description
+	 * @return PaymentMethodBrand
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets grayImagePath.
-     *
-     * @param string $grayImagePath
-     * @return PaymentMethodBrand
-     */
-    protected function setGrayImagePath($grayImagePath) {
-        $this->grayImagePath = $grayImagePath;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns grayImagePath.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getGrayImagePath() {
+		return $this->grayImagePath;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets grayImagePath.
+	 *
+	 * @param string $grayImagePath
+	 * @return PaymentMethodBrand
+	 */
+	protected function setGrayImagePath($grayImagePath) {
+		$this->grayImagePath = $grayImagePath;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return PaymentMethodBrand
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns imagePath.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getImagePath() {
-        return $this->imagePath;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return PaymentMethodBrand
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets imagePath.
-     *
-     * @param string $imagePath
-     * @return PaymentMethodBrand
-     */
-    protected function setImagePath($imagePath) {
-        $this->imagePath = $imagePath;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns imagePath.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getImagePath() {
+		return $this->imagePath;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets imagePath.
+	 *
+	 * @param string $imagePath
+	 * @return PaymentMethodBrand
+	 */
+	protected function setImagePath($imagePath) {
+		$this->imagePath = $imagePath;
 
-    /**
-     * Sets name.
-     *
-     * @param map[string,string] $name
-     * @return PaymentMethodBrand
-     */
-    public function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns paymentMethod.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getPaymentMethod() {
-        return $this->paymentMethod;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param map[string,string] $name
+	 * @return PaymentMethodBrand
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets paymentMethod.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
-     * @return PaymentMethodBrand
-     */
-    public function setPaymentMethod($paymentMethod) {
-        $this->paymentMethod = $paymentMethod;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns paymentMethod.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getPaymentMethod() {
+		return $this->paymentMethod;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets paymentMethod.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
+	 * @return PaymentMethodBrand
+	 */
+	public function setPaymentMethod($paymentMethod) {
+		$this->paymentMethod = $paymentMethod;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

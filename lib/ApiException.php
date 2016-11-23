@@ -30,79 +30,79 @@ use \Exception;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class ApiException extends Exception {
 
-    /**
-     * The HTTP body of the server response either as Json or string.
-     *
-     * @var string
-     */
-    private $responseBody;
+	/**
+	 * The HTTP body of the server response either as Json or string.
+	 *
+	 * @var string
+	 */
+	private $responseBody;
 
-    /**
-     * The HTTP headers of the server response.
-     *
-     * @var string[]
-     */
-    private $responseHeaders;
+	/**
+	 * The HTTP headers of the server response.
+	 *
+	 * @var string[]
+	 */
+	private $responseHeaders;
 
-    /**
-     * The deserialized response object.
-     *
-     * @var $responseObject
-     */
-    private $responseObject;
+	/**
+	 * The deserialized response object.
+	 *
+	 * @var $responseObject
+	 */
+	private $responseObject;
 
-    /**
-     * Constructor.
-     *
-     * @param string $message         the error message
-     * @param int    $code            the HTTP status code
-     * @param string $responseHeaders the HTTP response header
-     * @param mixed  $responseBody    the HTTP body of the server response either as Json or string
-     */
-    public function __construct($message = "", $code = 0, $responseHeaders = null, $responseBody = null) {
-        parent::__construct($message, $code);
-        $this->responseHeaders = $responseHeaders;
-        $this->responseBody = $responseBody;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param string $message		 the error message
+	 * @param int	$code			the HTTP status code
+	 * @param string $responseHeaders the HTTP response header
+	 * @param mixed  $responseBody	the HTTP body of the server response either as Json or string
+	 */
+	public function __construct($message = "", $code = 0, $responseHeaders = null, $responseBody = null) {
+		parent::__construct($message, $code);
+		$this->responseHeaders = $responseHeaders;
+		$this->responseBody = $responseBody;
+	}
 
-    /**
-     * Returns the HTTP response header.
-     *
-     * @return string
-     */
-    public function getResponseHeaders() {
-        return $this->responseHeaders;
-    }
+	/**
+	 * Returns the HTTP response header.
+	 *
+	 * @return string
+	 */
+	public function getResponseHeaders() {
+		return $this->responseHeaders;
+	}
 
-    /**
-     * Returns the HTTP body of the server response either as Json or string.
-     *
-     * @return string
-     */
-    public function getResponseBody() {
-        return $this->responseBody;
-    }
+	/**
+	 * Returns the HTTP body of the server response either as Json or string.
+	 *
+	 * @return string
+	 */
+	public function getResponseBody() {
+		return $this->responseBody;
+	}
 
-    /**
-     * Sets the deseralized response object.
-     *
-     * @param mixed $object the deserialized response object
-     */
-    public function setResponseObject($object) {
-        $this->responseObject = $object;
-    }
+	/**
+	 * Sets the deseralized response object.
+	 *
+	 * @param mixed $object the deserialized response object
+	 */
+	public function setResponseObject($object) {
+		$this->responseObject = $object;
+	}
 
-    /**
-     * Returns the deseralized response object.
-     *
-     * @return mixed
-     */
-    public function getResponseObject() {
-        return $this->responseObject;
-    }
-    
+	/**
+	 * Returns the deseralized response object.
+	 *
+	 * @return mixed
+	 */
+	public function getResponseObject() {
+		return $this->responseObject;
+	}
+
 }

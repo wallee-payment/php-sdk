@@ -35,283 +35,283 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProductVersionRetirement  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProductVersionRetirement';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProductVersionRetirement';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'createdOn' => 'string',
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
-        'respectTerminiationPeriodsEnabled' => 'bool',
-        'targetProduct' => '\Wallee\Sdk\Model\SubscriptionProduct',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'createdOn' => 'string',
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
+		'respectTerminiationPeriodsEnabled' => 'bool',
+		'targetProduct' => '\Wallee\Sdk\Model\SubscriptionProduct',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * The created on date indicates the date on which the entity was stored into the database.
-     *
-     * @var string
-     */
-    private $createdOn;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProductVersion
-     */
-    private $productVersion;
-    
-    /**
-     * 
-     *
-     * @var bool
-     */
-    private $respectTerminiationPeriodsEnabled;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    private $targetProduct;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-        $this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
-    }
+	
+
+	/**
+	 * The created on date indicates the date on which the entity was stored into the database.
+	 *
+	 * @var string
+	 */
+	private $createdOn;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProductVersion
+	 */
+	private $productVersion;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $respectTerminiationPeriodsEnabled;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	private $targetProduct;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns createdOn.
-     *
-     * The created on date indicates the date on which the entity was stored into the database.
-     *
-     * @return string
-     */
-    public function getCreatedOn() {
-        return $this->createdOn;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
+		$this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
+	}
 
-    /**
-     * Sets createdOn.
-     *
-     * @param string $createdOn
-     * @return SubscriptionProductVersionRetirement
-     */
-    protected function setCreatedOn($createdOn) {
-        $this->createdOn = $createdOn;
 
-        return $this;
-    }
+	/**
+	 * Returns createdOn.
+	 *
+	 * The created on date indicates the date on which the entity was stored into the database.
+	 *
+	 * @return string
+	 */
+	public function getCreatedOn() {
+		return $this->createdOn;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets createdOn.
+	 *
+	 * @param string $createdOn
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	protected function setCreatedOn($createdOn) {
+		$this->createdOn = $createdOn;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return SubscriptionProductVersionRetirement
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return SubscriptionProductVersionRetirement
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns productVersion.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductVersion
-     */
-    public function getProductVersion() {
-        return $this->productVersion;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets productVersion.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
-     * @return SubscriptionProductVersionRetirement
-     */
-    public function setProductVersion($productVersion) {
-        $this->productVersion = $productVersion;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns productVersion.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
+	 */
+	public function getProductVersion() {
+		return $this->productVersion;
+	}
 
-    /**
-     * Returns respectTerminiationPeriodsEnabled.
-     *
-     * 
-     *
-     * @return bool
-     */
-    public function getRespectTerminiationPeriodsEnabled() {
-        return $this->respectTerminiationPeriodsEnabled;
-    }
+	/**
+	 * Sets productVersion.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	public function setProductVersion($productVersion) {
+		$this->productVersion = $productVersion;
 
-    /**
-     * Sets respectTerminiationPeriodsEnabled.
-     *
-     * @param bool $respectTerminiationPeriodsEnabled
-     * @return SubscriptionProductVersionRetirement
-     */
-    protected function setRespectTerminiationPeriodsEnabled($respectTerminiationPeriodsEnabled) {
-        $this->respectTerminiationPeriodsEnabled = $respectTerminiationPeriodsEnabled;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns respectTerminiationPeriodsEnabled.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getRespectTerminiationPeriodsEnabled() {
+		return $this->respectTerminiationPeriodsEnabled;
+	}
 
-    /**
-     * Returns targetProduct.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    public function getTargetProduct() {
-        return $this->targetProduct;
-    }
+	/**
+	 * Sets respectTerminiationPeriodsEnabled.
+	 *
+	 * @param bool $respectTerminiationPeriodsEnabled
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	protected function setRespectTerminiationPeriodsEnabled($respectTerminiationPeriodsEnabled) {
+		$this->respectTerminiationPeriodsEnabled = $respectTerminiationPeriodsEnabled;
 
-    /**
-     * Sets targetProduct.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProduct $targetProduct
-     * @return SubscriptionProductVersionRetirement
-     */
-    public function setTargetProduct($targetProduct) {
-        $this->targetProduct = $targetProduct;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns targetProduct.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	public function getTargetProduct() {
+		return $this->targetProduct;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets targetProduct.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProduct $targetProduct
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	public function setTargetProduct($targetProduct) {
+		$this->targetProduct = $targetProduct;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return SubscriptionProductVersionRetirement
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductVersionRetirement
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

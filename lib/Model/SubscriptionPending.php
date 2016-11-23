@@ -35,144 +35,144 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionPending extends SubscriptionUpdate  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Subscription.Pending';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Subscription.Pending';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setReference(isset($data['reference']) ? $data['reference'] : null);
-        $this->setSubscriber(isset($data['subscriber']) ? $data['subscriber'] : null);
-        $this->setToken(isset($data['token']) ? $data['token'] : null);
-    }
+	
 
 
-    /**
-     * Returns reference.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getReference() {
-        return parent::getReference();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets reference.
-     *
-     * @param string $reference
-     * @return SubscriptionPending
-     */
-    public function setReference($reference) {
-        return parent::setReference($reference);
-    }
+		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
+		$this->setSubscriber(isset($data['subscriber']) ? $data['subscriber'] : null);
+		$this->setToken(isset($data['token']) ? $data['token'] : null);
+	}
 
-    /**
-     * Returns subscriber.
-     *
-     * @return \Wallee\Sdk\Model\Subscriber
-     */
-    public function getSubscriber() {
-        return parent::getSubscriber();
-    }
 
-    /**
-     * Sets subscriber.
-     *
-     * @param \Wallee\Sdk\Model\Subscriber $subscriber
-     * @return SubscriptionPending
-     */
-    public function setSubscriber($subscriber) {
-        return parent::setSubscriber($subscriber);
-    }
+	/**
+	 * Returns reference.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getReference() {
+		return parent::getReference();
+	}
 
-    /**
-     * Returns token.
-     *
-     * @return \Wallee\Sdk\Model\Token
-     */
-    public function getToken() {
-        return parent::getToken();
-    }
+	/**
+	 * Sets reference.
+	 *
+	 * @param string $reference
+	 * @return SubscriptionPending
+	 */
+	public function setReference($reference) {
+		return parent::setReference($reference);
+	}
 
-    /**
-     * Sets token.
-     *
-     * @param \Wallee\Sdk\Model\Token $token
-     * @return SubscriptionPending
-     */
-    public function setToken($token) {
-        return parent::setToken($token);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getReference() === null) {
-        	throw new ValidationException("'reference' can't be null", 'reference', $this);
-        }
-    }
+	/**
+	 * Returns subscriber.
+	 *
+	 * @return \Wallee\Sdk\Model\Subscriber
+	 */
+	public function getSubscriber() {
+		return parent::getSubscriber();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets subscriber.
+	 *
+	 * @param \Wallee\Sdk\Model\Subscriber $subscriber
+	 * @return SubscriptionPending
+	 */
+	public function setSubscriber($subscriber) {
+		return parent::setSubscriber($subscriber);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns token.
+	 *
+	 * @return \Wallee\Sdk\Model\Token
+	 */
+	public function getToken() {
+		return parent::getToken();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets token.
+	 *
+	 * @param \Wallee\Sdk\Model\Token $token
+	 * @return SubscriptionPending
+	 */
+	public function setToken($token) {
+		return parent::setToken($token);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getReference() === null) {
+			throw new ValidationException("'reference' can't be null", 'reference', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

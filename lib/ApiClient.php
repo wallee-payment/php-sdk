@@ -31,7 +31,7 @@ use \Wallee\Sdk\Http\HttpClientFactory;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class ApiClient {
 
@@ -41,14 +41,14 @@ final class ApiClient {
 	 * @var string
 	 */
 	private $basePath = 'https://app-wallee.com:443/api';
-	
+
 	/**
 	 * An array of headers that are added to every request.
 	 *
 	 * @var array
 	 */
 	private $defaultHeaders = array();
-	
+
 	/**
 	 * The user agent that is sent with any request.
 	 *
@@ -62,21 +62,21 @@ final class ApiClient {
 	 * @var string
 	 */
 	private $certificateAuthority;
-	
+
 	/**
 	 * Defines whether the certificate authority should be checked.
 	 *
 	 * @var boolean
 	 */
 	private $enableCertificateAuthorityCheck = true;
-	
+
 	/**
 	 * The connection timeout in seconds.
 	 *
 	 * @var integer
 	 */
 	private $connectionTimeout = 20;
-	
+
 	/**
 	 * The http client type to use for communication.
 	 *
@@ -90,7 +90,7 @@ final class ApiClient {
 	 * @var boolean
 	 */
 	private $enableDebugging = false;
-	
+
 	/**
 	 * The path to the debug file.
 	 *
@@ -104,7 +104,7 @@ final class ApiClient {
 	 * @var string
 	 */
 	private $userId;
-	
+
 	/**
 	 * The application user's security key.
 	 *
@@ -161,19 +161,19 @@ final class ApiClient {
 
 	/**
 	 * Returns the path to the certificate authority file.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getCertificateAuthority() {
 		return $this->certificateAuthority;
 	}
-	
+
 	/**
-	 * Sets the path to the certificate authority file. The certificate authority is used to verify the identity of the 
-	 * remote server. By setting this option the default certificate authority file will be overridden. 
-	 * 
+	 * Sets the path to the certificate authority file. The certificate authority is used to verify the identity of the
+	 * remote server. By setting this option the default certificate authority file will be overridden.
+	 *
 	 * To deactivate the check please use disableCertificateAuthorityCheck()
-	 * 
+	 *
 	 * @param string $certificateAuthorityFile the path to the certificate authority file
 	 * @return ApiClient
 	 */
@@ -189,45 +189,45 @@ final class ApiClient {
 	/**
 	 * Returns true, when the authority check is enabled. See enableCertificateAuthorityCheck() for more details about
 	 * the authority check.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public function isCertificateAuthorityCheckEnabled() {
 		return $this->enableCertificateAuthorityCheck;
 	}
-	
+
 	/**
 	 * Enables the check of the certificate authority. By checking the certificate authority the whole certificate
 	 * chain is checked. the authority check prevents an attacker to use a man-in-the-middle attack.
-	 * 
+	 *
 	 * @return ApiClient
 	 */
 	public function enableCertificateAuthorityCheck() {
 		$this->enableCertificateAuthorityCheck = true;
 		return $this;
 	}
-	
+
 	/**
 	 * Disables the check of the certificate authority. See enableCertificateAuthorityCheck() for more details.
-	 * 
+	 *
 	 * @return ApiClient
 	 */
 	public function disableCertificateAuthorityCheck() {
 		$this->enableCertificateAuthorityCheck = false;
 		return $this;
 	}
-	
+
 	/**
-	 * Returns the connection timeout. 
-	 * 
+	 * Returns the connection timeout.
+	 *
 	 * @return int
 	 */
 	public function getConnectionTimeout() {
 		return $this->connectionTimeout;
 	}
-	
+
 	/**
-	 * Sets the connection timeout in seconds. 
+	 * Sets the connection timeout in seconds.
 	 *
 	 * @param int $connectionTimeout the connection timeout in seconds
 	 * @return IHttpClient
@@ -240,7 +240,7 @@ final class ApiClient {
 		$this->connectionTimeout = $connectionTimeout;
 		return $this;
 	}
-	
+
 	/**
 	 * Return the http client type to use for communication.
 	 *
@@ -250,7 +250,7 @@ final class ApiClient {
 	public function getHttpClientType() {
 		return $this->httpClientType;
 	}
-	
+
 	/**
 	 * Set the http client type to use for communication.
 	 * If this is null, all client are considered and the one working in the current environment is used.
@@ -422,9 +422,9 @@ final class ApiClient {
 	 * Make the HTTP call (synchronously).
 	 *
 	 * @param string $resourcePath the path to the endpoint resource
-	 * @param string $method       the method to call
+	 * @param string $method	   the method to call
 	 * @param array  $queryParams  the query parameters
-	 * @param array  $postData     the body parameters
+	 * @param array  $postData	 the body parameters
 	 * @param array  $headerParams the header parameters
 	 * @param string $responseType the expected response type
 	 * @param string $endpointPath the path to the method endpoint before expanding parameters
@@ -514,5 +514,5 @@ final class ApiClient {
 		$decodedSecret = base64_decode($this->applicationKey);
 		return base64_encode(hash_hmac("sha512", $securedData, $decodedSecret, true));
 	}
-	
+
 }

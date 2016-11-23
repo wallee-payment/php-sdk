@@ -35,352 +35,352 @@ use \Wallee\Sdk\ValidationException;
  */
 class TransactionGroup  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'TransactionGroup';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'TransactionGroup';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'beginDate' => 'string',
-        'customerId' => 'string',
-        'endDate' => 'string',
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'plannedPurgeDate' => 'string',
-        'state' => 'string',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'beginDate' => 'string',
+		'customerId' => 'string',
+		'endDate' => 'string',
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'plannedPurgeDate' => 'string',
+		'state' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_PENDING = 'PENDING';
-    const STATE_FAILED = 'FAILED';
-    const STATE_SUCCESSFUL = 'SUCCESSFUL';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_PENDING,
-            self::STATE_FAILED,
-            self::STATE_SUCCESSFUL,
-        ];
-    }
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $beginDate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $customerId;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $endDate;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_PENDING = 'PENDING';
+	const STATE_FAILED = 'FAILED';
+	const STATE_SUCCESSFUL = 'SUCCESSFUL';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_PENDING,
+			self::STATE_FAILED,
+			self::STATE_SUCCESSFUL,
+		];
+	}
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $beginDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $customerId;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $endDate;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns beginDate.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getBeginDate() {
-        return $this->beginDate;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+	}
 
-    /**
-     * Sets beginDate.
-     *
-     * @param string $beginDate
-     * @return TransactionGroup
-     */
-    protected function setBeginDate($beginDate) {
-        $this->beginDate = $beginDate;
 
-        return $this;
-    }
+	/**
+	 * Returns beginDate.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getBeginDate() {
+		return $this->beginDate;
+	}
 
-    /**
-     * Returns customerId.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCustomerId() {
-        return $this->customerId;
-    }
+	/**
+	 * Sets beginDate.
+	 *
+	 * @param string $beginDate
+	 * @return TransactionGroup
+	 */
+	protected function setBeginDate($beginDate) {
+		$this->beginDate = $beginDate;
 
-    /**
-     * Sets customerId.
-     *
-     * @param string $customerId
-     * @return TransactionGroup
-     */
-    protected function setCustomerId($customerId) {
-        $this->customerId = $customerId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns customerId.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCustomerId() {
+		return $this->customerId;
+	}
 
-    /**
-     * Returns endDate.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getEndDate() {
-        return $this->endDate;
-    }
+	/**
+	 * Sets customerId.
+	 *
+	 * @param string $customerId
+	 * @return TransactionGroup
+	 */
+	protected function setCustomerId($customerId) {
+		$this->customerId = $customerId;
 
-    /**
-     * Sets endDate.
-     *
-     * @param string $endDate
-     * @return TransactionGroup
-     */
-    protected function setEndDate($endDate) {
-        $this->endDate = $endDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns endDate.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getEndDate() {
+		return $this->endDate;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets endDate.
+	 *
+	 * @param string $endDate
+	 * @return TransactionGroup
+	 */
+	protected function setEndDate($endDate) {
+		$this->endDate = $endDate;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return TransactionGroup
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return TransactionGroup
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return TransactionGroup
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return TransactionGroup
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return TransactionGroup
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return TransactionGroup
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return TransactionGroup
-     */
-    protected function setState($state) {
-        $allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-        if ((!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return TransactionGroup
+	 */
+	protected function setState($state) {
+		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return TransactionGroup
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getState() === null) {
-        	throw new ValidationException("'state' can't be null", 'state', $this);
-        }
-        $allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return TransactionGroup
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

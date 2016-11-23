@@ -35,233 +35,233 @@ use \Wallee\Sdk\ValidationException;
  */
 class DatabaseTranslatedStringItem  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'DatabaseTranslatedStringItem';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'DatabaseTranslatedStringItem';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'id' => 'int',
-        'language' => 'string',
-        'languageCode' => 'string',
-        'translation' => 'string',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'id' => 'int',
+		'language' => 'string',
+		'languageCode' => 'string',
+		'translation' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $language;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $languageCode;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $translation;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $languageCode;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $translation;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return DatabaseTranslatedStringItem
-     */
-    protected function setId($id) {
-        $this->id = $id;
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns language.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return DatabaseTranslatedStringItem
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return DatabaseTranslatedStringItem
-     */
-    protected function setLanguage($language) {
-        $this->language = $language;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 
-    /**
-     * Returns languageCode.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLanguageCode() {
-        return $this->languageCode;
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return DatabaseTranslatedStringItem
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
-    /**
-     * Sets languageCode.
-     *
-     * @param string $languageCode
-     * @return DatabaseTranslatedStringItem
-     */
-    protected function setLanguageCode($languageCode) {
-        $this->languageCode = $languageCode;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns languageCode.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguageCode() {
+		return $this->languageCode;
+	}
 
-    /**
-     * Returns translation.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTranslation() {
-        return $this->translation;
-    }
+	/**
+	 * Sets languageCode.
+	 *
+	 * @param string $languageCode
+	 * @return DatabaseTranslatedStringItem
+	 */
+	protected function setLanguageCode($languageCode) {
+		$this->languageCode = $languageCode;
 
-    /**
-     * Sets translation.
-     *
-     * @param string $translation
-     * @return DatabaseTranslatedStringItem
-     */
-    protected function setTranslation($translation) {
-        $this->translation = $translation;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns translation.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTranslation() {
+		return $this->translation;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets translation.
+	 *
+	 * @param string $translation
+	 * @return DatabaseTranslatedStringItem
+	 */
+	protected function setTranslation($translation) {
+		$this->translation = $translation;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return DatabaseTranslatedStringItem
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getLanguage() === null) {
-        	throw new ValidationException("'language' can't be null", 'language', $this);
-        }
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return DatabaseTranslatedStringItem
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getLanguage() === null) {
+			throw new ValidationException("'language' can't be null", 'language', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

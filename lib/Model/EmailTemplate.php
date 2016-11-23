@@ -35,537 +35,537 @@ use \Wallee\Sdk\ValidationException;
  */
 class EmailTemplate  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'EmailTemplate';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'EmailTemplate';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'attachedDocumentTemplateTypes' => '\Wallee\Sdk\Model\DocumentTemplateType[]',
-        'attachmentResourcePaths' => '\Wallee\Sdk\Model\AttachmentResourceEditable[]',
-        'blindCarbonCopyRecipients' => 'string[]',
-        'carbonCopyRecipients' => 'string[]',
-        'htmlBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'name' => 'string',
-        'plannedPurgeDate' => 'string',
-        'state' => 'string',
-        'subject' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-        'textBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
-        'type' => '\Wallee\Sdk\Model\EntityReference',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'attachedDocumentTemplateTypes' => '\Wallee\Sdk\Model\DocumentTemplateType[]',
+		'attachmentResourcePaths' => '\Wallee\Sdk\Model\AttachmentResourceEditable[]',
+		'blindCarbonCopyRecipients' => 'string[]',
+		'carbonCopyRecipients' => 'string[]',
+		'htmlBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'name' => 'string',
+		'plannedPurgeDate' => 'string',
+		'state' => 'string',
+		'subject' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+		'textBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
+		'type' => '\Wallee\Sdk\Model\EntityReference',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_CREATE = 'CREATE';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_INACTIVE = 'INACTIVE';
-    const STATE_DELETING = 'DELETING';
-    const STATE_DELETED = 'DELETED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_CREATE,
-            self::STATE_ACTIVE,
-            self::STATE_INACTIVE,
-            self::STATE_DELETING,
-            self::STATE_DELETED,
-        ];
-    }
-    
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\DocumentTemplateType[]
-     */
-    private $attachedDocumentTemplateTypes;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\AttachmentResourceEditable[]
-     */
-    private $attachmentResourcePaths;
-    
-    /**
-     * 
-     *
-     * @var string[]
-     */
-    private $blindCarbonCopyRecipients;
-    
-    /**
-     * 
-     *
-     * @var string[]
-     */
-    private $carbonCopyRecipients;
-    
-    /**
-     * @var \Wallee\Sdk\Model\ModelResourcePath
-     */
-    private $htmlBodyTemplateResource;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The template name is used internally to identify the template in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @var string
-     */
-    private $name;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    private $subject;
-    
-    /**
-     * @var \Wallee\Sdk\Model\ModelResourcePath
-     */
-    private $textBodyTemplateResource;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $type;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setAttachedDocumentTemplateTypes(isset($data['attachedDocumentTemplateTypes']) ? $data['attachedDocumentTemplateTypes'] : null);
-        $this->setAttachmentResourcePaths(isset($data['attachmentResourcePaths']) ? $data['attachmentResourcePaths'] : null);
-        $this->setBlindCarbonCopyRecipients(isset($data['blindCarbonCopyRecipients']) ? $data['blindCarbonCopyRecipients'] : null);
-        $this->setCarbonCopyRecipients(isset($data['carbonCopyRecipients']) ? $data['carbonCopyRecipients'] : null);
-        $this->setHtmlBodyTemplateResource(isset($data['htmlBodyTemplateResource']) ? $data['htmlBodyTemplateResource'] : null);
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setSubject(isset($data['subject']) ? $data['subject'] : null);
-        $this->setTextBodyTemplateResource(isset($data['textBodyTemplateResource']) ? $data['textBodyTemplateResource'] : null);
-        $this->setType(isset($data['type']) ? $data['type'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_DELETING = 'DELETING';
+	const STATE_DELETED = 'DELETED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_DELETING,
+			self::STATE_DELETED,
+		];
+	}
+	
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\DocumentTemplateType[]
+	 */
+	private $attachedDocumentTemplateTypes;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\AttachmentResourceEditable[]
+	 */
+	private $attachmentResourcePaths;
+
+	/**
+	 * 
+	 *
+	 * @var string[]
+	 */
+	private $blindCarbonCopyRecipients;
+
+	/**
+	 * 
+	 *
+	 * @var string[]
+	 */
+	private $carbonCopyRecipients;
+
+	/**
+	 * @var \Wallee\Sdk\Model\ModelResourcePath
+	 */
+	private $htmlBodyTemplateResource;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The template name is used internally to identify the template in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $subject;
+
+	/**
+	 * @var \Wallee\Sdk\Model\ModelResourcePath
+	 */
+	private $textBodyTemplateResource;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $type;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns attachedDocumentTemplateTypes.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\DocumentTemplateType[]
-     */
-    public function getAttachedDocumentTemplateTypes() {
-        return $this->attachedDocumentTemplateTypes;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setAttachedDocumentTemplateTypes(isset($data['attachedDocumentTemplateTypes']) ? $data['attachedDocumentTemplateTypes'] : null);
+		$this->setAttachmentResourcePaths(isset($data['attachmentResourcePaths']) ? $data['attachmentResourcePaths'] : null);
+		$this->setBlindCarbonCopyRecipients(isset($data['blindCarbonCopyRecipients']) ? $data['blindCarbonCopyRecipients'] : null);
+		$this->setCarbonCopyRecipients(isset($data['carbonCopyRecipients']) ? $data['carbonCopyRecipients'] : null);
+		$this->setHtmlBodyTemplateResource(isset($data['htmlBodyTemplateResource']) ? $data['htmlBodyTemplateResource'] : null);
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setSubject(isset($data['subject']) ? $data['subject'] : null);
+		$this->setTextBodyTemplateResource(isset($data['textBodyTemplateResource']) ? $data['textBodyTemplateResource'] : null);
+		$this->setType(isset($data['type']) ? $data['type'] : null);
+	}
 
-    /**
-     * Sets attachedDocumentTemplateTypes.
-     *
-     * @param \Wallee\Sdk\Model\DocumentTemplateType[] $attachedDocumentTemplateTypes
-     * @return EmailTemplate
-     */
-    public function setAttachedDocumentTemplateTypes($attachedDocumentTemplateTypes) {
-        $this->attachedDocumentTemplateTypes = $attachedDocumentTemplateTypes;
 
-        return $this;
-    }
+	/**
+	 * Returns attachedDocumentTemplateTypes.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\DocumentTemplateType[]
+	 */
+	public function getAttachedDocumentTemplateTypes() {
+		return $this->attachedDocumentTemplateTypes;
+	}
 
-    /**
-     * Returns attachmentResourcePaths.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\AttachmentResourceEditable[]
-     */
-    public function getAttachmentResourcePaths() {
-        return $this->attachmentResourcePaths;
-    }
+	/**
+	 * Sets attachedDocumentTemplateTypes.
+	 *
+	 * @param \Wallee\Sdk\Model\DocumentTemplateType[] $attachedDocumentTemplateTypes
+	 * @return EmailTemplate
+	 */
+	public function setAttachedDocumentTemplateTypes($attachedDocumentTemplateTypes) {
+		$this->attachedDocumentTemplateTypes = $attachedDocumentTemplateTypes;
 
-    /**
-     * Sets attachmentResourcePaths.
-     *
-     * @param \Wallee\Sdk\Model\AttachmentResourceEditable[] $attachmentResourcePaths
-     * @return EmailTemplate
-     */
-    public function setAttachmentResourcePaths($attachmentResourcePaths) {
-        $this->attachmentResourcePaths = $attachmentResourcePaths;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns attachmentResourcePaths.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\AttachmentResourceEditable[]
+	 */
+	public function getAttachmentResourcePaths() {
+		return $this->attachmentResourcePaths;
+	}
 
-    /**
-     * Returns blindCarbonCopyRecipients.
-     *
-     * 
-     *
-     * @return string[]
-     */
-    public function getBlindCarbonCopyRecipients() {
-        return $this->blindCarbonCopyRecipients;
-    }
+	/**
+	 * Sets attachmentResourcePaths.
+	 *
+	 * @param \Wallee\Sdk\Model\AttachmentResourceEditable[] $attachmentResourcePaths
+	 * @return EmailTemplate
+	 */
+	public function setAttachmentResourcePaths($attachmentResourcePaths) {
+		$this->attachmentResourcePaths = $attachmentResourcePaths;
 
-    /**
-     * Sets blindCarbonCopyRecipients.
-     *
-     * @param string[] $blindCarbonCopyRecipients
-     * @return EmailTemplate
-     */
-    public function setBlindCarbonCopyRecipients($blindCarbonCopyRecipients) {
-        $this->blindCarbonCopyRecipients = $blindCarbonCopyRecipients;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns blindCarbonCopyRecipients.
+	 *
+	 * 
+	 *
+	 * @return string[]
+	 */
+	public function getBlindCarbonCopyRecipients() {
+		return $this->blindCarbonCopyRecipients;
+	}
 
-    /**
-     * Returns carbonCopyRecipients.
-     *
-     * 
-     *
-     * @return string[]
-     */
-    public function getCarbonCopyRecipients() {
-        return $this->carbonCopyRecipients;
-    }
+	/**
+	 * Sets blindCarbonCopyRecipients.
+	 *
+	 * @param string[] $blindCarbonCopyRecipients
+	 * @return EmailTemplate
+	 */
+	public function setBlindCarbonCopyRecipients($blindCarbonCopyRecipients) {
+		$this->blindCarbonCopyRecipients = $blindCarbonCopyRecipients;
 
-    /**
-     * Sets carbonCopyRecipients.
-     *
-     * @param string[] $carbonCopyRecipients
-     * @return EmailTemplate
-     */
-    public function setCarbonCopyRecipients($carbonCopyRecipients) {
-        $this->carbonCopyRecipients = $carbonCopyRecipients;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns carbonCopyRecipients.
+	 *
+	 * 
+	 *
+	 * @return string[]
+	 */
+	public function getCarbonCopyRecipients() {
+		return $this->carbonCopyRecipients;
+	}
 
-    /**
-     * Returns htmlBodyTemplateResource.
-     *
-     * @return \Wallee\Sdk\Model\ModelResourcePath
-     */
-    public function getHtmlBodyTemplateResource() {
-        return $this->htmlBodyTemplateResource;
-    }
+	/**
+	 * Sets carbonCopyRecipients.
+	 *
+	 * @param string[] $carbonCopyRecipients
+	 * @return EmailTemplate
+	 */
+	public function setCarbonCopyRecipients($carbonCopyRecipients) {
+		$this->carbonCopyRecipients = $carbonCopyRecipients;
 
-    /**
-     * Sets htmlBodyTemplateResource.
-     *
-     * @param \Wallee\Sdk\Model\ModelResourcePath $htmlBodyTemplateResource
-     * @return EmailTemplate
-     */
-    public function setHtmlBodyTemplateResource($htmlBodyTemplateResource) {
-        $this->htmlBodyTemplateResource = $htmlBodyTemplateResource;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns htmlBodyTemplateResource.
+	 *
+	 * @return \Wallee\Sdk\Model\ModelResourcePath
+	 */
+	public function getHtmlBodyTemplateResource() {
+		return $this->htmlBodyTemplateResource;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets htmlBodyTemplateResource.
+	 *
+	 * @param \Wallee\Sdk\Model\ModelResourcePath $htmlBodyTemplateResource
+	 * @return EmailTemplate
+	 */
+	public function setHtmlBodyTemplateResource($htmlBodyTemplateResource) {
+		$this->htmlBodyTemplateResource = $htmlBodyTemplateResource;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return EmailTemplate
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return EmailTemplate
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return EmailTemplate
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns name.
-     *
-     * The template name is used internally to identify the template in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return EmailTemplate
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return EmailTemplate
-     */
-    protected function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * The template name is used internally to identify the template in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return EmailTemplate
+	 */
+	protected function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return EmailTemplate
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return EmailTemplate
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return EmailTemplate
-     */
-    protected function setState($state) {
-        $allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-        if ((!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns subject.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getSubject() {
-        return $this->subject;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return EmailTemplate
+	 */
+	protected function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets subject.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $subject
-     * @return EmailTemplate
-     */
-    public function setSubject($subject) {
-        $this->subject = $subject;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns subject.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getSubject() {
+		return $this->subject;
+	}
 
-    /**
-     * Returns textBodyTemplateResource.
-     *
-     * @return \Wallee\Sdk\Model\ModelResourcePath
-     */
-    public function getTextBodyTemplateResource() {
-        return $this->textBodyTemplateResource;
-    }
+	/**
+	 * Sets subject.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $subject
+	 * @return EmailTemplate
+	 */
+	public function setSubject($subject) {
+		$this->subject = $subject;
 
-    /**
-     * Sets textBodyTemplateResource.
-     *
-     * @param \Wallee\Sdk\Model\ModelResourcePath $textBodyTemplateResource
-     * @return EmailTemplate
-     */
-    public function setTextBodyTemplateResource($textBodyTemplateResource) {
-        $this->textBodyTemplateResource = $textBodyTemplateResource;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns textBodyTemplateResource.
+	 *
+	 * @return \Wallee\Sdk\Model\ModelResourcePath
+	 */
+	public function getTextBodyTemplateResource() {
+		return $this->textBodyTemplateResource;
+	}
 
-    /**
-     * Returns type.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getType() {
-        return $this->type;
-    }
+	/**
+	 * Sets textBodyTemplateResource.
+	 *
+	 * @param \Wallee\Sdk\Model\ModelResourcePath $textBodyTemplateResource
+	 * @return EmailTemplate
+	 */
+	public function setTextBodyTemplateResource($textBodyTemplateResource) {
+		$this->textBodyTemplateResource = $textBodyTemplateResource;
 
-    /**
-     * Sets type.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $type
-     * @return EmailTemplate
-     */
-    public function setType($type) {
-        $this->type = $type;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns type.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getType() {
+		return $this->type;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets type.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $type
+	 * @return EmailTemplate
+	 */
+	public function setType($type) {
+		$this->type = $type;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return EmailTemplate
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getState() === null) {
-        	throw new ValidationException("'state' can't be null", 'state', $this);
-        }
-        $allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return EmailTemplate
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

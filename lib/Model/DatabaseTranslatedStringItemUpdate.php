@@ -35,126 +35,126 @@ use \Wallee\Sdk\ValidationException;
  */
 class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'DatabaseTranslatedStringItem.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'DatabaseTranslatedStringItem.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setLanguage(isset($data['language']) ? $data['language'] : null);
-        $this->setTranslation(isset($data['translation']) ? $data['translation'] : null);
-    }
+	
 
 
-    /**
-     * Returns language.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return parent::getLanguage();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return DatabaseTranslatedStringItemUpdate
-     */
-    public function setLanguage($language) {
-        return parent::setLanguage($language);
-    }
+		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
+		$this->setTranslation(isset($data['translation']) ? $data['translation'] : null);
+	}
 
-    /**
-     * Returns translation.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTranslation() {
-        return parent::getTranslation();
-    }
 
-    /**
-     * Sets translation.
-     *
-     * @param string $translation
-     * @return DatabaseTranslatedStringItemUpdate
-     */
-    public function setTranslation($translation) {
-        return parent::setTranslation($translation);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getLanguage() === null) {
-        	throw new ValidationException("'language' can't be null", 'language', $this);
-        }
-    }
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return parent::getLanguage();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return DatabaseTranslatedStringItemUpdate
+	 */
+	public function setLanguage($language) {
+		return parent::setLanguage($language);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns translation.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTranslation() {
+		return parent::getTranslation();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets translation.
+	 *
+	 * @param string $translation
+	 * @return DatabaseTranslatedStringItemUpdate
+	 */
+	public function setTranslation($translation) {
+		return parent::setTranslation($translation);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getLanguage() === null) {
+			throw new ValidationException("'language' can't be null", 'language', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

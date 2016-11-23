@@ -35,505 +35,505 @@ use \Wallee\Sdk\ValidationException;
  */
 class Charge  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Charge';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Charge';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'createdOn' => 'string',
-        'failureReason' => '\Wallee\Sdk\Model\FailureReason',
-        'id' => 'int',
-        'language' => 'string',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'plannedPurgeDate' => 'string',
-        'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
-        'state' => 'string',
-        'timeoutOn' => 'string',
-        'transaction' => '\Wallee\Sdk\Model\Transaction',
-        'type' => 'string',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'createdOn' => 'string',
+		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
+		'id' => 'int',
+		'language' => 'string',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'plannedPurgeDate' => 'string',
+		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'state' => 'string',
+		'timeoutOn' => 'string',
+		'transaction' => '\Wallee\Sdk\Model\Transaction',
+		'type' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_PENDING = 'PENDING';
-    const STATE_FAILED = 'FAILED';
-    const STATE_SUCCESSFUL = 'SUCCESSFUL';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_PENDING,
-            self::STATE_FAILED,
-            self::STATE_SUCCESSFUL,
-        ];
-    }
-    
-    /**
-     * Values of type.
-     */ 
-    const TYPE_ASYNCHRONOUS = 'ASYNCHRONOUS';
-    const TYPE_SYNCHRONOUS = 'SYNCHRONOUS';
-    const TYPE_TOKEN = 'TOKEN';
-    
-    /**
-     * Returns allowable values of type.
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues() {
-        return [
-            self::TYPE_ASYNCHRONOUS,
-            self::TYPE_SYNCHRONOUS,
-            self::TYPE_TOKEN,
-        ];
-    }
-    
-    
-    /**
-     * The date on which the charge was created on.
-     *
-     * @var string
-     */
-    private $createdOn;
-    
-    /**
-     * @var \Wallee\Sdk\Model\FailureReason
-     */
-    private $failureReason;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $language;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $spaceViewId;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $timeoutOn;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Transaction
-     */
-    private $transaction;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $type;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-        $this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_PENDING = 'PENDING';
+	const STATE_FAILED = 'FAILED';
+	const STATE_SUCCESSFUL = 'SUCCESSFUL';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_PENDING,
+			self::STATE_FAILED,
+			self::STATE_SUCCESSFUL,
+		];
+	}
+	
+	/**
+	 * Values of type.
+	 */
+	const TYPE_ASYNCHRONOUS = 'ASYNCHRONOUS';
+	const TYPE_SYNCHRONOUS = 'SYNCHRONOUS';
+	const TYPE_TOKEN = 'TOKEN';
+	
+	/**
+	 * Returns allowable values of type.
+	 *
+	 * @return string[]
+	 */
+	public function getTypeAllowableValues() {
+		return [
+			self::TYPE_ASYNCHRONOUS,
+			self::TYPE_SYNCHRONOUS,
+			self::TYPE_TOKEN,
+		];
+	}
+	
+
+	/**
+	 * The date on which the charge was created on.
+	 *
+	 * @var string
+	 */
+	private $createdOn;
+
+	/**
+	 * @var \Wallee\Sdk\Model\FailureReason
+	 */
+	private $failureReason;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $spaceViewId;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $timeoutOn;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Transaction
+	 */
+	private $transaction;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $type;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns createdOn.
-     *
-     * The date on which the charge was created on.
-     *
-     * @return string
-     */
-    public function getCreatedOn() {
-        return $this->createdOn;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
+		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+	}
 
-    /**
-     * Sets createdOn.
-     *
-     * @param string $createdOn
-     * @return Charge
-     */
-    protected function setCreatedOn($createdOn) {
-        $this->createdOn = $createdOn;
 
-        return $this;
-    }
+	/**
+	 * Returns createdOn.
+	 *
+	 * The date on which the charge was created on.
+	 *
+	 * @return string
+	 */
+	public function getCreatedOn() {
+		return $this->createdOn;
+	}
 
-    /**
-     * Returns failureReason.
-     *
-     * @return \Wallee\Sdk\Model\FailureReason
-     */
-    public function getFailureReason() {
-        return $this->failureReason;
-    }
+	/**
+	 * Sets createdOn.
+	 *
+	 * @param string $createdOn
+	 * @return Charge
+	 */
+	protected function setCreatedOn($createdOn) {
+		$this->createdOn = $createdOn;
 
-    /**
-     * Sets failureReason.
-     *
-     * @param \Wallee\Sdk\Model\FailureReason $failureReason
-     * @return Charge
-     */
-    public function setFailureReason($failureReason) {
-        $this->failureReason = $failureReason;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns failureReason.
+	 *
+	 * @return \Wallee\Sdk\Model\FailureReason
+	 */
+	public function getFailureReason() {
+		return $this->failureReason;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets failureReason.
+	 *
+	 * @param \Wallee\Sdk\Model\FailureReason $failureReason
+	 * @return Charge
+	 */
+	public function setFailureReason($failureReason) {
+		$this->failureReason = $failureReason;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return Charge
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns language.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Charge
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return Charge
-     */
-    protected function setLanguage($language) {
-        $this->language = $language;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return Charge
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return Charge
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return Charge
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return Charge
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns spaceViewId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getSpaceViewId() {
-        return $this->spaceViewId;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return Charge
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets spaceViewId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
-     * @return Charge
-     */
-    public function setSpaceViewId($spaceViewId) {
-        $this->spaceViewId = $spaceViewId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns spaceViewId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getSpaceViewId() {
+		return $this->spaceViewId;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets spaceViewId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @return Charge
+	 */
+	public function setSpaceViewId($spaceViewId) {
+		$this->spaceViewId = $spaceViewId;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return Charge
-     */
-    protected function setState($state) {
-        $allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-        if ((!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns timeoutOn.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTimeoutOn() {
-        return $this->timeoutOn;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return Charge
+	 */
+	protected function setState($state) {
+		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets timeoutOn.
-     *
-     * @param string $timeoutOn
-     * @return Charge
-     */
-    protected function setTimeoutOn($timeoutOn) {
-        $this->timeoutOn = $timeoutOn;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns timeoutOn.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTimeoutOn() {
+		return $this->timeoutOn;
+	}
 
-    /**
-     * Returns transaction.
-     *
-     * @return \Wallee\Sdk\Model\Transaction
-     */
-    public function getTransaction() {
-        return $this->transaction;
-    }
+	/**
+	 * Sets timeoutOn.
+	 *
+	 * @param string $timeoutOn
+	 * @return Charge
+	 */
+	protected function setTimeoutOn($timeoutOn) {
+		$this->timeoutOn = $timeoutOn;
 
-    /**
-     * Sets transaction.
-     *
-     * @param \Wallee\Sdk\Model\Transaction $transaction
-     * @return Charge
-     */
-    public function setTransaction($transaction) {
-        $this->transaction = $transaction;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns transaction.
+	 *
+	 * @return \Wallee\Sdk\Model\Transaction
+	 */
+	public function getTransaction() {
+		return $this->transaction;
+	}
 
-    /**
-     * Returns type.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getType() {
-        return $this->type;
-    }
+	/**
+	 * Sets transaction.
+	 *
+	 * @param \Wallee\Sdk\Model\Transaction $transaction
+	 * @return Charge
+	 */
+	public function setTransaction($transaction) {
+		$this->transaction = $transaction;
 
-    /**
-     * Sets type.
-     *
-     * @param string $type
-     * @return Charge
-     */
-    protected function setType($type) {
-        $allowed_values = array('ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN');
-        if ((!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN'");
-        }
-        $this->type = $type;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns type.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return $this->type;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets type.
+	 *
+	 * @param string $type
+	 * @return Charge
+	 */
+	protected function setType($type) {
+		$allowed_values = array('ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN');
+		if ((!in_array($type, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN'");
+		}
+		$this->type = $type;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return Charge
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getCreatedOn() === null) {
-        	throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-        }
-        if ($this->getState() === null) {
-        	throw new ValidationException("'state' can't be null", 'state', $this);
-        }
-        $allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-        if ($this->getTimeoutOn() === null) {
-        	throw new ValidationException("'timeoutOn' can't be null", 'timeoutOn', $this);
-        }
-        if ($this->getType() === null) {
-        	throw new ValidationException("'type' can't be null", 'type', $this);
-        }
-        $allowed_values = ["ASYNCHRONOUS", "SYNCHRONOUS", "TOKEN"];
-        if (!in_array($this->getType(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-        }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return Charge
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    }
+		return $this;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		if ($this->getCreatedOn() === null) {
+			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
+		}
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getTimeoutOn() === null) {
+			throw new ValidationException("'timeoutOn' can't be null", 'timeoutOn', $this);
+		}
+		if ($this->getType() === null) {
+			throw new ValidationException("'type' can't be null", 'type', $this);
+		}
+		$allowed_values = ["ASYNCHRONOUS", "SYNCHRONOUS", "TOKEN"];
+		if (!in_array($this->getType(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

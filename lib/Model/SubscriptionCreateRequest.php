@@ -35,198 +35,198 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionCreateRequest  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionCreateRequest';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionCreateRequest';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'currency' => 'string',
-        'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
-        'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
-        'subscription' => '\Wallee\Sdk\Model\SubscriptionPending'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'currency' => 'string',
+		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
+		'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
+		'subscription' => '\Wallee\Sdk\Model\SubscriptionPending'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $currency;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    private $product;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
-     */
-    private $selectedComponents;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionPending
-     */
-    private $subscription;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
-        $this->setProduct(isset($data['product']) ? $data['product'] : null);
-        $this->setSelectedComponents(isset($data['selectedComponents']) ? $data['selectedComponents'] : null);
-        $this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $currency;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	private $product;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
+	 */
+	private $selectedComponents;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionPending
+	 */
+	private $subscription;
 
 
-    /**
-     * Returns currency.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCurrency() {
-        return $this->currency;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
+		$this->setProduct(isset($data['product']) ? $data['product'] : null);
+		$this->setSelectedComponents(isset($data['selectedComponents']) ? $data['selectedComponents'] : null);
+		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+	}
 
-    /**
-     * Sets currency.
-     *
-     * @param string $currency
-     * @return SubscriptionCreateRequest
-     */
-    public function setCurrency($currency) {
-        $this->currency = $currency;
 
-        return $this;
-    }
+	/**
+	 * Returns currency.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCurrency() {
+		return $this->currency;
+	}
 
-    /**
-     * Returns product.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    public function getProduct() {
-        return $this->product;
-    }
+	/**
+	 * Sets currency.
+	 *
+	 * @param string $currency
+	 * @return SubscriptionCreateRequest
+	 */
+	public function setCurrency($currency) {
+		$this->currency = $currency;
 
-    /**
-     * Sets product.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProduct $product
-     * @return SubscriptionCreateRequest
-     */
-    public function setProduct($product) {
-        $this->product = $product;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns product.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	public function getProduct() {
+		return $this->product;
+	}
 
-    /**
-     * Returns selectedComponents.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
-     */
-    public function getSelectedComponents() {
-        return $this->selectedComponents;
-    }
+	/**
+	 * Sets product.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProduct $product
+	 * @return SubscriptionCreateRequest
+	 */
+	public function setProduct($product) {
+		$this->product = $product;
 
-    /**
-     * Sets selectedComponents.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference[] $selectedComponents
-     * @return SubscriptionCreateRequest
-     */
-    public function setSelectedComponents($selectedComponents) {
-        $this->selectedComponents = $selectedComponents;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns selectedComponents.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
+	 */
+	public function getSelectedComponents() {
+		return $this->selectedComponents;
+	}
 
-    /**
-     * Returns subscription.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionPending
-     */
-    public function getSubscription() {
-        return $this->subscription;
-    }
+	/**
+	 * Sets selectedComponents.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference[] $selectedComponents
+	 * @return SubscriptionCreateRequest
+	 */
+	public function setSelectedComponents($selectedComponents) {
+		$this->selectedComponents = $selectedComponents;
 
-    /**
-     * Sets subscription.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionPending $subscription
-     * @return SubscriptionCreateRequest
-     */
-    public function setSubscription($subscription) {
-        $this->subscription = $subscription;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getCurrency() === null) {
-        	throw new ValidationException("'currency' can't be null", 'currency', $this);
-        }
-    }
+	/**
+	 * Returns subscription.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionPending
+	 */
+	public function getSubscription() {
+		return $this->subscription;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets subscription.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionPending $subscription
+	 * @return SubscriptionCreateRequest
+	 */
+	public function setSubscription($subscription) {
+		$this->subscription = $subscription;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getCurrency() === null) {
+			throw new ValidationException("'currency' can't be null", 'currency', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

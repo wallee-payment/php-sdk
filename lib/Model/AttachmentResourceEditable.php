@@ -35,210 +35,210 @@ use \Wallee\Sdk\ValidationException;
  */
 class AttachmentResourceEditable extends AttachmentResource  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'AttachmentResourceEditable';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'AttachmentResourceEditable';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
+	
 
-        $this->setAttachmentName(isset($data['attachmentName']) ? $data['attachmentName'] : null);
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setResourcePath(isset($data['resourcePath']) ? $data['resourcePath'] : null);
-    }
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns attachmentName.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getAttachmentName() {
-        return parent::getAttachmentName();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets attachmentName.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $attachmentName
-     * @return AttachmentResourceEditable
-     */
-    public function setAttachmentName($attachmentName) {
-        return parent::setAttachmentName($attachmentName);
-    }
+		$this->setAttachmentName(isset($data['attachmentName']) ? $data['attachmentName'] : null);
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setResourcePath(isset($data['resourcePath']) ? $data['resourcePath'] : null);
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return AttachmentResourceEditable
-     */
-    protected function setId($id) {
-        $this->id = $id;
+	/**
+	 * Returns attachmentName.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getAttachmentName() {
+		return parent::getAttachmentName();
+	}
 
-        return $this;
-    }
+	/**
+	 * Sets attachmentName.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $attachmentName
+	 * @return AttachmentResourceEditable
+	 */
+	public function setAttachmentName($attachmentName) {
+		return parent::setAttachmentName($attachmentName);
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return AttachmentResourceEditable
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return AttachmentResourceEditable
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns resourcePath.
-     *
-     * The path to the resource which should be attachted to the e-mail.
-     *
-     * @return string
-     */
-    public function getResourcePath() {
-        return parent::getResourcePath();
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Sets resourcePath.
-     *
-     * @param string $resourcePath
-     * @return AttachmentResourceEditable
-     */
-    public function setResourcePath($resourcePath) {
-        return parent::setResourcePath($resourcePath);
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return AttachmentResourceEditable
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+		return $this;
+	}
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return AttachmentResourceEditable
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+	/**
+	 * Returns resourcePath.
+	 *
+	 * The path to the resource which should be attachted to the e-mail.
+	 *
+	 * @return string
+	 */
+	public function getResourcePath() {
+		return parent::getResourcePath();
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-    }
+	/**
+	 * Sets resourcePath.
+	 *
+	 * @param string $resourcePath
+	 * @return AttachmentResourceEditable
+	 */
+	public function setResourcePath($resourcePath) {
+		return parent::setResourcePath($resourcePath);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return AttachmentResourceEditable
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		return $this;
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

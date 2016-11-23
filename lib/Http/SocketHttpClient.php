@@ -30,7 +30,7 @@ use \Wallee\Sdk\ApiClient;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class SocketHttpClient implements IHttpClient {
 
@@ -40,7 +40,7 @@ final class SocketHttpClient implements IHttpClient {
 	 * @var integer
 	 */
 	private $startTime;
-	
+
 	public function isSupported() {
 		return function_exists('stream_socket_client');
 	}
@@ -118,25 +118,25 @@ final class SocketHttpClient implements IHttpClient {
 						break;
 					}
 				}
-				
+
 				// Since we have not set any content length we assume that we need to read in chunks.
 				else {
-					
+
 					// We have to read the next line to get the chunk length.
 					if ($chunkLength === false) {
 						$line = trim(fgets($socket, 128));
 						$chunkLength = hexdec($line);
 					}
-					
+
 					// We have to read the chunk, when it is greater than zero. The last one is always 0.
 					else if ($chunkLength > 0) {
 						$responseMessage .= $this->readContentFromSocket($apiClient, $socket, $chunkLength);
-						
+
 						// We skip the next line break.
 						fseek($socket, 2, SEEK_CUR);
 						$chunkLength = false;
 					}
-					
+
 					// The chunk length must be zero. Hence we are finished and we can stop.
 					else {
 						$endReached = true;
@@ -145,7 +145,7 @@ final class SocketHttpClient implements IHttpClient {
 				}
 			}
 		}
-		
+
 		if (feof($socket) || $endReached) {
 			return $responseMessage;
 		}
@@ -157,9 +157,9 @@ final class SocketHttpClient implements IHttpClient {
 
 	/**
 	 * This method reads in blocking fashion from the socket.
-	 * 
-	 * We need this method because neither fread nor stream_get_contents do respect timeouts. 
-	 * 
+	 *
+	 * We need this method because neither fread nor stream_get_contents do respect timeouts.
+	 *
 	 * @param ApiClient $apiClient the API client instance
 	 * @param socket $socket the socket from which should be read
 	 * @param int $maxNumberOfBytes the number of bytes to read
@@ -179,12 +179,12 @@ final class SocketHttpClient implements IHttpClient {
 				$numberOfBytesRead += strlen($tmp);
 			}
 			else {
-				// Wait 100 milliseconds 
+				// Wait 100 milliseconds
 				usleep(100 * 1000);
 			}
 		}
 		stream_set_blocking($socket, true);
-		
+
 		if (feof($socket) || $numberOfBytesRead >= $maxNumberOfBytes) {
 			return $result;
 		}
@@ -219,7 +219,7 @@ final class SocketHttpClient implements IHttpClient {
 			}
 		}
 		stream_set_blocking($socket, true);
-	
+
 		if ($result !== false) {
 			return $result;
 		}
@@ -303,7 +303,7 @@ final class SocketHttpClient implements IHttpClient {
 		}
 		$socket = $host . ':' . $port;
 
-		$filePointer = stream_socket_client($socket, $errno, $errstr, $apiClient->getConnectionTimeout(), STREAM_CLIENT_CONNECT, 
+		$filePointer = stream_socket_client($socket, $errno, $errstr, $apiClient->getConnectionTimeout(), STREAM_CLIENT_CONNECT,
 				$this->createStreamContext($apiClient, $request));
 
 		if ($filePointer === false) {
@@ -350,7 +350,7 @@ final class SocketHttpClient implements IHttpClient {
 		if ($rs === null) {
 			throw new Exception("Invalid state.");
 		}
-		
+
 		$possibleTransportProtocols = stream_get_transports();
 		if (!in_array($rs, $possibleTransportProtocols)) {
 			throw new Exception(
@@ -361,7 +361,7 @@ final class SocketHttpClient implements IHttpClient {
 								'@supported' => implode(',', $possibleTransportProtocols),
 							))->toString());
 		}
-		
+
 		return $rs;
 	}
 
@@ -380,7 +380,7 @@ final class SocketHttpClient implements IHttpClient {
 	 * Generates an option array for creating the stream context.
 	 *
 	 * @param ApiClient $apiClient the API client instance
-	 * @param HttpRequest $request the HTTP request 
+	 * @param HttpRequest $request the HTTP request
 	 * @return array
 	 */
 	private function buildStreamContextOptions(ApiClient $apiClient, HttpRequest $request) {
@@ -392,7 +392,7 @@ final class SocketHttpClient implements IHttpClient {
 			$options['ssl']['verify_host'] = true;
 			$options['ssl']['allow_self_signed'] = false;
 			$options['ssl']['verify_peer'] = false;
-			
+
 			if ($apiClient->isCertificateAuthorityCheckEnabled()) {
 				$options['ssl']['verify_peer'] = true;
 				$options['ssl']['cafile'] = $apiClient->getCertificateAuthority();
@@ -402,12 +402,12 @@ final class SocketHttpClient implements IHttpClient {
 		if ($ipVersion !== null) {
 			if ($ipVersion == self::IP_ADDRESS_VERSION_V4) {
 				$options['socket'] = array(
-					'bindto' => '0.0.0.0:0' 
+					'bindto' => '0.0.0.0:0'
 				);
 			}
 			elseif ($ipVersion == self::IP_ADDRESS_VERSION_V6) {
 				$options['socket'] = array(
-					'bindto' => '[::]:0' 
+					'bindto' => '[::]:0'
 				);
 			}
 		}
@@ -420,7 +420,7 @@ final class SocketHttpClient implements IHttpClient {
 	private function resetStartTime() {
 		$this->startTime = time();
 	}
-	
+
 	/**
 	 * Returns the start time.
 	 *

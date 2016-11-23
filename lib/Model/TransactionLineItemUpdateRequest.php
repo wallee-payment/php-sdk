@@ -35,138 +35,138 @@ use \Wallee\Sdk\ValidationException;
  */
 class TransactionLineItemUpdateRequest  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'TransactionLineItemUpdateRequest';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'TransactionLineItemUpdateRequest';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'newLineItems' => '\Wallee\Sdk\Model\LineItem[]',
-        'transactionId' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'newLineItems' => '\Wallee\Sdk\Model\LineItem[]',
+		'transactionId' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\LineItem[]
-     */
-    private $newLineItems;
-    
-    /**
-     * 
-     *
-     * @var int
-     */
-    private $transactionId;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setNewLineItems(isset($data['newLineItems']) ? $data['newLineItems'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LineItem[]
+	 */
+	private $newLineItems;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $transactionId;
 
 
-    /**
-     * Returns newLineItems.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\LineItem[]
-     */
-    public function getNewLineItems() {
-        return $this->newLineItems;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setNewLineItems(isset($data['newLineItems']) ? $data['newLineItems'] : null);
+	}
 
-    /**
-     * Sets newLineItems.
-     *
-     * @param \Wallee\Sdk\Model\LineItem[] $newLineItems
-     * @return TransactionLineItemUpdateRequest
-     */
-    public function setNewLineItems($newLineItems) {
-        $this->newLineItems = $newLineItems;
 
-        return $this;
-    }
+	/**
+	 * Returns newLineItems.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\LineItem[]
+	 */
+	public function getNewLineItems() {
+		return $this->newLineItems;
+	}
 
-    /**
-     * Returns transactionId.
-     *
-     * 
-     *
-     * @return int
-     */
-    public function getTransactionId() {
-        return $this->transactionId;
-    }
+	/**
+	 * Sets newLineItems.
+	 *
+	 * @param \Wallee\Sdk\Model\LineItem[] $newLineItems
+	 * @return TransactionLineItemUpdateRequest
+	 */
+	public function setNewLineItems($newLineItems) {
+		$this->newLineItems = $newLineItems;
 
-    /**
-     * Sets transactionId.
-     *
-     * @param int $transactionId
-     * @return TransactionLineItemUpdateRequest
-     */
-    protected function setTransactionId($transactionId) {
-        $this->transactionId = $transactionId;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns transactionId.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getTransactionId() {
+		return $this->transactionId;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets transactionId.
+	 *
+	 * @param int $transactionId
+	 * @return TransactionLineItemUpdateRequest
+	 */
+	protected function setTransactionId($transactionId) {
+		$this->transactionId = $transactionId;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,301 +35,301 @@ use \Wallee\Sdk\ValidationException;
  */
 class LineItemCreate extends LineItem  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'LineItem.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'LineItem.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    /**
-     * Values of type.
-     */ 
-    const TYPE_SHIPPING = 'SHIPPING';
-    const TYPE_DISCOUNT = 'DISCOUNT';
-    const TYPE_FEE = 'FEE';
-    const TYPE_PRODUCT = 'PRODUCT';
-    
-    /**
-     * Returns allowable values of type.
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues() {
-        return [
-            self::TYPE_SHIPPING,
-            self::TYPE_DISCOUNT,
-            self::TYPE_FEE,
-            self::TYPE_PRODUCT,
-        ];
-    }
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setAmountIncludingTax(isset($data['amountIncludingTax']) ? $data['amountIncludingTax'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setQuantity(isset($data['quantity']) ? $data['quantity'] : null);
-        $this->setShippingRequired(isset($data['shippingRequired']) ? $data['shippingRequired'] : null);
-        $this->setSku(isset($data['sku']) ? $data['sku'] : null);
-        $this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
-        $this->setType(isset($data['type']) ? $data['type'] : null);
-        $this->setUniqueId(isset($data['uniqueId']) ? $data['uniqueId'] : null);
-    }
+	
+	/**
+	 * Values of type.
+	 */
+	const TYPE_SHIPPING = 'SHIPPING';
+	const TYPE_DISCOUNT = 'DISCOUNT';
+	const TYPE_FEE = 'FEE';
+	const TYPE_PRODUCT = 'PRODUCT';
+	
+	/**
+	 * Returns allowable values of type.
+	 *
+	 * @return string[]
+	 */
+	public function getTypeAllowableValues() {
+		return [
+			self::TYPE_SHIPPING,
+			self::TYPE_DISCOUNT,
+			self::TYPE_FEE,
+			self::TYPE_PRODUCT,
+		];
+	}
+	
 
 
-    /**
-     * Returns amountIncludingTax.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getAmountIncludingTax() {
-        return parent::getAmountIncludingTax();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets amountIncludingTax.
-     *
-     * @param float $amountIncludingTax
-     * @return LineItemCreate
-     */
-    public function setAmountIncludingTax($amountIncludingTax) {
-        return parent::setAmountIncludingTax($amountIncludingTax);
-    }
+		$this->setAmountIncludingTax(isset($data['amountIncludingTax']) ? $data['amountIncludingTax'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setQuantity(isset($data['quantity']) ? $data['quantity'] : null);
+		$this->setShippingRequired(isset($data['shippingRequired']) ? $data['shippingRequired'] : null);
+		$this->setSku(isset($data['sku']) ? $data['sku'] : null);
+		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
+		$this->setType(isset($data['type']) ? $data['type'] : null);
+		$this->setUniqueId(isset($data['uniqueId']) ? $data['uniqueId'] : null);
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getName() {
-        return parent::getName();
-    }
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return LineItemCreate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+	/**
+	 * Returns amountIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getAmountIncludingTax() {
+		return parent::getAmountIncludingTax();
+	}
 
-    /**
-     * Returns quantity.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getQuantity() {
-        return parent::getQuantity();
-    }
+	/**
+	 * Sets amountIncludingTax.
+	 *
+	 * @param float $amountIncludingTax
+	 * @return LineItemCreate
+	 */
+	public function setAmountIncludingTax($amountIncludingTax) {
+		return parent::setAmountIncludingTax($amountIncludingTax);
+	}
 
-    /**
-     * Sets quantity.
-     *
-     * @param float $quantity
-     * @return LineItemCreate
-     */
-    public function setQuantity($quantity) {
-        return parent::setQuantity($quantity);
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns shippingRequired.
-     *
-     * 
-     *
-     * @return bool
-     */
-    public function getShippingRequired() {
-        return parent::getShippingRequired();
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return LineItemCreate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Sets shippingRequired.
-     *
-     * @param bool $shippingRequired
-     * @return LineItemCreate
-     */
-    public function setShippingRequired($shippingRequired) {
-        return parent::setShippingRequired($shippingRequired);
-    }
+	/**
+	 * Returns quantity.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getQuantity() {
+		return parent::getQuantity();
+	}
 
-    /**
-     * Returns sku.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getSku() {
-        return parent::getSku();
-    }
+	/**
+	 * Sets quantity.
+	 *
+	 * @param float $quantity
+	 * @return LineItemCreate
+	 */
+	public function setQuantity($quantity) {
+		return parent::setQuantity($quantity);
+	}
 
-    /**
-     * Sets sku.
-     *
-     * @param string $sku
-     * @return LineItemCreate
-     */
-    public function setSku($sku) {
-        return parent::setSku($sku);
-    }
+	/**
+	 * Returns shippingRequired.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getShippingRequired() {
+		return parent::getShippingRequired();
+	}
 
-    /**
-     * Returns taxes.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\TaxCreate[]
-     */
-    public function getTaxes() {
-        return parent::getTaxes();
-    }
+	/**
+	 * Sets shippingRequired.
+	 *
+	 * @param bool $shippingRequired
+	 * @return LineItemCreate
+	 */
+	public function setShippingRequired($shippingRequired) {
+		return parent::setShippingRequired($shippingRequired);
+	}
 
-    /**
-     * Sets taxes.
-     *
-     * @param \Wallee\Sdk\Model\TaxCreate[] $taxes
-     * @return LineItemCreate
-     */
-    public function setTaxes($taxes) {
-        return parent::setTaxes($taxes);
-    }
+	/**
+	 * Returns sku.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getSku() {
+		return parent::getSku();
+	}
 
-    /**
-     * Returns type.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getType() {
-        return parent::getType();
-    }
+	/**
+	 * Sets sku.
+	 *
+	 * @param string $sku
+	 * @return LineItemCreate
+	 */
+	public function setSku($sku) {
+		return parent::setSku($sku);
+	}
 
-    /**
-     * Sets type.
-     *
-     * @param string $type
-     * @return LineItemCreate
-     */
-    public function setType($type) {
-        $allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
-        if ((!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
-        }
-        return parent::setType($type);
-    }
+	/**
+	 * Returns taxes.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\TaxCreate[]
+	 */
+	public function getTaxes() {
+		return parent::getTaxes();
+	}
 
-    /**
-     * Returns uniqueId.
-     *
-     * The unique id identifies the line item within the set of line items associated with the transaction.
-     *
-     * @return string
-     */
-    public function getUniqueId() {
-        return parent::getUniqueId();
-    }
+	/**
+	 * Sets taxes.
+	 *
+	 * @param \Wallee\Sdk\Model\TaxCreate[] $taxes
+	 * @return LineItemCreate
+	 */
+	public function setTaxes($taxes) {
+		return parent::setTaxes($taxes);
+	}
 
-    /**
-     * Sets uniqueId.
-     *
-     * @param string $uniqueId
-     * @return LineItemCreate
-     */
-    public function setUniqueId($uniqueId) {
-        return parent::setUniqueId($uniqueId);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getAmountIncludingTax() === null) {
-        	throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
-        }
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getQuantity() === null) {
-        	throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-        }
-        if ($this->getType() === null) {
-        	throw new ValidationException("'type' can't be null", 'type', $this);
-        }
-        $allowed_values = ["SHIPPING", "DISCOUNT", "FEE", "PRODUCT"];
-        if (!in_array($this->getType(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-        }
+	/**
+	 * Returns type.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return parent::getType();
+	}
 
-        if ($this->getUniqueId() === null) {
-        	throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
-        }
-    }
+	/**
+	 * Sets type.
+	 *
+	 * @param string $type
+	 * @return LineItemCreate
+	 */
+	public function setType($type) {
+		$allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
+		if ((!in_array($type, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
+		}
+		return parent::setType($type);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns uniqueId.
+	 *
+	 * The unique id identifies the line item within the set of line items associated with the transaction.
+	 *
+	 * @return string
+	 */
+	public function getUniqueId() {
+		return parent::getUniqueId();
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets uniqueId.
+	 *
+	 * @param string $uniqueId
+	 * @return LineItemCreate
+	 */
+	public function setUniqueId($uniqueId) {
+		return parent::setUniqueId($uniqueId);
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getAmountIncludingTax() === null) {
+			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
+		}
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getQuantity() === null) {
+			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
+		}
+		if ($this->getType() === null) {
+			throw new ValidationException("'type' can't be null", 'type', $this);
+		}
+		$allowed_values = ["SHIPPING", "DISCOUNT", "FEE", "PRODUCT"];
+		if (!in_array($this->getType(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
+		}
+
+		if ($this->getUniqueId() === null) {
+			throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

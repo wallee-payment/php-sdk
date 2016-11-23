@@ -35,227 +35,227 @@ use \Wallee\Sdk\ValidationException;
  */
 class RefundCreate extends Refund  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Refund.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Refund.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    /**
-     * Values of type.
-     */ 
-    const TYPE_CUSTOMER_INITIATED_AUTOMATIC = 'CUSTOMER_INITIATED_AUTOMATIC';
-    const TYPE_CUSTOMER_INITIATED_MANUAL = 'CUSTOMER_INITIATED_MANUAL';
-    const TYPE_MERCHANT_INITIATED_ONLINE = 'MERCHANT_INITIATED_ONLINE';
-    const TYPE_MERCHANT_INITIATED_OFFLINE = 'MERCHANT_INITIATED_OFFLINE';
-    
-    /**
-     * Returns allowable values of type.
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues() {
-        return [
-            self::TYPE_CUSTOMER_INITIATED_AUTOMATIC,
-            self::TYPE_CUSTOMER_INITIATED_MANUAL,
-            self::TYPE_MERCHANT_INITIATED_ONLINE,
-            self::TYPE_MERCHANT_INITIATED_OFFLINE,
-        ];
-    }
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-        $this->setMerchantReference(isset($data['merchantReference']) ? $data['merchantReference'] : null);
-        $this->setReductions(isset($data['reductions']) ? $data['reductions'] : null);
-        $this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
-        $this->setType(isset($data['type']) ? $data['type'] : null);
-    }
+	
+	/**
+	 * Values of type.
+	 */
+	const TYPE_CUSTOMER_INITIATED_AUTOMATIC = 'CUSTOMER_INITIATED_AUTOMATIC';
+	const TYPE_CUSTOMER_INITIATED_MANUAL = 'CUSTOMER_INITIATED_MANUAL';
+	const TYPE_MERCHANT_INITIATED_ONLINE = 'MERCHANT_INITIATED_ONLINE';
+	const TYPE_MERCHANT_INITIATED_OFFLINE = 'MERCHANT_INITIATED_OFFLINE';
+	
+	/**
+	 * Returns allowable values of type.
+	 *
+	 * @return string[]
+	 */
+	public function getTypeAllowableValues() {
+		return [
+			self::TYPE_CUSTOMER_INITIATED_AUTOMATIC,
+			self::TYPE_CUSTOMER_INITIATED_MANUAL,
+			self::TYPE_MERCHANT_INITIATED_ONLINE,
+			self::TYPE_MERCHANT_INITIATED_OFFLINE,
+		];
+	}
+	
 
 
-    /**
-     * Returns externalId.
-     *
-     * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
-     *
-     * @return string
-     */
-    public function getExternalId() {
-        return parent::getExternalId();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets externalId.
-     *
-     * @param string $externalId
-     * @return RefundCreate
-     */
-    public function setExternalId($externalId) {
-        return parent::setExternalId($externalId);
-    }
+		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
+		$this->setMerchantReference(isset($data['merchantReference']) ? $data['merchantReference'] : null);
+		$this->setReductions(isset($data['reductions']) ? $data['reductions'] : null);
+		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		$this->setType(isset($data['type']) ? $data['type'] : null);
+	}
 
-    /**
-     * Returns merchantReference.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getMerchantReference() {
-        return parent::getMerchantReference();
-    }
 
-    /**
-     * Sets merchantReference.
-     *
-     * @param string $merchantReference
-     * @return RefundCreate
-     */
-    public function setMerchantReference($merchantReference) {
-        return parent::setMerchantReference($merchantReference);
-    }
+	/**
+	 * Returns externalId.
+	 *
+	 * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return parent::getExternalId();
+	}
 
-    /**
-     * Returns reductions.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\LineItemReductionCreate[]
-     */
-    public function getReductions() {
-        return parent::getReductions();
-    }
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return RefundCreate
+	 */
+	public function setExternalId($externalId) {
+		return parent::setExternalId($externalId);
+	}
 
-    /**
-     * Sets reductions.
-     *
-     * @param \Wallee\Sdk\Model\LineItemReductionCreate[] $reductions
-     * @return RefundCreate
-     */
-    public function setReductions($reductions) {
-        return parent::setReductions($reductions);
-    }
+	/**
+	 * Returns merchantReference.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getMerchantReference() {
+		return parent::getMerchantReference();
+	}
 
-    /**
-     * Returns transaction.
-     *
-     * @return \Wallee\Sdk\Model\Transaction
-     */
-    public function getTransaction() {
-        return parent::getTransaction();
-    }
+	/**
+	 * Sets merchantReference.
+	 *
+	 * @param string $merchantReference
+	 * @return RefundCreate
+	 */
+	public function setMerchantReference($merchantReference) {
+		return parent::setMerchantReference($merchantReference);
+	}
 
-    /**
-     * Sets transaction.
-     *
-     * @param \Wallee\Sdk\Model\Transaction $transaction
-     * @return RefundCreate
-     */
-    public function setTransaction($transaction) {
-        return parent::setTransaction($transaction);
-    }
+	/**
+	 * Returns reductions.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\LineItemReductionCreate[]
+	 */
+	public function getReductions() {
+		return parent::getReductions();
+	}
 
-    /**
-     * Returns type.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getType() {
-        return parent::getType();
-    }
+	/**
+	 * Sets reductions.
+	 *
+	 * @param \Wallee\Sdk\Model\LineItemReductionCreate[] $reductions
+	 * @return RefundCreate
+	 */
+	public function setReductions($reductions) {
+		return parent::setReductions($reductions);
+	}
 
-    /**
-     * Sets type.
-     *
-     * @param string $type
-     * @return RefundCreate
-     */
-    public function setType($type) {
-        $allowed_values = array('CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE');
-        if ((!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE'");
-        }
-        return parent::setType($type);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getExternalId() === null) {
-        	throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-        }
-        if ($this->getReductions() === null) {
-        	throw new ValidationException("'reductions' can't be null", 'reductions', $this);
-        }
-        if ($this->getType() === null) {
-        	throw new ValidationException("'type' can't be null", 'type', $this);
-        }
-        $allowed_values = ["CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE"];
-        if (!in_array($this->getType(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-        }
+	/**
+	 * Returns transaction.
+	 *
+	 * @return \Wallee\Sdk\Model\Transaction
+	 */
+	public function getTransaction() {
+		return parent::getTransaction();
+	}
 
-    }
+	/**
+	 * Sets transaction.
+	 *
+	 * @param \Wallee\Sdk\Model\Transaction $transaction
+	 * @return RefundCreate
+	 */
+	public function setTransaction($transaction) {
+		return parent::setTransaction($transaction);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns type.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return parent::getType();
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets type.
+	 *
+	 * @param string $type
+	 * @return RefundCreate
+	 */
+	public function setType($type) {
+		$allowed_values = array('CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE');
+		if ((!in_array($type, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE'");
+		}
+		return parent::setType($type);
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getExternalId() === null) {
+			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+		}
+		if ($this->getReductions() === null) {
+			throw new ValidationException("'reductions' can't be null", 'reductions', $this);
+		}
+		if ($this->getType() === null) {
+			throw new ValidationException("'type' can't be null", 'type', $this);
+		}
+		$allowed_values = ["CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE"];
+		if (!in_array($this->getType(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

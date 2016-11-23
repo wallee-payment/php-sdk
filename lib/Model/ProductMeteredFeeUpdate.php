@@ -35,211 +35,211 @@ use \Wallee\Sdk\ValidationException;
  */
 class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'ProductMeteredFee.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'ProductMeteredFee.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    /**
-     * Values of tierPricing.
-     */ 
-    const TIER_PRICING_CHEAPEST_TIER_PRICING = 'CHEAPEST_TIER_PRICING';
-    const TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING = 'INCREMENTAL_DISCOUNT_PRICING';
-    
-    /**
-     * Returns allowable values of tierPricing.
-     *
-     * @return string[]
-     */
-    public function getTierPricingAllowableValues() {
-        return [
-            self::TIER_PRICING_CHEAPEST_TIER_PRICING,
-            self::TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING,
-        ];
-    }
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setComponent(isset($data['component']) ? $data['component'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setMetric(isset($data['metric']) ? $data['metric'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setTierPricing(isset($data['tierPricing']) ? $data['tierPricing'] : null);
-    }
+	
+	/**
+	 * Values of tierPricing.
+	 */
+	const TIER_PRICING_CHEAPEST_TIER_PRICING = 'CHEAPEST_TIER_PRICING';
+	const TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING = 'INCREMENTAL_DISCOUNT_PRICING';
+	
+	/**
+	 * Returns allowable values of tierPricing.
+	 *
+	 * @return string[]
+	 */
+	public function getTierPricingAllowableValues() {
+		return [
+			self::TIER_PRICING_CHEAPEST_TIER_PRICING,
+			self::TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING,
+		];
+	}
+	
 
 
-    /**
-     * Returns component.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponent
-     */
-    public function getComponent() {
-        return parent::getComponent();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets component.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
-     * @return ProductMeteredFeeUpdate
-     */
-    public function setComponent($component) {
-        return parent::setComponent($component);
-    }
+		$this->setComponent(isset($data['component']) ? $data['component'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setMetric(isset($data['metric']) ? $data['metric'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setTierPricing(isset($data['tierPricing']) ? $data['tierPricing'] : null);
+	}
 
-    /**
-     * Returns description.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getDescription() {
-        return parent::getDescription();
-    }
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
-     * @return ProductMeteredFeeUpdate
-     */
-    public function setDescription($description) {
-        return parent::setDescription($description);
-    }
+	/**
+	 * Returns component.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+	 */
+	public function getComponent() {
+		return parent::getComponent();
+	}
 
-    /**
-     * Returns metric.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionMetric
-     */
-    public function getMetric() {
-        return parent::getMetric();
-    }
+	/**
+	 * Sets component.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setComponent($component) {
+		return parent::setComponent($component);
+	}
 
-    /**
-     * Sets metric.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
-     * @return ProductMeteredFeeUpdate
-     */
-    public function setMetric($metric) {
-        return parent::setMetric($metric);
-    }
+	/**
+	 * Returns description.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getDescription() {
+		return parent::getDescription();
+	}
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setDescription($description) {
+		return parent::setDescription($description);
+	}
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
-     * @return ProductMeteredFeeUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+	/**
+	 * Returns metric.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionMetric
+	 */
+	public function getMetric() {
+		return parent::getMetric();
+	}
 
-    /**
-     * Returns tierPricing.
-     *
-     * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
-     *
-     * @return string
-     */
-    public function getTierPricing() {
-        return parent::getTierPricing();
-    }
+	/**
+	 * Sets metric.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setMetric($metric) {
+		return parent::setMetric($metric);
+	}
 
-    /**
-     * Sets tierPricing.
-     *
-     * @param string $tierPricing
-     * @return ProductMeteredFeeUpdate
-     */
-    public function setTierPricing($tierPricing) {
-        $allowed_values = array('CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING');
-        if ((!in_array($tierPricing, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'tierPricing', must be one of 'CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING'");
-        }
-        return parent::setTierPricing($tierPricing);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getTierPricing() === null) {
-        	throw new ValidationException("'tierPricing' can't be null", 'tierPricing', $this);
-        }
-        $allowed_values = ["CHEAPEST_TIER_PRICING", "INCREMENTAL_DISCOUNT_PRICING"];
-        if (!in_array($this->getTierPricing(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'tierPricing', must be one of #{allowed_values}.", 'tierPricing', $this);
-        }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns tierPricing.
+	 *
+	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
+	 *
+	 * @return string
+	 */
+	public function getTierPricing() {
+		return parent::getTierPricing();
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets tierPricing.
+	 *
+	 * @param string $tierPricing
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setTierPricing($tierPricing) {
+		$allowed_values = array('CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING');
+		if ((!in_array($tierPricing, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'tierPricing', must be one of 'CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING'");
+		}
+		return parent::setTierPricing($tierPricing);
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getTierPricing() === null) {
+			throw new ValidationException("'tierPricing' can't be null", 'tierPricing', $this);
+		}
+		$allowed_values = ["CHEAPEST_TIER_PRICING", "INCREMENTAL_DISCOUNT_PRICING"];
+		if (!in_array($this->getTierPricing(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'tierPricing', must be one of #{allowed_values}.", 'tierPricing', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

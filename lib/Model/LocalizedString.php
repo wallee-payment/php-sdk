@@ -35,168 +35,168 @@ use \Wallee\Sdk\ValidationException;
  */
 class LocalizedString  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'LocalizedString';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'LocalizedString';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'displayName' => 'string',
-        'language' => 'string',
-        'string' => 'string'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'displayName' => 'string',
+		'language' => 'string',
+		'string' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $displayName;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $language;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $string;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $displayName;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $string;
 
 
-    /**
-     * Returns displayName.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getDisplayName() {
-        return $this->displayName;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets displayName.
-     *
-     * @param string $displayName
-     * @return LocalizedString
-     */
-    protected function setDisplayName($displayName) {
-        $this->displayName = $displayName;
 
-        return $this;
-    }
+	/**
+	 * Returns displayName.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDisplayName() {
+		return $this->displayName;
+	}
 
-    /**
-     * Returns language.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * Sets displayName.
+	 *
+	 * @param string $displayName
+	 * @return LocalizedString
+	 */
+	protected function setDisplayName($displayName) {
+		$this->displayName = $displayName;
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return LocalizedString
-     */
-    protected function setLanguage($language) {
-        $this->language = $language;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 
-    /**
-     * Returns string.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getString() {
-        return $this->string;
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return LocalizedString
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
-    /**
-     * Sets string.
-     *
-     * @param string $string
-     * @return LocalizedString
-     */
-    protected function setString($string) {
-        $this->string = $string;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns string.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getString() {
+		return $this->string;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets string.
+	 *
+	 * @param string $string
+	 * @return LocalizedString
+	 */
+	protected function setString($string) {
+		$this->string = $string;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

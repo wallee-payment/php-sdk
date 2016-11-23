@@ -30,24 +30,24 @@ use \Exception;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class ValidationException extends Exception {
-	
+
 	/**
 	 * The name of the invalid property.
 	 *
 	 * @var string
 	 */
 	 private $property;
-	 
+
 	 /**
 	  * The instance of the validated model.
 	  *
 	  * @var object
 	  */
 	 private $model;
-	 
+
 	/**
 	 * Constructor.
 	 *
@@ -59,7 +59,7 @@ final class ValidationException extends Exception {
 		parent::__construct($message);
 		$this->property = $property;
 	}
-	
+
 	/**
 	 * Returns the name of the invalid property.
 	 *
@@ -68,7 +68,7 @@ final class ValidationException extends Exception {
 	public function getProperty() {
 		return $this->property;
 	}
-	
+
 	/**
 	 * Returns the instance of the validated model.
 	 *
@@ -77,5 +77,5 @@ final class ValidationException extends Exception {
 	public function getModel() {
 		return $this->model;
 	}
-	
+
 }

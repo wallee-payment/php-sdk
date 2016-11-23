@@ -35,231 +35,231 @@ use \Wallee\Sdk\ValidationException;
  */
 class EntityQuery  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'EntityQuery';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'EntityQuery';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'filter' => '\Wallee\Sdk\Model\EntityQueryFilter',
-        'language' => 'string',
-        'numberOfEntities' => 'int',
-        'orderBys' => '\Wallee\Sdk\Model\EntityQueryOrderBy[]',
-        'startingEntity' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'filter' => '\Wallee\Sdk\Model\EntityQueryFilter',
+		'language' => 'string',
+		'numberOfEntities' => 'int',
+		'orderBys' => '\Wallee\Sdk\Model\EntityQueryOrderBy[]',
+		'startingEntity' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityQueryFilter
-     */
-    private $filter;
-    
-    /**
-     * The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
-     *
-     * @var string
-     */
-    private $language;
-    
-    /**
-     * The number of entities defines how many entities should be returned. There is a maximum of 500 entities.
-     *
-     * @var int
-     */
-    private $numberOfEntities;
-    
-    /**
-     * The order bys allows to define the ordering of the entities returned by the search.
-     *
-     * @var \Wallee\Sdk\Model\EntityQueryOrderBy[]
-     */
-    private $orderBys;
-    
-    /**
-     * The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
-     *
-     * @var int
-     */
-    private $startingEntity;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setFilter(isset($data['filter']) ? $data['filter'] : null);
-        $this->setLanguage(isset($data['language']) ? $data['language'] : null);
-        $this->setNumberOfEntities(isset($data['numberOfEntities']) ? $data['numberOfEntities'] : null);
-        $this->setOrderBys(isset($data['orderBys']) ? $data['orderBys'] : null);
-        $this->setStartingEntity(isset($data['startingEntity']) ? $data['startingEntity'] : null);
-    }
+	
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityQueryFilter
+	 */
+	private $filter;
+
+	/**
+	 * The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * The number of entities defines how many entities should be returned. There is a maximum of 500 entities.
+	 *
+	 * @var int
+	 */
+	private $numberOfEntities;
+
+	/**
+	 * The order bys allows to define the ordering of the entities returned by the search.
+	 *
+	 * @var \Wallee\Sdk\Model\EntityQueryOrderBy[]
+	 */
+	private $orderBys;
+
+	/**
+	 * The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
+	 *
+	 * @var int
+	 */
+	private $startingEntity;
 
 
-    /**
-     * Returns filter.
-     *
-     * @return \Wallee\Sdk\Model\EntityQueryFilter
-     */
-    public function getFilter() {
-        return $this->filter;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setFilter(isset($data['filter']) ? $data['filter'] : null);
+		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
+		$this->setNumberOfEntities(isset($data['numberOfEntities']) ? $data['numberOfEntities'] : null);
+		$this->setOrderBys(isset($data['orderBys']) ? $data['orderBys'] : null);
+		$this->setStartingEntity(isset($data['startingEntity']) ? $data['startingEntity'] : null);
+	}
 
-    /**
-     * Sets filter.
-     *
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter
-     * @return EntityQuery
-     */
-    public function setFilter($filter) {
-        $this->filter = $filter;
 
-        return $this;
-    }
+	/**
+	 * Returns filter.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityQueryFilter
+	 */
+	public function getFilter() {
+		return $this->filter;
+	}
 
-    /**
-     * Returns language.
-     *
-     * The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * Sets filter.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter
+	 * @return EntityQuery
+	 */
+	public function setFilter($filter) {
+		$this->filter = $filter;
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return EntityQuery
-     */
-    public function setLanguage($language) {
-        $this->language = $language;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns language.
+	 *
+	 * The language is applied to the ordering of the entities returned. Some entity fields are language dependent and hence the language is required to order them.
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 
-    /**
-     * Returns numberOfEntities.
-     *
-     * The number of entities defines how many entities should be returned. There is a maximum of 500 entities.
-     *
-     * @return int
-     */
-    public function getNumberOfEntities() {
-        return $this->numberOfEntities;
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return EntityQuery
+	 */
+	public function setLanguage($language) {
+		$this->language = $language;
 
-    /**
-     * Sets numberOfEntities.
-     *
-     * @param int $numberOfEntities
-     * @return EntityQuery
-     */
-    public function setNumberOfEntities($numberOfEntities) {
-        $this->numberOfEntities = $numberOfEntities;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns numberOfEntities.
+	 *
+	 * The number of entities defines how many entities should be returned. There is a maximum of 500 entities.
+	 *
+	 * @return int
+	 */
+	public function getNumberOfEntities() {
+		return $this->numberOfEntities;
+	}
 
-    /**
-     * Returns orderBys.
-     *
-     * The order bys allows to define the ordering of the entities returned by the search.
-     *
-     * @return \Wallee\Sdk\Model\EntityQueryOrderBy[]
-     */
-    public function getOrderBys() {
-        return $this->orderBys;
-    }
+	/**
+	 * Sets numberOfEntities.
+	 *
+	 * @param int $numberOfEntities
+	 * @return EntityQuery
+	 */
+	public function setNumberOfEntities($numberOfEntities) {
+		$this->numberOfEntities = $numberOfEntities;
 
-    /**
-     * Sets orderBys.
-     *
-     * @param \Wallee\Sdk\Model\EntityQueryOrderBy[] $orderBys
-     * @return EntityQuery
-     */
-    public function setOrderBys($orderBys) {
-        $this->orderBys = $orderBys;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns orderBys.
+	 *
+	 * The order bys allows to define the ordering of the entities returned by the search.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityQueryOrderBy[]
+	 */
+	public function getOrderBys() {
+		return $this->orderBys;
+	}
 
-    /**
-     * Returns startingEntity.
-     *
-     * The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
-     *
-     * @return int
-     */
-    public function getStartingEntity() {
-        return $this->startingEntity;
-    }
+	/**
+	 * Sets orderBys.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityQueryOrderBy[] $orderBys
+	 * @return EntityQuery
+	 */
+	public function setOrderBys($orderBys) {
+		$this->orderBys = $orderBys;
 
-    /**
-     * Sets startingEntity.
-     *
-     * @param int $startingEntity
-     * @return EntityQuery
-     */
-    public function setStartingEntity($startingEntity) {
-        $this->startingEntity = $startingEntity;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns startingEntity.
+	 *
+	 * The 'starting entity' defines the entity number at which the returned result should start. The entity number is the consecutive number of the entity as returned and it is not the entity id.
+	 *
+	 * @return int
+	 */
+	public function getStartingEntity() {
+		return $this->startingEntity;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets startingEntity.
+	 *
+	 * @param int $startingEntity
+	 * @return EntityQuery
+	 */
+	public function setStartingEntity($startingEntity) {
+		$this->startingEntity = $startingEntity;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

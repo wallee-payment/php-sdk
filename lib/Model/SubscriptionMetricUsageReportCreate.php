@@ -35,191 +35,191 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionMetricUsageReport.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionMetricUsageReport.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setConsumedUnits(isset($data['consumedUnits']) ? $data['consumedUnits'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-        $this->setMetric(isset($data['metric']) ? $data['metric'] : null);
-        $this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
-    }
+	
 
 
-    /**
-     * Returns consumedUnits.
-     *
-     * The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
-     *
-     * @return float
-     */
-    public function getConsumedUnits() {
-        return parent::getConsumedUnits();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets consumedUnits.
-     *
-     * @param float $consumedUnits
-     * @return SubscriptionMetricUsageReportCreate
-     */
-    public function setConsumedUnits($consumedUnits) {
-        return parent::setConsumedUnits($consumedUnits);
-    }
+		$this->setConsumedUnits(isset($data['consumedUnits']) ? $data['consumedUnits'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
+		$this->setMetric(isset($data['metric']) ? $data['metric'] : null);
+		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+	}
 
-    /**
-     * Returns description.
-     *
-     * The metric usage report description describe the reported usage. This description may be shown to the end user.
-     *
-     * @return string
-     */
-    public function getDescription() {
-        return parent::getDescription();
-    }
 
-    /**
-     * Sets description.
-     *
-     * @param string $description
-     * @return SubscriptionMetricUsageReportCreate
-     */
-    public function setDescription($description) {
-        return parent::setDescription($description);
-    }
+	/**
+	 * Returns consumedUnits.
+	 *
+	 * The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
+	 *
+	 * @return float
+	 */
+	public function getConsumedUnits() {
+		return parent::getConsumedUnits();
+	}
 
-    /**
-     * Returns externalId.
-     *
-     * The external id identifies the metric usage uniquely.
-     *
-     * @return string
-     */
-    public function getExternalId() {
-        return parent::getExternalId();
-    }
+	/**
+	 * Sets consumedUnits.
+	 *
+	 * @param float $consumedUnits
+	 * @return SubscriptionMetricUsageReportCreate
+	 */
+	public function setConsumedUnits($consumedUnits) {
+		return parent::setConsumedUnits($consumedUnits);
+	}
 
-    /**
-     * Sets externalId.
-     *
-     * @param string $externalId
-     * @return SubscriptionMetricUsageReportCreate
-     */
-    public function setExternalId($externalId) {
-        return parent::setExternalId($externalId);
-    }
+	/**
+	 * Returns description.
+	 *
+	 * The metric usage report description describe the reported usage. This description may be shown to the end user.
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return parent::getDescription();
+	}
 
-    /**
-     * Returns metric.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionMetric
-     */
-    public function getMetric() {
-        return parent::getMetric();
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param string $description
+	 * @return SubscriptionMetricUsageReportCreate
+	 */
+	public function setDescription($description) {
+		return parent::setDescription($description);
+	}
 
-    /**
-     * Sets metric.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
-     * @return SubscriptionMetricUsageReportCreate
-     */
-    public function setMetric($metric) {
-        return parent::setMetric($metric);
-    }
+	/**
+	 * Returns externalId.
+	 *
+	 * The external id identifies the metric usage uniquely.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return parent::getExternalId();
+	}
 
-    /**
-     * Returns subscription.
-     *
-     * @return \Wallee\Sdk\Model\Subscription
-     */
-    public function getSubscription() {
-        return parent::getSubscription();
-    }
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return SubscriptionMetricUsageReportCreate
+	 */
+	public function setExternalId($externalId) {
+		return parent::setExternalId($externalId);
+	}
 
-    /**
-     * Sets subscription.
-     *
-     * @param \Wallee\Sdk\Model\Subscription $subscription
-     * @return SubscriptionMetricUsageReportCreate
-     */
-    public function setSubscription($subscription) {
-        return parent::setSubscription($subscription);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getConsumedUnits() === null) {
-        	throw new ValidationException("'consumedUnits' can't be null", 'consumedUnits', $this);
-        }
-        if ($this->getExternalId() === null) {
-        	throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-        }
-    }
+	/**
+	 * Returns metric.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionMetric
+	 */
+	public function getMetric() {
+		return parent::getMetric();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets metric.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
+	 * @return SubscriptionMetricUsageReportCreate
+	 */
+	public function setMetric($metric) {
+		return parent::setMetric($metric);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns subscription.
+	 *
+	 * @return \Wallee\Sdk\Model\Subscription
+	 */
+	public function getSubscription() {
+		return parent::getSubscription();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets subscription.
+	 *
+	 * @param \Wallee\Sdk\Model\Subscription $subscription
+	 * @return SubscriptionMetricUsageReportCreate
+	 */
+	public function setSubscription($subscription) {
+		return parent::setSubscription($subscription);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getConsumedUnits() === null) {
+			throw new ValidationException("'consumedUnits' can't be null", 'consumedUnits', $this);
+		}
+		if ($this->getExternalId() === null) {
+			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

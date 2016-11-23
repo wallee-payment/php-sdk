@@ -35,562 +35,562 @@ use \Wallee\Sdk\ValidationException;
  */
 class LineItem  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'LineItem';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'LineItem';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'aggregatedTaxRate' => 'float',
-        'amountExcludingTax' => 'float',
-        'amountIncludingTax' => 'float',
-        'name' => 'string',
-        'quantity' => 'float',
-        'shippingRequired' => 'bool',
-        'sku' => 'string',
-        'taxAmount' => 'float',
-        'taxAmountPerUnit' => 'float',
-        'taxes' => '\Wallee\Sdk\Model\Tax[]',
-        'type' => 'string',
-        'uniqueId' => 'string',
-        'unitPriceExcludingTax' => 'float',
-        'unitPriceIncludingTax' => 'float'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'aggregatedTaxRate' => 'float',
+		'amountExcludingTax' => 'float',
+		'amountIncludingTax' => 'float',
+		'name' => 'string',
+		'quantity' => 'float',
+		'shippingRequired' => 'bool',
+		'sku' => 'string',
+		'taxAmount' => 'float',
+		'taxAmountPerUnit' => 'float',
+		'taxes' => '\Wallee\Sdk\Model\Tax[]',
+		'type' => 'string',
+		'uniqueId' => 'string',
+		'unitPriceExcludingTax' => 'float',
+		'unitPriceIncludingTax' => 'float'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of type.
-     */ 
-    const TYPE_SHIPPING = 'SHIPPING';
-    const TYPE_DISCOUNT = 'DISCOUNT';
-    const TYPE_FEE = 'FEE';
-    const TYPE_PRODUCT = 'PRODUCT';
-    
-    /**
-     * Returns allowable values of type.
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues() {
-        return [
-            self::TYPE_SHIPPING,
-            self::TYPE_DISCOUNT,
-            self::TYPE_FEE,
-            self::TYPE_PRODUCT,
-        ];
-    }
-    
-    
-    /**
-     * The aggregated tax rate is the sum of all tax rates of the line item.
-     *
-     * @var float
-     */
-    private $aggregatedTaxRate;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $amountExcludingTax;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $amountIncludingTax;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $name;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $quantity;
-    
-    /**
-     * 
-     *
-     * @var bool
-     */
-    private $shippingRequired;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $sku;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $taxAmount;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $taxAmountPerUnit;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\Tax[]
-     */
-    private $taxes;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $type;
-    
-    /**
-     * The unique id identifies the line item within the set of line items associated with the transaction.
-     *
-     * @var string
-     */
-    private $uniqueId;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $unitPriceExcludingTax;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $unitPriceIncludingTax;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
-    }
+	
+	/**
+	 * Values of type.
+	 */
+	const TYPE_SHIPPING = 'SHIPPING';
+	const TYPE_DISCOUNT = 'DISCOUNT';
+	const TYPE_FEE = 'FEE';
+	const TYPE_PRODUCT = 'PRODUCT';
+	
+	/**
+	 * Returns allowable values of type.
+	 *
+	 * @return string[]
+	 */
+	public function getTypeAllowableValues() {
+		return [
+			self::TYPE_SHIPPING,
+			self::TYPE_DISCOUNT,
+			self::TYPE_FEE,
+			self::TYPE_PRODUCT,
+		];
+	}
+	
+
+	/**
+	 * The aggregated tax rate is the sum of all tax rates of the line item.
+	 *
+	 * @var float
+	 */
+	private $aggregatedTaxRate;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $amountExcludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $amountIncludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $quantity;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $shippingRequired;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $sku;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $taxAmount;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $taxAmountPerUnit;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Tax[]
+	 */
+	private $taxes;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $type;
+
+	/**
+	 * The unique id identifies the line item within the set of line items associated with the transaction.
+	 *
+	 * @var string
+	 */
+	private $uniqueId;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $unitPriceExcludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $unitPriceIncludingTax;
 
 
-    /**
-     * Returns aggregatedTaxRate.
-     *
-     * The aggregated tax rate is the sum of all tax rates of the line item.
-     *
-     * @return float
-     */
-    public function getAggregatedTaxRate() {
-        return $this->aggregatedTaxRate;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
+	}
 
-    /**
-     * Sets aggregatedTaxRate.
-     *
-     * @param float $aggregatedTaxRate
-     * @return LineItem
-     */
-    protected function setAggregatedTaxRate($aggregatedTaxRate) {
-        $this->aggregatedTaxRate = $aggregatedTaxRate;
 
-        return $this;
-    }
+	/**
+	 * Returns aggregatedTaxRate.
+	 *
+	 * The aggregated tax rate is the sum of all tax rates of the line item.
+	 *
+	 * @return float
+	 */
+	public function getAggregatedTaxRate() {
+		return $this->aggregatedTaxRate;
+	}
 
-    /**
-     * Returns amountExcludingTax.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getAmountExcludingTax() {
-        return $this->amountExcludingTax;
-    }
+	/**
+	 * Sets aggregatedTaxRate.
+	 *
+	 * @param float $aggregatedTaxRate
+	 * @return LineItem
+	 */
+	protected function setAggregatedTaxRate($aggregatedTaxRate) {
+		$this->aggregatedTaxRate = $aggregatedTaxRate;
 
-    /**
-     * Sets amountExcludingTax.
-     *
-     * @param float $amountExcludingTax
-     * @return LineItem
-     */
-    protected function setAmountExcludingTax($amountExcludingTax) {
-        $this->amountExcludingTax = $amountExcludingTax;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns amountExcludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getAmountExcludingTax() {
+		return $this->amountExcludingTax;
+	}
 
-    /**
-     * Returns amountIncludingTax.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getAmountIncludingTax() {
-        return $this->amountIncludingTax;
-    }
+	/**
+	 * Sets amountExcludingTax.
+	 *
+	 * @param float $amountExcludingTax
+	 * @return LineItem
+	 */
+	protected function setAmountExcludingTax($amountExcludingTax) {
+		$this->amountExcludingTax = $amountExcludingTax;
 
-    /**
-     * Sets amountIncludingTax.
-     *
-     * @param float $amountIncludingTax
-     * @return LineItem
-     */
-    protected function setAmountIncludingTax($amountIncludingTax) {
-        $this->amountIncludingTax = $amountIncludingTax;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns amountIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getAmountIncludingTax() {
+		return $this->amountIncludingTax;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets amountIncludingTax.
+	 *
+	 * @param float $amountIncludingTax
+	 * @return LineItem
+	 */
+	protected function setAmountIncludingTax($amountIncludingTax) {
+		$this->amountIncludingTax = $amountIncludingTax;
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return LineItem
-     */
-    protected function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns quantity.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getQuantity() {
-        return $this->quantity;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return LineItem
+	 */
+	protected function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets quantity.
-     *
-     * @param float $quantity
-     * @return LineItem
-     */
-    protected function setQuantity($quantity) {
-        $this->quantity = $quantity;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns quantity.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getQuantity() {
+		return $this->quantity;
+	}
 
-    /**
-     * Returns shippingRequired.
-     *
-     * 
-     *
-     * @return bool
-     */
-    public function getShippingRequired() {
-        return $this->shippingRequired;
-    }
+	/**
+	 * Sets quantity.
+	 *
+	 * @param float $quantity
+	 * @return LineItem
+	 */
+	protected function setQuantity($quantity) {
+		$this->quantity = $quantity;
 
-    /**
-     * Sets shippingRequired.
-     *
-     * @param bool $shippingRequired
-     * @return LineItem
-     */
-    protected function setShippingRequired($shippingRequired) {
-        $this->shippingRequired = $shippingRequired;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns shippingRequired.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getShippingRequired() {
+		return $this->shippingRequired;
+	}
 
-    /**
-     * Returns sku.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getSku() {
-        return $this->sku;
-    }
+	/**
+	 * Sets shippingRequired.
+	 *
+	 * @param bool $shippingRequired
+	 * @return LineItem
+	 */
+	protected function setShippingRequired($shippingRequired) {
+		$this->shippingRequired = $shippingRequired;
 
-    /**
-     * Sets sku.
-     *
-     * @param string $sku
-     * @return LineItem
-     */
-    protected function setSku($sku) {
-        $this->sku = $sku;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sku.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getSku() {
+		return $this->sku;
+	}
 
-    /**
-     * Returns taxAmount.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getTaxAmount() {
-        return $this->taxAmount;
-    }
+	/**
+	 * Sets sku.
+	 *
+	 * @param string $sku
+	 * @return LineItem
+	 */
+	protected function setSku($sku) {
+		$this->sku = $sku;
 
-    /**
-     * Sets taxAmount.
-     *
-     * @param float $taxAmount
-     * @return LineItem
-     */
-    protected function setTaxAmount($taxAmount) {
-        $this->taxAmount = $taxAmount;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns taxAmount.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getTaxAmount() {
+		return $this->taxAmount;
+	}
 
-    /**
-     * Returns taxAmountPerUnit.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getTaxAmountPerUnit() {
-        return $this->taxAmountPerUnit;
-    }
+	/**
+	 * Sets taxAmount.
+	 *
+	 * @param float $taxAmount
+	 * @return LineItem
+	 */
+	protected function setTaxAmount($taxAmount) {
+		$this->taxAmount = $taxAmount;
 
-    /**
-     * Sets taxAmountPerUnit.
-     *
-     * @param float $taxAmountPerUnit
-     * @return LineItem
-     */
-    protected function setTaxAmountPerUnit($taxAmountPerUnit) {
-        $this->taxAmountPerUnit = $taxAmountPerUnit;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns taxAmountPerUnit.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getTaxAmountPerUnit() {
+		return $this->taxAmountPerUnit;
+	}
 
-    /**
-     * Returns taxes.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\Tax[]
-     */
-    public function getTaxes() {
-        return $this->taxes;
-    }
+	/**
+	 * Sets taxAmountPerUnit.
+	 *
+	 * @param float $taxAmountPerUnit
+	 * @return LineItem
+	 */
+	protected function setTaxAmountPerUnit($taxAmountPerUnit) {
+		$this->taxAmountPerUnit = $taxAmountPerUnit;
 
-    /**
-     * Sets taxes.
-     *
-     * @param \Wallee\Sdk\Model\Tax[] $taxes
-     * @return LineItem
-     */
-    public function setTaxes($taxes) {
-        $this->taxes = $taxes;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns taxes.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\Tax[]
+	 */
+	public function getTaxes() {
+		return $this->taxes;
+	}
 
-    /**
-     * Returns type.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getType() {
-        return $this->type;
-    }
+	/**
+	 * Sets taxes.
+	 *
+	 * @param \Wallee\Sdk\Model\Tax[] $taxes
+	 * @return LineItem
+	 */
+	public function setTaxes($taxes) {
+		$this->taxes = $taxes;
 
-    /**
-     * Sets type.
-     *
-     * @param string $type
-     * @return LineItem
-     */
-    protected function setType($type) {
-        $allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
-        if ((!in_array($type, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
-        }
-        $this->type = $type;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns type.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return $this->type;
+	}
 
-    /**
-     * Returns uniqueId.
-     *
-     * The unique id identifies the line item within the set of line items associated with the transaction.
-     *
-     * @return string
-     */
-    public function getUniqueId() {
-        return $this->uniqueId;
-    }
+	/**
+	 * Sets type.
+	 *
+	 * @param string $type
+	 * @return LineItem
+	 */
+	protected function setType($type) {
+		$allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
+		if ((!in_array($type, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
+		}
+		$this->type = $type;
 
-    /**
-     * Sets uniqueId.
-     *
-     * @param string $uniqueId
-     * @return LineItem
-     */
-    protected function setUniqueId($uniqueId) {
-        $this->uniqueId = $uniqueId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns uniqueId.
+	 *
+	 * The unique id identifies the line item within the set of line items associated with the transaction.
+	 *
+	 * @return string
+	 */
+	public function getUniqueId() {
+		return $this->uniqueId;
+	}
 
-    /**
-     * Returns unitPriceExcludingTax.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getUnitPriceExcludingTax() {
-        return $this->unitPriceExcludingTax;
-    }
+	/**
+	 * Sets uniqueId.
+	 *
+	 * @param string $uniqueId
+	 * @return LineItem
+	 */
+	protected function setUniqueId($uniqueId) {
+		$this->uniqueId = $uniqueId;
 
-    /**
-     * Sets unitPriceExcludingTax.
-     *
-     * @param float $unitPriceExcludingTax
-     * @return LineItem
-     */
-    protected function setUnitPriceExcludingTax($unitPriceExcludingTax) {
-        $this->unitPriceExcludingTax = $unitPriceExcludingTax;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns unitPriceExcludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUnitPriceExcludingTax() {
+		return $this->unitPriceExcludingTax;
+	}
 
-    /**
-     * Returns unitPriceIncludingTax.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getUnitPriceIncludingTax() {
-        return $this->unitPriceIncludingTax;
-    }
+	/**
+	 * Sets unitPriceExcludingTax.
+	 *
+	 * @param float $unitPriceExcludingTax
+	 * @return LineItem
+	 */
+	protected function setUnitPriceExcludingTax($unitPriceExcludingTax) {
+		$this->unitPriceExcludingTax = $unitPriceExcludingTax;
 
-    /**
-     * Sets unitPriceIncludingTax.
-     *
-     * @param float $unitPriceIncludingTax
-     * @return LineItem
-     */
-    protected function setUnitPriceIncludingTax($unitPriceIncludingTax) {
-        $this->unitPriceIncludingTax = $unitPriceIncludingTax;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getAggregatedTaxRate() === null) {
-        	throw new ValidationException("'aggregatedTaxRate' can't be null", 'aggregatedTaxRate', $this);
-        }
-        if ($this->getAmountExcludingTax() === null) {
-        	throw new ValidationException("'amountExcludingTax' can't be null", 'amountExcludingTax', $this);
-        }
-        if ($this->getAmountIncludingTax() === null) {
-        	throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
-        }
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getQuantity() === null) {
-        	throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-        }
-        if ($this->getType() === null) {
-        	throw new ValidationException("'type' can't be null", 'type', $this);
-        }
-        $allowed_values = ["SHIPPING", "DISCOUNT", "FEE", "PRODUCT"];
-        if (!in_array($this->getType(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-        }
+	/**
+	 * Returns unitPriceIncludingTax.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUnitPriceIncludingTax() {
+		return $this->unitPriceIncludingTax;
+	}
 
-        if ($this->getUniqueId() === null) {
-        	throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
-        }
-    }
+	/**
+	 * Sets unitPriceIncludingTax.
+	 *
+	 * @param float $unitPriceIncludingTax
+	 * @return LineItem
+	 */
+	protected function setUnitPriceIncludingTax($unitPriceIncludingTax) {
+		$this->unitPriceIncludingTax = $unitPriceIncludingTax;
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getAggregatedTaxRate() === null) {
+			throw new ValidationException("'aggregatedTaxRate' can't be null", 'aggregatedTaxRate', $this);
+		}
+		if ($this->getAmountExcludingTax() === null) {
+			throw new ValidationException("'amountExcludingTax' can't be null", 'amountExcludingTax', $this);
+		}
+		if ($this->getAmountIncludingTax() === null) {
+			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
+		}
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getQuantity() === null) {
+			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
+		}
+		if ($this->getType() === null) {
+			throw new ValidationException("'type' can't be null", 'type', $this);
+		}
+		$allowed_values = ["SHIPPING", "DISCOUNT", "FEE", "PRODUCT"];
+		if (!in_array($this->getType(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
+		}
+
+		if ($this->getUniqueId() === null) {
+			throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

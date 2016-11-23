@@ -35,143 +35,143 @@ use \Wallee\Sdk\ValidationException;
  */
 class Tax  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Tax';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Tax';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'rate' => 'float',
-        'title' => 'string'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'rate' => 'float',
+		'title' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $rate;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $title;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $rate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $title;
 
 
-    /**
-     * Returns rate.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getRate() {
-        return $this->rate;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets rate.
-     *
-     * @param float $rate
-     * @return Tax
-     */
-    protected function setRate($rate) {
-        $this->rate = $rate;
 
-        return $this;
-    }
+	/**
+	 * Returns rate.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getRate() {
+		return $this->rate;
+	}
 
-    /**
-     * Returns title.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTitle() {
-        return $this->title;
-    }
+	/**
+	 * Sets rate.
+	 *
+	 * @param float $rate
+	 * @return Tax
+	 */
+	protected function setRate($rate) {
+		$this->rate = $rate;
 
-    /**
-     * Sets title.
-     *
-     * @param string $title
-     * @return Tax
-     */
-    protected function setTitle($title) {
-        $this->title = $title;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getRate() === null) {
-        	throw new ValidationException("'rate' can't be null", 'rate', $this);
-        }
-        if ($this->getTitle() === null) {
-        	throw new ValidationException("'title' can't be null", 'title', $this);
-        }
-    }
+	/**
+	 * Returns title.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets title.
+	 *
+	 * @param string $title
+	 * @return Tax
+	 */
+	protected function setTitle($title) {
+		$this->title = $title;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getRate() === null) {
+			throw new ValidationException("'rate' can't be null", 'rate', $this);
+		}
+		if ($this->getTitle() === null) {
+			throw new ValidationException("'title' can't be null", 'title', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

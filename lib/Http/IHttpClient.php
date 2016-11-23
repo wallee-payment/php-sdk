@@ -30,7 +30,7 @@ use \Wallee\Sdk\ApiClient;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 interface IHttpClient {
 
@@ -43,7 +43,7 @@ interface IHttpClient {
 	const SSL_VERSION_TLSV1 = 'tlsv1';
 	const SSL_VERSION_TLSV11 = 'tlsv11';
 	const SSL_VERSION_TLSV12 = 'tlsv12';
-	
+
 	const IP_ADDRESS_VERSION_V4 = 'IPv4';
 	const IP_ADDRESS_VERSION_V6 = 'IPv6';
 
@@ -53,7 +53,7 @@ interface IHttpClient {
 	 * @return boolean
 	 */
 	public function isSupported();
-	
+
 	/**
 	 * This method sends an HTTP request synchronously.
 	 *

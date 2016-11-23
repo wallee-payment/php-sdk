@@ -35,198 +35,198 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionSuspension.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionSuspension.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    /**
-     * Values of endAction.
-     */ 
-    const END_ACTION_TERMINATE = 'TERMINATE';
-    const END_ACTION_REACTIVATE = 'REACTIVATE';
-    
-    /**
-     * Returns allowable values of endAction.
-     *
-     * @return string[]
-     */
-    public function getEndActionAllowableValues() {
-        return [
-            self::END_ACTION_TERMINATE,
-            self::END_ACTION_REACTIVATE,
-        ];
-    }
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setEndAction(isset($data['endAction']) ? $data['endAction'] : null);
-        $this->setNote(isset($data['note']) ? $data['note'] : null);
-        $this->setPlannedEndDate(isset($data['plannedEndDate']) ? $data['plannedEndDate'] : null);
-        $this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
-    }
+	
+	/**
+	 * Values of endAction.
+	 */
+	const END_ACTION_TERMINATE = 'TERMINATE';
+	const END_ACTION_REACTIVATE = 'REACTIVATE';
+	
+	/**
+	 * Returns allowable values of endAction.
+	 *
+	 * @return string[]
+	 */
+	public function getEndActionAllowableValues() {
+		return [
+			self::END_ACTION_TERMINATE,
+			self::END_ACTION_REACTIVATE,
+		];
+	}
+	
 
 
-    /**
-     * Returns endAction.
-     *
-     * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
-     *
-     * @return string
-     */
-    public function getEndAction() {
-        return parent::getEndAction();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets endAction.
-     *
-     * @param string $endAction
-     * @return SubscriptionSuspensionCreate
-     */
-    public function setEndAction($endAction) {
-        $allowed_values = array('TERMINATE', 'REACTIVATE');
-        if ((!in_array($endAction, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'endAction', must be one of 'TERMINATE', 'REACTIVATE'");
-        }
-        return parent::setEndAction($endAction);
-    }
+		$this->setEndAction(isset($data['endAction']) ? $data['endAction'] : null);
+		$this->setNote(isset($data['note']) ? $data['note'] : null);
+		$this->setPlannedEndDate(isset($data['plannedEndDate']) ? $data['plannedEndDate'] : null);
+		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+	}
 
-    /**
-     * Returns note.
-     *
-     * The note may contain some internal information for the suspension. The note will not be disclosed to the subscriber.
-     *
-     * @return string
-     */
-    public function getNote() {
-        return parent::getNote();
-    }
 
-    /**
-     * Sets note.
-     *
-     * @param string $note
-     * @return SubscriptionSuspensionCreate
-     */
-    public function setNote($note) {
-        return parent::setNote($note);
-    }
+	/**
+	 * Returns endAction.
+	 *
+	 * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
+	 *
+	 * @return string
+	 */
+	public function getEndAction() {
+		return parent::getEndAction();
+	}
 
-    /**
-     * Returns plannedEndDate.
-     *
-     * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
-     *
-     * @return string
-     */
-    public function getPlannedEndDate() {
-        return parent::getPlannedEndDate();
-    }
+	/**
+	 * Sets endAction.
+	 *
+	 * @param string $endAction
+	 * @return SubscriptionSuspensionCreate
+	 */
+	public function setEndAction($endAction) {
+		$allowed_values = array('TERMINATE', 'REACTIVATE');
+		if ((!in_array($endAction, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'endAction', must be one of 'TERMINATE', 'REACTIVATE'");
+		}
+		return parent::setEndAction($endAction);
+	}
 
-    /**
-     * Sets plannedEndDate.
-     *
-     * @param string $plannedEndDate
-     * @return SubscriptionSuspensionCreate
-     */
-    public function setPlannedEndDate($plannedEndDate) {
-        return parent::setPlannedEndDate($plannedEndDate);
-    }
+	/**
+	 * Returns note.
+	 *
+	 * The note may contain some internal information for the suspension. The note will not be disclosed to the subscriber.
+	 *
+	 * @return string
+	 */
+	public function getNote() {
+		return parent::getNote();
+	}
 
-    /**
-     * Returns subscription.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getSubscription() {
-        return parent::getSubscription();
-    }
+	/**
+	 * Sets note.
+	 *
+	 * @param string $note
+	 * @return SubscriptionSuspensionCreate
+	 */
+	public function setNote($note) {
+		return parent::setNote($note);
+	}
 
-    /**
-     * Sets subscription.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $subscription
-     * @return SubscriptionSuspensionCreate
-     */
-    public function setSubscription($subscription) {
-        return parent::setSubscription($subscription);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getEndAction() === null) {
-        	throw new ValidationException("'endAction' can't be null", 'endAction', $this);
-        }
-        $allowed_values = ["TERMINATE", "REACTIVATE"];
-        if (!in_array($this->getEndAction(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'endAction', must be one of #{allowed_values}.", 'endAction', $this);
-        }
+	/**
+	 * Returns plannedEndDate.
+	 *
+	 * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
+	 *
+	 * @return string
+	 */
+	public function getPlannedEndDate() {
+		return parent::getPlannedEndDate();
+	}
 
-        if ($this->getPlannedEndDate() === null) {
-        	throw new ValidationException("'plannedEndDate' can't be null", 'plannedEndDate', $this);
-        }
-    }
+	/**
+	 * Sets plannedEndDate.
+	 *
+	 * @param string $plannedEndDate
+	 * @return SubscriptionSuspensionCreate
+	 */
+	public function setPlannedEndDate($plannedEndDate) {
+		return parent::setPlannedEndDate($plannedEndDate);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns subscription.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getSubscription() {
+		return parent::getSubscription();
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets subscription.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $subscription
+	 * @return SubscriptionSuspensionCreate
+	 */
+	public function setSubscription($subscription) {
+		return parent::setSubscription($subscription);
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getEndAction() === null) {
+			throw new ValidationException("'endAction' can't be null", 'endAction', $this);
+		}
+		$allowed_values = ["TERMINATE", "REACTIVATE"];
+		if (!in_array($this->getEndAction(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'endAction', must be one of #{allowed_values}.", 'endAction', $this);
+		}
+
+		if ($this->getPlannedEndDate() === null) {
+			throw new ValidationException("'plannedEndDate' can't be null", 'plannedEndDate', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

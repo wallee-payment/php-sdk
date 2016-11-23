@@ -28,29 +28,29 @@ namespace Wallee\Sdk\Http;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class HttpResponse {
-	
+
 	/**
-     * The status code of the response.
-     *
-     * @var integer
-     */
+	 * The status code of the response.
+	 *
+	 * @var integer
+	 */
 	private $statusCode;
-	
+
 	/**
-     * The a key/value map of the headers.
-     *
-     * @var array
-     */
+	 * The a key/value map of the headers.
+	 *
+	 * @var array
+	 */
 	private $headers = array();
-	
+
 	 /**
-     * The HTTP body.
-     *
-     * @var string
-     */
+	 * The HTTP body.
+	 *
+	 * @var string
+	 */
 	private $body;
 
 	/**
@@ -72,7 +72,7 @@ final class HttpResponse {
 
 	/**
 	 * Returns the status code of the response.
-	 * 
+	 *
 	 * @return integer
 	 */
 	public function getStatusCode() {
@@ -90,7 +90,7 @@ final class HttpResponse {
 
 	/**
 	 * Returns the HTTP body.
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getBody() {
@@ -142,7 +142,7 @@ final class HttpResponse {
 	 */
 	private function parseRawMessage($message) {
 		$positionStartBody = strpos($message, "\r\n\r\n");
-		
+
 		$startPositionOffset = 4;
 		if ($positionStartBody === false) {
 			$positionStartBody = strpos($message, "\n\n");
@@ -151,10 +151,10 @@ final class HttpResponse {
 				throw new \Exception("Invalid HTTP message provided. It does not contain a header part.");
 			}
 		}
-		
+
 		$headerString = str_replace("\r\n", "\n", trim(substr($message, 0, $positionStartBody), "\r\n"));
 		$content = substr($message, $positionStartBody + $startPositionOffset);
-	
+
 		$this->headers = $this->parseHttpHeaders($headerString);
 		$statusLine = current(explode("\n", $headerString));
 		$this->parseStatusLine($statusLine);

@@ -35,231 +35,231 @@ use \Wallee\Sdk\ValidationException;
  */
 class RestCountry  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'RestCountry';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'RestCountry';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'iSOCode2Letter' => 'string',
-        'iSOCode3Letter' => 'string',
-        'name' => 'string',
-        'numericCode' => 'string',
-        'stateCodes' => 'string[]'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'iSOCode2Letter' => 'string',
+		'iSOCode3Letter' => 'string',
+		'name' => 'string',
+		'numericCode' => 'string',
+		'stateCodes' => 'string[]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $iSOCode2Letter;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $iSOCode3Letter;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $name;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $numericCode;
-    
-    /**
-     * 
-     *
-     * @var string[]
-     */
-    private $stateCodes;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setStateCodes(isset($data['stateCodes']) ? $data['stateCodes'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $iSOCode2Letter;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $iSOCode3Letter;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $numericCode;
+
+	/**
+	 * 
+	 *
+	 * @var string[]
+	 */
+	private $stateCodes;
 
 
-    /**
-     * Returns iSOCode2Letter.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getISOCode2Letter() {
-        return $this->iSOCode2Letter;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setStateCodes(isset($data['stateCodes']) ? $data['stateCodes'] : null);
+	}
 
-    /**
-     * Sets iSOCode2Letter.
-     *
-     * @param string $iSOCode2Letter
-     * @return RestCountry
-     */
-    protected function setISOCode2Letter($iSOCode2Letter) {
-        $this->iSOCode2Letter = $iSOCode2Letter;
 
-        return $this;
-    }
+	/**
+	 * Returns iSOCode2Letter.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getISOCode2Letter() {
+		return $this->iSOCode2Letter;
+	}
 
-    /**
-     * Returns iSOCode3Letter.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getISOCode3Letter() {
-        return $this->iSOCode3Letter;
-    }
+	/**
+	 * Sets iSOCode2Letter.
+	 *
+	 * @param string $iSOCode2Letter
+	 * @return RestCountry
+	 */
+	protected function setISOCode2Letter($iSOCode2Letter) {
+		$this->iSOCode2Letter = $iSOCode2Letter;
 
-    /**
-     * Sets iSOCode3Letter.
-     *
-     * @param string $iSOCode3Letter
-     * @return RestCountry
-     */
-    protected function setISOCode3Letter($iSOCode3Letter) {
-        $this->iSOCode3Letter = $iSOCode3Letter;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns iSOCode3Letter.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getISOCode3Letter() {
+		return $this->iSOCode3Letter;
+	}
 
-    /**
-     * Returns name.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets iSOCode3Letter.
+	 *
+	 * @param string $iSOCode3Letter
+	 * @return RestCountry
+	 */
+	protected function setISOCode3Letter($iSOCode3Letter) {
+		$this->iSOCode3Letter = $iSOCode3Letter;
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return RestCountry
-     */
-    protected function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns numericCode.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getNumericCode() {
-        return $this->numericCode;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return RestCountry
+	 */
+	protected function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets numericCode.
-     *
-     * @param string $numericCode
-     * @return RestCountry
-     */
-    protected function setNumericCode($numericCode) {
-        $this->numericCode = $numericCode;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns numericCode.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getNumericCode() {
+		return $this->numericCode;
+	}
 
-    /**
-     * Returns stateCodes.
-     *
-     * 
-     *
-     * @return string[]
-     */
-    public function getStateCodes() {
-        return $this->stateCodes;
-    }
+	/**
+	 * Sets numericCode.
+	 *
+	 * @param string $numericCode
+	 * @return RestCountry
+	 */
+	protected function setNumericCode($numericCode) {
+		$this->numericCode = $numericCode;
 
-    /**
-     * Sets stateCodes.
-     *
-     * @param string[] $stateCodes
-     * @return RestCountry
-     */
-    public function setStateCodes($stateCodes) {
-        $this->stateCodes = $stateCodes;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns stateCodes.
+	 *
+	 * 
+	 *
+	 * @return string[]
+	 */
+	public function getStateCodes() {
+		return $this->stateCodes;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets stateCodes.
+	 *
+	 * @param string[] $stateCodes
+	 * @return RestCountry
+	 */
+	public function setStateCodes($stateCodes) {
+		$this->stateCodes = $stateCodes;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

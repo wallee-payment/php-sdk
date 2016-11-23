@@ -35,324 +35,324 @@ use \Wallee\Sdk\ValidationException;
  */
 class HumanUser extends User  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'HumanUser';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'HumanUser';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'emailAddress' => 'string',
-        'emailAddressVerified' => 'bool',
-        'firstname' => 'string',
-        'language' => 'string',
-        'lastname' => 'string',
-        'primaryAccount' => '\Wallee\Sdk\Model\Account',
-        'timeZone' => 'string'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'emailAddress' => 'string',
+		'emailAddressVerified' => 'bool',
+		'firstname' => 'string',
+		'language' => 'string',
+		'lastname' => 'string',
+		'primaryAccount' => '\Wallee\Sdk\Model\Account',
+		'timeZone' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
-    /**
-     * The e-mail address of the user.
-     *
-     * @var string
-     */
-    private $emailAddress;
-    
-    /**
-     * Defines whether a user is verified or not.
-     *
-     * @var bool
-     */
-    private $emailAddressVerified;
-    
-    /**
-     * The first name of the user.
-     *
-     * @var string
-     */
-    private $firstname;
-    
-    /**
-     * The preferred language of the user.
-     *
-     * @var string
-     */
-    private $language;
-    
-    /**
-     * The last name of the user.
-     *
-     * @var string
-     */
-    private $lastname;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Account
-     */
-    private $primaryAccount;
-    
-    /**
-     * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
-     *
-     * @var string
-     */
-    private $timeZone;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
+	
 
-        $this->setPrimaryAccount(isset($data['primaryAccount']) ? $data['primaryAccount'] : null);
-        $this->setScope(isset($data['scope']) ? $data['scope'] : null);
-    }
+	/**
+	 * The e-mail address of the user.
+	 *
+	 * @var string
+	 */
+	private $emailAddress;
+
+	/**
+	 * Defines whether a user is verified or not.
+	 *
+	 * @var bool
+	 */
+	private $emailAddressVerified;
+
+	/**
+	 * The first name of the user.
+	 *
+	 * @var string
+	 */
+	private $firstname;
+
+	/**
+	 * The preferred language of the user.
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * The last name of the user.
+	 *
+	 * @var string
+	 */
+	private $lastname;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Account
+	 */
+	private $primaryAccount;
+
+	/**
+	 * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+	 *
+	 * @var string
+	 */
+	private $timeZone;
 
 
-    /**
-     * Returns emailAddress.
-     *
-     * The e-mail address of the user.
-     *
-     * @return string
-     */
-    public function getEmailAddress() {
-        return $this->emailAddress;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets emailAddress.
-     *
-     * @param string $emailAddress
-     * @return HumanUser
-     */
-    protected function setEmailAddress($emailAddress) {
-        $this->emailAddress = $emailAddress;
+		$this->setPrimaryAccount(isset($data['primaryAccount']) ? $data['primaryAccount'] : null);
+		$this->setScope(isset($data['scope']) ? $data['scope'] : null);
+	}
 
-        return $this;
-    }
 
-    /**
-     * Returns emailAddressVerified.
-     *
-     * Defines whether a user is verified or not.
-     *
-     * @return bool
-     */
-    public function getEmailAddressVerified() {
-        return $this->emailAddressVerified;
-    }
+	/**
+	 * Returns emailAddress.
+	 *
+	 * The e-mail address of the user.
+	 *
+	 * @return string
+	 */
+	public function getEmailAddress() {
+		return $this->emailAddress;
+	}
 
-    /**
-     * Sets emailAddressVerified.
-     *
-     * @param bool $emailAddressVerified
-     * @return HumanUser
-     */
-    protected function setEmailAddressVerified($emailAddressVerified) {
-        $this->emailAddressVerified = $emailAddressVerified;
+	/**
+	 * Sets emailAddress.
+	 *
+	 * @param string $emailAddress
+	 * @return HumanUser
+	 */
+	protected function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns firstname.
-     *
-     * The first name of the user.
-     *
-     * @return string
-     */
-    public function getFirstname() {
-        return $this->firstname;
-    }
+	/**
+	 * Returns emailAddressVerified.
+	 *
+	 * Defines whether a user is verified or not.
+	 *
+	 * @return bool
+	 */
+	public function getEmailAddressVerified() {
+		return $this->emailAddressVerified;
+	}
 
-    /**
-     * Sets firstname.
-     *
-     * @param string $firstname
-     * @return HumanUser
-     */
-    protected function setFirstname($firstname) {
-        $this->firstname = $firstname;
+	/**
+	 * Sets emailAddressVerified.
+	 *
+	 * @param bool $emailAddressVerified
+	 * @return HumanUser
+	 */
+	protected function setEmailAddressVerified($emailAddressVerified) {
+		$this->emailAddressVerified = $emailAddressVerified;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns language.
-     *
-     * The preferred language of the user.
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return $this->language;
-    }
+	/**
+	 * Returns firstname.
+	 *
+	 * The first name of the user.
+	 *
+	 * @return string
+	 */
+	public function getFirstname() {
+		return $this->firstname;
+	}
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return HumanUser
-     */
-    protected function setLanguage($language) {
-        $this->language = $language;
+	/**
+	 * Sets firstname.
+	 *
+	 * @param string $firstname
+	 * @return HumanUser
+	 */
+	protected function setFirstname($firstname) {
+		$this->firstname = $firstname;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns lastname.
-     *
-     * The last name of the user.
-     *
-     * @return string
-     */
-    public function getLastname() {
-        return $this->lastname;
-    }
+	/**
+	 * Returns language.
+	 *
+	 * The preferred language of the user.
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
 
-    /**
-     * Sets lastname.
-     *
-     * @param string $lastname
-     * @return HumanUser
-     */
-    protected function setLastname($lastname) {
-        $this->lastname = $lastname;
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return HumanUser
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns primaryAccount.
-     *
-     * @return \Wallee\Sdk\Model\Account
-     */
-    public function getPrimaryAccount() {
-        return $this->primaryAccount;
-    }
+	/**
+	 * Returns lastname.
+	 *
+	 * The last name of the user.
+	 *
+	 * @return string
+	 */
+	public function getLastname() {
+		return $this->lastname;
+	}
 
-    /**
-     * Sets primaryAccount.
-     *
-     * @param \Wallee\Sdk\Model\Account $primaryAccount
-     * @return HumanUser
-     */
-    public function setPrimaryAccount($primaryAccount) {
-        $this->primaryAccount = $primaryAccount;
+	/**
+	 * Sets lastname.
+	 *
+	 * @param string $lastname
+	 * @return HumanUser
+	 */
+	protected function setLastname($lastname) {
+		$this->lastname = $lastname;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns scope.
-     *
-     * @return \Wallee\Sdk\Model\Scope
-     */
-    public function getScope() {
-        return parent::getScope();
-    }
+	/**
+	 * Returns primaryAccount.
+	 *
+	 * @return \Wallee\Sdk\Model\Account
+	 */
+	public function getPrimaryAccount() {
+		return $this->primaryAccount;
+	}
 
-    /**
-     * Sets scope.
-     *
-     * @param \Wallee\Sdk\Model\Scope $scope
-     * @return HumanUser
-     */
-    public function setScope($scope) {
-        return parent::setScope($scope);
-    }
+	/**
+	 * Sets primaryAccount.
+	 *
+	 * @param \Wallee\Sdk\Model\Account $primaryAccount
+	 * @return HumanUser
+	 */
+	public function setPrimaryAccount($primaryAccount) {
+		$this->primaryAccount = $primaryAccount;
 
-    /**
-     * Returns timeZone.
-     *
-     * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
-     *
-     * @return string
-     */
-    public function getTimeZone() {
-        return $this->timeZone;
-    }
+		return $this;
+	}
 
-    /**
-     * Sets timeZone.
-     *
-     * @param string $timeZone
-     * @return HumanUser
-     */
-    protected function setTimeZone($timeZone) {
-        $this->timeZone = $timeZone;
+	/**
+	 * Returns scope.
+	 *
+	 * @return \Wallee\Sdk\Model\Scope
+	 */
+	public function getScope() {
+		return parent::getScope();
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getEmailAddress() === null) {
-        	throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
-        }
-        if ($this->getFirstname() === null) {
-        	throw new ValidationException("'firstname' can't be null", 'firstname', $this);
-        }
-        if ($this->getLanguage() === null) {
-        	throw new ValidationException("'language' can't be null", 'language', $this);
-        }
-        if ($this->getLastname() === null) {
-        	throw new ValidationException("'lastname' can't be null", 'lastname', $this);
-        }
-    }
+	/**
+	 * Sets scope.
+	 *
+	 * @param \Wallee\Sdk\Model\Scope $scope
+	 * @return HumanUser
+	 */
+	public function setScope($scope) {
+		return parent::setScope($scope);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns timeZone.
+	 *
+	 * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return HumanUser
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		return $this;
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getEmailAddress() === null) {
+			throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
+		}
+		if ($this->getFirstname() === null) {
+			throw new ValidationException("'firstname' can't be null", 'firstname', $this);
+		}
+		if ($this->getLanguage() === null) {
+			throw new ValidationException("'language' can't be null", 'language', $this);
+		}
+		if ($this->getLastname() === null) {
+			throw new ValidationException("'lastname' can't be null", 'lastname', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

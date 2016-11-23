@@ -35,186 +35,186 @@ use \Wallee\Sdk\ValidationException;
  */
 class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'ProductPeriodFee.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'ProductPeriodFee.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setComponent(isset($data['component']) ? $data['component'] : null);
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setNumberOfFreeTrialPeriods(isset($data['numberOfFreeTrialPeriods']) ? $data['numberOfFreeTrialPeriods'] : null);
-        $this->setPeriodFee(isset($data['periodFee']) ? $data['periodFee'] : null);
-    }
+	
 
 
-    /**
-     * Returns component.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponent
-     */
-    public function getComponent() {
-        return parent::getComponent();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets component.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
-     * @return ProductPeriodFeeUpdate
-     */
-    public function setComponent($component) {
-        return parent::setComponent($component);
-    }
+		$this->setComponent(isset($data['component']) ? $data['component'] : null);
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setNumberOfFreeTrialPeriods(isset($data['numberOfFreeTrialPeriods']) ? $data['numberOfFreeTrialPeriods'] : null);
+		$this->setPeriodFee(isset($data['periodFee']) ? $data['periodFee'] : null);
+	}
 
-    /**
-     * Returns description.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getDescription() {
-        return parent::getDescription();
-    }
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
-     * @return ProductPeriodFeeUpdate
-     */
-    public function setDescription($description) {
-        return parent::setDescription($description);
-    }
+	/**
+	 * Returns component.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+	 */
+	public function getComponent() {
+		return parent::getComponent();
+	}
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Sets component.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setComponent($component) {
+		return parent::setComponent($component);
+	}
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
-     * @return ProductPeriodFeeUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+	/**
+	 * Returns description.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getDescription() {
+		return parent::getDescription();
+	}
 
-    /**
-     * Returns numberOfFreeTrialPeriods.
-     *
-     * The number of free trial periods specify how many periods are free of charge at the begining of the subscription.
-     *
-     * @return int
-     */
-    public function getNumberOfFreeTrialPeriods() {
-        return parent::getNumberOfFreeTrialPeriods();
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setDescription($description) {
+		return parent::setDescription($description);
+	}
 
-    /**
-     * Sets numberOfFreeTrialPeriods.
-     *
-     * @param int $numberOfFreeTrialPeriods
-     * @return ProductPeriodFeeUpdate
-     */
-    public function setNumberOfFreeTrialPeriods($numberOfFreeTrialPeriods) {
-        return parent::setNumberOfFreeTrialPeriods($numberOfFreeTrialPeriods);
-    }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns periodFee.
-     *
-     * The period fee is charged for every period of the subscription except for those periods which are trial periods.
-     *
-     * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
-     */
-    public function getPeriodFee() {
-        return parent::getPeriodFee();
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Sets periodFee.
-     *
-     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $periodFee
-     * @return ProductPeriodFeeUpdate
-     */
-    public function setPeriodFee($periodFee) {
-        return parent::setPeriodFee($periodFee);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getPeriodFee() === null) {
-        	throw new ValidationException("'periodFee' can't be null", 'periodFee', $this);
-        }
-    }
+	/**
+	 * Returns numberOfFreeTrialPeriods.
+	 *
+	 * The number of free trial periods specify how many periods are free of charge at the begining of the subscription.
+	 *
+	 * @return int
+	 */
+	public function getNumberOfFreeTrialPeriods() {
+		return parent::getNumberOfFreeTrialPeriods();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets numberOfFreeTrialPeriods.
+	 *
+	 * @param int $numberOfFreeTrialPeriods
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setNumberOfFreeTrialPeriods($numberOfFreeTrialPeriods) {
+		return parent::setNumberOfFreeTrialPeriods($numberOfFreeTrialPeriods);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns periodFee.
+	 *
+	 * The period fee is charged for every period of the subscription except for those periods which are trial periods.
+	 *
+	 * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+	 */
+	public function getPeriodFee() {
+		return parent::getPeriodFee();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets periodFee.
+	 *
+	 * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $periodFee
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setPeriodFee($periodFee) {
+		return parent::setPeriodFee($periodFee);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getPeriodFee() === null) {
+			throw new ValidationException("'periodFee' can't be null", 'periodFee', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

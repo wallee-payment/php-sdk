@@ -35,140 +35,140 @@ use \Wallee\Sdk\ValidationException;
  */
 class IdempotentJpaEntity  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'IdempotentJpaEntity';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'IdempotentJpaEntity';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'externalId' => 'string',
-        'id' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'externalId' => 'string',
+		'id' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-     *
-     * @var string
-     */
-    private $externalId;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 
-    /**
-     * Returns externalId.
-     *
-     * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-     *
-     * @return string
-     */
-    public function getExternalId() {
-        return $this->externalId;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets externalId.
-     *
-     * @param string $externalId
-     * @return IdempotentJpaEntity
-     */
-    protected function setExternalId($externalId) {
-        $this->externalId = $externalId;
 
-        return $this;
-    }
+	/**
+	 * Returns externalId.
+	 *
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return $this->externalId;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return IdempotentJpaEntity
+	 */
+	protected function setExternalId($externalId) {
+		$this->externalId = $externalId;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return IdempotentJpaEntity
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getExternalId() === null) {
-        	throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-        }
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return IdempotentJpaEntity
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getExternalId() === null) {
+			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

@@ -35,230 +35,230 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionChangeRequest  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionChangeRequest';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionChangeRequest';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'currency' => 'string',
-        'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
-        'respectTerminationPeriod' => 'bool',
-        'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
-        'subscription' => '\Wallee\Sdk\Model\Subscription'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'currency' => 'string',
+		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
+		'respectTerminationPeriod' => 'bool',
+		'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
+		'subscription' => '\Wallee\Sdk\Model\Subscription'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $currency;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    private $product;
-    
-    /**
-     * The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately.
-     *
-     * @var bool
-     */
-    private $respectTerminationPeriod;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
-     */
-    private $selectedComponents;
-    
-    /**
-     * @var \Wallee\Sdk\Model\Subscription
-     */
-    private $subscription;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
-        $this->setProduct(isset($data['product']) ? $data['product'] : null);
-        $this->setRespectTerminationPeriod(isset($data['respectTerminationPeriod']) ? $data['respectTerminationPeriod'] : null);
-        $this->setSelectedComponents(isset($data['selectedComponents']) ? $data['selectedComponents'] : null);
-        $this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $currency;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	private $product;
+
+	/**
+	 * The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately.
+	 *
+	 * @var bool
+	 */
+	private $respectTerminationPeriod;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
+	 */
+	private $selectedComponents;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Subscription
+	 */
+	private $subscription;
 
 
-    /**
-     * Returns currency.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCurrency() {
-        return $this->currency;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
+		$this->setProduct(isset($data['product']) ? $data['product'] : null);
+		$this->setRespectTerminationPeriod(isset($data['respectTerminationPeriod']) ? $data['respectTerminationPeriod'] : null);
+		$this->setSelectedComponents(isset($data['selectedComponents']) ? $data['selectedComponents'] : null);
+		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+	}
 
-    /**
-     * Sets currency.
-     *
-     * @param string $currency
-     * @return SubscriptionChangeRequest
-     */
-    public function setCurrency($currency) {
-        $this->currency = $currency;
 
-        return $this;
-    }
+	/**
+	 * Returns currency.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCurrency() {
+		return $this->currency;
+	}
 
-    /**
-     * Returns product.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProduct
-     */
-    public function getProduct() {
-        return $this->product;
-    }
+	/**
+	 * Sets currency.
+	 *
+	 * @param string $currency
+	 * @return SubscriptionChangeRequest
+	 */
+	public function setCurrency($currency) {
+		$this->currency = $currency;
 
-    /**
-     * Sets product.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProduct $product
-     * @return SubscriptionChangeRequest
-     */
-    public function setProduct($product) {
-        $this->product = $product;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns product.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	public function getProduct() {
+		return $this->product;
+	}
 
-    /**
-     * Returns respectTerminationPeriod.
-     *
-     * The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately.
-     *
-     * @return bool
-     */
-    public function getRespectTerminationPeriod() {
-        return $this->respectTerminationPeriod;
-    }
+	/**
+	 * Sets product.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProduct $product
+	 * @return SubscriptionChangeRequest
+	 */
+	public function setProduct($product) {
+		$this->product = $product;
 
-    /**
-     * Sets respectTerminationPeriod.
-     *
-     * @param bool $respectTerminationPeriod
-     * @return SubscriptionChangeRequest
-     */
-    public function setRespectTerminationPeriod($respectTerminationPeriod) {
-        $this->respectTerminationPeriod = $respectTerminationPeriod;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns respectTerminationPeriod.
+	 *
+	 * The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately.
+	 *
+	 * @return bool
+	 */
+	public function getRespectTerminationPeriod() {
+		return $this->respectTerminationPeriod;
+	}
 
-    /**
-     * Returns selectedComponents.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
-     */
-    public function getSelectedComponents() {
-        return $this->selectedComponents;
-    }
+	/**
+	 * Sets respectTerminationPeriod.
+	 *
+	 * @param bool $respectTerminationPeriod
+	 * @return SubscriptionChangeRequest
+	 */
+	public function setRespectTerminationPeriod($respectTerminationPeriod) {
+		$this->respectTerminationPeriod = $respectTerminationPeriod;
 
-    /**
-     * Sets selectedComponents.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference[] $selectedComponents
-     * @return SubscriptionChangeRequest
-     */
-    public function setSelectedComponents($selectedComponents) {
-        $this->selectedComponents = $selectedComponents;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns selectedComponents.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference[]
+	 */
+	public function getSelectedComponents() {
+		return $this->selectedComponents;
+	}
 
-    /**
-     * Returns subscription.
-     *
-     * @return \Wallee\Sdk\Model\Subscription
-     */
-    public function getSubscription() {
-        return $this->subscription;
-    }
+	/**
+	 * Sets selectedComponents.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference[] $selectedComponents
+	 * @return SubscriptionChangeRequest
+	 */
+	public function setSelectedComponents($selectedComponents) {
+		$this->selectedComponents = $selectedComponents;
 
-    /**
-     * Sets subscription.
-     *
-     * @param \Wallee\Sdk\Model\Subscription $subscription
-     * @return SubscriptionChangeRequest
-     */
-    public function setSubscription($subscription) {
-        $this->subscription = $subscription;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getCurrency() === null) {
-        	throw new ValidationException("'currency' can't be null", 'currency', $this);
-        }
-    }
+	/**
+	 * Returns subscription.
+	 *
+	 * @return \Wallee\Sdk\Model\Subscription
+	 */
+	public function getSubscription() {
+		return $this->subscription;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets subscription.
+	 *
+	 * @param \Wallee\Sdk\Model\Subscription $subscription
+	 * @return SubscriptionChangeRequest
+	 */
+	public function setSubscription($subscription) {
+		$this->subscription = $subscription;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getCurrency() === null) {
+			throw new ValidationException("'currency' can't be null", 'currency', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

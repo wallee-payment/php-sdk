@@ -35,452 +35,452 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProduct  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProduct';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProduct';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'allowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
-        'failedPaymentSuspensionPeriod' => 'string',
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'name' => 'string',
-        'plannedPurgeDate' => 'string',
-        'reference' => 'string',
-        'sortOrder' => 'int',
-        'spaceId' => 'int',
-        'state' => 'string',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'allowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
+		'failedPaymentSuspensionPeriod' => 'string',
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'name' => 'string',
+		'plannedPurgeDate' => 'string',
+		'reference' => 'string',
+		'sortOrder' => 'int',
+		'spaceId' => 'int',
+		'state' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_CREATE = 'CREATE';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_INACTIVE = 'INACTIVE';
-    const STATE_RETIRING = 'RETIRING';
-    const STATE_RETIRED = 'RETIRED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_CREATE,
-            self::STATE_ACTIVE,
-            self::STATE_INACTIVE,
-            self::STATE_RETIRING,
-            self::STATE_RETIRED,
-        ];
-    }
-    
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $allowedPaymentMethodConfigurations;
-    
-    /**
-     * When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
-     *
-     * @var string
-     */
-    private $failedPaymentSuspensionPeriod;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @var string
-     */
-    private $name;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * The product reference identifies the product for external systems. This field may contain the product's SKU.
-     *
-     * @var string
-     */
-    private $reference;
-    
-    /**
-     * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
-     *
-     * @var int
-     */
-    private $sortOrder;
-    
-    /**
-     * 
-     *
-     * @var int
-     */
-    private $spaceId;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setAllowedPaymentMethodConfigurations(isset($data['allowedPaymentMethodConfigurations']) ? $data['allowedPaymentMethodConfigurations'] : null);
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_RETIRING = 'RETIRING';
+	const STATE_RETIRED = 'RETIRED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_RETIRING,
+			self::STATE_RETIRED,
+		];
+	}
+	
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $allowedPaymentMethodConfigurations;
+
+	/**
+	 * When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
+	 *
+	 * @var string
+	 */
+	private $failedPaymentSuspensionPeriod;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * The product reference identifies the product for external systems. This field may contain the product's SKU.
+	 *
+	 * @var string
+	 */
+	private $reference;
+
+	/**
+	 * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
+	 *
+	 * @var int
+	 */
+	private $sortOrder;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $spaceId;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns allowedPaymentMethodConfigurations.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getAllowedPaymentMethodConfigurations() {
-        return $this->allowedPaymentMethodConfigurations;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setAllowedPaymentMethodConfigurations(isset($data['allowedPaymentMethodConfigurations']) ? $data['allowedPaymentMethodConfigurations'] : null);
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+	}
 
-    /**
-     * Sets allowedPaymentMethodConfigurations.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $allowedPaymentMethodConfigurations
-     * @return SubscriptionProduct
-     */
-    public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {
-        $this->allowedPaymentMethodConfigurations = $allowedPaymentMethodConfigurations;
 
-        return $this;
-    }
+	/**
+	 * Returns allowedPaymentMethodConfigurations.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getAllowedPaymentMethodConfigurations() {
+		return $this->allowedPaymentMethodConfigurations;
+	}
 
-    /**
-     * Returns failedPaymentSuspensionPeriod.
-     *
-     * When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
-     *
-     * @return string
-     */
-    public function getFailedPaymentSuspensionPeriod() {
-        return $this->failedPaymentSuspensionPeriod;
-    }
+	/**
+	 * Sets allowedPaymentMethodConfigurations.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $allowedPaymentMethodConfigurations
+	 * @return SubscriptionProduct
+	 */
+	public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {
+		$this->allowedPaymentMethodConfigurations = $allowedPaymentMethodConfigurations;
 
-    /**
-     * Sets failedPaymentSuspensionPeriod.
-     *
-     * @param string $failedPaymentSuspensionPeriod
-     * @return SubscriptionProduct
-     */
-    protected function setFailedPaymentSuspensionPeriod($failedPaymentSuspensionPeriod) {
-        $this->failedPaymentSuspensionPeriod = $failedPaymentSuspensionPeriod;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns failedPaymentSuspensionPeriod.
+	 *
+	 * When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
+	 *
+	 * @return string
+	 */
+	public function getFailedPaymentSuspensionPeriod() {
+		return $this->failedPaymentSuspensionPeriod;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets failedPaymentSuspensionPeriod.
+	 *
+	 * @param string $failedPaymentSuspensionPeriod
+	 * @return SubscriptionProduct
+	 */
+	protected function setFailedPaymentSuspensionPeriod($failedPaymentSuspensionPeriod) {
+		$this->failedPaymentSuspensionPeriod = $failedPaymentSuspensionPeriod;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return SubscriptionProduct
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProduct
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return SubscriptionProduct
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns name.
-     *
-     * The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return SubscriptionProduct
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return SubscriptionProduct
-     */
-    protected function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return SubscriptionProduct
+	 */
+	protected function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return SubscriptionProduct
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns reference.
-     *
-     * The product reference identifies the product for external systems. This field may contain the product's SKU.
-     *
-     * @return string
-     */
-    public function getReference() {
-        return $this->reference;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return SubscriptionProduct
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets reference.
-     *
-     * @param string $reference
-     * @return SubscriptionProduct
-     */
-    protected function setReference($reference) {
-        $this->reference = $reference;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns reference.
+	 *
+	 * The product reference identifies the product for external systems. This field may contain the product's SKU.
+	 *
+	 * @return string
+	 */
+	public function getReference() {
+		return $this->reference;
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return $this->sortOrder;
-    }
+	/**
+	 * Sets reference.
+	 *
+	 * @param string $reference
+	 * @return SubscriptionProduct
+	 */
+	protected function setReference($reference) {
+		$this->reference = $reference;
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return SubscriptionProduct
-     */
-    protected function setSortOrder($sortOrder) {
-        $this->sortOrder = $sortOrder;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
 
-    /**
-     * Returns spaceId.
-     *
-     * 
-     *
-     * @return int
-     */
-    public function getSpaceId() {
-        return $this->spaceId;
-    }
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return SubscriptionProduct
+	 */
+	protected function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 
-    /**
-     * Sets spaceId.
-     *
-     * @param int $spaceId
-     * @return SubscriptionProduct
-     */
-    protected function setSpaceId($spaceId) {
-        $this->spaceId = $spaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns spaceId.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getSpaceId() {
+		return $this->spaceId;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets spaceId.
+	 *
+	 * @param int $spaceId
+	 * @return SubscriptionProduct
+	 */
+	protected function setSpaceId($spaceId) {
+		$this->spaceId = $spaceId;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return SubscriptionProduct
-     */
-    protected function setState($state) {
-        $allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED');
-        if (!is_null($state) && (!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return SubscriptionProduct
+	 */
+	protected function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED');
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return SubscriptionProduct
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getFailedPaymentSuspensionPeriod() === null) {
-        	throw new ValidationException("'failedPaymentSuspensionPeriod' can't be null", 'failedPaymentSuspensionPeriod', $this);
-        }
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getReference() === null) {
-        	throw new ValidationException("'reference' can't be null", 'reference', $this);
-        }
-        $allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProduct
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getFailedPaymentSuspensionPeriod() === null) {
+			throw new ValidationException("'failedPaymentSuspensionPeriod' can't be null", 'failedPaymentSuspensionPeriod', $this);
+		}
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getReference() === null) {
+			throw new ValidationException("'reference' can't be null", 'reference', $this);
+		}
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

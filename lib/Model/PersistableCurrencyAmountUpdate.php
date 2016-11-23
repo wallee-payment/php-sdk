@@ -35,123 +35,123 @@ use \Wallee\Sdk\ValidationException;
  */
 class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'PersistableCurrencyAmount.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'PersistableCurrencyAmount.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setAmount(isset($data['amount']) ? $data['amount'] : null);
-        $this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
-    }
+	
 
 
-    /**
-     * Returns amount.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getAmount() {
-        return parent::getAmount();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets amount.
-     *
-     * @param float $amount
-     * @return PersistableCurrencyAmountUpdate
-     */
-    public function setAmount($amount) {
-        return parent::setAmount($amount);
-    }
+		$this->setAmount(isset($data['amount']) ? $data['amount'] : null);
+		$this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
+	}
 
-    /**
-     * Returns currency.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCurrency() {
-        return parent::getCurrency();
-    }
 
-    /**
-     * Sets currency.
-     *
-     * @param string $currency
-     * @return PersistableCurrencyAmountUpdate
-     */
-    public function setCurrency($currency) {
-        return parent::setCurrency($currency);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-    }
+	/**
+	 * Returns amount.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getAmount() {
+		return parent::getAmount();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets amount.
+	 *
+	 * @param float $amount
+	 * @return PersistableCurrencyAmountUpdate
+	 */
+	public function setAmount($amount) {
+		return parent::setAmount($amount);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns currency.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCurrency() {
+		return parent::getCurrency();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets currency.
+	 *
+	 * @param string $currency
+	 * @return PersistableCurrencyAmountUpdate
+	 */
+	public function setCurrency($currency) {
+		return parent::setCurrency($currency);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

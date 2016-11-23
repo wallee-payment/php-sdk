@@ -35,283 +35,283 @@ use \Wallee\Sdk\ValidationException;
  */
 class SubscriptionProductComponentGroup  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SubscriptionProductComponentGroup';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SubscriptionProductComponentGroup';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'id' => 'int',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-        'optional' => 'bool',
-        'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
-        'sortOrder' => 'int',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'id' => 'int',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+		'optional' => 'bool',
+		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
+		'sortOrder' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    private $name;
-    
-    /**
-     * The component group can be optional. This means no component has to be selected by the subscriber.
-     *
-     * @var bool
-     */
-    private $optional;
-    
-    /**
-     * @var \Wallee\Sdk\Model\SubscriptionProductVersion
-     */
-    private $productVersion;
-    
-    /**
-     * The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
-     *
-     * @var int
-     */
-    private $sortOrder;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-    }
+	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $name;
+
+	/**
+	 * The component group can be optional. This means no component has to be selected by the subscriber.
+	 *
+	 * @var bool
+	 */
+	private $optional;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProductVersion
+	 */
+	private $productVersion;
+
+	/**
+	 * The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
+	 *
+	 * @var int
+	 */
+	private $sortOrder;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
+	}
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return SubscriptionProductComponentGroup
-     */
-    protected function setId($id) {
-        $this->id = $id;
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductComponentGroup
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return SubscriptionProductComponentGroup
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns name.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return SubscriptionProductComponentGroup
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets name.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name
-     * @return SubscriptionProductComponentGroup
-     */
-    public function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns optional.
-     *
-     * The component group can be optional. This means no component has to be selected by the subscriber.
-     *
-     * @return bool
-     */
-    public function getOptional() {
-        return $this->optional;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name
+	 * @return SubscriptionProductComponentGroup
+	 */
+	public function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets optional.
-     *
-     * @param bool $optional
-     * @return SubscriptionProductComponentGroup
-     */
-    protected function setOptional($optional) {
-        $this->optional = $optional;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns optional.
+	 *
+	 * The component group can be optional. This means no component has to be selected by the subscriber.
+	 *
+	 * @return bool
+	 */
+	public function getOptional() {
+		return $this->optional;
+	}
 
-    /**
-     * Returns productVersion.
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionProductVersion
-     */
-    public function getProductVersion() {
-        return $this->productVersion;
-    }
+	/**
+	 * Sets optional.
+	 *
+	 * @param bool $optional
+	 * @return SubscriptionProductComponentGroup
+	 */
+	protected function setOptional($optional) {
+		$this->optional = $optional;
 
-    /**
-     * Sets productVersion.
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
-     * @return SubscriptionProductComponentGroup
-     */
-    public function setProductVersion($productVersion) {
-        $this->productVersion = $productVersion;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns productVersion.
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
+	 */
+	public function getProductVersion() {
+		return $this->productVersion;
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return $this->sortOrder;
-    }
+	/**
+	 * Sets productVersion.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
+	 * @return SubscriptionProductComponentGroup
+	 */
+	public function setProductVersion($productVersion) {
+		$this->productVersion = $productVersion;
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return SubscriptionProductComponentGroup
-     */
-    protected function setSortOrder($sortOrder) {
-        $this->sortOrder = $sortOrder;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order controls in which order the component group is listed. The sort order is used to order the component groups in ascending order.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return SubscriptionProductComponentGroup
+	 */
+	protected function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return SubscriptionProductComponentGroup
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductComponentGroup
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

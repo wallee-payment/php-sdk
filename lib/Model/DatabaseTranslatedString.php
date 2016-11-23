@@ -35,201 +35,201 @@ use \Wallee\Sdk\ValidationException;
  */
 class DatabaseTranslatedString  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'DatabaseTranslatedString';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'DatabaseTranslatedString';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'availableLanguages' => 'string[]',
-        'id' => 'int',
-        'items' => '\Wallee\Sdk\Model\DatabaseTranslatedStringItem[]',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'availableLanguages' => 'string[]',
+		'id' => 'int',
+		'items' => '\Wallee\Sdk\Model\DatabaseTranslatedStringItem[]',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string[]
-     */
-    private $availableLanguages;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedStringItem[]
-     */
-    private $items;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setAvailableLanguages(isset($data['availableLanguages']) ? $data['availableLanguages'] : null);
-        $this->setItems(isset($data['items']) ? $data['items'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string[]
+	 */
+	private $availableLanguages;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringItem[]
+	 */
+	private $items;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns availableLanguages.
-     *
-     * 
-     *
-     * @return string[]
-     */
-    public function getAvailableLanguages() {
-        return $this->availableLanguages;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setAvailableLanguages(isset($data['availableLanguages']) ? $data['availableLanguages'] : null);
+		$this->setItems(isset($data['items']) ? $data['items'] : null);
+	}
 
-    /**
-     * Sets availableLanguages.
-     *
-     * @param string[] $availableLanguages
-     * @return DatabaseTranslatedString
-     */
-    public function setAvailableLanguages($availableLanguages) {
-        $this->availableLanguages = $availableLanguages;
 
-        return $this;
-    }
+	/**
+	 * Returns availableLanguages.
+	 *
+	 * 
+	 *
+	 * @return string[]
+	 */
+	public function getAvailableLanguages() {
+		return $this->availableLanguages;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets availableLanguages.
+	 *
+	 * @param string[] $availableLanguages
+	 * @return DatabaseTranslatedString
+	 */
+	public function setAvailableLanguages($availableLanguages) {
+		$this->availableLanguages = $availableLanguages;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return DatabaseTranslatedString
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns items.
-     *
-     * 
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringItem[]
-     */
-    public function getItems() {
-        return $this->items;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return DatabaseTranslatedString
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets items.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringItem[] $items
-     * @return DatabaseTranslatedString
-     */
-    public function setItems($items) {
-        $this->items = $items;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns items.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringItem[]
+	 */
+	public function getItems() {
+		return $this->items;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets items.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringItem[] $items
+	 * @return DatabaseTranslatedString
+	 */
+	public function setItems($items) {
+		$this->items = $items;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return DatabaseTranslatedString
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return DatabaseTranslatedString
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

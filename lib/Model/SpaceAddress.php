@@ -35,481 +35,481 @@ use \Wallee\Sdk\ValidationException;
  */
 class SpaceAddress  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'SpaceAddress';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'SpaceAddress';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'city' => 'string',
-        'country' => 'string',
-        'dependentLocality' => 'string',
-        'emailAddress' => 'string',
-        'familyName' => 'string',
-        'givenName' => 'string',
-        'organizationName' => 'string',
-        'postCode' => 'string',
-        'postalState' => 'string',
-        'salesTaxNumber' => 'string',
-        'salutation' => 'string',
-        'sortingCode' => 'string',
-        'street' => 'string'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'city' => 'string',
+		'country' => 'string',
+		'dependentLocality' => 'string',
+		'emailAddress' => 'string',
+		'familyName' => 'string',
+		'givenName' => 'string',
+		'organizationName' => 'string',
+		'postCode' => 'string',
+		'postalState' => 'string',
+		'salesTaxNumber' => 'string',
+		'salutation' => 'string',
+		'sortingCode' => 'string',
+		'street' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $city;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $country;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $dependentLocality;
-    
-    /**
-     * The e-mail address is used within e-mails and as reply to address.
-     *
-     * @var string
-     */
-    private $emailAddress;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $familyName;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $givenName;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $organizationName;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $postCode;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $postalState;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $salesTaxNumber;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $salutation;
-    
-    /**
-     * The sorting code identifies the post office at which the post box is located in.
-     *
-     * @var string
-     */
-    private $sortingCode;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $street;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $city;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $country;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $dependentLocality;
+
+	/**
+	 * The e-mail address is used within e-mails and as reply to address.
+	 *
+	 * @var string
+	 */
+	private $emailAddress;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $familyName;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $givenName;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $organizationName;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $postCode;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $postalState;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $salesTaxNumber;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $salutation;
+
+	/**
+	 * The sorting code identifies the post office at which the post box is located in.
+	 *
+	 * @var string
+	 */
+	private $sortingCode;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $street;
 
 
-    /**
-     * Returns city.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCity() {
-        return $this->city;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets city.
-     *
-     * @param string $city
-     * @return SpaceAddress
-     */
-    protected function setCity($city) {
-        $this->city = $city;
 
-        return $this;
-    }
+	/**
+	 * Returns city.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCity() {
+		return $this->city;
+	}
 
-    /**
-     * Returns country.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getCountry() {
-        return $this->country;
-    }
+	/**
+	 * Sets city.
+	 *
+	 * @param string $city
+	 * @return SpaceAddress
+	 */
+	protected function setCity($city) {
+		$this->city = $city;
 
-    /**
-     * Sets country.
-     *
-     * @param string $country
-     * @return SpaceAddress
-     */
-    protected function setCountry($country) {
-        $this->country = $country;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns country.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
 
-    /**
-     * Returns dependentLocality.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getDependentLocality() {
-        return $this->dependentLocality;
-    }
+	/**
+	 * Sets country.
+	 *
+	 * @param string $country
+	 * @return SpaceAddress
+	 */
+	protected function setCountry($country) {
+		$this->country = $country;
 
-    /**
-     * Sets dependentLocality.
-     *
-     * @param string $dependentLocality
-     * @return SpaceAddress
-     */
-    protected function setDependentLocality($dependentLocality) {
-        $this->dependentLocality = $dependentLocality;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns dependentLocality.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDependentLocality() {
+		return $this->dependentLocality;
+	}
 
-    /**
-     * Returns emailAddress.
-     *
-     * The e-mail address is used within e-mails and as reply to address.
-     *
-     * @return string
-     */
-    public function getEmailAddress() {
-        return $this->emailAddress;
-    }
+	/**
+	 * Sets dependentLocality.
+	 *
+	 * @param string $dependentLocality
+	 * @return SpaceAddress
+	 */
+	protected function setDependentLocality($dependentLocality) {
+		$this->dependentLocality = $dependentLocality;
 
-    /**
-     * Sets emailAddress.
-     *
-     * @param string $emailAddress
-     * @return SpaceAddress
-     */
-    protected function setEmailAddress($emailAddress) {
-        $this->emailAddress = $emailAddress;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns emailAddress.
+	 *
+	 * The e-mail address is used within e-mails and as reply to address.
+	 *
+	 * @return string
+	 */
+	public function getEmailAddress() {
+		return $this->emailAddress;
+	}
 
-    /**
-     * Returns familyName.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getFamilyName() {
-        return $this->familyName;
-    }
+	/**
+	 * Sets emailAddress.
+	 *
+	 * @param string $emailAddress
+	 * @return SpaceAddress
+	 */
+	protected function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
 
-    /**
-     * Sets familyName.
-     *
-     * @param string $familyName
-     * @return SpaceAddress
-     */
-    protected function setFamilyName($familyName) {
-        $this->familyName = $familyName;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns familyName.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getFamilyName() {
+		return $this->familyName;
+	}
 
-    /**
-     * Returns givenName.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getGivenName() {
-        return $this->givenName;
-    }
+	/**
+	 * Sets familyName.
+	 *
+	 * @param string $familyName
+	 * @return SpaceAddress
+	 */
+	protected function setFamilyName($familyName) {
+		$this->familyName = $familyName;
 
-    /**
-     * Sets givenName.
-     *
-     * @param string $givenName
-     * @return SpaceAddress
-     */
-    protected function setGivenName($givenName) {
-        $this->givenName = $givenName;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns givenName.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getGivenName() {
+		return $this->givenName;
+	}
 
-    /**
-     * Returns organizationName.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getOrganizationName() {
-        return $this->organizationName;
-    }
+	/**
+	 * Sets givenName.
+	 *
+	 * @param string $givenName
+	 * @return SpaceAddress
+	 */
+	protected function setGivenName($givenName) {
+		$this->givenName = $givenName;
 
-    /**
-     * Sets organizationName.
-     *
-     * @param string $organizationName
-     * @return SpaceAddress
-     */
-    protected function setOrganizationName($organizationName) {
-        $this->organizationName = $organizationName;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns organizationName.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getOrganizationName() {
+		return $this->organizationName;
+	}
 
-    /**
-     * Returns postCode.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getPostCode() {
-        return $this->postCode;
-    }
+	/**
+	 * Sets organizationName.
+	 *
+	 * @param string $organizationName
+	 * @return SpaceAddress
+	 */
+	protected function setOrganizationName($organizationName) {
+		$this->organizationName = $organizationName;
 
-    /**
-     * Sets postCode.
-     *
-     * @param string $postCode
-     * @return SpaceAddress
-     */
-    protected function setPostCode($postCode) {
-        $this->postCode = $postCode;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns postCode.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getPostCode() {
+		return $this->postCode;
+	}
 
-    /**
-     * Returns postalState.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getPostalState() {
-        return $this->postalState;
-    }
+	/**
+	 * Sets postCode.
+	 *
+	 * @param string $postCode
+	 * @return SpaceAddress
+	 */
+	protected function setPostCode($postCode) {
+		$this->postCode = $postCode;
 
-    /**
-     * Sets postalState.
-     *
-     * @param string $postalState
-     * @return SpaceAddress
-     */
-    protected function setPostalState($postalState) {
-        $this->postalState = $postalState;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns postalState.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getPostalState() {
+		return $this->postalState;
+	}
 
-    /**
-     * Returns salesTaxNumber.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getSalesTaxNumber() {
-        return $this->salesTaxNumber;
-    }
+	/**
+	 * Sets postalState.
+	 *
+	 * @param string $postalState
+	 * @return SpaceAddress
+	 */
+	protected function setPostalState($postalState) {
+		$this->postalState = $postalState;
 
-    /**
-     * Sets salesTaxNumber.
-     *
-     * @param string $salesTaxNumber
-     * @return SpaceAddress
-     */
-    protected function setSalesTaxNumber($salesTaxNumber) {
-        $this->salesTaxNumber = $salesTaxNumber;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns salesTaxNumber.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getSalesTaxNumber() {
+		return $this->salesTaxNumber;
+	}
 
-    /**
-     * Returns salutation.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getSalutation() {
-        return $this->salutation;
-    }
+	/**
+	 * Sets salesTaxNumber.
+	 *
+	 * @param string $salesTaxNumber
+	 * @return SpaceAddress
+	 */
+	protected function setSalesTaxNumber($salesTaxNumber) {
+		$this->salesTaxNumber = $salesTaxNumber;
 
-    /**
-     * Sets salutation.
-     *
-     * @param string $salutation
-     * @return SpaceAddress
-     */
-    protected function setSalutation($salutation) {
-        $this->salutation = $salutation;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns salutation.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getSalutation() {
+		return $this->salutation;
+	}
 
-    /**
-     * Returns sortingCode.
-     *
-     * The sorting code identifies the post office at which the post box is located in.
-     *
-     * @return string
-     */
-    public function getSortingCode() {
-        return $this->sortingCode;
-    }
+	/**
+	 * Sets salutation.
+	 *
+	 * @param string $salutation
+	 * @return SpaceAddress
+	 */
+	protected function setSalutation($salutation) {
+		$this->salutation = $salutation;
 
-    /**
-     * Sets sortingCode.
-     *
-     * @param string $sortingCode
-     * @return SpaceAddress
-     */
-    protected function setSortingCode($sortingCode) {
-        $this->sortingCode = $sortingCode;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sortingCode.
+	 *
+	 * The sorting code identifies the post office at which the post box is located in.
+	 *
+	 * @return string
+	 */
+	public function getSortingCode() {
+		return $this->sortingCode;
+	}
 
-    /**
-     * Returns street.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getStreet() {
-        return $this->street;
-    }
+	/**
+	 * Sets sortingCode.
+	 *
+	 * @param string $sortingCode
+	 * @return SpaceAddress
+	 */
+	protected function setSortingCode($sortingCode) {
+		$this->sortingCode = $sortingCode;
 
-    /**
-     * Sets street.
-     *
-     * @param string $street
-     * @return SpaceAddress
-     */
-    protected function setStreet($street) {
-        $this->street = $street;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getCountry() === null) {
-        	throw new ValidationException("'country' can't be null", 'country', $this);
-        }
-    }
+	/**
+	 * Returns street.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getStreet() {
+		return $this->street;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets street.
+	 *
+	 * @param string $street
+	 * @return SpaceAddress
+	 */
+	protected function setStreet($street) {
+		$this->street = $street;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getCountry() === null) {
+			throw new ValidationException("'country' can't be null", 'country', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

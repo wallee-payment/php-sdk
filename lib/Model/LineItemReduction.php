@@ -35,177 +35,177 @@ use \Wallee\Sdk\ValidationException;
  */
 class LineItemReduction  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'LineItemReduction';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'LineItemReduction';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'lineItemUniqueId' => 'string',
-        'quantityReduction' => 'float',
-        'unitPriceReduction' => 'float'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'lineItemUniqueId' => 'string',
+		'quantityReduction' => 'float',
+		'unitPriceReduction' => 'float'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * The unique id identifies the line item on which the reduction is applied on.
-     *
-     * @var string
-     */
-    private $lineItemUniqueId;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $quantityReduction;
-    
-    /**
-     * 
-     *
-     * @var float
-     */
-    private $unitPriceReduction;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-    }
+	
+
+	/**
+	 * The unique id identifies the line item on which the reduction is applied on.
+	 *
+	 * @var string
+	 */
+	private $lineItemUniqueId;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $quantityReduction;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $unitPriceReduction;
 
 
-    /**
-     * Returns lineItemUniqueId.
-     *
-     * The unique id identifies the line item on which the reduction is applied on.
-     *
-     * @return string
-     */
-    public function getLineItemUniqueId() {
-        return $this->lineItemUniqueId;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+	}
 
-    /**
-     * Sets lineItemUniqueId.
-     *
-     * @param string $lineItemUniqueId
-     * @return LineItemReduction
-     */
-    protected function setLineItemUniqueId($lineItemUniqueId) {
-        $this->lineItemUniqueId = $lineItemUniqueId;
 
-        return $this;
-    }
+	/**
+	 * Returns lineItemUniqueId.
+	 *
+	 * The unique id identifies the line item on which the reduction is applied on.
+	 *
+	 * @return string
+	 */
+	public function getLineItemUniqueId() {
+		return $this->lineItemUniqueId;
+	}
 
-    /**
-     * Returns quantityReduction.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getQuantityReduction() {
-        return $this->quantityReduction;
-    }
+	/**
+	 * Sets lineItemUniqueId.
+	 *
+	 * @param string $lineItemUniqueId
+	 * @return LineItemReduction
+	 */
+	protected function setLineItemUniqueId($lineItemUniqueId) {
+		$this->lineItemUniqueId = $lineItemUniqueId;
 
-    /**
-     * Sets quantityReduction.
-     *
-     * @param float $quantityReduction
-     * @return LineItemReduction
-     */
-    protected function setQuantityReduction($quantityReduction) {
-        $this->quantityReduction = $quantityReduction;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns quantityReduction.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getQuantityReduction() {
+		return $this->quantityReduction;
+	}
 
-    /**
-     * Returns unitPriceReduction.
-     *
-     * 
-     *
-     * @return float
-     */
-    public function getUnitPriceReduction() {
-        return $this->unitPriceReduction;
-    }
+	/**
+	 * Sets quantityReduction.
+	 *
+	 * @param float $quantityReduction
+	 * @return LineItemReduction
+	 */
+	protected function setQuantityReduction($quantityReduction) {
+		$this->quantityReduction = $quantityReduction;
 
-    /**
-     * Sets unitPriceReduction.
-     *
-     * @param float $unitPriceReduction
-     * @return LineItemReduction
-     */
-    protected function setUnitPriceReduction($unitPriceReduction) {
-        $this->unitPriceReduction = $unitPriceReduction;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getLineItemUniqueId() === null) {
-        	throw new ValidationException("'lineItemUniqueId' can't be null", 'lineItemUniqueId', $this);
-        }
-        if ($this->getQuantityReduction() === null) {
-        	throw new ValidationException("'quantityReduction' can't be null", 'quantityReduction', $this);
-        }
-        if ($this->getUnitPriceReduction() === null) {
-        	throw new ValidationException("'unitPriceReduction' can't be null", 'unitPriceReduction', $this);
-        }
-    }
+	/**
+	 * Returns unitPriceReduction.
+	 *
+	 * 
+	 *
+	 * @return float
+	 */
+	public function getUnitPriceReduction() {
+		return $this->unitPriceReduction;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets unitPriceReduction.
+	 *
+	 * @param float $unitPriceReduction
+	 * @return LineItemReduction
+	 */
+	protected function setUnitPriceReduction($unitPriceReduction) {
+		$this->unitPriceReduction = $unitPriceReduction;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+		if ($this->getLineItemUniqueId() === null) {
+			throw new ValidationException("'lineItemUniqueId' can't be null", 'lineItemUniqueId', $this);
+		}
+		if ($this->getQuantityReduction() === null) {
+			throw new ValidationException("'quantityReduction' can't be null", 'quantityReduction', $this);
+		}
+		if ($this->getUnitPriceReduction() === null) {
+			throw new ValidationException("'unitPriceReduction' can't be null", 'unitPriceReduction', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

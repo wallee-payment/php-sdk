@@ -35,229 +35,229 @@ use \Wallee\Sdk\ValidationException;
  */
 class DocumentTemplateType  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'DocumentTemplateType';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'DocumentTemplateType';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'description' => 'map[string,string]',
-        'feature' => '\Wallee\Sdk\Model\EntityReference',
-        'id' => 'int',
-        'templateResource' => 'string',
-        'title' => 'map[string,string]'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'description' => 'map[string,string]',
+		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'id' => 'int',
+		'templateResource' => 'string',
+		'title' => 'map[string,string]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $description;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $feature;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $templateResource;
-    
-    /**
-     * 
-     *
-     * @var map[string,string]
-     */
-    private $title;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-        $this->setTitle(isset($data['title']) ? $data['title'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $description;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $feature;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $templateResource;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $title;
 
 
-    /**
-     * Returns description.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
+		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+	}
 
-    /**
-     * Sets description.
-     *
-     * @param map[string,string] $description
-     * @return DocumentTemplateType
-     */
-    public function setDescription($description) {
-        $this->description = $description;
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns feature.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getFeature() {
-        return $this->feature;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param map[string,string] $description
+	 * @return DocumentTemplateType
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets feature.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $feature
-     * @return DocumentTemplateType
-     */
-    public function setFeature($feature) {
-        $this->feature = $feature;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns feature.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getFeature() {
+		return $this->feature;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets feature.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @return DocumentTemplateType
+	 */
+	public function setFeature($feature) {
+		$this->feature = $feature;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return DocumentTemplateType
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns templateResource.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getTemplateResource() {
-        return $this->templateResource;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return DocumentTemplateType
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets templateResource.
-     *
-     * @param string $templateResource
-     * @return DocumentTemplateType
-     */
-    protected function setTemplateResource($templateResource) {
-        $this->templateResource = $templateResource;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns templateResource.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTemplateResource() {
+		return $this->templateResource;
+	}
 
-    /**
-     * Returns title.
-     *
-     * 
-     *
-     * @return map[string,string]
-     */
-    public function getTitle() {
-        return $this->title;
-    }
+	/**
+	 * Sets templateResource.
+	 *
+	 * @param string $templateResource
+	 * @return DocumentTemplateType
+	 */
+	protected function setTemplateResource($templateResource) {
+		$this->templateResource = $templateResource;
 
-    /**
-     * Sets title.
-     *
-     * @param map[string,string] $title
-     * @return DocumentTemplateType
-     */
-    public function setTitle($title) {
-        $this->title = $title;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns title.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets title.
+	 *
+	 * @param map[string,string] $title
+	 * @return DocumentTemplateType
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

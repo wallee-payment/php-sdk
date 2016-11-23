@@ -33,329 +33,329 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class SubscriptionPeriodBillService {
 
-    /**
-     * The API client instance.
-     *
-     * @var ApiClient
-     */
-    private $apiClient;
+	/**
+	 * The API client instance.
+	 *
+	 * @var ApiClient
+	 */
+	private $apiClient;
 
-    /**
-     * Constructor.
-     *
-     * @param ApiClient $apiClient the api client
-     */
-    public function __construct(ApiClient $apiClient) {
-    	if ($apiClient == null) {
-    		throw new \InvalidArgumentException('The api client is required.');
-    	}
-    	
-        $this->apiClient = $apiClient;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param ApiClient $apiClient the api client
+	 */
+	public function __construct(ApiClient $apiClient) {
+		if ($apiClient == null) {
+			throw new \InvalidArgumentException('The api client is required.');
+		}
 
-    /**
-     * Returns the API client instance.
-     *
-     * @return ApiClient
-     */
-    public function getApiClient() {
-        return $this->apiClient;
-    }
+		$this->apiClient = $apiClient;
+	}
+
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
 
 
-    /**
-     * Operation subscriptionPeriodBillCountPost
-     *
-     * count
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-     * @throws \Wallee\Sdk\ApiException
-     * @return int
-     */
-    public function subscriptionPeriodBillCountPost($spaceId, $filter = null) {
-        return $this->subscriptionPeriodBillCountPostWithHttpInfo($spaceId, $filter)->getData();
-    }
+	/**
+	 * Operation subscriptionPeriodBillCountPost
+	 *
+	 * count
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return int
+	 */
+	public function subscriptionPeriodBillCountPost($spaceId, $filter = null) {
+		return $this->subscriptionPeriodBillCountPostWithHttpInfo($spaceId, $filter)->getData();
+	}
 
-    /**
-     * Operation subscriptionPeriodBillCountPostWithHttpInfo
-     *
-     * count
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function subscriptionPeriodBillCountPostWithHttpInfo($spaceId, $filter = null) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionPeriodBillCountPost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/subscription-period-bill/count";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($filter)) {
-            $tempBody = $filter;
-        }
-
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                'int',
-                '/subscription-period-bill/count'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation subscriptionPeriodBillReadGet
-     *
-     * read
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The id of the subscription period bill which should be returned. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\SubscriptionVersion
-     */
-    public function subscriptionPeriodBillReadGet($spaceId, $id) {
-        return $this->subscriptionPeriodBillReadGetWithHttpInfo($spaceId, $id)->getData();
-    }
-
-    /**
-     * Operation subscriptionPeriodBillReadGetWithHttpInfo
-     *
-     * read
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The id of the subscription period bill which should be returned. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function subscriptionPeriodBillReadGetWithHttpInfo($spaceId, $id) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionPeriodBillReadGet');
-        }
-        // verify the required parameter 'id' is set
-        if ($id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $id when calling subscriptionPeriodBillReadGet');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation subscriptionPeriodBillCountPostWithHttpInfo
+	 *
+	 * count
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function subscriptionPeriodBillCountPostWithHttpInfo($spaceId, $filter = null) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionPeriodBillCountPost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        if ($id !== null) {
-            $queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-        }
-        
-        // path params
-        $resourcePath = "/subscription-period-bill/read";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/subscription-period-bill/count";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'GET',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\SubscriptionVersion',
-                '/subscription-period-bill/read'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionVersion', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionVersion', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		// body params
+		$tempBody = null;
+		if (isset($filter)) {
+			$tempBody = $filter;
+		}
 
-            throw $e;
-        }
-    }
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'int',
+				'/subscription-period-bill/count'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-    /**
-     * Operation subscriptionPeriodBillSearchPost
-     *
-     * search
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription period bills which are returned by the search. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\SubscriptionVersion[]
-     */
-    public function subscriptionPeriodBillSearchPost($spaceId, $query) {
-        return $this->subscriptionPeriodBillSearchPostWithHttpInfo($spaceId, $query)->getData();
-    }
+			throw $e;
+		}
+	}
 
-    /**
-     * Operation subscriptionPeriodBillSearchPostWithHttpInfo
-     *
-     * search
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription period bills which are returned by the search. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function subscriptionPeriodBillSearchPostWithHttpInfo($spaceId, $query) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionPeriodBillSearchPost');
-        }
-        // verify the required parameter 'query' is set
-        if ($query === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $query when calling subscriptionPeriodBillSearchPost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation subscriptionPeriodBillReadGet
+	 *
+	 * read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the subscription period bill which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\SubscriptionVersion
+	 */
+	public function subscriptionPeriodBillReadGet($spaceId, $id) {
+		return $this->subscriptionPeriodBillReadGetWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation subscriptionPeriodBillReadGetWithHttpInfo
+	 *
+	 * read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the subscription period bill which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function subscriptionPeriodBillReadGetWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionPeriodBillReadGet');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling subscriptionPeriodBillReadGet');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/subscription-period-bill/search";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/subscription-period-bill/read";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($query)) {
-            $tempBody = $query;
-        }
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\SubscriptionVersion',
+				'/subscription-period-bill/read'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionVersion', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionVersion', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\SubscriptionVersion[]',
-                '/subscription-period-bill/search'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionVersion[]', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionVersion[]', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+			throw $e;
+		}
+	}
 
-            throw $e;
-        }
-    }
-    
+	/**
+	 * Operation subscriptionPeriodBillSearchPost
+	 *
+	 * search
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription period bills which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\SubscriptionVersion[]
+	 */
+	public function subscriptionPeriodBillSearchPost($spaceId, $query) {
+		return $this->subscriptionPeriodBillSearchPostWithHttpInfo($spaceId, $query)->getData();
+	}
+
+	/**
+	 * Operation subscriptionPeriodBillSearchPostWithHttpInfo
+	 *
+	 * search
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription period bills which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function subscriptionPeriodBillSearchPostWithHttpInfo($spaceId, $query) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionPeriodBillSearchPost');
+		}
+		// verify the required parameter 'query' is set
+		if ($query === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling subscriptionPeriodBillSearchPost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+
+		// query params
+		$queryParams = [];
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/subscription-period-bill/search";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = [];
+		// body params
+		$tempBody = null;
+		if (isset($query)) {
+			$tempBody = $query;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\SubscriptionVersion[]',
+				'/subscription-period-bill/search'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionVersion[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionVersion[]', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
 }

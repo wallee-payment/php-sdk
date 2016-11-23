@@ -28,69 +28,69 @@ namespace Wallee\Sdk;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class ApiResponse {
 
 	/**
-     * The HTTP status code of the server response.
-     *
-     * @var int
-     */
-    private $statusCode;
-    
-    /**
-     * The HTTP headers of the server response.
-     *
-     * @var string[]
-     */
-    private $headers = array();
-    
-    /**
-     * The HTTP body of the server response.
-     *
-     * @var string
-     */
-    private $data;
+	 * The HTTP status code of the server response.
+	 *
+	 * @var int
+	 */
+	private $statusCode;
 
-    /**
-     * Constructor.
-     *
-     * @param int $statusCode the HTTP status code
-     * @param array $headers the HTTP headers
-     * @param mixed $data the HTTP body
-     */
-    public function __construct($statusCode, $headers, $data = null) {
-        $this->statusCode = $statusCode;
-        $this->headers = $headers;
-        $this->data = $data;
-    }
-    
-    /**
-     * Returns the HTTP status code of the server response.
-     *
-     * @return int
-     */
-    public function getStatusCode() {
-    	return $this->statusCode;
-    }
-    
-    /**
-     * Returns the HTTP headers of the server response.
-     *
-     * @return string[]
-     */
-    public function getHeaders() {
-    	return $this->headers;
-    }
-    
-    /**
-     * Returns the HTTP body of the server response.
-     *
-     * @return string
-     */
-    public function getData() {
-    	return $this->data;
-    }
-    
+	/**
+	 * The HTTP headers of the server response.
+	 *
+	 * @var string[]
+	 */
+	private $headers = array();
+
+	/**
+	 * The HTTP body of the server response.
+	 *
+	 * @var string
+	 */
+	private $data;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param int $statusCode the HTTP status code
+	 * @param array $headers the HTTP headers
+	 * @param mixed $data the HTTP body
+	 */
+	public function __construct($statusCode, $headers, $data = null) {
+		$this->statusCode = $statusCode;
+		$this->headers = $headers;
+		$this->data = $data;
+	}
+
+	/**
+	 * Returns the HTTP status code of the server response.
+	 *
+	 * @return int
+	 */
+	public function getStatusCode() {
+		return $this->statusCode;
+	}
+
+	/**
+	 * Returns the HTTP headers of the server response.
+	 *
+	 * @return string[]
+	 */
+	public function getHeaders() {
+		return $this->headers;
+	}
+
+	/**
+	 * Returns the HTTP body of the server response.
+	 *
+	 * @return string
+	 */
+	public function getData() {
+		return $this->data;
+	}
+
 }

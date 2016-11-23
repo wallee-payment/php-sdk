@@ -30,10 +30,10 @@ use \Wallee\Sdk\ApiClient;
  * @package  Wallee\Sdk\Http
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class CurlHttpClient implements IHttpClient {
-	
+
 	public function isSupported() {
 		return function_exists('curl_version');
 	}

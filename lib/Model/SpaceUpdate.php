@@ -35,193 +35,193 @@ use \Wallee\Sdk\ValidationException;
  */
 class SpaceUpdate extends Space  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Space.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Space.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setPostalAddress(isset($data['postalAddress']) ? $data['postalAddress'] : null);
-        $this->setRequestLimit(isset($data['requestLimit']) ? $data['requestLimit'] : null);
-        $this->setTechnicalContactAddresses(isset($data['technicalContactAddresses']) ? $data['technicalContactAddresses'] : null);
-        $this->setTimeZone(isset($data['timeZone']) ? $data['timeZone'] : null);
-    }
+	
 
 
-    /**
-     * Returns name.
-     *
-     * The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return string
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return SpaceUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setPostalAddress(isset($data['postalAddress']) ? $data['postalAddress'] : null);
+		$this->setRequestLimit(isset($data['requestLimit']) ? $data['requestLimit'] : null);
+		$this->setTechnicalContactAddresses(isset($data['technicalContactAddresses']) ? $data['technicalContactAddresses'] : null);
+		$this->setTimeZone(isset($data['timeZone']) ? $data['timeZone'] : null);
+	}
 
-    /**
-     * Returns postalAddress.
-     *
-     * @return \Wallee\Sdk\Model\SpaceAddressSetter
-     */
-    public function getPostalAddress() {
-        return parent::getPostalAddress();
-    }
 
-    /**
-     * Sets postalAddress.
-     *
-     * @param \Wallee\Sdk\Model\SpaceAddressSetter $postalAddress
-     * @return SpaceUpdate
-     */
-    public function setPostalAddress($postalAddress) {
-        return parent::setPostalAddress($postalAddress);
-    }
+	/**
+	 * Returns name.
+	 *
+	 * The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns requestLimit.
-     *
-     * The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
-     *
-     * @return int
-     */
-    public function getRequestLimit() {
-        return parent::getRequestLimit();
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return SpaceUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Sets requestLimit.
-     *
-     * @param int $requestLimit
-     * @return SpaceUpdate
-     */
-    public function setRequestLimit($requestLimit) {
-        return parent::setRequestLimit($requestLimit);
-    }
+	/**
+	 * Returns postalAddress.
+	 *
+	 * @return \Wallee\Sdk\Model\SpaceAddressSetter
+	 */
+	public function getPostalAddress() {
+		return parent::getPostalAddress();
+	}
 
-    /**
-     * Returns technicalContactAddresses.
-     *
-     * The e-mail address provided as contact addresses will be informed about technical issues or errors triggered by the space.
-     *
-     * @return string[]
-     */
-    public function getTechnicalContactAddresses() {
-        return parent::getTechnicalContactAddresses();
-    }
+	/**
+	 * Sets postalAddress.
+	 *
+	 * @param \Wallee\Sdk\Model\SpaceAddressSetter $postalAddress
+	 * @return SpaceUpdate
+	 */
+	public function setPostalAddress($postalAddress) {
+		return parent::setPostalAddress($postalAddress);
+	}
 
-    /**
-     * Sets technicalContactAddresses.
-     *
-     * @param string[] $technicalContactAddresses
-     * @return SpaceUpdate
-     */
-    public function setTechnicalContactAddresses($technicalContactAddresses) {
-        return parent::setTechnicalContactAddresses($technicalContactAddresses);
-    }
+	/**
+	 * Returns requestLimit.
+	 *
+	 * The request limit defines the maximum number of API request accepted within 2 minutes per cluster node. This limit can only be changed with special privileges.
+	 *
+	 * @return int
+	 */
+	public function getRequestLimit() {
+		return parent::getRequestLimit();
+	}
 
-    /**
-     * Returns timeZone.
-     *
-     * The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
-     *
-     * @return string
-     */
-    public function getTimeZone() {
-        return parent::getTimeZone();
-    }
+	/**
+	 * Sets requestLimit.
+	 *
+	 * @param int $requestLimit
+	 * @return SpaceUpdate
+	 */
+	public function setRequestLimit($requestLimit) {
+		return parent::setRequestLimit($requestLimit);
+	}
 
-    /**
-     * Sets timeZone.
-     *
-     * @param string $timeZone
-     * @return SpaceUpdate
-     */
-    public function setTimeZone($timeZone) {
-        return parent::setTimeZone($timeZone);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getTimeZone() === null) {
-        	throw new ValidationException("'timeZone' can't be null", 'timeZone', $this);
-        }
-    }
+	/**
+	 * Returns technicalContactAddresses.
+	 *
+	 * The e-mail address provided as contact addresses will be informed about technical issues or errors triggered by the space.
+	 *
+	 * @return string[]
+	 */
+	public function getTechnicalContactAddresses() {
+		return parent::getTechnicalContactAddresses();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets technicalContactAddresses.
+	 *
+	 * @param string[] $technicalContactAddresses
+	 * @return SpaceUpdate
+	 */
+	public function setTechnicalContactAddresses($technicalContactAddresses) {
+		return parent::setTechnicalContactAddresses($technicalContactAddresses);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns timeZone.
+	 *
+	 * The time zone assigned to the space determines the time offset for calculating dates within the space. This is typically used for background processed which needs to be triggered on a specific hour within the day. Changing the space time zone will not change the display of dates.
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return parent::getTimeZone();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return SpaceUpdate
+	 */
+	public function setTimeZone($timeZone) {
+		return parent::setTimeZone($timeZone);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getTimeZone() === null) {
+			throw new ValidationException("'timeZone' can't be null", 'timeZone', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

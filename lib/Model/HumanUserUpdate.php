@@ -35,201 +35,201 @@ use \Wallee\Sdk\ValidationException;
  */
 class HumanUserUpdate extends HumanUser  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'HumanUser.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'HumanUser.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setEmailAddress(isset($data['emailAddress']) ? $data['emailAddress'] : null);
-        $this->setFirstname(isset($data['firstname']) ? $data['firstname'] : null);
-        $this->setLanguage(isset($data['language']) ? $data['language'] : null);
-        $this->setLastname(isset($data['lastname']) ? $data['lastname'] : null);
-        $this->setTimeZone(isset($data['timeZone']) ? $data['timeZone'] : null);
-    }
+	
 
 
-    /**
-     * Returns emailAddress.
-     *
-     * The e-mail address of the user.
-     *
-     * @return string
-     */
-    public function getEmailAddress() {
-        return parent::getEmailAddress();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets emailAddress.
-     *
-     * @param string $emailAddress
-     * @return HumanUserUpdate
-     */
-    public function setEmailAddress($emailAddress) {
-        return parent::setEmailAddress($emailAddress);
-    }
+		$this->setEmailAddress(isset($data['emailAddress']) ? $data['emailAddress'] : null);
+		$this->setFirstname(isset($data['firstname']) ? $data['firstname'] : null);
+		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
+		$this->setLastname(isset($data['lastname']) ? $data['lastname'] : null);
+		$this->setTimeZone(isset($data['timeZone']) ? $data['timeZone'] : null);
+	}
 
-    /**
-     * Returns firstname.
-     *
-     * The first name of the user.
-     *
-     * @return string
-     */
-    public function getFirstname() {
-        return parent::getFirstname();
-    }
 
-    /**
-     * Sets firstname.
-     *
-     * @param string $firstname
-     * @return HumanUserUpdate
-     */
-    public function setFirstname($firstname) {
-        return parent::setFirstname($firstname);
-    }
+	/**
+	 * Returns emailAddress.
+	 *
+	 * The e-mail address of the user.
+	 *
+	 * @return string
+	 */
+	public function getEmailAddress() {
+		return parent::getEmailAddress();
+	}
 
-    /**
-     * Returns language.
-     *
-     * The preferred language of the user.
-     *
-     * @return string
-     */
-    public function getLanguage() {
-        return parent::getLanguage();
-    }
+	/**
+	 * Sets emailAddress.
+	 *
+	 * @param string $emailAddress
+	 * @return HumanUserUpdate
+	 */
+	public function setEmailAddress($emailAddress) {
+		return parent::setEmailAddress($emailAddress);
+	}
 
-    /**
-     * Sets language.
-     *
-     * @param string $language
-     * @return HumanUserUpdate
-     */
-    public function setLanguage($language) {
-        return parent::setLanguage($language);
-    }
+	/**
+	 * Returns firstname.
+	 *
+	 * The first name of the user.
+	 *
+	 * @return string
+	 */
+	public function getFirstname() {
+		return parent::getFirstname();
+	}
 
-    /**
-     * Returns lastname.
-     *
-     * The last name of the user.
-     *
-     * @return string
-     */
-    public function getLastname() {
-        return parent::getLastname();
-    }
+	/**
+	 * Sets firstname.
+	 *
+	 * @param string $firstname
+	 * @return HumanUserUpdate
+	 */
+	public function setFirstname($firstname) {
+		return parent::setFirstname($firstname);
+	}
 
-    /**
-     * Sets lastname.
-     *
-     * @param string $lastname
-     * @return HumanUserUpdate
-     */
-    public function setLastname($lastname) {
-        return parent::setLastname($lastname);
-    }
+	/**
+	 * Returns language.
+	 *
+	 * The preferred language of the user.
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return parent::getLanguage();
+	}
 
-    /**
-     * Returns timeZone.
-     *
-     * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
-     *
-     * @return string
-     */
-    public function getTimeZone() {
-        return parent::getTimeZone();
-    }
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return HumanUserUpdate
+	 */
+	public function setLanguage($language) {
+		return parent::setLanguage($language);
+	}
 
-    /**
-     * Sets timeZone.
-     *
-     * @param string $timeZone
-     * @return HumanUserUpdate
-     */
-    public function setTimeZone($timeZone) {
-        return parent::setTimeZone($timeZone);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getEmailAddress() === null) {
-        	throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
-        }
-        if ($this->getFirstname() === null) {
-        	throw new ValidationException("'firstname' can't be null", 'firstname', $this);
-        }
-        if ($this->getLanguage() === null) {
-        	throw new ValidationException("'language' can't be null", 'language', $this);
-        }
-        if ($this->getLastname() === null) {
-        	throw new ValidationException("'lastname' can't be null", 'lastname', $this);
-        }
-    }
+	/**
+	 * Returns lastname.
+	 *
+	 * The last name of the user.
+	 *
+	 * @return string
+	 */
+	public function getLastname() {
+		return parent::getLastname();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets lastname.
+	 *
+	 * @param string $lastname
+	 * @return HumanUserUpdate
+	 */
+	public function setLastname($lastname) {
+		return parent::setLastname($lastname);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns timeZone.
+	 *
+	 * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return parent::getTimeZone();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return HumanUserUpdate
+	 */
+	public function setTimeZone($timeZone) {
+		return parent::setTimeZone($timeZone);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getEmailAddress() === null) {
+			throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
+		}
+		if ($this->getFirstname() === null) {
+			throw new ValidationException("'firstname' can't be null", 'firstname', $this);
+		}
+		if ($this->getLanguage() === null) {
+			throw new ValidationException("'language' can't be null", 'language', $this);
+		}
+		if ($this->getLastname() === null) {
+			throw new ValidationException("'lastname' can't be null", 'lastname', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

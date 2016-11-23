@@ -35,532 +35,532 @@ use \Wallee\Sdk\ValidationException;
  */
 class PaymentMethodConfiguration  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'PaymentMethodConfiguration';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'PaymentMethodConfiguration';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'dataCollectionType' => 'string',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-        'id' => 'int',
-        'imageResourcePath' => '\Wallee\Sdk\Model\ModelResourcePath',
-        'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-        'name' => 'string',
-        'paymentMethod' => '\Wallee\Sdk\Model\EntityReference',
-        'plannedPurgeDate' => 'string',
-        'sortOrder' => 'int',
-        'spaceId' => 'int',
-        'state' => 'string',
-        'title' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'dataCollectionType' => 'string',
+		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+		'id' => 'int',
+		'imageResourcePath' => '\Wallee\Sdk\Model\ModelResourcePath',
+		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'name' => 'string',
+		'paymentMethod' => '\Wallee\Sdk\Model\EntityReference',
+		'plannedPurgeDate' => 'string',
+		'sortOrder' => 'int',
+		'spaceId' => 'int',
+		'state' => 'string',
+		'title' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    /**
-     * Values of dataCollectionType.
-     */ 
-    const DATA_COLLECTION_TYPE_ONSITE = 'ONSITE';
-    const DATA_COLLECTION_TYPE_OFFSITE = 'OFFSITE';
-    
-    /**
-     * Returns allowable values of dataCollectionType.
-     *
-     * @return string[]
-     */
-    public function getDataCollectionTypeAllowableValues() {
-        return [
-            self::DATA_COLLECTION_TYPE_ONSITE,
-            self::DATA_COLLECTION_TYPE_OFFSITE,
-        ];
-    }
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_CREATE = 'CREATE';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_INACTIVE = 'INACTIVE';
-    const STATE_DELETING = 'DELETING';
-    const STATE_DELETED = 'DELETED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_CREATE,
-            self::STATE_ACTIVE,
-            self::STATE_INACTIVE,
-            self::STATE_DELETING,
-            self::STATE_DELETED,
-        ];
-    }
-    
-    
-    /**
-     * The data collection type determines who is collecting the payment information. This can be done either by the processor (offsite) or by our application (onsite).
-     *
-     * @var string
-     */
-    private $dataCollectionType;
-    
-    /**
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    private $description;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * @var \Wallee\Sdk\Model\ModelResourcePath
-     */
-    private $imageResourcePath;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $linkedSpaceId;
-    
-    /**
-     * The payment method configuration name is used internally to identify the payment method configuration.For example the name is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @var string
-     */
-    private $name;
-    
-    /**
-     * @var \Wallee\Sdk\Model\EntityReference
-     */
-    private $paymentMethod;
-    
-    /**
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @var string
-     */
-    private $plannedPurgeDate;
-    
-    /**
-     * The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
-     *
-     * @var int
-     */
-    private $sortOrder;
-    
-    /**
-     * 
-     *
-     * @var int
-     */
-    private $spaceId;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $state;
-    
-    /**
-     * @var \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    private $title;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setDescription(isset($data['description']) ? $data['description'] : null);
-        $this->setImageResourcePath(isset($data['imageResourcePath']) ? $data['imageResourcePath'] : null);
-        $this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-        $this->setPaymentMethod(isset($data['paymentMethod']) ? $data['paymentMethod'] : null);
-        $this->setTitle(isset($data['title']) ? $data['title'] : null);
-    }
+	
+	/**
+	 * Values of dataCollectionType.
+	 */
+	const DATA_COLLECTION_TYPE_ONSITE = 'ONSITE';
+	const DATA_COLLECTION_TYPE_OFFSITE = 'OFFSITE';
+	
+	/**
+	 * Returns allowable values of dataCollectionType.
+	 *
+	 * @return string[]
+	 */
+	public function getDataCollectionTypeAllowableValues() {
+		return [
+			self::DATA_COLLECTION_TYPE_ONSITE,
+			self::DATA_COLLECTION_TYPE_OFFSITE,
+		];
+	}
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_DELETING = 'DELETING';
+	const STATE_DELETED = 'DELETED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_DELETING,
+			self::STATE_DELETED,
+		];
+	}
+	
+
+	/**
+	 * The data collection type determines who is collecting the payment information. This can be done either by the processor (offsite) or by our application (onsite).
+	 *
+	 * @var string
+	 */
+	private $dataCollectionType;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $description;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * @var \Wallee\Sdk\Model\ModelResourcePath
+	 */
+	private $imageResourcePath;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The payment method configuration name is used internally to identify the payment method configuration.For example the name is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * @var \Wallee\Sdk\Model\EntityReference
+	 */
+	private $paymentMethod;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
+	 *
+	 * @var int
+	 */
+	private $sortOrder;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $spaceId;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $title;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns dataCollectionType.
-     *
-     * The data collection type determines who is collecting the payment information. This can be done either by the processor (offsite) or by our application (onsite).
-     *
-     * @return string
-     */
-    public function getDataCollectionType() {
-        return $this->dataCollectionType;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setDescription(isset($data['description']) ? $data['description'] : null);
+		$this->setImageResourcePath(isset($data['imageResourcePath']) ? $data['imageResourcePath'] : null);
+		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		$this->setPaymentMethod(isset($data['paymentMethod']) ? $data['paymentMethod'] : null);
+		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+	}
 
-    /**
-     * Sets dataCollectionType.
-     *
-     * @param string $dataCollectionType
-     * @return PaymentMethodConfiguration
-     */
-    protected function setDataCollectionType($dataCollectionType) {
-        $allowed_values = array('ONSITE', 'OFFSITE');
-        if ((!in_array($dataCollectionType, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'dataCollectionType', must be one of 'ONSITE', 'OFFSITE'");
-        }
-        $this->dataCollectionType = $dataCollectionType;
 
-        return $this;
-    }
+	/**
+	 * Returns dataCollectionType.
+	 *
+	 * The data collection type determines who is collecting the payment information. This can be done either by the processor (offsite) or by our application (onsite).
+	 *
+	 * @return string
+	 */
+	public function getDataCollectionType() {
+		return $this->dataCollectionType;
+	}
 
-    /**
-     * Returns description.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+	/**
+	 * Sets dataCollectionType.
+	 *
+	 * @param string $dataCollectionType
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setDataCollectionType($dataCollectionType) {
+		$allowed_values = array('ONSITE', 'OFFSITE');
+		if ((!in_array($dataCollectionType, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'dataCollectionType', must be one of 'ONSITE', 'OFFSITE'");
+		}
+		$this->dataCollectionType = $dataCollectionType;
 
-    /**
-     * Sets description.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description
-     * @return PaymentMethodConfiguration
-     */
-    public function setDescription($description) {
-        $this->description = $description;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns description.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return PaymentMethodConfiguration
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns imageResourcePath.
-     *
-     * @return \Wallee\Sdk\Model\ModelResourcePath
-     */
-    public function getImageResourcePath() {
-        return $this->imageResourcePath;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets imageResourcePath.
-     *
-     * @param \Wallee\Sdk\Model\ModelResourcePath $imageResourcePath
-     * @return PaymentMethodConfiguration
-     */
-    public function setImageResourcePath($imageResourcePath) {
-        $this->imageResourcePath = $imageResourcePath;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns imageResourcePath.
+	 *
+	 * @return \Wallee\Sdk\Model\ModelResourcePath
+	 */
+	public function getImageResourcePath() {
+		return $this->imageResourcePath;
+	}
 
-    /**
-     * Returns linkedSpaceId.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getLinkedSpaceId() {
-        return $this->linkedSpaceId;
-    }
+	/**
+	 * Sets imageResourcePath.
+	 *
+	 * @param \Wallee\Sdk\Model\ModelResourcePath $imageResourcePath
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setImageResourcePath($imageResourcePath) {
+		$this->imageResourcePath = $imageResourcePath;
 
-    /**
-     * Sets linkedSpaceId.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-     * @return PaymentMethodConfiguration
-     */
-    public function setLinkedSpaceId($linkedSpaceId) {
-        $this->linkedSpaceId = $linkedSpaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
 
-    /**
-     * Returns name.
-     *
-     * The payment method configuration name is used internally to identify the payment method configuration.For example the name is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return PaymentMethodConfiguration
-     */
-    protected function setName($name) {
-        $this->name = $name;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns name.
+	 *
+	 * The payment method configuration name is used internally to identify the payment method configuration.For example the name is used within search fields and hence it should be distinct and descriptive.
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
 
-    /**
-     * Returns paymentMethod.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getPaymentMethod() {
-        return $this->paymentMethod;
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setName($name) {
+		$this->name = $name;
 
-    /**
-     * Sets paymentMethod.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
-     * @return PaymentMethodConfiguration
-     */
-    public function setPaymentMethod($paymentMethod) {
-        $this->paymentMethod = $paymentMethod;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns paymentMethod.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getPaymentMethod() {
+		return $this->paymentMethod;
+	}
 
-    /**
-     * Returns plannedPurgeDate.
-     *
-     * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return string
-     */
-    public function getPlannedPurgeDate() {
-        return $this->plannedPurgeDate;
-    }
+	/**
+	 * Sets paymentMethod.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setPaymentMethod($paymentMethod) {
+		$this->paymentMethod = $paymentMethod;
 
-    /**
-     * Sets plannedPurgeDate.
-     *
-     * @param string $plannedPurgeDate
-     * @return PaymentMethodConfiguration
-     */
-    protected function setPlannedPurgeDate($plannedPurgeDate) {
-        $this->plannedPurgeDate = $plannedPurgeDate;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return string
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
 
-    /**
-     * Returns sortOrder.
-     *
-     * The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
-     *
-     * @return int
-     */
-    public function getSortOrder() {
-        return $this->sortOrder;
-    }
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param string $plannedPurgeDate
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
 
-    /**
-     * Sets sortOrder.
-     *
-     * @param int $sortOrder
-     * @return PaymentMethodConfiguration
-     */
-    protected function setSortOrder($sortOrder) {
-        $this->sortOrder = $sortOrder;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
 
-    /**
-     * Returns spaceId.
-     *
-     * 
-     *
-     * @return int
-     */
-    public function getSpaceId() {
-        return $this->spaceId;
-    }
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
 
-    /**
-     * Sets spaceId.
-     *
-     * @param int $spaceId
-     * @return PaymentMethodConfiguration
-     */
-    protected function setSpaceId($spaceId) {
-        $this->spaceId = $spaceId;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns spaceId.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getSpaceId() {
+		return $this->spaceId;
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
-    }
+	/**
+	 * Sets spaceId.
+	 *
+	 * @param int $spaceId
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setSpaceId($spaceId) {
+		$this->spaceId = $spaceId;
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return PaymentMethodConfiguration
-     */
-    protected function setState($state) {
-        $allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-        if ((!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-        }
-        $this->state = $state;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
 
-    /**
-     * Returns title.
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
-     */
-    public function getTitle() {
-        return $this->title;
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
+		}
+		$this->state = $state;
 
-    /**
-     * Sets title.
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $title
-     * @return PaymentMethodConfiguration
-     */
-    public function setTitle($title) {
-        $this->title = $title;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns title.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets title.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $title
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return PaymentMethodConfiguration
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-        if ($this->getDataCollectionType() === null) {
-        	throw new ValidationException("'dataCollectionType' can't be null", 'dataCollectionType', $this);
-        }
-        $allowed_values = ["ONSITE", "OFFSITE"];
-        if (!in_array($this->getDataCollectionType(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'dataCollectionType', must be one of #{allowed_values}.", 'dataCollectionType', $this);
-        }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-        if ($this->getState() === null) {
-        	throw new ValidationException("'state' can't be null", 'state', $this);
-        }
-        $allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    }
+		return $this;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		if ($this->getDataCollectionType() === null) {
+			throw new ValidationException("'dataCollectionType' can't be null", 'dataCollectionType', $this);
+		}
+		$allowed_values = ["ONSITE", "OFFSITE"];
+		if (!in_array($this->getDataCollectionType(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'dataCollectionType', must be one of #{allowed_values}.", 'dataCollectionType', $this);
+		}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

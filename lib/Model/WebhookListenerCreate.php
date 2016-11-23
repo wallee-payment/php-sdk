@@ -35,222 +35,222 @@ use \Wallee\Sdk\ValidationException;
  */
 class WebhookListenerCreate extends WebhookListenerUpdate  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'WebhookListener.Create';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'WebhookListener.Create';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    /**
-     * Values of state.
-     */ 
-    const STATE_CREATE = 'CREATE';
-    const STATE_ACTIVE = 'ACTIVE';
-    const STATE_INACTIVE = 'INACTIVE';
-    const STATE_DELETING = 'DELETING';
-    const STATE_DELETED = 'DELETED';
-    
-    /**
-     * Returns allowable values of state.
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues() {
-        return [
-            self::STATE_CREATE,
-            self::STATE_ACTIVE,
-            self::STATE_INACTIVE,
-            self::STATE_DELETING,
-            self::STATE_DELETED,
-        ];
-    }
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setEntity(isset($data['entity']) ? $data['entity'] : null);
-        $this->setEntityStates(isset($data['entityStates']) ? $data['entityStates'] : null);
-        $this->setIdentity(isset($data['identity']) ? $data['identity'] : null);
-        $this->setState(isset($data['state']) ? $data['state'] : null);
-        $this->setUrl(isset($data['url']) ? $data['url'] : null);
-    }
+	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_DELETING = 'DELETING';
+	const STATE_DELETED = 'DELETED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_DELETING,
+			self::STATE_DELETED,
+		];
+	}
+	
 
 
-    /**
-     * Returns entity.
-     *
-     * @return \Wallee\Sdk\Model\EntityReference
-     */
-    public function getEntity() {
-        return parent::getEntity();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets entity.
-     *
-     * @param \Wallee\Sdk\Model\EntityReference $entity
-     * @return WebhookListenerCreate
-     */
-    public function setEntity($entity) {
-        return parent::setEntity($entity);
-    }
+		$this->setEntity(isset($data['entity']) ? $data['entity'] : null);
+		$this->setEntityStates(isset($data['entityStates']) ? $data['entityStates'] : null);
+		$this->setIdentity(isset($data['identity']) ? $data['identity'] : null);
+		$this->setState(isset($data['state']) ? $data['state'] : null);
+		$this->setUrl(isset($data['url']) ? $data['url'] : null);
+	}
 
-    /**
-     * Returns entityStates.
-     *
-     * The target state identifies the state into which entities need to move into to trigger the webhook listener.
-     *
-     * @return string[]
-     */
-    public function getEntityStates() {
-        return parent::getEntityStates();
-    }
 
-    /**
-     * Sets entityStates.
-     *
-     * @param string[] $entityStates
-     * @return WebhookListenerCreate
-     */
-    public function setEntityStates($entityStates) {
-        return parent::setEntityStates($entityStates);
-    }
+	/**
+	 * Returns entity.
+	 *
+	 * @return \Wallee\Sdk\Model\EntityReference
+	 */
+	public function getEntity() {
+		return parent::getEntity();
+	}
 
-    /**
-     * Returns identity.
-     *
-     * @return \Wallee\Sdk\Model\WebhookIdentity
-     */
-    public function getIdentity() {
-        return parent::getIdentity();
-    }
+	/**
+	 * Sets entity.
+	 *
+	 * @param \Wallee\Sdk\Model\EntityReference $entity
+	 * @return WebhookListenerCreate
+	 */
+	public function setEntity($entity) {
+		return parent::setEntity($entity);
+	}
 
-    /**
-     * Sets identity.
-     *
-     * @param \Wallee\Sdk\Model\WebhookIdentity $identity
-     * @return WebhookListenerCreate
-     */
-    public function setIdentity($identity) {
-        return parent::setIdentity($identity);
-    }
+	/**
+	 * Returns entityStates.
+	 *
+	 * The target state identifies the state into which entities need to move into to trigger the webhook listener.
+	 *
+	 * @return string[]
+	 */
+	public function getEntityStates() {
+		return parent::getEntityStates();
+	}
 
-    /**
-     * Returns state.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getState() {
-        return parent::getState();
-    }
+	/**
+	 * Sets entityStates.
+	 *
+	 * @param string[] $entityStates
+	 * @return WebhookListenerCreate
+	 */
+	public function setEntityStates($entityStates) {
+		return parent::setEntityStates($entityStates);
+	}
 
-    /**
-     * Sets state.
-     *
-     * @param string $state
-     * @return WebhookListenerCreate
-     */
-    public function setState($state) {
-        $allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-        if ((!in_array($state, $allowed_values))) {
-            throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-        }
-        return parent::setState($state);
-    }
+	/**
+	 * Returns identity.
+	 *
+	 * @return \Wallee\Sdk\Model\WebhookIdentity
+	 */
+	public function getIdentity() {
+		return parent::getIdentity();
+	}
 
-    /**
-     * Returns url.
-     *
-     * @return \Wallee\Sdk\Model\WebhookUrl
-     */
-    public function getUrl() {
-        return parent::getUrl();
-    }
+	/**
+	 * Sets identity.
+	 *
+	 * @param \Wallee\Sdk\Model\WebhookIdentity $identity
+	 * @return WebhookListenerCreate
+	 */
+	public function setIdentity($identity) {
+		return parent::setIdentity($identity);
+	}
 
-    /**
-     * Sets url.
-     *
-     * @param \Wallee\Sdk\Model\WebhookUrl $url
-     * @return WebhookListenerCreate
-     */
-    public function setUrl($url) {
-        return parent::setUrl($url);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getEntityStates() === null) {
-        	throw new ValidationException("'entityStates' can't be null", 'entityStates', $this);
-        }
-        if ($this->getState() === null) {
-        	throw new ValidationException("'state' can't be null", 'state', $this);
-        }
-        $allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
-        if (!in_array($this->getState(), $allowed_values)) {
-            throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-        }
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return parent::getState();
+	}
 
-    }
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return WebhookListenerCreate
+	 */
+	public function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
+		}
+		return parent::setState($state);
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Returns url.
+	 *
+	 * @return \Wallee\Sdk\Model\WebhookUrl
+	 */
+	public function getUrl() {
+		return parent::getUrl();
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Sets url.
+	 *
+	 * @param \Wallee\Sdk\Model\WebhookUrl $url
+	 * @return WebhookListenerCreate
+	 */
+	public function setUrl($url) {
+		return parent::setUrl($url);
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getEntityStates() === null) {
+			throw new ValidationException("'entityStates' can't be null", 'entityStates', $this);
+		}
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

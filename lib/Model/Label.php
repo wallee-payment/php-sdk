@@ -35,228 +35,228 @@ use \Wallee\Sdk\ValidationException;
  */
 class Label  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Label';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Label';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-        'content' => 'object',
-        'contentAsString' => 'string',
-        'descriptor' => '\Wallee\Sdk\Model\LabelDescriptor',
-        'id' => 'int',
-        'version' => 'int'    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+		'content' => 'object',
+		'contentAsString' => 'string',
+		'descriptor' => '\Wallee\Sdk\Model\LabelDescriptor',
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes;
-    }
-    
-    
-    
-    /**
-     * 
-     *
-     * @var object
-     */
-    private $content;
-    
-    /**
-     * 
-     *
-     * @var string
-     */
-    private $contentAsString;
-    
-    /**
-     * @var \Wallee\Sdk\Model\LabelDescriptor
-     */
-    private $descriptor;
-    
-    /**
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @var int
-     */
-    private $id;
-    
-    /**
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @var int
-     */
-    private $version;
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes;
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        $this->setContent(isset($data['content']) ? $data['content'] : null);
-        $this->setDescriptor(isset($data['descriptor']) ? $data['descriptor'] : null);
-    }
+	
+
+	/**
+	 * 
+	 *
+	 * @var object
+	 */
+	private $content;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $contentAsString;
+
+	/**
+	 * @var \Wallee\Sdk\Model\LabelDescriptor
+	 */
+	private $descriptor;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
-    /**
-     * Returns content.
-     *
-     * 
-     *
-     * @return object
-     */
-    public function getContent() {
-        return $this->content;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		$this->setContent(isset($data['content']) ? $data['content'] : null);
+		$this->setDescriptor(isset($data['descriptor']) ? $data['descriptor'] : null);
+	}
 
-    /**
-     * Sets content.
-     *
-     * @param object $content
-     * @return Label
-     */
-    public function setContent($content) {
-        $this->content = $content;
 
-        return $this;
-    }
+	/**
+	 * Returns content.
+	 *
+	 * 
+	 *
+	 * @return object
+	 */
+	public function getContent() {
+		return $this->content;
+	}
 
-    /**
-     * Returns contentAsString.
-     *
-     * 
-     *
-     * @return string
-     */
-    public function getContentAsString() {
-        return $this->contentAsString;
-    }
+	/**
+	 * Sets content.
+	 *
+	 * @param object $content
+	 * @return Label
+	 */
+	public function setContent($content) {
+		$this->content = $content;
 
-    /**
-     * Sets contentAsString.
-     *
-     * @param string $contentAsString
-     * @return Label
-     */
-    protected function setContentAsString($contentAsString) {
-        $this->contentAsString = $contentAsString;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns contentAsString.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getContentAsString() {
+		return $this->contentAsString;
+	}
 
-    /**
-     * Returns descriptor.
-     *
-     * @return \Wallee\Sdk\Model\LabelDescriptor
-     */
-    public function getDescriptor() {
-        return $this->descriptor;
-    }
+	/**
+	 * Sets contentAsString.
+	 *
+	 * @param string $contentAsString
+	 * @return Label
+	 */
+	protected function setContentAsString($contentAsString) {
+		$this->contentAsString = $contentAsString;
 
-    /**
-     * Sets descriptor.
-     *
-     * @param \Wallee\Sdk\Model\LabelDescriptor $descriptor
-     * @return Label
-     */
-    public function setDescriptor($descriptor) {
-        $this->descriptor = $descriptor;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns descriptor.
+	 *
+	 * @return \Wallee\Sdk\Model\LabelDescriptor
+	 */
+	public function getDescriptor() {
+		return $this->descriptor;
+	}
 
-    /**
-     * Returns id.
-     *
-     * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	 * Sets descriptor.
+	 *
+	 * @param \Wallee\Sdk\Model\LabelDescriptor $descriptor
+	 * @return Label
+	 */
+	public function setDescriptor($descriptor) {
+		$this->descriptor = $descriptor;
 
-    /**
-     * Sets id.
-     *
-     * @param int $id
-     * @return Label
-     */
-    protected function setId($id) {
-        $this->id = $id;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
 
-    /**
-     * Returns version.
-     *
-     * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return int
-     */
-    public function getVersion() {
-        return $this->version;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Label
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
-    /**
-     * Sets version.
-     *
-     * @param int $version
-     * @return Label
-     */
-    protected function setVersion($version) {
-        $this->version = $version;
+		return $this;
+	}
 
-        return $this;
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        
-    }
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return Label
+	 */
+	protected function setVersion($version) {
+		$this->version = $version;
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+		return $this;
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

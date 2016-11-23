@@ -35,126 +35,126 @@ use \Wallee\Sdk\ValidationException;
  */
 class AccountUpdate extends Account  {
 
-    /**
-     * The original name of the model.
-     *
-     * @var string
-     */
-    private static $swaggerModelName = 'Account.Update';
+	/**
+	 * The original name of the model.
+	 *
+	 * @var string
+	 */
+	private static $swaggerModelName = 'Account.Update';
 
-    /**
-     * An array of property to type mappings. Used for (de)serialization.
-     *
-     * @var string[]
-     */
-    private static $swaggerTypes = array(
-    );
+	/**
+	 * An array of property to type mappings. Used for (de)serialization.
+	 *
+	 * @var string[]
+	 */
+	private static $swaggerTypes = array(
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
 	 *
 	 * @return string[]
 	 */
-    public static function swaggerTypes() {
-        return self::$swaggerTypes + parent::swaggerTypes();
-    }
-    
-    
-    
+	public static function swaggerTypes() {
+		return self::$swaggerTypes + parent::swaggerTypes();
+	}
 
-    /**
-     * Constructor.
-     *
-     * @param mixed[] $data an associated array of property values initializing the model
-     */
-    public function __construct(array $data = null) {
-        parent::__construct($data);
-
-        $this->setName(isset($data['name']) ? $data['name'] : null);
-        $this->setSubaccountLimit(isset($data['subaccountLimit']) ? $data['subaccountLimit'] : null);
-    }
+	
 
 
-    /**
-     * Returns name.
-     *
-     * The name of the account identifies the account within the administrative interface.
-     *
-     * @return string
-     */
-    public function getName() {
-        return parent::getName();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed[] $data an associated array of property values initializing the model
+	 */
+	public function __construct(array $data = null) {
+		parent::__construct($data);
 
-    /**
-     * Sets name.
-     *
-     * @param string $name
-     * @return AccountUpdate
-     */
-    public function setName($name) {
-        return parent::setName($name);
-    }
+		$this->setName(isset($data['name']) ? $data['name'] : null);
+		$this->setSubaccountLimit(isset($data['subaccountLimit']) ? $data['subaccountLimit'] : null);
+	}
 
-    /**
-     * Returns subaccountLimit.
-     *
-     * This property restricts the number of subaccounts which can be created within this account.
-     *
-     * @return int
-     */
-    public function getSubaccountLimit() {
-        return parent::getSubaccountLimit();
-    }
 
-    /**
-     * Sets subaccountLimit.
-     *
-     * @param int $subaccountLimit
-     * @return AccountUpdate
-     */
-    public function setSubaccountLimit($subaccountLimit) {
-        return parent::setSubaccountLimit($subaccountLimit);
-    }
-    
-    /**
-     * Validates the model's properties and throws a ValidationException if the validation fails.
-     *
-     * @throws ValidationException
-     */
-    public function validate() {
-        parent::validate();
-        
-        if ($this->getName() === null) {
-        	throw new ValidationException("'name' can't be null", 'name', $this);
-        }
-    }
+	/**
+	 * Returns name.
+	 *
+	 * The name of the account identifies the account within the administrative interface.
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return parent::getName();
+	}
 
-    /**
-     * Returns true if all the properties in the model are valid.
-     *
-     * @return boolean
-     */
-    public function isValid() {
-    	try {
-    		$this->validate();
-    		return true;
-    	} catch (ValidationException $e) {
-    		return false;
-    	}
-    }
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return AccountUpdate
+	 */
+	public function setName($name) {
+		return parent::setName($name);
+	}
 
-    /**
-     * Returns the string presentation of the object.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
-        }
+	/**
+	 * Returns subaccountLimit.
+	 *
+	 * This property restricts the number of subaccounts which can be created within this account.
+	 *
+	 * @return int
+	 */
+	public function getSubaccountLimit() {
+		return parent::getSubaccountLimit();
+	}
 
-        return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
-    }
-    
+	/**
+	 * Sets subaccountLimit.
+	 *
+	 * @param int $subaccountLimit
+	 * @return AccountUpdate
+	 */
+	public function setSubaccountLimit($subaccountLimit) {
+		return parent::setSubaccountLimit($subaccountLimit);
+	}
+
+	/**
+	 * Validates the model's properties and throws a ValidationException if the validation fails.
+	 *
+	 * @throws ValidationException
+	 */
+	public function validate() {
+		parent::validate();
+
+		if ($this->getName() === null) {
+			throw new ValidationException("'name' can't be null", 'name', $this);
+		}
+	}
+
+	/**
+	 * Returns true if all the properties in the model are valid.
+	 *
+	 * @return boolean
+	 */
+	public function isValid() {
+		try {
+			$this->validate();
+			return true;
+		} catch (ValidationException $e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the string presentation of the object.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+			return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+		}
+
+		return json_encode(\Wallee\Sdk\ObjectSerializer::sanitizeForSerialization($this));
+	}
+
 }

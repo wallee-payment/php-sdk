@@ -33,426 +33,426 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link     https://github.com/wallee-payment/wallee-php-sdk
+ * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class ChargeFlowService {
 
-    /**
-     * The API client instance.
-     *
-     * @var ApiClient
-     */
-    private $apiClient;
+	/**
+	 * The API client instance.
+	 *
+	 * @var ApiClient
+	 */
+	private $apiClient;
 
-    /**
-     * Constructor.
-     *
-     * @param ApiClient $apiClient the api client
-     */
-    public function __construct(ApiClient $apiClient) {
-    	if ($apiClient == null) {
-    		throw new \InvalidArgumentException('The api client is required.');
-    	}
-    	
-        $this->apiClient = $apiClient;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param ApiClient $apiClient the api client
+	 */
+	public function __construct(ApiClient $apiClient) {
+		if ($apiClient == null) {
+			throw new \InvalidArgumentException('The api client is required.');
+		}
 
-    /**
-     * Returns the API client instance.
-     *
-     * @return ApiClient
-     */
-    public function getApiClient() {
-        return $this->apiClient;
-    }
+		$this->apiClient = $apiClient;
+	}
+
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
 
 
-    /**
-     * Operation chargeFlowApplyFlowGet
-     *
-     * applyFlow
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\Transaction
-     */
-    public function chargeFlowApplyFlowGet($spaceId, $id) {
-        return $this->chargeFlowApplyFlowGetWithHttpInfo($spaceId, $id)->getData();
-    }
+	/**
+	 * Operation chargeFlowApplyFlowGet
+	 *
+	 * applyFlow
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\Transaction
+	 */
+	public function chargeFlowApplyFlowGet($spaceId, $id) {
+		return $this->chargeFlowApplyFlowGetWithHttpInfo($spaceId, $id)->getData();
+	}
 
-    /**
-     * Operation chargeFlowApplyFlowGetWithHttpInfo
-     *
-     * applyFlow
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function chargeFlowApplyFlowGetWithHttpInfo($spaceId, $id) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowApplyFlowGet');
-        }
-        // verify the required parameter 'id' is set
-        if ($id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $id when calling chargeFlowApplyFlowGet');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept([]);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        if ($id !== null) {
-            $queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-        }
-        
-        // path params
-        $resourcePath = "/charge-flow/applyFlow";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-        
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'GET',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\Transaction',
-                '/charge-flow/applyFlow'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chargeFlowCountPost
-     *
-     * count
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-     * @throws \Wallee\Sdk\ApiException
-     * @return int
-     */
-    public function chargeFlowCountPost($spaceId, $filter = null) {
-        return $this->chargeFlowCountPostWithHttpInfo($spaceId, $filter)->getData();
-    }
-
-    /**
-     * Operation chargeFlowCountPostWithHttpInfo
-     *
-     * count
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function chargeFlowCountPostWithHttpInfo($spaceId, $filter = null) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowCountPost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation chargeFlowApplyFlowGetWithHttpInfo
+	 *
+	 * applyFlow
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function chargeFlowApplyFlowGetWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowApplyFlowGet');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling chargeFlowApplyFlowGet');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/charge-flow/count";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/charge-flow/applyFlow";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($filter)) {
-            $tempBody = $filter;
-        }
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\Transaction',
+				'/charge-flow/applyFlow'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                'int',
-                '/charge-flow/count'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+			throw $e;
+		}
+	}
 
-            throw $e;
-        }
-    }
+	/**
+	 * Operation chargeFlowCountPost
+	 *
+	 * count
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return int
+	 */
+	public function chargeFlowCountPost($spaceId, $filter = null) {
+		return $this->chargeFlowCountPostWithHttpInfo($spaceId, $filter)->getData();
+	}
 
-    /**
-     * Operation chargeFlowReadGet
-     *
-     * read
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The id of the charge flow which should be returned. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\ChargeFlow
-     */
-    public function chargeFlowReadGet($spaceId, $id) {
-        return $this->chargeFlowReadGetWithHttpInfo($spaceId, $id)->getData();
-    }
-
-    /**
-     * Operation chargeFlowReadGetWithHttpInfo
-     *
-     * read
-     *
-     * @param int $spaceId  (required)
-     * @param int $id The id of the charge flow which should be returned. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function chargeFlowReadGetWithHttpInfo($spaceId, $id) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowReadGet');
-        }
-        // verify the required parameter 'id' is set
-        if ($id === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $id when calling chargeFlowReadGet');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation chargeFlowCountPostWithHttpInfo
+	 *
+	 * count
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function chargeFlowCountPostWithHttpInfo($spaceId, $filter = null) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowCountPost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        if ($id !== null) {
-            $queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-        }
-        
-        // path params
-        $resourcePath = "/charge-flow/read";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/charge-flow/count";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'GET',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\ChargeFlow',
-                '/charge-flow/read'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ChargeFlow', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ChargeFlow', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+		// body params
+		$tempBody = null;
+		if (isset($filter)) {
+			$tempBody = $filter;
+		}
 
-            throw $e;
-        }
-    }
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'int',
+				'/charge-flow/count'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-    /**
-     * Operation chargeFlowSearchPost
-     *
-     * search
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return \Wallee\Sdk\Model\ChargeFlow[]
-     */
-    public function chargeFlowSearchPost($spaceId, $query) {
-        return $this->chargeFlowSearchPostWithHttpInfo($spaceId, $query)->getData();
-    }
+			throw $e;
+		}
+	}
 
-    /**
-     * Operation chargeFlowSearchPostWithHttpInfo
-     *
-     * search
-     *
-     * @param int $spaceId  (required)
-     * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
-     * @throws \Wallee\Sdk\ApiException
-     * @return ApiResponse
-     */
-    public function chargeFlowSearchPostWithHttpInfo($spaceId, $query) {
-        // verify the required parameter 'spaceId' is set
-        if ($spaceId === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowSearchPost');
-        }
-        // verify the required parameter 'query' is set
-        if ($query === null) {
-            throw new \InvalidArgumentException('Missing the required parameter $query when calling chargeFlowSearchPost');
-        }
-        // header params
-        $headerParams = [];
-        $headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-        if (!is_null($headerAccept)) {
-            $headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-        }
-        $headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+	/**
+	 * Operation chargeFlowReadGet
+	 *
+	 * read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the charge flow which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\ChargeFlow
+	 */
+	public function chargeFlowReadGet($spaceId, $id) {
+		return $this->chargeFlowReadGetWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation chargeFlowReadGetWithHttpInfo
+	 *
+	 * read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the charge flow which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function chargeFlowReadGetWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowReadGet');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling chargeFlowReadGet');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
-        if ($spaceId !== null) {
-            $queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-        }
-        
-        // path params
-        $resourcePath = "/charge-flow/search";
-        // default format to json
-        $resourcePath = str_replace("{format}", "json", $resourcePath);
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/charge-flow/read";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = [];
-        // body params
-        $tempBody = null;
-        if (isset($query)) {
-            $tempBody = $query;
-        }
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\ChargeFlow',
+				'/charge-flow/read'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ChargeFlow', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ChargeFlow', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
 
-        // for model (json/xml)
-        $httpBody = '';
-        if (isset($tempBody)) {
-            $httpBody = $tempBody; // $tempBody is the method argument, if present
-        } elseif (count($formParams) > 0) {
-            $httpBody = $formParams; // for HTTP post (form)
-        }
-        // make the API Call
-        try {
-            $response = $this->apiClient->callApi(
-                $resourcePath,
-                'POST',
-                $queryParams,
-                $httpBody,
-                $headerParams,
-                '\Wallee\Sdk\Model\ChargeFlow[]',
-                '/charge-flow/search'
-            );
-            return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ChargeFlow[]', $response->getHeaders()));
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ChargeFlow[]', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 442:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-                case 542:
-                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-                    $e->setResponseObject($data);
-                    break;
-            }
+			throw $e;
+		}
+	}
 
-            throw $e;
-        }
-    }
-    
+	/**
+	 * Operation chargeFlowSearchPost
+	 *
+	 * search
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\ChargeFlow[]
+	 */
+	public function chargeFlowSearchPost($spaceId, $query) {
+		return $this->chargeFlowSearchPostWithHttpInfo($spaceId, $query)->getData();
+	}
+
+	/**
+	 * Operation chargeFlowSearchPostWithHttpInfo
+	 *
+	 * search
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function chargeFlowSearchPostWithHttpInfo($spaceId, $query) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling chargeFlowSearchPost');
+		}
+		// verify the required parameter 'query' is set
+		if ($query === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling chargeFlowSearchPost');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+
+		// query params
+		$queryParams = [];
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/charge-flow/search";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = [];
+		// body params
+		$tempBody = null;
+		if (isset($query)) {
+			$tempBody = $query;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\ChargeFlow[]',
+				'/charge-flow/search'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ChargeFlow[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ChargeFlow[]', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 442:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+				case 542:
+					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e->setResponseObject($data);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
 }
