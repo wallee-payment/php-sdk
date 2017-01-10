@@ -143,12 +143,24 @@ class SubscriptionProductComponent  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setComponentGroup(isset($data['componentGroup']) ? $data['componentGroup'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
-		$this->setTaxClass(isset($data['taxClass']) ? $data['taxClass'] : null);
+		if (isset($data['componentGroup']) && $data['componentGroup'] != null) {
+			$this->setComponentGroup($data['componentGroup']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['reference']) && $data['reference'] != null) {
+			$this->setReference($data['reference']);
+		}
+		if (isset($data['taxClass']) && $data['taxClass'] != null) {
+			$this->setTaxClass($data['taxClass']);
+		}
 	}
 
 
@@ -430,3 +442,4 @@ class SubscriptionProductComponent  {
 	}
 
 }
+

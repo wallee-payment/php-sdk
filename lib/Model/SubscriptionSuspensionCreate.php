@@ -88,10 +88,18 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setEndAction(isset($data['endAction']) ? $data['endAction'] : null);
-		$this->setNote(isset($data['note']) ? $data['note'] : null);
-		$this->setPlannedEndDate(isset($data['plannedEndDate']) ? $data['plannedEndDate'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+		if (isset($data['endAction']) && $data['endAction'] != null) {
+			$this->setEndAction($data['endAction']);
+		}
+		if (isset($data['note']) && $data['note'] != null) {
+			$this->setNote($data['note']);
+		}
+		if (isset($data['plannedEndDate']) && $data['plannedEndDate'] != null) {
+			$this->setPlannedEndDate($data['plannedEndDate']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
 	}
 
 
@@ -230,3 +238,4 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	}
 
 }
+

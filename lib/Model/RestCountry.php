@@ -107,7 +107,9 @@ class RestCountry  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setStateCodes(isset($data['stateCodes']) ? $data['stateCodes'] : null);
+		if (isset($data['stateCodes']) && $data['stateCodes'] != null) {
+			$this->setStateCodes($data['stateCodes']);
+		}
 	}
 
 
@@ -263,3 +265,4 @@ class RestCountry  {
 	}
 
 }
+

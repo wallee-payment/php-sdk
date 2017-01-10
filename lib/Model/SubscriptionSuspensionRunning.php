@@ -111,3 +111,4 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension  {
 	}
 
 }
+

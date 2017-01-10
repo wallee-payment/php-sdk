@@ -267,14 +267,30 @@ class ChargeAttempt  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setCharge(isset($data['charge']) ? $data['charge'] : null);
-		$this->setConnectorConfiguration(isset($data['connectorConfiguration']) ? $data['connectorConfiguration'] : null);
-		$this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
-		$this->setInvocation(isset($data['invocation']) ? $data['invocation'] : null);
-		$this->setLabels(isset($data['labels']) ? $data['labels'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-		$this->setTokenVersion(isset($data['tokenVersion']) ? $data['tokenVersion'] : null);
+		if (isset($data['charge']) && $data['charge'] != null) {
+			$this->setCharge($data['charge']);
+		}
+		if (isset($data['connectorConfiguration']) && $data['connectorConfiguration'] != null) {
+			$this->setConnectorConfiguration($data['connectorConfiguration']);
+		}
+		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+			$this->setFailureReason($data['failureReason']);
+		}
+		if (isset($data['invocation']) && $data['invocation'] != null) {
+			$this->setInvocation($data['invocation']);
+		}
+		if (isset($data['labels']) && $data['labels'] != null) {
+			$this->setLabels($data['labels']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
+		if (isset($data['tokenVersion']) && $data['tokenVersion'] != null) {
+			$this->setTokenVersion($data['tokenVersion']);
+		}
 	}
 
 
@@ -840,3 +856,4 @@ class ChargeAttempt  {
 	}
 
 }
+

@@ -70,9 +70,15 @@ class SubscriptionProductVersionRetirementCreate extends SubscriptionProductVers
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-		$this->setRespectTerminiationPeriodsEnabled(isset($data['respectTerminiationPeriodsEnabled']) ? $data['respectTerminiationPeriodsEnabled'] : null);
-		$this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
+		if (isset($data['productVersion']) && $data['productVersion'] != null) {
+			$this->setProductVersion($data['productVersion']);
+		}
+		if (isset($data['respectTerminiationPeriodsEnabled']) && $data['respectTerminiationPeriodsEnabled'] != null) {
+			$this->setRespectTerminiationPeriodsEnabled($data['respectTerminiationPeriodsEnabled']);
+		}
+		if (isset($data['targetProduct']) && $data['targetProduct'] != null) {
+			$this->setTargetProduct($data['targetProduct']);
+		}
 	}
 
 
@@ -173,3 +179,4 @@ class SubscriptionProductVersionRetirementCreate extends SubscriptionProductVers
 	}
 
 }
+

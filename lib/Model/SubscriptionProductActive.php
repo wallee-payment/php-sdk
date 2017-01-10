@@ -94,11 +94,21 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAllowedPaymentMethodConfigurations(isset($data['allowedPaymentMethodConfigurations']) ? $data['allowedPaymentMethodConfigurations'] : null);
-		$this->setFailedPaymentSuspensionPeriod(isset($data['failedPaymentSuspensionPeriod']) ? $data['failedPaymentSuspensionPeriod'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
-		$this->setState(isset($data['state']) ? $data['state'] : null);
+		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
+			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['failedPaymentSuspensionPeriod']) && $data['failedPaymentSuspensionPeriod'] != null) {
+			$this->setFailedPaymentSuspensionPeriod($data['failedPaymentSuspensionPeriod']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
+			$this->setSortOrder($data['sortOrder']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 	}
 
 
@@ -258,3 +268,4 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	}
 
 }
+

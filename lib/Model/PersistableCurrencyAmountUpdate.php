@@ -70,8 +70,12 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAmount(isset($data['amount']) ? $data['amount'] : null);
-		$this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
+		if (isset($data['amount']) && $data['amount'] != null) {
+			$this->setAmount($data['amount']);
+		}
+		if (isset($data['currency']) && $data['currency'] != null) {
+			$this->setCurrency($data['currency']);
+		}
 	}
 
 
@@ -155,3 +159,4 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	}
 
 }
+

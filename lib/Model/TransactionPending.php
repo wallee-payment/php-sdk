@@ -70,20 +70,48 @@ class TransactionPending extends Transaction  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAllowedPaymentMethodBrands(isset($data['allowedPaymentMethodBrands']) ? $data['allowedPaymentMethodBrands'] : null);
-		$this->setAllowedPaymentMethodConfigurations(isset($data['allowedPaymentMethodConfigurations']) ? $data['allowedPaymentMethodConfigurations'] : null);
-		$this->setBillingAddress(isset($data['billingAddress']) ? $data['billingAddress'] : null);
-		$this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
-		$this->setCustomerEmailAddress(isset($data['customerEmailAddress']) ? $data['customerEmailAddress'] : null);
-		$this->setCustomerId(isset($data['customerId']) ? $data['customerId'] : null);
-		$this->setFailedUrl(isset($data['failedUrl']) ? $data['failedUrl'] : null);
-		$this->setInvoiceMerchantReference(isset($data['invoiceMerchantReference']) ? $data['invoiceMerchantReference'] : null);
-		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
-		$this->setLineItems(isset($data['lineItems']) ? $data['lineItems'] : null);
-		$this->setMerchantReference(isset($data['merchantReference']) ? $data['merchantReference'] : null);
-		$this->setShippingAddress(isset($data['shippingAddress']) ? $data['shippingAddress'] : null);
-		$this->setShippingMethod(isset($data['shippingMethod']) ? $data['shippingMethod'] : null);
-		$this->setSuccessUrl(isset($data['successUrl']) ? $data['successUrl'] : null);
+		if (isset($data['allowedPaymentMethodBrands']) && $data['allowedPaymentMethodBrands'] != null) {
+			$this->setAllowedPaymentMethodBrands($data['allowedPaymentMethodBrands']);
+		}
+		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
+			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
+		if (isset($data['currency']) && $data['currency'] != null) {
+			$this->setCurrency($data['currency']);
+		}
+		if (isset($data['customerEmailAddress']) && $data['customerEmailAddress'] != null) {
+			$this->setCustomerEmailAddress($data['customerEmailAddress']);
+		}
+		if (isset($data['customerId']) && $data['customerId'] != null) {
+			$this->setCustomerId($data['customerId']);
+		}
+		if (isset($data['failedUrl']) && $data['failedUrl'] != null) {
+			$this->setFailedUrl($data['failedUrl']);
+		}
+		if (isset($data['invoiceMerchantReference']) && $data['invoiceMerchantReference'] != null) {
+			$this->setInvoiceMerchantReference($data['invoiceMerchantReference']);
+		}
+		if (isset($data['language']) && $data['language'] != null) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+			$this->setLineItems($data['lineItems']);
+		}
+		if (isset($data['merchantReference']) && $data['merchantReference'] != null) {
+			$this->setMerchantReference($data['merchantReference']);
+		}
+		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+			$this->setShippingAddress($data['shippingAddress']);
+		}
+		if (isset($data['shippingMethod']) && $data['shippingMethod'] != null) {
+			$this->setShippingMethod($data['shippingMethod']);
+		}
+		if (isset($data['successUrl']) && $data['successUrl'] != null) {
+			$this->setSuccessUrl($data['successUrl']);
+		}
 	}
 
 
@@ -419,3 +447,4 @@ class TransactionPending extends Transaction  {
 	}
 
 }
+

@@ -70,9 +70,15 @@ class SubscriptionMetricCreate extends SubscriptionMetricActive  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -171,3 +177,4 @@ class SubscriptionMetricCreate extends SubscriptionMetricActive  {
 	}
 
 }
+

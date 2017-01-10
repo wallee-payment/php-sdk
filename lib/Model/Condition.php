@@ -143,8 +143,12 @@ class Condition  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setConditionType(isset($data['conditionType']) ? $data['conditionType'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		if (isset($data['conditionType']) && $data['conditionType'] != null) {
+			$this->setConditionType($data['conditionType']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
 	}
 
 
@@ -357,3 +361,4 @@ class Condition  {
 	}
 
 }
+

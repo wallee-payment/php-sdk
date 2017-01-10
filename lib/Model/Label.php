@@ -105,8 +105,12 @@ class Label  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setContent(isset($data['content']) ? $data['content'] : null);
-		$this->setDescriptor(isset($data['descriptor']) ? $data['descriptor'] : null);
+		if (isset($data['content']) && $data['content'] != null) {
+			$this->setContent($data['content']);
+		}
+		if (isset($data['descriptor']) && $data['descriptor'] != null) {
+			$this->setDescriptor($data['descriptor']);
+		}
 	}
 
 
@@ -260,3 +264,4 @@ class Label  {
 	}
 
 }
+

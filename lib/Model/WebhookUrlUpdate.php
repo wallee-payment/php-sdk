@@ -70,8 +70,12 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setUrl(isset($data['url']) ? $data['url'] : null);
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['url']) && $data['url'] != null) {
+			$this->setUrl($data['url']);
+		}
 	}
 
 
@@ -161,3 +165,4 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	}
 
 }
+

@@ -203,11 +203,21 @@ class PaymentMethodConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setImageResourcePath(isset($data['imageResourcePath']) ? $data['imageResourcePath'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setPaymentMethod(isset($data['paymentMethod']) ? $data['paymentMethod'] : null);
-		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['imageResourcePath']) && $data['imageResourcePath'] != null) {
+			$this->setImageResourcePath($data['imageResourcePath']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['paymentMethod']) && $data['paymentMethod'] != null) {
+			$this->setPaymentMethod($data['paymentMethod']);
+		}
+		if (isset($data['title']) && $data['title'] != null) {
+			$this->setTitle($data['title']);
+		}
 	}
 
 
@@ -564,3 +574,4 @@ class PaymentMethodConfiguration  {
 	}
 
 }
+

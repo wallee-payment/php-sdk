@@ -88,11 +88,21 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setComponent(isset($data['component']) ? $data['component'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setMetric(isset($data['metric']) ? $data['metric'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setTierPricing(isset($data['tierPricing']) ? $data['tierPricing'] : null);
+		if (isset($data['component']) && $data['component'] != null) {
+			$this->setComponent($data['component']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['metric']) && $data['metric'] != null) {
+			$this->setMetric($data['metric']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['tierPricing']) && $data['tierPricing'] != null) {
+			$this->setTierPricing($data['tierPricing']);
+		}
 	}
 
 
@@ -243,3 +253,4 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	}
 
 }
+

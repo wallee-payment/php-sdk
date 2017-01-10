@@ -88,26 +88,66 @@ class AddressCreate extends Address  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setCity(isset($data['city']) ? $data['city'] : null);
-		$this->setCommercialRegisterNumber(isset($data['commercialRegisterNumber']) ? $data['commercialRegisterNumber'] : null);
-		$this->setCountry(isset($data['country']) ? $data['country'] : null);
-		$this->setDateOfBirth(isset($data['dateOfBirth']) ? $data['dateOfBirth'] : null);
-		$this->setDependentLocality(isset($data['dependentLocality']) ? $data['dependentLocality'] : null);
-		$this->setEmailAddress(isset($data['emailAddress']) ? $data['emailAddress'] : null);
-		$this->setFamilyName(isset($data['familyName']) ? $data['familyName'] : null);
-		$this->setGender(isset($data['gender']) ? $data['gender'] : null);
-		$this->setGivenName(isset($data['givenName']) ? $data['givenName'] : null);
-		$this->setLegalOrganizationForm(isset($data['legalOrganizationForm']) ? $data['legalOrganizationForm'] : null);
-		$this->setMobilePhoneNumber(isset($data['mobilePhoneNumber']) ? $data['mobilePhoneNumber'] : null);
-		$this->setOrganizationName(isset($data['organizationName']) ? $data['organizationName'] : null);
-		$this->setPhoneNumber(isset($data['phoneNumber']) ? $data['phoneNumber'] : null);
-		$this->setPostCode(isset($data['postCode']) ? $data['postCode'] : null);
-		$this->setPostalState(isset($data['postalState']) ? $data['postalState'] : null);
-		$this->setSalesTaxNumber(isset($data['salesTaxNumber']) ? $data['salesTaxNumber'] : null);
-		$this->setSalutation(isset($data['salutation']) ? $data['salutation'] : null);
-		$this->setSocialSecurityNumber(isset($data['socialSecurityNumber']) ? $data['socialSecurityNumber'] : null);
-		$this->setSortingCode(isset($data['sortingCode']) ? $data['sortingCode'] : null);
-		$this->setStreet(isset($data['street']) ? $data['street'] : null);
+		if (isset($data['city']) && $data['city'] != null) {
+			$this->setCity($data['city']);
+		}
+		if (isset($data['commercialRegisterNumber']) && $data['commercialRegisterNumber'] != null) {
+			$this->setCommercialRegisterNumber($data['commercialRegisterNumber']);
+		}
+		if (isset($data['country']) && $data['country'] != null) {
+			$this->setCountry($data['country']);
+		}
+		if (isset($data['dateOfBirth']) && $data['dateOfBirth'] != null) {
+			$this->setDateOfBirth($data['dateOfBirth']);
+		}
+		if (isset($data['dependentLocality']) && $data['dependentLocality'] != null) {
+			$this->setDependentLocality($data['dependentLocality']);
+		}
+		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+			$this->setEmailAddress($data['emailAddress']);
+		}
+		if (isset($data['familyName']) && $data['familyName'] != null) {
+			$this->setFamilyName($data['familyName']);
+		}
+		if (isset($data['gender']) && $data['gender'] != null) {
+			$this->setGender($data['gender']);
+		}
+		if (isset($data['givenName']) && $data['givenName'] != null) {
+			$this->setGivenName($data['givenName']);
+		}
+		if (isset($data['legalOrganizationForm']) && $data['legalOrganizationForm'] != null) {
+			$this->setLegalOrganizationForm($data['legalOrganizationForm']);
+		}
+		if (isset($data['mobilePhoneNumber']) && $data['mobilePhoneNumber'] != null) {
+			$this->setMobilePhoneNumber($data['mobilePhoneNumber']);
+		}
+		if (isset($data['organizationName']) && $data['organizationName'] != null) {
+			$this->setOrganizationName($data['organizationName']);
+		}
+		if (isset($data['phoneNumber']) && $data['phoneNumber'] != null) {
+			$this->setPhoneNumber($data['phoneNumber']);
+		}
+		if (isset($data['postCode']) && $data['postCode'] != null) {
+			$this->setPostCode($data['postCode']);
+		}
+		if (isset($data['postalState']) && $data['postalState'] != null) {
+			$this->setPostalState($data['postalState']);
+		}
+		if (isset($data['salesTaxNumber']) && $data['salesTaxNumber'] != null) {
+			$this->setSalesTaxNumber($data['salesTaxNumber']);
+		}
+		if (isset($data['salutation']) && $data['salutation'] != null) {
+			$this->setSalutation($data['salutation']);
+		}
+		if (isset($data['socialSecurityNumber']) && $data['socialSecurityNumber'] != null) {
+			$this->setSocialSecurityNumber($data['socialSecurityNumber']);
+		}
+		if (isset($data['sortingCode']) && $data['sortingCode'] != null) {
+			$this->setSortingCode($data['sortingCode']);
+		}
+		if (isset($data['street']) && $data['street'] != null) {
+			$this->setStreet($data['street']);
+		}
 	}
 
 
@@ -579,3 +619,4 @@ class AddressCreate extends Address  {
 	}
 
 }
+

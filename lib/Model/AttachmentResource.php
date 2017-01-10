@@ -83,7 +83,9 @@ class AttachmentResource  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAttachmentName(isset($data['attachmentName']) ? $data['attachmentName'] : null);
+		if (isset($data['attachmentName']) && $data['attachmentName'] != null) {
+			$this->setAttachmentName($data['attachmentName']);
+		}
 	}
 
 
@@ -170,3 +172,4 @@ class AttachmentResource  {
 	}
 
 }
+

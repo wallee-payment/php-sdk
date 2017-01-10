@@ -94,7 +94,9 @@ class SubscriberActive extends SubscriberUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setState(isset($data['state']) ? $data['state'] : null);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 	}
 
 
@@ -166,3 +168,4 @@ class SubscriberActive extends SubscriberUpdate  {
 	}
 
 }
+

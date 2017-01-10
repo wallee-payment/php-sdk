@@ -165,9 +165,15 @@ class ChargeFlowLevelConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setFlow(isset($data['flow']) ? $data['flow'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
+		if (isset($data['flow']) && $data['flow'] != null) {
+			$this->setFlow($data['flow']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -450,3 +456,4 @@ class ChargeFlowLevelConfiguration  {
 	}
 
 }
+

@@ -111,3 +111,4 @@ class SubscriptionProductVersionRetired extends SubscriptionProductVersion  {
 	}
 
 }
+

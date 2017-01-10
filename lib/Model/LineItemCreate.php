@@ -92,14 +92,30 @@ class LineItemCreate extends LineItem  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAmountIncludingTax(isset($data['amountIncludingTax']) ? $data['amountIncludingTax'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setQuantity(isset($data['quantity']) ? $data['quantity'] : null);
-		$this->setShippingRequired(isset($data['shippingRequired']) ? $data['shippingRequired'] : null);
-		$this->setSku(isset($data['sku']) ? $data['sku'] : null);
-		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
-		$this->setUniqueId(isset($data['uniqueId']) ? $data['uniqueId'] : null);
+		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
+			$this->setAmountIncludingTax($data['amountIncludingTax']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['quantity']) && $data['quantity'] != null) {
+			$this->setQuantity($data['quantity']);
+		}
+		if (isset($data['shippingRequired']) && $data['shippingRequired'] != null) {
+			$this->setShippingRequired($data['shippingRequired']);
+		}
+		if (isset($data['sku']) && $data['sku'] != null) {
+			$this->setSku($data['sku']);
+		}
+		if (isset($data['taxes']) && $data['taxes'] != null) {
+			$this->setTaxes($data['taxes']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
+		if (isset($data['uniqueId']) && $data['uniqueId'] != null) {
+			$this->setUniqueId($data['uniqueId']);
+		}
 	}
 
 
@@ -333,3 +349,4 @@ class LineItemCreate extends LineItem  {
 	}
 
 }
+

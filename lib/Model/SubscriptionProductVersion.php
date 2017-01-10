@@ -245,10 +245,18 @@ class SubscriptionProductVersion  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setEnabledCurrencies(isset($data['enabledCurrencies']) ? $data['enabledCurrencies'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setProduct(isset($data['product']) ? $data['product'] : null);
+		if (isset($data['enabledCurrencies']) && $data['enabledCurrencies'] != null) {
+			$this->setEnabledCurrencies($data['enabledCurrencies']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['product']) && $data['product'] != null) {
+			$this->setProduct($data['product']);
+		}
 	}
 
 
@@ -764,3 +772,4 @@ class SubscriptionProductVersion  {
 	}
 
 }
+

@@ -133,10 +133,18 @@ class PaymentMethod  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDataCollectionTypes(isset($data['dataCollectionTypes']) ? $data['dataCollectionTypes'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setSupportedCurrencies(isset($data['supportedCurrencies']) ? $data['supportedCurrencies'] : null);
+		if (isset($data['dataCollectionTypes']) && $data['dataCollectionTypes'] != null) {
+			$this->setDataCollectionTypes($data['dataCollectionTypes']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['supportedCurrencies']) && $data['supportedCurrencies'] != null) {
+			$this->setSupportedCurrencies($data['supportedCurrencies']);
+		}
 	}
 
 
@@ -319,3 +327,4 @@ class PaymentMethod  {
 	}
 
 }
+

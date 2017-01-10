@@ -94,15 +94,33 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setBillingCycle(isset($data['billingCycle']) ? $data['billingCycle'] : null);
-		$this->setComment(isset($data['comment']) ? $data['comment'] : null);
-		$this->setDefaultCurrency(isset($data['defaultCurrency']) ? $data['defaultCurrency'] : null);
-		$this->setEnabledCurrencies(isset($data['enabledCurrencies']) ? $data['enabledCurrencies'] : null);
-		$this->setMinimalNumberOfPeriods(isset($data['minimalNumberOfPeriods']) ? $data['minimalNumberOfPeriods'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setNumberOfNoticePeriods(isset($data['numberOfNoticePeriods']) ? $data['numberOfNoticePeriods'] : null);
-		$this->setProduct(isset($data['product']) ? $data['product'] : null);
-		$this->setState(isset($data['state']) ? $data['state'] : null);
+		if (isset($data['billingCycle']) && $data['billingCycle'] != null) {
+			$this->setBillingCycle($data['billingCycle']);
+		}
+		if (isset($data['comment']) && $data['comment'] != null) {
+			$this->setComment($data['comment']);
+		}
+		if (isset($data['defaultCurrency']) && $data['defaultCurrency'] != null) {
+			$this->setDefaultCurrency($data['defaultCurrency']);
+		}
+		if (isset($data['enabledCurrencies']) && $data['enabledCurrencies'] != null) {
+			$this->setEnabledCurrencies($data['enabledCurrencies']);
+		}
+		if (isset($data['minimalNumberOfPeriods']) && $data['minimalNumberOfPeriods'] != null) {
+			$this->setMinimalNumberOfPeriods($data['minimalNumberOfPeriods']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['numberOfNoticePeriods']) && $data['numberOfNoticePeriods'] != null) {
+			$this->setNumberOfNoticePeriods($data['numberOfNoticePeriods']);
+		}
+		if (isset($data['product']) && $data['product'] != null) {
+			$this->setProduct($data['product']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 	}
 
 
@@ -350,3 +368,4 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	}
 
 }
+

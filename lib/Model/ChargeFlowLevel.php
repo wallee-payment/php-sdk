@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ChargeFlowLevel  {
+class ChargeFlowLevel extends TransactionAwareEntity  {
 
 	/**
 	 * The original name of the model.
@@ -51,8 +51,6 @@ class ChargeFlowLevel  {
 		'asynchronousCharge' => '\Wallee\Sdk\Model\EntityReference',
 		'configuration' => '\Wallee\Sdk\Model\ChargeFlowLevelConfiguration',
 		'createdOn' => 'string',
-		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
 		'synchronousCharge' => '\Wallee\Sdk\Model\EntityReference',
@@ -67,7 +65,7 @@ class ChargeFlowLevel  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
@@ -108,18 +106,6 @@ class ChargeFlowLevel  {
 	 * @var string
 	 */
 	private $createdOn;
-
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
-	 */
-	private $linkedSpaceId;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -171,12 +157,23 @@ class ChargeFlowLevel  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAsynchronousCharge(isset($data['asynchronousCharge']) ? $data['asynchronousCharge'] : null);
-		$this->setConfiguration(isset($data['configuration']) ? $data['configuration'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSynchronousCharge(isset($data['synchronousCharge']) ? $data['synchronousCharge'] : null);
-		$this->setTokenCharge(isset($data['tokenCharge']) ? $data['tokenCharge'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		parent::__construct($data);
+
+		if (isset($data['asynchronousCharge']) && $data['asynchronousCharge'] != null) {
+			$this->setAsynchronousCharge($data['asynchronousCharge']);
+		}
+		if (isset($data['configuration']) && $data['configuration'] != null) {
+			$this->setConfiguration($data['configuration']);
+		}
+		if (isset($data['synchronousCharge']) && $data['synchronousCharge'] != null) {
+			$this->setSynchronousCharge($data['synchronousCharge']);
+		}
+		if (isset($data['tokenCharge']) && $data['tokenCharge'] != null) {
+			$this->setTokenCharge($data['tokenCharge']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -241,50 +238,6 @@ class ChargeFlowLevel  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return ChargeFlowLevel
-	 */
-	protected function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-	 * @return ChargeFlowLevel
-	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
 	}
@@ -454,6 +407,7 @@ class ChargeFlowLevel  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getCreatedOn() === null) {
 			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
@@ -499,3 +453,4 @@ class ChargeFlowLevel  {
 	}
 
 }
+

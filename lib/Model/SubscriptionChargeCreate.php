@@ -88,13 +88,27 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-		$this->setFailedUrl(isset($data['failedUrl']) ? $data['failedUrl'] : null);
-		$this->setPlannedExecutionDate(isset($data['plannedExecutionDate']) ? $data['plannedExecutionDate'] : null);
-		$this->setProcessingType(isset($data['processingType']) ? $data['processingType'] : null);
-		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
-		$this->setSuccessUrl(isset($data['successUrl']) ? $data['successUrl'] : null);
+		if (isset($data['externalId']) && $data['externalId'] != null) {
+			$this->setExternalId($data['externalId']);
+		}
+		if (isset($data['failedUrl']) && $data['failedUrl'] != null) {
+			$this->setFailedUrl($data['failedUrl']);
+		}
+		if (isset($data['plannedExecutionDate']) && $data['plannedExecutionDate'] != null) {
+			$this->setPlannedExecutionDate($data['plannedExecutionDate']);
+		}
+		if (isset($data['processingType']) && $data['processingType'] != null) {
+			$this->setProcessingType($data['processingType']);
+		}
+		if (isset($data['reference']) && $data['reference'] != null) {
+			$this->setReference($data['reference']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
+		if (isset($data['successUrl']) && $data['successUrl'] != null) {
+			$this->setSuccessUrl($data['successUrl']);
+		}
 	}
 
 
@@ -296,3 +310,4 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	}
 
 }
+

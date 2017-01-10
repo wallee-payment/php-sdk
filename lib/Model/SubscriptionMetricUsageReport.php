@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
+class SubscriptionMetricUsageReport  {
 
 	/**
 	 * The original name of the model.
@@ -52,6 +52,8 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 		'createdByUserId' => '\Wallee\Sdk\Model\EntityReference',
 		'createdOn' => 'string',
 		'description' => 'string',
+		'externalId' => 'string',
+		'id' => 'int',
 		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'metric' => '\Wallee\Sdk\Model\SubscriptionMetric',
 		'plannedPurgeDate' => 'string',
@@ -64,7 +66,7 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -94,6 +96,20 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	 * @var string
 	 */
 	private $description;
+
+	/**
+	 * The external id identifies the metric usage uniquely.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 	/**
 	 * @var \Wallee\Sdk\Model\EntityReference
@@ -131,12 +147,18 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		$this->setCreatedByUserId(isset($data['createdByUserId']) ? $data['createdByUserId'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setMetric(isset($data['metric']) ? $data['metric'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+		if (isset($data['createdByUserId']) && $data['createdByUserId'] != null) {
+			$this->setCreatedByUserId($data['createdByUserId']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['metric']) && $data['metric'] != null) {
+			$this->setMetric($data['metric']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
 	}
 
 
@@ -238,7 +260,7 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -248,7 +270,32 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	 * @return SubscriptionMetricUsageReport
 	 */
 	protected function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionMetricUsageReport
+	 */
+	protected function setId($id) {
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -366,7 +413,6 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getConsumedUnits() === null) {
 			throw new ValidationException("'consumedUnits' can't be null", 'consumedUnits', $this);
@@ -404,3 +450,4 @@ class SubscriptionMetricUsageReport extends IdempotentJpaEntity  {
 	}
 
 }
+

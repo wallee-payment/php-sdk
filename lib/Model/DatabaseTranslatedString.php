@@ -99,8 +99,12 @@ class DatabaseTranslatedString  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAvailableLanguages(isset($data['availableLanguages']) ? $data['availableLanguages'] : null);
-		$this->setItems(isset($data['items']) ? $data['items'] : null);
+		if (isset($data['availableLanguages']) && $data['availableLanguages'] != null) {
+			$this->setAvailableLanguages($data['availableLanguages']);
+		}
+		if (isset($data['items']) && $data['items'] != null) {
+			$this->setItems($data['items']);
+		}
 	}
 
 
@@ -233,3 +237,4 @@ class DatabaseTranslatedString  {
 	}
 
 }
+

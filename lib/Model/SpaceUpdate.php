@@ -70,11 +70,21 @@ class SpaceUpdate extends Space  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setPostalAddress(isset($data['postalAddress']) ? $data['postalAddress'] : null);
-		$this->setRequestLimit(isset($data['requestLimit']) ? $data['requestLimit'] : null);
-		$this->setTechnicalContactAddresses(isset($data['technicalContactAddresses']) ? $data['technicalContactAddresses'] : null);
-		$this->setTimeZone(isset($data['timeZone']) ? $data['timeZone'] : null);
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['postalAddress']) && $data['postalAddress'] != null) {
+			$this->setPostalAddress($data['postalAddress']);
+		}
+		if (isset($data['requestLimit']) && $data['requestLimit'] != null) {
+			$this->setRequestLimit($data['requestLimit']);
+		}
+		if (isset($data['technicalContactAddresses']) && $data['technicalContactAddresses'] != null) {
+			$this->setTechnicalContactAddresses($data['technicalContactAddresses']);
+		}
+		if (isset($data['timeZone']) && $data['timeZone'] != null) {
+			$this->setTimeZone($data['timeZone']);
+		}
 	}
 
 
@@ -225,3 +235,4 @@ class SpaceUpdate extends Space  {
 	}
 
 }
+

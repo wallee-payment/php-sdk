@@ -185,12 +185,24 @@ class PaymentConnectorConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setConditions(isset($data['conditions']) ? $data['conditions'] : null);
-		$this->setConnector(isset($data['connector']) ? $data['connector'] : null);
-		$this->setEnabledSpaceViews(isset($data['enabledSpaceViews']) ? $data['enabledSpaceViews'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setPaymentMethodConfiguration(isset($data['paymentMethodConfiguration']) ? $data['paymentMethodConfiguration'] : null);
-		$this->setProcessorConfiguration(isset($data['processorConfiguration']) ? $data['processorConfiguration'] : null);
+		if (isset($data['conditions']) && $data['conditions'] != null) {
+			$this->setConditions($data['conditions']);
+		}
+		if (isset($data['connector']) && $data['connector'] != null) {
+			$this->setConnector($data['connector']);
+		}
+		if (isset($data['enabledSpaceViews']) && $data['enabledSpaceViews'] != null) {
+			$this->setEnabledSpaceViews($data['enabledSpaceViews']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['paymentMethodConfiguration']) && $data['paymentMethodConfiguration'] != null) {
+			$this->setPaymentMethodConfiguration($data['paymentMethodConfiguration']);
+		}
+		if (isset($data['processorConfiguration']) && $data['processorConfiguration'] != null) {
+			$this->setProcessorConfiguration($data['processorConfiguration']);
+		}
 	}
 
 
@@ -535,3 +547,4 @@ class PaymentConnectorConfiguration  {
 	}
 
 }
+

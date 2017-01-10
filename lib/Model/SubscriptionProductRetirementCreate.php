@@ -70,9 +70,15 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setProduct(isset($data['product']) ? $data['product'] : null);
-		$this->setRespectTerminiationPeriodsEnabled(isset($data['respectTerminiationPeriodsEnabled']) ? $data['respectTerminiationPeriodsEnabled'] : null);
-		$this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
+		if (isset($data['product']) && $data['product'] != null) {
+			$this->setProduct($data['product']);
+		}
+		if (isset($data['respectTerminiationPeriodsEnabled']) && $data['respectTerminiationPeriodsEnabled'] != null) {
+			$this->setRespectTerminiationPeriodsEnabled($data['respectTerminiationPeriodsEnabled']);
+		}
+		if (isset($data['targetProduct']) && $data['targetProduct'] != null) {
+			$this->setTargetProduct($data['targetProduct']);
+		}
 	}
 
 
@@ -173,3 +179,4 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	}
 
 }
+

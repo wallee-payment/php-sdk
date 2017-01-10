@@ -70,11 +70,21 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setComponent(isset($data['component']) ? $data['component'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setNumberOfFreeTrialPeriods(isset($data['numberOfFreeTrialPeriods']) ? $data['numberOfFreeTrialPeriods'] : null);
-		$this->setPeriodFee(isset($data['periodFee']) ? $data['periodFee'] : null);
+		if (isset($data['component']) && $data['component'] != null) {
+			$this->setComponent($data['component']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['numberOfFreeTrialPeriods']) && $data['numberOfFreeTrialPeriods'] != null) {
+			$this->setNumberOfFreeTrialPeriods($data['numberOfFreeTrialPeriods']);
+		}
+		if (isset($data['periodFee']) && $data['periodFee'] != null) {
+			$this->setPeriodFee($data['periodFee']);
+		}
 	}
 
 
@@ -218,3 +228,4 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	}
 
 }
+

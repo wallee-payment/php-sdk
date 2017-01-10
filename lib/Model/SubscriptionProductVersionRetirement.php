@@ -117,9 +117,15 @@ class SubscriptionProductVersionRetirement  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-		$this->setTargetProduct(isset($data['targetProduct']) ? $data['targetProduct'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['productVersion']) && $data['productVersion'] != null) {
+			$this->setProductVersion($data['productVersion']);
+		}
+		if (isset($data['targetProduct']) && $data['targetProduct'] != null) {
+			$this->setTargetProduct($data['targetProduct']);
+		}
 	}
 
 
@@ -315,3 +321,4 @@ class SubscriptionProductVersionRetirement  {
 	}
 
 }
+

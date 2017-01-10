@@ -229,9 +229,15 @@ class SubscriptionSuspension  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setPeriodBill(isset($data['periodBill']) ? $data['periodBill'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['periodBill']) && $data['periodBill'] != null) {
+			$this->setPeriodBill($data['periodBill']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
 	}
 
 
@@ -621,3 +627,4 @@ class SubscriptionSuspension  {
 	}
 
 }
+

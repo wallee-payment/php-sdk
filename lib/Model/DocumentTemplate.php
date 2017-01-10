@@ -155,10 +155,18 @@ class DocumentTemplate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSpaceId(isset($data['spaceId']) ? $data['spaceId'] : null);
-		$this->setTemplateResource(isset($data['templateResource']) ? $data['templateResource'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['spaceId']) && $data['spaceId'] != null) {
+			$this->setSpaceId($data['spaceId']);
+		}
+		if (isset($data['templateResource']) && $data['templateResource'] != null) {
+			$this->setTemplateResource($data['templateResource']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -410,3 +418,4 @@ class DocumentTemplate  {
 	}
 
 }
+

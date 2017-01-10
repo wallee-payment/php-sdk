@@ -123,8 +123,12 @@ class HumanUser extends User  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setPrimaryAccount(isset($data['primaryAccount']) ? $data['primaryAccount'] : null);
-		$this->setScope(isset($data['scope']) ? $data['scope'] : null);
+		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
+			$this->setPrimaryAccount($data['primaryAccount']);
+		}
+		if (isset($data['scope']) && $data['scope'] != null) {
+			$this->setScope($data['scope']);
+		}
 	}
 
 
@@ -356,3 +360,4 @@ class HumanUser extends User  {
 	}
 
 }
+

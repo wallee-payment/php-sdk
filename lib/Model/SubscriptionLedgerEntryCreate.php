@@ -70,12 +70,24 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAmountIncludingTax(isset($data['amountIncludingTax']) ? $data['amountIncludingTax'] : null);
-		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-		$this->setQuantity(isset($data['quantity']) ? $data['quantity'] : null);
-		$this->setSubscriptionVersion(isset($data['subscriptionVersion']) ? $data['subscriptionVersion'] : null);
-		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
-		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
+			$this->setAmountIncludingTax($data['amountIncludingTax']);
+		}
+		if (isset($data['externalId']) && $data['externalId'] != null) {
+			$this->setExternalId($data['externalId']);
+		}
+		if (isset($data['quantity']) && $data['quantity'] != null) {
+			$this->setQuantity($data['quantity']);
+		}
+		if (isset($data['subscriptionVersion']) && $data['subscriptionVersion'] != null) {
+			$this->setSubscriptionVersion($data['subscriptionVersion']);
+		}
+		if (isset($data['taxes']) && $data['taxes'] != null) {
+			$this->setTaxes($data['taxes']);
+		}
+		if (isset($data['title']) && $data['title'] != null) {
+			$this->setTitle($data['title']);
+		}
 	}
 
 
@@ -253,3 +265,4 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	}
 
 }
+

@@ -94,8 +94,12 @@ class SpaceCreate extends SpaceUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAccount(isset($data['account']) ? $data['account'] : null);
-		$this->setState(isset($data['state']) ? $data['state'] : null);
+		if (isset($data['account']) && $data['account'] != null) {
+			$this->setAccount($data['account']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 	}
 
 
@@ -189,3 +193,4 @@ class SpaceCreate extends SpaceUpdate  {
 	}
 
 }
+

@@ -70,14 +70,30 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setComponentChangeWeight(isset($data['componentChangeWeight']) ? $data['componentChangeWeight'] : null);
-		$this->setComponentGroup(isset($data['componentGroup']) ? $data['componentGroup'] : null);
-		$this->setDefaultComponent(isset($data['defaultComponent']) ? $data['defaultComponent'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
-		$this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
-		$this->setTaxClass(isset($data['taxClass']) ? $data['taxClass'] : null);
+		if (isset($data['componentChangeWeight']) && $data['componentChangeWeight'] != null) {
+			$this->setComponentChangeWeight($data['componentChangeWeight']);
+		}
+		if (isset($data['componentGroup']) && $data['componentGroup'] != null) {
+			$this->setComponentGroup($data['componentGroup']);
+		}
+		if (isset($data['defaultComponent']) && $data['defaultComponent'] != null) {
+			$this->setDefaultComponent($data['defaultComponent']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['reference']) && $data['reference'] != null) {
+			$this->setReference($data['reference']);
+		}
+		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
+			$this->setSortOrder($data['sortOrder']);
+		}
+		if (isset($data['taxClass']) && $data['taxClass'] != null) {
+			$this->setTaxClass($data['taxClass']);
+		}
 	}
 
 
@@ -277,3 +293,4 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	}
 
 }
+

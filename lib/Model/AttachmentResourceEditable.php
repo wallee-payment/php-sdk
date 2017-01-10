@@ -91,9 +91,15 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAttachmentName(isset($data['attachmentName']) ? $data['attachmentName'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setResourcePath(isset($data['resourcePath']) ? $data['resourcePath'] : null);
+		if (isset($data['attachmentName']) && $data['attachmentName'] != null) {
+			$this->setAttachmentName($data['attachmentName']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['resourcePath']) && $data['resourcePath'] != null) {
+			$this->setResourcePath($data['resourcePath']);
+		}
 	}
 
 
@@ -242,3 +248,4 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	}
 
 }
+

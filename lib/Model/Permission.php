@@ -133,12 +133,24 @@ class Permission  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setParent(isset($data['parent']) ? $data['parent'] : null);
-		$this->setPathToRoot(isset($data['pathToRoot']) ? $data['pathToRoot'] : null);
-		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['feature']) && $data['feature'] != null) {
+			$this->setFeature($data['feature']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['parent']) && $data['parent'] != null) {
+			$this->setParent($data['parent']);
+		}
+		if (isset($data['pathToRoot']) && $data['pathToRoot'] != null) {
+			$this->setPathToRoot($data['pathToRoot']);
+		}
+		if (isset($data['title']) && $data['title'] != null) {
+			$this->setTitle($data['title']);
+		}
 	}
 
 
@@ -380,3 +392,4 @@ class Permission  {
 	}
 
 }
+

@@ -92,11 +92,21 @@ class RefundCreate extends Refund  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-		$this->setMerchantReference(isset($data['merchantReference']) ? $data['merchantReference'] : null);
-		$this->setReductions(isset($data['reductions']) ? $data['reductions'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
+		if (isset($data['externalId']) && $data['externalId'] != null) {
+			$this->setExternalId($data['externalId']);
+		}
+		if (isset($data['merchantReference']) && $data['merchantReference'] != null) {
+			$this->setMerchantReference($data['merchantReference']);
+		}
+		if (isset($data['reductions']) && $data['reductions'] != null) {
+			$this->setReductions($data['reductions']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -259,3 +269,4 @@ class RefundCreate extends Refund  {
 	}
 
 }
+

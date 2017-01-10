@@ -151,11 +151,21 @@ class ProductPeriodFee  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setComponent(isset($data['component']) ? $data['component'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setPeriodFee(isset($data['periodFee']) ? $data['periodFee'] : null);
+		if (isset($data['component']) && $data['component'] != null) {
+			$this->setComponent($data['component']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['periodFee']) && $data['periodFee'] != null) {
+			$this->setPeriodFee($data['periodFee']);
+		}
 	}
 
 
@@ -407,3 +417,4 @@ class ProductPeriodFee  {
 	}
 
 }
+

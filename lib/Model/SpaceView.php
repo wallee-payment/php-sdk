@@ -143,8 +143,12 @@ class SpaceView  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSpace(isset($data['space']) ? $data['space'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['space']) && $data['space'] != null) {
+			$this->setSpace($data['space']);
+		}
 	}
 
 
@@ -357,3 +361,4 @@ class SpaceView  {
 	}
 
 }
+

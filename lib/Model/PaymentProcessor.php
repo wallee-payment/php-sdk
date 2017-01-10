@@ -129,12 +129,24 @@ class PaymentProcessor  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setCompanyName(isset($data['companyName']) ? $data['companyName'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-		$this->setHeadquartersLocation(isset($data['headquartersLocation']) ? $data['headquartersLocation'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setProductName(isset($data['productName']) ? $data['productName'] : null);
+		if (isset($data['companyName']) && $data['companyName'] != null) {
+			$this->setCompanyName($data['companyName']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['feature']) && $data['feature'] != null) {
+			$this->setFeature($data['feature']);
+		}
+		if (isset($data['headquartersLocation']) && $data['headquartersLocation'] != null) {
+			$this->setHeadquartersLocation($data['headquartersLocation']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['productName']) && $data['productName'] != null) {
+			$this->setProductName($data['productName']);
+		}
 	}
 
 
@@ -363,3 +375,4 @@ class PaymentProcessor  {
 	}
 
 }
+

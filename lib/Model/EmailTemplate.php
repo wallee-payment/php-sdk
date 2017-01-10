@@ -193,15 +193,33 @@ class EmailTemplate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAttachedDocumentTemplateTypes(isset($data['attachedDocumentTemplateTypes']) ? $data['attachedDocumentTemplateTypes'] : null);
-		$this->setAttachmentResourcePaths(isset($data['attachmentResourcePaths']) ? $data['attachmentResourcePaths'] : null);
-		$this->setBlindCarbonCopyRecipients(isset($data['blindCarbonCopyRecipients']) ? $data['blindCarbonCopyRecipients'] : null);
-		$this->setCarbonCopyRecipients(isset($data['carbonCopyRecipients']) ? $data['carbonCopyRecipients'] : null);
-		$this->setHtmlBodyTemplateResource(isset($data['htmlBodyTemplateResource']) ? $data['htmlBodyTemplateResource'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSubject(isset($data['subject']) ? $data['subject'] : null);
-		$this->setTextBodyTemplateResource(isset($data['textBodyTemplateResource']) ? $data['textBodyTemplateResource'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
+		if (isset($data['attachedDocumentTemplateTypes']) && $data['attachedDocumentTemplateTypes'] != null) {
+			$this->setAttachedDocumentTemplateTypes($data['attachedDocumentTemplateTypes']);
+		}
+		if (isset($data['attachmentResourcePaths']) && $data['attachmentResourcePaths'] != null) {
+			$this->setAttachmentResourcePaths($data['attachmentResourcePaths']);
+		}
+		if (isset($data['blindCarbonCopyRecipients']) && $data['blindCarbonCopyRecipients'] != null) {
+			$this->setBlindCarbonCopyRecipients($data['blindCarbonCopyRecipients']);
+		}
+		if (isset($data['carbonCopyRecipients']) && $data['carbonCopyRecipients'] != null) {
+			$this->setCarbonCopyRecipients($data['carbonCopyRecipients']);
+		}
+		if (isset($data['htmlBodyTemplateResource']) && $data['htmlBodyTemplateResource'] != null) {
+			$this->setHtmlBodyTemplateResource($data['htmlBodyTemplateResource']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['subject']) && $data['subject'] != null) {
+			$this->setSubject($data['subject']);
+		}
+		if (isset($data['textBodyTemplateResource']) && $data['textBodyTemplateResource'] != null) {
+			$this->setTextBodyTemplateResource($data['textBodyTemplateResource']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -569,3 +587,4 @@ class EmailTemplate  {
 	}
 
 }
+

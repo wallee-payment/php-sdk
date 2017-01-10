@@ -90,13 +90,27 @@ class TransactionCreate extends TransactionPending  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setBillingAddress(isset($data['billingAddress']) ? $data['billingAddress'] : null);
-		$this->setChargeRetryEnabled(isset($data['chargeRetryEnabled']) ? $data['chargeRetryEnabled'] : null);
-		$this->setCustomersPresence(isset($data['customersPresence']) ? $data['customersPresence'] : null);
-		$this->setLineItems(isset($data['lineItems']) ? $data['lineItems'] : null);
-		$this->setShippingAddress(isset($data['shippingAddress']) ? $data['shippingAddress'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-		$this->setToken(isset($data['token']) ? $data['token'] : null);
+		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
+		if (isset($data['chargeRetryEnabled']) && $data['chargeRetryEnabled'] != null) {
+			$this->setChargeRetryEnabled($data['chargeRetryEnabled']);
+		}
+		if (isset($data['customersPresence']) && $data['customersPresence'] != null) {
+			$this->setCustomersPresence($data['customersPresence']);
+		}
+		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+			$this->setLineItems($data['lineItems']);
+		}
+		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+			$this->setShippingAddress($data['shippingAddress']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
+		if (isset($data['token']) && $data['token'] != null) {
+			$this->setToken($data['token']);
+		}
 	}
 
 
@@ -292,3 +306,4 @@ class TransactionCreate extends TransactionPending  {
 	}
 
 }
+

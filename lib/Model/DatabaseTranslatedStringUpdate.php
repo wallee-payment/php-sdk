@@ -70,7 +70,9 @@ class DatabaseTranslatedStringUpdate extends DatabaseTranslatedString  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setItems(isset($data['items']) ? $data['items'] : null);
+		if (isset($data['items']) && $data['items'] != null) {
+			$this->setItems($data['items']);
+		}
 	}
 
 
@@ -133,3 +135,4 @@ class DatabaseTranslatedStringUpdate extends DatabaseTranslatedString  {
 	}
 
 }
+

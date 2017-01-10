@@ -70,8 +70,12 @@ class AccountUpdate extends Account  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setSubaccountLimit(isset($data['subaccountLimit']) ? $data['subaccountLimit'] : null);
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['subaccountLimit']) && $data['subaccountLimit'] != null) {
+			$this->setSubaccountLimit($data['subaccountLimit']);
+		}
 	}
 
 
@@ -158,3 +162,4 @@ class AccountUpdate extends Account  {
 	}
 
 }
+

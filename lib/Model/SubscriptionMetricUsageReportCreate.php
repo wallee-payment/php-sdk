@@ -70,11 +70,21 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setConsumedUnits(isset($data['consumedUnits']) ? $data['consumedUnits'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-		$this->setMetric(isset($data['metric']) ? $data['metric'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+		if (isset($data['consumedUnits']) && $data['consumedUnits'] != null) {
+			$this->setConsumedUnits($data['consumedUnits']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['externalId']) && $data['externalId'] != null) {
+			$this->setExternalId($data['externalId']);
+		}
+		if (isset($data['metric']) && $data['metric'] != null) {
+			$this->setMetric($data['metric']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
 	}
 
 
@@ -223,3 +233,4 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	}
 
 }
+

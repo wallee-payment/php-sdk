@@ -209,9 +209,15 @@ class Subscription  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSubscriber(isset($data['subscriber']) ? $data['subscriber'] : null);
-		$this->setToken(isset($data['token']) ? $data['token'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['subscriber']) && $data['subscriber'] != null) {
+			$this->setSubscriber($data['subscriber']);
+		}
+		if (isset($data['token']) && $data['token'] != null) {
+			$this->setToken($data['token']);
+		}
 	}
 
 
@@ -603,3 +609,4 @@ class Subscription  {
 	}
 
 }
+

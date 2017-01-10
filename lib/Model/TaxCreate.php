@@ -70,8 +70,12 @@ class TaxCreate extends Tax  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setRate(isset($data['rate']) ? $data['rate'] : null);
-		$this->setTitle(isset($data['title']) ? $data['title'] : null);
+		if (isset($data['rate']) && $data['rate'] != null) {
+			$this->setRate($data['rate']);
+		}
+		if (isset($data['title']) && $data['title'] != null) {
+			$this->setTitle($data['title']);
+		}
 	}
 
 
@@ -161,3 +165,4 @@ class TaxCreate extends Tax  {
 	}
 
 }
+

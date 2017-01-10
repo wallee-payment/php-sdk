@@ -70,8 +70,12 @@ class SubscriptionUpdate extends Subscription  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setPlannedTerminationDate(isset($data['plannedTerminationDate']) ? $data['plannedTerminationDate'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['plannedTerminationDate']) && $data['plannedTerminationDate'] != null) {
+			$this->setPlannedTerminationDate($data['plannedTerminationDate']);
+		}
 	}
 
 
@@ -155,3 +159,4 @@ class SubscriptionUpdate extends Subscription  {
 	}
 
 }
+

@@ -103,11 +103,21 @@ class SubscriptionChangeRequest  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setCurrency(isset($data['currency']) ? $data['currency'] : null);
-		$this->setProduct(isset($data['product']) ? $data['product'] : null);
-		$this->setRespectTerminationPeriod(isset($data['respectTerminationPeriod']) ? $data['respectTerminationPeriod'] : null);
-		$this->setSelectedComponents(isset($data['selectedComponents']) ? $data['selectedComponents'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+		if (isset($data['currency']) && $data['currency'] != null) {
+			$this->setCurrency($data['currency']);
+		}
+		if (isset($data['product']) && $data['product'] != null) {
+			$this->setProduct($data['product']);
+		}
+		if (isset($data['respectTerminationPeriod']) && $data['respectTerminationPeriod'] != null) {
+			$this->setRespectTerminationPeriod($data['respectTerminationPeriod']);
+		}
+		if (isset($data['selectedComponents']) && $data['selectedComponents'] != null) {
+			$this->setSelectedComponents($data['selectedComponents']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
 	}
 
 
@@ -262,3 +272,4 @@ class SubscriptionChangeRequest  {
 	}
 
 }
+

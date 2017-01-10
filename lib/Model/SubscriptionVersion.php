@@ -223,10 +223,18 @@ class SubscriptionVersion  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-		$this->setSelectedComponents(isset($data['selectedComponents']) ? $data['selectedComponents'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['productVersion']) && $data['productVersion'] != null) {
+			$this->setProductVersion($data['productVersion']);
+		}
+		if (isset($data['selectedComponents']) && $data['selectedComponents'] != null) {
+			$this->setSelectedComponents($data['selectedComponents']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
 	}
 
 
@@ -670,3 +678,4 @@ class SubscriptionVersion  {
 	}
 
 }
+

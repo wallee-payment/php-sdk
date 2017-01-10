@@ -70,9 +70,15 @@ class LineItemReductionCreate extends LineItemReduction  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setLineItemUniqueId(isset($data['lineItemUniqueId']) ? $data['lineItemUniqueId'] : null);
-		$this->setQuantityReduction(isset($data['quantityReduction']) ? $data['quantityReduction'] : null);
-		$this->setUnitPriceReduction(isset($data['unitPriceReduction']) ? $data['unitPriceReduction'] : null);
+		if (isset($data['lineItemUniqueId']) && $data['lineItemUniqueId'] != null) {
+			$this->setLineItemUniqueId($data['lineItemUniqueId']);
+		}
+		if (isset($data['quantityReduction']) && $data['quantityReduction'] != null) {
+			$this->setQuantityReduction($data['quantityReduction']);
+		}
+		if (isset($data['unitPriceReduction']) && $data['unitPriceReduction'] != null) {
+			$this->setUnitPriceReduction($data['unitPriceReduction']);
+		}
 	}
 
 
@@ -186,3 +192,4 @@ class LineItemReductionCreate extends LineItemReduction  {
 	}
 
 }
+

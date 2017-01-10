@@ -111,3 +111,4 @@ class SubscriptionProductVersionObsolete extends SubscriptionProductVersionRetir
 	}
 
 }
+

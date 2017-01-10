@@ -151,8 +151,12 @@ class ChargeFlow  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setConditions(isset($data['conditions']) ? $data['conditions'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		if (isset($data['conditions']) && $data['conditions'] != null) {
+			$this->setConditions($data['conditions']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
 	}
 
 
@@ -388,3 +392,4 @@ class ChargeFlow  {
 	}
 
 }
+

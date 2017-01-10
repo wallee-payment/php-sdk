@@ -163,11 +163,21 @@ class WebhookListener  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setEntity(isset($data['entity']) ? $data['entity'] : null);
-		$this->setEntityStates(isset($data['entityStates']) ? $data['entityStates'] : null);
-		$this->setIdentity(isset($data['identity']) ? $data['identity'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setUrl(isset($data['url']) ? $data['url'] : null);
+		if (isset($data['entity']) && $data['entity'] != null) {
+			$this->setEntity($data['entity']);
+		}
+		if (isset($data['entityStates']) && $data['entityStates'] != null) {
+			$this->setEntityStates($data['entityStates']);
+		}
+		if (isset($data['identity']) && $data['identity'] != null) {
+			$this->setIdentity($data['identity']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['url']) && $data['url'] != null) {
+			$this->setUrl($data['url']);
+		}
 	}
 
 
@@ -448,3 +458,4 @@ class WebhookListener  {
 	}
 
 }
+

@@ -70,10 +70,18 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setOptional(isset($data['optional']) ? $data['optional'] : null);
-		$this->setProductVersion(isset($data['productVersion']) ? $data['productVersion'] : null);
-		$this->setSortOrder(isset($data['sortOrder']) ? $data['sortOrder'] : null);
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['optional']) && $data['optional'] != null) {
+			$this->setOptional($data['optional']);
+		}
+		if (isset($data['productVersion']) && $data['productVersion'] != null) {
+			$this->setProductVersion($data['productVersion']);
+		}
+		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
+			$this->setSortOrder($data['sortOrder']);
+		}
 	}
 
 
@@ -195,3 +203,4 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	}
 
 }
+

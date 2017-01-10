@@ -203,14 +203,30 @@ class PaymentConnector  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setPaymentMethod(isset($data['paymentMethod']) ? $data['paymentMethod'] : null);
-		$this->setPaymentMethodBrand(isset($data['paymentMethodBrand']) ? $data['paymentMethodBrand'] : null);
-		$this->setProcessor(isset($data['processor']) ? $data['processor'] : null);
-		$this->setSupportedCustomersPresences(isset($data['supportedCustomersPresences']) ? $data['supportedCustomersPresences'] : null);
-		$this->setSupportedFeatures(isset($data['supportedFeatures']) ? $data['supportedFeatures'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['feature']) && $data['feature'] != null) {
+			$this->setFeature($data['feature']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['paymentMethod']) && $data['paymentMethod'] != null) {
+			$this->setPaymentMethod($data['paymentMethod']);
+		}
+		if (isset($data['paymentMethodBrand']) && $data['paymentMethodBrand'] != null) {
+			$this->setPaymentMethodBrand($data['paymentMethodBrand']);
+		}
+		if (isset($data['processor']) && $data['processor'] != null) {
+			$this->setProcessor($data['processor']);
+		}
+		if (isset($data['supportedCustomersPresences']) && $data['supportedCustomersPresences'] != null) {
+			$this->setSupportedCustomersPresences($data['supportedCustomersPresences']);
+		}
+		if (isset($data['supportedFeatures']) && $data['supportedFeatures'] != null) {
+			$this->setSupportedFeatures($data['supportedFeatures']);
+		}
 	}
 
 
@@ -522,3 +538,4 @@ class PaymentConnector  {
 	}
 
 }
+

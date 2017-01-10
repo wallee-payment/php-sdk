@@ -145,9 +145,15 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setLineItems(isset($data['lineItems']) ? $data['lineItems'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+			$this->setLineItems($data['lineItems']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -427,3 +433,4 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	}
 
 }
+

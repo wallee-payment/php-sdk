@@ -91,8 +91,12 @@ class DeliveryIndicationDecisionReason  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
 	}
 
 
@@ -202,3 +206,4 @@ class DeliveryIndicationDecisionReason  {
 	}
 
 }
+

@@ -70,7 +70,9 @@ class AccountCreate extends AccountUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setParentAccount(isset($data['parentAccount']) ? $data['parentAccount'] : null);
+		if (isset($data['parentAccount']) && $data['parentAccount'] != null) {
+			$this->setParentAccount($data['parentAccount']);
+		}
 	}
 
 
@@ -131,3 +133,4 @@ class AccountCreate extends AccountUpdate  {
 	}
 
 }
+

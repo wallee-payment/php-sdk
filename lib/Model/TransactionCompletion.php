@@ -241,10 +241,18 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
-		$this->setLabels(isset($data['labels']) ? $data['labels'] : null);
-		$this->setLineItemVersion(isset($data['lineItemVersion']) ? $data['lineItemVersion'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
+		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+			$this->setFailureReason($data['failureReason']);
+		}
+		if (isset($data['labels']) && $data['labels'] != null) {
+			$this->setLabels($data['labels']);
+		}
+		if (isset($data['lineItemVersion']) && $data['lineItemVersion'] != null) {
+			$this->setLineItemVersion($data['lineItemVersion']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
 	}
 
 
@@ -701,3 +709,4 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	}
 
 }
+

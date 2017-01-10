@@ -70,19 +70,45 @@ class SpaceAddressSetter extends SpaceAddress  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setCity(isset($data['city']) ? $data['city'] : null);
-		$this->setCountry(isset($data['country']) ? $data['country'] : null);
-		$this->setDependentLocality(isset($data['dependentLocality']) ? $data['dependentLocality'] : null);
-		$this->setEmailAddress(isset($data['emailAddress']) ? $data['emailAddress'] : null);
-		$this->setFamilyName(isset($data['familyName']) ? $data['familyName'] : null);
-		$this->setGivenName(isset($data['givenName']) ? $data['givenName'] : null);
-		$this->setOrganizationName(isset($data['organizationName']) ? $data['organizationName'] : null);
-		$this->setPostCode(isset($data['postCode']) ? $data['postCode'] : null);
-		$this->setPostalState(isset($data['postalState']) ? $data['postalState'] : null);
-		$this->setSalesTaxNumber(isset($data['salesTaxNumber']) ? $data['salesTaxNumber'] : null);
-		$this->setSalutation(isset($data['salutation']) ? $data['salutation'] : null);
-		$this->setSortingCode(isset($data['sortingCode']) ? $data['sortingCode'] : null);
-		$this->setStreet(isset($data['street']) ? $data['street'] : null);
+		if (isset($data['city']) && $data['city'] != null) {
+			$this->setCity($data['city']);
+		}
+		if (isset($data['country']) && $data['country'] != null) {
+			$this->setCountry($data['country']);
+		}
+		if (isset($data['dependentLocality']) && $data['dependentLocality'] != null) {
+			$this->setDependentLocality($data['dependentLocality']);
+		}
+		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+			$this->setEmailAddress($data['emailAddress']);
+		}
+		if (isset($data['familyName']) && $data['familyName'] != null) {
+			$this->setFamilyName($data['familyName']);
+		}
+		if (isset($data['givenName']) && $data['givenName'] != null) {
+			$this->setGivenName($data['givenName']);
+		}
+		if (isset($data['organizationName']) && $data['organizationName'] != null) {
+			$this->setOrganizationName($data['organizationName']);
+		}
+		if (isset($data['postCode']) && $data['postCode'] != null) {
+			$this->setPostCode($data['postCode']);
+		}
+		if (isset($data['postalState']) && $data['postalState'] != null) {
+			$this->setPostalState($data['postalState']);
+		}
+		if (isset($data['salesTaxNumber']) && $data['salesTaxNumber'] != null) {
+			$this->setSalesTaxNumber($data['salesTaxNumber']);
+		}
+		if (isset($data['salutation']) && $data['salutation'] != null) {
+			$this->setSalutation($data['salutation']);
+		}
+		if (isset($data['sortingCode']) && $data['sortingCode'] != null) {
+			$this->setSortingCode($data['sortingCode']);
+		}
+		if (isset($data['street']) && $data['street'] != null) {
+			$this->setStreet($data['street']);
+		}
 	}
 
 
@@ -400,3 +426,4 @@ class SpaceAddressSetter extends SpaceAddress  {
 	}
 
 }
+

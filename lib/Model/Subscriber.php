@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class Subscriber extends IdempotentJpaEntity  {
+class Subscriber  {
 
 	/**
 	 * The original name of the model.
@@ -53,6 +53,8 @@ class Subscriber extends IdempotentJpaEntity  {
 		'description' => 'string',
 		'disallowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
 		'emailAddress' => 'string',
+		'externalId' => 'string',
+		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedPurgeDate' => 'string',
@@ -68,7 +70,7 @@ class Subscriber extends IdempotentJpaEntity  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -127,6 +129,20 @@ class Subscriber extends IdempotentJpaEntity  {
 	private $emailAddress;
 
 	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
 	 * The subscriber language determines the language which is used to communicate with the subscriber in e-mails and documents (e.g. invoices).
 	 *
 	 * @var string
@@ -183,14 +199,24 @@ class Subscriber extends IdempotentJpaEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		$this->setAdditionalAllowedPaymentMethodConfigurations(isset($data['additionalAllowedPaymentMethodConfigurations']) ? $data['additionalAllowedPaymentMethodConfigurations'] : null);
-		$this->setBillingAddress(isset($data['billingAddress']) ? $data['billingAddress'] : null);
-		$this->setDisallowedPaymentMethodConfigurations(isset($data['disallowedPaymentMethodConfigurations']) ? $data['disallowedPaymentMethodConfigurations'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setShippingAddress(isset($data['shippingAddress']) ? $data['shippingAddress'] : null);
-		$this->setSpaceReference(isset($data['spaceReference']) ? $data['spaceReference'] : null);
+		if (isset($data['additionalAllowedPaymentMethodConfigurations']) && $data['additionalAllowedPaymentMethodConfigurations'] != null) {
+			$this->setAdditionalAllowedPaymentMethodConfigurations($data['additionalAllowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
+		if (isset($data['disallowedPaymentMethodConfigurations']) && $data['disallowedPaymentMethodConfigurations'] != null) {
+			$this->setDisallowedPaymentMethodConfigurations($data['disallowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+			$this->setShippingAddress($data['shippingAddress']);
+		}
+		if (isset($data['spaceReference']) && $data['spaceReference'] != null) {
+			$this->setSpaceReference($data['spaceReference']);
+		}
 	}
 
 
@@ -311,7 +337,7 @@ class Subscriber extends IdempotentJpaEntity  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -321,7 +347,32 @@ class Subscriber extends IdempotentJpaEntity  {
 	 * @return Subscriber
 	 */
 	protected function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Subscriber
+	 */
+	protected function setId($id) {
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -512,7 +563,6 @@ class Subscriber extends IdempotentJpaEntity  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getEmailAddress() === null) {
 			throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
@@ -555,3 +605,4 @@ class Subscriber extends IdempotentJpaEntity  {
 	}
 
 }
+

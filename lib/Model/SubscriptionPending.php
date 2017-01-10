@@ -70,9 +70,15 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
-		$this->setSubscriber(isset($data['subscriber']) ? $data['subscriber'] : null);
-		$this->setToken(isset($data['token']) ? $data['token'] : null);
+		if (isset($data['reference']) && $data['reference'] != null) {
+			$this->setReference($data['reference']);
+		}
+		if (isset($data['subscriber']) && $data['subscriber'] != null) {
+			$this->setSubscriber($data['subscriber']);
+		}
+		if (isset($data['token']) && $data['token'] != null) {
+			$this->setToken($data['token']);
+		}
 	}
 
 
@@ -176,3 +182,4 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	}
 
 }
+

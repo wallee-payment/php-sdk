@@ -94,8 +94,12 @@ class SubscriberCreate extends SubscriberActive  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setExternalId(isset($data['externalId']) ? $data['externalId'] : null);
-		$this->setState(isset($data['state']) ? $data['state'] : null);
+		if (isset($data['externalId']) && $data['externalId'] != null) {
+			$this->setExternalId($data['externalId']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 	}
 
 
@@ -191,3 +195,4 @@ class SubscriberCreate extends SubscriberActive  {
 	}
 
 }
+

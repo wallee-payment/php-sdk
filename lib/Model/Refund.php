@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class Refund extends IdempotentJpaEntity  {
+class Refund  {
 
 	/**
 	 * The original name of the model.
@@ -51,8 +51,10 @@ class Refund extends IdempotentJpaEntity  {
 		'amount' => 'float',
 		'createdBy' => '\Wallee\Sdk\Model\EntityReference',
 		'createdOn' => 'string',
+		'externalId' => 'string',
 		'failedOn' => 'string',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
+		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
 		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
@@ -76,7 +78,7 @@ class Refund extends IdempotentJpaEntity  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -147,6 +149,13 @@ class Refund extends IdempotentJpaEntity  {
 	private $createdOn;
 
 	/**
+	 * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
 	 * 
 	 *
 	 * @var string
@@ -157,6 +166,13 @@ class Refund extends IdempotentJpaEntity  {
 	 * @var \Wallee\Sdk\Model\FailureReason
 	 */
 	private $failureReason;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 	/**
 	 * 
@@ -273,16 +289,30 @@ class Refund extends IdempotentJpaEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		$this->setCreatedBy(isset($data['createdBy']) ? $data['createdBy'] : null);
-		$this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
-		$this->setLabels(isset($data['labels']) ? $data['labels'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setReducedLineItems(isset($data['reducedLineItems']) ? $data['reducedLineItems'] : null);
-		$this->setReductions(isset($data['reductions']) ? $data['reductions'] : null);
-		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		if (isset($data['createdBy']) && $data['createdBy'] != null) {
+			$this->setCreatedBy($data['createdBy']);
+		}
+		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+			$this->setFailureReason($data['failureReason']);
+		}
+		if (isset($data['labels']) && $data['labels'] != null) {
+			$this->setLabels($data['labels']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['reducedLineItems']) && $data['reducedLineItems'] != null) {
+			$this->setReducedLineItems($data['reducedLineItems']);
+		}
+		if (isset($data['reductions']) && $data['reductions'] != null) {
+			$this->setReductions($data['reductions']);
+		}
+		if (isset($data['taxes']) && $data['taxes'] != null) {
+			$this->setTaxes($data['taxes']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -361,7 +391,7 @@ class Refund extends IdempotentJpaEntity  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -371,7 +401,9 @@ class Refund extends IdempotentJpaEntity  {
 	 * @return Refund
 	 */
 	protected function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -414,6 +446,29 @@ class Refund extends IdempotentJpaEntity  {
 	 */
 	public function setFailureReason($failureReason) {
 		$this->failureReason = $failureReason;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Refund
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
 		return $this;
 	}
@@ -796,7 +851,6 @@ class Refund extends IdempotentJpaEntity  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
@@ -847,3 +901,4 @@ class Refund extends IdempotentJpaEntity  {
 	}
 
 }
+

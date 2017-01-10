@@ -70,8 +70,12 @@ class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
-		$this->setTranslation(isset($data['translation']) ? $data['translation'] : null);
+		if (isset($data['language']) && $data['language'] != null) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['translation']) && $data['translation'] != null) {
+			$this->setTranslation($data['translation']);
+		}
 	}
 
 
@@ -158,3 +162,4 @@ class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 	}
 
 }
+

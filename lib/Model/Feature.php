@@ -129,9 +129,15 @@ class Feature  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setRequiredFeatures(isset($data['requiredFeatures']) ? $data['requiredFeatures'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['requiredFeatures']) && $data['requiredFeatures'] != null) {
+			$this->setRequiredFeatures($data['requiredFeatures']);
+		}
 	}
 
 
@@ -354,3 +360,4 @@ class Feature  {
 	}
 
 }
+

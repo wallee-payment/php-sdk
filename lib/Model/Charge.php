@@ -195,10 +195,18 @@ class Charge  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+			$this->setFailureReason($data['failureReason']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -537,3 +545,4 @@ class Charge  {
 	}
 
 }
+

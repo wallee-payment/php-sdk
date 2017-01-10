@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class DeliveryIndication  {
+class DeliveryIndication extends TransactionAwareEntity  {
 
 	/**
 	 * The original name of the model.
@@ -51,8 +51,6 @@ class DeliveryIndication  {
 		'automaticDecisionReason' => '\Wallee\Sdk\Model\DeliveryIndicationDecisionReason',
 		'automaticallyDecidedOn' => 'string',
 		'createdOn' => 'string',
-		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'manuallyDecidedBy' => 'int',
 		'manuallyDecidedOn' => 'string',
 		'plannedPurgeDate' => 'string',
@@ -66,7 +64,7 @@ class DeliveryIndication  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
@@ -111,18 +109,6 @@ class DeliveryIndication  {
 	 * @var string
 	 */
 	private $createdOn;
-
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
-	 */
-	private $linkedSpaceId;
 
 	/**
 	 * 
@@ -171,9 +157,14 @@ class DeliveryIndication  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAutomaticDecisionReason(isset($data['automaticDecisionReason']) ? $data['automaticDecisionReason'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		parent::__construct($data);
+
+		if (isset($data['automaticDecisionReason']) && $data['automaticDecisionReason'] != null) {
+			$this->setAutomaticDecisionReason($data['automaticDecisionReason']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -240,50 +231,6 @@ class DeliveryIndication  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return DeliveryIndication
-	 */
-	protected function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-	 * @return DeliveryIndication
-	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
 	}
@@ -434,6 +381,7 @@ class DeliveryIndication  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getCreatedOn() === null) {
 			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
@@ -479,3 +427,4 @@ class DeliveryIndication  {
 	}
 
 }
+

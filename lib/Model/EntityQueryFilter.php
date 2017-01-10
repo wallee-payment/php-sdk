@@ -159,11 +159,21 @@ class EntityQueryFilter  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setChildren(isset($data['children']) ? $data['children'] : null);
-		$this->setFieldName(isset($data['fieldName']) ? $data['fieldName'] : null);
-		$this->setOperator(isset($data['operator']) ? $data['operator'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
-		$this->setValue(isset($data['value']) ? $data['value'] : null);
+		if (isset($data['children']) && $data['children'] != null) {
+			$this->setChildren($data['children']);
+		}
+		if (isset($data['fieldName']) && $data['fieldName'] != null) {
+			$this->setFieldName($data['fieldName']);
+		}
+		if (isset($data['operator']) && $data['operator'] != null) {
+			$this->setOperator($data['operator']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
+		if (isset($data['value']) && $data['value'] != null) {
+			$this->setValue($data['value']);
+		}
 	}
 
 
@@ -340,3 +350,4 @@ class EntityQueryFilter  {
 	}
 
 }
+

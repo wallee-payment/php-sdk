@@ -137,12 +137,24 @@ class EmailTemplateType  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAttachmentResources(isset($data['attachmentResources']) ? $data['attachmentResources'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setDocumentAttachments(isset($data['documentAttachments']) ? $data['documentAttachments'] : null);
-		$this->setFeature(isset($data['feature']) ? $data['feature'] : null);
-		$this->setName(isset($data['name']) ? $data['name'] : null);
-		$this->setSubject(isset($data['subject']) ? $data['subject'] : null);
+		if (isset($data['attachmentResources']) && $data['attachmentResources'] != null) {
+			$this->setAttachmentResources($data['attachmentResources']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['documentAttachments']) && $data['documentAttachments'] != null) {
+			$this->setDocumentAttachments($data['documentAttachments']);
+		}
+		if (isset($data['feature']) && $data['feature'] != null) {
+			$this->setFeature($data['feature']);
+		}
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
+		if (isset($data['subject']) && $data['subject'] != null) {
+			$this->setSubject($data['subject']);
+		}
 	}
 
 
@@ -388,3 +400,4 @@ class EmailTemplateType  {
 	}
 
 }
+

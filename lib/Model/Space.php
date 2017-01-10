@@ -197,10 +197,18 @@ class Space  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAccount(isset($data['account']) ? $data['account'] : null);
-		$this->setDatabase(isset($data['database']) ? $data['database'] : null);
-		$this->setPostalAddress(isset($data['postalAddress']) ? $data['postalAddress'] : null);
-		$this->setTechnicalContactAddresses(isset($data['technicalContactAddresses']) ? $data['technicalContactAddresses'] : null);
+		if (isset($data['account']) && $data['account'] != null) {
+			$this->setAccount($data['account']);
+		}
+		if (isset($data['database']) && $data['database'] != null) {
+			$this->setDatabase($data['database']);
+		}
+		if (isset($data['postalAddress']) && $data['postalAddress'] != null) {
+			$this->setPostalAddress($data['postalAddress']);
+		}
+		if (isset($data['technicalContactAddresses']) && $data['technicalContactAddresses'] != null) {
+			$this->setTechnicalContactAddresses($data['technicalContactAddresses']);
+		}
 	}
 
 
@@ -575,3 +583,4 @@ class Space  {
 	}
 
 }
+

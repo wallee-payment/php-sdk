@@ -70,14 +70,30 @@ class SubscriberUpdate extends Subscriber  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setAdditionalAllowedPaymentMethodConfigurations(isset($data['additionalAllowedPaymentMethodConfigurations']) ? $data['additionalAllowedPaymentMethodConfigurations'] : null);
-		$this->setBillingAddress(isset($data['billingAddress']) ? $data['billingAddress'] : null);
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setDisallowedPaymentMethodConfigurations(isset($data['disallowedPaymentMethodConfigurations']) ? $data['disallowedPaymentMethodConfigurations'] : null);
-		$this->setEmailAddress(isset($data['emailAddress']) ? $data['emailAddress'] : null);
-		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
-		$this->setReference(isset($data['reference']) ? $data['reference'] : null);
-		$this->setShippingAddress(isset($data['shippingAddress']) ? $data['shippingAddress'] : null);
+		if (isset($data['additionalAllowedPaymentMethodConfigurations']) && $data['additionalAllowedPaymentMethodConfigurations'] != null) {
+			$this->setAdditionalAllowedPaymentMethodConfigurations($data['additionalAllowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['disallowedPaymentMethodConfigurations']) && $data['disallowedPaymentMethodConfigurations'] != null) {
+			$this->setDisallowedPaymentMethodConfigurations($data['disallowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+			$this->setEmailAddress($data['emailAddress']);
+		}
+		if (isset($data['language']) && $data['language'] != null) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['reference']) && $data['reference'] != null) {
+			$this->setReference($data['reference']);
+		}
+		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+			$this->setShippingAddress($data['shippingAddress']);
+		}
 	}
 
 
@@ -282,3 +298,4 @@ class SubscriberUpdate extends Subscriber  {
 	}
 
 }
+

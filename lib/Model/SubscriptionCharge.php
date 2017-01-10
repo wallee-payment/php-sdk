@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionCharge extends IdempotentJpaEntity  {
+class SubscriptionCharge  {
 
 	/**
 	 * The original name of the model.
@@ -51,8 +51,10 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 		'createdOn' => 'string',
 		'discardedBy' => 'int',
 		'discardedOn' => 'string',
+		'externalId' => 'string',
 		'failedOn' => 'string',
 		'failedUrl' => 'string',
+		'id' => 'int',
 		'ledgerEntries' => '\Wallee\Sdk\Model\SubscriptionLedgerEntry[]',
 		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedExecutionDate' => 'string',
@@ -73,7 +75,7 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -160,6 +162,13 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	private $discardedOn;
 
 	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
 	 * 
 	 *
 	 * @var string
@@ -172,6 +181,13 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 * @var string
 	 */
 	private $failedUrl;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 	/**
 	 * 
@@ -265,12 +281,18 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		$this->setLedgerEntries(isset($data['ledgerEntries']) ? $data['ledgerEntries'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSubscription(isset($data['subscription']) ? $data['subscription'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		if (isset($data['ledgerEntries']) && $data['ledgerEntries'] != null) {
+			$this->setLedgerEntries($data['ledgerEntries']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['subscription']) && $data['subscription'] != null) {
+			$this->setSubscription($data['subscription']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -351,7 +373,7 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -361,7 +383,9 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 * @return SubscriptionCharge
 	 */
 	protected function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -406,6 +430,29 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 */
 	protected function setFailedUrl($failedUrl) {
 		$this->failedUrl = $failedUrl;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionCharge
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
 		return $this;
 	}
@@ -721,7 +768,6 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
@@ -774,3 +820,4 @@ class SubscriptionCharge extends IdempotentJpaEntity  {
 	}
 
 }
+

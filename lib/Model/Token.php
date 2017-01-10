@@ -27,13 +27,13 @@ use \Wallee\Sdk\ValidationException;
  * Token model
  *
  * @category    Class
- * @description An idempotent entity ensures that no entity with the same external id will be created twice. When an entity is created with the same ID the service will return the previously created entity rather than actually creating a new instance.
+ * @description 
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class Token extends IdempotentJpaEntity  {
+class Token  {
 
 	/**
 	 * The original name of the model.
@@ -49,6 +49,8 @@ class Token extends IdempotentJpaEntity  {
 	 */
 	private static $swaggerTypes = array(
 		'createdOn' => 'string',
+		'externalId' => 'string',
+		'id' => 'int',
 		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
@@ -61,7 +63,7 @@ class Token extends IdempotentJpaEntity  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -96,6 +98,20 @@ class Token extends IdempotentJpaEntity  {
 	 * @var string
 	 */
 	private $createdOn;
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 	/**
 	 * @var \Wallee\Sdk\Model\EntityReference
@@ -137,9 +153,9 @@ class Token extends IdempotentJpaEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
 	}
 
 
@@ -162,6 +178,52 @@ class Token extends IdempotentJpaEntity  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns externalId.
+	 *
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return $this->externalId;
+	}
+
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return Token
+	 */
+	protected function setExternalId($externalId) {
+		$this->externalId = $externalId;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return Token
+	 */
+	protected function setId($id) {
+		$this->id = $id;
 
 		return $this;
 	}
@@ -289,8 +351,10 @@ class Token extends IdempotentJpaEntity  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
+		if ($this->getExternalId() === null) {
+			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+		}
 		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
@@ -326,3 +390,4 @@ class Token extends IdempotentJpaEntity  {
 	}
 
 }
+

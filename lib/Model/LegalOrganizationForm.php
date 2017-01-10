@@ -107,8 +107,12 @@ class LegalOrganizationForm  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setDescription(isset($data['description']) ? $data['description'] : null);
-		$this->setShortcut(isset($data['shortcut']) ? $data['shortcut'] : null);
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['shortcut']) && $data['shortcut'] != null) {
+			$this->setShortcut($data['shortcut']);
+		}
 	}
 
 
@@ -264,3 +268,4 @@ class LegalOrganizationForm  {
 	}
 
 }
+

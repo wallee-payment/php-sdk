@@ -87,8 +87,12 @@ class TransactionAwareEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setLinkedTransaction(isset($data['linkedTransaction']) ? $data['linkedTransaction'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['linkedTransaction']) && $data['linkedTransaction'] != null) {
+			$this->setLinkedTransaction($data['linkedTransaction']);
+		}
 	}
 
 
@@ -194,3 +198,4 @@ class TransactionAwareEntity  {
 	}
 
 }
+

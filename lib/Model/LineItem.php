@@ -201,7 +201,9 @@ class LineItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
+		if (isset($data['taxes']) && $data['taxes'] != null) {
+			$this->setTaxes($data['taxes']);
+		}
 	}
 
 
@@ -594,3 +596,4 @@ class LineItem  {
 	}
 
 }
+

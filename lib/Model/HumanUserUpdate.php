@@ -70,11 +70,21 @@ class HumanUserUpdate extends HumanUser  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setEmailAddress(isset($data['emailAddress']) ? $data['emailAddress'] : null);
-		$this->setFirstname(isset($data['firstname']) ? $data['firstname'] : null);
-		$this->setLanguage(isset($data['language']) ? $data['language'] : null);
-		$this->setLastname(isset($data['lastname']) ? $data['lastname'] : null);
-		$this->setTimeZone(isset($data['timeZone']) ? $data['timeZone'] : null);
+		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+			$this->setEmailAddress($data['emailAddress']);
+		}
+		if (isset($data['firstname']) && $data['firstname'] != null) {
+			$this->setFirstname($data['firstname']);
+		}
+		if (isset($data['language']) && $data['language'] != null) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['lastname']) && $data['lastname'] != null) {
+			$this->setLastname($data['lastname']);
+		}
+		if (isset($data['timeZone']) && $data['timeZone'] != null) {
+			$this->setTimeZone($data['timeZone']);
+		}
 	}
 
 
@@ -233,3 +243,4 @@ class HumanUserUpdate extends HumanUser  {
 	}
 
 }
+

@@ -195,8 +195,12 @@ class Scope  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setFeatures(isset($data['features']) ? $data['features'] : null);
-		$this->setThemes(isset($data['themes']) ? $data['themes'] : null);
+		if (isset($data['features']) && $data['features'] != null) {
+			$this->setFeatures($data['features']);
+		}
+		if (isset($data['themes']) && $data['themes'] != null) {
+			$this->setThemes($data['themes']);
+		}
 	}
 
 
@@ -557,3 +561,4 @@ class Scope  {
 	}
 
 }
+

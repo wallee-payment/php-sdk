@@ -70,7 +70,9 @@ class WebhookListenerUpdate extends WebhookListener  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setName(isset($data['name']) ? $data['name'] : null);
+		if (isset($data['name']) && $data['name'] != null) {
+			$this->setName($data['name']);
+		}
 	}
 
 
@@ -136,3 +138,4 @@ class WebhookListenerUpdate extends WebhookListener  {
 	}
 
 }
+

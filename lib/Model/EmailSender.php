@@ -157,9 +157,15 @@ class EmailSender  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSenderName(isset($data['senderName']) ? $data['senderName'] : null);
-		$this->setType(isset($data['type']) ? $data['type'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['senderName']) && $data['senderName'] != null) {
+			$this->setSenderName($data['senderName']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -416,3 +422,4 @@ class EmailSender  {
 	}
 
 }
+

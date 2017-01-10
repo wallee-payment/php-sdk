@@ -83,7 +83,9 @@ class TransactionLineItemUpdateRequest  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setNewLineItems(isset($data['newLineItems']) ? $data['newLineItems'] : null);
+		if (isset($data['newLineItems']) && $data['newLineItems'] != null) {
+			$this->setNewLineItems($data['newLineItems']);
+		}
 	}
 
 
@@ -170,3 +172,4 @@ class TransactionLineItemUpdateRequest  {
 	}
 
 }
+

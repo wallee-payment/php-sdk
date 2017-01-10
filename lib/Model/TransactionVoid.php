@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class TransactionVoid  {
+class TransactionVoid extends TransactionAwareEntity  {
 
 	/**
 	 * The original name of the model.
@@ -52,10 +52,8 @@ class TransactionVoid  {
 		'createdOn' => 'string',
 		'failedOn' => 'string',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
-		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'mode' => 'string',
 		'nextUpdateOn' => 'string',
 		'plannedPurgeDate' => 'string',
@@ -73,7 +71,7 @@ class TransactionVoid  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
@@ -145,13 +143,6 @@ class TransactionVoid  {
 	private $failureReason;
 
 	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
 	 * 
 	 *
 	 * @var \Wallee\Sdk\Model\Label[]
@@ -164,11 +155,6 @@ class TransactionVoid  {
 	 * @var string
 	 */
 	private $language;
-
-	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
-	 */
-	private $linkedSpaceId;
 
 	/**
 	 * 
@@ -243,11 +229,20 @@ class TransactionVoid  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setFailureReason(isset($data['failureReason']) ? $data['failureReason'] : null);
-		$this->setLabels(isset($data['labels']) ? $data['labels'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-		$this->setTransaction(isset($data['transaction']) ? $data['transaction'] : null);
+		parent::__construct($data);
+
+		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+			$this->setFailureReason($data['failureReason']);
+		}
+		if (isset($data['labels']) && $data['labels'] != null) {
+			$this->setLabels($data['labels']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
+		if (isset($data['transaction']) && $data['transaction'] != null) {
+			$this->setTransaction($data['transaction']);
+		}
 	}
 
 
@@ -342,29 +337,6 @@ class TransactionVoid  {
 	}
 
 	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return TransactionVoid
-	 */
-	protected function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
 	 * Returns labels.
 	 *
 	 * 
@@ -406,27 +378,6 @@ class TransactionVoid  {
 	 */
 	protected function setLanguage($language) {
 		$this->language = $language;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-	 * @return TransactionVoid
-	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
 	}
@@ -671,6 +622,7 @@ class TransactionVoid  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getCreatedOn() === null) {
 			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
@@ -721,3 +673,4 @@ class TransactionVoid  {
 	}
 
 }
+

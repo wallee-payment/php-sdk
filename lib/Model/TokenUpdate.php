@@ -27,7 +27,7 @@ use \Wallee\Sdk\ValidationException;
  * TokenUpdate model
  *
  * @category    Class
- * @description An idempotent entity ensures that no entity with the same external id will be created twice. When an entity is created with the same ID the service will return the previously created entity rather than actually creating a new instance.
+ * @description 
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -70,7 +70,9 @@ class TokenUpdate extends Token  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setTokenReference(isset($data['tokenReference']) ? $data['tokenReference'] : null);
+		if (isset($data['tokenReference']) && $data['tokenReference'] != null) {
+			$this->setTokenReference($data['tokenReference']);
+		}
 	}
 
 
@@ -133,3 +135,4 @@ class TokenUpdate extends Token  {
 	}
 
 }
+

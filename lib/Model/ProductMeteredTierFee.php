@@ -105,8 +105,12 @@ class ProductMeteredTierFee  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setFee(isset($data['fee']) ? $data['fee'] : null);
-		$this->setMeteredFee(isset($data['meteredFee']) ? $data['meteredFee'] : null);
+		if (isset($data['fee']) && $data['fee'] != null) {
+			$this->setFee($data['fee']);
+		}
+		if (isset($data['meteredFee']) && $data['meteredFee'] != null) {
+			$this->setMeteredFee($data['meteredFee']);
+		}
 	}
 
 
@@ -266,3 +270,4 @@ class ProductMeteredTierFee  {
 	}
 
 }
+

@@ -143,8 +143,12 @@ class SpaceReference  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSpaceId(isset($data['spaceId']) ? $data['spaceId'] : null);
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['spaceId']) && $data['spaceId'] != null) {
+			$this->setSpaceId($data['spaceId']);
+		}
 	}
 
 
@@ -351,3 +355,4 @@ class SpaceReference  {
 	}
 
 }
+

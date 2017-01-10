@@ -94,8 +94,12 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setPrimaryAccount(isset($data['primaryAccount']) ? $data['primaryAccount'] : null);
-		$this->setState(isset($data['state']) ? $data['state'] : null);
+		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
+			$this->setPrimaryAccount($data['primaryAccount']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 	}
 
 
@@ -189,3 +193,4 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	}
 
 }
+

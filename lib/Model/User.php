@@ -159,7 +159,9 @@ class User  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setScope(isset($data['scope']) ? $data['scope'] : null);
+		if (isset($data['scope']) && $data['scope'] != null) {
+			$this->setScope($data['scope']);
+		}
 	}
 
 
@@ -360,3 +362,4 @@ class User  {
 	}
 
 }
+

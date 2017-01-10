@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
+class SubscriptionLedgerEntry  {
 
 	/**
 	 * The original name of the model.
@@ -53,6 +53,8 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 		'amountIncludingTax' => 'float',
 		'createdBy' => '\Wallee\Sdk\Model\EntityReference',
 		'createdOn' => 'string',
+		'externalId' => 'string',
+		'id' => 'int',
 		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedPurgeDate' => 'string',
 		'quantity' => 'float',
@@ -69,7 +71,7 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -126,6 +128,20 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	 * @var string
 	 */
 	private $createdOn;
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
 
 	/**
 	 * @var \Wallee\Sdk\Model\EntityReference
@@ -193,12 +209,18 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		$this->setCreatedBy(isset($data['createdBy']) ? $data['createdBy'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setSubscriptionVersion(isset($data['subscriptionVersion']) ? $data['subscriptionVersion'] : null);
-		$this->setTaxes(isset($data['taxes']) ? $data['taxes'] : null);
+		if (isset($data['createdBy']) && $data['createdBy'] != null) {
+			$this->setCreatedBy($data['createdBy']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['subscriptionVersion']) && $data['subscriptionVersion'] != null) {
+			$this->setSubscriptionVersion($data['subscriptionVersion']);
+		}
+		if (isset($data['taxes']) && $data['taxes'] != null) {
+			$this->setTaxes($data['taxes']);
+		}
 	}
 
 
@@ -323,7 +345,7 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -333,7 +355,32 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	 * @return SubscriptionLedgerEntry
 	 */
 	protected function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionLedgerEntry
+	 */
+	protected function setId($id) {
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -549,7 +596,6 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getAmountIncludingTax() === null) {
 			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
@@ -598,3 +644,4 @@ class SubscriptionLedgerEntry extends IdempotentJpaEntity  {
 	}
 
 }
+

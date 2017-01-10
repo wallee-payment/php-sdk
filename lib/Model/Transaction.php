@@ -401,16 +401,36 @@ class Transaction  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		$this->setAllowedPaymentMethodBrands(isset($data['allowedPaymentMethodBrands']) ? $data['allowedPaymentMethodBrands'] : null);
-		$this->setAllowedPaymentMethodConfigurations(isset($data['allowedPaymentMethodConfigurations']) ? $data['allowedPaymentMethodConfigurations'] : null);
-		$this->setBillingAddress(isset($data['billingAddress']) ? $data['billingAddress'] : null);
-		$this->setGroup(isset($data['group']) ? $data['group'] : null);
-		$this->setLineItems(isset($data['lineItems']) ? $data['lineItems'] : null);
-		$this->setLinkedSpaceId(isset($data['linkedSpaceId']) ? $data['linkedSpaceId'] : null);
-		$this->setPaymentConnectorConfiguration(isset($data['paymentConnectorConfiguration']) ? $data['paymentConnectorConfiguration'] : null);
-		$this->setShippingAddress(isset($data['shippingAddress']) ? $data['shippingAddress'] : null);
-		$this->setSpaceViewId(isset($data['spaceViewId']) ? $data['spaceViewId'] : null);
-		$this->setToken(isset($data['token']) ? $data['token'] : null);
+		if (isset($data['allowedPaymentMethodBrands']) && $data['allowedPaymentMethodBrands'] != null) {
+			$this->setAllowedPaymentMethodBrands($data['allowedPaymentMethodBrands']);
+		}
+		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
+			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
+		}
+		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
+		if (isset($data['group']) && $data['group'] != null) {
+			$this->setGroup($data['group']);
+		}
+		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+			$this->setLineItems($data['lineItems']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['paymentConnectorConfiguration']) && $data['paymentConnectorConfiguration'] != null) {
+			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
+		}
+		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+			$this->setShippingAddress($data['shippingAddress']);
+		}
+		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+			$this->setSpaceViewId($data['spaceViewId']);
+		}
+		if (isset($data['token']) && $data['token'] != null) {
+			$this->setToken($data['token']);
+		}
 	}
 
 
@@ -1319,3 +1339,4 @@ class Transaction  {
 	}
 
 }
+

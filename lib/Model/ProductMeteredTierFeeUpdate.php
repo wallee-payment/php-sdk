@@ -70,9 +70,15 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		$this->setFee(isset($data['fee']) ? $data['fee'] : null);
-		$this->setMeteredFee(isset($data['meteredFee']) ? $data['meteredFee'] : null);
-		$this->setStartRange(isset($data['startRange']) ? $data['startRange'] : null);
+		if (isset($data['fee']) && $data['fee'] != null) {
+			$this->setFee($data['fee']);
+		}
+		if (isset($data['meteredFee']) && $data['meteredFee'] != null) {
+			$this->setMeteredFee($data['meteredFee']);
+		}
+		if (isset($data['startRange']) && $data['startRange'] != null) {
+			$this->setStartRange($data['startRange']);
+		}
 	}
 
 
@@ -181,3 +187,4 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	}
 
 }
+
