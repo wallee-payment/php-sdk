@@ -446,7 +446,7 @@ final class ApiClient {
 		if ($response->getStatusCode() >= 200 && $response->getStatusCode() <= 299) {
 			// return raw body if response is a file
 			if ($responseType === '\SplFileObject' || $responseType === 'string') {
-				return [$response->getBody(), $response->getStatusCode(), $response->getHeaders()];
+				return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
 			}
 
 			$data = json_decode($response->getBody());
