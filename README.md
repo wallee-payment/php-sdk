@@ -51,8 +51,9 @@ require_once(__DIR__ . '/autoload.php');
 $client = new \Wallee\Sdk\ApiClient('YOUR_USER_ID', 'YOUR_API_KEY');
 
 // Create API service instance
-$service = new \Wallee\Sdk\Api\AccountService($apiClient);
-$filter = new \Wallee\Sdk\Model\EntityQueryFilter(); // The filter which restricts the entities which are used to calculate the count.
+$service = new \Wallee\Sdk\Service\AccountService($apiClient);
+// The filter which restricts the entities which are used to calculate the count.
+$filter = new \Wallee\Sdk\Model\EntityQueryFilter();
 
 try {
     $result = $apiService->accountCountPost($filter);
