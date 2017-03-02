@@ -51,7 +51,7 @@ class EmailTemplateType  {
 		'attachmentResources' => '\Wallee\Sdk\Model\AttachmentResource[]',
 		'description' => 'map[string,string]',
 		'documentAttachments' => '\Wallee\Sdk\Model\DocumentTemplateType[]',
-		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'feature' => 'int',
 		'htmlBodyTemplateResource' => 'string',
 		'id' => 'int',
 		'name' => 'map[string,string]',
@@ -91,7 +91,7 @@ class EmailTemplateType  {
 	private $documentAttachments;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $feature;
 
@@ -230,7 +230,7 @@ class EmailTemplateType  {
 	/**
 	 * Returns feature.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getFeature() {
 		return $this->feature;
@@ -239,7 +239,7 @@ class EmailTemplateType  {
 	/**
 	 * Sets feature.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @param int $feature
 	 * @return EmailTemplateType
 	 */
 	public function setFeature($feature) {

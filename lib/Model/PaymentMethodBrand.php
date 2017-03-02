@@ -53,7 +53,7 @@ class PaymentMethodBrand  {
 		'id' => 'int',
 		'imagePath' => 'string',
 		'name' => 'map[string,string]',
-		'paymentMethod' => '\Wallee\Sdk\Model\EntityReference'	);
+		'paymentMethod' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -102,7 +102,7 @@ class PaymentMethodBrand  {
 	private $name;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $paymentMethod;
 
@@ -243,7 +243,7 @@ class PaymentMethodBrand  {
 	/**
 	 * Returns paymentMethod.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getPaymentMethod() {
 		return $this->paymentMethod;
@@ -252,7 +252,7 @@ class PaymentMethodBrand  {
 	/**
 	 * Sets paymentMethod.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
+	 * @param int $paymentMethod
 	 * @return PaymentMethodBrand
 	 */
 	public function setPaymentMethod($paymentMethod) {

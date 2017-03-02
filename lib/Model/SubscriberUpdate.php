@@ -100,7 +100,7 @@ class SubscriberUpdate extends Subscriber  {
 	/**
 	 * Returns additionalAllowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getAdditionalAllowedPaymentMethodConfigurations() {
 		return parent::getAdditionalAllowedPaymentMethodConfigurations();
@@ -109,7 +109,7 @@ class SubscriberUpdate extends Subscriber  {
 	/**
 	 * Sets additionalAllowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $additionalAllowedPaymentMethodConfigurations
+	 * @param int[] $additionalAllowedPaymentMethodConfigurations
 	 * @return SubscriberUpdate
 	 */
 	public function setAdditionalAllowedPaymentMethodConfigurations($additionalAllowedPaymentMethodConfigurations) {
@@ -159,7 +159,7 @@ class SubscriberUpdate extends Subscriber  {
 	/**
 	 * Returns disallowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getDisallowedPaymentMethodConfigurations() {
 		return parent::getDisallowedPaymentMethodConfigurations();
@@ -168,7 +168,7 @@ class SubscriberUpdate extends Subscriber  {
 	/**
 	 * Sets disallowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $disallowedPaymentMethodConfigurations
+	 * @param int[] $disallowedPaymentMethodConfigurations
 	 * @return SubscriberUpdate
 	 */
 	public function setDisallowedPaymentMethodConfigurations($disallowedPaymentMethodConfigurations) {
@@ -178,7 +178,7 @@ class SubscriberUpdate extends Subscriber  {
 	/**
 	 * Returns emailAddress.
 	 *
-	 * The e-mail address is used to communicate with the subscriber. There can be only one subscriber per space with the same e-mail address.
+	 * The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
 	 *
 	 * @return string
 	 */
@@ -199,7 +199,7 @@ class SubscriberUpdate extends Subscriber  {
 	/**
 	 * Returns language.
 	 *
-	 * The subscriber language determines the language which is used to communicate with the subscriber in e-mails and documents (e.g. invoices).
+	 * The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
 	 *
 	 * @return string
 	 */

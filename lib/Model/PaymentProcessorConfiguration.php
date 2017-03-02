@@ -49,10 +49,10 @@ class PaymentProcessorConfiguration  {
 	 */
 	private static $swaggerTypes = array(
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
-		'processor' => '\Wallee\Sdk\Model\EntityReference',
+		'processor' => 'int',
 		'state' => 'string',
 		'version' => 'int'	);
 
@@ -99,7 +99,7 @@ class PaymentProcessorConfiguration  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -118,7 +118,7 @@ class PaymentProcessorConfiguration  {
 	private $plannedPurgeDate;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $processor;
 
@@ -143,11 +143,17 @@ class PaymentProcessorConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['processor']) && $data['processor'] != null) {
 			$this->setProcessor($data['processor']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -169,7 +175,7 @@ class PaymentProcessorConfiguration  {
 	 * @param int $id
 	 * @return PaymentProcessorConfiguration
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -178,7 +184,7 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -187,7 +193,7 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return PaymentProcessorConfiguration
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -245,7 +251,7 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Returns processor.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getProcessor() {
 		return $this->processor;
@@ -254,7 +260,7 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Sets processor.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $processor
+	 * @param int $processor
 	 * @return PaymentProcessorConfiguration
 	 */
 	public function setProcessor($processor) {
@@ -307,7 +313,7 @@ class PaymentProcessorConfiguration  {
 	 * @param int $version
 	 * @return PaymentProcessorConfiguration
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

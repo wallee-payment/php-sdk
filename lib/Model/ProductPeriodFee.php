@@ -51,7 +51,7 @@ class ProductPeriodFee  {
 		'component' => '\Wallee\Sdk\Model\SubscriptionProductComponent',
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'numberOfFreeTrialPeriods' => 'int',
 		'periodFee' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
@@ -107,7 +107,7 @@ class ProductPeriodFee  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -157,6 +157,9 @@ class ProductPeriodFee  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -165,6 +168,9 @@ class ProductPeriodFee  {
 		}
 		if (isset($data['periodFee']) && $data['periodFee'] != null) {
 			$this->setPeriodFee($data['periodFee']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -228,7 +234,7 @@ class ProductPeriodFee  {
 	 * @param int $id
 	 * @return ProductPeriodFee
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -237,7 +243,7 @@ class ProductPeriodFee  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -246,7 +252,7 @@ class ProductPeriodFee  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return ProductPeriodFee
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -366,7 +372,7 @@ class ProductPeriodFee  {
 	 * @param int $version
 	 * @return ProductPeriodFee
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class Charge  {
+class Charge extends TransactionAwareEntity  {
 
 	/**
 	 * The original name of the model.
@@ -50,11 +50,9 @@ class Charge  {
 	private static $swaggerTypes = array(
 		'createdOn' => 'string',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
-		'id' => 'int',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedPurgeDate' => 'string',
-		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceViewId' => 'int',
 		'state' => 'string',
 		'timeoutOn' => 'string',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
@@ -67,7 +65,7 @@ class Charge  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
@@ -125,23 +123,11 @@ class Charge  {
 	private $failureReason;
 
 	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
 	 * 
 	 *
 	 * @var string
 	 */
 	private $language;
-
-	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
-	 */
-	private $linkedSpaceId;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -151,7 +137,7 @@ class Charge  {
 	private $plannedPurgeDate;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceViewId;
 
@@ -195,11 +181,10 @@ class Charge  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		parent::__construct($data);
+
 		if (isset($data['failureReason']) && $data['failureReason'] != null) {
 			$this->setFailureReason($data['failureReason']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
 			$this->setSpaceViewId($data['spaceViewId']);
@@ -255,29 +240,6 @@ class Charge  {
 	}
 
 	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return Charge
-	 */
-	protected function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
 	 * Returns language.
 	 *
 	 * 
@@ -296,27 +258,6 @@ class Charge  {
 	 */
 	protected function setLanguage($language) {
 		$this->language = $language;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-	 * @return Charge
-	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
 	}
@@ -347,7 +288,7 @@ class Charge  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return $this->spaceViewId;
@@ -356,7 +297,7 @@ class Charge  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return Charge
 	 */
 	public function setSpaceViewId($spaceViewId) {
@@ -492,6 +433,7 @@ class Charge  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getCreatedOn() === null) {
 			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);

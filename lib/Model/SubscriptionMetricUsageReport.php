@@ -49,12 +49,12 @@ class SubscriptionMetricUsageReport  {
 	 */
 	private static $swaggerTypes = array(
 		'consumedUnits' => 'float',
-		'createdByUserId' => '\Wallee\Sdk\Model\EntityReference',
+		'createdByUserId' => 'int',
 		'createdOn' => 'string',
 		'description' => 'string',
 		'externalId' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'metric' => '\Wallee\Sdk\Model\SubscriptionMetric',
 		'plannedPurgeDate' => 'string',
 		'subscription' => '\Wallee\Sdk\Model\Subscription',
@@ -79,7 +79,7 @@ class SubscriptionMetricUsageReport  {
 	private $consumedUnits;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $createdByUserId;
 
@@ -112,7 +112,7 @@ class SubscriptionMetricUsageReport  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -150,6 +150,9 @@ class SubscriptionMetricUsageReport  {
 		if (isset($data['createdByUserId']) && $data['createdByUserId'] != null) {
 			$this->setCreatedByUserId($data['createdByUserId']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -158,6 +161,9 @@ class SubscriptionMetricUsageReport  {
 		}
 		if (isset($data['subscription']) && $data['subscription'] != null) {
 			$this->setSubscription($data['subscription']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -188,7 +194,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns createdByUserId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getCreatedByUserId() {
 		return $this->createdByUserId;
@@ -197,7 +203,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Sets createdByUserId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $createdByUserId
+	 * @param int $createdByUserId
 	 * @return SubscriptionMetricUsageReport
 	 */
 	public function setCreatedByUserId($createdByUserId) {
@@ -292,7 +298,7 @@ class SubscriptionMetricUsageReport  {
 	 * @param int $id
 	 * @return SubscriptionMetricUsageReport
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -301,7 +307,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -310,7 +316,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionMetricUsageReport
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -401,7 +407,7 @@ class SubscriptionMetricUsageReport  {
 	 * @param int $version
 	 * @return SubscriptionMetricUsageReport
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

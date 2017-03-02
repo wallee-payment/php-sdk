@@ -49,8 +49,8 @@ class TransactionAwareEntity  {
 	 */
 	private static $swaggerTypes = array(
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
-		'linkedTransaction' => '\Wallee\Sdk\Model\EntityReference'	);
+		'linkedSpaceId' => 'int',
+		'linkedTransaction' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -71,12 +71,12 @@ class TransactionAwareEntity  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedTransaction;
 
@@ -87,6 +87,9 @@ class TransactionAwareEntity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -113,7 +116,7 @@ class TransactionAwareEntity  {
 	 * @param int $id
 	 * @return TransactionAwareEntity
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -122,7 +125,7 @@ class TransactionAwareEntity  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -131,7 +134,7 @@ class TransactionAwareEntity  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return TransactionAwareEntity
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -143,7 +146,7 @@ class TransactionAwareEntity  {
 	/**
 	 * Returns linkedTransaction.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedTransaction() {
 		return $this->linkedTransaction;
@@ -152,7 +155,7 @@ class TransactionAwareEntity  {
 	/**
 	 * Sets linkedTransaction.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedTransaction
+	 * @param int $linkedTransaction
 	 * @return TransactionAwareEntity
 	 */
 	public function setLinkedTransaction($linkedTransaction) {

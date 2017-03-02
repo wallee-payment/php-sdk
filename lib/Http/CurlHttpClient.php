@@ -77,7 +77,7 @@ final class CurlHttpClient implements IHttpClient {
 			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getBody());
 		} elseif ($request->getMethod() !== HttpRequest::GET) {
-			throw new ConnectionException('Method ' . $request->getMethod() . ' is not recognized.');
+			throw new ConnectionException($request->getUrl(), 'Method ' . $request->getMethod() . ' is not recognized.');
 		}
 		curl_setopt($curl, CURLOPT_URL, $request->getUrl());
 
@@ -132,13 +132,10 @@ final class CurlHttpClient implements IHttpClient {
 
 			// curl_exec can sometimes fail but still return a blank message from curl_error().
 			if (!empty($curl_error_message)) {
-				$error_message = "API call to $url failed: $curl_error_message";
+				throw new ConnectionException($url, $curl_error_message);
 			} else {
-				$error_message = "API call to $url failed, but for an unknown reason. " .
-					"This could happen if you are disconnected from the network.";
+				throw new ConnectionException($url, 'API call failed for an unknown reason. This could happen if you are disconnected from the network.');
 			}
-
-			throw new ConnectionException($error_message);
 		} else {
 			return new HttpResponse($response_info['http_code'], $http_header, $http_body);
 		}

@@ -49,7 +49,7 @@ class DocumentTemplateType  {
 	 */
 	private static $swaggerTypes = array(
 		'description' => 'map[string,string]',
-		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'feature' => 'int',
 		'id' => 'int',
 		'templateResource' => 'string',
 		'title' => 'map[string,string]'	);
@@ -73,7 +73,7 @@ class DocumentTemplateType  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $feature;
 
@@ -143,7 +143,7 @@ class DocumentTemplateType  {
 	/**
 	 * Returns feature.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getFeature() {
 		return $this->feature;
@@ -152,7 +152,7 @@ class DocumentTemplateType  {
 	/**
 	 * Sets feature.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @param int $feature
 	 * @return DocumentTemplateType
 	 */
 	public function setFeature($feature) {

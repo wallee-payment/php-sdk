@@ -54,7 +54,7 @@ class SubscriptionVersion  {
 		'failedOn' => 'string',
 		'id' => 'int',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'plannedTerminationDate' => 'string',
 		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
@@ -146,7 +146,7 @@ class SubscriptionVersion  {
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -223,6 +223,9 @@ class SubscriptionVersion  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -234,6 +237,9 @@ class SubscriptionVersion  {
 		}
 		if (isset($data['subscription']) && $data['subscription'] != null) {
 			$this->setSubscription($data['subscription']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -347,7 +353,7 @@ class SubscriptionVersion  {
 	 * @param int $id
 	 * @return SubscriptionVersion
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -379,7 +385,7 @@ class SubscriptionVersion  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -388,7 +394,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionVersion
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -621,7 +627,7 @@ class SubscriptionVersion  {
 	 * @param int $version
 	 * @return SubscriptionVersion
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

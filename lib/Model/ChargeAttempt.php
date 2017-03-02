@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ChargeAttempt  {
+class ChargeAttempt extends TransactionAwareEntity  {
 
 	/**
 	 * The original name of the model.
@@ -54,16 +54,14 @@ class ChargeAttempt  {
 		'environment' => 'string',
 		'failedOn' => 'string',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
-		'id' => 'int',
 		'initializingTokenVersion' => 'bool',
 		'invocation' => '\Wallee\Sdk\Model\ConnectorInvocation',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'nextUpdateOn' => 'string',
 		'plannedPurgeDate' => 'string',
 		'redirectionUrl' => 'string',
-		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceViewId' => 'int',
 		'state' => 'string',
 		'succeededOn' => 'string',
 		'timeoutOn' => 'string',
@@ -77,7 +75,7 @@ class ChargeAttempt  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
@@ -157,13 +155,6 @@ class ChargeAttempt  {
 	private $failureReason;
 
 	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
 	 * 
 	 *
 	 * @var bool
@@ -190,11 +181,6 @@ class ChargeAttempt  {
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
-	 */
-	private $linkedSpaceId;
-
-	/**
 	 * 
 	 *
 	 * @var string
@@ -216,7 +202,7 @@ class ChargeAttempt  {
 	private $redirectionUrl;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceViewId;
 
@@ -267,6 +253,8 @@ class ChargeAttempt  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		parent::__construct($data);
+
 		if (isset($data['charge']) && $data['charge'] != null) {
 			$this->setCharge($data['charge']);
 		}
@@ -281,9 +269,6 @@ class ChargeAttempt  {
 		}
 		if (isset($data['labels']) && $data['labels'] != null) {
 			$this->setLabels($data['labels']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
 			$this->setSpaceViewId($data['spaceViewId']);
@@ -431,29 +416,6 @@ class ChargeAttempt  {
 	}
 
 	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return ChargeAttempt
-	 */
-	protected function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
 	 * Returns initializingTokenVersion.
 	 *
 	 * 
@@ -544,27 +506,6 @@ class ChargeAttempt  {
 	}
 
 	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-	 * @return ChargeAttempt
-	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
-
-		return $this;
-	}
-
-	/**
 	 * Returns nextUpdateOn.
 	 *
 	 * 
@@ -636,7 +577,7 @@ class ChargeAttempt  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return $this->spaceViewId;
@@ -645,7 +586,7 @@ class ChargeAttempt  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return ChargeAttempt
 	 */
 	public function setSpaceViewId($spaceViewId) {
@@ -800,6 +741,7 @@ class ChargeAttempt  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getCreatedOn() === null) {
 			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);

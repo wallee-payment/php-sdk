@@ -52,7 +52,7 @@ class SubscriptionPeriodBill  {
 		'effectivePeriodEndDate' => 'string',
 		'id' => 'int',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'periodStartDate' => 'string',
 		'plannedPeriodEndDate' => 'string',
 		'plannedPurgeDate' => 'string',
@@ -118,7 +118,7 @@ class SubscriptionPeriodBill  {
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -169,11 +169,17 @@ class SubscriptionPeriodBill  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['subscriptionVersion']) && $data['subscriptionVersion'] != null) {
 			$this->setSubscriptionVersion($data['subscriptionVersion']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -241,7 +247,7 @@ class SubscriptionPeriodBill  {
 	 * @param int $id
 	 * @return SubscriptionPeriodBill
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -273,7 +279,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -282,7 +288,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionPeriodBill
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -425,7 +431,7 @@ class SubscriptionPeriodBill  {
 	 * @param int $version
 	 * @return SubscriptionPeriodBill
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

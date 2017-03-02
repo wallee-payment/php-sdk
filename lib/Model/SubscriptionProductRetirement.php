@@ -50,7 +50,7 @@ class SubscriptionProductRetirement  {
 	private static $swaggerTypes = array(
 		'createdOn' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
 		'respectTerminiationPeriodsEnabled' => 'bool',
 		'targetProduct' => '\Wallee\Sdk\Model\SubscriptionProduct',
@@ -82,7 +82,7 @@ class SubscriptionProductRetirement  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -117,6 +117,9 @@ class SubscriptionProductRetirement  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -125,6 +128,9 @@ class SubscriptionProductRetirement  {
 		}
 		if (isset($data['targetProduct']) && $data['targetProduct'] != null) {
 			$this->setTargetProduct($data['targetProduct']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -169,7 +175,7 @@ class SubscriptionProductRetirement  {
 	 * @param int $id
 	 * @return SubscriptionProductRetirement
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -178,7 +184,7 @@ class SubscriptionProductRetirement  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -187,7 +193,7 @@ class SubscriptionProductRetirement  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductRetirement
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -278,7 +284,7 @@ class SubscriptionProductRetirement  {
 	 * @param int $version
 	 * @return SubscriptionProductRetirement
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

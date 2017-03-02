@@ -49,7 +49,7 @@ class Refund  {
 	 */
 	private static $swaggerTypes = array(
 		'amount' => 'float',
-		'createdBy' => '\Wallee\Sdk\Model\EntityReference',
+		'createdBy' => 'int',
 		'createdOn' => 'string',
 		'externalId' => 'string',
 		'failedOn' => 'string',
@@ -57,7 +57,7 @@ class Refund  {
 		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'merchantReference' => 'string',
 		'nextUpdateOn' => 'string',
 		'plannedPurgeDate' => 'string',
@@ -137,7 +137,7 @@ class Refund  {
 	private $amount;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $createdBy;
 
@@ -189,7 +189,7 @@ class Refund  {
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -295,6 +295,9 @@ class Refund  {
 		if (isset($data['failureReason']) && $data['failureReason'] != null) {
 			$this->setFailureReason($data['failureReason']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['labels']) && $data['labels'] != null) {
 			$this->setLabels($data['labels']);
 		}
@@ -312,6 +315,9 @@ class Refund  {
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -342,7 +348,7 @@ class Refund  {
 	/**
 	 * Returns createdBy.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getCreatedBy() {
 		return $this->createdBy;
@@ -351,7 +357,7 @@ class Refund  {
 	/**
 	 * Sets createdBy.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $createdBy
+	 * @param int $createdBy
 	 * @return Refund
 	 */
 	public function setCreatedBy($createdBy) {
@@ -467,7 +473,7 @@ class Refund  {
 	 * @param int $id
 	 * @return Refund
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -522,7 +528,7 @@ class Refund  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -531,7 +537,7 @@ class Refund  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return Refund
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -839,7 +845,7 @@ class Refund  {
 	 * @param int $version
 	 * @return Refund
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

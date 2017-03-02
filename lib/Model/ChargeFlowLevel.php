@@ -48,14 +48,14 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'asynchronousCharge' => '\Wallee\Sdk\Model\EntityReference',
+		'asynchronousCharge' => 'int',
 		'configuration' => '\Wallee\Sdk\Model\ChargeFlowLevelConfiguration',
 		'createdOn' => 'string',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
-		'synchronousCharge' => '\Wallee\Sdk\Model\EntityReference',
+		'synchronousCharge' => 'int',
 		'timeoutOn' => 'string',
-		'tokenCharge' => '\Wallee\Sdk\Model\EntityReference',
+		'tokenCharge' => 'int',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'version' => 'int'	);
 
@@ -91,7 +91,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $asynchronousCharge;
 
@@ -122,7 +122,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	private $state;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $synchronousCharge;
 
@@ -134,7 +134,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	private $timeoutOn;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $tokenCharge;
 
@@ -180,7 +180,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Returns asynchronousCharge.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getAsynchronousCharge() {
 		return $this->asynchronousCharge;
@@ -189,7 +189,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets asynchronousCharge.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $asynchronousCharge
+	 * @param int $asynchronousCharge
 	 * @return ChargeFlowLevel
 	 */
 	public function setAsynchronousCharge($asynchronousCharge) {
@@ -295,7 +295,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Returns synchronousCharge.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSynchronousCharge() {
 		return $this->synchronousCharge;
@@ -304,7 +304,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets synchronousCharge.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $synchronousCharge
+	 * @param int $synchronousCharge
 	 * @return ChargeFlowLevel
 	 */
 	public function setSynchronousCharge($synchronousCharge) {
@@ -339,7 +339,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Returns tokenCharge.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getTokenCharge() {
 		return $this->tokenCharge;
@@ -348,7 +348,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets tokenCharge.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $tokenCharge
+	 * @param int $tokenCharge
 	 * @return ChargeFlowLevel
 	 */
 	public function setTokenCharge($tokenCharge) {

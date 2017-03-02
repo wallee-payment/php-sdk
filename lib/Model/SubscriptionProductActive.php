@@ -115,7 +115,7 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getAllowedPaymentMethodConfigurations() {
 		return parent::getAllowedPaymentMethodConfigurations();
@@ -124,7 +124,7 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	/**
 	 * Sets allowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $allowedPaymentMethodConfigurations
+	 * @param int[] $allowedPaymentMethodConfigurations
 	 * @return SubscriptionProductActive
 	 */
 	public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {

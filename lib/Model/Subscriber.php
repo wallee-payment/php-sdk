@@ -48,15 +48,15 @@ class Subscriber  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'additionalAllowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
+		'additionalAllowedPaymentMethodConfigurations' => 'int[]',
 		'billingAddress' => '\Wallee\Sdk\Model\Address',
 		'description' => 'string',
-		'disallowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
+		'disallowedPaymentMethodConfigurations' => 'int[]',
 		'emailAddress' => 'string',
 		'externalId' => 'string',
 		'id' => 'int',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'reference' => 'string',
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
@@ -100,7 +100,7 @@ class Subscriber  {
 	
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $additionalAllowedPaymentMethodConfigurations;
 
@@ -117,12 +117,12 @@ class Subscriber  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $disallowedPaymentMethodConfigurations;
 
 	/**
-	 * The e-mail address is used to communicate with the subscriber. There can be only one subscriber per space with the same e-mail address.
+	 * The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
 	 *
 	 * @var string
 	 */
@@ -143,14 +143,14 @@ class Subscriber  {
 	private $id;
 
 	/**
-	 * The subscriber language determines the language which is used to communicate with the subscriber in e-mails and documents (e.g. invoices).
+	 * The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
 	 *
 	 * @var string
 	 */
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -208,6 +208,9 @@ class Subscriber  {
 		if (isset($data['disallowedPaymentMethodConfigurations']) && $data['disallowedPaymentMethodConfigurations'] != null) {
 			$this->setDisallowedPaymentMethodConfigurations($data['disallowedPaymentMethodConfigurations']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -217,13 +220,16 @@ class Subscriber  {
 		if (isset($data['spaceReference']) && $data['spaceReference'] != null) {
 			$this->setSpaceReference($data['spaceReference']);
 		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns additionalAllowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getAdditionalAllowedPaymentMethodConfigurations() {
 		return $this->additionalAllowedPaymentMethodConfigurations;
@@ -232,7 +238,7 @@ class Subscriber  {
 	/**
 	 * Sets additionalAllowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $additionalAllowedPaymentMethodConfigurations
+	 * @param int[] $additionalAllowedPaymentMethodConfigurations
 	 * @return Subscriber
 	 */
 	public function setAdditionalAllowedPaymentMethodConfigurations($additionalAllowedPaymentMethodConfigurations) {
@@ -288,7 +294,7 @@ class Subscriber  {
 	/**
 	 * Returns disallowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getDisallowedPaymentMethodConfigurations() {
 		return $this->disallowedPaymentMethodConfigurations;
@@ -297,7 +303,7 @@ class Subscriber  {
 	/**
 	 * Sets disallowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $disallowedPaymentMethodConfigurations
+	 * @param int[] $disallowedPaymentMethodConfigurations
 	 * @return Subscriber
 	 */
 	public function setDisallowedPaymentMethodConfigurations($disallowedPaymentMethodConfigurations) {
@@ -309,7 +315,7 @@ class Subscriber  {
 	/**
 	 * Returns emailAddress.
 	 *
-	 * The e-mail address is used to communicate with the subscriber. There can be only one subscriber per space with the same e-mail address.
+	 * The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
 	 *
 	 * @return string
 	 */
@@ -369,7 +375,7 @@ class Subscriber  {
 	 * @param int $id
 	 * @return Subscriber
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -378,7 +384,7 @@ class Subscriber  {
 	/**
 	 * Returns language.
 	 *
-	 * The subscriber language determines the language which is used to communicate with the subscriber in e-mails and documents (e.g. invoices).
+	 * The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
 	 *
 	 * @return string
 	 */
@@ -401,7 +407,7 @@ class Subscriber  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -410,7 +416,7 @@ class Subscriber  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return Subscriber
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -551,7 +557,7 @@ class Subscriber  {
 	 * @param int $version
 	 * @return Subscriber
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

@@ -50,11 +50,11 @@ class LabelDescriptor  {
 	private static $swaggerTypes = array(
 		'category' => 'string',
 		'description' => 'map[string,string]',
-		'features' => '\Wallee\Sdk\Model\EntityReference',
-		'group' => '\Wallee\Sdk\Model\EntityReference',
+		'features' => 'int[]',
+		'group' => 'int',
 		'id' => 'int',
 		'name' => 'map[string,string]',
-		'type' => '\Wallee\Sdk\Model\EntityReference',
+		'type' => 'int',
 		'weight' => 'int'	);
 
 	/**
@@ -101,12 +101,12 @@ class LabelDescriptor  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $features;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $group;
 
@@ -125,7 +125,7 @@ class LabelDescriptor  {
 	private $name;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $type;
 
@@ -214,7 +214,7 @@ class LabelDescriptor  {
 	/**
 	 * Returns features.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getFeatures() {
 		return $this->features;
@@ -223,7 +223,7 @@ class LabelDescriptor  {
 	/**
 	 * Sets features.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $features
+	 * @param int[] $features
 	 * @return LabelDescriptor
 	 */
 	public function setFeatures($features) {
@@ -235,7 +235,7 @@ class LabelDescriptor  {
 	/**
 	 * Returns group.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getGroup() {
 		return $this->group;
@@ -244,7 +244,7 @@ class LabelDescriptor  {
 	/**
 	 * Sets group.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $group
+	 * @param int $group
 	 * @return LabelDescriptor
 	 */
 	public function setGroup($group) {
@@ -302,7 +302,7 @@ class LabelDescriptor  {
 	/**
 	 * Returns type.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getType() {
 		return $this->type;
@@ -311,7 +311,7 @@ class LabelDescriptor  {
 	/**
 	 * Sets type.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $type
+	 * @param int $type
 	 * @return LabelDescriptor
 	 */
 	public function setType($type) {

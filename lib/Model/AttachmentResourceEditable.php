@@ -27,7 +27,7 @@ use \Wallee\Sdk\ValidationException;
  * AttachmentResourceEditable model
  *
  * @category    Class
- * @description The attachment resource allows the attachment of resources to e-mails.
+ * @description The attachment resource allows the attachment of resources to emails.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -49,7 +49,9 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	 */
 	private static $swaggerTypes = array(
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
+		'plannedPurgeDate' => 'string',
+		'state' => 'string',
 		'version' => 'int'	);
 
 	/**
@@ -62,6 +64,30 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	}
 
 	
+	/**
+	 * Values of state.
+	 */
+	const STATE_CREATE = 'CREATE';
+	const STATE_ACTIVE = 'ACTIVE';
+	const STATE_INACTIVE = 'INACTIVE';
+	const STATE_DELETING = 'DELETING';
+	const STATE_DELETED = 'DELETED';
+	
+	/**
+	 * Returns allowable values of state.
+	 *
+	 * @return string[]
+	 */
+	public function getStateAllowableValues() {
+		return [
+			self::STATE_CREATE,
+			self::STATE_ACTIVE,
+			self::STATE_INACTIVE,
+			self::STATE_DELETING,
+			self::STATE_DELETED,
+		];
+	}
+	
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -71,9 +97,23 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var string
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
 
 	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -94,11 +134,14 @@ class AttachmentResourceEditable extends AttachmentResource  {
 		if (isset($data['attachmentName']) && $data['attachmentName'] != null) {
 			$this->setAttachmentName($data['attachmentName']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
-		if (isset($data['resourcePath']) && $data['resourcePath'] != null) {
-			$this->setResourcePath($data['resourcePath']);
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -139,7 +182,7 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	 * @param int $id
 	 * @return AttachmentResourceEditable
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -148,7 +191,7 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -157,7 +200,7 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return AttachmentResourceEditable
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -167,24 +210,53 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	}
 
 	/**
-	 * Returns resourcePath.
+	 * Returns plannedPurgeDate.
 	 *
-	 * The path to the resource which should be attachted to the e-mail.
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
 	 * @return string
 	 */
-	public function getResourcePath() {
-		return parent::getResourcePath();
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
 	}
 
 	/**
-	 * Sets resourcePath.
+	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $resourcePath
+	 * @param string $plannedPurgeDate
 	 * @return AttachmentResourceEditable
 	 */
-	public function setResourcePath($resourcePath) {
-		return parent::setResourcePath($resourcePath);
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
+
+		return $this;
+	}
+
+	/**
+	 * Returns state.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getState() {
+		return $this->state;
+	}
+
+	/**
+	 * Sets state.
+	 *
+	 * @param string $state
+	 * @return AttachmentResourceEditable
+	 */
+	protected function setState($state) {
+		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
+		if ((!in_array($state, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
+		}
+		$this->state = $state;
+
+		return $this;
 	}
 
 	/**
@@ -204,7 +276,7 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	 * @param int $version
 	 * @return AttachmentResourceEditable
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;
@@ -217,6 +289,14 @@ class AttachmentResourceEditable extends AttachmentResource  {
 	 */
 	public function validate() {
 		parent::validate();
+
+		if ($this->getState() === null) {
+			throw new ValidationException("'state' can't be null", 'state', $this);
+		}
+		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		if (!in_array($this->getState(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		}
 
 	}
 

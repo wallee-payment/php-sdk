@@ -581,9 +581,6 @@ class AddressCreate extends Address  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCountry() === null) {
-			throw new ValidationException("'country' can't be null", 'country', $this);
-		}
 		$allowed_values = ["MALE", "FEMALE"];
 		if (!in_array($this->getGender(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'gender', must be one of #{allowed_values}.", 'gender', $this);

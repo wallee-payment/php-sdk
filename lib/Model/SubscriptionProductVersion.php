@@ -56,7 +56,7 @@ class SubscriptionProductVersion  {
 		'enabledCurrencies' => 'string[]',
 		'id' => 'int',
 		'incrementNumber' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'minimalNumberOfPeriods' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'numberOfNoticePeriods' => 'int',
@@ -161,7 +161,7 @@ class SubscriptionProductVersion  {
 	private $incrementNumber;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -248,6 +248,9 @@ class SubscriptionProductVersion  {
 		if (isset($data['enabledCurrencies']) && $data['enabledCurrencies'] != null) {
 			$this->setEnabledCurrencies($data['enabledCurrencies']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -256,6 +259,9 @@ class SubscriptionProductVersion  {
 		}
 		if (isset($data['product']) && $data['product'] != null) {
 			$this->setProduct($data['product']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -415,7 +421,7 @@ class SubscriptionProductVersion  {
 	 * @param int $id
 	 * @return SubscriptionProductVersion
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -447,7 +453,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -456,7 +462,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductVersion
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -712,7 +718,7 @@ class SubscriptionProductVersion  {
 	 * @param int $version
 	 * @return SubscriptionProductVersion
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

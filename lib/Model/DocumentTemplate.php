@@ -49,13 +49,13 @@ class DocumentTemplate  {
 	 */
 	private static $swaggerTypes = array(
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
-		'spaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceId' => 'int',
 		'state' => 'string',
 		'templateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
-		'type' => '\Wallee\Sdk\Model\EntityReference',
+		'type' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -101,7 +101,7 @@ class DocumentTemplate  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -120,7 +120,7 @@ class DocumentTemplate  {
 	private $plannedPurgeDate;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceId;
 
@@ -137,7 +137,7 @@ class DocumentTemplate  {
 	private $templateResource;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $type;
 
@@ -155,6 +155,9 @@ class DocumentTemplate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -166,6 +169,9 @@ class DocumentTemplate  {
 		}
 		if (isset($data['type']) && $data['type'] != null) {
 			$this->setType($data['type']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -187,7 +193,7 @@ class DocumentTemplate  {
 	 * @param int $id
 	 * @return DocumentTemplate
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -196,7 +202,7 @@ class DocumentTemplate  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -205,7 +211,7 @@ class DocumentTemplate  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return DocumentTemplate
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -263,7 +269,7 @@ class DocumentTemplate  {
 	/**
 	 * Returns spaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceId() {
 		return $this->spaceId;
@@ -272,7 +278,7 @@ class DocumentTemplate  {
 	/**
 	 * Sets spaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceId
+	 * @param int $spaceId
 	 * @return DocumentTemplate
 	 */
 	public function setSpaceId($spaceId) {
@@ -332,7 +338,7 @@ class DocumentTemplate  {
 	/**
 	 * Returns type.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getType() {
 		return $this->type;
@@ -341,7 +347,7 @@ class DocumentTemplate  {
 	/**
 	 * Sets type.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $type
+	 * @param int $type
 	 * @return DocumentTemplate
 	 */
 	public function setType($type) {
@@ -367,7 +373,7 @@ class DocumentTemplate  {
 	 * @param int $version
 	 * @return DocumentTemplate
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

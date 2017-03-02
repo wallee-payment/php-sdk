@@ -50,7 +50,7 @@ class PaymentProcessor  {
 	private static $swaggerTypes = array(
 		'companyName' => 'map[string,string]',
 		'description' => 'map[string,string]',
-		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'feature' => 'int',
 		'headquartersLocation' => 'map[string,string]',
 		'id' => 'int',
 		'logoPath' => 'string',
@@ -83,7 +83,7 @@ class PaymentProcessor  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $feature;
 
@@ -199,7 +199,7 @@ class PaymentProcessor  {
 	/**
 	 * Returns feature.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getFeature() {
 		return $this->feature;
@@ -208,7 +208,7 @@ class PaymentProcessor  {
 	/**
 	 * Sets feature.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @param int $feature
 	 * @return PaymentProcessor
 	 */
 	public function setFeature($feature) {

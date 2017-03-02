@@ -50,7 +50,7 @@ class FailureReason  {
 	private static $swaggerTypes = array(
 		'category' => 'string',
 		'description' => 'map[string,string]',
-		'features' => '\Wallee\Sdk\Model\EntityReference',
+		'features' => 'int[]',
 		'id' => 'int',
 		'name' => 'map[string,string]'	);
 
@@ -104,7 +104,7 @@ class FailureReason  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $features;
 
@@ -194,7 +194,7 @@ class FailureReason  {
 	/**
 	 * Returns features.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getFeatures() {
 		return $this->features;
@@ -203,7 +203,7 @@ class FailureReason  {
 	/**
 	 * Sets features.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $features
+	 * @param int[] $features
 	 * @return FailureReason
 	 */
 	public function setFeatures($features) {

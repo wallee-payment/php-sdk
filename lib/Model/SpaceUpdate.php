@@ -152,7 +152,7 @@ class SpaceUpdate extends Space  {
 	/**
 	 * Returns technicalContactAddresses.
 	 *
-	 * The e-mail address provided as contact addresses will be informed about technical issues or errors triggered by the space.
+	 * The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
 	 *
 	 * @return string[]
 	 */

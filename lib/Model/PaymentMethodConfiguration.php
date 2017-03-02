@@ -52,9 +52,10 @@ class PaymentMethodConfiguration  {
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'id' => 'int',
 		'imageResourcePath' => '\Wallee\Sdk\Model\ModelResourcePath',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
-		'paymentMethod' => '\Wallee\Sdk\Model\EntityReference',
+		'oneClickPaymentMode' => 'string',
+		'paymentMethod' => 'int',
 		'plannedPurgeDate' => 'string',
 		'sortOrder' => 'int',
 		'spaceId' => 'int',
@@ -87,6 +88,26 @@ class PaymentMethodConfiguration  {
 		return [
 			self::DATA_COLLECTION_TYPE_ONSITE,
 			self::DATA_COLLECTION_TYPE_OFFSITE,
+		];
+	}
+	
+	/**
+	 * Values of oneClickPaymentMode.
+	 */
+	const ONE_CLICK_PAYMENT_MODE_DISABLED = 'DISABLED';
+	const ONE_CLICK_PAYMENT_MODE_ALLOW = 'ALLOW';
+	const ONE_CLICK_PAYMENT_MODE_FORCE = 'FORCE';
+	
+	/**
+	 * Returns allowable values of oneClickPaymentMode.
+	 *
+	 * @return string[]
+	 */
+	public function getOneClickPaymentModeAllowableValues() {
+		return [
+			self::ONE_CLICK_PAYMENT_MODE_DISABLED,
+			self::ONE_CLICK_PAYMENT_MODE_ALLOW,
+			self::ONE_CLICK_PAYMENT_MODE_FORCE,
 		];
 	}
 	
@@ -140,7 +161,7 @@ class PaymentMethodConfiguration  {
 	private $imageResourcePath;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -152,7 +173,14 @@ class PaymentMethodConfiguration  {
 	private $name;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * When the buyer is present on the payment page or within the iFrame the payment details can be stored automatically. The buyer will be able to use the stored payment details for subsequent transactions. When the transaction already contains a token one-click payments are disabled anyway
+	 *
+	 * @var string
+	 */
+	private $oneClickPaymentMode;
+
+	/**
+	 * @var int
 	 */
 	private $paymentMethod;
 
@@ -206,6 +234,9 @@ class PaymentMethodConfiguration  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['imageResourcePath']) && $data['imageResourcePath'] != null) {
 			$this->setImageResourcePath($data['imageResourcePath']);
 		}
@@ -217,6 +248,9 @@ class PaymentMethodConfiguration  {
 		}
 		if (isset($data['title']) && $data['title'] != null) {
 			$this->setTitle($data['title']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -286,7 +320,7 @@ class PaymentMethodConfiguration  {
 	 * @param int $id
 	 * @return PaymentMethodConfiguration
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -316,7 +350,7 @@ class PaymentMethodConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -325,7 +359,7 @@ class PaymentMethodConfiguration  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return PaymentMethodConfiguration
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -358,9 +392,36 @@ class PaymentMethodConfiguration  {
 	}
 
 	/**
+	 * Returns oneClickPaymentMode.
+	 *
+	 * When the buyer is present on the payment page or within the iFrame the payment details can be stored automatically. The buyer will be able to use the stored payment details for subsequent transactions. When the transaction already contains a token one-click payments are disabled anyway
+	 *
+	 * @return string
+	 */
+	public function getOneClickPaymentMode() {
+		return $this->oneClickPaymentMode;
+	}
+
+	/**
+	 * Sets oneClickPaymentMode.
+	 *
+	 * @param string $oneClickPaymentMode
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setOneClickPaymentMode($oneClickPaymentMode) {
+		$allowed_values = array('DISABLED', 'ALLOW', 'FORCE');
+		if (!is_null($oneClickPaymentMode) && (!in_array($oneClickPaymentMode, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'oneClickPaymentMode', must be one of 'DISABLED', 'ALLOW', 'FORCE'");
+		}
+		$this->oneClickPaymentMode = $oneClickPaymentMode;
+
+		return $this;
+	}
+
+	/**
 	 * Returns paymentMethod.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getPaymentMethod() {
 		return $this->paymentMethod;
@@ -369,7 +430,7 @@ class PaymentMethodConfiguration  {
 	/**
 	 * Sets paymentMethod.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
+	 * @param int $paymentMethod
 	 * @return PaymentMethodConfiguration
 	 */
 	public function setPaymentMethod($paymentMethod) {
@@ -512,7 +573,7 @@ class PaymentMethodConfiguration  {
 	 * @param int $version
 	 * @return PaymentMethodConfiguration
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;
@@ -536,6 +597,11 @@ class PaymentMethodConfiguration  {
 		if ($this->getName() === null) {
 			throw new ValidationException("'name' can't be null", 'name', $this);
 		}
+		$allowed_values = ["DISABLED", "ALLOW", "FORCE"];
+		if (!in_array($this->getOneClickPaymentMode(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'oneClickPaymentMode', must be one of #{allowed_values}.", 'oneClickPaymentMode', $this);
+		}
+
 		if ($this->getState() === null) {
 			throw new ValidationException("'state' can't be null", 'state', $this);
 		}

@@ -50,12 +50,12 @@ class EmailSender  {
 	private static $swaggerTypes = array(
 		'defaultSender' => 'bool',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'senderAddress' => 'string',
 		'senderName' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'state' => 'string',
-		'type' => '\Wallee\Sdk\Model\EntityReference',
+		'type' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -94,7 +94,7 @@ class EmailSender  {
 	
 
 	/**
-	 * The default e-mail sender is used whenever not different sender is specified in the space.
+	 * The default email sender is used whenever not different sender is specified in the space.
 	 *
 	 * @var bool
 	 */
@@ -108,7 +108,7 @@ class EmailSender  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -120,7 +120,7 @@ class EmailSender  {
 	private $plannedPurgeDate;
 
 	/**
-	 * The sender address is the e-mail address from which you want to send the e-mail to the customer.
+	 * The sender address is the email address from which you want to send the email to the customer.
 	 *
 	 * @var string
 	 */
@@ -139,7 +139,7 @@ class EmailSender  {
 	private $state;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $type;
 
@@ -157,6 +157,9 @@ class EmailSender  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -166,13 +169,16 @@ class EmailSender  {
 		if (isset($data['type']) && $data['type'] != null) {
 			$this->setType($data['type']);
 		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns defaultSender.
 	 *
-	 * The default e-mail sender is used whenever not different sender is specified in the space.
+	 * The default email sender is used whenever not different sender is specified in the space.
 	 *
 	 * @return bool
 	 */
@@ -209,7 +215,7 @@ class EmailSender  {
 	 * @param int $id
 	 * @return EmailSender
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -218,7 +224,7 @@ class EmailSender  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -227,7 +233,7 @@ class EmailSender  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return EmailSender
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -262,7 +268,7 @@ class EmailSender  {
 	/**
 	 * Returns senderAddress.
 	 *
-	 * The sender address is the e-mail address from which you want to send the e-mail to the customer.
+	 * The sender address is the email address from which you want to send the email to the customer.
 	 *
 	 * @return string
 	 */
@@ -333,7 +339,7 @@ class EmailSender  {
 	/**
 	 * Returns type.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getType() {
 		return $this->type;
@@ -342,7 +348,7 @@ class EmailSender  {
 	/**
 	 * Sets type.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $type
+	 * @param int $type
 	 * @return EmailSender
 	 */
 	public function setType($type) {
@@ -368,7 +374,7 @@ class EmailSender  {
 	 * @param int $version
 	 * @return EmailSender
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

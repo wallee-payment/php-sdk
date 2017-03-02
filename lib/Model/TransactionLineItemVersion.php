@@ -54,7 +54,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 		'language' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'plannedPurgeDate' => 'string',
-		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceViewId' => 'int',
 		'taxAmount' => 'float',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'version' => 'int'	);
@@ -113,7 +113,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	private $plannedPurgeDate;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceViewId;
 
@@ -298,7 +298,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return $this->spaceViewId;
@@ -307,7 +307,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return TransactionLineItemVersion
 	 */
 	public function setSpaceViewId($spaceViewId) {

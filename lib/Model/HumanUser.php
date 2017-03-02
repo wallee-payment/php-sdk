@@ -68,7 +68,7 @@ class HumanUser extends User  {
 	
 
 	/**
-	 * The e-mail address of the user.
+	 * The email address of the user.
 	 *
 	 * @var string
 	 */
@@ -135,7 +135,7 @@ class HumanUser extends User  {
 	/**
 	 * Returns emailAddress.
 	 *
-	 * The e-mail address of the user.
+	 * The email address of the user.
 	 *
 	 * @return string
 	 */

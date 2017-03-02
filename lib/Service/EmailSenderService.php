@@ -73,7 +73,7 @@ class EmailSenderService {
 	 * count
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the e-mail senders which are used to calculate the count. (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the email senders which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
@@ -87,7 +87,7 @@ class EmailSenderService {
 	 * count
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the e-mail senders which are used to calculate the count. (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the email senders which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
@@ -149,16 +149,16 @@ class EmailSenderService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -172,7 +172,7 @@ class EmailSenderService {
 	 * read
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the e-mail sender which should be returned. (required)
+	 * @param int $id The id of the email sender which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\EmailSender
 	 */
@@ -186,7 +186,7 @@ class EmailSenderService {
 	 * read
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the e-mail sender which should be returned. (required)
+	 * @param int $id The id of the email sender which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
@@ -246,16 +246,16 @@ class EmailSenderService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSender', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSender', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -269,7 +269,7 @@ class EmailSenderService {
 	 * search
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the e-mail senders which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the email senders which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\EmailSender[]
 	 */
@@ -283,7 +283,7 @@ class EmailSenderService {
 	 * search
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the e-mail senders which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the email senders which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
@@ -345,16 +345,16 @@ class EmailSenderService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSender[]', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSender[]', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 

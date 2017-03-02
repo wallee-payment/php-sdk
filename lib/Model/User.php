@@ -159,8 +159,14 @@ class User  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['scope']) && $data['scope'] != null) {
 			$this->setScope($data['scope']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -182,7 +188,7 @@ class User  {
 	 * @param int $id
 	 * @return User
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -303,7 +309,7 @@ class User  {
 	 * @param int $version
 	 * @return User
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

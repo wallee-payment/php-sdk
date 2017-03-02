@@ -86,6 +86,9 @@ class TransactionLineItemUpdateRequest  {
 		if (isset($data['newLineItems']) && $data['newLineItems'] != null) {
 			$this->setNewLineItems($data['newLineItems']);
 		}
+		if (isset($data['transactionId']) && $data['transactionId'] != null) {
+			$this->setTransactionId($data['transactionId']);
+		}
 	}
 
 
@@ -129,7 +132,7 @@ class TransactionLineItemUpdateRequest  {
 	 * @param int $transactionId
 	 * @return TransactionLineItemUpdateRequest
 	 */
-	protected function setTransactionId($transactionId) {
+	public function setTransactionId($transactionId) {
 		$this->transactionId = $transactionId;
 
 		return $this;
@@ -142,6 +145,9 @@ class TransactionLineItemUpdateRequest  {
 	 */
 	public function validate() {
 
+		if ($this->getTransactionId() === null) {
+			throw new ValidationException("'transactionId' can't be null", 'transactionId', $this);
+		}
 	}
 
 	/**

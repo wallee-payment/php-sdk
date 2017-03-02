@@ -53,7 +53,7 @@ class Subscription  {
 		'id' => 'int',
 		'initializedOn' => 'string',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'plannedTerminationDate' => 'string',
 		'reference' => 'string',
@@ -139,7 +139,7 @@ class Subscription  {
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -209,6 +209,9 @@ class Subscription  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -217,6 +220,9 @@ class Subscription  {
 		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -284,7 +290,7 @@ class Subscription  {
 	 * @param int $id
 	 * @return Subscription
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -339,7 +345,7 @@ class Subscription  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -348,7 +354,7 @@ class Subscription  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return Subscription
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -558,7 +564,7 @@ class Subscription  {
 	 * @param int $version
 	 * @return Subscription
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

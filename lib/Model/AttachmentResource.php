@@ -27,7 +27,7 @@ use \Wallee\Sdk\ValidationException;
  * AttachmentResource model
  *
  * @category    Class
- * @description The attachment resource allows the attachment of resources to e-mails.
+ * @description The attachment resource allows the attachment of resources to emails.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -49,7 +49,7 @@ class AttachmentResource  {
 	 */
 	private static $swaggerTypes = array(
 		'attachmentName' => 'map[string,string]',
-		'resourcePath' => 'string'	);
+		'resourcePath' => '\Wallee\Sdk\Model\ModelResourcePath'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -63,16 +63,14 @@ class AttachmentResource  {
 	
 
 	/**
-	 * The name of the attachment which is shown to the user within the e-mail client.
+	 * The name of the attachment which is shown to the user within the email client.
 	 *
 	 * @var map[string,string]
 	 */
 	private $attachmentName;
 
 	/**
-	 * The path to the resource which should be attachted to the e-mail.
-	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	private $resourcePath;
 
@@ -86,13 +84,16 @@ class AttachmentResource  {
 		if (isset($data['attachmentName']) && $data['attachmentName'] != null) {
 			$this->setAttachmentName($data['attachmentName']);
 		}
+		if (isset($data['resourcePath']) && $data['resourcePath'] != null) {
+			$this->setResourcePath($data['resourcePath']);
+		}
 	}
 
 
 	/**
 	 * Returns attachmentName.
 	 *
-	 * The name of the attachment which is shown to the user within the e-mail client.
+	 * The name of the attachment which is shown to the user within the email client.
 	 *
 	 * @return map[string,string]
 	 */
@@ -115,9 +116,7 @@ class AttachmentResource  {
 	/**
 	 * Returns resourcePath.
 	 *
-	 * The path to the resource which should be attachted to the e-mail.
-	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	public function getResourcePath() {
 		return $this->resourcePath;
@@ -126,10 +125,10 @@ class AttachmentResource  {
 	/**
 	 * Sets resourcePath.
 	 *
-	 * @param string $resourcePath
+	 * @param \Wallee\Sdk\Model\ModelResourcePath $resourcePath
 	 * @return AttachmentResource
 	 */
-	protected function setResourcePath($resourcePath) {
+	public function setResourcePath($resourcePath) {
 		$this->resourcePath = $resourcePath;
 
 		return $this;

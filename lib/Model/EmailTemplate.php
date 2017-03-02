@@ -54,13 +54,13 @@ class EmailTemplate  {
 		'carbonCopyRecipients' => 'string[]',
 		'htmlBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
 		'subject' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'textBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
-		'type' => '\Wallee\Sdk\Model\EntityReference',
+		'type' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -139,7 +139,7 @@ class EmailTemplate  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -175,7 +175,7 @@ class EmailTemplate  {
 	private $textBodyTemplateResource;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $type;
 
@@ -208,6 +208,9 @@ class EmailTemplate  {
 		if (isset($data['htmlBodyTemplateResource']) && $data['htmlBodyTemplateResource'] != null) {
 			$this->setHtmlBodyTemplateResource($data['htmlBodyTemplateResource']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -219,6 +222,9 @@ class EmailTemplate  {
 		}
 		if (isset($data['type']) && $data['type'] != null) {
 			$this->setType($data['type']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -353,7 +359,7 @@ class EmailTemplate  {
 	 * @param int $id
 	 * @return EmailTemplate
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -362,7 +368,7 @@ class EmailTemplate  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -371,7 +377,7 @@ class EmailTemplate  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return EmailTemplate
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -498,7 +504,7 @@ class EmailTemplate  {
 	/**
 	 * Returns type.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getType() {
 		return $this->type;
@@ -507,7 +513,7 @@ class EmailTemplate  {
 	/**
 	 * Sets type.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $type
+	 * @param int $type
 	 * @return EmailTemplate
 	 */
 	public function setType($type) {
@@ -533,7 +539,7 @@ class EmailTemplate  {
 	 * @param int $version
 	 * @return EmailTemplate
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

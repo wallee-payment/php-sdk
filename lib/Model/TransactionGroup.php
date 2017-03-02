@@ -52,7 +52,7 @@ class TransactionGroup  {
 		'customerId' => 'string',
 		'endDate' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
 		'version' => 'int'	);
@@ -117,7 +117,7 @@ class TransactionGroup  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -149,8 +149,14 @@ class TransactionGroup  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -241,7 +247,7 @@ class TransactionGroup  {
 	 * @param int $id
 	 * @return TransactionGroup
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -250,7 +256,7 @@ class TransactionGroup  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -259,7 +265,7 @@ class TransactionGroup  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return TransactionGroup
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -335,7 +341,7 @@ class TransactionGroup  {
 	 * @param int $version
 	 * @return TransactionGroup
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

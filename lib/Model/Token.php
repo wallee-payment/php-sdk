@@ -49,9 +49,13 @@ class Token  {
 	 */
 	private static $swaggerTypes = array(
 		'createdOn' => 'string',
+		'customerEmailAddress' => 'string',
+		'customerId' => 'string',
+		'enabledForOneClickPayment' => 'bool',
 		'externalId' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'language' => 'string',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
 		'tokenReference' => 'string',
@@ -100,6 +104,27 @@ class Token  {
 	private $createdOn;
 
 	/**
+	 * The customer email address is the email address of the customer.
+	 *
+	 * @var string
+	 */
+	private $customerEmailAddress;
+
+	/**
+	 * The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
+	 *
+	 * @var string
+	 */
+	private $customerId;
+
+	/**
+	 * When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
+	 *
+	 * @var bool
+	 */
+	private $enabledForOneClickPayment;
+
+	/**
 	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
 	 *
 	 * @var string
@@ -114,7 +139,14 @@ class Token  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -153,8 +185,14 @@ class Token  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -178,6 +216,75 @@ class Token  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns customerEmailAddress.
+	 *
+	 * The customer email address is the email address of the customer.
+	 *
+	 * @return string
+	 */
+	public function getCustomerEmailAddress() {
+		return $this->customerEmailAddress;
+	}
+
+	/**
+	 * Sets customerEmailAddress.
+	 *
+	 * @param string $customerEmailAddress
+	 * @return Token
+	 */
+	protected function setCustomerEmailAddress($customerEmailAddress) {
+		$this->customerEmailAddress = $customerEmailAddress;
+
+		return $this;
+	}
+
+	/**
+	 * Returns customerId.
+	 *
+	 * The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
+	 *
+	 * @return string
+	 */
+	public function getCustomerId() {
+		return $this->customerId;
+	}
+
+	/**
+	 * Sets customerId.
+	 *
+	 * @param string $customerId
+	 * @return Token
+	 */
+	protected function setCustomerId($customerId) {
+		$this->customerId = $customerId;
+
+		return $this;
+	}
+
+	/**
+	 * Returns enabledForOneClickPayment.
+	 *
+	 * When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
+	 *
+	 * @return bool
+	 */
+	public function getEnabledForOneClickPayment() {
+		return $this->enabledForOneClickPayment;
+	}
+
+	/**
+	 * Sets enabledForOneClickPayment.
+	 *
+	 * @param bool $enabledForOneClickPayment
+	 * @return Token
+	 */
+	protected function setEnabledForOneClickPayment($enabledForOneClickPayment) {
+		$this->enabledForOneClickPayment = $enabledForOneClickPayment;
 
 		return $this;
 	}
@@ -222,8 +329,31 @@ class Token  {
 	 * @param int $id
 	 * @return Token
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
+
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return Token
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
 		return $this;
 	}
@@ -231,7 +361,7 @@ class Token  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -240,7 +370,7 @@ class Token  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return Token
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -339,7 +469,7 @@ class Token  {
 	 * @param int $version
 	 * @return Token
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

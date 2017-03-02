@@ -199,8 +199,14 @@ class Account  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['parentAccount']) && $data['parentAccount'] != null) {
 			$this->setParentAccount($data['parentAccount']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -268,7 +274,7 @@ class Account  {
 	 * @param int $id
 	 * @return Account
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -458,7 +464,7 @@ class Account  {
 	 * @param int $version
 	 * @return Account
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

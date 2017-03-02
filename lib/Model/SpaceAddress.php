@@ -95,7 +95,7 @@ class SpaceAddress  {
 	private $dependentLocality;
 
 	/**
-	 * The e-mail address is used within e-mails and as reply to address.
+	 * The email address is used within emails and as reply to address.
 	 *
 	 * @var string
 	 */
@@ -246,7 +246,7 @@ class SpaceAddress  {
 	/**
 	 * Returns emailAddress.
 	 *
-	 * The e-mail address is used within e-mails and as reply to address.
+	 * The email address is used within emails and as reply to address.
 	 *
 	 * @return string
 	 */
@@ -480,9 +480,6 @@ class SpaceAddress  {
 	 */
 	public function validate() {
 
-		if ($this->getCountry() === null) {
-			throw new ValidationException("'country' can't be null", 'country', $this);
-		}
 	}
 
 	/**

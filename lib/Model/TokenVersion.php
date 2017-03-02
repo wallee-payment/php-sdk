@@ -49,13 +49,19 @@ class TokenVersion  {
 	 */
 	private static $swaggerTypes = array(
 		'activatedOn' => 'string',
+		'billingAddress' => '\Wallee\Sdk\Model\Address',
 		'createdOn' => 'string',
+		'environment' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'labels' => '\Wallee\Sdk\Model\Label[]',
+		'language' => 'string',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'obsoletedOn' => 'string',
+		'paymentConnectorConfiguration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
 		'plannedPurgeDate' => 'string',
 		'processorToken' => 'string',
+		'shippingAddress' => '\Wallee\Sdk\Model\Address',
 		'state' => 'string',
 		'token' => '\Wallee\Sdk\Model\Token',
 		'version' => 'int'	);
@@ -69,6 +75,24 @@ class TokenVersion  {
 		return self::$swaggerTypes;
 	}
 
+	
+	/**
+	 * Values of environment.
+	 */
+	const ENVIRONMENT_PRODUCTION = 'PRODUCTION';
+	const ENVIRONMENT_TEST = 'TEST';
+	
+	/**
+	 * Returns allowable values of environment.
+	 *
+	 * @return string[]
+	 */
+	public function getEnvironmentAllowableValues() {
+		return [
+			self::ENVIRONMENT_PRODUCTION,
+			self::ENVIRONMENT_TEST,
+		];
+	}
 	
 	/**
 	 * Values of state.
@@ -99,11 +123,23 @@ class TokenVersion  {
 	private $activatedOn;
 
 	/**
+	 * @var \Wallee\Sdk\Model\Address
+	 */
+	private $billingAddress;
+
+	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
 	 * @var string
 	 */
 	private $createdOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $environment;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -113,7 +149,21 @@ class TokenVersion  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Label[]
+	 */
+	private $labels;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -132,6 +182,11 @@ class TokenVersion  {
 	private $obsoletedOn;
 
 	/**
+	 * @var \Wallee\Sdk\Model\PaymentConnectorConfiguration
+	 */
+	private $paymentConnectorConfiguration;
+
+	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
 	 * @var string
@@ -144,6 +199,11 @@ class TokenVersion  {
 	 * @var string
 	 */
 	private $processorToken;
+
+	/**
+	 * @var \Wallee\Sdk\Model\Address
+	 */
+	private $shippingAddress;
 
 	/**
 	 * 
@@ -171,11 +231,29 @@ class TokenVersion  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+			$this->setBillingAddress($data['billingAddress']);
+		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['labels']) && $data['labels'] != null) {
+			$this->setLabels($data['labels']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
+		if (isset($data['paymentConnectorConfiguration']) && $data['paymentConnectorConfiguration'] != null) {
+			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
+		}
+		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+			$this->setShippingAddress($data['shippingAddress']);
+		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -204,6 +282,27 @@ class TokenVersion  {
 	}
 
 	/**
+	 * Returns billingAddress.
+	 *
+	 * @return \Wallee\Sdk\Model\Address
+	 */
+	public function getBillingAddress() {
+		return $this->billingAddress;
+	}
+
+	/**
+	 * Sets billingAddress.
+	 *
+	 * @param \Wallee\Sdk\Model\Address $billingAddress
+	 * @return TokenVersion
+	 */
+	public function setBillingAddress($billingAddress) {
+		$this->billingAddress = $billingAddress;
+
+		return $this;
+	}
+
+	/**
 	 * Returns createdOn.
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
@@ -227,6 +326,33 @@ class TokenVersion  {
 	}
 
 	/**
+	 * Returns environment.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getEnvironment() {
+		return $this->environment;
+	}
+
+	/**
+	 * Sets environment.
+	 *
+	 * @param string $environment
+	 * @return TokenVersion
+	 */
+	protected function setEnvironment($environment) {
+		$allowed_values = array('PRODUCTION', 'TEST');
+		if (!is_null($environment) && (!in_array($environment, $allowed_values))) {
+			throw new \InvalidArgumentException("Invalid value for 'environment', must be one of 'PRODUCTION', 'TEST'");
+		}
+		$this->environment = $environment;
+
+		return $this;
+	}
+
+	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -243,8 +369,54 @@ class TokenVersion  {
 	 * @param int $id
 	 * @return TokenVersion
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns labels.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\Label[]
+	 */
+	public function getLabels() {
+		return $this->labels;
+	}
+
+	/**
+	 * Sets labels.
+	 *
+	 * @param \Wallee\Sdk\Model\Label[] $labels
+	 * @return TokenVersion
+	 */
+	public function setLabels($labels) {
+		$this->labels = $labels;
+
+		return $this;
+	}
+
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
+
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return TokenVersion
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
 		return $this;
 	}
@@ -252,7 +424,7 @@ class TokenVersion  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -261,7 +433,7 @@ class TokenVersion  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return TokenVersion
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -317,6 +489,27 @@ class TokenVersion  {
 	}
 
 	/**
+	 * Returns paymentConnectorConfiguration.
+	 *
+	 * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
+	 */
+	public function getPaymentConnectorConfiguration() {
+		return $this->paymentConnectorConfiguration;
+	}
+
+	/**
+	 * Sets paymentConnectorConfiguration.
+	 *
+	 * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $paymentConnectorConfiguration
+	 * @return TokenVersion
+	 */
+	public function setPaymentConnectorConfiguration($paymentConnectorConfiguration) {
+		$this->paymentConnectorConfiguration = $paymentConnectorConfiguration;
+
+		return $this;
+	}
+
+	/**
 	 * Returns plannedPurgeDate.
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -358,6 +551,27 @@ class TokenVersion  {
 	 */
 	protected function setProcessorToken($processorToken) {
 		$this->processorToken = $processorToken;
+
+		return $this;
+	}
+
+	/**
+	 * Returns shippingAddress.
+	 *
+	 * @return \Wallee\Sdk\Model\Address
+	 */
+	public function getShippingAddress() {
+		return $this->shippingAddress;
+	}
+
+	/**
+	 * Sets shippingAddress.
+	 *
+	 * @param \Wallee\Sdk\Model\Address $shippingAddress
+	 * @return TokenVersion
+	 */
+	public function setShippingAddress($shippingAddress) {
+		$this->shippingAddress = $shippingAddress;
 
 		return $this;
 	}
@@ -427,7 +641,7 @@ class TokenVersion  {
 	 * @param int $version
 	 * @return TokenVersion
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;
@@ -439,6 +653,11 @@ class TokenVersion  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+
+		$allowed_values = ["PRODUCTION", "TEST"];
+		if (!in_array($this->getEnvironment(), $allowed_values)) {
+			throw new ValidationException("invalid value for 'environment', must be one of #{allowed_values}.", 'environment', $this);
+		}
 
 		if ($this->getState() === null) {
 			throw new ValidationException("'state' can't be null", 'state', $this);

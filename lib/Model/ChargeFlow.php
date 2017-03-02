@@ -48,9 +48,9 @@ class ChargeFlow  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'conditions' => '\Wallee\Sdk\Model\EntityReference',
+		'conditions' => 'int[]',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
 		'priority' => 'int',
@@ -93,7 +93,7 @@ class ChargeFlow  {
 	
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $conditions;
 
@@ -105,7 +105,7 @@ class ChargeFlow  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -154,8 +154,14 @@ class ChargeFlow  {
 		if (isset($data['conditions']) && $data['conditions'] != null) {
 			$this->setConditions($data['conditions']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -163,7 +169,7 @@ class ChargeFlow  {
 	/**
 	 * Returns conditions.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getConditions() {
 		return $this->conditions;
@@ -172,7 +178,7 @@ class ChargeFlow  {
 	/**
 	 * Sets conditions.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $conditions
+	 * @param int[] $conditions
 	 * @return ChargeFlow
 	 */
 	public function setConditions($conditions) {
@@ -198,7 +204,7 @@ class ChargeFlow  {
 	 * @param int $id
 	 * @return ChargeFlow
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -207,7 +213,7 @@ class ChargeFlow  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -216,7 +222,7 @@ class ChargeFlow  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return ChargeFlow
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -338,7 +344,7 @@ class ChargeFlow  {
 	 * @param int $version
 	 * @return ChargeFlow
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

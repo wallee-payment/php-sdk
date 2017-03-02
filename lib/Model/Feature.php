@@ -53,7 +53,7 @@ class Feature  {
 		'id' => 'int',
 		'logoPath' => 'string',
 		'name' => 'map[string,string]',
-		'requiredFeatures' => '\Wallee\Sdk\Model\EntityReference',
+		'requiredFeatures' => 'int[]',
 		'sortOrder' => 'int',
 		'visible' => 'bool'	);
 
@@ -104,7 +104,7 @@ class Feature  {
 	private $name;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $requiredFeatures;
 
@@ -259,7 +259,7 @@ class Feature  {
 	/**
 	 * Returns requiredFeatures.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getRequiredFeatures() {
 		return $this->requiredFeatures;
@@ -268,7 +268,7 @@ class Feature  {
 	/**
 	 * Sets requiredFeatures.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $requiredFeatures
+	 * @param int[] $requiredFeatures
 	 * @return Feature
 	 */
 	public function setRequiredFeatures($requiredFeatures) {

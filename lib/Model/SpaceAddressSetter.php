@@ -178,7 +178,7 @@ class SpaceAddressSetter extends SpaceAddress  {
 	/**
 	 * Returns emailAddress.
 	 *
-	 * The e-mail address is used within e-mails and as reply to address.
+	 * The email address is used within emails and as reply to address.
 	 *
 	 * @return string
 	 */
@@ -393,9 +393,6 @@ class SpaceAddressSetter extends SpaceAddress  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCountry() === null) {
-			throw new ValidationException("'country' can't be null", 'country', $this);
-		}
 	}
 
 	/**

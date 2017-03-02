@@ -102,8 +102,14 @@ class DatabaseTranslatedString  {
 		if (isset($data['availableLanguages']) && $data['availableLanguages'] != null) {
 			$this->setAvailableLanguages($data['availableLanguages']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['items']) && $data['items'] != null) {
 			$this->setItems($data['items']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -148,7 +154,7 @@ class DatabaseTranslatedString  {
 	 * @param int $id
 	 * @return DatabaseTranslatedString
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -194,7 +200,7 @@ class DatabaseTranslatedString  {
 	 * @param int $version
 	 * @return DatabaseTranslatedString
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

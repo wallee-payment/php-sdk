@@ -49,11 +49,11 @@ class PaymentConnectorConfiguration  {
 	 */
 	private static $swaggerTypes = array(
 		'applicableForTransactionProcessing' => 'bool',
-		'conditions' => '\Wallee\Sdk\Model\EntityReference',
-		'connector' => '\Wallee\Sdk\Model\EntityReference',
+		'conditions' => 'int[]',
+		'connector' => 'int',
 		'enabledSpaceViews' => 'int[]',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'paymentMethodConfiguration' => '\Wallee\Sdk\Model\PaymentMethodConfiguration',
 		'plannedPurgeDate' => 'string',
@@ -105,12 +105,12 @@ class PaymentConnectorConfiguration  {
 	private $applicableForTransactionProcessing;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $conditions;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $connector;
 
@@ -129,7 +129,7 @@ class PaymentConnectorConfiguration  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -194,6 +194,9 @@ class PaymentConnectorConfiguration  {
 		if (isset($data['enabledSpaceViews']) && $data['enabledSpaceViews'] != null) {
 			$this->setEnabledSpaceViews($data['enabledSpaceViews']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -202,6 +205,9 @@ class PaymentConnectorConfiguration  {
 		}
 		if (isset($data['processorConfiguration']) && $data['processorConfiguration'] != null) {
 			$this->setProcessorConfiguration($data['processorConfiguration']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -232,7 +238,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns conditions.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getConditions() {
 		return $this->conditions;
@@ -241,7 +247,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Sets conditions.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $conditions
+	 * @param int[] $conditions
 	 * @return PaymentConnectorConfiguration
 	 */
 	public function setConditions($conditions) {
@@ -253,7 +259,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns connector.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getConnector() {
 		return $this->connector;
@@ -262,7 +268,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Sets connector.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $connector
+	 * @param int $connector
 	 * @return PaymentConnectorConfiguration
 	 */
 	public function setConnector($connector) {
@@ -311,7 +317,7 @@ class PaymentConnectorConfiguration  {
 	 * @param int $id
 	 * @return PaymentConnectorConfiguration
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -320,7 +326,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -329,7 +335,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return PaymentConnectorConfiguration
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -493,7 +499,7 @@ class PaymentConnectorConfiguration  {
 	 * @param int $version
 	 * @return PaymentConnectorConfiguration
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

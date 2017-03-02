@@ -129,16 +129,16 @@ class EmailSenderTypeService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSenderType[]', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSenderType[]', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -151,7 +151,7 @@ class EmailSenderTypeService {
 	 *
 	 * read
 	 *
-	 * @param int $id The id of the e-mail sender type which should be returned. (required)
+	 * @param int $id The id of the email sender type which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\EmailSenderType
 	 */
@@ -164,7 +164,7 @@ class EmailSenderTypeService {
 	 *
 	 * read
 	 *
-	 * @param int $id The id of the e-mail sender type which should be returned. (required)
+	 * @param int $id The id of the email sender type which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
@@ -217,16 +217,16 @@ class EmailSenderTypeService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSenderType', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\EmailSenderType', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 

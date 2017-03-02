@@ -58,7 +58,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 		'nextUpdateOn' => 'string',
 		'plannedPurgeDate' => 'string',
 		'processorReference' => 'string',
-		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceViewId' => 'int',
 		'state' => 'string',
 		'succeededOn' => 'string',
 		'timeoutOn' => 'string',
@@ -185,7 +185,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	private $processorReference;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceViewId;
 
@@ -481,7 +481,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return $this->spaceViewId;
@@ -490,7 +490,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return TransactionVoid
 	 */
 	public function setSpaceViewId($spaceViewId) {

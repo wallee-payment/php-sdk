@@ -145,16 +145,16 @@ class RefundService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -242,16 +242,113 @@ class RefundService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation refundGetRefundDocumentGet
+	 *
+	 * getRefundDocument
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund to get the document for. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\RenderedDocument
+	 */
+	public function refundGetRefundDocumentGet($spaceId, $id) {
+		return $this->refundGetRefundDocumentGetWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation refundGetRefundDocumentGetWithHttpInfo
+	 *
+	 * getRefundDocument
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund to get the document for. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function refundGetRefundDocumentGetWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundGetRefundDocumentGet');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling refundGetRefundDocumentGet');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+
+		// query params
+		$queryParams = [];
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/refund/getRefundDocument";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\RenderedDocument',
+				'/refund/getRefundDocument'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedDocument', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\RenderedDocument', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -339,16 +436,16 @@ class RefundService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -438,16 +535,16 @@ class RefundService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -537,16 +634,16 @@ class RefundService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund[]', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund[]', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 
@@ -634,16 +731,16 @@ class RefundService {
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 542:
-					$data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e->setResponseObject($data);
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 			}
 

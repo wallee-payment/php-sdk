@@ -70,11 +70,107 @@ class TokenUpdate extends Token  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['customerEmailAddress']) && $data['customerEmailAddress'] != null) {
+			$this->setCustomerEmailAddress($data['customerEmailAddress']);
+		}
+		if (isset($data['customerId']) && $data['customerId'] != null) {
+			$this->setCustomerId($data['customerId']);
+		}
+		if (isset($data['enabledForOneClickPayment']) && $data['enabledForOneClickPayment'] != null) {
+			$this->setEnabledForOneClickPayment($data['enabledForOneClickPayment']);
+		}
+		if (isset($data['language']) && $data['language'] != null) {
+			$this->setLanguage($data['language']);
+		}
 		if (isset($data['tokenReference']) && $data['tokenReference'] != null) {
 			$this->setTokenReference($data['tokenReference']);
 		}
 	}
 
+
+	/**
+	 * Returns customerEmailAddress.
+	 *
+	 * The customer email address is the email address of the customer.
+	 *
+	 * @return string
+	 */
+	public function getCustomerEmailAddress() {
+		return parent::getCustomerEmailAddress();
+	}
+
+	/**
+	 * Sets customerEmailAddress.
+	 *
+	 * @param string $customerEmailAddress
+	 * @return TokenUpdate
+	 */
+	public function setCustomerEmailAddress($customerEmailAddress) {
+		return parent::setCustomerEmailAddress($customerEmailAddress);
+	}
+
+	/**
+	 * Returns customerId.
+	 *
+	 * The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
+	 *
+	 * @return string
+	 */
+	public function getCustomerId() {
+		return parent::getCustomerId();
+	}
+
+	/**
+	 * Sets customerId.
+	 *
+	 * @param string $customerId
+	 * @return TokenUpdate
+	 */
+	public function setCustomerId($customerId) {
+		return parent::setCustomerId($customerId);
+	}
+
+	/**
+	 * Returns enabledForOneClickPayment.
+	 *
+	 * When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
+	 *
+	 * @return bool
+	 */
+	public function getEnabledForOneClickPayment() {
+		return parent::getEnabledForOneClickPayment();
+	}
+
+	/**
+	 * Sets enabledForOneClickPayment.
+	 *
+	 * @param bool $enabledForOneClickPayment
+	 * @return TokenUpdate
+	 */
+	public function setEnabledForOneClickPayment($enabledForOneClickPayment) {
+		return parent::setEnabledForOneClickPayment($enabledForOneClickPayment);
+	}
+
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return parent::getLanguage();
+	}
+
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return TokenUpdate
+	 */
+	public function setLanguage($language) {
+		return parent::setLanguage($language);
+	}
 
 	/**
 	 * Returns tokenReference.

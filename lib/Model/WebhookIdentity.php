@@ -49,7 +49,7 @@ class WebhookIdentity  {
 	 */
 	private static $swaggerTypes = array(
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
@@ -98,7 +98,7 @@ class WebhookIdentity  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -137,8 +137,14 @@ class WebhookIdentity  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -160,7 +166,7 @@ class WebhookIdentity  {
 	 * @param int $id
 	 * @return WebhookIdentity
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -169,7 +175,7 @@ class WebhookIdentity  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -178,7 +184,7 @@ class WebhookIdentity  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return WebhookIdentity
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -277,7 +283,7 @@ class WebhookIdentity  {
 	 * @param int $version
 	 * @return WebhookIdentity
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

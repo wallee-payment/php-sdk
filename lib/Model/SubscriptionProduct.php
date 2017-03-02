@@ -48,10 +48,10 @@ class SubscriptionProduct  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'allowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
+		'allowedPaymentMethodConfigurations' => 'int[]',
 		'failedPaymentSuspensionPeriod' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
 		'reference' => 'string',
@@ -96,7 +96,7 @@ class SubscriptionProduct  {
 	
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $allowedPaymentMethodConfigurations;
 
@@ -115,7 +115,7 @@ class SubscriptionProduct  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -178,8 +178,14 @@ class SubscriptionProduct  {
 		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
 			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -187,7 +193,7 @@ class SubscriptionProduct  {
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getAllowedPaymentMethodConfigurations() {
 		return $this->allowedPaymentMethodConfigurations;
@@ -196,7 +202,7 @@ class SubscriptionProduct  {
 	/**
 	 * Sets allowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $allowedPaymentMethodConfigurations
+	 * @param int[] $allowedPaymentMethodConfigurations
 	 * @return SubscriptionProduct
 	 */
 	public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {
@@ -245,7 +251,7 @@ class SubscriptionProduct  {
 	 * @param int $id
 	 * @return SubscriptionProduct
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -254,7 +260,7 @@ class SubscriptionProduct  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -263,7 +269,7 @@ class SubscriptionProduct  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionProduct
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -431,7 +437,7 @@ class SubscriptionProduct  {
 	 * @param int $version
 	 * @return SubscriptionProduct
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

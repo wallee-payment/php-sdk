@@ -107,6 +107,12 @@ class DatabaseTranslatedStringItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
@@ -127,7 +133,7 @@ class DatabaseTranslatedStringItem  {
 	 * @param int $id
 	 * @return DatabaseTranslatedStringItem
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -219,7 +225,7 @@ class DatabaseTranslatedStringItem  {
 	 * @param int $version
 	 * @return DatabaseTranslatedStringItem
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

@@ -173,7 +173,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	/**
 	 * Returns subscription.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSubscription() {
 		return parent::getSubscription();
@@ -182,7 +182,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $subscription
+	 * @param int $subscription
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setSubscription($subscription) {

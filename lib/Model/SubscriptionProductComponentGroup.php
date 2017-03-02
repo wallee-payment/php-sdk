@@ -49,7 +49,7 @@ class SubscriptionProductComponentGroup  {
 	 */
 	private static $swaggerTypes = array(
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'optional' => 'bool',
 		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
@@ -75,7 +75,7 @@ class SubscriptionProductComponentGroup  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -117,6 +117,9 @@ class SubscriptionProductComponentGroup  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -125,6 +128,9 @@ class SubscriptionProductComponentGroup  {
 		}
 		if (isset($data['productVersion']) && $data['productVersion'] != null) {
 			$this->setProductVersion($data['productVersion']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -146,7 +152,7 @@ class SubscriptionProductComponentGroup  {
 	 * @param int $id
 	 * @return SubscriptionProductComponentGroup
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -155,7 +161,7 @@ class SubscriptionProductComponentGroup  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -164,7 +170,7 @@ class SubscriptionProductComponentGroup  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductComponentGroup
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -278,7 +284,7 @@ class SubscriptionProductComponentGroup  {
 	 * @param int $version
 	 * @return SubscriptionProductComponentGroup
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

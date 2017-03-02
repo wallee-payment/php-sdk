@@ -51,6 +51,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 		'automaticDecisionReason' => '\Wallee\Sdk\Model\DeliveryIndicationDecisionReason',
 		'automaticallyDecidedOn' => 'string',
 		'createdOn' => 'string',
+		'manualDecisionTimeoutOn' => 'string',
 		'manuallyDecidedBy' => 'int',
 		'manuallyDecidedOn' => 'string',
 		'plannedPurgeDate' => 'string',
@@ -109,6 +110,13 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 * @var string
 	 */
 	private $createdOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $manualDecisionTimeoutOn;
 
 	/**
 	 * 
@@ -231,6 +239,29 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns manualDecisionTimeoutOn.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getManualDecisionTimeoutOn() {
+		return $this->manualDecisionTimeoutOn;
+	}
+
+	/**
+	 * Sets manualDecisionTimeoutOn.
+	 *
+	 * @param string $manualDecisionTimeoutOn
+	 * @return DeliveryIndication
+	 */
+	protected function setManualDecisionTimeoutOn($manualDecisionTimeoutOn) {
+		$this->manualDecisionTimeoutOn = $manualDecisionTimeoutOn;
 
 		return $this;
 	}

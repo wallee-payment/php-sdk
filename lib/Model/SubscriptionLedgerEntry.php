@@ -51,15 +51,15 @@ class SubscriptionLedgerEntry  {
 		'aggregatedTaxRate' => 'float',
 		'amountExcludingTax' => 'float',
 		'amountIncludingTax' => 'float',
-		'createdBy' => '\Wallee\Sdk\Model\EntityReference',
+		'createdBy' => 'int',
 		'createdOn' => 'string',
 		'externalId' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
 		'quantity' => 'float',
 		'state' => 'string',
-		'subscriptionVersion' => '\Wallee\Sdk\Model\EntityReference',
+		'subscriptionVersion' => 'int',
 		'taxAmount' => 'float',
 		'taxes' => '\Wallee\Sdk\Model\Tax[]',
 		'title' => 'string',
@@ -118,7 +118,7 @@ class SubscriptionLedgerEntry  {
 	private $amountIncludingTax;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $createdBy;
 
@@ -144,7 +144,7 @@ class SubscriptionLedgerEntry  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -170,7 +170,7 @@ class SubscriptionLedgerEntry  {
 	private $state;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $subscriptionVersion;
 
@@ -212,6 +212,9 @@ class SubscriptionLedgerEntry  {
 		if (isset($data['createdBy']) && $data['createdBy'] != null) {
 			$this->setCreatedBy($data['createdBy']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -220,6 +223,9 @@ class SubscriptionLedgerEntry  {
 		}
 		if (isset($data['taxes']) && $data['taxes'] != null) {
 			$this->setTaxes($data['taxes']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -296,7 +302,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Returns createdBy.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getCreatedBy() {
 		return $this->createdBy;
@@ -305,7 +311,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Sets createdBy.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $createdBy
+	 * @param int $createdBy
 	 * @return SubscriptionLedgerEntry
 	 */
 	public function setCreatedBy($createdBy) {
@@ -377,7 +383,7 @@ class SubscriptionLedgerEntry  {
 	 * @param int $id
 	 * @return SubscriptionLedgerEntry
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -386,7 +392,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -395,7 +401,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionLedgerEntry
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -480,7 +486,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Returns subscriptionVersion.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSubscriptionVersion() {
 		return $this->subscriptionVersion;
@@ -489,7 +495,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Sets subscriptionVersion.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $subscriptionVersion
+	 * @param int $subscriptionVersion
 	 * @return SubscriptionLedgerEntry
 	 */
 	public function setSubscriptionVersion($subscriptionVersion) {
@@ -584,7 +590,7 @@ class SubscriptionLedgerEntry  {
 	 * @param int $version
 	 * @return SubscriptionLedgerEntry
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

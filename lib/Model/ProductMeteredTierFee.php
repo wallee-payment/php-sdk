@@ -108,8 +108,14 @@ class ProductMeteredTierFee  {
 		if (isset($data['fee']) && $data['fee'] != null) {
 			$this->setFee($data['fee']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['meteredFee']) && $data['meteredFee'] != null) {
 			$this->setMeteredFee($data['meteredFee']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -154,7 +160,7 @@ class ProductMeteredTierFee  {
 	 * @param int $id
 	 * @return ProductMeteredTierFee
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -221,7 +227,7 @@ class ProductMeteredTierFee  {
 	 * @param int $version
 	 * @return ProductMeteredTierFee
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

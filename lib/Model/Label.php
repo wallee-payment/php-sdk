@@ -111,6 +111,12 @@ class Label  {
 		if (isset($data['descriptor']) && $data['descriptor'] != null) {
 			$this->setDescriptor($data['descriptor']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
@@ -198,7 +204,7 @@ class Label  {
 	 * @param int $id
 	 * @return Label
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -221,7 +227,7 @@ class Label  {
 	 * @param int $version
 	 * @return Label
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

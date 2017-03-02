@@ -330,7 +330,9 @@ final class HttpRequest {
 		} elseif ((is_object($this->body) || is_array($this->body)) &&
 			(!isset($this->headers[self::HEADER_KEY_CONTENT_TYPE]) || $this->headers[self::HEADER_KEY_CONTENT_TYPE] != 'multipart/form-data')) {
 			return json_encode($this->serializer->sanitizeForSerialization($this->body));
-		}
+		} else {
+      return $this->body;
+    }
 	}
 
 	/**

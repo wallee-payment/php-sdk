@@ -50,9 +50,9 @@ class SpaceReference  {
 	private static $swaggerTypes = array(
 		'createdOn' => 'string',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => 'string',
-		'spaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceId' => 'int',
 		'state' => 'string',
 		'version' => 'int'	);
 
@@ -106,7 +106,7 @@ class SpaceReference  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -118,7 +118,7 @@ class SpaceReference  {
 	private $plannedPurgeDate;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceId;
 
@@ -143,11 +143,17 @@ class SpaceReference  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['spaceId']) && $data['spaceId'] != null) {
 			$this->setSpaceId($data['spaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -192,7 +198,7 @@ class SpaceReference  {
 	 * @param int $id
 	 * @return SpaceReference
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -201,7 +207,7 @@ class SpaceReference  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -210,7 +216,7 @@ class SpaceReference  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SpaceReference
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -245,7 +251,7 @@ class SpaceReference  {
 	/**
 	 * Returns spaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceId() {
 		return $this->spaceId;
@@ -254,7 +260,7 @@ class SpaceReference  {
 	/**
 	 * Sets spaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceId
+	 * @param int $spaceId
 	 * @return SpaceReference
 	 */
 	public function setSpaceId($spaceId) {
@@ -307,7 +313,7 @@ class SpaceReference  {
 	 * @param int $version
 	 * @return SpaceReference
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

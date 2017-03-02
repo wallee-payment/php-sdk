@@ -222,7 +222,7 @@ class TransactionCreate extends TransactionPending  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return parent::getSpaceViewId();
@@ -231,7 +231,7 @@ class TransactionCreate extends TransactionPending  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return TransactionCreate
 	 */
 	public function setSpaceViewId($spaceViewId) {

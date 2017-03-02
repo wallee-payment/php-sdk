@@ -50,13 +50,13 @@ class ChargeFlowLevelConfiguration  {
 	private static $swaggerTypes = array(
 		'flow' => '\Wallee\Sdk\Model\ChargeFlow',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'period' => 'string',
 		'plannedPurgeDate' => 'string',
 		'priority' => 'int',
 		'state' => 'string',
-		'type' => '\Wallee\Sdk\Model\EntityReference',
+		'type' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -107,7 +107,7 @@ class ChargeFlowLevelConfiguration  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -147,7 +147,7 @@ class ChargeFlowLevelConfiguration  {
 	private $state;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $type;
 
@@ -168,11 +168,17 @@ class ChargeFlowLevelConfiguration  {
 		if (isset($data['flow']) && $data['flow'] != null) {
 			$this->setFlow($data['flow']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['type']) && $data['type'] != null) {
 			$this->setType($data['type']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -215,7 +221,7 @@ class ChargeFlowLevelConfiguration  {
 	 * @param int $id
 	 * @return ChargeFlowLevelConfiguration
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -224,7 +230,7 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -233,7 +239,7 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return ChargeFlowLevelConfiguration
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -364,7 +370,7 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * Returns type.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getType() {
 		return $this->type;
@@ -373,7 +379,7 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * Sets type.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $type
+	 * @param int $type
 	 * @return ChargeFlowLevelConfiguration
 	 */
 	public function setType($type) {
@@ -399,7 +405,7 @@ class ChargeFlowLevelConfiguration  {
 	 * @param int $version
 	 * @return ChargeFlowLevelConfiguration
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

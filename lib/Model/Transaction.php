@@ -49,7 +49,7 @@ class Transaction  {
 	 */
 	private static $swaggerTypes = array(
 		'allowedPaymentMethodBrands' => '\Wallee\Sdk\Model\PaymentMethodBrand[]',
-		'allowedPaymentMethodConfigurations' => '\Wallee\Sdk\Model\EntityReference',
+		'allowedPaymentMethodConfigurations' => 'int[]',
 		'authorizationAmount' => 'float',
 		'authorizedOn' => 'string',
 		'billingAddress' => '\Wallee\Sdk\Model\Address',
@@ -64,6 +64,7 @@ class Transaction  {
 		'customerEmailAddress' => 'string',
 		'customerId' => 'string',
 		'customersPresence' => 'string',
+		'endOfLife' => 'string',
 		'failedOn' => 'string',
 		'failedUrl' => 'string',
 		'group' => '\Wallee\Sdk\Model\TransactionGroup',
@@ -73,14 +74,14 @@ class Transaction  {
 		'invoiceMerchantReference' => 'string',
 		'language' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'merchantReference' => 'string',
 		'paymentConnectorConfiguration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
 		'plannedPurgeDate' => 'string',
 		'processingOn' => 'string',
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
 		'shippingMethod' => 'string',
-		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceViewId' => 'int',
 		'state' => 'string',
 		'successUrl' => 'string',
 		'token' => '\Wallee\Sdk\Model\Token',
@@ -159,7 +160,7 @@ class Transaction  {
 	private $allowedPaymentMethodBrands;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $allowedPaymentMethodConfigurations;
 
@@ -239,7 +240,7 @@ class Transaction  {
 	private $currency;
 
 	/**
-	 * The customer e-mail address is the e-mail address of the customer. If no e-mail address is used provided on the shipping or billing address this address is used.
+	 * The customer email address is the email address of the customer. If no email address is used provided on the shipping or billing address this address is used.
 	 *
 	 * @var string
 	 */
@@ -258,6 +259,13 @@ class Transaction  {
 	 * @var string
 	 */
 	private $customersPresence;
+
+	/**
+	 * The transaction's end of life indicates the date from which on no operation can be carried out anymore.
+	 *
+	 * @var string
+	 */
+	private $endOfLife;
 
 	/**
 	 * 
@@ -321,7 +329,7 @@ class Transaction  {
 	private $lineItems;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -364,7 +372,7 @@ class Transaction  {
 	private $shippingMethod;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceViewId;
 
@@ -413,6 +421,9 @@ class Transaction  {
 		if (isset($data['group']) && $data['group'] != null) {
 			$this->setGroup($data['group']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
 		}
@@ -430,6 +441,9 @@ class Transaction  {
 		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -460,7 +474,7 @@ class Transaction  {
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getAllowedPaymentMethodConfigurations() {
 		return $this->allowedPaymentMethodConfigurations;
@@ -469,7 +483,7 @@ class Transaction  {
 	/**
 	 * Sets allowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $allowedPaymentMethodConfigurations
+	 * @param int[] $allowedPaymentMethodConfigurations
 	 * @return Transaction
 	 */
 	public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {
@@ -732,7 +746,7 @@ class Transaction  {
 	/**
 	 * Returns customerEmailAddress.
 	 *
-	 * The customer e-mail address is the e-mail address of the customer. If no e-mail address is used provided on the shipping or billing address this address is used.
+	 * The customer email address is the email address of the customer. If no email address is used provided on the shipping or billing address this address is used.
 	 *
 	 * @return string
 	 */
@@ -798,6 +812,29 @@ class Transaction  {
 			throw new \InvalidArgumentException("Invalid value for 'customersPresence', must be one of 'NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT'");
 		}
 		$this->customersPresence = $customersPresence;
+
+		return $this;
+	}
+
+	/**
+	 * Returns endOfLife.
+	 *
+	 * The transaction's end of life indicates the date from which on no operation can be carried out anymore.
+	 *
+	 * @return string
+	 */
+	public function getEndOfLife() {
+		return $this->endOfLife;
+	}
+
+	/**
+	 * Sets endOfLife.
+	 *
+	 * @param string $endOfLife
+	 * @return Transaction
+	 */
+	protected function setEndOfLife($endOfLife) {
+		$this->endOfLife = $endOfLife;
 
 		return $this;
 	}
@@ -886,7 +923,7 @@ class Transaction  {
 	 * @param int $id
 	 * @return Transaction
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -1010,7 +1047,7 @@ class Transaction  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -1019,7 +1056,7 @@ class Transaction  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return Transaction
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -1165,7 +1202,7 @@ class Transaction  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return $this->spaceViewId;
@@ -1174,7 +1211,7 @@ class Transaction  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return Transaction
 	 */
 	public function setSpaceViewId($spaceViewId) {
@@ -1271,7 +1308,7 @@ class Transaction  {
 	 * @param int $version
 	 * @return Transaction
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ConnectorInvocation  {
+class ConnectorInvocation extends TransactionAwareEntity  {
 
 	/**
 	 * The original name of the model.
@@ -49,12 +49,10 @@ class ConnectorInvocation  {
 	 */
 	private static $swaggerTypes = array(
 		'createdOn' => 'string',
-		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
 		'plannedPurgeDate' => 'string',
 		'stage' => 'string',
 		'timeTookInMilliseconds' => 'int',
-		'transaction' => '\Wallee\Sdk\Model\EntityReference',
+		'transaction' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -63,7 +61,7 @@ class ConnectorInvocation  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
@@ -91,23 +89,11 @@ class ConnectorInvocation  {
 	
 
 	/**
-	 * 
+	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
 	 * @var string
 	 */
 	private $createdOn;
-
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
-	 */
-	private $linkedSpaceId;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -131,7 +117,7 @@ class ConnectorInvocation  {
 	private $timeTookInMilliseconds;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $transaction;
 
@@ -149,9 +135,8 @@ class ConnectorInvocation  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
+		parent::__construct($data);
+
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
 		}
@@ -161,7 +146,7 @@ class ConnectorInvocation  {
 	/**
 	 * Returns createdOn.
 	 *
-	 * 
+	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
 	 * @return string
 	 */
@@ -177,50 +162,6 @@ class ConnectorInvocation  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
-
-		return $this;
-	}
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return ConnectorInvocation
-	 */
-	protected function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns linkedSpaceId.
-	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
-	 */
-	public function getLinkedSpaceId() {
-		return $this->linkedSpaceId;
-	}
-
-	/**
-	 * Sets linkedSpaceId.
-	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
-	 * @return ConnectorInvocation
-	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
-		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
 	}
@@ -301,7 +242,7 @@ class ConnectorInvocation  {
 	/**
 	 * Returns transaction.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getTransaction() {
 		return $this->transaction;
@@ -310,7 +251,7 @@ class ConnectorInvocation  {
 	/**
 	 * Sets transaction.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $transaction
+	 * @param int $transaction
 	 * @return ConnectorInvocation
 	 */
 	public function setTransaction($transaction) {
@@ -348,6 +289,7 @@ class ConnectorInvocation  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getCreatedOn() === null) {
 			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);

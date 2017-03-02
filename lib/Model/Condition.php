@@ -48,9 +48,9 @@ class Condition  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'conditionType' => '\Wallee\Sdk\Model\EntityReference',
+		'conditionType' => 'int',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
@@ -92,7 +92,7 @@ class Condition  {
 	
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $conditionType;
 
@@ -104,7 +104,7 @@ class Condition  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -146,8 +146,14 @@ class Condition  {
 		if (isset($data['conditionType']) && $data['conditionType'] != null) {
 			$this->setConditionType($data['conditionType']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -155,7 +161,7 @@ class Condition  {
 	/**
 	 * Returns conditionType.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getConditionType() {
 		return $this->conditionType;
@@ -164,7 +170,7 @@ class Condition  {
 	/**
 	 * Sets conditionType.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $conditionType
+	 * @param int $conditionType
 	 * @return Condition
 	 */
 	public function setConditionType($conditionType) {
@@ -190,7 +196,7 @@ class Condition  {
 	 * @param int $id
 	 * @return Condition
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -199,7 +205,7 @@ class Condition  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -208,7 +214,7 @@ class Condition  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return Condition
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -307,7 +313,7 @@ class Condition  {
 	 * @param int $version
 	 * @return Condition
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

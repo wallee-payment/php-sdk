@@ -170,7 +170,7 @@ class Space  {
 	private $state;
 
 	/**
-	 * The e-mail address provided as contact addresses will be informed about technical issues or errors triggered by the space.
+	 * The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
 	 *
 	 * @var string[]
 	 */
@@ -203,11 +203,17 @@ class Space  {
 		if (isset($data['database']) && $data['database'] != null) {
 			$this->setDatabase($data['database']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['postalAddress']) && $data['postalAddress'] != null) {
 			$this->setPostalAddress($data['postalAddress']);
 		}
 		if (isset($data['technicalContactAddresses']) && $data['technicalContactAddresses'] != null) {
 			$this->setTechnicalContactAddresses($data['technicalContactAddresses']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -317,7 +323,7 @@ class Space  {
 	 * @param int $id
 	 * @return Space
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -466,7 +472,7 @@ class Space  {
 	/**
 	 * Returns technicalContactAddresses.
 	 *
-	 * The e-mail address provided as contact addresses will be informed about technical issues or errors triggered by the space.
+	 * The email address provided as contact addresses will be informed about technical issues or errors triggered by the space.
 	 *
 	 * @return string[]
 	 */
@@ -526,7 +532,7 @@ class Space  {
 	 * @param int $version
 	 * @return Space
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

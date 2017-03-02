@@ -49,13 +49,13 @@ class Permission  {
 	 */
 	private static $swaggerTypes = array(
 		'description' => 'map[string,string]',
-		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'feature' => 'int',
 		'group' => 'bool',
 		'id' => 'int',
 		'leaf' => 'bool',
 		'name' => 'map[string,string]',
-		'parent' => '\Wallee\Sdk\Model\EntityReference',
-		'pathToRoot' => '\Wallee\Sdk\Model\EntityReference',
+		'parent' => 'int',
+		'pathToRoot' => 'int[]',
 		'title' => 'map[string,string]'	);
 
 	/**
@@ -77,7 +77,7 @@ class Permission  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $feature;
 
@@ -110,12 +110,12 @@ class Permission  {
 	private $name;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $parent;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $pathToRoot;
 
@@ -180,7 +180,7 @@ class Permission  {
 	/**
 	 * Returns feature.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getFeature() {
 		return $this->feature;
@@ -189,7 +189,7 @@ class Permission  {
 	/**
 	 * Sets feature.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @param int $feature
 	 * @return Permission
 	 */
 	public function setFeature($feature) {
@@ -293,7 +293,7 @@ class Permission  {
 	/**
 	 * Returns parent.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -302,7 +302,7 @@ class Permission  {
 	/**
 	 * Sets parent.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $parent
+	 * @param int $parent
 	 * @return Permission
 	 */
 	public function setParent($parent) {
@@ -314,7 +314,7 @@ class Permission  {
 	/**
 	 * Returns pathToRoot.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getPathToRoot() {
 		return $this->pathToRoot;
@@ -323,7 +323,7 @@ class Permission  {
 	/**
 	 * Sets pathToRoot.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $pathToRoot
+	 * @param int[] $pathToRoot
 	 * @return Permission
 	 */
 	public function setPathToRoot($pathToRoot) {

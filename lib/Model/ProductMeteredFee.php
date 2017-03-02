@@ -51,7 +51,7 @@ class ProductMeteredFee  {
 		'component' => '\Wallee\Sdk\Model\SubscriptionProductComponent',
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'metric' => '\Wallee\Sdk\Model\SubscriptionMetric',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'tierPricing' => 'string',
@@ -125,7 +125,7 @@ class ProductMeteredFee  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -173,6 +173,9 @@ class ProductMeteredFee  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -181,6 +184,9 @@ class ProductMeteredFee  {
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -244,7 +250,7 @@ class ProductMeteredFee  {
 	 * @param int $id
 	 * @return ProductMeteredFee
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -253,7 +259,7 @@ class ProductMeteredFee  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -262,7 +268,7 @@ class ProductMeteredFee  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return ProductMeteredFee
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -384,7 +390,7 @@ class ProductMeteredFee  {
 	 * @param int $version
 	 * @return ProductMeteredFee
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

@@ -56,7 +56,7 @@ class SubscriptionCharge  {
 		'failedUrl' => 'string',
 		'id' => 'int',
 		'ledgerEntries' => '\Wallee\Sdk\Model\SubscriptionLedgerEntry[]',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'plannedExecutionDate' => 'string',
 		'plannedPurgeDate' => 'string',
 		'processingType' => 'string',
@@ -197,7 +197,7 @@ class SubscriptionCharge  {
 	private $ledgerEntries;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -281,6 +281,9 @@ class SubscriptionCharge  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['ledgerEntries']) && $data['ledgerEntries'] != null) {
 			$this->setLedgerEntries($data['ledgerEntries']);
 		}
@@ -292,6 +295,9 @@ class SubscriptionCharge  {
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -451,7 +457,7 @@ class SubscriptionCharge  {
 	 * @param int $id
 	 * @return SubscriptionCharge
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -483,7 +489,7 @@ class SubscriptionCharge  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -492,7 +498,7 @@ class SubscriptionCharge  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionCharge
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -756,7 +762,7 @@ class SubscriptionCharge  {
 	 * @param int $version
 	 * @return SubscriptionCharge
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

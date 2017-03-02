@@ -157,7 +157,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	/**
 	 * Returns subscriptionVersion.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSubscriptionVersion() {
 		return parent::getSubscriptionVersion();
@@ -166,7 +166,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	/**
 	 * Sets subscriptionVersion.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $subscriptionVersion
+	 * @param int $subscriptionVersion
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setSubscriptionVersion($subscriptionVersion) {

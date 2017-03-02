@@ -53,14 +53,14 @@ class SubscriptionSuspension  {
 		'endAction' => 'string',
 		'id' => 'int',
 		'language' => 'string',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'note' => 'string',
-		'periodBill' => '\Wallee\Sdk\Model\EntityReference',
+		'periodBill' => 'int',
 		'plannedEndDate' => 'string',
 		'plannedPurgeDate' => 'string',
 		'reason' => 'string',
 		'state' => 'string',
-		'subscription' => '\Wallee\Sdk\Model\EntityReference',
+		'subscription' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -166,7 +166,7 @@ class SubscriptionSuspension  {
 	private $language;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -178,7 +178,7 @@ class SubscriptionSuspension  {
 	private $note;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $periodBill;
 
@@ -211,7 +211,7 @@ class SubscriptionSuspension  {
 	private $state;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $subscription;
 
@@ -229,6 +229,9 @@ class SubscriptionSuspension  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -237,6 +240,9 @@ class SubscriptionSuspension  {
 		}
 		if (isset($data['subscription']) && $data['subscription'] != null) {
 			$this->setSubscription($data['subscription']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -331,7 +337,7 @@ class SubscriptionSuspension  {
 	 * @param int $id
 	 * @return SubscriptionSuspension
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -363,7 +369,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -372,7 +378,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionSuspension
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -407,7 +413,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Returns periodBill.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getPeriodBill() {
 		return $this->periodBill;
@@ -416,7 +422,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets periodBill.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $periodBill
+	 * @param int $periodBill
 	 * @return SubscriptionSuspension
 	 */
 	public function setPeriodBill($periodBill) {
@@ -528,7 +534,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Returns subscription.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSubscription() {
 		return $this->subscription;
@@ -537,7 +543,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $subscription
+	 * @param int $subscription
 	 * @return SubscriptionSuspension
 	 */
 	public function setSubscription($subscription) {
@@ -563,7 +569,7 @@ class SubscriptionSuspension  {
 	 * @param int $version
 	 * @return SubscriptionSuspension
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

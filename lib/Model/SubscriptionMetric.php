@@ -50,7 +50,7 @@ class SubscriptionMetric  {
 	private static $swaggerTypes = array(
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
@@ -105,7 +105,7 @@ class SubscriptionMetric  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -150,6 +150,9 @@ class SubscriptionMetric  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -158,6 +161,9 @@ class SubscriptionMetric  {
 		}
 		if (isset($data['type']) && $data['type'] != null) {
 			$this->setType($data['type']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -200,7 +206,7 @@ class SubscriptionMetric  {
 	 * @param int $id
 	 * @return SubscriptionMetric
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -209,7 +215,7 @@ class SubscriptionMetric  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -218,7 +224,7 @@ class SubscriptionMetric  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionMetric
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -336,7 +342,7 @@ class SubscriptionMetric  {
 	 * @param int $version
 	 * @return SubscriptionMetric
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

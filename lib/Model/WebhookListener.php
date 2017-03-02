@@ -48,12 +48,13 @@ class WebhookListener  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'entity' => '\Wallee\Sdk\Model\EntityReference',
+		'entity' => 'int',
 		'entityStates' => 'string[]',
 		'id' => 'int',
 		'identity' => '\Wallee\Sdk\Model\WebhookIdentity',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => 'string',
+		'notifyEveryChange' => 'bool',
 		'plannedPurgeDate' => 'string',
 		'state' => 'string',
 		'url' => '\Wallee\Sdk\Model\WebhookUrl',
@@ -95,7 +96,7 @@ class WebhookListener  {
 	
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $entity;
 
@@ -119,7 +120,7 @@ class WebhookListener  {
 	private $identity;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -129,6 +130,13 @@ class WebhookListener  {
 	 * @var string
 	 */
 	private $name;
+
+	/**
+	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+	 *
+	 * @var bool
+	 */
+	private $notifyEveryChange;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
@@ -169,6 +177,9 @@ class WebhookListener  {
 		if (isset($data['entityStates']) && $data['entityStates'] != null) {
 			$this->setEntityStates($data['entityStates']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['identity']) && $data['identity'] != null) {
 			$this->setIdentity($data['identity']);
 		}
@@ -178,13 +189,16 @@ class WebhookListener  {
 		if (isset($data['url']) && $data['url'] != null) {
 			$this->setUrl($data['url']);
 		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns entity.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getEntity() {
 		return $this->entity;
@@ -193,7 +207,7 @@ class WebhookListener  {
 	/**
 	 * Sets entity.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $entity
+	 * @param int $entity
 	 * @return WebhookListener
 	 */
 	public function setEntity($entity) {
@@ -242,7 +256,7 @@ class WebhookListener  {
 	 * @param int $id
 	 * @return WebhookListener
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -272,7 +286,7 @@ class WebhookListener  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -281,7 +295,7 @@ class WebhookListener  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return WebhookListener
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -309,6 +323,29 @@ class WebhookListener  {
 	 */
 	protected function setName($name) {
 		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Returns notifyEveryChange.
+	 *
+	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+	 *
+	 * @return bool
+	 */
+	public function getNotifyEveryChange() {
+		return $this->notifyEveryChange;
+	}
+
+	/**
+	 * Sets notifyEveryChange.
+	 *
+	 * @param bool $notifyEveryChange
+	 * @return WebhookListener
+	 */
+	protected function setNotifyEveryChange($notifyEveryChange) {
+		$this->notifyEveryChange = $notifyEveryChange;
 
 		return $this;
 	}
@@ -401,7 +438,7 @@ class WebhookListener  {
 	 * @param int $version
 	 * @return WebhookListener
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

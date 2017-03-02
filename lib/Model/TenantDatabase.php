@@ -91,6 +91,12 @@ class TenantDatabase  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
@@ -111,7 +117,7 @@ class TenantDatabase  {
 	 * @param int $id
 	 * @return TenantDatabase
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -157,7 +163,7 @@ class TenantDatabase  {
 	 * @param int $version
 	 * @return TenantDatabase
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

@@ -49,7 +49,7 @@ class EmailSenderType  {
 	 */
 	private static $swaggerTypes = array(
 		'description' => 'map[string,string]',
-		'feature' => '\Wallee\Sdk\Model\EntityReference',
+		'feature' => 'int',
 		'id' => 'int',
 		'name' => 'map[string,string]'	);
 
@@ -72,7 +72,7 @@ class EmailSenderType  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $feature;
 
@@ -135,7 +135,7 @@ class EmailSenderType  {
 	/**
 	 * Returns feature.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getFeature() {
 		return $this->feature;
@@ -144,7 +144,7 @@ class EmailSenderType  {
 	/**
 	 * Sets feature.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $feature
+	 * @param int $feature
 	 * @return EmailSenderType
 	 */
 	public function setFeature($feature) {

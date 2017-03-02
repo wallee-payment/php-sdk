@@ -49,7 +49,7 @@ class StaticValue  {
 	 */
 	private static $swaggerTypes = array(
 		'description' => 'map[string,string]',
-		'features' => '\Wallee\Sdk\Model\EntityReference',
+		'features' => 'int[]',
 		'id' => 'int',
 		'name' => 'map[string,string]'	);
 
@@ -72,7 +72,7 @@ class StaticValue  {
 	private $description;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $features;
 
@@ -135,7 +135,7 @@ class StaticValue  {
 	/**
 	 * Returns features.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getFeatures() {
 		return $this->features;
@@ -144,7 +144,7 @@ class StaticValue  {
 	/**
 	 * Sets features.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $features
+	 * @param int[] $features
 	 * @return StaticValue
 	 */
 	public function setFeatures($features) {

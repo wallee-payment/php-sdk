@@ -60,7 +60,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 		'paymentInformation' => 'string',
 		'plannedPurgeDate' => 'string',
 		'processorReference' => 'string',
-		'spaceViewId' => '\Wallee\Sdk\Model\EntityReference',
+		'spaceViewId' => 'int',
 		'state' => 'string',
 		'succeededOn' => 'string',
 		'timeoutOn' => 'string',
@@ -200,7 +200,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	private $processorReference;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $spaceViewId;
 
@@ -535,7 +535,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getSpaceViewId() {
 		return $this->spaceViewId;
@@ -544,7 +544,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Sets spaceViewId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $spaceViewId
+	 * @param int $spaceViewId
 	 * @return TransactionCompletion
 	 */
 	public function setSpaceViewId($spaceViewId) {

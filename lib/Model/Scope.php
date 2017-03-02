@@ -198,8 +198,14 @@ class Scope  {
 		if (isset($data['features']) && $data['features'] != null) {
 			$this->setFeatures($data['features']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['themes']) && $data['themes'] != null) {
 			$this->setThemes($data['themes']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -313,7 +319,7 @@ class Scope  {
 	 * @param int $id
 	 * @return Scope
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -501,7 +507,7 @@ class Scope  {
 	 * @param int $version
 	 * @return Scope
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

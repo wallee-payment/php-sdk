@@ -103,6 +103,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 		if (isset($data['identity']) && $data['identity'] != null) {
 			$this->setIdentity($data['identity']);
 		}
+		if (isset($data['notifyEveryChange']) && $data['notifyEveryChange'] != null) {
+			$this->setNotifyEveryChange($data['notifyEveryChange']);
+		}
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
 		}
@@ -115,7 +118,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	/**
 	 * Returns entity.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getEntity() {
 		return parent::getEntity();
@@ -124,7 +127,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	/**
 	 * Sets entity.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $entity
+	 * @param int $entity
 	 * @return WebhookListenerCreate
 	 */
 	public function setEntity($entity) {
@@ -169,6 +172,27 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 */
 	public function setIdentity($identity) {
 		return parent::setIdentity($identity);
+	}
+
+	/**
+	 * Returns notifyEveryChange.
+	 *
+	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+	 *
+	 * @return bool
+	 */
+	public function getNotifyEveryChange() {
+		return parent::getNotifyEveryChange();
+	}
+
+	/**
+	 * Sets notifyEveryChange.
+	 *
+	 * @param bool $notifyEveryChange
+	 * @return WebhookListenerCreate
+	 */
+	public function setNotifyEveryChange($notifyEveryChange) {
+		return parent::setNotifyEveryChange($notifyEveryChange);
 	}
 
 	/**

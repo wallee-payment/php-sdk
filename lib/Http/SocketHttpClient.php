@@ -57,8 +57,8 @@ final class SocketHttpClient implements IHttpClient {
 		}
 
 		if (empty($responseMessage)) {
-			throw new ConnectionException(
-					"The server response with an empty response (no HTTP header and no HTTP body).");
+			throw new ConnectionException($request->getUrl(),
+					"The server responded with an empty response (no HTTP header and no HTTP body).");
 		}
 
 		return new HttpResponse($responseMessage);
@@ -150,8 +150,8 @@ final class SocketHttpClient implements IHttpClient {
 			return $responseMessage;
 		}
 		else {
-			throw new ConnectionException(
-					"The remote server does not response within '" . $apiClient->getConnectionTimeout() . "' seconds.");
+			throw new ConnectionException(null,
+					"The remote server did not respond within '" . $apiClient->getConnectionTimeout() . "' seconds.");
 		}
 	}
 
@@ -189,8 +189,8 @@ final class SocketHttpClient implements IHttpClient {
 			return $result;
 		}
 		else {
-			throw new ConnectionException(
-				"The remote server does not response within '" . $apiClient->getConnectionTimeout() . "' seconds.");
+			throw new ConnectionException(null,
+				"The remote server did not respond within '" . $apiClient->getConnectionTimeout() . "' seconds.");
 		}
 	}
 
@@ -224,8 +224,8 @@ final class SocketHttpClient implements IHttpClient {
 			return $result;
 		}
 		else {
-			throw new ConnectionException(
-					"The remote server does not response within '" . $apiClient->getConnectionTimeout() . "' seconds.");
+			throw new ConnectionException(null,
+					"The remote server did not respond within '" . $apiClient->getConnectionTimeout() . "' seconds.");
 		}
 	}
 
@@ -250,7 +250,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		$result = fwrite($socket, $message);
 		if ($result == false) {
-			throw new ConnectionException('Could not send the message to the server.');
+			throw new ConnectionException($request->getUrl(), 'Could not send the message to the server.');
 		}
 		return $socket;
 	}
@@ -307,14 +307,12 @@ final class SocketHttpClient implements IHttpClient {
 				$this->createStreamContext($apiClient, $request));
 
 		if ($filePointer === false) {
-			$errorMessage = 'Could not connect to the server. Host: ' . $socket . ' ';
-			$errorMessage .= '(Error: ' . $errno . ', Error Message: ' . $errstr . ')';
-			throw new ConnectionException($errorMessage);
+			throw new ConnectionException($request->getUrl(), $errstr);
 		}
 
 		if (!(get_resource_type($filePointer) == 'stream')) {
-			$errorMessage = 'Could not connect to the server. The returned socket was not a stream. Host: ' . $socket . ' ';
-			throw new ConnectionException($errorMessage);
+			$errorMessage = 'Could not connect to the server. The returned socket was not a stream.';
+			throw new ConnectionException($request->getUrl(), $errorMessage);
 		}
 
 		return $filePointer;

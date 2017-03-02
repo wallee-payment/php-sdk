@@ -53,12 +53,12 @@ class PaymentConnector  {
 		'feature' => '\Wallee\Sdk\Model\Feature',
 		'id' => 'int',
 		'name' => 'map[string,string]',
-		'paymentMethod' => '\Wallee\Sdk\Model\EntityReference',
+		'paymentMethod' => 'int',
 		'paymentMethodBrand' => '\Wallee\Sdk\Model\PaymentMethodBrand',
 		'primaryRiskTaker' => 'string',
-		'processor' => '\Wallee\Sdk\Model\EntityReference',
+		'processor' => 'int',
 		'supportedCustomersPresences' => 'string[]',
-		'supportedFeatures' => '\Wallee\Sdk\Model\EntityReference'	);
+		'supportedFeatures' => 'int[]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -163,7 +163,7 @@ class PaymentConnector  {
 	private $name;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $paymentMethod;
 
@@ -180,7 +180,7 @@ class PaymentConnector  {
 	private $primaryRiskTaker;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $processor;
 
@@ -192,7 +192,7 @@ class PaymentConnector  {
 	private $supportedCustomersPresences;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int[]
 	 */
 	private $supportedFeatures;
 
@@ -350,7 +350,7 @@ class PaymentConnector  {
 	/**
 	 * Returns paymentMethod.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getPaymentMethod() {
 		return $this->paymentMethod;
@@ -359,7 +359,7 @@ class PaymentConnector  {
 	/**
 	 * Sets paymentMethod.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $paymentMethod
+	 * @param int $paymentMethod
 	 * @return PaymentConnector
 	 */
 	public function setPaymentMethod($paymentMethod) {
@@ -419,7 +419,7 @@ class PaymentConnector  {
 	/**
 	 * Returns processor.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getProcessor() {
 		return $this->processor;
@@ -428,7 +428,7 @@ class PaymentConnector  {
 	/**
 	 * Sets processor.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $processor
+	 * @param int $processor
 	 * @return PaymentConnector
 	 */
 	public function setProcessor($processor) {
@@ -467,7 +467,7 @@ class PaymentConnector  {
 	/**
 	 * Returns supportedFeatures.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getSupportedFeatures() {
 		return $this->supportedFeatures;
@@ -476,7 +476,7 @@ class PaymentConnector  {
 	/**
 	 * Sets supportedFeatures.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $supportedFeatures
+	 * @param int[] $supportedFeatures
 	 * @return PaymentConnector
 	 */
 	public function setSupportedFeatures($supportedFeatures) {

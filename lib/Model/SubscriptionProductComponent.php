@@ -53,7 +53,7 @@ class SubscriptionProductComponent  {
 		'defaultComponent' => 'bool',
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'id' => 'int',
-		'linkedSpaceId' => '\Wallee\Sdk\Model\EntityReference',
+		'linkedSpaceId' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'reference' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference',
 		'sortOrder' => 'int',
@@ -103,7 +103,7 @@ class SubscriptionProductComponent  {
 	private $id;
 
 	/**
-	 * @var \Wallee\Sdk\Model\EntityReference
+	 * @var int
 	 */
 	private $linkedSpaceId;
 
@@ -149,6 +149,9 @@ class SubscriptionProductComponent  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
@@ -160,6 +163,9 @@ class SubscriptionProductComponent  {
 		}
 		if (isset($data['taxClass']) && $data['taxClass'] != null) {
 			$this->setTaxClass($data['taxClass']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -269,7 +275,7 @@ class SubscriptionProductComponent  {
 	 * @param int $id
 	 * @return SubscriptionProductComponent
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -278,7 +284,7 @@ class SubscriptionProductComponent  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int
 	 */
 	public function getLinkedSpaceId() {
 		return $this->linkedSpaceId;
@@ -287,7 +293,7 @@ class SubscriptionProductComponent  {
 	/**
 	 * Sets linkedSpaceId.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $linkedSpaceId
+	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductComponent
 	 */
 	public function setLinkedSpaceId($linkedSpaceId) {
@@ -399,7 +405,7 @@ class SubscriptionProductComponent  {
 	 * @param int $version
 	 * @return SubscriptionProductComponent
 	 */
-	protected function setVersion($version) {
+	public function setVersion($version) {
 		$this->version = $version;
 
 		return $this;

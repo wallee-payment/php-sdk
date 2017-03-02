@@ -91,7 +91,7 @@ class HumanUserUpdate extends HumanUser  {
 	/**
 	 * Returns emailAddress.
 	 *
-	 * The e-mail address of the user.
+	 * The email address of the user.
 	 *
 	 * @return string
 	 */

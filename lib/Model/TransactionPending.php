@@ -112,6 +112,9 @@ class TransactionPending extends Transaction  {
 		if (isset($data['successUrl']) && $data['successUrl'] != null) {
 			$this->setSuccessUrl($data['successUrl']);
 		}
+		if (isset($data['token']) && $data['token'] != null) {
+			$this->setToken($data['token']);
+		}
 	}
 
 
@@ -139,7 +142,7 @@ class TransactionPending extends Transaction  {
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
 	 *
-	 * @return \Wallee\Sdk\Model\EntityReference
+	 * @return int[]
 	 */
 	public function getAllowedPaymentMethodConfigurations() {
 		return parent::getAllowedPaymentMethodConfigurations();
@@ -148,7 +151,7 @@ class TransactionPending extends Transaction  {
 	/**
 	 * Sets allowedPaymentMethodConfigurations.
 	 *
-	 * @param \Wallee\Sdk\Model\EntityReference $allowedPaymentMethodConfigurations
+	 * @param int[] $allowedPaymentMethodConfigurations
 	 * @return TransactionPending
 	 */
 	public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {
@@ -198,7 +201,7 @@ class TransactionPending extends Transaction  {
 	/**
 	 * Returns customerEmailAddress.
 	 *
-	 * The customer e-mail address is the e-mail address of the customer. If no e-mail address is used provided on the shipping or billing address this address is used.
+	 * The customer email address is the email address of the customer. If no email address is used provided on the shipping or billing address this address is used.
 	 *
 	 * @return string
 	 */
@@ -401,6 +404,25 @@ class TransactionPending extends Transaction  {
 	 */
 	public function setSuccessUrl($successUrl) {
 		return parent::setSuccessUrl($successUrl);
+	}
+
+	/**
+	 * Returns token.
+	 *
+	 * @return \Wallee\Sdk\Model\Token
+	 */
+	public function getToken() {
+		return parent::getToken();
+	}
+
+	/**
+	 * Sets token.
+	 *
+	 * @param \Wallee\Sdk\Model\Token $token
+	 * @return TransactionPending
+	 */
+	public function setToken($token) {
+		return parent::setToken($token);
 	}
 
 	/**
