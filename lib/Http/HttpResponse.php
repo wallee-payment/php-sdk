@@ -115,9 +115,9 @@ final class HttpResponse {
 				if (!isset($headers[$h[0]])) {
 					$headers[$h[0]] = trim($h[1]);
 				} elseif (is_array($headers[$h[0]])) {
-					$headers[$h[0]] = array_merge($headers[$h[0]], [trim($h[1])]);
+					$headers[$h[0]] = array_merge($headers[$h[0]], array(trim($h[1])));
 				} else {
-					$headers[$h[0]] = array_merge([$headers[$h[0]]], [trim($h[1])]);
+					$headers[$h[0]] = array_merge(array($headers[$h[0]]), array(trim($h[1])));
 				}
 
 				$key = $h[0];

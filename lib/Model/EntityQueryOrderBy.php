@@ -73,10 +73,10 @@ class EntityQueryOrderBy  {
 	 * @return string[]
 	 */
 	public function getSortingAllowableValues() {
-		return [
+		return array(
 			self::SORTING_DESC,
 			self::SORTING_ASC,
-		];
+		);
 	}
 	
 
@@ -167,7 +167,7 @@ class EntityQueryOrderBy  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["DESC", "ASC"];
+		$allowed_values = array("DESC", "ASC");
 		if (!in_array($this->getSorting(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'sorting', must be one of #{allowed_values}.", 'sorting', $this);
 		}

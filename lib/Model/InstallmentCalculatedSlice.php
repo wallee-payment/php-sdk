@@ -49,7 +49,7 @@ class InstallmentCalculatedSlice  {
 	 */
 	private static $swaggerTypes = array(
 		'amountIncludingTax' => 'float',
-		'dueOn' => 'string',
+		'dueOn' => '\DateTime',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]'	);
 
 	/**
@@ -73,7 +73,7 @@ class InstallmentCalculatedSlice  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $dueOn;
 
@@ -125,7 +125,7 @@ class InstallmentCalculatedSlice  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getDueOn() {
 		return $this->dueOn;
@@ -134,7 +134,7 @@ class InstallmentCalculatedSlice  {
 	/**
 	 * Sets dueOn.
 	 *
-	 * @param string $dueOn
+	 * @param \DateTime $dueOn
 	 * @return InstallmentCalculatedSlice
 	 */
 	protected function setDueOn($dueOn) {

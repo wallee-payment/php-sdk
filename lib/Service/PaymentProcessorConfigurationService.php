@@ -68,44 +68,44 @@ class PaymentProcessorConfigurationService {
 
 
 	/**
-	 * Operation paymentProcessorConfigurationCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function paymentProcessorConfigurationCountPost($spaceId, $filter = null) {
-		return $this->paymentProcessorConfigurationCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter = null) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation paymentProcessorConfigurationCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function paymentProcessorConfigurationCountPostWithHttpInfo($spaceId, $filter = null) {
+	public function countWithHttpInfo($spaceId, $filter = null) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling paymentProcessorConfigurationCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -116,7 +116,7 @@ class PaymentProcessorConfigurationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -163,48 +163,48 @@ class PaymentProcessorConfigurationService {
 	}
 
 	/**
-	 * Operation paymentProcessorConfigurationReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the payment processor configuration which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\PaymentProcessorConfiguration
 	 */
-	public function paymentProcessorConfigurationReadGet($spaceId, $id) {
-		return $this->paymentProcessorConfigurationReadGetWithHttpInfo($spaceId, $id)->getData();
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation paymentProcessorConfigurationReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the payment processor configuration which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function paymentProcessorConfigurationReadGetWithHttpInfo($spaceId, $id) {
+	public function readWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling paymentProcessorConfigurationReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling paymentProcessorConfigurationReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -218,7 +218,7 @@ class PaymentProcessorConfigurationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -260,48 +260,48 @@ class PaymentProcessorConfigurationService {
 	}
 
 	/**
-	 * Operation paymentProcessorConfigurationSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the payment processor configuration which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\PaymentProcessorConfiguration[]
 	 */
-	public function paymentProcessorConfigurationSearchPost($spaceId, $query) {
-		return $this->paymentProcessorConfigurationSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation paymentProcessorConfigurationSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the payment processor configuration which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function paymentProcessorConfigurationSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling paymentProcessorConfigurationSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling paymentProcessorConfigurationSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -312,7 +312,7 @@ class PaymentProcessorConfigurationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {

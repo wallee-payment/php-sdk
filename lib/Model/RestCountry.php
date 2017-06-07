@@ -66,35 +66,35 @@ class RestCountry  {
 	
 
 	/**
-	 * 
+	 * The ISO code 2 letter identifies the country by two chars as defined in ISO 3166-1 (e.g. US, DE, CH).
 	 *
 	 * @var string
 	 */
 	private $iSOCode2Letter;
 
 	/**
-	 * 
+	 * The ISO code 3 letter identifies the country by three chars as defined in ISO 3166-1 (e.g. CHE, USA, GBR).
 	 *
 	 * @var string
 	 */
 	private $iSOCode3Letter;
 
 	/**
-	 * 
+	 * The name labels the country by a name in English.
 	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
-	 * 
+	 * The numeric code identifies the country by a three digit number as defined in ISO 3166-1 (e.g. 840, 826, 756).
 	 *
 	 * @var string
 	 */
 	private $numericCode;
 
 	/**
-	 * 
+	 * The state codes field is a list of all states associated with this country. The list contains the identifiers of the states. The identifiers corresponds to the ISO 3166-2 subdivision identifier.
 	 *
 	 * @var string[]
 	 */
@@ -116,7 +116,7 @@ class RestCountry  {
 	/**
 	 * Returns iSOCode2Letter.
 	 *
-	 * 
+	 * The ISO code 2 letter identifies the country by two chars as defined in ISO 3166-1 (e.g. US, DE, CH).
 	 *
 	 * @return string
 	 */
@@ -139,7 +139,7 @@ class RestCountry  {
 	/**
 	 * Returns iSOCode3Letter.
 	 *
-	 * 
+	 * The ISO code 3 letter identifies the country by three chars as defined in ISO 3166-1 (e.g. CHE, USA, GBR).
 	 *
 	 * @return string
 	 */
@@ -162,7 +162,7 @@ class RestCountry  {
 	/**
 	 * Returns name.
 	 *
-	 * 
+	 * The name labels the country by a name in English.
 	 *
 	 * @return string
 	 */
@@ -185,7 +185,7 @@ class RestCountry  {
 	/**
 	 * Returns numericCode.
 	 *
-	 * 
+	 * The numeric code identifies the country by a three digit number as defined in ISO 3166-1 (e.g. 840, 826, 756).
 	 *
 	 * @return string
 	 */
@@ -208,7 +208,7 @@ class RestCountry  {
 	/**
 	 * Returns stateCodes.
 	 *
-	 * 
+	 * The state codes field is a list of all states associated with this country. The list contains the identifiers of the states. The identifiers corresponds to the ISO 3166-2 subdivision identifier.
 	 *
 	 * @return string[]
 	 */

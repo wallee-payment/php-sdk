@@ -68,38 +68,38 @@ class ApplicationUserService {
 
 
 	/**
-	 * Operation applicationUserCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function applicationUserCountPost($filter = null) {
-		return $this->applicationUserCountPostWithHttpInfo($filter)->getData();
+	public function count($filter = null) {
+		return $this->countWithHttpInfo($filter)->getData();
 	}
 
 	/**
-	 * Operation applicationUserCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function applicationUserCountPostWithHttpInfo($filter = null) {
+	public function countWithHttpInfo($filter = null) {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/application-user/count";
@@ -107,7 +107,7 @@ class ApplicationUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -154,42 +154,42 @@ class ApplicationUserService {
 	}
 
 	/**
-	 * Operation applicationUserCreatePost
+	 * Operation create
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param \Wallee\Sdk\Model\ApplicationUserCreate $entity The user object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ApplicationUserCreateWithMacKey
 	 */
-	public function applicationUserCreatePost($entity) {
-		return $this->applicationUserCreatePostWithHttpInfo($entity)->getData();
+	public function create($entity) {
+		return $this->createWithHttpInfo($entity)->getData();
 	}
 
 	/**
-	 * Operation applicationUserCreatePostWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param \Wallee\Sdk\Model\ApplicationUserCreate $entity The user object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function applicationUserCreatePostWithHttpInfo($entity) {
+	public function createWithHttpInfo($entity) {
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling applicationUserCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/application-user/create";
@@ -197,7 +197,7 @@ class ApplicationUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -244,42 +244,42 @@ class ApplicationUserService {
 	}
 
 	/**
-	 * Operation applicationUserDeletePost
+	 * Operation delete
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return void
 	 */
-	public function applicationUserDeletePost($id) {
-		return $this->applicationUserDeletePostWithHttpInfo($id)->getData();
+	public function delete($id) {
+		return $this->deleteWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation applicationUserDeletePostWithHttpInfo
+	 * Operation deleteWithHttpInfo
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function applicationUserDeletePostWithHttpInfo($id) {
+	public function deleteWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling applicationUserDeletePost');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling delete');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/application-user/delete";
@@ -287,7 +287,7 @@ class ApplicationUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($id)) {
@@ -315,6 +315,10 @@ class ApplicationUserService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -330,42 +334,42 @@ class ApplicationUserService {
 	}
 
 	/**
-	 * Operation applicationUserReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the application user which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ApplicationUser
 	 */
-	public function applicationUserReadGet($id) {
-		return $this->applicationUserReadGetWithHttpInfo($id)->getData();
+	public function read($id) {
+		return $this->readWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation applicationUserReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the application user which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function applicationUserReadGetWithHttpInfo($id) {
+	public function readWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling applicationUserReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($id !== null) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
@@ -376,7 +380,7 @@ class ApplicationUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -418,42 +422,42 @@ class ApplicationUserService {
 	}
 
 	/**
-	 * Operation applicationUserSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the application users which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ApplicationUser[]
 	 */
-	public function applicationUserSearchPost($query) {
-		return $this->applicationUserSearchPostWithHttpInfo($query)->getData();
+	public function search($query) {
+		return $this->searchWithHttpInfo($query)->getData();
 	}
 
 	/**
-	 * Operation applicationUserSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the application users which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function applicationUserSearchPostWithHttpInfo($query) {
+	public function searchWithHttpInfo($query) {
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling applicationUserSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/application-user/search";
@@ -461,7 +465,7 @@ class ApplicationUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -508,42 +512,42 @@ class ApplicationUserService {
 	}
 
 	/**
-	 * Operation applicationUserUpdatePost
+	 * Operation update
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param \Wallee\Sdk\Model\ApplicationUserUpdate $entity The application user entity with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ApplicationUserUpdate
 	 */
-	public function applicationUserUpdatePost($entity) {
-		return $this->applicationUserUpdatePostWithHttpInfo($entity)->getData();
+	public function update($entity) {
+		return $this->updateWithHttpInfo($entity)->getData();
 	}
 
 	/**
-	 * Operation applicationUserUpdatePostWithHttpInfo
+	 * Operation updateWithHttpInfo
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param \Wallee\Sdk\Model\ApplicationUserUpdate $entity The application user entity with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function applicationUserUpdatePostWithHttpInfo($entity) {
+	public function updateWithHttpInfo($entity) {
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling applicationUserUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/application-user/update";
@@ -551,7 +555,7 @@ class ApplicationUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -581,6 +585,10 @@ class ApplicationUserService {
 			switch ($e->getCode()) {
 				case 200:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ApplicationUserUpdate', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

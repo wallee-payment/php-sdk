@@ -50,15 +50,15 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	private static $swaggerTypes = array(
 		'amount' => 'float',
 		'completion' => '\Wallee\Sdk\Model\TransactionCompletion',
-		'createdOn' => 'string',
-		'derecognizedOn' => 'string',
-		'dueOn' => 'string',
+		'createdOn' => '\DateTime',
+		'derecognizedOn' => '\DateTime',
+		'dueOn' => '\DateTime',
 		'externalId' => 'string',
 		'language' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'merchantReference' => 'string',
-		'paidOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'paidOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'spaceViewId' => 'int',
 		'state' => 'string',
 		'taxAmount' => 'float',
@@ -91,7 +91,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_OPEN,
 			self::STATE_OVERDUE,
@@ -99,7 +99,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 			self::STATE_PAID,
 			self::STATE_DERECOGNIZED,
 			self::STATE_NOT_APPLICABLE,
-		];
+		);
 	}
 	
 
@@ -118,21 +118,21 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * The date on which the invoice is created on.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
 	 * The date on which the invoice is marked as derecognized.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $derecognizedOn;
 
 	/**
 	 * The date on which the invoice should be paid on.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $dueOn;
 
@@ -167,14 +167,14 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $paidOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -274,7 +274,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 *
 	 * The date on which the invoice is created on.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -283,7 +283,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return TransactionInvoice
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -297,7 +297,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 *
 	 * The date on which the invoice is marked as derecognized.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getDerecognizedOn() {
 		return $this->derecognizedOn;
@@ -306,7 +306,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Sets derecognizedOn.
 	 *
-	 * @param string $derecognizedOn
+	 * @param \DateTime $derecognizedOn
 	 * @return TransactionInvoice
 	 */
 	protected function setDerecognizedOn($derecognizedOn) {
@@ -320,7 +320,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 *
 	 * The date on which the invoice should be paid on.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getDueOn() {
 		return $this->dueOn;
@@ -329,7 +329,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Sets dueOn.
 	 *
-	 * @param string $dueOn
+	 * @param \DateTime $dueOn
 	 * @return TransactionInvoice
 	 */
 	protected function setDueOn($dueOn) {
@@ -435,7 +435,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 *
 	 * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPaidOn() {
 		return $this->paidOn;
@@ -444,7 +444,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Sets paidOn.
 	 *
-	 * @param string $paidOn
+	 * @param \DateTime $paidOn
 	 * @return TransactionInvoice
 	 */
 	protected function setPaidOn($paidOn) {
@@ -458,7 +458,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -467,7 +467,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return TransactionInvoice
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -578,26 +578,11 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getAmount() === null) {
-			throw new ValidationException("'amount' can't be null", 'amount', $this);
-		}
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getLineItems() === null) {
-			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
-		}
-		if ($this->getMerchantReference() === null) {
-			throw new ValidationException("'merchantReference' can't be null", 'merchantReference', $this);
-		}
-		$allowed_values = ["CREATE", "OPEN", "OVERDUE", "CANCELED", "PAID", "DERECOGNIZED", "NOT_APPLICABLE"];
+		$allowed_values = array("CREATE", "OPEN", "OVERDUE", "CANCELED", "PAID", "DERECOGNIZED", "NOT_APPLICABLE");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getTaxAmount() === null) {
-			throw new ValidationException("'taxAmount' can't be null", 'taxAmount', $this);
-		}
 	}
 
 	/**

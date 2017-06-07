@@ -82,11 +82,11 @@ class ProductSetupFee  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_METERED_FEE,
 			self::TYPE_SETUP_FEE,
 			self::TYPE_PERIOD_FEE,
-		];
+		);
 	}
 	
 
@@ -422,16 +422,7 @@ class ProductSetupFee  {
 	 */
 	public function validate() {
 
-		if ($this->getOnDowngradeCreditedAmount() === null) {
-			throw new ValidationException("'onDowngradeCreditedAmount' can't be null", 'onDowngradeCreditedAmount', $this);
-		}
-		if ($this->getOnUpgradeCreditedAmount() === null) {
-			throw new ValidationException("'onUpgradeCreditedAmount' can't be null", 'onUpgradeCreditedAmount', $this);
-		}
-		if ($this->getSetupFee() === null) {
-			throw new ValidationException("'setupFee' can't be null", 'setupFee', $this);
-		}
-		$allowed_values = ["METERED_FEE", "SETUP_FEE", "PERIOD_FEE"];
+		$allowed_values = array("METERED_FEE", "SETUP_FEE", "PERIOD_FEE");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

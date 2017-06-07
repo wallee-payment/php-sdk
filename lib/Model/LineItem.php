@@ -87,12 +87,12 @@ class LineItem  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_SHIPPING,
 			self::TYPE_DISCOUNT,
 			self::TYPE_FEE,
 			self::TYPE_PRODUCT,
-		];
+		);
 	}
 	
 
@@ -456,7 +456,7 @@ class LineItem  {
 	 */
 	protected function setType($type) {
 		$allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
-		if ((!in_array($type, $allowed_values))) {
+		if (!is_null($type) && (!in_array($type, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
 		}
 		$this->type = $type;
@@ -540,32 +540,11 @@ class LineItem  {
 	 */
 	public function validate() {
 
-		if ($this->getAggregatedTaxRate() === null) {
-			throw new ValidationException("'aggregatedTaxRate' can't be null", 'aggregatedTaxRate', $this);
-		}
-		if ($this->getAmountExcludingTax() === null) {
-			throw new ValidationException("'amountExcludingTax' can't be null", 'amountExcludingTax', $this);
-		}
-		if ($this->getAmountIncludingTax() === null) {
-			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
-		}
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getQuantity() === null) {
-			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-		}
-		if ($this->getType() === null) {
-			throw new ValidationException("'type' can't be null", 'type', $this);
-		}
-		$allowed_values = ["SHIPPING", "DISCOUNT", "FEE", "PRODUCT"];
+		$allowed_values = array("SHIPPING", "DISCOUNT", "FEE", "PRODUCT");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}
 
-		if ($this->getUniqueId() === null) {
-			throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
-		}
 	}
 
 	/**

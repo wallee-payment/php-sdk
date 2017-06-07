@@ -48,7 +48,7 @@ class Token  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'customerEmailAddress' => 'string',
 		'customerId' => 'string',
 		'enabledForOneClickPayment' => 'bool',
@@ -56,7 +56,7 @@ class Token  {
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
 		'tokenReference' => 'string',
 		'version' => 'int'	);
@@ -86,20 +86,20 @@ class Token  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -153,7 +153,7 @@ class Token  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -202,7 +202,7 @@ class Token  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -211,7 +211,7 @@ class Token  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return Token
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -384,7 +384,7 @@ class Token  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -393,7 +393,7 @@ class Token  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return Token
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -482,10 +482,7 @@ class Token  {
 	 */
 	public function validate() {
 
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

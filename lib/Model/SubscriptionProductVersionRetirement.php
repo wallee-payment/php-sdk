@@ -48,7 +48,7 @@ class SubscriptionProductVersionRetirement  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
@@ -70,7 +70,7 @@ class SubscriptionProductVersionRetirement  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -140,7 +140,7 @@ class SubscriptionProductVersionRetirement  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -149,7 +149,7 @@ class SubscriptionProductVersionRetirement  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionProductVersionRetirement
 	 */
 	protected function setCreatedOn($createdOn) {

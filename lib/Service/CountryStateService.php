@@ -68,36 +68,36 @@ class CountryStateService {
 
 
 	/**
-	 * Operation countryStateAllGet
+	 * Operation all
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RestCountryState[]
 	 */
-	public function countryStateAllGet() {
-		return $this->countryStateAllGetWithHttpInfo()->getData();
+	public function all() {
+		return $this->allWithHttpInfo()->getData();
 	}
 
 	/**
-	 * Operation countryStateAllGetWithHttpInfo
+	 * Operation allWithHttpInfo
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function countryStateAllGetWithHttpInfo() {
+	public function allWithHttpInfo() {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/country-state/all";
@@ -105,7 +105,7 @@ class CountryStateService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -147,42 +147,42 @@ class CountryStateService {
 	}
 
 	/**
-	 * Operation countryStateCountryGet
+	 * Operation findByCountry
 	 *
-	 * findByCountry
+	 * Find by Country
 	 *
 	 * @param string $code The country code in ISO code two letter format for which all states should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RestCountryState[]
 	 */
-	public function countryStateCountryGet($code) {
-		return $this->countryStateCountryGetWithHttpInfo($code)->getData();
+	public function findByCountry($code) {
+		return $this->findByCountryWithHttpInfo($code)->getData();
 	}
 
 	/**
-	 * Operation countryStateCountryGetWithHttpInfo
+	 * Operation findByCountryWithHttpInfo
 	 *
-	 * findByCountry
+	 * Find by Country
 	 *
 	 * @param string $code The country code in ISO code two letter format for which all states should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function countryStateCountryGetWithHttpInfo($code) {
+	public function findByCountryWithHttpInfo($code) {
 		// verify the required parameter 'code' is set
 		if ($code === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $code when calling countryStateCountryGet');
+			throw new \InvalidArgumentException('Missing the required parameter $code when calling findByCountry');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($code !== null) {
 			$queryParams['code'] = $this->apiClient->getSerializer()->toQueryValue($code);
 		}
@@ -193,7 +193,7 @@ class CountryStateService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';

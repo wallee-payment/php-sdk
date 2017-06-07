@@ -48,13 +48,13 @@ class InstallmentPayment  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'id' => 'int',
 		'initialTransaction' => '\Wallee\Sdk\Model\Transaction',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'linkedSpaceId' => 'int',
 		'planConfiguration' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
 		'version' => 'int'	);
 
@@ -86,7 +86,7 @@ class InstallmentPayment  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_CONFIRMED,
 			self::STATE_AUTHORIZED,
@@ -95,14 +95,14 @@ class InstallmentPayment  {
 			self::STATE_RUNNING,
 			self::STATE_DONE,
 			self::STATE_DEFAULTED,
-		];
+		);
 	}
 	
 
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -138,7 +138,7 @@ class InstallmentPayment  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -189,7 +189,7 @@ class InstallmentPayment  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -198,7 +198,7 @@ class InstallmentPayment  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return InstallmentPayment
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -321,7 +321,7 @@ class InstallmentPayment  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -330,7 +330,7 @@ class InstallmentPayment  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return InstallmentPayment
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -396,7 +396,7 @@ class InstallmentPayment  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["CREATE", "CONFIRMED", "AUTHORIZED", "REJECTED", "COMPLETED", "RUNNING", "DONE", "DEFAULTED"];
+		$allowed_values = array("CREATE", "CONFIRMED", "AUTHORIZED", "REJECTED", "COMPLETED", "RUNNING", "DONE", "DEFAULTED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

@@ -75,13 +75,13 @@ class SubscriberCreate extends SubscriberActive  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -160,7 +160,7 @@ class SubscriberCreate extends SubscriberActive  {
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
 		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

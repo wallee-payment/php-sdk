@@ -33,7 +33,7 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductVersionPending extends SubscriptionProductVersionActive  {
+class SubscriptionProductVersionPending  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,26 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'activatedOn' => '\DateTime',
+		'billingCycle' => 'string',
+		'comment' => 'string',
+		'createdOn' => '\DateTime',
+		'defaultCurrency' => 'string',
+		'enabledCurrencies' => 'string[]',
+		'id' => 'int',
+		'incrementNumber' => 'int',
+		'linkedSpaceId' => 'int',
+		'minimalNumberOfPeriods' => 'int',
+		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringUpdate',
+		'numberOfNoticePeriods' => 'int',
+		'obsoletedOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
+		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
+		'reference' => 'string',
+		'retiringFinishedOn' => '\DateTime',
+		'retiringStartedOn' => '\DateTime',
+		'state' => 'string',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,7 +75,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
@@ -75,15 +94,149 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_ACTIVE,
 			self::STATE_OBSOLETE,
 			self::STATE_RETIRING,
 			self::STATE_RETIRED,
-		];
+		);
 	}
 	
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $activatedOn;
+
+	/**
+	 * The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
+	 *
+	 * @var string
+	 */
+	private $billingCycle;
+
+	/**
+	 * The comment allows to provide a internal comment for the version. It helps to document why a product was changed. The comment is not disclosed to the subscriber.
+	 *
+	 * @var string
+	 */
+	private $comment;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $createdOn;
+
+	/**
+	 * The default currency has to be used in all fees.
+	 *
+	 * @var string
+	 */
+	private $defaultCurrency;
+
+	/**
+	 * The currencies which are enabled can be selected to define component fees. Currencies which are not enabled cannot be used to define fees.
+	 *
+	 * @var string[]
+	 */
+	private $enabledCurrencies;
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The increment number represents the version number incremented whenever a new version is activated.
+	 *
+	 * @var int
+	 */
+	private $incrementNumber;
+
+	/**
+	 * @var int
+	 */
+	private $linkedSpaceId;
+
+	/**
+	 * The minimal number of periods determines how long the subscription has to run before the subscription can be terminated.
+	 *
+	 * @var int
+	 */
+	private $minimalNumberOfPeriods;
+
+	/**
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 */
+	private $name;
+
+	/**
+	 * The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
+	 *
+	 * @var int
+	 */
+	private $numberOfNoticePeriods;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $obsoletedOn;
+
+	/**
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @var \DateTime
+	 */
+	private $plannedPurgeDate;
+
+	/**
+	 * @var \Wallee\Sdk\Model\SubscriptionProduct
+	 */
+	private $product;
+
+	/**
+	 * The product version reference helps to identify the version. The reference is generated out of the product reference.
+	 *
+	 * @var string
+	 */
+	private $reference;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $retiringFinishedOn;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $retiringStartedOn;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
 	/**
@@ -92,8 +245,6 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['billingCycle']) && $data['billingCycle'] != null) {
 			$this->setBillingCycle($data['billingCycle']);
 		}
@@ -105,6 +256,12 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 		}
 		if (isset($data['enabledCurrencies']) && $data['enabledCurrencies'] != null) {
 			$this->setEnabledCurrencies($data['enabledCurrencies']);
+		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
+			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['minimalNumberOfPeriods']) && $data['minimalNumberOfPeriods'] != null) {
 			$this->setMinimalNumberOfPeriods($data['minimalNumberOfPeriods']);
@@ -121,8 +278,34 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
 		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
+
+	/**
+	 * Returns activatedOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getActivatedOn() {
+		return $this->activatedOn;
+	}
+
+	/**
+	 * Sets activatedOn.
+	 *
+	 * @param \DateTime $activatedOn
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setActivatedOn($activatedOn) {
+		$this->activatedOn = $activatedOn;
+
+		return $this;
+	}
 
 	/**
 	 * Returns billingCycle.
@@ -132,7 +315,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string
 	 */
 	public function getBillingCycle() {
-		return parent::getBillingCycle();
+		return $this->billingCycle;
 	}
 
 	/**
@@ -142,7 +325,9 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setBillingCycle($billingCycle) {
-		return parent::setBillingCycle($billingCycle);
+		$this->billingCycle = $billingCycle;
+
+		return $this;
 	}
 
 	/**
@@ -153,7 +338,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string
 	 */
 	public function getComment() {
-		return parent::getComment();
+		return $this->comment;
 	}
 
 	/**
@@ -163,7 +348,32 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setComment($comment) {
-		return parent::setComment($comment);
+		$this->comment = $comment;
+
+		return $this;
+	}
+
+	/**
+	 * Returns createdOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreatedOn() {
+		return $this->createdOn;
+	}
+
+	/**
+	 * Sets createdOn.
+	 *
+	 * @param \DateTime $createdOn
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setCreatedOn($createdOn) {
+		$this->createdOn = $createdOn;
+
+		return $this;
 	}
 
 	/**
@@ -174,7 +384,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string
 	 */
 	public function getDefaultCurrency() {
-		return parent::getDefaultCurrency();
+		return $this->defaultCurrency;
 	}
 
 	/**
@@ -184,7 +394,9 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setDefaultCurrency($defaultCurrency) {
-		return parent::setDefaultCurrency($defaultCurrency);
+		$this->defaultCurrency = $defaultCurrency;
+
+		return $this;
 	}
 
 	/**
@@ -195,7 +407,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string[]
 	 */
 	public function getEnabledCurrencies() {
-		return parent::getEnabledCurrencies();
+		return $this->enabledCurrencies;
 	}
 
 	/**
@@ -205,7 +417,76 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setEnabledCurrencies($enabledCurrencies) {
-		return parent::setEnabledCurrencies($enabledCurrencies);
+		$this->enabledCurrencies = $enabledCurrencies;
+
+		return $this;
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductVersionPending
+	 */
+	public function setId($id) {
+		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns incrementNumber.
+	 *
+	 * The increment number represents the version number incremented whenever a new version is activated.
+	 *
+	 * @return int
+	 */
+	public function getIncrementNumber() {
+		return $this->incrementNumber;
+	}
+
+	/**
+	 * Sets incrementNumber.
+	 *
+	 * @param int $incrementNumber
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setIncrementNumber($incrementNumber) {
+		$this->incrementNumber = $incrementNumber;
+
+		return $this;
+	}
+
+	/**
+	 * Returns linkedSpaceId.
+	 *
+	 * @return int
+	 */
+	public function getLinkedSpaceId() {
+		return $this->linkedSpaceId;
+	}
+
+	/**
+	 * Sets linkedSpaceId.
+	 *
+	 * @param int $linkedSpaceId
+	 * @return SubscriptionProductVersionPending
+	 */
+	public function setLinkedSpaceId($linkedSpaceId) {
+		$this->linkedSpaceId = $linkedSpaceId;
+
+		return $this;
 	}
 
 	/**
@@ -216,7 +497,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return int
 	 */
 	public function getMinimalNumberOfPeriods() {
-		return parent::getMinimalNumberOfPeriods();
+		return $this->minimalNumberOfPeriods;
 	}
 
 	/**
@@ -226,7 +507,9 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setMinimalNumberOfPeriods($minimalNumberOfPeriods) {
-		return parent::setMinimalNumberOfPeriods($minimalNumberOfPeriods);
+		$this->minimalNumberOfPeriods = $minimalNumberOfPeriods;
+
+		return $this;
 	}
 
 	/**
@@ -235,7 +518,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
 	 */
 	public function getName() {
-		return parent::getName();
+		return $this->name;
 	}
 
 	/**
@@ -245,7 +528,9 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setName($name) {
-		return parent::setName($name);
+		$this->name = $name;
+
+		return $this;
 	}
 
 	/**
@@ -256,7 +541,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return int
 	 */
 	public function getNumberOfNoticePeriods() {
-		return parent::getNumberOfNoticePeriods();
+		return $this->numberOfNoticePeriods;
 	}
 
 	/**
@@ -266,7 +551,55 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setNumberOfNoticePeriods($numberOfNoticePeriods) {
-		return parent::setNumberOfNoticePeriods($numberOfNoticePeriods);
+		$this->numberOfNoticePeriods = $numberOfNoticePeriods;
+
+		return $this;
+	}
+
+	/**
+	 * Returns obsoletedOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getObsoletedOn() {
+		return $this->obsoletedOn;
+	}
+
+	/**
+	 * Sets obsoletedOn.
+	 *
+	 * @param \DateTime $obsoletedOn
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setObsoletedOn($obsoletedOn) {
+		$this->obsoletedOn = $obsoletedOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns plannedPurgeDate.
+	 *
+	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+	 *
+	 * @return \DateTime
+	 */
+	public function getPlannedPurgeDate() {
+		return $this->plannedPurgeDate;
+	}
+
+	/**
+	 * Sets plannedPurgeDate.
+	 *
+	 * @param \DateTime $plannedPurgeDate
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setPlannedPurgeDate($plannedPurgeDate) {
+		$this->plannedPurgeDate = $plannedPurgeDate;
+
+		return $this;
 	}
 
 	/**
@@ -275,7 +608,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return \Wallee\Sdk\Model\SubscriptionProduct
 	 */
 	public function getProduct() {
-		return parent::getProduct();
+		return $this->product;
 	}
 
 	/**
@@ -285,7 +618,78 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return SubscriptionProductVersionPending
 	 */
 	public function setProduct($product) {
-		return parent::setProduct($product);
+		$this->product = $product;
+
+		return $this;
+	}
+
+	/**
+	 * Returns reference.
+	 *
+	 * The product version reference helps to identify the version. The reference is generated out of the product reference.
+	 *
+	 * @return string
+	 */
+	public function getReference() {
+		return $this->reference;
+	}
+
+	/**
+	 * Sets reference.
+	 *
+	 * @param string $reference
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setReference($reference) {
+		$this->reference = $reference;
+
+		return $this;
+	}
+
+	/**
+	 * Returns retiringFinishedOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getRetiringFinishedOn() {
+		return $this->retiringFinishedOn;
+	}
+
+	/**
+	 * Sets retiringFinishedOn.
+	 *
+	 * @param \DateTime $retiringFinishedOn
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setRetiringFinishedOn($retiringFinishedOn) {
+		$this->retiringFinishedOn = $retiringFinishedOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns retiringStartedOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getRetiringStartedOn() {
+		return $this->retiringStartedOn;
+	}
+
+	/**
+	 * Sets retiringStartedOn.
+	 *
+	 * @param \DateTime $retiringStartedOn
+	 * @return SubscriptionProductVersionPending
+	 */
+	protected function setRetiringStartedOn($retiringStartedOn) {
+		$this->retiringStartedOn = $retiringStartedOn;
+
+		return $this;
 	}
 
 	/**
@@ -296,7 +700,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @return string
 	 */
 	public function getState() {
-		return parent::getState();
+		return $this->state;
 	}
 
 	/**
@@ -307,10 +711,35 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 */
 	public function setState($state) {
 		$allowed_values = array('PENDING', 'ACTIVE', 'OBSOLETE', 'RETIRING', 'RETIRED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'ACTIVE', 'OBSOLETE', 'RETIRING', 'RETIRED'");
 		}
-		return parent::setState($state);
+		$this->state = $state;
+
+		return $this;
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductVersionPending
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**
@@ -319,7 +748,6 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getBillingCycle() === null) {
 			throw new ValidationException("'billingCycle' can't be null", 'billingCycle', $this);
@@ -330,10 +758,7 @@ class SubscriptionProductVersionPending extends SubscriptionProductVersionActive
 		if ($this->getEnabledCurrencies() === null) {
 			throw new ValidationException("'enabledCurrencies' can't be null", 'enabledCurrencies', $this);
 		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "ACTIVE", "OBSOLETE", "RETIRING", "RETIRED"];
+		$allowed_values = array("PENDING", "ACTIVE", "OBSOLETE", "RETIRING", "RETIRED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

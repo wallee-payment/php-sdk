@@ -64,21 +64,21 @@ class RestCurrency  {
 	
 
 	/**
-	 * 
+	 * The currency code identifies the currency with the three char long ISO 4217 code (e.g. USD, CHF, EUR).
 	 *
 	 * @var string
 	 */
 	private $currencyCode;
 
 	/**
-	 * 
+	 * The fraction digits indicates how many places the currency has. This also indicates with which precision we calculate internally when we do calculations with this currency.
 	 *
 	 * @var int
 	 */
 	private $fractionDigits;
 
 	/**
-	 * 
+	 * The numeric code identifies the currency with the three digit long ISO 4217 code (e.g. 978, 756, 840).
 	 *
 	 * @var int
 	 */
@@ -97,7 +97,7 @@ class RestCurrency  {
 	/**
 	 * Returns currencyCode.
 	 *
-	 * 
+	 * The currency code identifies the currency with the three char long ISO 4217 code (e.g. USD, CHF, EUR).
 	 *
 	 * @return string
 	 */
@@ -120,7 +120,7 @@ class RestCurrency  {
 	/**
 	 * Returns fractionDigits.
 	 *
-	 * 
+	 * The fraction digits indicates how many places the currency has. This also indicates with which precision we calculate internally when we do calculations with this currency.
 	 *
 	 * @return int
 	 */
@@ -143,7 +143,7 @@ class RestCurrency  {
 	/**
 	 * Returns numericCode.
 	 *
-	 * 
+	 * The numeric code identifies the currency with the three digit long ISO 4217 code (e.g. 978, 756, 840).
 	 *
 	 * @return int
 	 */

@@ -68,44 +68,44 @@ class TransactionInvoiceService {
 
 
 	/**
-	 * Operation transactionInvoiceCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function transactionInvoiceCountPost($spaceId, $filter = null) {
-		return $this->transactionInvoiceCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter = null) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation transactionInvoiceCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionInvoiceCountPostWithHttpInfo($spaceId, $filter = null) {
+	public function countWithHttpInfo($spaceId, $filter = null) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionInvoiceCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -116,7 +116,7 @@ class TransactionInvoiceService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -163,7 +163,7 @@ class TransactionInvoiceService {
 	}
 
 	/**
-	 * Operation transactionInvoiceGetInvoiceDocumentGet
+	 * Operation getInvoiceDocument
 	 *
 	 * getInvoiceDocument
 	 *
@@ -172,12 +172,12 @@ class TransactionInvoiceService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RenderedDocument
 	 */
-	public function transactionInvoiceGetInvoiceDocumentGet($spaceId, $id) {
-		return $this->transactionInvoiceGetInvoiceDocumentGetWithHttpInfo($spaceId, $id)->getData();
+	public function getInvoiceDocument($spaceId, $id) {
+		return $this->getInvoiceDocumentWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionInvoiceGetInvoiceDocumentGetWithHttpInfo
+	 * Operation getInvoiceDocumentWithHttpInfo
 	 *
 	 * getInvoiceDocument
 	 *
@@ -186,25 +186,25 @@ class TransactionInvoiceService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionInvoiceGetInvoiceDocumentGetWithHttpInfo($spaceId, $id) {
+	public function getInvoiceDocumentWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionInvoiceGetInvoiceDocumentGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getInvoiceDocument');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionInvoiceGetInvoiceDocumentGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling getInvoiceDocument');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -218,7 +218,7 @@ class TransactionInvoiceService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -260,7 +260,7 @@ class TransactionInvoiceService {
 	}
 
 	/**
-	 * Operation transactionInvoiceIsReplacementPossibleGet
+	 * Operation isReplacementPossible
 	 *
 	 * isReplacementPossible
 	 *
@@ -269,12 +269,12 @@ class TransactionInvoiceService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return bool
 	 */
-	public function transactionInvoiceIsReplacementPossibleGet($spaceId, $id) {
-		return $this->transactionInvoiceIsReplacementPossibleGetWithHttpInfo($spaceId, $id)->getData();
+	public function isReplacementPossible($spaceId, $id) {
+		return $this->isReplacementPossibleWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionInvoiceIsReplacementPossibleGetWithHttpInfo
+	 * Operation isReplacementPossibleWithHttpInfo
 	 *
 	 * isReplacementPossible
 	 *
@@ -283,25 +283,25 @@ class TransactionInvoiceService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionInvoiceIsReplacementPossibleGetWithHttpInfo($spaceId, $id) {
+	public function isReplacementPossibleWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionInvoiceIsReplacementPossibleGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling isReplacementPossible');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionInvoiceIsReplacementPossibleGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling isReplacementPossible');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -315,7 +315,7 @@ class TransactionInvoiceService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -357,48 +357,48 @@ class TransactionInvoiceService {
 	}
 
 	/**
-	 * Operation transactionInvoiceReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction invoices which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\TransactionInvoice
 	 */
-	public function transactionInvoiceReadGet($spaceId, $id) {
-		return $this->transactionInvoiceReadGetWithHttpInfo($spaceId, $id)->getData();
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionInvoiceReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction invoices which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionInvoiceReadGetWithHttpInfo($spaceId, $id) {
+	public function readWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionInvoiceReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionInvoiceReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -412,7 +412,7 @@ class TransactionInvoiceService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -454,7 +454,7 @@ class TransactionInvoiceService {
 	}
 
 	/**
-	 * Operation transactionInvoiceReplacePost
+	 * Operation replace
 	 *
 	 * replace
 	 *
@@ -464,12 +464,12 @@ class TransactionInvoiceService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\TransactionInvoice
 	 */
-	public function transactionInvoiceReplacePost($spaceId, $id, $replacement) {
-		return $this->transactionInvoiceReplacePostWithHttpInfo($spaceId, $id, $replacement)->getData();
+	public function replace($spaceId, $id, $replacement) {
+		return $this->replaceWithHttpInfo($spaceId, $id, $replacement)->getData();
 	}
 
 	/**
-	 * Operation transactionInvoiceReplacePostWithHttpInfo
+	 * Operation replaceWithHttpInfo
 	 *
 	 * replace
 	 *
@@ -479,29 +479,29 @@ class TransactionInvoiceService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionInvoiceReplacePostWithHttpInfo($spaceId, $id, $replacement) {
+	public function replaceWithHttpInfo($spaceId, $id, $replacement) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionInvoiceReplacePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling replace');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionInvoiceReplacePost');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling replace');
 		}
 		// verify the required parameter 'replacement' is set
 		if ($replacement === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $replacement when calling transactionInvoiceReplacePost');
+			throw new \InvalidArgumentException('Missing the required parameter $replacement when calling replace');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -515,7 +515,7 @@ class TransactionInvoiceService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($replacement)) {
@@ -562,48 +562,48 @@ class TransactionInvoiceService {
 	}
 
 	/**
-	 * Operation transactionInvoiceSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the transaction invoices which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\TransactionInvoice[]
 	 */
-	public function transactionInvoiceSearchPost($spaceId, $query) {
-		return $this->transactionInvoiceSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation transactionInvoiceSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the transaction invoices which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionInvoiceSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionInvoiceSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling transactionInvoiceSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -614,7 +614,7 @@ class TransactionInvoiceService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {

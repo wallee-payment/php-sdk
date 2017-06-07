@@ -72,10 +72,10 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return string[]
 	 */
 	public function getProcessingTypeAllowableValues() {
-		return [
+		return array(
 			self::PROCESSING_TYPE_SYNCHRONOUS,
 			self::PROCESSING_TYPE_CHARGE_FLOW,
-		];
+		);
 	}
 	
 
@@ -159,7 +159,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedExecutionDate() {
 		return parent::getPlannedExecutionDate();
@@ -168,7 +168,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	/**
 	 * Sets plannedExecutionDate.
 	 *
-	 * @param string $plannedExecutionDate
+	 * @param \DateTime $plannedExecutionDate
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setPlannedExecutionDate($plannedExecutionDate) {
@@ -275,7 +275,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 		if ($this->getProcessingType() === null) {
 			throw new ValidationException("'processingType' can't be null", 'processingType', $this);
 		}
-		$allowed_values = ["SYNCHRONOUS", "CHARGE_FLOW"];
+		$allowed_values = array("SYNCHRONOUS", "CHARGE_FLOW");
 		if (!in_array($this->getProcessingType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'processingType', must be one of #{allowed_values}.", 'processingType', $this);
 		}

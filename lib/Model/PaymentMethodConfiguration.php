@@ -56,7 +56,7 @@ class PaymentMethodConfiguration  {
 		'name' => 'string',
 		'oneClickPaymentMode' => 'string',
 		'paymentMethod' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'sortOrder' => 'int',
 		'spaceId' => 'int',
 		'state' => 'string',
@@ -85,10 +85,10 @@ class PaymentMethodConfiguration  {
 	 * @return string[]
 	 */
 	public function getDataCollectionTypeAllowableValues() {
-		return [
+		return array(
 			self::DATA_COLLECTION_TYPE_ONSITE,
 			self::DATA_COLLECTION_TYPE_OFFSITE,
-		];
+		);
 	}
 	
 	/**
@@ -104,11 +104,11 @@ class PaymentMethodConfiguration  {
 	 * @return string[]
 	 */
 	public function getOneClickPaymentModeAllowableValues() {
-		return [
+		return array(
 			self::ONE_CLICK_PAYMENT_MODE_DISABLED,
 			self::ONE_CLICK_PAYMENT_MODE_ALLOW,
 			self::ONE_CLICK_PAYMENT_MODE_FORCE,
-		];
+		);
 	}
 	
 	/**
@@ -126,13 +126,13 @@ class PaymentMethodConfiguration  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -166,7 +166,7 @@ class PaymentMethodConfiguration  {
 	private $linkedSpaceId;
 
 	/**
-	 * The payment method configuration name is used internally to identify the payment method configuration.For example the name is used within search fields and hence it should be distinct and descriptive.
+	 * The payment method configuration name is used internally to identify the payment method configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
 	 *
 	 * @var string
 	 */
@@ -187,7 +187,7 @@ class PaymentMethodConfiguration  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -274,7 +274,7 @@ class PaymentMethodConfiguration  {
 	 */
 	protected function setDataCollectionType($dataCollectionType) {
 		$allowed_values = array('ONSITE', 'OFFSITE');
-		if ((!in_array($dataCollectionType, $allowed_values))) {
+		if (!is_null($dataCollectionType) && (!in_array($dataCollectionType, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'dataCollectionType', must be one of 'ONSITE', 'OFFSITE'");
 		}
 		$this->dataCollectionType = $dataCollectionType;
@@ -371,7 +371,7 @@ class PaymentMethodConfiguration  {
 	/**
 	 * Returns name.
 	 *
-	 * The payment method configuration name is used internally to identify the payment method configuration.For example the name is used within search fields and hence it should be distinct and descriptive.
+	 * The payment method configuration name is used internally to identify the payment method configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
 	 *
 	 * @return string
 	 */
@@ -444,7 +444,7 @@ class PaymentMethodConfiguration  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -453,7 +453,7 @@ class PaymentMethodConfiguration  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return PaymentMethodConfiguration
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -527,7 +527,7 @@ class PaymentMethodConfiguration  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -586,26 +586,17 @@ class PaymentMethodConfiguration  {
 	 */
 	public function validate() {
 
-		if ($this->getDataCollectionType() === null) {
-			throw new ValidationException("'dataCollectionType' can't be null", 'dataCollectionType', $this);
-		}
-		$allowed_values = ["ONSITE", "OFFSITE"];
+		$allowed_values = array("ONSITE", "OFFSITE");
 		if (!in_array($this->getDataCollectionType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'dataCollectionType', must be one of #{allowed_values}.", 'dataCollectionType', $this);
 		}
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		$allowed_values = ["DISABLED", "ALLOW", "FORCE"];
+		$allowed_values = array("DISABLED", "ALLOW", "FORCE");
 		if (!in_array($this->getOneClickPaymentMode(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'oneClickPaymentMode', must be one of #{allowed_values}.", 'oneClickPaymentMode', $this);
 		}
 
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

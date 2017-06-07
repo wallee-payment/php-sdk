@@ -72,10 +72,10 @@ class AddressCreate extends Address  {
 	 * @return string[]
 	 */
 	public function getGenderAllowableValues() {
-		return [
+		return array(
 			self::GENDER_MALE,
 			self::GENDER_FEMALE,
-		];
+		);
 	}
 	
 
@@ -219,7 +219,7 @@ class AddressCreate extends Address  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getDateOfBirth() {
 		return parent::getDateOfBirth();
@@ -228,7 +228,7 @@ class AddressCreate extends Address  {
 	/**
 	 * Sets dateOfBirth.
 	 *
-	 * @param string $dateOfBirth
+	 * @param \DateTime $dateOfBirth
 	 * @return AddressCreate
 	 */
 	public function setDateOfBirth($dateOfBirth) {
@@ -581,7 +581,7 @@ class AddressCreate extends Address  {
 	public function validate() {
 		parent::validate();
 
-		$allowed_values = ["MALE", "FEMALE"];
+		$allowed_values = array("MALE", "FEMALE");
 		if (!in_array($this->getGender(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'gender', must be one of #{allowed_values}.", 'gender', $this);
 		}

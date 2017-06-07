@@ -48,16 +48,16 @@ class SubscriptionSuspension  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
-		'effectiveEndDate' => 'string',
+		'createdOn' => '\DateTime',
+		'effectiveEndDate' => '\DateTime',
 		'endAction' => 'string',
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
 		'note' => 'string',
 		'periodBill' => 'int',
-		'plannedEndDate' => 'string',
-		'plannedPurgeDate' => 'string',
+		'plannedEndDate' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'reason' => 'string',
 		'state' => 'string',
 		'subscription' => 'int',
@@ -85,10 +85,10 @@ class SubscriptionSuspension  {
 	 * @return string[]
 	 */
 	public function getEndActionAllowableValues() {
-		return [
+		return array(
 			self::END_ACTION_TERMINATE,
 			self::END_ACTION_REACTIVATE,
-		];
+		);
 	}
 	
 	/**
@@ -104,11 +104,11 @@ class SubscriptionSuspension  {
 	 * @return string[]
 	 */
 	public function getReasonAllowableValues() {
-		return [
+		return array(
 			self::REASON_FAILED_CHARGE,
 			self::REASON_SUBSCRIBER_INITIATED_REFUND,
 			self::REASON_MANUAL,
-		];
+		);
 	}
 	
 	/**
@@ -123,24 +123,24 @@ class SubscriptionSuspension  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_RUNNING,
 			self::STATE_ENDED,
-		];
+		);
 	}
 	
 
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $effectiveEndDate;
 
@@ -185,14 +185,14 @@ class SubscriptionSuspension  {
 	/**
 	 * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedEndDate;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -252,7 +252,7 @@ class SubscriptionSuspension  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -261,7 +261,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionSuspension
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -275,7 +275,7 @@ class SubscriptionSuspension  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getEffectiveEndDate() {
 		return $this->effectiveEndDate;
@@ -284,7 +284,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets effectiveEndDate.
 	 *
-	 * @param string $effectiveEndDate
+	 * @param \DateTime $effectiveEndDate
 	 * @return SubscriptionSuspension
 	 */
 	protected function setEffectiveEndDate($effectiveEndDate) {
@@ -312,7 +312,7 @@ class SubscriptionSuspension  {
 	 */
 	protected function setEndAction($endAction) {
 		$allowed_values = array('TERMINATE', 'REACTIVATE');
-		if ((!in_array($endAction, $allowed_values))) {
+		if (!is_null($endAction) && (!in_array($endAction, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'endAction', must be one of 'TERMINATE', 'REACTIVATE'");
 		}
 		$this->endAction = $endAction;
@@ -436,7 +436,7 @@ class SubscriptionSuspension  {
 	 *
 	 * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedEndDate() {
 		return $this->plannedEndDate;
@@ -445,7 +445,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets plannedEndDate.
 	 *
-	 * @param string $plannedEndDate
+	 * @param \DateTime $plannedEndDate
 	 * @return SubscriptionSuspension
 	 */
 	protected function setPlannedEndDate($plannedEndDate) {
@@ -459,7 +459,7 @@ class SubscriptionSuspension  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -468,7 +468,7 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionSuspension
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -582,23 +582,17 @@ class SubscriptionSuspension  {
 	 */
 	public function validate() {
 
-		if ($this->getEndAction() === null) {
-			throw new ValidationException("'endAction' can't be null", 'endAction', $this);
-		}
-		$allowed_values = ["TERMINATE", "REACTIVATE"];
+		$allowed_values = array("TERMINATE", "REACTIVATE");
 		if (!in_array($this->getEndAction(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'endAction', must be one of #{allowed_values}.", 'endAction', $this);
 		}
 
-		if ($this->getPlannedEndDate() === null) {
-			throw new ValidationException("'plannedEndDate' can't be null", 'plannedEndDate', $this);
-		}
-		$allowed_values = ["FAILED_CHARGE", "SUBSCRIBER_INITIATED_REFUND", "MANUAL"];
+		$allowed_values = array("FAILED_CHARGE", "SUBSCRIBER_INITIATED_REFUND", "MANUAL");
 		if (!in_array($this->getReason(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'reason', must be one of #{allowed_values}.", 'reason', $this);
 		}
 
-		$allowed_values = ["RUNNING", "ENDED"];
+		$allowed_values = array("RUNNING", "ENDED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

@@ -48,22 +48,23 @@ class SubscriptionVersion  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'activatedOn' => 'string',
+		'activatedOn' => '\DateTime',
 		'billingCurrency' => 'string',
-		'createdOn' => 'string',
-		'failedOn' => 'string',
+		'createdOn' => '\DateTime',
+		'expectedLastPeriodEnd' => '\DateTime',
+		'failedOn' => '\DateTime',
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
-		'plannedTerminationDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
+		'plannedTerminationDate' => '\DateTime',
 		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
 		'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponent[]',
 		'state' => 'string',
 		'subscription' => '\Wallee\Sdk\Model\Subscription',
-		'terminatedOn' => 'string',
-		'terminatingOn' => 'string',
-		'terminationIssuedOn' => 'string',
+		'terminatedOn' => '\DateTime',
+		'terminatingOn' => '\DateTime',
+		'terminationIssuedOn' => '\DateTime',
 		'version' => 'int'	);
 
 	/**
@@ -92,21 +93,21 @@ class SubscriptionVersion  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_INITIALIZING,
 			self::STATE_FAILED,
 			self::STATE_ACTIVE,
 			self::STATE_TERMINATING,
 			self::STATE_TERMINATED,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $activatedOn;
 
@@ -120,14 +121,21 @@ class SubscriptionVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
+	 * The expected last period end is the date on which the projected end date of the last period is. This is only a projection and as such the actual date may be different.
+	 *
+	 * @var \DateTime
+	 */
+	private $expectedLastPeriodEnd;
+
+	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $failedOn;
 
@@ -153,14 +161,14 @@ class SubscriptionVersion  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedTerminationDate;
 
@@ -191,21 +199,21 @@ class SubscriptionVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $terminatedOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $terminatingOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $terminationIssuedOn;
 
@@ -249,7 +257,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getActivatedOn() {
 		return $this->activatedOn;
@@ -258,7 +266,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets activatedOn.
 	 *
-	 * @param string $activatedOn
+	 * @param \DateTime $activatedOn
 	 * @return SubscriptionVersion
 	 */
 	protected function setActivatedOn($activatedOn) {
@@ -295,7 +303,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -304,7 +312,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionVersion
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -314,11 +322,34 @@ class SubscriptionVersion  {
 	}
 
 	/**
+	 * Returns expectedLastPeriodEnd.
+	 *
+	 * The expected last period end is the date on which the projected end date of the last period is. This is only a projection and as such the actual date may be different.
+	 *
+	 * @return \DateTime
+	 */
+	public function getExpectedLastPeriodEnd() {
+		return $this->expectedLastPeriodEnd;
+	}
+
+	/**
+	 * Sets expectedLastPeriodEnd.
+	 *
+	 * @param \DateTime $expectedLastPeriodEnd
+	 * @return SubscriptionVersion
+	 */
+	protected function setExpectedLastPeriodEnd($expectedLastPeriodEnd) {
+		$this->expectedLastPeriodEnd = $expectedLastPeriodEnd;
+
+		return $this;
+	}
+
+	/**
 	 * Returns failedOn.
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getFailedOn() {
 		return $this->failedOn;
@@ -327,7 +358,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets failedOn.
 	 *
-	 * @param string $failedOn
+	 * @param \DateTime $failedOn
 	 * @return SubscriptionVersion
 	 */
 	protected function setFailedOn($failedOn) {
@@ -408,7 +439,7 @@ class SubscriptionVersion  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -417,7 +448,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionVersion
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -431,7 +462,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedTerminationDate() {
 		return $this->plannedTerminationDate;
@@ -440,7 +471,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets plannedTerminationDate.
 	 *
-	 * @param string $plannedTerminationDate
+	 * @param \DateTime $plannedTerminationDate
 	 * @return SubscriptionVersion
 	 */
 	protected function setPlannedTerminationDate($plannedTerminationDate) {
@@ -512,7 +543,7 @@ class SubscriptionVersion  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'TERMINATING', 'TERMINATED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'TERMINATING', 'TERMINATED'");
 		}
 		$this->state = $state;
@@ -546,7 +577,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTerminatedOn() {
 		return $this->terminatedOn;
@@ -555,7 +586,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets terminatedOn.
 	 *
-	 * @param string $terminatedOn
+	 * @param \DateTime $terminatedOn
 	 * @return SubscriptionVersion
 	 */
 	protected function setTerminatedOn($terminatedOn) {
@@ -569,7 +600,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTerminatingOn() {
 		return $this->terminatingOn;
@@ -578,7 +609,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets terminatingOn.
 	 *
-	 * @param string $terminatingOn
+	 * @param \DateTime $terminatingOn
 	 * @return SubscriptionVersion
 	 */
 	protected function setTerminatingOn($terminatingOn) {
@@ -592,7 +623,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTerminationIssuedOn() {
 		return $this->terminationIssuedOn;
@@ -601,7 +632,7 @@ class SubscriptionVersion  {
 	/**
 	 * Sets terminationIssuedOn.
 	 *
-	 * @param string $terminationIssuedOn
+	 * @param \DateTime $terminationIssuedOn
 	 * @return SubscriptionVersion
 	 */
 	protected function setTerminationIssuedOn($terminationIssuedOn) {
@@ -640,16 +671,7 @@ class SubscriptionVersion  {
 	 */
 	public function validate() {
 
-		if ($this->getBillingCurrency() === null) {
-			throw new ValidationException("'billingCurrency' can't be null", 'billingCurrency', $this);
-		}
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "INITIALIZING", "FAILED", "ACTIVE", "TERMINATING", "TERMINATED"];
+		$allowed_values = array("PENDING", "INITIALIZING", "FAILED", "ACTIVE", "TERMINATING", "TERMINATED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

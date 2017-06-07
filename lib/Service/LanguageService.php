@@ -68,36 +68,36 @@ class LanguageService {
 
 
 	/**
-	 * Operation languageAllGet
+	 * Operation all
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RestLanguage[]
 	 */
-	public function languageAllGet() {
-		return $this->languageAllGetWithHttpInfo()->getData();
+	public function all() {
+		return $this->allWithHttpInfo()->getData();
 	}
 
 	/**
-	 * Operation languageAllGetWithHttpInfo
+	 * Operation allWithHttpInfo
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function languageAllGetWithHttpInfo() {
+	public function allWithHttpInfo() {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/language/all";
@@ -105,7 +105,7 @@ class LanguageService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';

@@ -48,10 +48,10 @@ class SpaceReference  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'spaceId' => 'int',
 		'state' => 'string',
 		'version' => 'int'	);
@@ -81,20 +81,20 @@ class SpaceReference  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_RESTRICTED_ACTIVE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -113,7 +113,7 @@ class SpaceReference  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -163,7 +163,7 @@ class SpaceReference  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -172,7 +172,7 @@ class SpaceReference  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SpaceReference
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -230,7 +230,7 @@ class SpaceReference  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -239,7 +239,7 @@ class SpaceReference  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SpaceReference
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -326,7 +326,7 @@ class SpaceReference  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["RESTRICTED_ACTIVE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("RESTRICTED_ACTIVE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

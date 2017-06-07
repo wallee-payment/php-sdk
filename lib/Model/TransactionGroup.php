@@ -48,12 +48,12 @@ class TransactionGroup  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'beginDate' => 'string',
+		'beginDate' => '\DateTime',
 		'customerId' => 'string',
-		'endDate' => 'string',
+		'endDate' => '\DateTime',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
 		'version' => 'int'	);
 
@@ -80,18 +80,18 @@ class TransactionGroup  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $beginDate;
 
@@ -105,7 +105,7 @@ class TransactionGroup  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $endDate;
 
@@ -124,7 +124,7 @@ class TransactionGroup  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -166,7 +166,7 @@ class TransactionGroup  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getBeginDate() {
 		return $this->beginDate;
@@ -175,7 +175,7 @@ class TransactionGroup  {
 	/**
 	 * Sets beginDate.
 	 *
-	 * @param string $beginDate
+	 * @param \DateTime $beginDate
 	 * @return TransactionGroup
 	 */
 	protected function setBeginDate($beginDate) {
@@ -212,7 +212,7 @@ class TransactionGroup  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getEndDate() {
 		return $this->endDate;
@@ -221,7 +221,7 @@ class TransactionGroup  {
 	/**
 	 * Sets endDate.
 	 *
-	 * @param string $endDate
+	 * @param \DateTime $endDate
 	 * @return TransactionGroup
 	 */
 	protected function setEndDate($endDate) {
@@ -279,7 +279,7 @@ class TransactionGroup  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -288,7 +288,7 @@ class TransactionGroup  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return TransactionGroup
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -316,7 +316,7 @@ class TransactionGroup  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
 		}
 		$this->state = $state;
@@ -354,10 +354,7 @@ class TransactionGroup  {
 	 */
 	public function validate() {
 
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("PENDING", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

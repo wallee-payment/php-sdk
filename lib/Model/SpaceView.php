@@ -51,7 +51,7 @@ class SpaceView  {
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'space' => '\Wallee\Sdk\Model\Space',
 		'state' => 'string',
 		'version' => 'int'	);
@@ -81,13 +81,13 @@ class SpaceView  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -113,7 +113,7 @@ class SpaceView  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -230,7 +230,7 @@ class SpaceView  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -239,7 +239,7 @@ class SpaceView  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SpaceView
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -288,7 +288,7 @@ class SpaceView  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -326,13 +326,7 @@ class SpaceView  {
 	 */
 	public function validate() {
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

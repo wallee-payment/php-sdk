@@ -77,11 +77,11 @@ class ClientError  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_END_USER_ERROR,
 			self::TYPE_CONFIGURATION_ERROR,
 			self::TYPE_DEVELOPER_ERROR,
-		];
+		);
 	}
 	
 
@@ -256,7 +256,7 @@ class ClientError  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["END_USER_ERROR", "CONFIGURATION_ERROR", "DEVELOPER_ERROR"];
+		$allowed_values = array("END_USER_ERROR", "CONFIGURATION_ERROR", "DEVELOPER_ERROR");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

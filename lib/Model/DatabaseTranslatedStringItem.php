@@ -238,9 +238,6 @@ class DatabaseTranslatedStringItem  {
 	 */
 	public function validate() {
 
-		if ($this->getLanguage() === null) {
-			throw new ValidationException("'language' can't be null", 'language', $this);
-		}
 	}
 
 	/**

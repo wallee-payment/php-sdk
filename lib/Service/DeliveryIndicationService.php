@@ -68,44 +68,44 @@ class DeliveryIndicationService {
 
 
 	/**
-	 * Operation deliveryIndicationCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function deliveryIndicationCountPost($spaceId, $filter = null) {
-		return $this->deliveryIndicationCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter = null) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation deliveryIndicationCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function deliveryIndicationCountPostWithHttpInfo($spaceId, $filter = null) {
+	public function countWithHttpInfo($spaceId, $filter = null) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling deliveryIndicationCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -116,7 +116,7 @@ class DeliveryIndicationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -163,7 +163,7 @@ class DeliveryIndicationService {
 	}
 
 	/**
-	 * Operation deliveryIndicationMarkAsNotSuitablePost
+	 * Operation markAsNotSuitable
 	 *
 	 * markAsNotSuitable
 	 *
@@ -172,12 +172,12 @@ class DeliveryIndicationService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\DeliveryIndication
 	 */
-	public function deliveryIndicationMarkAsNotSuitablePost($spaceId, $deliveryIndicationId) {
-		return $this->deliveryIndicationMarkAsNotSuitablePostWithHttpInfo($spaceId, $deliveryIndicationId)->getData();
+	public function markAsNotSuitable($spaceId, $deliveryIndicationId) {
+		return $this->markAsNotSuitableWithHttpInfo($spaceId, $deliveryIndicationId)->getData();
 	}
 
 	/**
-	 * Operation deliveryIndicationMarkAsNotSuitablePostWithHttpInfo
+	 * Operation markAsNotSuitableWithHttpInfo
 	 *
 	 * markAsNotSuitable
 	 *
@@ -186,25 +186,25 @@ class DeliveryIndicationService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function deliveryIndicationMarkAsNotSuitablePostWithHttpInfo($spaceId, $deliveryIndicationId) {
+	public function markAsNotSuitableWithHttpInfo($spaceId, $deliveryIndicationId) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling deliveryIndicationMarkAsNotSuitablePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling markAsNotSuitable');
 		}
 		// verify the required parameter 'deliveryIndicationId' is set
 		if ($deliveryIndicationId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $deliveryIndicationId when calling deliveryIndicationMarkAsNotSuitablePost');
+			throw new \InvalidArgumentException('Missing the required parameter $deliveryIndicationId when calling markAsNotSuitable');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -215,7 +215,7 @@ class DeliveryIndicationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($deliveryIndicationId)) {
@@ -262,7 +262,7 @@ class DeliveryIndicationService {
 	}
 
 	/**
-	 * Operation deliveryIndicationMarkAsSuitablePost
+	 * Operation markAsSuitable
 	 *
 	 * markAsSuitable
 	 *
@@ -271,12 +271,12 @@ class DeliveryIndicationService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\DeliveryIndication
 	 */
-	public function deliveryIndicationMarkAsSuitablePost($spaceId, $deliveryIndicationId) {
-		return $this->deliveryIndicationMarkAsSuitablePostWithHttpInfo($spaceId, $deliveryIndicationId)->getData();
+	public function markAsSuitable($spaceId, $deliveryIndicationId) {
+		return $this->markAsSuitableWithHttpInfo($spaceId, $deliveryIndicationId)->getData();
 	}
 
 	/**
-	 * Operation deliveryIndicationMarkAsSuitablePostWithHttpInfo
+	 * Operation markAsSuitableWithHttpInfo
 	 *
 	 * markAsSuitable
 	 *
@@ -285,25 +285,25 @@ class DeliveryIndicationService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function deliveryIndicationMarkAsSuitablePostWithHttpInfo($spaceId, $deliveryIndicationId) {
+	public function markAsSuitableWithHttpInfo($spaceId, $deliveryIndicationId) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling deliveryIndicationMarkAsSuitablePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling markAsSuitable');
 		}
 		// verify the required parameter 'deliveryIndicationId' is set
 		if ($deliveryIndicationId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $deliveryIndicationId when calling deliveryIndicationMarkAsSuitablePost');
+			throw new \InvalidArgumentException('Missing the required parameter $deliveryIndicationId when calling markAsSuitable');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -314,7 +314,7 @@ class DeliveryIndicationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($deliveryIndicationId)) {
@@ -361,48 +361,48 @@ class DeliveryIndicationService {
 	}
 
 	/**
-	 * Operation deliveryIndicationReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the delivery indication which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\DeliveryIndication
 	 */
-	public function deliveryIndicationReadGet($spaceId, $id) {
-		return $this->deliveryIndicationReadGetWithHttpInfo($spaceId, $id)->getData();
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation deliveryIndicationReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the delivery indication which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function deliveryIndicationReadGetWithHttpInfo($spaceId, $id) {
+	public function readWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling deliveryIndicationReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling deliveryIndicationReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -416,7 +416,7 @@ class DeliveryIndicationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -458,48 +458,48 @@ class DeliveryIndicationService {
 	}
 
 	/**
-	 * Operation deliveryIndicationSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the delivery indications which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\DeliveryIndication[]
 	 */
-	public function deliveryIndicationSearchPost($spaceId, $query) {
-		return $this->deliveryIndicationSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation deliveryIndicationSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the delivery indications which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function deliveryIndicationSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling deliveryIndicationSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling deliveryIndicationSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -510,7 +510,7 @@ class DeliveryIndicationService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {

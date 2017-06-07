@@ -50,14 +50,14 @@ class SubscriptionMetricUsageReport  {
 	private static $swaggerTypes = array(
 		'consumedUnits' => 'float',
 		'createdByUserId' => 'int',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'description' => 'string',
 		'externalId' => 'string',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
-		'metric' => '\Wallee\Sdk\Model\SubscriptionMetric',
-		'plannedPurgeDate' => 'string',
-		'subscription' => '\Wallee\Sdk\Model\Subscription',
+		'metric' => 'int',
+		'plannedPurgeDate' => '\DateTime',
+		'subscription' => 'int',
 		'version' => 'int'	);
 
 	/**
@@ -86,7 +86,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -117,19 +117,19 @@ class SubscriptionMetricUsageReport  {
 	private $linkedSpaceId;
 
 	/**
-	 * @var \Wallee\Sdk\Model\SubscriptionMetric
+	 * @var int
 	 */
 	private $metric;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
 	/**
-	 * @var \Wallee\Sdk\Model\Subscription
+	 * @var int
 	 */
 	private $subscription;
 
@@ -217,7 +217,7 @@ class SubscriptionMetricUsageReport  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -226,7 +226,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionMetricUsageReport
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -328,7 +328,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns metric.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionMetric
+	 * @return int
 	 */
 	public function getMetric() {
 		return $this->metric;
@@ -337,7 +337,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Sets metric.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
+	 * @param int $metric
 	 * @return SubscriptionMetricUsageReport
 	 */
 	public function setMetric($metric) {
@@ -351,7 +351,7 @@ class SubscriptionMetricUsageReport  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -360,7 +360,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionMetricUsageReport
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -372,7 +372,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns subscription.
 	 *
-	 * @return \Wallee\Sdk\Model\Subscription
+	 * @return int
 	 */
 	public function getSubscription() {
 		return $this->subscription;
@@ -381,7 +381,7 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\Subscription $subscription
+	 * @param int $subscription
 	 * @return SubscriptionMetricUsageReport
 	 */
 	public function setSubscription($subscription) {
@@ -420,12 +420,6 @@ class SubscriptionMetricUsageReport  {
 	 */
 	public function validate() {
 
-		if ($this->getConsumedUnits() === null) {
-			throw new ValidationException("'consumedUnits' can't be null", 'consumedUnits', $this);
-		}
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
 	}
 
 	/**

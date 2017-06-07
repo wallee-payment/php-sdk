@@ -68,44 +68,44 @@ class SubscriptionProductSetupFeeService {
 
 
 	/**
-	 * Operation subscriptionProductSetupFeeCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function subscriptionProductSetupFeeCountPost($spaceId, $filter = null) {
-		return $this->subscriptionProductSetupFeeCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter = null) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function subscriptionProductSetupFeeCountPostWithHttpInfo($spaceId, $filter = null) {
+	public function countWithHttpInfo($spaceId, $filter = null) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionProductSetupFeeCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -116,7 +116,7 @@ class SubscriptionProductSetupFeeService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -163,48 +163,48 @@ class SubscriptionProductSetupFeeService {
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeCreatePost
+	 * Operation create
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductSetupFeeUpdate $entity The setup fee object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ProductSetupFeeUpdate
 	 */
-	public function subscriptionProductSetupFeeCreatePost($spaceId, $entity) {
-		return $this->subscriptionProductSetupFeeCreatePostWithHttpInfo($spaceId, $entity)->getData();
+	public function create($spaceId, $entity) {
+		return $this->createWithHttpInfo($spaceId, $entity)->getData();
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeCreatePostWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductSetupFeeUpdate $entity The setup fee object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function subscriptionProductSetupFeeCreatePostWithHttpInfo($spaceId, $entity) {
+	public function createWithHttpInfo($spaceId, $entity) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionProductSetupFeeCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling create');
 		}
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling subscriptionProductSetupFeeCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -215,7 +215,7 @@ class SubscriptionProductSetupFeeService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -262,48 +262,48 @@ class SubscriptionProductSetupFeeService {
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeDeletePost
+	 * Operation delete
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return void
 	 */
-	public function subscriptionProductSetupFeeDeletePost($spaceId, $id) {
-		return $this->subscriptionProductSetupFeeDeletePostWithHttpInfo($spaceId, $id)->getData();
+	public function delete($spaceId, $id) {
+		return $this->deleteWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeDeletePostWithHttpInfo
+	 * Operation deleteWithHttpInfo
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function subscriptionProductSetupFeeDeletePostWithHttpInfo($spaceId, $id) {
+	public function deleteWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionProductSetupFeeDeletePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling delete');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling subscriptionProductSetupFeeDeletePost');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling delete');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -314,7 +314,7 @@ class SubscriptionProductSetupFeeService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($id)) {
@@ -342,6 +342,10 @@ class SubscriptionProductSetupFeeService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -357,48 +361,48 @@ class SubscriptionProductSetupFeeService {
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the setup fee which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ProductSetupFee
 	 */
-	public function subscriptionProductSetupFeeReadGet($spaceId, $id) {
-		return $this->subscriptionProductSetupFeeReadGetWithHttpInfo($spaceId, $id)->getData();
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the setup fee which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function subscriptionProductSetupFeeReadGetWithHttpInfo($spaceId, $id) {
+	public function readWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionProductSetupFeeReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling subscriptionProductSetupFeeReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -412,7 +416,7 @@ class SubscriptionProductSetupFeeService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -454,48 +458,48 @@ class SubscriptionProductSetupFeeService {
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the setup fees which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ProductSetupFee[]
 	 */
-	public function subscriptionProductSetupFeeSearchPost($spaceId, $query) {
-		return $this->subscriptionProductSetupFeeSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the setup fees which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function subscriptionProductSetupFeeSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionProductSetupFeeSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling subscriptionProductSetupFeeSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -506,7 +510,7 @@ class SubscriptionProductSetupFeeService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -553,48 +557,48 @@ class SubscriptionProductSetupFeeService {
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeUpdatePost
+	 * Operation update
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductSetupFeeUpdate $entity The setup fee object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\ProductSetupFeeUpdate
 	 */
-	public function subscriptionProductSetupFeeUpdatePost($spaceId, $entity) {
-		return $this->subscriptionProductSetupFeeUpdatePostWithHttpInfo($spaceId, $entity)->getData();
+	public function update($spaceId, $entity) {
+		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
 	}
 
 	/**
-	 * Operation subscriptionProductSetupFeeUpdatePostWithHttpInfo
+	 * Operation updateWithHttpInfo
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductSetupFeeUpdate $entity The setup fee object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function subscriptionProductSetupFeeUpdatePostWithHttpInfo($spaceId, $entity) {
+	public function updateWithHttpInfo($spaceId, $entity) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling subscriptionProductSetupFeeUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling update');
 		}
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling subscriptionProductSetupFeeUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -605,7 +609,7 @@ class SubscriptionProductSetupFeeService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -635,6 +639,10 @@ class SubscriptionProductSetupFeeService {
 			switch ($e->getCode()) {
 				case 200:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductSetupFeeUpdate', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

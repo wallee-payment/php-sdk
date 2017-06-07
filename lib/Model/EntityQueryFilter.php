@@ -83,7 +83,7 @@ class EntityQueryFilter  {
 	 * @return string[]
 	 */
 	public function getOperatorAllowableValues() {
-		return [
+		return array(
 			self::OPERATOR_EQUALS,
 			self::OPERATOR_GREATER_THAN,
 			self::OPERATOR_GREATER_THAN_OR_EQUAL,
@@ -93,7 +93,7 @@ class EntityQueryFilter  {
 			self::OPERATOR_NOT_EQUALS,
 			self::OPERATOR_NOT_CONTAINS,
 			self::OPERATOR_IS_NULL,
-		];
+		);
 	}
 	
 	/**
@@ -109,11 +109,11 @@ class EntityQueryFilter  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_LEAF,
 			self::TYPE_OR,
 			self::TYPE_AND,
-		];
+		);
 	}
 	
 
@@ -307,7 +307,7 @@ class EntityQueryFilter  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "CONTAINS", "NOT_EQUALS", "NOT_CONTAINS", "IS_NULL"];
+		$allowed_values = array("EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "CONTAINS", "NOT_EQUALS", "NOT_CONTAINS", "IS_NULL");
 		if (!in_array($this->getOperator(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'operator', must be one of #{allowed_values}.", 'operator', $this);
 		}
@@ -315,7 +315,7 @@ class EntityQueryFilter  {
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);
 		}
-		$allowed_values = ["LEAF", "OR", "AND"];
+		$allowed_values = array("LEAF", "OR", "AND");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

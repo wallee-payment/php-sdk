@@ -48,13 +48,13 @@ class Charge extends TransactionAwareEntity  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
 		'language' => 'string',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'spaceViewId' => 'int',
 		'state' => 'string',
-		'timeoutOn' => 'string',
+		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'type' => 'string',
 		'version' => 'int'	);
@@ -82,11 +82,11 @@ class Charge extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 	/**
@@ -102,18 +102,18 @@ class Charge extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_ASYNCHRONOUS,
 			self::TYPE_SYNCHRONOUS,
 			self::TYPE_TOKEN,
-		];
+		);
 	}
 	
 
 	/**
 	 * The date on which the charge was created on.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -132,7 +132,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -151,7 +151,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $timeoutOn;
 
@@ -200,7 +200,7 @@ class Charge extends TransactionAwareEntity  {
 	 *
 	 * The date on which the charge was created on.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -209,7 +209,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return Charge
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -267,7 +267,7 @@ class Charge extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -276,7 +276,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return Charge
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -325,7 +325,7 @@ class Charge extends TransactionAwareEntity  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
 		}
 		$this->state = $state;
@@ -338,7 +338,7 @@ class Charge extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTimeoutOn() {
 		return $this->timeoutOn;
@@ -347,7 +347,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Sets timeoutOn.
 	 *
-	 * @param string $timeoutOn
+	 * @param \DateTime $timeoutOn
 	 * @return Charge
 	 */
 	protected function setTimeoutOn($timeoutOn) {
@@ -396,7 +396,7 @@ class Charge extends TransactionAwareEntity  {
 	 */
 	protected function setType($type) {
 		$allowed_values = array('ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN');
-		if ((!in_array($type, $allowed_values))) {
+		if (!is_null($type) && (!in_array($type, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN'");
 		}
 		$this->type = $type;
@@ -435,24 +435,12 @@ class Charge extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("PENDING", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getTimeoutOn() === null) {
-			throw new ValidationException("'timeoutOn' can't be null", 'timeoutOn', $this);
-		}
-		if ($this->getType() === null) {
-			throw new ValidationException("'type' can't be null", 'type', $this);
-		}
-		$allowed_values = ["ASYNCHRONOUS", "SYNCHRONOUS", "TOKEN"];
+		$allowed_values = array("ASYNCHRONOUS", "SYNCHRONOUS", "TOKEN");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

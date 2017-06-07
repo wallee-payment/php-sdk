@@ -68,36 +68,36 @@ class LabelDescriptorService {
 
 
 	/**
-	 * Operation labelDescriptionServiceAllGet
+	 * Operation all
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\LabelDescriptor[]
 	 */
-	public function labelDescriptionServiceAllGet() {
-		return $this->labelDescriptionServiceAllGetWithHttpInfo()->getData();
+	public function all() {
+		return $this->allWithHttpInfo()->getData();
 	}
 
 	/**
-	 * Operation labelDescriptionServiceAllGetWithHttpInfo
+	 * Operation allWithHttpInfo
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function labelDescriptionServiceAllGetWithHttpInfo() {
+	public function allWithHttpInfo() {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/label-description-service/all";
@@ -105,7 +105,7 @@ class LabelDescriptorService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -147,42 +147,42 @@ class LabelDescriptorService {
 	}
 
 	/**
-	 * Operation labelDescriptionServiceReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the label descriptor which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\LabelDescriptor
 	 */
-	public function labelDescriptionServiceReadGet($id) {
-		return $this->labelDescriptionServiceReadGetWithHttpInfo($id)->getData();
+	public function read($id) {
+		return $this->readWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation labelDescriptionServiceReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the label descriptor which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function labelDescriptionServiceReadGetWithHttpInfo($id) {
+	public function readWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling labelDescriptionServiceReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($id !== null) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
@@ -193,7 +193,7 @@ class LabelDescriptorService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';

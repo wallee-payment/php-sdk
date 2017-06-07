@@ -57,7 +57,7 @@ class InstallmentPlanConfiguration  {
 		'minimalAmount' => 'float',
 		'name' => 'string',
 		'paymentMethodConfigurations' => 'int[]',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'sortOrder' => 'int',
 		'spaceReference' => '\Wallee\Sdk\Model\SpaceReference',
 		'state' => 'string',
@@ -91,13 +91,13 @@ class InstallmentPlanConfiguration  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -161,7 +161,7 @@ class InstallmentPlanConfiguration  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -449,7 +449,7 @@ class InstallmentPlanConfiguration  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -458,7 +458,7 @@ class InstallmentPlanConfiguration  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return InstallmentPlanConfiguration
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -530,7 +530,7 @@ class InstallmentPlanConfiguration  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -631,25 +631,7 @@ class InstallmentPlanConfiguration  {
 	 */
 	public function validate() {
 
-		if ($this->getBaseCurrency() === null) {
-			throw new ValidationException("'baseCurrency' can't be null", 'baseCurrency', $this);
-		}
-		if ($this->getInstallmentFee() === null) {
-			throw new ValidationException("'installmentFee' can't be null", 'installmentFee', $this);
-		}
-		if ($this->getInterestRate() === null) {
-			throw new ValidationException("'interestRate' can't be null", 'interestRate', $this);
-		}
-		if ($this->getMinimalAmount() === null) {
-			throw new ValidationException("'minimalAmount' can't be null", 'minimalAmount', $this);
-		}
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

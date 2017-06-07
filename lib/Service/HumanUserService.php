@@ -68,38 +68,38 @@ class HumanUserService {
 
 
 	/**
-	 * Operation humanUserCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function humanUserCountPost($filter = null) {
-		return $this->humanUserCountPostWithHttpInfo($filter)->getData();
+	public function count($filter = null) {
+		return $this->countWithHttpInfo($filter)->getData();
 	}
 
 	/**
-	 * Operation humanUserCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function humanUserCountPostWithHttpInfo($filter = null) {
+	public function countWithHttpInfo($filter = null) {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/human-user/count";
@@ -107,7 +107,7 @@ class HumanUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -154,42 +154,42 @@ class HumanUserService {
 	}
 
 	/**
-	 * Operation humanUserCreatePost
+	 * Operation create
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param \Wallee\Sdk\Model\HumanUserCreate $entity The human user object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\HumanUserCreate
 	 */
-	public function humanUserCreatePost($entity) {
-		return $this->humanUserCreatePostWithHttpInfo($entity)->getData();
+	public function create($entity) {
+		return $this->createWithHttpInfo($entity)->getData();
 	}
 
 	/**
-	 * Operation humanUserCreatePostWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param \Wallee\Sdk\Model\HumanUserCreate $entity The human user object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function humanUserCreatePostWithHttpInfo($entity) {
+	public function createWithHttpInfo($entity) {
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling humanUserCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/human-user/create";
@@ -197,7 +197,7 @@ class HumanUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -244,42 +244,42 @@ class HumanUserService {
 	}
 
 	/**
-	 * Operation humanUserDeletePost
+	 * Operation delete
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return void
 	 */
-	public function humanUserDeletePost($id) {
-		return $this->humanUserDeletePostWithHttpInfo($id)->getData();
+	public function delete($id) {
+		return $this->deleteWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation humanUserDeletePostWithHttpInfo
+	 * Operation deleteWithHttpInfo
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function humanUserDeletePostWithHttpInfo($id) {
+	public function deleteWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling humanUserDeletePost');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling delete');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/human-user/delete";
@@ -287,7 +287,7 @@ class HumanUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($id)) {
@@ -315,6 +315,10 @@ class HumanUserService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -330,42 +334,42 @@ class HumanUserService {
 	}
 
 	/**
-	 * Operation humanUserReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the human user which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\HumanUser
 	 */
-	public function humanUserReadGet($id) {
-		return $this->humanUserReadGetWithHttpInfo($id)->getData();
+	public function read($id) {
+		return $this->readWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation humanUserReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the human user which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function humanUserReadGetWithHttpInfo($id) {
+	public function readWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling humanUserReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($id !== null) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
@@ -376,7 +380,7 @@ class HumanUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -418,42 +422,42 @@ class HumanUserService {
 	}
 
 	/**
-	 * Operation humanUserSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the human users which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\HumanUser[]
 	 */
-	public function humanUserSearchPost($query) {
-		return $this->humanUserSearchPostWithHttpInfo($query)->getData();
+	public function search($query) {
+		return $this->searchWithHttpInfo($query)->getData();
 	}
 
 	/**
-	 * Operation humanUserSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the human users which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function humanUserSearchPostWithHttpInfo($query) {
+	public function searchWithHttpInfo($query) {
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling humanUserSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/human-user/search";
@@ -461,7 +465,7 @@ class HumanUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -508,42 +512,42 @@ class HumanUserService {
 	}
 
 	/**
-	 * Operation humanUserUpdatePost
+	 * Operation update
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param \Wallee\Sdk\Model\HumanUserUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\HumanUserUpdate
 	 */
-	public function humanUserUpdatePost($entity) {
-		return $this->humanUserUpdatePostWithHttpInfo($entity)->getData();
+	public function update($entity) {
+		return $this->updateWithHttpInfo($entity)->getData();
 	}
 
 	/**
-	 * Operation humanUserUpdatePostWithHttpInfo
+	 * Operation updateWithHttpInfo
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param \Wallee\Sdk\Model\HumanUserUpdate $entity The object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function humanUserUpdatePostWithHttpInfo($entity) {
+	public function updateWithHttpInfo($entity) {
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling humanUserUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/human-user/update";
@@ -551,7 +555,7 @@ class HumanUserService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -581,6 +585,10 @@ class HumanUserService {
 			switch ($e->getCode()) {
 				case 200:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\HumanUserUpdate', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

@@ -22,6 +22,7 @@
 namespace Wallee\Sdk\Http;
 
 use \Wallee\Sdk\ApiClient;
+use \Wallee\Sdk\Http\ConnectionException;
 
 /**
  * This class sends API calls via a socket.
@@ -346,12 +347,12 @@ final class SocketHttpClient implements IHttpClient {
 				$rs = 'ssl';
 		}
 		if ($rs === null) {
-			throw new Exception("Invalid state.");
+			throw new \Exception("Invalid state.");
 		}
 
 		$possibleTransportProtocols = stream_get_transports();
 		if (!in_array($rs, $possibleTransportProtocols)) {
-			throw new Exception(
+			throw new \Exception(
 					Customweb_Core_String::_(
 							"The enforced SSL protocol is '@actual'. But this protocol is not supported by the web server. Supported stream protocols by the web server are @supported.")->format(
 							array(

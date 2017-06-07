@@ -50,21 +50,21 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	private static $swaggerTypes = array(
 		'charge' => '\Wallee\Sdk\Model\Charge',
 		'connectorConfiguration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'environment' => 'string',
-		'failedOn' => 'string',
+		'failedOn' => '\DateTime',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
 		'initializingTokenVersion' => 'bool',
 		'invocation' => '\Wallee\Sdk\Model\ConnectorInvocation',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
-		'nextUpdateOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'nextUpdateOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'redirectionUrl' => 'string',
 		'spaceViewId' => 'int',
 		'state' => 'string',
-		'succeededOn' => 'string',
-		'timeoutOn' => 'string',
+		'succeededOn' => '\DateTime',
+		'timeoutOn' => '\DateTime',
 		'tokenVersion' => '\Wallee\Sdk\Model\TokenVersion',
 		'userFailureMessage' => 'string',
 		'version' => 'int'	);
@@ -91,10 +91,10 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getEnvironmentAllowableValues() {
-		return [
+		return array(
 			self::ENVIRONMENT_PRODUCTION,
 			self::ENVIRONMENT_TEST,
-		];
+		);
 	}
 	
 	/**
@@ -110,11 +110,11 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PROCESSING,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 
@@ -131,7 +131,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -145,7 +145,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $failedOn;
 
@@ -183,14 +183,14 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $nextUpdateOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -216,14 +216,14 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $succeededOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $timeoutOn;
 
@@ -326,7 +326,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -335,7 +335,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return ChargeAttempt
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -363,7 +363,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 */
 	protected function setEnvironment($environment) {
 		$allowed_values = array('PRODUCTION', 'TEST');
-		if ((!in_array($environment, $allowed_values))) {
+		if (!is_null($environment) && (!in_array($environment, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'environment', must be one of 'PRODUCTION', 'TEST'");
 		}
 		$this->environment = $environment;
@@ -376,7 +376,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getFailedOn() {
 		return $this->failedOn;
@@ -385,7 +385,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets failedOn.
 	 *
-	 * @param string $failedOn
+	 * @param \DateTime $failedOn
 	 * @return ChargeAttempt
 	 */
 	protected function setFailedOn($failedOn) {
@@ -510,7 +510,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getNextUpdateOn() {
 		return $this->nextUpdateOn;
@@ -519,7 +519,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets nextUpdateOn.
 	 *
-	 * @param string $nextUpdateOn
+	 * @param \DateTime $nextUpdateOn
 	 * @return ChargeAttempt
 	 */
 	protected function setNextUpdateOn($nextUpdateOn) {
@@ -533,7 +533,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -542,7 +542,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return ChargeAttempt
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -614,7 +614,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PROCESSING', 'FAILED', 'SUCCESSFUL');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PROCESSING', 'FAILED', 'SUCCESSFUL'");
 		}
 		$this->state = $state;
@@ -627,7 +627,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getSucceededOn() {
 		return $this->succeededOn;
@@ -636,7 +636,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets succeededOn.
 	 *
-	 * @param string $succeededOn
+	 * @param \DateTime $succeededOn
 	 * @return ChargeAttempt
 	 */
 	protected function setSucceededOn($succeededOn) {
@@ -650,7 +650,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTimeoutOn() {
 		return $this->timeoutOn;
@@ -659,7 +659,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets timeoutOn.
 	 *
-	 * @param string $timeoutOn
+	 * @param \DateTime $timeoutOn
 	 * @return ChargeAttempt
 	 */
 	protected function setTimeoutOn($timeoutOn) {
@@ -743,31 +743,16 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getEnvironment() === null) {
-			throw new ValidationException("'environment' can't be null", 'environment', $this);
-		}
-		$allowed_values = ["PRODUCTION", "TEST"];
+		$allowed_values = array("PRODUCTION", "TEST");
 		if (!in_array($this->getEnvironment(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'environment', must be one of #{allowed_values}.", 'environment', $this);
 		}
 
-		if ($this->getLabels() === null) {
-			throw new ValidationException("'labels' can't be null", 'labels', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PROCESSING", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("PROCESSING", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getTimeoutOn() === null) {
-			throw new ValidationException("'timeoutOn' can't be null", 'timeoutOn', $this);
-		}
 	}
 
 	/**

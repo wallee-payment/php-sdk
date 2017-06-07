@@ -68,38 +68,38 @@ class AccountService {
 
 
 	/**
-	 * Operation accountCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function accountCountPost($filter = null) {
-		return $this->accountCountPostWithHttpInfo($filter)->getData();
+	public function count($filter = null) {
+		return $this->countWithHttpInfo($filter)->getData();
 	}
 
 	/**
-	 * Operation accountCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function accountCountPostWithHttpInfo($filter = null) {
+	public function countWithHttpInfo($filter = null) {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/account/count";
@@ -107,7 +107,7 @@ class AccountService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -154,42 +154,42 @@ class AccountService {
 	}
 
 	/**
-	 * Operation accountCreatePost
+	 * Operation create
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param \Wallee\Sdk\Model\AccountCreate $entity The account object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\AccountCreate
 	 */
-	public function accountCreatePost($entity) {
-		return $this->accountCreatePostWithHttpInfo($entity)->getData();
+	public function create($entity) {
+		return $this->createWithHttpInfo($entity)->getData();
 	}
 
 	/**
-	 * Operation accountCreatePostWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param \Wallee\Sdk\Model\AccountCreate $entity The account object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function accountCreatePostWithHttpInfo($entity) {
+	public function createWithHttpInfo($entity) {
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling accountCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/account/create";
@@ -197,7 +197,7 @@ class AccountService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -244,42 +244,42 @@ class AccountService {
 	}
 
 	/**
-	 * Operation accountDeletePost
+	 * Operation delete
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return void
 	 */
-	public function accountDeletePost($id) {
-		return $this->accountDeletePostWithHttpInfo($id)->getData();
+	public function delete($id) {
+		return $this->deleteWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation accountDeletePostWithHttpInfo
+	 * Operation deleteWithHttpInfo
 	 *
-	 * delete
+	 * Delete
 	 *
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function accountDeletePostWithHttpInfo($id) {
+	public function deleteWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling accountDeletePost');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling delete');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/account/delete";
@@ -287,7 +287,7 @@ class AccountService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($id)) {
@@ -315,6 +315,10 @@ class AccountService {
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -330,42 +334,42 @@ class AccountService {
 	}
 
 	/**
-	 * Operation accountReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the account which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Account
 	 */
-	public function accountReadGet($id) {
-		return $this->accountReadGetWithHttpInfo($id)->getData();
+	public function read($id) {
+		return $this->readWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation accountReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the account which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function accountReadGetWithHttpInfo($id) {
+	public function readWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling accountReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($id !== null) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
@@ -376,7 +380,7 @@ class AccountService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -418,42 +422,42 @@ class AccountService {
 	}
 
 	/**
-	 * Operation accountSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the accounts which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Account[]
 	 */
-	public function accountSearchPost($query) {
-		return $this->accountSearchPostWithHttpInfo($query)->getData();
+	public function search($query) {
+		return $this->searchWithHttpInfo($query)->getData();
 	}
 
 	/**
-	 * Operation accountSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the accounts which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function accountSearchPostWithHttpInfo($query) {
+	public function searchWithHttpInfo($query) {
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling accountSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/account/search";
@@ -461,7 +465,7 @@ class AccountService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -508,42 +512,42 @@ class AccountService {
 	}
 
 	/**
-	 * Operation accountUpdatePost
+	 * Operation update
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param \Wallee\Sdk\Model\AccountUpdate $entity The account object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\AccountUpdate
 	 */
-	public function accountUpdatePost($entity) {
-		return $this->accountUpdatePostWithHttpInfo($entity)->getData();
+	public function update($entity) {
+		return $this->updateWithHttpInfo($entity)->getData();
 	}
 
 	/**
-	 * Operation accountUpdatePostWithHttpInfo
+	 * Operation updateWithHttpInfo
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param \Wallee\Sdk\Model\AccountUpdate $entity The account object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function accountUpdatePostWithHttpInfo($entity) {
+	public function updateWithHttpInfo($entity) {
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling accountUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/account/update";
@@ -551,7 +555,7 @@ class AccountService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -581,6 +585,10 @@ class AccountService {
 			switch ($e->getCode()) {
 				case 200:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\AccountUpdate', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

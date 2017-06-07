@@ -50,10 +50,10 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	private static $swaggerTypes = array(
 		'amount' => 'float',
 		'createdBy' => 'int',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'language' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'spaceViewId' => 'int',
 		'taxAmount' => 'float',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
@@ -87,7 +87,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -108,7 +108,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -208,7 +208,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -217,7 +217,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return TransactionLineItemVersion
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -277,7 +277,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -286,7 +286,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return TransactionLineItemVersion
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -391,18 +391,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getAmount() === null) {
-			throw new ValidationException("'amount' can't be null", 'amount', $this);
-		}
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getLineItems() === null) {
-			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
-		}
-		if ($this->getTaxAmount() === null) {
-			throw new ValidationException("'taxAmount' can't be null", 'taxAmount', $this);
-		}
 	}
 
 	/**

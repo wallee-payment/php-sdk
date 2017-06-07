@@ -53,7 +53,7 @@ class InstallmentPlanSliceConfiguration  {
 		'linkedSpaceId' => 'int',
 		'period' => 'string',
 		'plan' => '\Wallee\Sdk\Model\InstallmentPlanConfiguration',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'priority' => 'int',
 		'proportion' => 'float',
 		'state' => 'string',
@@ -84,13 +84,13 @@ class InstallmentPlanSliceConfiguration  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -126,7 +126,7 @@ class InstallmentPlanSliceConfiguration  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -297,7 +297,7 @@ class InstallmentPlanSliceConfiguration  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -306,7 +306,7 @@ class InstallmentPlanSliceConfiguration  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return InstallmentPlanSliceConfiguration
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -380,7 +380,7 @@ class InstallmentPlanSliceConfiguration  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -418,19 +418,7 @@ class InstallmentPlanSliceConfiguration  {
 	 */
 	public function validate() {
 
-		if ($this->getPeriod() === null) {
-			throw new ValidationException("'period' can't be null", 'period', $this);
-		}
-		if ($this->getPriority() === null) {
-			throw new ValidationException("'priority' can't be null", 'priority', $this);
-		}
-		if ($this->getProportion() === null) {
-			throw new ValidationException("'proportion' can't be null", 'proportion', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

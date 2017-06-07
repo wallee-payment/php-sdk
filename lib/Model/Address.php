@@ -51,7 +51,7 @@ class Address  {
 		'city' => 'string',
 		'commercialRegisterNumber' => 'string',
 		'country' => 'string',
-		'dateOfBirth' => 'string',
+		'dateOfBirth' => '\DateTime',
 		'dependentLocality' => 'string',
 		'emailAddress' => 'string',
 		'familyName' => 'string',
@@ -91,10 +91,10 @@ class Address  {
 	 * @return string[]
 	 */
 	public function getGenderAllowableValues() {
-		return [
+		return array(
 			self::GENDER_MALE,
 			self::GENDER_FEMALE,
-		];
+		);
 	}
 	
 
@@ -122,7 +122,7 @@ class Address  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $dateOfBirth;
 
@@ -323,7 +323,7 @@ class Address  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getDateOfBirth() {
 		return $this->dateOfBirth;
@@ -332,7 +332,7 @@ class Address  {
 	/**
 	 * Sets dateOfBirth.
 	 *
-	 * @param string $dateOfBirth
+	 * @param \DateTime $dateOfBirth
 	 * @return Address
 	 */
 	protected function setDateOfBirth($dateOfBirth) {
@@ -718,7 +718,7 @@ class Address  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["MALE", "FEMALE"];
+		$allowed_values = array("MALE", "FEMALE");
 		if (!in_array($this->getGender(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'gender', must be one of #{allowed_values}.", 'gender', $this);
 		}

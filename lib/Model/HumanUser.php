@@ -318,18 +318,6 @@ class HumanUser extends User  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getEmailAddress() === null) {
-			throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
-		}
-		if ($this->getFirstname() === null) {
-			throw new ValidationException("'firstname' can't be null", 'firstname', $this);
-		}
-		if ($this->getLanguage() === null) {
-			throw new ValidationException("'language' can't be null", 'language', $this);
-		}
-		if ($this->getLastname() === null) {
-			throw new ValidationException("'lastname' can't be null", 'lastname', $this);
-		}
 	}
 
 	/**

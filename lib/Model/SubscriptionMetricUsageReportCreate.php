@@ -154,7 +154,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	/**
 	 * Returns metric.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionMetric
+	 * @return int
 	 */
 	public function getMetric() {
 		return parent::getMetric();
@@ -163,7 +163,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	/**
 	 * Sets metric.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
+	 * @param int $metric
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setMetric($metric) {
@@ -173,7 +173,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	/**
 	 * Returns subscription.
 	 *
-	 * @return \Wallee\Sdk\Model\Subscription
+	 * @return int
 	 */
 	public function getSubscription() {
 		return parent::getSubscription();
@@ -182,7 +182,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\Subscription $subscription
+	 * @param int $subscription
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setSubscription($subscription) {

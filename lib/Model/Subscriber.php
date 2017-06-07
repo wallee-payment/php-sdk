@@ -57,10 +57,9 @@ class Subscriber  {
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'reference' => 'string',
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
-		'spaceReference' => '\Wallee\Sdk\Model\SpaceReference',
 		'state' => 'string',
 		'version' => 'int'	);
 
@@ -89,13 +88,13 @@ class Subscriber  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -157,7 +156,7 @@ class Subscriber  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -172,11 +171,6 @@ class Subscriber  {
 	 * @var \Wallee\Sdk\Model\Address
 	 */
 	private $shippingAddress;
-
-	/**
-	 * @var \Wallee\Sdk\Model\SpaceReference
-	 */
-	private $spaceReference;
 
 	/**
 	 * 
@@ -216,9 +210,6 @@ class Subscriber  {
 		}
 		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
 			$this->setShippingAddress($data['shippingAddress']);
-		}
-		if (isset($data['spaceReference']) && $data['spaceReference'] != null) {
-			$this->setSpaceReference($data['spaceReference']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -430,7 +421,7 @@ class Subscriber  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -439,7 +430,7 @@ class Subscriber  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return Subscriber
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -488,27 +479,6 @@ class Subscriber  {
 	 */
 	public function setShippingAddress($shippingAddress) {
 		$this->shippingAddress = $shippingAddress;
-
-		return $this;
-	}
-
-	/**
-	 * Returns spaceReference.
-	 *
-	 * @return \Wallee\Sdk\Model\SpaceReference
-	 */
-	public function getSpaceReference() {
-		return $this->spaceReference;
-	}
-
-	/**
-	 * Sets spaceReference.
-	 *
-	 * @param \Wallee\Sdk\Model\SpaceReference $spaceReference
-	 * @return Subscriber
-	 */
-	public function setSpaceReference($spaceReference) {
-		$this->spaceReference = $spaceReference;
 
 		return $this;
 	}
@@ -570,13 +540,7 @@ class Subscriber  {
 	 */
 	public function validate() {
 
-		if ($this->getEmailAddress() === null) {
-			throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
-		}
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

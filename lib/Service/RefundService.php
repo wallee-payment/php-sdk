@@ -68,44 +68,44 @@ class RefundService {
 
 
 	/**
-	 * Operation refundCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function refundCountPost($spaceId, $filter = null) {
-		return $this->refundCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter = null) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation refundCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function refundCountPostWithHttpInfo($spaceId, $filter = null) {
+	public function countWithHttpInfo($spaceId, $filter = null) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -116,7 +116,7 @@ class RefundService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -163,298 +163,7 @@ class RefundService {
 	}
 
 	/**
-	 * Operation refundFailPost
-	 *
-	 * fail
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $refundId The id of the refund which should be marked as failed. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\Refund
-	 */
-	public function refundFailPost($spaceId, $refundId) {
-		return $this->refundFailPostWithHttpInfo($spaceId, $refundId)->getData();
-	}
-
-	/**
-	 * Operation refundFailPostWithHttpInfo
-	 *
-	 * fail
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $refundId The id of the refund which should be marked as failed. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return ApiResponse
-	 */
-	public function refundFailPostWithHttpInfo($spaceId, $refundId) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundFailPost');
-		}
-		// verify the required parameter 'refundId' is set
-		if ($refundId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $refundId when calling refundFailPost');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-		if ($refundId !== null) {
-			$queryParams['refundId'] = $this->apiClient->getSerializer()->toQueryValue($refundId);
-		}
-
-		// path params
-		$resourcePath = "/refund/fail";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\Wallee\Sdk\Model\Refund',
-				'/refund/fail'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Refund', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation refundGetRefundDocumentGet
-	 *
-	 * getRefundDocument
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $id The id of the refund to get the document for. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\RenderedDocument
-	 */
-	public function refundGetRefundDocumentGet($spaceId, $id) {
-		return $this->refundGetRefundDocumentGetWithHttpInfo($spaceId, $id)->getData();
-	}
-
-	/**
-	 * Operation refundGetRefundDocumentGetWithHttpInfo
-	 *
-	 * getRefundDocument
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $id The id of the refund to get the document for. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return ApiResponse
-	 */
-	public function refundGetRefundDocumentGetWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundGetRefundDocumentGet');
-		}
-		// verify the required parameter 'id' is set
-		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling refundGetRefundDocumentGet');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-		if ($id !== null) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-		}
-
-		// path params
-		$resourcePath = "/refund/getRefundDocument";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'GET',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\Wallee\Sdk\Model\RenderedDocument',
-				'/refund/getRefundDocument'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedDocument', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\RenderedDocument', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation refundReadGet
-	 *
-	 * read
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $id The id of the refund which should be returned. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\Refund
-	 */
-	public function refundReadGet($spaceId, $id) {
-		return $this->refundReadGetWithHttpInfo($spaceId, $id)->getData();
-	}
-
-	/**
-	 * Operation refundReadGetWithHttpInfo
-	 *
-	 * read
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $id The id of the refund which should be returned. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return ApiResponse
-	 */
-	public function refundReadGetWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundReadGet');
-		}
-		// verify the required parameter 'id' is set
-		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling refundReadGet');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-		if ($id !== null) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-		}
-
-		// path params
-		$resourcePath = "/refund/read";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'GET',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\Wallee\Sdk\Model\Refund',
-				'/refund/read'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Refund', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation refundRefundPost
+	 * Operation create
 	 *
 	 * create
 	 *
@@ -463,12 +172,12 @@ class RefundService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Refund
 	 */
-	public function refundRefundPost($spaceId, $refund) {
-		return $this->refundRefundPostWithHttpInfo($spaceId, $refund)->getData();
+	public function create($spaceId, $refund) {
+		return $this->createWithHttpInfo($spaceId, $refund)->getData();
 	}
 
 	/**
-	 * Operation refundRefundPostWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
 	 * create
 	 *
@@ -477,25 +186,25 @@ class RefundService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function refundRefundPostWithHttpInfo($spaceId, $refund) {
+	public function createWithHttpInfo($spaceId, $refund) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundRefundPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling create');
 		}
 		// verify the required parameter 'refund' is set
 		if ($refund === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $refund when calling refundRefundPost');
+			throw new \InvalidArgumentException('Missing the required parameter $refund when calling create');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -506,7 +215,7 @@ class RefundService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($refund)) {
@@ -553,48 +262,339 @@ class RefundService {
 	}
 
 	/**
-	 * Operation refundSearchPost
+	 * Operation fail
 	 *
-	 * search
+	 * fail
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $refundId The id of the refund which should be marked as failed. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\Refund
+	 */
+	public function fail($spaceId, $refundId) {
+		return $this->failWithHttpInfo($spaceId, $refundId)->getData();
+	}
+
+	/**
+	 * Operation failWithHttpInfo
+	 *
+	 * fail
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $refundId The id of the refund which should be marked as failed. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function failWithHttpInfo($spaceId, $refundId) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling fail');
+		}
+		// verify the required parameter 'refundId' is set
+		if ($refundId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $refundId when calling fail');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($refundId !== null) {
+			$queryParams['refundId'] = $this->apiClient->getSerializer()->toQueryValue($refundId);
+		}
+
+		// path params
+		$resourcePath = "/refund/fail";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\Refund',
+				'/refund/fail'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Refund', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation getRefundDocument
+	 *
+	 * getRefundDocument
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund to get the document for. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\RenderedDocument
+	 */
+	public function getRefundDocument($spaceId, $id) {
+		return $this->getRefundDocumentWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation getRefundDocumentWithHttpInfo
+	 *
+	 * getRefundDocument
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund to get the document for. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function getRefundDocumentWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getRefundDocument');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling getRefundDocument');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/refund/getRefundDocument";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\RenderedDocument',
+				'/refund/getRefundDocument'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedDocument', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\RenderedDocument', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation read
+	 *
+	 * Read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\Refund
+	 */
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation readWithHttpInfo
+	 *
+	 * Read
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the refund which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function readWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/refund/read";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\Refund',
+				'/refund/read'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Refund', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Refund', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation search
+	 *
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the refunds which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Refund[]
 	 */
-	public function refundSearchPost($spaceId, $query) {
-		return $this->refundSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation refundSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the refunds which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function refundSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling refundSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -605,7 +605,7 @@ class RefundService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -652,7 +652,7 @@ class RefundService {
 	}
 
 	/**
-	 * Operation refundSucceedPost
+	 * Operation succeed
 	 *
 	 * succeed
 	 *
@@ -661,12 +661,12 @@ class RefundService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Refund
 	 */
-	public function refundSucceedPost($spaceId, $refundId) {
-		return $this->refundSucceedPostWithHttpInfo($spaceId, $refundId)->getData();
+	public function succeed($spaceId, $refundId) {
+		return $this->succeedWithHttpInfo($spaceId, $refundId)->getData();
 	}
 
 	/**
-	 * Operation refundSucceedPostWithHttpInfo
+	 * Operation succeedWithHttpInfo
 	 *
 	 * succeed
 	 *
@@ -675,25 +675,25 @@ class RefundService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function refundSucceedPostWithHttpInfo($spaceId, $refundId) {
+	public function succeedWithHttpInfo($spaceId, $refundId) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling refundSucceedPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling succeed');
 		}
 		// verify the required parameter 'refundId' is set
 		if ($refundId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $refundId when calling refundSucceedPost');
+			throw new \InvalidArgumentException('Missing the required parameter $refundId when calling succeed');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -707,7 +707,7 @@ class RefundService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';

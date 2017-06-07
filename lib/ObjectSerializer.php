@@ -147,12 +147,10 @@ final class ObjectSerializer {
 			}
 			return $data;
 		} elseif (is_object($data)) {
-			$values = [];
+			$values = array();
 			foreach (array_keys($data::swaggerTypes()) as $property) {
 				$getter = 'get' . ucfirst($property);
-				if ($data->$getter() !== null) {
-					$values[$property] = self::sanitizeForSerialization($data->$getter());
-				}
+				$values[$property] = self::sanitizeForSerialization($data->$getter());
 			}
 			return (object)$values;
 		} else {
@@ -287,7 +285,7 @@ final class ObjectSerializer {
 			return null;
 		} elseif (substr($class, 0, 4) === 'map[') { // for associative array e.g. map[string,int]
 			$inner = substr($class, 4, -1);
-			$deserialized = [];
+			$deserialized = array();
 			if (strrpos($inner, ",") !== false) {
 				$subClass_array = explode(',', $inner, 2);
 				$subClass = $subClass_array[1];
@@ -298,7 +296,7 @@ final class ObjectSerializer {
 			return $deserialized;
 		} elseif (strcasecmp(substr($class, -2), '[]') === 0) {
 			$subClass = substr($class, 0, -2);
-			$values = [];
+			$values = array();
 			foreach ($data as $key => $value) {
 				$values[] = self::deserialize($value, $subClass, null, $discriminator);
 			}
@@ -318,7 +316,7 @@ final class ObjectSerializer {
 			} else {
 				return null;
 			}
-		} elseif (in_array($class, ['void', 'bool', 'string', 'double', 'byte', 'mixed', 'integer', 'float', 'int', 'DateTime', 'number', 'boolean', 'object'], true)) {
+		} elseif (in_array($class, array('void', 'bool', 'string', 'double', 'byte', 'mixed', 'integer', 'float', 'int', 'DateTime', 'number', 'boolean', 'object'), true)) {
 			settype($data, $class);
 			return $data;
 		} elseif ($class === '\SplFileObject') {

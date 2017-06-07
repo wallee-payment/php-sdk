@@ -65,7 +65,7 @@ class RestCountryState  {
 	
 
 	/**
-	 * 
+	 * The code of the state identifies the state. The code is typically used within addresses. Some countries may not provide a code. For those the field is null.
 	 *
 	 * @var string
 	 */
@@ -79,14 +79,14 @@ class RestCountryState  {
 	private $countryCode;
 
 	/**
-	 * 
+	 * The ID of the state corresponds to the subdivision identifier defined in ISO 3166-2. The format consists of the country code followed by a dash and a subdivision identifier.
 	 *
 	 * @var string
 	 */
 	private $id;
 
 	/**
-	 * 
+	 * The name is a human readable label of the state in the language of the region.
 	 *
 	 * @var string
 	 */
@@ -105,7 +105,7 @@ class RestCountryState  {
 	/**
 	 * Returns code.
 	 *
-	 * 
+	 * The code of the state identifies the state. The code is typically used within addresses. Some countries may not provide a code. For those the field is null.
 	 *
 	 * @return string
 	 */
@@ -151,7 +151,7 @@ class RestCountryState  {
 	/**
 	 * Returns id.
 	 *
-	 * 
+	 * The ID of the state corresponds to the subdivision identifier defined in ISO 3166-2. The format consists of the country code followed by a dash and a subdivision identifier.
 	 *
 	 * @return string
 	 */
@@ -174,7 +174,7 @@ class RestCountryState  {
 	/**
 	 * Returns name.
 	 *
-	 * 
+	 * The name is a human readable label of the state in the language of the region.
 	 *
 	 * @return string
 	 */

@@ -76,11 +76,11 @@ class ManualTaskAction  {
 	 * @return string[]
 	 */
 	public function getStyleAllowableValues() {
-		return [
+		return array(
 			self::STYLE_DEFAULT,
 			self::STYLE_PRIMARY,
 			self::STYLE_DANGER,
-		];
+		);
 	}
 	
 
@@ -227,7 +227,7 @@ class ManualTaskAction  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["DEFAULT", "PRIMARY", "DANGER"];
+		$allowed_values = array("DEFAULT", "PRIMARY", "DANGER");
 		if (!in_array($this->getStyle(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'style', must be one of #{allowed_values}.", 'style', $this);
 		}

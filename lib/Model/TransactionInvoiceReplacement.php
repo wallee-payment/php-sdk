@@ -48,7 +48,7 @@ class TransactionInvoiceReplacement  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'dueOn' => 'string',
+		'dueOn' => '\DateTime',
 		'externalId' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItemCreate[]',
 		'merchantReference' => 'string',
@@ -68,7 +68,7 @@ class TransactionInvoiceReplacement  {
 	/**
 	 * The date on which the invoice should be paid on.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $dueOn;
 
@@ -130,7 +130,7 @@ class TransactionInvoiceReplacement  {
 	 *
 	 * The date on which the invoice should be paid on.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getDueOn() {
 		return $this->dueOn;
@@ -139,7 +139,7 @@ class TransactionInvoiceReplacement  {
 	/**
 	 * Sets dueOn.
 	 *
-	 * @param string $dueOn
+	 * @param \DateTime $dueOn
 	 * @return TransactionInvoiceReplacement
 	 */
 	public function setDueOn($dueOn) {

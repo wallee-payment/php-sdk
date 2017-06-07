@@ -51,7 +51,7 @@ class ModelResourcePath  {
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'path' => 'string',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'spaceId' => 'int',
 		'state' => 'string',
 		'version' => 'int'	);
@@ -79,11 +79,11 @@ class ModelResourcePath  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_ACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -109,7 +109,7 @@ class ModelResourcePath  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -225,7 +225,7 @@ class ModelResourcePath  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -234,7 +234,7 @@ class ModelResourcePath  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return ModelResourcePath
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -285,7 +285,7 @@ class ModelResourcePath  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('ACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'ACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -323,13 +323,7 @@ class ModelResourcePath  {
 	 */
 	public function validate() {
 
-		if ($this->getPath() === null) {
-			throw new ValidationException("'path' can't be null", 'path', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["ACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("ACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

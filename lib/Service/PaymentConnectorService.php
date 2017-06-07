@@ -68,36 +68,36 @@ class PaymentConnectorService {
 
 
 	/**
-	 * Operation paymentConnectorAllGet
+	 * Operation all
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\PaymentConnector[]
 	 */
-	public function paymentConnectorAllGet() {
-		return $this->paymentConnectorAllGetWithHttpInfo()->getData();
+	public function all() {
+		return $this->allWithHttpInfo()->getData();
 	}
 
 	/**
-	 * Operation paymentConnectorAllGetWithHttpInfo
+	 * Operation allWithHttpInfo
 	 *
-	 * all
+	 * All
 	 *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function paymentConnectorAllGetWithHttpInfo() {
+	public function allWithHttpInfo() {
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 
 		// path params
 		$resourcePath = "/payment-connector/all";
@@ -105,7 +105,7 @@ class PaymentConnectorService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -147,42 +147,42 @@ class PaymentConnectorService {
 	}
 
 	/**
-	 * Operation paymentConnectorReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the connector which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\PaymentConnector
 	 */
-	public function paymentConnectorReadGet($id) {
-		return $this->paymentConnectorReadGetWithHttpInfo($id)->getData();
+	public function read($id) {
+		return $this->readWithHttpInfo($id)->getData();
 	}
 
 	/**
-	 * Operation paymentConnectorReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $id The id of the connector which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function paymentConnectorReadGetWithHttpInfo($id) {
+	public function readWithHttpInfo($id) {
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling paymentConnectorReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($id !== null) {
 			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
@@ -193,7 +193,7 @@ class PaymentConnectorService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';

@@ -48,14 +48,14 @@ class SubscriptionPeriodBill  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
-		'effectivePeriodEndDate' => 'string',
+		'createdOn' => '\DateTime',
+		'effectivePeriodEndDate' => '\DateTime',
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
-		'periodStartDate' => 'string',
-		'plannedPeriodEndDate' => 'string',
-		'plannedPurgeDate' => 'string',
+		'periodStartDate' => '\DateTime',
+		'plannedPeriodEndDate' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
 		'subscriptionVersion' => '\Wallee\Sdk\Model\SubscriptionVersion',
 		'version' => 'int'	);
@@ -82,24 +82,24 @@ class SubscriptionPeriodBill  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_BILLED,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $effectivePeriodEndDate;
 
@@ -125,21 +125,21 @@ class SubscriptionPeriodBill  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $periodStartDate;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPeriodEndDate;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -189,7 +189,7 @@ class SubscriptionPeriodBill  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -198,7 +198,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionPeriodBill
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -212,7 +212,7 @@ class SubscriptionPeriodBill  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getEffectivePeriodEndDate() {
 		return $this->effectivePeriodEndDate;
@@ -221,7 +221,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets effectivePeriodEndDate.
 	 *
-	 * @param string $effectivePeriodEndDate
+	 * @param \DateTime $effectivePeriodEndDate
 	 * @return SubscriptionPeriodBill
 	 */
 	protected function setEffectivePeriodEndDate($effectivePeriodEndDate) {
@@ -302,7 +302,7 @@ class SubscriptionPeriodBill  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPeriodStartDate() {
 		return $this->periodStartDate;
@@ -311,7 +311,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets periodStartDate.
 	 *
-	 * @param string $periodStartDate
+	 * @param \DateTime $periodStartDate
 	 * @return SubscriptionPeriodBill
 	 */
 	protected function setPeriodStartDate($periodStartDate) {
@@ -325,7 +325,7 @@ class SubscriptionPeriodBill  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPeriodEndDate() {
 		return $this->plannedPeriodEndDate;
@@ -334,7 +334,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets plannedPeriodEndDate.
 	 *
-	 * @param string $plannedPeriodEndDate
+	 * @param \DateTime $plannedPeriodEndDate
 	 * @return SubscriptionPeriodBill
 	 */
 	protected function setPlannedPeriodEndDate($plannedPeriodEndDate) {
@@ -348,7 +348,7 @@ class SubscriptionPeriodBill  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -357,7 +357,7 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionPeriodBill
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -385,7 +385,7 @@ class SubscriptionPeriodBill  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'BILLED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'BILLED'");
 		}
 		$this->state = $state;
@@ -444,19 +444,7 @@ class SubscriptionPeriodBill  {
 	 */
 	public function validate() {
 
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getPeriodStartDate() === null) {
-			throw new ValidationException("'periodStartDate' can't be null", 'periodStartDate', $this);
-		}
-		if ($this->getPlannedPeriodEndDate() === null) {
-			throw new ValidationException("'plannedPeriodEndDate' can't be null", 'plannedPeriodEndDate', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "BILLED"];
+		$allowed_values = array("PENDING", "BILLED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

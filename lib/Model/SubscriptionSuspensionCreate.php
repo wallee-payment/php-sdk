@@ -72,10 +72,10 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return string[]
 	 */
 	public function getEndActionAllowableValues() {
-		return [
+		return array(
 			self::END_ACTION_TERMINATE,
 			self::END_ACTION_REACTIVATE,
-		];
+		);
 	}
 	
 
@@ -154,7 +154,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 *
 	 * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedEndDate() {
 		return parent::getPlannedEndDate();
@@ -163,7 +163,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	/**
 	 * Sets plannedEndDate.
 	 *
-	 * @param string $plannedEndDate
+	 * @param \DateTime $plannedEndDate
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setPlannedEndDate($plannedEndDate) {
@@ -200,7 +200,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 		if ($this->getEndAction() === null) {
 			throw new ValidationException("'endAction' can't be null", 'endAction', $this);
 		}
-		$allowed_values = ["TERMINATE", "REACTIVATE"];
+		$allowed_values = array("TERMINATE", "REACTIVATE");
 		if (!in_array($this->getEndAction(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'endAction', must be one of #{allowed_values}.", 'endAction', $this);
 		}

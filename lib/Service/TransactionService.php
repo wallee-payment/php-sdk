@@ -68,7 +68,7 @@ class TransactionService {
 
 
 	/**
-	 * Operation transactionBuildJavaScriptUrlGet
+	 * Operation buildJavaScriptUrl
 	 *
 	 * buildJavaScriptUrl
 	 *
@@ -77,12 +77,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return string
 	 */
-	public function transactionBuildJavaScriptUrlGet($spaceId, $id) {
-		return $this->transactionBuildJavaScriptUrlGetWithHttpInfo($spaceId, $id)->getData();
+	public function buildJavaScriptUrl($spaceId, $id) {
+		return $this->buildJavaScriptUrlWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionBuildJavaScriptUrlGetWithHttpInfo
+	 * Operation buildJavaScriptUrlWithHttpInfo
 	 *
 	 * buildJavaScriptUrl
 	 *
@@ -91,25 +91,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionBuildJavaScriptUrlGetWithHttpInfo($spaceId, $id) {
+	public function buildJavaScriptUrlWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionBuildJavaScriptUrlGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling buildJavaScriptUrl');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionBuildJavaScriptUrlGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling buildJavaScriptUrl');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -123,7 +123,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -150,6 +150,10 @@ class TransactionService {
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'string', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -165,7 +169,7 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionBuildPaymentPageUrlGet
+	 * Operation buildPaymentPageUrl
 	 *
 	 * buildPaymentPageUrl
 	 *
@@ -174,12 +178,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return string
 	 */
-	public function transactionBuildPaymentPageUrlGet($spaceId, $id) {
-		return $this->transactionBuildPaymentPageUrlGetWithHttpInfo($spaceId, $id)->getData();
+	public function buildPaymentPageUrl($spaceId, $id) {
+		return $this->buildPaymentPageUrlWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionBuildPaymentPageUrlGetWithHttpInfo
+	 * Operation buildPaymentPageUrlWithHttpInfo
 	 *
 	 * buildPaymentPageUrl
 	 *
@@ -188,25 +192,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionBuildPaymentPageUrlGetWithHttpInfo($spaceId, $id) {
+	public function buildPaymentPageUrlWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionBuildPaymentPageUrlGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling buildPaymentPageUrl');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionBuildPaymentPageUrlGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling buildPaymentPageUrl');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -220,7 +224,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -247,6 +251,10 @@ class TransactionService {
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'string', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -262,7 +270,7 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionConfirmPost
+	 * Operation confirm
 	 *
 	 * confirm
 	 *
@@ -271,12 +279,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
-	public function transactionConfirmPost($spaceId, $transactionModel) {
-		return $this->transactionConfirmPostWithHttpInfo($spaceId, $transactionModel)->getData();
+	public function confirm($spaceId, $transactionModel) {
+		return $this->confirmWithHttpInfo($spaceId, $transactionModel)->getData();
 	}
 
 	/**
-	 * Operation transactionConfirmPostWithHttpInfo
+	 * Operation confirmWithHttpInfo
 	 *
 	 * confirm
 	 *
@@ -285,25 +293,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionConfirmPostWithHttpInfo($spaceId, $transactionModel) {
+	public function confirmWithHttpInfo($spaceId, $transactionModel) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionConfirmPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling confirm');
 		}
 		// verify the required parameter 'transactionModel' is set
 		if ($transactionModel === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $transactionModel when calling transactionConfirmPost');
+			throw new \InvalidArgumentException('Missing the required parameter $transactionModel when calling confirm');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -314,7 +322,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($transactionModel)) {
@@ -346,6 +354,10 @@ class TransactionService {
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -361,44 +373,44 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function transactionCountPost($spaceId, $filter = null) {
-		return $this->transactionCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter = null) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation transactionCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionCountPostWithHttpInfo($spaceId, $filter = null) {
+	public function countWithHttpInfo($spaceId, $filter = null) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -409,7 +421,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -456,48 +468,48 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionCreatePost
+	 * Operation create
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\TransactionCreate
 	 */
-	public function transactionCreatePost($spaceId, $transaction) {
-		return $this->transactionCreatePostWithHttpInfo($spaceId, $transaction)->getData();
+	public function create($spaceId, $transaction) {
+		return $this->createWithHttpInfo($spaceId, $transaction)->getData();
 	}
 
 	/**
-	 * Operation transactionCreatePostWithHttpInfo
+	 * Operation createWithHttpInfo
 	 *
-	 * create
+	 * Create
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionCreatePostWithHttpInfo($spaceId, $transaction) {
+	public function createWithHttpInfo($spaceId, $transaction) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling create');
 		}
 		// verify the required parameter 'transaction' is set
 		if ($transaction === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $transaction when calling transactionCreatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $transaction when calling create');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -508,7 +520,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($transaction)) {
@@ -555,7 +567,7 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionFetchPossiblePaymentMethodsGet
+	 * Operation fetchPossiblePaymentMethods
 	 *
 	 * fetchPossiblePaymentMethods
 	 *
@@ -564,12 +576,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\PaymentMethodConfiguration[]
 	 */
-	public function transactionFetchPossiblePaymentMethodsGet($spaceId, $id) {
-		return $this->transactionFetchPossiblePaymentMethodsGetWithHttpInfo($spaceId, $id)->getData();
+	public function fetchPossiblePaymentMethods($spaceId, $id) {
+		return $this->fetchPossiblePaymentMethodsWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionFetchPossiblePaymentMethodsGetWithHttpInfo
+	 * Operation fetchPossiblePaymentMethodsWithHttpInfo
 	 *
 	 * fetchPossiblePaymentMethods
 	 *
@@ -578,25 +590,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionFetchPossiblePaymentMethodsGetWithHttpInfo($spaceId, $id) {
+	public function fetchPossiblePaymentMethodsWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionFetchPossiblePaymentMethodsGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling fetchPossiblePaymentMethods');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionFetchPossiblePaymentMethodsGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling fetchPossiblePaymentMethods');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -610,7 +622,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -652,7 +664,7 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionGetInvoiceDocumentGet
+	 * Operation getInvoiceDocument
 	 *
 	 * getInvoiceDocument
 	 *
@@ -661,12 +673,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RenderedDocument
 	 */
-	public function transactionGetInvoiceDocumentGet($spaceId, $id) {
-		return $this->transactionGetInvoiceDocumentGetWithHttpInfo($spaceId, $id)->getData();
+	public function getInvoiceDocument($spaceId, $id) {
+		return $this->getInvoiceDocumentWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionGetInvoiceDocumentGetWithHttpInfo
+	 * Operation getInvoiceDocumentWithHttpInfo
 	 *
 	 * getInvoiceDocument
 	 *
@@ -675,25 +687,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionGetInvoiceDocumentGetWithHttpInfo($spaceId, $id) {
+	public function getInvoiceDocumentWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionGetInvoiceDocumentGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getInvoiceDocument');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionGetInvoiceDocumentGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling getInvoiceDocument');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -707,7 +719,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -749,7 +761,104 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionGetPackingSlipGet
+	 * Operation getLatestTransactionLineItemVersion
+	 *
+	 * getLatestTransactionLineItemVersion
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the transaction to get the latest line item version for. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\TransactionLineItemVersion
+	 */
+	public function getLatestTransactionLineItemVersion($spaceId, $id) {
+		return $this->getLatestTransactionLineItemVersionWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation getLatestTransactionLineItemVersionWithHttpInfo
+	 *
+	 * getLatestTransactionLineItemVersion
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the transaction to get the latest line item version for. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function getLatestTransactionLineItemVersionWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getLatestTransactionLineItemVersion');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling getLatestTransactionLineItemVersion');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/transaction/getLatestTransactionLineItemVersion";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\TransactionLineItemVersion',
+				'/transaction/getLatestTransactionLineItemVersion'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\TransactionLineItemVersion', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\TransactionLineItemVersion', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation getPackingSlip
 	 *
 	 * getPackingSlip
 	 *
@@ -758,12 +867,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RenderedDocument
 	 */
-	public function transactionGetPackingSlipGet($spaceId, $id) {
-		return $this->transactionGetPackingSlipGetWithHttpInfo($spaceId, $id)->getData();
+	public function getPackingSlip($spaceId, $id) {
+		return $this->getPackingSlipWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionGetPackingSlipGetWithHttpInfo
+	 * Operation getPackingSlipWithHttpInfo
 	 *
 	 * getPackingSlip
 	 *
@@ -772,25 +881,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionGetPackingSlipGetWithHttpInfo($spaceId, $id) {
+	public function getPackingSlipWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionGetPackingSlipGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling getPackingSlip');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionGetPackingSlipGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling getPackingSlip');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -804,7 +913,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -846,48 +955,48 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
-	public function transactionReadGet($spaceId, $id) {
-		return $this->transactionReadGetWithHttpInfo($spaceId, $id)->getData();
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation transactionReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionReadGetWithHttpInfo($spaceId, $id) {
+	public function readWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling transactionReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -901,7 +1010,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -943,48 +1052,48 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\Transaction[]
 	 */
-	public function transactionSearchPost($spaceId, $query) {
-		return $this->transactionSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation transactionSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling transactionSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -995,7 +1104,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -1042,48 +1151,48 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionUpdatePost
+	 * Operation update
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\TransactionPending
 	 */
-	public function transactionUpdatePost($spaceId, $entity) {
-		return $this->transactionUpdatePostWithHttpInfo($spaceId, $entity)->getData();
+	public function update($spaceId, $entity) {
+		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
 	}
 
 	/**
-	 * Operation transactionUpdatePostWithHttpInfo
+	 * Operation updateWithHttpInfo
 	 *
-	 * update
+	 * Update
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionUpdatePostWithHttpInfo($spaceId, $entity) {
+	public function updateWithHttpInfo($spaceId, $entity) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling update');
 		}
 		// verify the required parameter 'entity' is set
 		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling transactionUpdatePost');
+			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -1094,7 +1203,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($entity)) {
@@ -1126,6 +1235,10 @@ class TransactionService {
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\TransactionPending', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
 				case 442:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
@@ -1141,7 +1254,7 @@ class TransactionService {
 	}
 
 	/**
-	 * Operation transactionUpdateTransactionLineItemsPost
+	 * Operation updateTransactionLineItems
 	 *
 	 * updateTransactionLineItems
 	 *
@@ -1150,12 +1263,12 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\TransactionLineItemVersion
 	 */
-	public function transactionUpdateTransactionLineItemsPost($spaceId, $updateRequest) {
-		return $this->transactionUpdateTransactionLineItemsPostWithHttpInfo($spaceId, $updateRequest)->getData();
+	public function updateTransactionLineItems($spaceId, $updateRequest) {
+		return $this->updateTransactionLineItemsWithHttpInfo($spaceId, $updateRequest)->getData();
 	}
 
 	/**
-	 * Operation transactionUpdateTransactionLineItemsPostWithHttpInfo
+	 * Operation updateTransactionLineItemsWithHttpInfo
 	 *
 	 * updateTransactionLineItems
 	 *
@@ -1164,25 +1277,25 @@ class TransactionService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function transactionUpdateTransactionLineItemsPostWithHttpInfo($spaceId, $updateRequest) {
+	public function updateTransactionLineItemsWithHttpInfo($spaceId, $updateRequest) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling transactionUpdateTransactionLineItemsPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling updateTransactionLineItems');
 		}
 		// verify the required parameter 'updateRequest' is set
 		if ($updateRequest === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $updateRequest when calling transactionUpdateTransactionLineItemsPost');
+			throw new \InvalidArgumentException('Missing the required parameter $updateRequest when calling updateTransactionLineItems');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -1193,7 +1306,7 @@ class TransactionService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($updateRequest)) {
@@ -1223,6 +1336,10 @@ class TransactionService {
 			switch ($e->getCode()) {
 				case 200:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\TransactionLineItemVersion', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

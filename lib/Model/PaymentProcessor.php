@@ -339,12 +339,6 @@ class PaymentProcessor  {
 	 */
 	public function validate() {
 
-		if ($this->getCompanyName() === null) {
-			throw new ValidationException("'companyName' can't be null", 'companyName', $this);
-		}
-		if ($this->getProductName() === null) {
-			throw new ValidationException("'productName' can't be null", 'productName', $this);
-		}
 	}
 
 	/**

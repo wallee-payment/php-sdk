@@ -49,19 +49,19 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 */
 	private static $swaggerTypes = array(
 		'createdBy' => 'int',
-		'createdOn' => 'string',
-		'failedOn' => 'string',
+		'createdOn' => '\DateTime',
+		'failedOn' => '\DateTime',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
 		'mode' => 'string',
-		'nextUpdateOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'nextUpdateOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'processorReference' => 'string',
 		'spaceViewId' => 'int',
 		'state' => 'string',
-		'succeededOn' => 'string',
-		'timeoutOn' => 'string',
+		'succeededOn' => '\DateTime',
+		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'version' => 'int'	);
 
@@ -87,10 +87,10 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getModeAllowableValues() {
-		return [
+		return array(
 			self::MODE_ONLINE,
 			self::MODE_OFFLINE,
-		];
+		);
 	}
 	
 	/**
@@ -107,12 +107,12 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_PENDING,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 
@@ -126,14 +126,14 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $failedOn;
 
@@ -166,14 +166,14 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $nextUpdateOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -199,14 +199,14 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $succeededOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $timeoutOn;
 
@@ -274,7 +274,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -283,7 +283,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return TransactionVoid
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -297,7 +297,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getFailedOn() {
 		return $this->failedOn;
@@ -306,7 +306,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets failedOn.
 	 *
-	 * @param string $failedOn
+	 * @param \DateTime $failedOn
 	 * @return TransactionVoid
 	 */
 	protected function setFailedOn($failedOn) {
@@ -401,7 +401,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 */
 	protected function setMode($mode) {
 		$allowed_values = array('ONLINE', 'OFFLINE');
-		if ((!in_array($mode, $allowed_values))) {
+		if (!is_null($mode) && (!in_array($mode, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'mode', must be one of 'ONLINE', 'OFFLINE'");
 		}
 		$this->mode = $mode;
@@ -414,7 +414,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getNextUpdateOn() {
 		return $this->nextUpdateOn;
@@ -423,7 +423,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets nextUpdateOn.
 	 *
-	 * @param string $nextUpdateOn
+	 * @param \DateTime $nextUpdateOn
 	 * @return TransactionVoid
 	 */
 	protected function setNextUpdateOn($nextUpdateOn) {
@@ -437,7 +437,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -446,7 +446,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return TransactionVoid
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -531,7 +531,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getSucceededOn() {
 		return $this->succeededOn;
@@ -540,7 +540,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets succeededOn.
 	 *
-	 * @param string $succeededOn
+	 * @param \DateTime $succeededOn
 	 * @return TransactionVoid
 	 */
 	protected function setSucceededOn($succeededOn) {
@@ -554,7 +554,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTimeoutOn() {
 		return $this->timeoutOn;
@@ -563,7 +563,7 @@ class TransactionVoid extends TransactionAwareEntity  {
 	/**
 	 * Sets timeoutOn.
 	 *
-	 * @param string $timeoutOn
+	 * @param \DateTime $timeoutOn
 	 * @return TransactionVoid
 	 */
 	protected function setTimeoutOn($timeoutOn) {
@@ -624,21 +624,12 @@ class TransactionVoid extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getLabels() === null) {
-			throw new ValidationException("'labels' can't be null", 'labels', $this);
-		}
-		if ($this->getMode() === null) {
-			throw new ValidationException("'mode' can't be null", 'mode', $this);
-		}
-		$allowed_values = ["ONLINE", "OFFLINE"];
+		$allowed_values = array("ONLINE", "OFFLINE");
 		if (!in_array($this->getMode(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'mode', must be one of #{allowed_values}.", 'mode', $this);
 		}
 
-		$allowed_values = ["CREATE", "PENDING", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("CREATE", "PENDING", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

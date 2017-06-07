@@ -170,15 +170,6 @@ class LineItemReduction  {
 	 */
 	public function validate() {
 
-		if ($this->getLineItemUniqueId() === null) {
-			throw new ValidationException("'lineItemUniqueId' can't be null", 'lineItemUniqueId', $this);
-		}
-		if ($this->getQuantityReduction() === null) {
-			throw new ValidationException("'quantityReduction' can't be null", 'quantityReduction', $this);
-		}
-		if ($this->getUnitPriceReduction() === null) {
-			throw new ValidationException("'unitPriceReduction' can't be null", 'unitPriceReduction', $this);
-		}
 	}
 
 	/**

@@ -80,10 +80,10 @@ class ProductMeteredFee  {
 	 * @return string[]
 	 */
 	public function getTierPricingAllowableValues() {
-		return [
+		return array(
 			self::TIER_PRICING_CHEAPEST_TIER_PRICING,
 			self::TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING,
-		];
+		);
 	}
 	
 	/**
@@ -99,11 +99,11 @@ class ProductMeteredFee  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_METERED_FEE,
 			self::TYPE_SETUP_FEE,
 			self::TYPE_PERIOD_FEE,
-		];
+		);
 	}
 	
 
@@ -338,7 +338,7 @@ class ProductMeteredFee  {
 	 */
 	protected function setTierPricing($tierPricing) {
 		$allowed_values = array('CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING');
-		if ((!in_array($tierPricing, $allowed_values))) {
+		if (!is_null($tierPricing) && (!in_array($tierPricing, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'tierPricing', must be one of 'CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING'");
 		}
 		$this->tierPricing = $tierPricing;
@@ -403,15 +403,12 @@ class ProductMeteredFee  {
 	 */
 	public function validate() {
 
-		if ($this->getTierPricing() === null) {
-			throw new ValidationException("'tierPricing' can't be null", 'tierPricing', $this);
-		}
-		$allowed_values = ["CHEAPEST_TIER_PRICING", "INCREMENTAL_DISCOUNT_PRICING"];
+		$allowed_values = array("CHEAPEST_TIER_PRICING", "INCREMENTAL_DISCOUNT_PRICING");
 		if (!in_array($this->getTierPricing(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'tierPricing', must be one of #{allowed_values}.", 'tierPricing', $this);
 		}
 
-		$allowed_values = ["METERED_FEE", "SETUP_FEE", "PERIOD_FEE"];
+		$allowed_values = array("METERED_FEE", "SETUP_FEE", "PERIOD_FEE");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

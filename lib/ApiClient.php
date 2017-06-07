@@ -23,6 +23,7 @@ namespace Wallee\Sdk;
 
 use \Wallee\Sdk\Http\HttpRequest;
 use \Wallee\Sdk\Http\HttpClientFactory;
+use \Wallee\Sdk\ApiException;
 
 /**
  * This class sends API calls to the endpoint.

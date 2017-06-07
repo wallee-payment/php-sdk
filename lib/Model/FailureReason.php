@@ -79,13 +79,13 @@ class FailureReason  {
 	 * @return string[]
 	 */
 	public function getCategoryAllowableValues() {
-		return [
+		return array(
 			self::CATEGORY_TEMPORARY_ISSUE,
 			self::CATEGORY_INTERNAL,
 			self::CATEGORY_END_USER,
 			self::CATEGORY_CONFIGURATION,
 			self::CATEGORY_DEVELOPER,
-		];
+		);
 	}
 	
 
@@ -265,7 +265,7 @@ class FailureReason  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["TEMPORARY_ISSUE", "INTERNAL", "END_USER", "CONFIGURATION", "DEVELOPER"];
+		$allowed_values = array("TEMPORARY_ISSUE", "INTERNAL", "END_USER", "CONFIGURATION", "DEVELOPER");
 		if (!in_array($this->getCategory(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'category', must be one of #{allowed_values}.", 'category', $this);
 		}

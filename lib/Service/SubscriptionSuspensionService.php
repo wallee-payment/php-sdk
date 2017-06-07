@@ -27,7 +27,7 @@ use \Wallee\Sdk\ApiResponse;
 use \Wallee\Sdk\Http\HttpRequest;
 
 /**
- * SubscriptionProductService service
+ * SubscriptionSuspensionService service
  *
  * @category Class
  * @package  Wallee\Sdk
@@ -35,7 +35,7 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductService {
+class SubscriptionSuspensionService {
 
 	/**
 	 * The API client instance.
@@ -111,7 +111,7 @@ class SubscriptionProductService {
 		}
 
 		// path params
-		$resourcePath = "/subscription-product/count";
+		$resourcePath = "/subscription-suspension/count";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -139,7 +139,7 @@ class SubscriptionProductService {
 				$httpBody,
 				$headerParams,
 				'int',
-				'/subscription-product/count'
+				'/subscription-suspension/count'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -168,12 +168,12 @@ class SubscriptionProductService {
 	 * Create
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\SubscriptionProductCreate $entity The product object with the properties which should be created. (required)
+	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionCreate $suspension  (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\SubscriptionProductCreate
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspension
 	 */
-	public function create($spaceId, $entity) {
-		return $this->createWithHttpInfo($spaceId, $entity)->getData();
+	public function create($spaceId, $suspension) {
+		return $this->createWithHttpInfo($spaceId, $suspension)->getData();
 	}
 
 	/**
@@ -182,18 +182,18 @@ class SubscriptionProductService {
 	 * Create
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\SubscriptionProductCreate $entity The product object with the properties which should be created. (required)
+	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionCreate $suspension  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function createWithHttpInfo($spaceId, $entity) {
+	public function createWithHttpInfo($spaceId, $suspension) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
 			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling create');
 		}
-		// verify the required parameter 'entity' is set
-		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling create');
+		// verify the required parameter 'suspension' is set
+		if ($suspension === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $suspension when calling create');
 		}
 		// header params
 		$headerParams = array();
@@ -210,7 +210,7 @@ class SubscriptionProductService {
 		}
 
 		// path params
-		$resourcePath = "/subscription-product/create";
+		$resourcePath = "/subscription-suspension/create";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -218,8 +218,8 @@ class SubscriptionProductService {
 		$formParams = array();
 		// body params
 		$tempBody = null;
-		if (isset($entity)) {
-			$tempBody = $entity;
+		if (isset($suspension)) {
+			$tempBody = $suspension;
 		}
 
 		// for model (json/xml)
@@ -237,14 +237,14 @@ class SubscriptionProductService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\SubscriptionProductCreate',
-				'/subscription-product/create'
+				'\Wallee\Sdk\Model\SubscriptionSuspension',
+				'/subscription-suspension/create'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionProductCreate', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionSuspension', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionProductCreate', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionSuspension', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -267,9 +267,9 @@ class SubscriptionProductService {
 	 * Read
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the product which should be returned. (required)
+	 * @param int $id The id of the suspension which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspension
 	 */
 	public function read($spaceId, $id) {
 		return $this->readWithHttpInfo($spaceId, $id)->getData();
@@ -281,7 +281,7 @@ class SubscriptionProductService {
 	 * Read
 	 *
 	 * @param int $spaceId  (required)
-	 * @param int $id The id of the product which should be returned. (required)
+	 * @param int $id The id of the suspension which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
@@ -312,7 +312,7 @@ class SubscriptionProductService {
 		}
 
 		// path params
-		$resourcePath = "/subscription-product/read";
+		$resourcePath = "/subscription-suspension/read";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -334,14 +334,14 @@ class SubscriptionProductService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\SubscriptionProduct',
-				'/subscription-product/read'
+				'\Wallee\Sdk\Model\SubscriptionSuspension',
+				'/subscription-suspension/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionProduct', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionSuspension', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionProduct', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionSuspension', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -364,9 +364,9 @@ class SubscriptionProductService {
 	 * Search
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the products which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription suspensions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\SubscriptionProduct[]
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspension[]
 	 */
 	public function search($spaceId, $query) {
 		return $this->searchWithHttpInfo($spaceId, $query)->getData();
@@ -378,7 +378,7 @@ class SubscriptionProductService {
 	 * Search
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the products which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription suspensions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
@@ -406,7 +406,7 @@ class SubscriptionProductService {
 		}
 
 		// path params
-		$resourcePath = "/subscription-product/search";
+		$resourcePath = "/subscription-suspension/search";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
@@ -433,14 +433,14 @@ class SubscriptionProductService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\SubscriptionProduct[]',
-				'/subscription-product/search'
+				'\Wallee\Sdk\Model\SubscriptionSuspension[]',
+				'/subscription-suspension/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionProduct[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionSuspension[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionProduct[]', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionSuspension[]', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -458,37 +458,37 @@ class SubscriptionProductService {
 	}
 
 	/**
-	 * Operation update
+	 * Operation terminate
 	 *
-	 * Update
+	 * terminate
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\SubscriptionProductActive $entity The products object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @param int $suspensionId  (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\SubscriptionProductActive
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspension
 	 */
-	public function update($spaceId, $entity) {
-		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
+	public function terminate($spaceId, $suspensionId) {
+		return $this->terminateWithHttpInfo($spaceId, $suspensionId)->getData();
 	}
 
 	/**
-	 * Operation updateWithHttpInfo
+	 * Operation terminateWithHttpInfo
 	 *
-	 * Update
+	 * terminate
 	 *
 	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\SubscriptionProductActive $entity The products object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @param int $suspensionId  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function updateWithHttpInfo($spaceId, $entity) {
+	public function terminateWithHttpInfo($spaceId, $suspensionId) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling update');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling terminate');
 		}
-		// verify the required parameter 'entity' is set
-		if ($entity === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $entity when calling update');
+		// verify the required parameter 'suspensionId' is set
+		if ($suspensionId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $suspensionId when calling terminate');
 		}
 		// header params
 		$headerParams = array();
@@ -503,20 +503,18 @@ class SubscriptionProductService {
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
+		if ($suspensionId !== null) {
+			$queryParams['suspensionId'] = $this->apiClient->getSerializer()->toQueryValue($suspensionId);
+		}
 
 		// path params
-		$resourcePath = "/subscription-product/update";
+		$resourcePath = "/subscription-suspension/terminate";
 		// default format to json
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
 		$formParams = array();
-		// body params
-		$tempBody = null;
-		if (isset($entity)) {
-			$tempBody = $entity;
-		}
-
+		
 		// for model (json/xml)
 		$httpBody = '';
 		if (isset($tempBody)) {
@@ -532,18 +530,14 @@ class SubscriptionProductService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\SubscriptionProductActive',
-				'/subscription-product/update'
+				'\Wallee\Sdk\Model\SubscriptionSuspension',
+				'/subscription-suspension/terminate'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionProductActive', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\SubscriptionSuspension', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionProductActive', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 409:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\SubscriptionSuspension', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

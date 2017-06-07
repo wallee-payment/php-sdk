@@ -49,14 +49,14 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 */
 	private static $swaggerTypes = array(
 		'automaticDecisionReason' => '\Wallee\Sdk\Model\DeliveryIndicationDecisionReason',
-		'automaticallyDecidedOn' => 'string',
-		'createdOn' => 'string',
-		'manualDecisionTimeoutOn' => 'string',
+		'automaticallyDecidedOn' => '\DateTime',
+		'createdOn' => '\DateTime',
+		'manualDecisionTimeoutOn' => '\DateTime',
 		'manuallyDecidedBy' => 'int',
-		'manuallyDecidedOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'manuallyDecidedOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
-		'timeoutOn' => 'string',
+		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction'	);
 
 	/**
@@ -83,12 +83,12 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_NOT_SUITABLE,
 			self::STATE_MANUAL_CHECK_REQUIRED,
 			self::STATE_SUITABLE,
-		];
+		);
 	}
 	
 
@@ -100,21 +100,21 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $automaticallyDecidedOn;
 
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $manualDecisionTimeoutOn;
 
@@ -128,14 +128,14 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $manuallyDecidedOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -149,7 +149,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $timeoutOn;
 
@@ -202,7 +202,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getAutomaticallyDecidedOn() {
 		return $this->automaticallyDecidedOn;
@@ -211,7 +211,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets automaticallyDecidedOn.
 	 *
-	 * @param string $automaticallyDecidedOn
+	 * @param \DateTime $automaticallyDecidedOn
 	 * @return DeliveryIndication
 	 */
 	protected function setAutomaticallyDecidedOn($automaticallyDecidedOn) {
@@ -225,7 +225,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -234,7 +234,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return DeliveryIndication
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -248,7 +248,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getManualDecisionTimeoutOn() {
 		return $this->manualDecisionTimeoutOn;
@@ -257,7 +257,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets manualDecisionTimeoutOn.
 	 *
-	 * @param string $manualDecisionTimeoutOn
+	 * @param \DateTime $manualDecisionTimeoutOn
 	 * @return DeliveryIndication
 	 */
 	protected function setManualDecisionTimeoutOn($manualDecisionTimeoutOn) {
@@ -294,7 +294,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getManuallyDecidedOn() {
 		return $this->manuallyDecidedOn;
@@ -303,7 +303,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets manuallyDecidedOn.
 	 *
-	 * @param string $manuallyDecidedOn
+	 * @param \DateTime $manuallyDecidedOn
 	 * @return DeliveryIndication
 	 */
 	protected function setManuallyDecidedOn($manuallyDecidedOn) {
@@ -317,7 +317,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -326,7 +326,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return DeliveryIndication
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -354,7 +354,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'NOT_SUITABLE', 'MANUAL_CHECK_REQUIRED', 'SUITABLE');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'NOT_SUITABLE', 'MANUAL_CHECK_REQUIRED', 'SUITABLE'");
 		}
 		$this->state = $state;
@@ -367,7 +367,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTimeoutOn() {
 		return $this->timeoutOn;
@@ -376,7 +376,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets timeoutOn.
 	 *
-	 * @param string $timeoutOn
+	 * @param \DateTime $timeoutOn
 	 * @return DeliveryIndication
 	 */
 	protected function setTimeoutOn($timeoutOn) {
@@ -414,20 +414,11 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "NOT_SUITABLE", "MANUAL_CHECK_REQUIRED", "SUITABLE"];
+		$allowed_values = array("PENDING", "NOT_SUITABLE", "MANUAL_CHECK_REQUIRED", "SUITABLE");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getTimeoutOn() === null) {
-			throw new ValidationException("'timeoutOn' can't be null", 'timeoutOn', $this);
-		}
 	}
 
 	/**

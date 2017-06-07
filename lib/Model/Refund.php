@@ -49,25 +49,27 @@ class Refund  {
 	 */
 	private static $swaggerTypes = array(
 		'amount' => 'float',
+		'baseLineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'createdBy' => 'int',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'externalId' => 'string',
-		'failedOn' => 'string',
+		'failedOn' => '\DateTime',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
 		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
+		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'linkedSpaceId' => 'int',
 		'merchantReference' => 'string',
-		'nextUpdateOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'nextUpdateOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'processorReference' => 'string',
 		'reducedLineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'reductions' => '\Wallee\Sdk\Model\LineItemReduction[]',
 		'state' => 'string',
-		'succeededOn' => 'string',
+		'succeededOn' => '\DateTime',
 		'taxes' => '\Wallee\Sdk\Model\Tax[]',
-		'timeoutOn' => 'string',
+		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'type' => 'string',
 		'version' => 'int'	);
@@ -97,13 +99,13 @@ class Refund  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_PENDING,
 			self::STATE_MANUAL_CHECK,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 	/**
@@ -120,12 +122,12 @@ class Refund  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_CUSTOMER_INITIATED_AUTOMATIC,
 			self::TYPE_CUSTOMER_INITIATED_MANUAL,
 			self::TYPE_MERCHANT_INITIATED_ONLINE,
 			self::TYPE_MERCHANT_INITIATED_OFFLINE,
-		];
+		);
 	}
 	
 
@@ -137,6 +139,13 @@ class Refund  {
 	private $amount;
 
 	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LineItem[]
+	 */
+	private $baseLineItems;
+
+	/**
 	 * @var int
 	 */
 	private $createdBy;
@@ -144,7 +153,7 @@ class Refund  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -158,7 +167,7 @@ class Refund  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $failedOn;
 
@@ -189,6 +198,13 @@ class Refund  {
 	private $language;
 
 	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LineItem[]
+	 */
+	private $lineItems;
+
+	/**
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -203,14 +219,14 @@ class Refund  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $nextUpdateOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -245,7 +261,7 @@ class Refund  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $succeededOn;
 
@@ -259,7 +275,7 @@ class Refund  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $timeoutOn;
 
@@ -289,6 +305,9 @@ class Refund  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['baseLineItems']) && $data['baseLineItems'] != null) {
+			$this->setBaseLineItems($data['baseLineItems']);
+		}
 		if (isset($data['createdBy']) && $data['createdBy'] != null) {
 			$this->setCreatedBy($data['createdBy']);
 		}
@@ -300,6 +319,9 @@ class Refund  {
 		}
 		if (isset($data['labels']) && $data['labels'] != null) {
 			$this->setLabels($data['labels']);
+		}
+		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+			$this->setLineItems($data['lineItems']);
 		}
 		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
 			$this->setLinkedSpaceId($data['linkedSpaceId']);
@@ -346,6 +368,29 @@ class Refund  {
 	}
 
 	/**
+	 * Returns baseLineItems.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\LineItem[]
+	 */
+	public function getBaseLineItems() {
+		return $this->baseLineItems;
+	}
+
+	/**
+	 * Sets baseLineItems.
+	 *
+	 * @param \Wallee\Sdk\Model\LineItem[] $baseLineItems
+	 * @return Refund
+	 */
+	public function setBaseLineItems($baseLineItems) {
+		$this->baseLineItems = $baseLineItems;
+
+		return $this;
+	}
+
+	/**
 	 * Returns createdBy.
 	 *
 	 * @return int
@@ -371,7 +416,7 @@ class Refund  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -380,7 +425,7 @@ class Refund  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return Refund
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -417,7 +462,7 @@ class Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getFailedOn() {
 		return $this->failedOn;
@@ -426,7 +471,7 @@ class Refund  {
 	/**
 	 * Sets failedOn.
 	 *
-	 * @param string $failedOn
+	 * @param \DateTime $failedOn
 	 * @return Refund
 	 */
 	protected function setFailedOn($failedOn) {
@@ -526,6 +571,29 @@ class Refund  {
 	}
 
 	/**
+	 * Returns lineItems.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\LineItem[]
+	 */
+	public function getLineItems() {
+		return $this->lineItems;
+	}
+
+	/**
+	 * Sets lineItems.
+	 *
+	 * @param \Wallee\Sdk\Model\LineItem[] $lineItems
+	 * @return Refund
+	 */
+	public function setLineItems($lineItems) {
+		$this->lineItems = $lineItems;
+
+		return $this;
+	}
+
+	/**
 	 * Returns linkedSpaceId.
 	 *
 	 * @return int
@@ -574,7 +642,7 @@ class Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getNextUpdateOn() {
 		return $this->nextUpdateOn;
@@ -583,7 +651,7 @@ class Refund  {
 	/**
 	 * Sets nextUpdateOn.
 	 *
-	 * @param string $nextUpdateOn
+	 * @param \DateTime $nextUpdateOn
 	 * @return Refund
 	 */
 	protected function setNextUpdateOn($nextUpdateOn) {
@@ -597,7 +665,7 @@ class Refund  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -606,7 +674,7 @@ class Refund  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return Refund
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -716,7 +784,7 @@ class Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getSucceededOn() {
 		return $this->succeededOn;
@@ -725,7 +793,7 @@ class Refund  {
 	/**
 	 * Sets succeededOn.
 	 *
-	 * @param string $succeededOn
+	 * @param \DateTime $succeededOn
 	 * @return Refund
 	 */
 	protected function setSucceededOn($succeededOn) {
@@ -762,7 +830,7 @@ class Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTimeoutOn() {
 		return $this->timeoutOn;
@@ -771,7 +839,7 @@ class Refund  {
 	/**
 	 * Sets timeoutOn.
 	 *
-	 * @param string $timeoutOn
+	 * @param \DateTime $timeoutOn
 	 * @return Refund
 	 */
 	protected function setTimeoutOn($timeoutOn) {
@@ -820,7 +888,7 @@ class Refund  {
 	 */
 	protected function setType($type) {
 		$allowed_values = array('CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE');
-		if ((!in_array($type, $allowed_values))) {
+		if (!is_null($type) && (!in_array($type, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE'");
 		}
 		$this->type = $type;
@@ -858,21 +926,12 @@ class Refund  {
 	 */
 	public function validate() {
 
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
-		if ($this->getReductions() === null) {
-			throw new ValidationException("'reductions' can't be null", 'reductions', $this);
-		}
-		$allowed_values = ["CREATE", "PENDING", "MANUAL_CHECK", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("CREATE", "PENDING", "MANUAL_CHECK", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getType() === null) {
-			throw new ValidationException("'type' can't be null", 'type', $this);
-		}
-		$allowed_values = ["CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE"];
+		$allowed_values = array("CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

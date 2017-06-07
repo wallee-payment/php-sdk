@@ -56,10 +56,10 @@ $service = new \Wallee\Sdk\Service\AccountService($apiClient);
 $filter = new \Wallee\Sdk\Model\EntityQueryFilter();
 
 try {
-    $result = $apiService->accountCountPost($filter);
+    $result = $apiService->count($filter);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AccountService->accountCountPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AccountService->count: ', $e->getMessage(), PHP_EOL;
 }
 
 ?>

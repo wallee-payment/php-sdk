@@ -77,10 +77,10 @@ class PaymentMethod  {
 	 * @return string[]
 	 */
 	public function getDataCollectionTypesAllowableValues() {
-		return [
+		return array(
 			self::DATA_COLLECTION_TYPES_ONSITE,
 			self::DATA_COLLECTION_TYPES_OFFSITE,
-		];
+		);
 	}
 	
 

@@ -52,11 +52,11 @@ class SubscriptionLedgerEntry  {
 		'amountExcludingTax' => 'float',
 		'amountIncludingTax' => 'float',
 		'createdBy' => 'int',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'externalId' => 'string',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'quantity' => 'float',
 		'state' => 'string',
 		'subscriptionVersion' => 'int',
@@ -88,11 +88,11 @@ class SubscriptionLedgerEntry  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_OPEN,
 			self::STATE_SCHEDULED,
 			self::STATE_PAID,
-		];
+		);
 	}
 	
 
@@ -125,7 +125,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -151,7 +151,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -325,7 +325,7 @@ class SubscriptionLedgerEntry  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -334,7 +334,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionLedgerEntry
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -415,7 +415,7 @@ class SubscriptionLedgerEntry  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -424,7 +424,7 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionLedgerEntry
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -603,23 +603,11 @@ class SubscriptionLedgerEntry  {
 	 */
 	public function validate() {
 
-		if ($this->getAmountIncludingTax() === null) {
-			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);
-		}
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
-		if ($this->getQuantity() === null) {
-			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
-		}
-		$allowed_values = ["OPEN", "SCHEDULED", "PAID"];
+		$allowed_values = array("OPEN", "SCHEDULED", "PAID");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getTitle() === null) {
-			throw new ValidationException("'title' can't be null", 'title', $this);
-		}
 	}
 
 	/**

@@ -48,19 +48,19 @@ class Subscription  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'description' => 'string',
 		'id' => 'int',
-		'initializedOn' => 'string',
+		'initializedOn' => '\DateTime',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
-		'plannedPurgeDate' => 'string',
-		'plannedTerminationDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
+		'plannedTerminationDate' => '\DateTime',
 		'reference' => 'string',
 		'state' => 'string',
 		'subscriber' => '\Wallee\Sdk\Model\Subscriber',
-		'terminatedOn' => 'string',
-		'terminatingOn' => 'string',
+		'terminatedOn' => '\DateTime',
+		'terminatingOn' => '\DateTime',
 		'token' => '\Wallee\Sdk\Model\Token',
 		'version' => 'int'	);
 
@@ -91,7 +91,7 @@ class Subscription  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_INITIALIZING,
 			self::STATE_FAILED,
@@ -99,14 +99,14 @@ class Subscription  {
 			self::STATE_SUSPENDED,
 			self::STATE_TERMINATING,
 			self::STATE_TERMINATED,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -127,7 +127,7 @@ class Subscription  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $initializedOn;
 
@@ -146,14 +146,14 @@ class Subscription  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedTerminationDate;
 
@@ -179,14 +179,14 @@ class Subscription  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $terminatedOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $terminatingOn;
 
@@ -232,7 +232,7 @@ class Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -241,7 +241,7 @@ class Subscription  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return Subscription
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -301,7 +301,7 @@ class Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getInitializedOn() {
 		return $this->initializedOn;
@@ -310,7 +310,7 @@ class Subscription  {
 	/**
 	 * Sets initializedOn.
 	 *
-	 * @param string $initializedOn
+	 * @param \DateTime $initializedOn
 	 * @return Subscription
 	 */
 	protected function setInitializedOn($initializedOn) {
@@ -368,7 +368,7 @@ class Subscription  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -377,7 +377,7 @@ class Subscription  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return Subscription
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -391,7 +391,7 @@ class Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedTerminationDate() {
 		return $this->plannedTerminationDate;
@@ -400,7 +400,7 @@ class Subscription  {
 	/**
 	 * Sets plannedTerminationDate.
 	 *
-	 * @param string $plannedTerminationDate
+	 * @param \DateTime $plannedTerminationDate
 	 * @return Subscription
 	 */
 	protected function setPlannedTerminationDate($plannedTerminationDate) {
@@ -485,7 +485,7 @@ class Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTerminatedOn() {
 		return $this->terminatedOn;
@@ -494,7 +494,7 @@ class Subscription  {
 	/**
 	 * Sets terminatedOn.
 	 *
-	 * @param string $terminatedOn
+	 * @param \DateTime $terminatedOn
 	 * @return Subscription
 	 */
 	protected function setTerminatedOn($terminatedOn) {
@@ -508,7 +508,7 @@ class Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTerminatingOn() {
 		return $this->terminatingOn;
@@ -517,7 +517,7 @@ class Subscription  {
 	/**
 	 * Sets terminatingOn.
 	 *
-	 * @param string $terminatingOn
+	 * @param \DateTime $terminatingOn
 	 * @return Subscription
 	 */
 	protected function setTerminatingOn($terminatingOn) {
@@ -577,10 +577,7 @@ class Subscription  {
 	 */
 	public function validate() {
 
-		if ($this->getReference() === null) {
-			throw new ValidationException("'reference' can't be null", 'reference', $this);
-		}
-		$allowed_values = ["PENDING", "INITIALIZING", "FAILED", "ACTIVE", "SUSPENDED", "TERMINATING", "TERMINATED"];
+		$allowed_values = array("PENDING", "INITIALIZING", "FAILED", "ACTIVE", "SUSPENDED", "TERMINATING", "TERMINATED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

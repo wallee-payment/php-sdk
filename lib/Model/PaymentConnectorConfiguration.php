@@ -56,7 +56,7 @@ class PaymentConnectorConfiguration  {
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'paymentMethodConfiguration' => '\Wallee\Sdk\Model\PaymentMethodConfiguration',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'priority' => 'int',
 		'processorConfiguration' => '\Wallee\Sdk\Model\PaymentProcessorConfiguration',
 		'state' => 'string',
@@ -87,13 +87,13 @@ class PaymentConnectorConfiguration  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 
@@ -134,7 +134,7 @@ class PaymentConnectorConfiguration  {
 	private $linkedSpaceId;
 
 	/**
-	 * The connector configuration name is used internally to identify the configuration in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+	 * The connector configuration name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
 	 *
 	 * @var string
 	 */
@@ -148,12 +148,12 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
 	/**
-	 * The priority will define the order of choice of the connector configurations. The lower the value, the higher the priority is going to be.This value can also be a negative number in case you are adding a new configuration that you want to have a high priority and you dont want to change the priority of all the other configurations.
+	 * The priority will define the order of choice of the connector configurations. The lower the value, the higher the priority is going to be. This value can also be a negative number in case you are adding a new configuration that you want to have a high priority and you dont want to change the priority of all the other configurations.
 	 *
 	 * @var int
 	 */
@@ -347,7 +347,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns name.
 	 *
-	 * The connector configuration name is used internally to identify the configuration in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+	 * The connector configuration name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
 	 *
 	 * @return string
 	 */
@@ -393,7 +393,7 @@ class PaymentConnectorConfiguration  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -402,7 +402,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return PaymentConnectorConfiguration
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -414,7 +414,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns priority.
 	 *
-	 * The priority will define the order of choice of the connector configurations. The lower the value, the higher the priority is going to be.This value can also be a negative number in case you are adding a new configuration that you want to have a high priority and you dont want to change the priority of all the other configurations.
+	 * The priority will define the order of choice of the connector configurations. The lower the value, the higher the priority is going to be. This value can also be a negative number in case you are adding a new configuration that you want to have a high priority and you dont want to change the priority of all the other configurations.
 	 *
 	 * @return int
 	 */
@@ -474,7 +474,7 @@ class PaymentConnectorConfiguration  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -512,13 +512,7 @@ class PaymentConnectorConfiguration  {
 	 */
 	public function validate() {
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

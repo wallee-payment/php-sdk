@@ -164,9 +164,6 @@ class ApplicationUser extends User  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
 	}
 
 	/**

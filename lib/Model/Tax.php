@@ -139,12 +139,6 @@ class Tax  {
 	 */
 	public function validate() {
 
-		if ($this->getRate() === null) {
-			throw new ValidationException("'rate' can't be null", 'rate', $this);
-		}
-		if ($this->getTitle() === null) {
-			throw new ValidationException("'title' can't be null", 'title', $this);
-		}
 	}
 
 	/**

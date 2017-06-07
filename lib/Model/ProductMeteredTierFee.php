@@ -240,12 +240,6 @@ class ProductMeteredTierFee  {
 	 */
 	public function validate() {
 
-		if ($this->getFee() === null) {
-			throw new ValidationException("'fee' can't be null", 'fee', $this);
-		}
-		if ($this->getStartRange() === null) {
-			throw new ValidationException("'startRange' can't be null", 'startRange', $this);
-		}
 	}
 
 	/**

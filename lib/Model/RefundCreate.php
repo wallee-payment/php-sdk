@@ -74,12 +74,12 @@ class RefundCreate extends Refund  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_CUSTOMER_INITIATED_AUTOMATIC,
 			self::TYPE_CUSTOMER_INITIATED_MANUAL,
 			self::TYPE_MERCHANT_INITIATED_ONLINE,
 			self::TYPE_MERCHANT_INITIATED_OFFLINE,
-		];
+		);
 	}
 	
 
@@ -234,7 +234,7 @@ class RefundCreate extends Refund  {
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);
 		}
-		$allowed_values = ["CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE"];
+		$allowed_values = array("CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

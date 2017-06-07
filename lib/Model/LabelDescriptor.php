@@ -79,10 +79,10 @@ class LabelDescriptor  {
 	 * @return string[]
 	 */
 	public function getCategoryAllowableValues() {
-		return [
+		return array(
 			self::CATEGORY_HUMAN,
 			self::CATEGORY_APPLICATION,
-		];
+		);
 	}
 	
 
@@ -350,7 +350,7 @@ class LabelDescriptor  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["HUMAN", "APPLICATION"];
+		$allowed_values = array("HUMAN", "APPLICATION");
 		if (!in_array($this->getCategory(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'category', must be one of #{allowed_values}.", 'category', $this);
 		}

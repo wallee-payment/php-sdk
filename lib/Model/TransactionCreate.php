@@ -73,11 +73,11 @@ class TransactionCreate extends TransactionPending  {
 	 * @return string[]
 	 */
 	public function getCustomersPresenceAllowableValues() {
-		return [
+		return array(
 			self::CUSTOMERS_PRESENCE_NOT_PRESENT,
 			self::CUSTOMERS_PRESENCE_VIRTUAL_PRESENT,
 			self::CUSTOMERS_PRESENCE_PHYSICAL_PRESENT,
-		];
+		);
 	}
 	
 
@@ -268,7 +268,7 @@ class TransactionCreate extends TransactionPending  {
 		if ($this->getCustomersPresence() === null) {
 			throw new ValidationException("'customersPresence' can't be null", 'customersPresence', $this);
 		}
-		$allowed_values = ["NOT_PRESENT", "VIRTUAL_PRESENT", "PHYSICAL_PRESENT"];
+		$allowed_values = array("NOT_PRESENT", "VIRTUAL_PRESENT", "PHYSICAL_PRESENT");
 		if (!in_array($this->getCustomersPresence(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'customersPresence', must be one of #{allowed_values}.", 'customersPresence', $this);
 		}

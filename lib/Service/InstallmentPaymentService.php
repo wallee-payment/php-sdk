@@ -68,48 +68,48 @@ class InstallmentPaymentService {
 
 
 	/**
-	 * Operation installmentPaymentCountPost
+	 * Operation count
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment payment which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return int
 	 */
-	public function installmentPaymentCountPost($spaceId, $filter) {
-		return $this->installmentPaymentCountPostWithHttpInfo($spaceId, $filter)->getData();
+	public function count($spaceId, $filter) {
+		return $this->countWithHttpInfo($spaceId, $filter)->getData();
 	}
 
 	/**
-	 * Operation installmentPaymentCountPostWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * count
+	 * Count
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment payment which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function installmentPaymentCountPostWithHttpInfo($spaceId, $filter) {
+	public function countWithHttpInfo($spaceId, $filter) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling count');
 		}
 		// verify the required parameter 'filter' is set
 		if ($filter === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $filter when calling installmentPaymentCountPost');
+			throw new \InvalidArgumentException('Missing the required parameter $filter when calling count');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -120,7 +120,7 @@ class InstallmentPaymentService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($filter)) {
@@ -167,7 +167,7 @@ class InstallmentPaymentService {
 	}
 
 	/**
-	 * Operation installmentPaymentCreateInstallmentPaymentPost
+	 * Operation createInstallmentPayment
 	 *
 	 * Create Installment Payment
 	 *
@@ -177,12 +177,12 @@ class InstallmentPaymentService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\InstallmentPayment
 	 */
-	public function installmentPaymentCreateInstallmentPaymentPost($spaceId, $transactionId, $installmentPlanConfiguration) {
-		return $this->installmentPaymentCreateInstallmentPaymentPostWithHttpInfo($spaceId, $transactionId, $installmentPlanConfiguration)->getData();
+	public function createInstallmentPayment($spaceId, $transactionId, $installmentPlanConfiguration) {
+		return $this->createInstallmentPaymentWithHttpInfo($spaceId, $transactionId, $installmentPlanConfiguration)->getData();
 	}
 
 	/**
-	 * Operation installmentPaymentCreateInstallmentPaymentPostWithHttpInfo
+	 * Operation createInstallmentPaymentWithHttpInfo
 	 *
 	 * Create Installment Payment
 	 *
@@ -192,29 +192,29 @@ class InstallmentPaymentService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function installmentPaymentCreateInstallmentPaymentPostWithHttpInfo($spaceId, $transactionId, $installmentPlanConfiguration) {
+	public function createInstallmentPaymentWithHttpInfo($spaceId, $transactionId, $installmentPlanConfiguration) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentCreateInstallmentPaymentPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling createInstallmentPayment');
 		}
 		// verify the required parameter 'transactionId' is set
 		if ($transactionId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $transactionId when calling installmentPaymentCreateInstallmentPaymentPost');
+			throw new \InvalidArgumentException('Missing the required parameter $transactionId when calling createInstallmentPayment');
 		}
 		// verify the required parameter 'installmentPlanConfiguration' is set
 		if ($installmentPlanConfiguration === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $installmentPlanConfiguration when calling installmentPaymentCreateInstallmentPaymentPost');
+			throw new \InvalidArgumentException('Missing the required parameter $installmentPlanConfiguration when calling createInstallmentPayment');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -231,7 +231,7 @@ class InstallmentPaymentService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -273,48 +273,48 @@ class InstallmentPaymentService {
 	}
 
 	/**
-	 * Operation installmentPaymentReadGet
+	 * Operation read
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the installment payment which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\InstallmentPayment
 	 */
-	public function installmentPaymentReadGet($spaceId, $id) {
-		return $this->installmentPaymentReadGetWithHttpInfo($spaceId, $id)->getData();
+	public function read($spaceId, $id) {
+		return $this->readWithHttpInfo($spaceId, $id)->getData();
 	}
 
 	/**
-	 * Operation installmentPaymentReadGetWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * read
+	 * Read
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the installment payment which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function installmentPaymentReadGetWithHttpInfo($spaceId, $id) {
+	public function readWithHttpInfo($spaceId, $id) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling read');
 		}
 		// verify the required parameter 'id' is set
 		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling installmentPaymentReadGet');
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -328,7 +328,7 @@ class InstallmentPaymentService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		
 		// for model (json/xml)
 		$httpBody = '';
@@ -370,48 +370,48 @@ class InstallmentPaymentService {
 	}
 
 	/**
-	 * Operation installmentPaymentSearchPost
+	 * Operation search
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment payments which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\InstallmentPayment[]
 	 */
-	public function installmentPaymentSearchPost($spaceId, $query) {
-		return $this->installmentPaymentSearchPostWithHttpInfo($spaceId, $query)->getData();
+	public function search($spaceId, $query) {
+		return $this->searchWithHttpInfo($spaceId, $query)->getData();
 	}
 
 	/**
-	 * Operation installmentPaymentSearchPostWithHttpInfo
+	 * Operation searchWithHttpInfo
 	 *
-	 * search
+	 * Search
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment payments which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function installmentPaymentSearchPostWithHttpInfo($spaceId, $query) {
+	public function searchWithHttpInfo($spaceId, $query) {
 		// verify the required parameter 'spaceId' is set
 		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling search');
 		}
 		// verify the required parameter 'query' is set
 		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling installmentPaymentSearchPost');
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
 		}
 		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
 
 		// query params
-		$queryParams = [];
+		$queryParams = array();
 		if ($spaceId !== null) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
 		}
@@ -422,7 +422,7 @@ class InstallmentPaymentService {
 		$resourcePath = str_replace("{format}", "json", $resourcePath);
 
 		// form params
-		$formParams = [];
+		$formParams = array();
 		// body params
 		$tempBody = null;
 		if (isset($query)) {
@@ -452,301 +452,6 @@ class InstallmentPaymentService {
 			switch ($e->getCode()) {
 				case 200:
 					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\InstallmentPayment[]', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation installmentPaymentSliceCountPost
-	 *
-	 * count
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment payment slices which are used to calculate the count. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return int
-	 */
-	public function installmentPaymentSliceCountPost($spaceId, $filter) {
-		return $this->installmentPaymentSliceCountPostWithHttpInfo($spaceId, $filter)->getData();
-	}
-
-	/**
-	 * Operation installmentPaymentSliceCountPostWithHttpInfo
-	 *
-	 * count
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment payment slices which are used to calculate the count. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return ApiResponse
-	 */
-	public function installmentPaymentSliceCountPostWithHttpInfo($spaceId, $filter) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentSliceCountPost');
-		}
-		// verify the required parameter 'filter' is set
-		if ($filter === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $filter when calling installmentPaymentSliceCountPost');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-
-		// path params
-		$resourcePath = "/installment-payment-slice/count";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($filter)) {
-			$tempBody = $filter;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'int',
-				'/installment-payment-slice/count'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'int', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation installmentPaymentSliceReadGet
-	 *
-	 * read
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $id The id of the installment payment slice which should be returned. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\InstallmentPaymentSlice
-	 */
-	public function installmentPaymentSliceReadGet($spaceId, $id) {
-		return $this->installmentPaymentSliceReadGetWithHttpInfo($spaceId, $id)->getData();
-	}
-
-	/**
-	 * Operation installmentPaymentSliceReadGetWithHttpInfo
-	 *
-	 * read
-	 *
-	 * @param int $spaceId  (required)
-	 * @param int $id The id of the installment payment slice which should be returned. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return ApiResponse
-	 */
-	public function installmentPaymentSliceReadGetWithHttpInfo($spaceId, $id) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentSliceReadGet');
-		}
-		// verify the required parameter 'id' is set
-		if ($id === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling installmentPaymentSliceReadGet');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['*/*']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-		if ($id !== null) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-		}
-
-		// path params
-		$resourcePath = "/installment-payment-slice/read";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'GET',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\Wallee\Sdk\Model\InstallmentPaymentSlice',
-				'/installment-payment-slice/read'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InstallmentPaymentSlice', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\InstallmentPaymentSlice', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 442:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-				case 542:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
-					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
-					break;
-			}
-
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation installmentPaymentSliceSearchPost
-	 *
-	 * search
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment payment slices which are returned by the search. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\InstallmentPaymentSlice[]
-	 */
-	public function installmentPaymentSliceSearchPost($spaceId, $query) {
-		return $this->installmentPaymentSliceSearchPostWithHttpInfo($spaceId, $query)->getData();
-	}
-
-	/**
-	 * Operation installmentPaymentSliceSearchPostWithHttpInfo
-	 *
-	 * search
-	 *
-	 * @param int $spaceId  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment payment slices which are returned by the search. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @return ApiResponse
-	 */
-	public function installmentPaymentSliceSearchPostWithHttpInfo($spaceId, $query) {
-		// verify the required parameter 'spaceId' is set
-		if ($spaceId === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling installmentPaymentSliceSearchPost');
-		}
-		// verify the required parameter 'query' is set
-		if ($query === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling installmentPaymentSliceSearchPost');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if ($spaceId !== null) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
-		}
-
-		// path params
-		$resourcePath = "/installment-payment-slice/search";
-		// default format to json
-		$resourcePath = str_replace("{format}", "json", $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($query)) {
-			$tempBody = $query;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (count($formParams) > 0) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\Wallee\Sdk\Model\InstallmentPaymentSlice[]',
-				'/installment-payment-slice/search'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InstallmentPaymentSlice[]', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\InstallmentPaymentSlice[]', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:

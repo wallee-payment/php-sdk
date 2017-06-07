@@ -105,7 +105,7 @@ class SubscriptionUpdate extends Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedTerminationDate() {
 		return parent::getPlannedTerminationDate();
@@ -114,7 +114,7 @@ class SubscriptionUpdate extends Subscription  {
 	/**
 	 * Sets plannedTerminationDate.
 	 *
-	 * @param string $plannedTerminationDate
+	 * @param \DateTime $plannedTerminationDate
 	 * @return SubscriptionUpdate
 	 */
 	public function setPlannedTerminationDate($plannedTerminationDate) {

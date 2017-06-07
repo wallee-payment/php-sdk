@@ -74,12 +74,12 @@ class LineItemCreate extends LineItem  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_SHIPPING,
 			self::TYPE_DISCOUNT,
 			self::TYPE_FEE,
 			self::TYPE_PRODUCT,
-		];
+		);
 	}
 	
 
@@ -311,7 +311,7 @@ class LineItemCreate extends LineItem  {
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);
 		}
-		$allowed_values = ["SHIPPING", "DISCOUNT", "FEE", "PRODUCT"];
+		$allowed_values = array("SHIPPING", "DISCOUNT", "FEE", "PRODUCT");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

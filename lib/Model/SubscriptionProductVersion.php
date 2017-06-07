@@ -48,10 +48,10 @@ class SubscriptionProductVersion  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'activatedOn' => 'string',
+		'activatedOn' => '\DateTime',
 		'billingCycle' => 'string',
 		'comment' => 'string',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'defaultCurrency' => 'string',
 		'enabledCurrencies' => 'string[]',
 		'id' => 'int',
@@ -60,12 +60,12 @@ class SubscriptionProductVersion  {
 		'minimalNumberOfPeriods' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'numberOfNoticePeriods' => 'int',
-		'obsoletedOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'obsoletedOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
 		'reference' => 'string',
-		'retiringFinishedOn' => 'string',
-		'retiringStartedOn' => 'string',
+		'retiringFinishedOn' => '\DateTime',
+		'retiringStartedOn' => '\DateTime',
 		'state' => 'string',
 		'version' => 'int'	);
 
@@ -94,20 +94,20 @@ class SubscriptionProductVersion  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_ACTIVE,
 			self::STATE_OBSOLETE,
 			self::STATE_RETIRING,
 			self::STATE_RETIRED,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $activatedOn;
 
@@ -128,7 +128,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -187,14 +187,14 @@ class SubscriptionProductVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $obsoletedOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -213,14 +213,14 @@ class SubscriptionProductVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $retiringFinishedOn;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $retiringStartedOn;
 
@@ -271,7 +271,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getActivatedOn() {
 		return $this->activatedOn;
@@ -280,7 +280,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets activatedOn.
 	 *
-	 * @param string $activatedOn
+	 * @param \DateTime $activatedOn
 	 * @return SubscriptionProductVersion
 	 */
 	protected function setActivatedOn($activatedOn) {
@@ -340,7 +340,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -349,7 +349,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return SubscriptionProductVersion
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -543,7 +543,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getObsoletedOn() {
 		return $this->obsoletedOn;
@@ -552,7 +552,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets obsoletedOn.
 	 *
-	 * @param string $obsoletedOn
+	 * @param \DateTime $obsoletedOn
 	 * @return SubscriptionProductVersion
 	 */
 	protected function setObsoletedOn($obsoletedOn) {
@@ -566,7 +566,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -575,7 +575,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionProductVersion
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -633,7 +633,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getRetiringFinishedOn() {
 		return $this->retiringFinishedOn;
@@ -642,7 +642,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets retiringFinishedOn.
 	 *
-	 * @param string $retiringFinishedOn
+	 * @param \DateTime $retiringFinishedOn
 	 * @return SubscriptionProductVersion
 	 */
 	protected function setRetiringFinishedOn($retiringFinishedOn) {
@@ -656,7 +656,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getRetiringStartedOn() {
 		return $this->retiringStartedOn;
@@ -665,7 +665,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets retiringStartedOn.
 	 *
-	 * @param string $retiringStartedOn
+	 * @param \DateTime $retiringStartedOn
 	 * @return SubscriptionProductVersion
 	 */
 	protected function setRetiringStartedOn($retiringStartedOn) {
@@ -693,7 +693,7 @@ class SubscriptionProductVersion  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'ACTIVE', 'OBSOLETE', 'RETIRING', 'RETIRED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'ACTIVE', 'OBSOLETE', 'RETIRING', 'RETIRED'");
 		}
 		$this->state = $state;
@@ -731,19 +731,7 @@ class SubscriptionProductVersion  {
 	 */
 	public function validate() {
 
-		if ($this->getBillingCycle() === null) {
-			throw new ValidationException("'billingCycle' can't be null", 'billingCycle', $this);
-		}
-		if ($this->getDefaultCurrency() === null) {
-			throw new ValidationException("'defaultCurrency' can't be null", 'defaultCurrency', $this);
-		}
-		if ($this->getEnabledCurrencies() === null) {
-			throw new ValidationException("'enabledCurrencies' can't be null", 'enabledCurrencies', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "ACTIVE", "OBSOLETE", "RETIRING", "RETIRED"];
+		$allowed_values = array("PENDING", "ACTIVE", "OBSOLETE", "RETIRING", "RETIRED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

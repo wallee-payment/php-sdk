@@ -75,13 +75,13 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_RETIRING,
 			self::STATE_RETIRED,
-		];
+		);
 	}
 	
 
@@ -233,7 +233,7 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 		if ($this->getName() === null) {
 			throw new ValidationException("'name' can't be null", 'name', $this);
 		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

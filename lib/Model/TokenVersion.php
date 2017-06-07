@@ -48,18 +48,18 @@ class TokenVersion  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'activatedOn' => 'string',
+		'activatedOn' => '\DateTime',
 		'billingAddress' => '\Wallee\Sdk\Model\Address',
-		'createdOn' => 'string',
+		'createdOn' => '\DateTime',
 		'environment' => 'string',
 		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
-		'obsoletedOn' => 'string',
+		'obsoletedOn' => '\DateTime',
 		'paymentConnectorConfiguration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'processorToken' => 'string',
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
 		'state' => 'string',
@@ -88,10 +88,10 @@ class TokenVersion  {
 	 * @return string[]
 	 */
 	public function getEnvironmentAllowableValues() {
-		return [
+		return array(
 			self::ENVIRONMENT_PRODUCTION,
 			self::ENVIRONMENT_TEST,
-		];
+		);
 	}
 	
 	/**
@@ -107,18 +107,18 @@ class TokenVersion  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_UNINITIALIZED,
 			self::STATE_ACTIVE,
 			self::STATE_OBSOLETE,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $activatedOn;
 
@@ -130,7 +130,7 @@ class TokenVersion  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -177,7 +177,7 @@ class TokenVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $obsoletedOn;
 
@@ -189,7 +189,7 @@ class TokenVersion  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -263,7 +263,7 @@ class TokenVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getActivatedOn() {
 		return $this->activatedOn;
@@ -272,7 +272,7 @@ class TokenVersion  {
 	/**
 	 * Sets activatedOn.
 	 *
-	 * @param string $activatedOn
+	 * @param \DateTime $activatedOn
 	 * @return TokenVersion
 	 */
 	protected function setActivatedOn($activatedOn) {
@@ -307,7 +307,7 @@ class TokenVersion  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -316,7 +316,7 @@ class TokenVersion  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return TokenVersion
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -470,7 +470,7 @@ class TokenVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getObsoletedOn() {
 		return $this->obsoletedOn;
@@ -479,7 +479,7 @@ class TokenVersion  {
 	/**
 	 * Sets obsoletedOn.
 	 *
-	 * @param string $obsoletedOn
+	 * @param \DateTime $obsoletedOn
 	 * @return TokenVersion
 	 */
 	protected function setObsoletedOn($obsoletedOn) {
@@ -514,7 +514,7 @@ class TokenVersion  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -523,7 +523,7 @@ class TokenVersion  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return TokenVersion
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -595,7 +595,7 @@ class TokenVersion  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('UNINITIALIZED', 'ACTIVE', 'OBSOLETE');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'UNINITIALIZED', 'ACTIVE', 'OBSOLETE'");
 		}
 		$this->state = $state;
@@ -654,15 +654,12 @@ class TokenVersion  {
 	 */
 	public function validate() {
 
-		$allowed_values = ["PRODUCTION", "TEST"];
+		$allowed_values = array("PRODUCTION", "TEST");
 		if (!in_array($this->getEnvironment(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'environment', must be one of #{allowed_values}.", 'environment', $this);
 		}
 
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["UNINITIALIZED", "ACTIVE", "OBSOLETE"];
+		$allowed_values = array("UNINITIALIZED", "ACTIVE", "OBSOLETE");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

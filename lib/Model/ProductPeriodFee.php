@@ -81,11 +81,11 @@ class ProductPeriodFee  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_METERED_FEE,
 			self::TYPE_SETUP_FEE,
 			self::TYPE_PERIOD_FEE,
-		];
+		);
 	}
 	
 
@@ -385,10 +385,7 @@ class ProductPeriodFee  {
 	 */
 	public function validate() {
 
-		if ($this->getPeriodFee() === null) {
-			throw new ValidationException("'periodFee' can't be null", 'periodFee', $this);
-		}
-		$allowed_values = ["METERED_FEE", "SETUP_FEE", "PERIOD_FEE"];
+		$allowed_values = array("METERED_FEE", "SETUP_FEE", "PERIOD_FEE");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

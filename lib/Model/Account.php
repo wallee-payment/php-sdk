@@ -53,7 +53,7 @@ class Account  {
 		'id' => 'int',
 		'name' => 'string',
 		'parentAccount' => '\Wallee\Sdk\Model\Account',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'restrictedActive' => 'bool',
 		'state' => 'string',
 		'subaccountLimit' => 'int',
@@ -86,14 +86,14 @@ class Account  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_RESTRICTED_ACTIVE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_DELETING,
 			self::STATE_DELETED,
-		];
+		);
 	}
 	
 	/**
@@ -109,11 +109,11 @@ class Account  {
 	 * @return string[]
 	 */
 	public function getTypeAllowableValues() {
-		return [
+		return array(
 			self::TYPE_MASTER,
 			self::TYPE_REGULAR,
 			self::TYPE_SUBACCOUNT,
-		];
+		);
 	}
 	
 
@@ -153,7 +153,7 @@ class Account  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -179,7 +179,7 @@ class Account  {
 	private $subaccountLimit;
 
 	/**
-	 * 
+	 * The account type defines which role and capabilities it has.
 	 *
 	 * @var string
 	 */
@@ -329,7 +329,7 @@ class Account  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -338,7 +338,7 @@ class Account  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return Account
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -389,7 +389,7 @@ class Account  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('CREATE', 'RESTRICTED_ACTIVE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'RESTRICTED_ACTIVE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
 		}
 		$this->state = $state;
@@ -423,7 +423,7 @@ class Account  {
 	/**
 	 * Returns type.
 	 *
-	 * 
+	 * The account type defines which role and capabilities it has.
 	 *
 	 * @return string
 	 */
@@ -439,7 +439,7 @@ class Account  {
 	 */
 	protected function setType($type) {
 		$allowed_values = array('MASTER', 'REGULAR', 'SUBACCOUNT');
-		if ((!in_array($type, $allowed_values))) {
+		if (!is_null($type) && (!in_array($type, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'MASTER', 'REGULAR', 'SUBACCOUNT'");
 		}
 		$this->type = $type;
@@ -477,21 +477,12 @@ class Account  {
 	 */
 	public function validate() {
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["CREATE", "RESTRICTED_ACTIVE", "ACTIVE", "INACTIVE", "DELETING", "DELETED"];
+		$allowed_values = array("CREATE", "RESTRICTED_ACTIVE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getType() === null) {
-			throw new ValidationException("'type' can't be null", 'type', $this);
-		}
-		$allowed_values = ["MASTER", "REGULAR", "SUBACCOUNT"];
+		$allowed_values = array("MASTER", "REGULAR", "SUBACCOUNT");
 		if (!in_array($this->getType(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
 		}

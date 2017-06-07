@@ -48,11 +48,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'chargeOn' => 'string',
-		'createdOn' => 'string',
+		'chargeOn' => '\DateTime',
+		'createdOn' => '\DateTime',
 		'installmentPayment' => '\Wallee\Sdk\Model\InstallmentPayment',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'version' => 'int'	);
@@ -84,7 +84,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_SCHEDULED,
 			self::STATE_CANCELED,
@@ -92,21 +92,21 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 			self::STATE_PROCESSING,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $chargeOn;
 
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
@@ -125,7 +125,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -174,7 +174,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getChargeOn() {
 		return $this->chargeOn;
@@ -183,7 +183,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	/**
 	 * Sets chargeOn.
 	 *
-	 * @param string $chargeOn
+	 * @param \DateTime $chargeOn
 	 * @return InstallmentPaymentSlice
 	 */
 	protected function setChargeOn($chargeOn) {
@@ -197,7 +197,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -206,7 +206,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return InstallmentPaymentSlice
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -264,7 +264,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -273,7 +273,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return InstallmentPaymentSlice
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -361,7 +361,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		$allowed_values = ["CREATE", "SCHEDULED", "CANCELED", "PREPARE_PROCESSING", "PROCESSING", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("CREATE", "SCHEDULED", "CANCELED", "PREPARE_PROCESSING", "PROCESSING", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}

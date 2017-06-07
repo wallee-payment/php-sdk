@@ -176,9 +176,6 @@ class TenantDatabase  {
 	 */
 	public function validate() {
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
 	}
 
 	/**

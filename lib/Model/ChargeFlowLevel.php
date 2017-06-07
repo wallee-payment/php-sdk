@@ -50,11 +50,11 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	private static $swaggerTypes = array(
 		'asynchronousCharge' => 'int',
 		'configuration' => '\Wallee\Sdk\Model\ChargeFlowLevelConfiguration',
-		'createdOn' => 'string',
-		'plannedPurgeDate' => 'string',
+		'createdOn' => '\DateTime',
+		'plannedPurgeDate' => '\DateTime',
 		'state' => 'string',
 		'synchronousCharge' => 'int',
-		'timeoutOn' => 'string',
+		'timeoutOn' => '\DateTime',
 		'tokenCharge' => 'int',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'version' => 'int'	);
@@ -82,11 +82,11 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_PENDING,
 			self::STATE_FAILED,
 			self::STATE_SUCCESSFUL,
-		];
+		);
 	}
 	
 
@@ -103,14 +103,14 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $createdOn;
 
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -129,7 +129,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $timeoutOn;
 
@@ -224,7 +224,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 *
 	 * The created on date indicates the date on which the entity was stored into the database.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getCreatedOn() {
 		return $this->createdOn;
@@ -233,7 +233,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets createdOn.
 	 *
-	 * @param string $createdOn
+	 * @param \DateTime $createdOn
 	 * @return ChargeFlowLevel
 	 */
 	protected function setCreatedOn($createdOn) {
@@ -247,7 +247,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -256,7 +256,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return ChargeFlowLevel
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -284,7 +284,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 */
 	protected function setState($state) {
 		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-		if ((!in_array($state, $allowed_values))) {
+		if (!is_null($state) && (!in_array($state, $allowed_values))) {
 			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
 		}
 		$this->state = $state;
@@ -318,7 +318,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getTimeoutOn() {
 		return $this->timeoutOn;
@@ -327,7 +327,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets timeoutOn.
 	 *
-	 * @param string $timeoutOn
+	 * @param \DateTime $timeoutOn
 	 * @return ChargeFlowLevel
 	 */
 	protected function setTimeoutOn($timeoutOn) {
@@ -409,20 +409,11 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCreatedOn() === null) {
-			throw new ValidationException("'createdOn' can't be null", 'createdOn', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
-		$allowed_values = ["PENDING", "FAILED", "SUCCESSFUL"];
+		$allowed_values = array("PENDING", "FAILED", "SUCCESSFUL");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
 
-		if ($this->getTimeoutOn() === null) {
-			throw new ValidationException("'timeoutOn' can't be null", 'timeoutOn', $this);
-		}
 	}
 
 	/**

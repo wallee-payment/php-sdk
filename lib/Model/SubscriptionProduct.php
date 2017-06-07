@@ -53,7 +53,7 @@ class SubscriptionProduct  {
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
-		'plannedPurgeDate' => 'string',
+		'plannedPurgeDate' => '\DateTime',
 		'reference' => 'string',
 		'sortOrder' => 'int',
 		'spaceId' => 'int',
@@ -85,13 +85,13 @@ class SubscriptionProduct  {
 	 * @return string[]
 	 */
 	public function getStateAllowableValues() {
-		return [
+		return array(
 			self::STATE_CREATE,
 			self::STATE_ACTIVE,
 			self::STATE_INACTIVE,
 			self::STATE_RETIRING,
 			self::STATE_RETIRED,
-		];
+		);
 	}
 	
 
@@ -129,7 +129,7 @@ class SubscriptionProduct  {
 	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @var string
+	 * @var \DateTime
 	 */
 	private $plannedPurgeDate;
 
@@ -306,7 +306,7 @@ class SubscriptionProduct  {
 	 *
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
-	 * @return string
+	 * @return \DateTime
 	 */
 	public function getPlannedPurgeDate() {
 		return $this->plannedPurgeDate;
@@ -315,7 +315,7 @@ class SubscriptionProduct  {
 	/**
 	 * Sets plannedPurgeDate.
 	 *
-	 * @param string $plannedPurgeDate
+	 * @param \DateTime $plannedPurgeDate
 	 * @return SubscriptionProduct
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
@@ -450,16 +450,7 @@ class SubscriptionProduct  {
 	 */
 	public function validate() {
 
-		if ($this->getFailedPaymentSuspensionPeriod() === null) {
-			throw new ValidationException("'failedPaymentSuspensionPeriod' can't be null", 'failedPaymentSuspensionPeriod', $this);
-		}
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
-		}
-		if ($this->getReference() === null) {
-			throw new ValidationException("'reference' can't be null", 'reference', $this);
-		}
-		$allowed_values = ["CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED"];
+		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED");
 		if (!in_array($this->getState(), $allowed_values)) {
 			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
 		}
