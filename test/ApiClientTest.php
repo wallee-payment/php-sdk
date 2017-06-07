@@ -66,7 +66,7 @@ final class BasicTest extends \PHPUnit_Framework_TestCase {
 		$apiClient->setBasePath(getenv('API_BASE_PATH'));
 		$apiClient->setHttpClientType($httpClientType);
 		$service = new \Wallee\Sdk\Service\WebhookUrlService($apiClient);
-		$response = $service->webhookUrlReadGetWithHttpInfo(14, 1);
+		$response = $service->readWithHttpInfo(14, 1);
 		$this->assertEquals(200, $response->getStatusCode());
 		$this->assertInstanceOf('\Wallee\Sdk\Model\WebhookUrl', $response->getData());
 		$this->assertTrue($response->getData()->isValid());
