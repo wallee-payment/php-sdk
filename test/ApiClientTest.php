@@ -23,6 +23,7 @@ namespace Wallee\Sdk;
 
 use \Wallee\Sdk\ApiClient;
 use \Wallee\Sdk\Http\HttpClientFactory;
+use \PHPUnit\Framework\TestCase;
 
 /**
  * This class tests the basic functionality of the SDK.
@@ -33,7 +34,7 @@ use \Wallee\Sdk\Http\HttpClientFactory;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
-final class BasicTest extends \PHPUnit_Framework_TestCase {
+final class BasicTest extends TestCase {
 
 	/**
 	 * Test the API client.
