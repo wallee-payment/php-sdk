@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-namespace Wallee\Sdk\Http;
+namespace Wallee\Sdk;
 
 use \Exception;
 
