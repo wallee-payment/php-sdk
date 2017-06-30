@@ -352,13 +352,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		$possibleTransportProtocols = stream_get_transports();
 		if (!in_array($rs, $possibleTransportProtocols)) {
-			throw new \Exception(
-					Customweb_Core_String::_(
-							"The enforced SSL protocol is '@actual'. But this protocol is not supported by the web server. Supported stream protocols by the web server are @supported.")->format(
-							array(
-								'@actual' => $rs,
-								'@supported' => implode(',', $possibleTransportProtocols),
-							))->toString());
+			throw new \Exception("The enforced SSL protocol is '" . $rs . "'. But this protocol is not supported by the web server. Supported stream protocols by the web server are " . implode(', ', $possibleTransportProtocols) . ".");
 		}
 
 		return $rs;
