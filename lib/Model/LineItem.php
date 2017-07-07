@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * LineItem model
@@ -51,6 +51,7 @@ class LineItem  {
 		'aggregatedTaxRate' => 'float',
 		'amountExcludingTax' => 'float',
 		'amountIncludingTax' => 'float',
+		'attributes' => 'map[string,\Wallee\Sdk\Model\LineItemAttribute]',
 		'name' => 'string',
 		'quantity' => 'float',
 		'shippingRequired' => 'bool',
@@ -58,7 +59,7 @@ class LineItem  {
 		'taxAmount' => 'float',
 		'taxAmountPerUnit' => 'float',
 		'taxes' => '\Wallee\Sdk\Model\Tax[]',
-		'type' => 'string',
+		'type' => '\Wallee\Sdk\Model\LineItemType',
 		'uniqueId' => 'string',
 		'unitPriceExcludingTax' => 'float',
 		'unitPriceIncludingTax' => 'float'	);
@@ -72,28 +73,6 @@ class LineItem  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_SHIPPING = 'SHIPPING';
-	const TYPE_DISCOUNT = 'DISCOUNT';
-	const TYPE_FEE = 'FEE';
-	const TYPE_PRODUCT = 'PRODUCT';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_SHIPPING,
-			self::TYPE_DISCOUNT,
-			self::TYPE_FEE,
-			self::TYPE_PRODUCT,
-		);
-	}
 	
 
 	/**
@@ -116,6 +95,13 @@ class LineItem  {
 	 * @var float
 	 */
 	private $amountIncludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,\Wallee\Sdk\Model\LineItemAttribute]
+	 */
+	private $attributes;
 
 	/**
 	 * 
@@ -169,7 +155,7 @@ class LineItem  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\LineItemType
 	 */
 	private $type;
 
@@ -201,8 +187,14 @@ class LineItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['attributes']) && $data['attributes'] != null) {
+			$this->setAttributes($data['attributes']);
+		}
 		if (isset($data['taxes']) && $data['taxes'] != null) {
 			$this->setTaxes($data['taxes']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 	}
 
@@ -272,6 +264,29 @@ class LineItem  {
 	 */
 	protected function setAmountIncludingTax($amountIncludingTax) {
 		$this->amountIncludingTax = $amountIncludingTax;
+
+		return $this;
+	}
+
+	/**
+	 * Returns attributes.
+	 *
+	 * 
+	 *
+	 * @return map[string,\Wallee\Sdk\Model\LineItemAttribute]
+	 */
+	public function getAttributes() {
+		return $this->attributes;
+	}
+
+	/**
+	 * Sets attributes.
+	 *
+	 * @param map[string,\Wallee\Sdk\Model\LineItemAttribute] $attributes
+	 * @return LineItem
+	 */
+	public function setAttributes($attributes) {
+		$this->attributes = $attributes;
 
 		return $this;
 	}
@@ -442,7 +457,7 @@ class LineItem  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\LineItemType
 	 */
 	public function getType() {
 		return $this->type;
@@ -451,14 +466,10 @@ class LineItem  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\LineItemType $type
 	 * @return LineItem
 	 */
-	protected function setType($type) {
-		$allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -539,11 +550,6 @@ class LineItem  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("SHIPPING", "DISCOUNT", "FEE", "PRODUCT");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

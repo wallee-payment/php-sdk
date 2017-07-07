@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * RefundCreate model
@@ -59,28 +59,6 @@ class RefundCreate extends Refund  {
 		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_CUSTOMER_INITIATED_AUTOMATIC = 'CUSTOMER_INITIATED_AUTOMATIC';
-	const TYPE_CUSTOMER_INITIATED_MANUAL = 'CUSTOMER_INITIATED_MANUAL';
-	const TYPE_MERCHANT_INITIATED_ONLINE = 'MERCHANT_INITIATED_ONLINE';
-	const TYPE_MERCHANT_INITIATED_OFFLINE = 'MERCHANT_INITIATED_OFFLINE';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_CUSTOMER_INITIATED_AUTOMATIC,
-			self::TYPE_CUSTOMER_INITIATED_MANUAL,
-			self::TYPE_MERCHANT_INITIATED_ONLINE,
-			self::TYPE_MERCHANT_INITIATED_OFFLINE,
-		);
-	}
 	
 
 
@@ -176,7 +154,9 @@ class RefundCreate extends Refund  {
 	/**
 	 * Returns transaction.
 	 *
-	 * @return \Wallee\Sdk\Model\Transaction
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getTransaction() {
 		return parent::getTransaction();
@@ -185,7 +165,7 @@ class RefundCreate extends Refund  {
 	/**
 	 * Sets transaction.
 	 *
-	 * @param \Wallee\Sdk\Model\Transaction $transaction
+	 * @param int $transaction
 	 * @return RefundCreate
 	 */
 	public function setTransaction($transaction) {
@@ -197,7 +177,7 @@ class RefundCreate extends Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\RefundType
 	 */
 	public function getType() {
 		return parent::getType();
@@ -206,14 +186,10 @@ class RefundCreate extends Refund  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\RefundType $type
 	 * @return RefundCreate
 	 */
 	public function setType($type) {
-		$allowed_values = array('CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE');
-		if ((!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE'");
-		}
 		return parent::setType($type);
 	}
 
@@ -231,14 +207,12 @@ class RefundCreate extends Refund  {
 		if ($this->getReductions() === null) {
 			throw new ValidationException("'reductions' can't be null", 'reductions', $this);
 		}
+		if ($this->getTransaction() === null) {
+			throw new ValidationException("'transaction' can't be null", 'transaction', $this);
+		}
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);
 		}
-		$allowed_values = array("CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
-
 	}
 
 	/**

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ChargeFlowLevelConfiguration model
@@ -55,7 +55,7 @@ class ChargeFlowLevelConfiguration  {
 		'period' => 'string',
 		'plannedPurgeDate' => '\DateTime',
 		'priority' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'type' => 'int',
 		'version' => 'int'	);
 
@@ -69,32 +69,10 @@ class ChargeFlowLevelConfiguration  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
+	 * The charge flow level configuration to which the flow is associated.
+	 *
 	 * @var \Wallee\Sdk\Model\ChargeFlow
 	 */
 	private $flow;
@@ -107,6 +85,8 @@ class ChargeFlowLevelConfiguration  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -142,11 +122,13 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
 	/**
+	 * The type determines how the payment link is delivered to the customer. Once the type is defined it cannot be changed anymore.
+	 *
 	 * @var int
 	 */
 	private $type;
@@ -171,11 +153,8 @@ class ChargeFlowLevelConfiguration  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['type']) && $data['type'] != null) {
-			$this->setType($data['type']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -185,6 +164,8 @@ class ChargeFlowLevelConfiguration  {
 
 	/**
 	 * Returns flow.
+	 *
+	 * The charge flow level configuration to which the flow is associated.
 	 *
 	 * @return \Wallee\Sdk\Model\ChargeFlow
 	 */
@@ -230,6 +211,8 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -242,7 +225,7 @@ class ChargeFlowLevelConfiguration  {
 	 * @param int $linkedSpaceId
 	 * @return ChargeFlowLevelConfiguration
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -345,7 +328,7 @@ class ChargeFlowLevelConfiguration  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -354,14 +337,10 @@ class ChargeFlowLevelConfiguration  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return ChargeFlowLevelConfiguration
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -369,6 +348,8 @@ class ChargeFlowLevelConfiguration  {
 
 	/**
 	 * Returns type.
+	 *
+	 * The type determines how the payment link is delivered to the customer. Once the type is defined it cannot be changed anymore.
 	 *
 	 * @return int
 	 */
@@ -382,7 +363,7 @@ class ChargeFlowLevelConfiguration  {
 	 * @param int $type
 	 * @return ChargeFlowLevelConfiguration
 	 */
-	public function setType($type) {
+	protected function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -417,11 +398,6 @@ class ChargeFlowLevelConfiguration  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

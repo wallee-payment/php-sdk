@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionLedgerEntryCreate model
@@ -157,6 +157,8 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	/**
 	 * Returns subscriptionVersion.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSubscriptionVersion() {
@@ -231,6 +233,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 		}
 		if ($this->getQuantity() === null) {
 			throw new ValidationException("'quantity' can't be null", 'quantity', $this);
+		}
+		if ($this->getSubscriptionVersion() === null) {
+			throw new ValidationException("'subscriptionVersion' can't be null", 'subscriptionVersion', $this);
 		}
 		if ($this->getTitle() === null) {
 			throw new ValidationException("'title' can't be null", 'title', $this);

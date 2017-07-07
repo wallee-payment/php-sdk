@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentConnectorConfiguration model
@@ -59,7 +59,7 @@ class PaymentConnectorConfiguration  {
 		'plannedPurgeDate' => '\DateTime',
 		'priority' => 'int',
 		'processorConfiguration' => '\Wallee\Sdk\Model\PaymentProcessorConfiguration',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'version' => 'int'	);
 
 	/**
@@ -72,30 +72,6 @@ class PaymentConnectorConfiguration  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
 	 * This property indicates if the connector is currently used for processing transactions. In case either the payment method configuration or the processor configuration is not active the connector will not be used even though the connector state is active.
@@ -105,11 +81,15 @@ class PaymentConnectorConfiguration  {
 	private $applicableForTransactionProcessing;
 
 	/**
+	 * If a transaction meet all selected conditions the connector configuration will be used to process the transaction otherwise the next connector configuration in line will be chosen according to the priorities.
+	 *
 	 * @var int[]
 	 */
 	private $conditions;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $connector;
@@ -129,6 +109,8 @@ class PaymentConnectorConfiguration  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -141,6 +123,8 @@ class PaymentConnectorConfiguration  {
 	private $name;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\PaymentMethodConfiguration
 	 */
 	private $paymentMethodConfiguration;
@@ -160,6 +144,8 @@ class PaymentConnectorConfiguration  {
 	private $priority;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\PaymentProcessorConfiguration
 	 */
 	private $processorConfiguration;
@@ -167,7 +153,7 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
@@ -188,23 +174,20 @@ class PaymentConnectorConfiguration  {
 		if (isset($data['conditions']) && $data['conditions'] != null) {
 			$this->setConditions($data['conditions']);
 		}
-		if (isset($data['connector']) && $data['connector'] != null) {
-			$this->setConnector($data['connector']);
-		}
 		if (isset($data['enabledSpaceViews']) && $data['enabledSpaceViews'] != null) {
 			$this->setEnabledSpaceViews($data['enabledSpaceViews']);
 		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['paymentMethodConfiguration']) && $data['paymentMethodConfiguration'] != null) {
 			$this->setPaymentMethodConfiguration($data['paymentMethodConfiguration']);
 		}
 		if (isset($data['processorConfiguration']) && $data['processorConfiguration'] != null) {
 			$this->setProcessorConfiguration($data['processorConfiguration']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -238,6 +221,8 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns conditions.
 	 *
+	 * If a transaction meet all selected conditions the connector configuration will be used to process the transaction otherwise the next connector configuration in line will be chosen according to the priorities.
+	 *
 	 * @return int[]
 	 */
 	public function getConditions() {
@@ -259,6 +244,8 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns connector.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getConnector() {
@@ -271,7 +258,7 @@ class PaymentConnectorConfiguration  {
 	 * @param int $connector
 	 * @return PaymentConnectorConfiguration
 	 */
-	public function setConnector($connector) {
+	protected function setConnector($connector) {
 		$this->connector = $connector;
 
 		return $this;
@@ -326,6 +313,8 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -338,7 +327,7 @@ class PaymentConnectorConfiguration  {
 	 * @param int $linkedSpaceId
 	 * @return PaymentConnectorConfiguration
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -369,6 +358,8 @@ class PaymentConnectorConfiguration  {
 
 	/**
 	 * Returns paymentMethodConfiguration.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\PaymentMethodConfiguration
 	 */
@@ -437,6 +428,8 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Returns processorConfiguration.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\PaymentProcessorConfiguration
 	 */
 	public function getProcessorConfiguration() {
@@ -460,7 +453,7 @@ class PaymentConnectorConfiguration  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -469,14 +462,10 @@ class PaymentConnectorConfiguration  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return PaymentConnectorConfiguration
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -511,11 +500,6 @@ class PaymentConnectorConfiguration  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

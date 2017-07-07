@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ChargeFlowLevel model
@@ -52,7 +52,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 		'configuration' => '\Wallee\Sdk\Model\ChargeFlowLevelConfiguration',
 		'createdOn' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\ChargeFlowLevelState',
 		'synchronousCharge' => 'int',
 		'timeoutOn' => '\DateTime',
 		'tokenCharge' => 'int',
@@ -69,33 +69,17 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
-	
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $asynchronousCharge;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\ChargeFlowLevelConfiguration
 	 */
 	private $configuration;
@@ -117,11 +101,13 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ChargeFlowLevelState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $synchronousCharge;
@@ -134,11 +120,15 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	private $timeoutOn;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $tokenCharge;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -159,17 +149,11 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['asynchronousCharge']) && $data['asynchronousCharge'] != null) {
-			$this->setAsynchronousCharge($data['asynchronousCharge']);
-		}
 		if (isset($data['configuration']) && $data['configuration'] != null) {
 			$this->setConfiguration($data['configuration']);
 		}
-		if (isset($data['synchronousCharge']) && $data['synchronousCharge'] != null) {
-			$this->setSynchronousCharge($data['synchronousCharge']);
-		}
-		if (isset($data['tokenCharge']) && $data['tokenCharge'] != null) {
-			$this->setTokenCharge($data['tokenCharge']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
@@ -179,6 +163,8 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 
 	/**
 	 * Returns asynchronousCharge.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -192,7 +178,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 * @param int $asynchronousCharge
 	 * @return ChargeFlowLevel
 	 */
-	public function setAsynchronousCharge($asynchronousCharge) {
+	protected function setAsynchronousCharge($asynchronousCharge) {
 		$this->asynchronousCharge = $asynchronousCharge;
 
 		return $this;
@@ -200,6 +186,8 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 
 	/**
 	 * Returns configuration.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\ChargeFlowLevelConfiguration
 	 */
@@ -270,7 +258,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ChargeFlowLevelState
 	 */
 	public function getState() {
 		return $this->state;
@@ -279,14 +267,10 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\ChargeFlowLevelState $state
 	 * @return ChargeFlowLevel
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -294,6 +278,8 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 
 	/**
 	 * Returns synchronousCharge.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -307,7 +293,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 * @param int $synchronousCharge
 	 * @return ChargeFlowLevel
 	 */
-	public function setSynchronousCharge($synchronousCharge) {
+	protected function setSynchronousCharge($synchronousCharge) {
 		$this->synchronousCharge = $synchronousCharge;
 
 		return $this;
@@ -339,6 +325,8 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	/**
 	 * Returns tokenCharge.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getTokenCharge() {
@@ -351,7 +339,7 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 * @param int $tokenCharge
 	 * @return ChargeFlowLevel
 	 */
-	public function setTokenCharge($tokenCharge) {
+	protected function setTokenCharge($tokenCharge) {
 		$this->tokenCharge = $tokenCharge;
 
 		return $this;
@@ -359,6 +347,8 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 
 	/**
 	 * Returns transaction.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
@@ -408,11 +398,6 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("PENDING", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

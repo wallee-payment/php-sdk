@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Service;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\ApiException;
-use \Wallee\Sdk\ApiResponse;
-use \Wallee\Sdk\Http\HttpRequest;
+use Wallee\Sdk\ApiClient;
+use Wallee\Sdk\ApiException;
+use Wallee\Sdk\ApiResponse;
+use Wallee\Sdk\Http\HttpRequest;
 
 /**
  * CountryStateService service
@@ -147,7 +147,7 @@ class CountryStateService {
 	}
 
 	/**
-	 * Operation findByCountry
+	 * Operation country
 	 *
 	 * Find by Country
 	 *
@@ -155,12 +155,12 @@ class CountryStateService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return \Wallee\Sdk\Model\RestCountryState[]
 	 */
-	public function findByCountry($code) {
-		return $this->findByCountryWithHttpInfo($code)->getData();
+	public function country($code) {
+		return $this->countryWithHttpInfo($code)->getData();
 	}
 
 	/**
-	 * Operation findByCountryWithHttpInfo
+	 * Operation countryWithHttpInfo
 	 *
 	 * Find by Country
 	 *
@@ -168,10 +168,10 @@ class CountryStateService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @return ApiResponse
 	 */
-	public function findByCountryWithHttpInfo($code) {
+	public function countryWithHttpInfo($code) {
 		// verify the required parameter 'code' is set
 		if ($code === null) {
-			throw new \InvalidArgumentException('Missing the required parameter $code when calling findByCountry');
+			throw new \InvalidArgumentException('Missing the required parameter $code when calling country');
 		}
 		// header params
 		$headerParams = array();

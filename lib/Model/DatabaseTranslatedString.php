@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * DatabaseTranslatedString model
@@ -49,9 +49,8 @@ class DatabaseTranslatedString  {
 	 */
 	private static $swaggerTypes = array(
 		'availableLanguages' => 'string[]',
-		'id' => 'int',
-		'items' => '\Wallee\Sdk\Model\DatabaseTranslatedStringItem[]',
-		'version' => 'int'	);
+		'displayName' => 'string',
+		'items' => '\Wallee\Sdk\Model\DatabaseTranslatedStringItem[]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -72,11 +71,11 @@ class DatabaseTranslatedString  {
 	private $availableLanguages;
 
 	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 * 
 	 *
-	 * @var int
+	 * @var string
 	 */
-	private $id;
+	private $displayName;
 
 	/**
 	 * 
@@ -84,13 +83,6 @@ class DatabaseTranslatedString  {
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringItem[]
 	 */
 	private $items;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
 
 
 	/**
@@ -102,14 +94,8 @@ class DatabaseTranslatedString  {
 		if (isset($data['availableLanguages']) && $data['availableLanguages'] != null) {
 			$this->setAvailableLanguages($data['availableLanguages']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
 		if (isset($data['items']) && $data['items'] != null) {
 			$this->setItems($data['items']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
 		}
 	}
 
@@ -138,24 +124,24 @@ class DatabaseTranslatedString  {
 	}
 
 	/**
-	 * Returns id.
+	 * Returns displayName.
 	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 * 
 	 *
-	 * @return int
+	 * @return string
 	 */
-	public function getId() {
-		return $this->id;
+	public function getDisplayName() {
+		return $this->displayName;
 	}
 
 	/**
-	 * Sets id.
+	 * Sets displayName.
 	 *
-	 * @param int $id
+	 * @param string $displayName
 	 * @return DatabaseTranslatedString
 	 */
-	public function setId($id) {
-		$this->id = $id;
+	protected function setDisplayName($displayName) {
+		$this->displayName = $displayName;
 
 		return $this;
 	}
@@ -179,29 +165,6 @@ class DatabaseTranslatedString  {
 	 */
 	public function setItems($items) {
 		$this->items = $items;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return DatabaseTranslatedString
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
 
 		return $this;
 	}

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Refund model
@@ -66,12 +66,12 @@ class Refund  {
 		'processorReference' => 'string',
 		'reducedLineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'reductions' => '\Wallee\Sdk\Model\LineItemReduction[]',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\RefundState',
 		'succeededOn' => '\DateTime',
 		'taxes' => '\Wallee\Sdk\Model\Tax[]',
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
-		'type' => 'string',
+		'type' => '\Wallee\Sdk\Model\RefundType',
 		'version' => 'int'	);
 
 	/**
@@ -83,52 +83,6 @@ class Refund  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_PENDING = 'PENDING';
-	const STATE_MANUAL_CHECK = 'MANUAL_CHECK';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_PENDING,
-			self::STATE_MANUAL_CHECK,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_CUSTOMER_INITIATED_AUTOMATIC = 'CUSTOMER_INITIATED_AUTOMATIC';
-	const TYPE_CUSTOMER_INITIATED_MANUAL = 'CUSTOMER_INITIATED_MANUAL';
-	const TYPE_MERCHANT_INITIATED_ONLINE = 'MERCHANT_INITIATED_ONLINE';
-	const TYPE_MERCHANT_INITIATED_OFFLINE = 'MERCHANT_INITIATED_OFFLINE';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_CUSTOMER_INITIATED_AUTOMATIC,
-			self::TYPE_CUSTOMER_INITIATED_MANUAL,
-			self::TYPE_MERCHANT_INITIATED_ONLINE,
-			self::TYPE_MERCHANT_INITIATED_OFFLINE,
-		);
-	}
 	
 
 	/**
@@ -146,6 +100,8 @@ class Refund  {
 	private $baseLineItems;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $createdBy;
@@ -172,6 +128,8 @@ class Refund  {
 	private $failedOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\FailureReason
 	 */
 	private $failureReason;
@@ -205,6 +163,8 @@ class Refund  {
 	private $lineItems;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -254,7 +214,7 @@ class Refund  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\RefundState
 	 */
 	private $state;
 
@@ -280,6 +240,8 @@ class Refund  {
 	private $timeoutOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -287,7 +249,7 @@ class Refund  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\RefundType
 	 */
 	private $type;
 
@@ -308,9 +270,6 @@ class Refund  {
 		if (isset($data['baseLineItems']) && $data['baseLineItems'] != null) {
 			$this->setBaseLineItems($data['baseLineItems']);
 		}
-		if (isset($data['createdBy']) && $data['createdBy'] != null) {
-			$this->setCreatedBy($data['createdBy']);
-		}
 		if (isset($data['failureReason']) && $data['failureReason'] != null) {
 			$this->setFailureReason($data['failureReason']);
 		}
@@ -323,20 +282,23 @@ class Refund  {
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['reducedLineItems']) && $data['reducedLineItems'] != null) {
 			$this->setReducedLineItems($data['reducedLineItems']);
 		}
 		if (isset($data['reductions']) && $data['reductions'] != null) {
 			$this->setReductions($data['reductions']);
 		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 		if (isset($data['taxes']) && $data['taxes'] != null) {
 			$this->setTaxes($data['taxes']);
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -393,6 +355,8 @@ class Refund  {
 	/**
 	 * Returns createdBy.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getCreatedBy() {
@@ -405,7 +369,7 @@ class Refund  {
 	 * @param int $createdBy
 	 * @return Refund
 	 */
-	public function setCreatedBy($createdBy) {
+	protected function setCreatedBy($createdBy) {
 		$this->createdBy = $createdBy;
 
 		return $this;
@@ -482,6 +446,8 @@ class Refund  {
 
 	/**
 	 * Returns failureReason.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\FailureReason
 	 */
@@ -596,6 +562,8 @@ class Refund  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -608,7 +576,7 @@ class Refund  {
 	 * @param int $linkedSpaceId
 	 * @return Refund
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -757,7 +725,7 @@ class Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\RefundState
 	 */
 	public function getState() {
 		return $this->state;
@@ -766,14 +734,10 @@ class Refund  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\RefundState $state
 	 * @return Refund
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'PENDING', 'MANUAL_CHECK', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'PENDING', 'MANUAL_CHECK', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -851,6 +815,8 @@ class Refund  {
 	/**
 	 * Returns transaction.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function getTransaction() {
@@ -874,7 +840,7 @@ class Refund  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\RefundType
 	 */
 	public function getType() {
 		return $this->type;
@@ -883,14 +849,10 @@ class Refund  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\RefundType $type
 	 * @return Refund
 	 */
-	protected function setType($type) {
-		$allowed_values = array('CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'CUSTOMER_INITIATED_AUTOMATIC', 'CUSTOMER_INITIATED_MANUAL', 'MERCHANT_INITIATED_ONLINE', 'MERCHANT_INITIATED_OFFLINE'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -925,16 +887,6 @@ class Refund  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "PENDING", "MANUAL_CHECK", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
-		$allowed_values = array("CUSTOMER_INITIATED_AUTOMATIC", "CUSTOMER_INITIATED_MANUAL", "MERCHANT_INITIATED_ONLINE", "MERCHANT_INITIATED_OFFLINE");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

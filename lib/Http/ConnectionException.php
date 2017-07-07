@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Http;
 
-use \Exception;
+use Exception;
 
 /**
  * This exception is used to inform about connection problems during an HTTP request.

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Transaction model
@@ -64,7 +64,7 @@ class Transaction  {
 		'currency' => 'string',
 		'customerEmailAddress' => 'string',
 		'customerId' => 'string',
-		'customersPresence' => 'string',
+		'customersPresence' => '\Wallee\Sdk\Model\CustomersPresence',
 		'endOfLife' => '\DateTime',
 		'failedOn' => '\DateTime',
 		'failedUrl' => 'string',
@@ -77,6 +77,7 @@ class Transaction  {
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'linkedSpaceId' => 'int',
 		'merchantReference' => 'string',
+		'metaData' => 'map[string,string]',
 		'paymentConnectorConfiguration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
 		'plannedPurgeDate' => '\DateTime',
 		'processingOn' => '\DateTime',
@@ -84,10 +85,11 @@ class Transaction  {
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
 		'shippingMethod' => 'string',
 		'spaceViewId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\TransactionState',
 		'successUrl' => 'string',
 		'token' => '\Wallee\Sdk\Model\Token',
 		'userAgentHeader' => 'string',
+		'userInterfaceType' => '\Wallee\Sdk\Model\TransactionUserInterfaceType',
 		'version' => 'int'	);
 
 	/**
@@ -99,60 +101,6 @@ class Transaction  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of customersPresence.
-	 */
-	const CUSTOMERS_PRESENCE_NOT_PRESENT = 'NOT_PRESENT';
-	const CUSTOMERS_PRESENCE_VIRTUAL_PRESENT = 'VIRTUAL_PRESENT';
-	const CUSTOMERS_PRESENCE_PHYSICAL_PRESENT = 'PHYSICAL_PRESENT';
-	
-	/**
-	 * Returns allowable values of customersPresence.
-	 *
-	 * @return string[]
-	 */
-	public function getCustomersPresenceAllowableValues() {
-		return array(
-			self::CUSTOMERS_PRESENCE_NOT_PRESENT,
-			self::CUSTOMERS_PRESENCE_VIRTUAL_PRESENT,
-			self::CUSTOMERS_PRESENCE_PHYSICAL_PRESENT,
-		);
-	}
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_PENDING = 'PENDING';
-	const STATE_CONFIRMED = 'CONFIRMED';
-	const STATE_PROCESSING = 'PROCESSING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_AUTHORIZED = 'AUTHORIZED';
-	const STATE_VOIDED = 'VOIDED';
-	const STATE_COMPLETED = 'COMPLETED';
-	const STATE_FULFILL = 'FULFILL';
-	const STATE_DECLINE = 'DECLINE';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_PENDING,
-			self::STATE_CONFIRMED,
-			self::STATE_PROCESSING,
-			self::STATE_FAILED,
-			self::STATE_AUTHORIZED,
-			self::STATE_VOIDED,
-			self::STATE_COMPLETED,
-			self::STATE_FULFILL,
-			self::STATE_DECLINE,
-		);
-	}
 	
 
 	/**
@@ -170,6 +118,8 @@ class Transaction  {
 	private $allowedPaymentMethodBrands;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $allowedPaymentMethodConfigurations;
@@ -189,6 +139,8 @@ class Transaction  {
 	private $authorizedOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Address
 	 */
 	private $billingAddress;
@@ -266,7 +218,7 @@ class Transaction  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CustomersPresence
 	 */
 	private $customersPresence;
 
@@ -292,6 +244,8 @@ class Transaction  {
 	private $failedUrl;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\TransactionGroup
 	 */
 	private $group;
@@ -339,6 +293,8 @@ class Transaction  {
 	private $lineItems;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -351,6 +307,15 @@ class Transaction  {
 	private $merchantReference;
 
 	/**
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @var map[string,string]
+	 */
+	private $metaData;
+
+	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\PaymentConnectorConfiguration
 	 */
 	private $paymentConnectorConfiguration;
@@ -377,6 +342,8 @@ class Transaction  {
 	private $refundedAmount;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Address
 	 */
 	private $shippingAddress;
@@ -389,6 +356,8 @@ class Transaction  {
 	private $shippingMethod;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceViewId;
@@ -396,7 +365,7 @@ class Transaction  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\TransactionState
 	 */
 	private $state;
 
@@ -408,6 +377,8 @@ class Transaction  {
 	private $successUrl;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Token
 	 */
 	private $token;
@@ -418,6 +389,13 @@ class Transaction  {
 	 * @var string
 	 */
 	private $userAgentHeader;
+
+	/**
+	 * The user interface type defines through which user interface the transaction has been processed resp. created.
+	 *
+	 * @var \Wallee\Sdk\Model\TransactionUserInterfaceType
+	 */
+	private $userInterfaceType;
 
 	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -442,6 +420,9 @@ class Transaction  {
 		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
+		if (isset($data['customersPresence']) && $data['customersPresence'] != null) {
+			$this->setCustomersPresence($data['customersPresence']);
+		}
 		if (isset($data['group']) && $data['group'] != null) {
 			$this->setGroup($data['group']);
 		}
@@ -451,8 +432,8 @@ class Transaction  {
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['metaData']) && $data['metaData'] != null) {
+			$this->setMetaData($data['metaData']);
 		}
 		if (isset($data['paymentConnectorConfiguration']) && $data['paymentConnectorConfiguration'] != null) {
 			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
@@ -460,11 +441,14 @@ class Transaction  {
 		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
-			$this->setSpaceViewId($data['spaceViewId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['userInterfaceType']) && $data['userInterfaceType'] != null) {
+			$this->setUserInterfaceType($data['userInterfaceType']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -520,6 +504,8 @@ class Transaction  {
 
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */
@@ -587,6 +573,8 @@ class Transaction  {
 
 	/**
 	 * Returns billingAddress.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Address
 	 */
@@ -841,7 +829,7 @@ class Transaction  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CustomersPresence
 	 */
 	public function getCustomersPresence() {
 		return $this->customersPresence;
@@ -850,14 +838,10 @@ class Transaction  {
 	/**
 	 * Sets customersPresence.
 	 *
-	 * @param string $customersPresence
+	 * @param \Wallee\Sdk\Model\CustomersPresence $customersPresence
 	 * @return Transaction
 	 */
-	protected function setCustomersPresence($customersPresence) {
-		$allowed_values = array('NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT');
-		if (!is_null($customersPresence) && (!in_array($customersPresence, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'customersPresence', must be one of 'NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT'");
-		}
+	public function setCustomersPresence($customersPresence) {
 		$this->customersPresence = $customersPresence;
 
 		return $this;
@@ -934,6 +918,8 @@ class Transaction  {
 
 	/**
 	 * Returns group.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\TransactionGroup
 	 */
@@ -1094,6 +1080,8 @@ class Transaction  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -1106,7 +1094,7 @@ class Transaction  {
 	 * @param int $linkedSpaceId
 	 * @return Transaction
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -1136,7 +1124,32 @@ class Transaction  {
 	}
 
 	/**
+	 * Returns metaData.
+	 *
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @return map[string,string]
+	 */
+	public function getMetaData() {
+		return $this->metaData;
+	}
+
+	/**
+	 * Sets metaData.
+	 *
+	 * @param map[string,string] $metaData
+	 * @return Transaction
+	 */
+	public function setMetaData($metaData) {
+		$this->metaData = $metaData;
+
+		return $this;
+	}
+
+	/**
 	 * Returns paymentConnectorConfiguration.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
 	 */
@@ -1228,6 +1241,8 @@ class Transaction  {
 	/**
 	 * Returns shippingAddress.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Address
 	 */
 	public function getShippingAddress() {
@@ -1272,6 +1287,8 @@ class Transaction  {
 	/**
 	 * Returns spaceViewId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceViewId() {
@@ -1284,7 +1301,7 @@ class Transaction  {
 	 * @param int $spaceViewId
 	 * @return Transaction
 	 */
-	public function setSpaceViewId($spaceViewId) {
+	protected function setSpaceViewId($spaceViewId) {
 		$this->spaceViewId = $spaceViewId;
 
 		return $this;
@@ -1295,7 +1312,7 @@ class Transaction  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\TransactionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -1304,14 +1321,10 @@ class Transaction  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\TransactionState $state
 	 * @return Transaction
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'PENDING', 'CONFIRMED', 'PROCESSING', 'FAILED', 'AUTHORIZED', 'VOIDED', 'COMPLETED', 'FULFILL', 'DECLINE');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'PENDING', 'CONFIRMED', 'PROCESSING', 'FAILED', 'AUTHORIZED', 'VOIDED', 'COMPLETED', 'FULFILL', 'DECLINE'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -1342,6 +1355,8 @@ class Transaction  {
 
 	/**
 	 * Returns token.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Token
 	 */
@@ -1385,6 +1400,29 @@ class Transaction  {
 	}
 
 	/**
+	 * Returns userInterfaceType.
+	 *
+	 * The user interface type defines through which user interface the transaction has been processed resp. created.
+	 *
+	 * @return \Wallee\Sdk\Model\TransactionUserInterfaceType
+	 */
+	public function getUserInterfaceType() {
+		return $this->userInterfaceType;
+	}
+
+	/**
+	 * Sets userInterfaceType.
+	 *
+	 * @param \Wallee\Sdk\Model\TransactionUserInterfaceType $userInterfaceType
+	 * @return Transaction
+	 */
+	public function setUserInterfaceType($userInterfaceType) {
+		$this->userInterfaceType = $userInterfaceType;
+
+		return $this;
+	}
+
+	/**
 	 * Returns version.
 	 *
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -1413,16 +1451,6 @@ class Transaction  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("NOT_PRESENT", "VIRTUAL_PRESENT", "PHYSICAL_PRESENT");
-		if (!in_array($this->getCustomersPresence(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'customersPresence', must be one of #{allowed_values}.", 'customersPresence', $this);
-		}
-
-		$allowed_values = array("CREATE", "PENDING", "CONFIRMED", "PROCESSING", "FAILED", "AUTHORIZED", "VOIDED", "COMPLETED", "FULFILL", "DECLINE");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

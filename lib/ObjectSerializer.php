@@ -342,6 +342,11 @@ final class ObjectSerializer {
 					$class = $subclass;
 				}
 			}
+			
+			if (is_subclass_of($class, '\Wallee\Sdk\Model\IEnum')) {
+			    return (string) $data;
+			}
+			
 			$instance = new $class();
 			foreach ($instance::swaggerTypes() as $property => $type) {
 				$propertySetter = 'set' . ucfirst($property);

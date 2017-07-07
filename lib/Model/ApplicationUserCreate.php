@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ApplicationUserCreate model
@@ -60,30 +60,6 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 
 	/**
@@ -97,16 +73,15 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
 			$this->setPrimaryAccount($data['primaryAccount']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
-			$this->setState($data['state']);
-		}
 	}
 
 
 	/**
 	 * Returns primaryAccount.
 	 *
-	 * @return \Wallee\Sdk\Model\Account
+	 * The account that this user is associated with. The account owner will be able to manage this user.
+	 *
+	 * @return int
 	 */
 	public function getPrimaryAccount() {
 		return parent::getPrimaryAccount();
@@ -115,36 +90,11 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	/**
 	 * Sets primaryAccount.
 	 *
-	 * @param \Wallee\Sdk\Model\Account $primaryAccount
+	 * @param int $primaryAccount
 	 * @return ApplicationUserCreate
 	 */
 	public function setPrimaryAccount($primaryAccount) {
 		return parent::setPrimaryAccount($primaryAccount);
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getState() {
-		return parent::getState();
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param string $state
-	 * @return ApplicationUserCreate
-	 */
-	public function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
-		return parent::setState($state);
 	}
 
 	/**
@@ -155,14 +105,9 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
+		if ($this->getPrimaryAccount() === null) {
+			throw new ValidationException("'primaryAccount' can't be null", 'primaryAccount', $this);
 		}
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
 	}
 
 	/**

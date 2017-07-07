@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionSuspensionCreate model
@@ -60,24 +60,6 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	}
 
 	
-	/**
-	 * Values of endAction.
-	 */
-	const END_ACTION_TERMINATE = 'TERMINATE';
-	const END_ACTION_REACTIVATE = 'REACTIVATE';
-	
-	/**
-	 * Returns allowable values of endAction.
-	 *
-	 * @return string[]
-	 */
-	public function getEndActionAllowableValues() {
-		return array(
-			self::END_ACTION_TERMINATE,
-			self::END_ACTION_REACTIVATE,
-		);
-	}
-	
 
 
 	/**
@@ -108,7 +90,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 *
 	 * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspensionAction
 	 */
 	public function getEndAction() {
 		return parent::getEndAction();
@@ -117,14 +99,10 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	/**
 	 * Sets endAction.
 	 *
-	 * @param string $endAction
+	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionAction $endAction
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setEndAction($endAction) {
-		$allowed_values = array('TERMINATE', 'REACTIVATE');
-		if ((!in_array($endAction, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'endAction', must be one of 'TERMINATE', 'REACTIVATE'");
-		}
 		return parent::setEndAction($endAction);
 	}
 
@@ -173,6 +151,8 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	/**
 	 * Returns subscription.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSubscription() {
@@ -200,13 +180,11 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 		if ($this->getEndAction() === null) {
 			throw new ValidationException("'endAction' can't be null", 'endAction', $this);
 		}
-		$allowed_values = array("TERMINATE", "REACTIVATE");
-		if (!in_array($this->getEndAction(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'endAction', must be one of #{allowed_values}.", 'endAction', $this);
-		}
-
 		if ($this->getPlannedEndDate() === null) {
 			throw new ValidationException("'plannedEndDate' can't be null", 'plannedEndDate', $this);
+		}
+		if ($this->getSubscription() === null) {
+			throw new ValidationException("'subscription' can't be null", 'subscription', $this);
 		}
 	}
 

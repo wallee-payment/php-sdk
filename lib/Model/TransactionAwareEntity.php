@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionAwareEntity model
@@ -71,11 +71,15 @@ class TransactionAwareEntity  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $linkedTransaction;
@@ -89,12 +93,6 @@ class TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['linkedTransaction']) && $data['linkedTransaction'] != null) {
-			$this->setLinkedTransaction($data['linkedTransaction']);
 		}
 	}
 
@@ -125,6 +123,8 @@ class TransactionAwareEntity  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -137,7 +137,7 @@ class TransactionAwareEntity  {
 	 * @param int $linkedSpaceId
 	 * @return TransactionAwareEntity
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -145,6 +145,8 @@ class TransactionAwareEntity  {
 
 	/**
 	 * Returns linkedTransaction.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -158,7 +160,7 @@ class TransactionAwareEntity  {
 	 * @param int $linkedTransaction
 	 * @return TransactionAwareEntity
 	 */
-	public function setLinkedTransaction($linkedTransaction) {
+	protected function setLinkedTransaction($linkedTransaction) {
 		$this->linkedTransaction = $linkedTransaction;
 
 		return $this;

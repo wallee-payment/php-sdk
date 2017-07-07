@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * HumanUserUpdate model
@@ -84,6 +84,12 @@ class HumanUserUpdate extends HumanUser  {
 		}
 		if (isset($data['timeZone']) && $data['timeZone'] != null) {
 			$this->setTimeZone($data['timeZone']);
+		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -194,6 +200,48 @@ class HumanUserUpdate extends HumanUser  {
 	}
 
 	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return HumanUserUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return HumanUserUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
+	}
+
+	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
 	 *
 	 * @throws ValidationException
@@ -201,17 +249,11 @@ class HumanUserUpdate extends HumanUser  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getEmailAddress() === null) {
-			throw new ValidationException("'emailAddress' can't be null", 'emailAddress', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
 		}
-		if ($this->getFirstname() === null) {
-			throw new ValidationException("'firstname' can't be null", 'firstname', $this);
-		}
-		if ($this->getLanguage() === null) {
-			throw new ValidationException("'language' can't be null", 'language', $this);
-		}
-		if ($this->getLastname() === null) {
-			throw new ValidationException("'lastname' can't be null", 'lastname', $this);
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
 	}
 

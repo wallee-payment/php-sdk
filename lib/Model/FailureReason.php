@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * FailureReason model
@@ -48,7 +48,7 @@ class FailureReason  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'category' => 'string',
+		'category' => '\Wallee\Sdk\Model\FailureCategory',
 		'description' => 'map[string,string]',
 		'features' => 'int[]',
 		'id' => 'int',
@@ -64,35 +64,11 @@ class FailureReason  {
 	}
 
 	
-	/**
-	 * Values of category.
-	 */
-	const CATEGORY_TEMPORARY_ISSUE = 'TEMPORARY_ISSUE';
-	const CATEGORY_INTERNAL = 'INTERNAL';
-	const CATEGORY_END_USER = 'END_USER';
-	const CATEGORY_CONFIGURATION = 'CONFIGURATION';
-	const CATEGORY_DEVELOPER = 'DEVELOPER';
-	
-	/**
-	 * Returns allowable values of category.
-	 *
-	 * @return string[]
-	 */
-	public function getCategoryAllowableValues() {
-		return array(
-			self::CATEGORY_TEMPORARY_ISSUE,
-			self::CATEGORY_INTERNAL,
-			self::CATEGORY_END_USER,
-			self::CATEGORY_CONFIGURATION,
-			self::CATEGORY_DEVELOPER,
-		);
-	}
-	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\FailureCategory
 	 */
 	private $category;
 
@@ -104,6 +80,8 @@ class FailureReason  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $features;
@@ -129,6 +107,9 @@ class FailureReason  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['category']) && $data['category'] != null) {
+			$this->setCategory($data['category']);
+		}
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
@@ -146,7 +127,7 @@ class FailureReason  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\FailureCategory
 	 */
 	public function getCategory() {
 		return $this->category;
@@ -155,14 +136,10 @@ class FailureReason  {
 	/**
 	 * Sets category.
 	 *
-	 * @param string $category
+	 * @param \Wallee\Sdk\Model\FailureCategory $category
 	 * @return FailureReason
 	 */
-	protected function setCategory($category) {
-		$allowed_values = array('TEMPORARY_ISSUE', 'INTERNAL', 'END_USER', 'CONFIGURATION', 'DEVELOPER');
-		if (!is_null($category) && (!in_array($category, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'category', must be one of 'TEMPORARY_ISSUE', 'INTERNAL', 'END_USER', 'CONFIGURATION', 'DEVELOPER'");
-		}
+	public function setCategory($category) {
 		$this->category = $category;
 
 		return $this;
@@ -193,6 +170,8 @@ class FailureReason  {
 
 	/**
 	 * Returns features.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */
@@ -264,11 +243,6 @@ class FailureReason  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("TEMPORARY_ISSUE", "INTERNAL", "END_USER", "CONFIGURATION", "DEVELOPER");
-		if (!in_array($this->getCategory(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'category', must be one of #{allowed_values}.", 'category', $this);
-		}
 
 	}
 

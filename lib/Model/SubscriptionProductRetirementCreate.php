@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductRetirementCreate model
@@ -85,7 +85,9 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	/**
 	 * Returns product.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getProduct() {
 		return parent::getProduct();
@@ -94,7 +96,7 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	/**
 	 * Sets product.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProduct $product
+	 * @param int $product
 	 * @return SubscriptionProductRetirementCreate
 	 */
 	public function setProduct($product) {
@@ -125,7 +127,9 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	/**
 	 * Returns targetProduct.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getTargetProduct() {
 		return parent::getTargetProduct();
@@ -134,7 +138,7 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	/**
 	 * Sets targetProduct.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProduct $targetProduct
+	 * @param int $targetProduct
 	 * @return SubscriptionProductRetirementCreate
 	 */
 	public function setTargetProduct($targetProduct) {
@@ -149,6 +153,9 @@ class SubscriptionProductRetirementCreate extends SubscriptionProductRetirement 
 	public function validate() {
 		parent::validate();
 
+		if ($this->getProduct() === null) {
+			throw new ValidationException("'product' can't be null", 'product', $this);
+		}
 	}
 
 	/**

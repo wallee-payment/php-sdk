@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ProductSetupFee model
@@ -56,7 +56,7 @@ class ProductSetupFee  {
 		'onDowngradeCreditedAmount' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
 		'onUpgradeCreditedAmount' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
 		'setupFee' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
-		'type' => 'string',
+		'type' => '\Wallee\Sdk\Model\ProductFeeType',
 		'version' => 'int'	);
 
 	/**
@@ -69,33 +69,17 @@ class ProductSetupFee  {
 	}
 
 	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_METERED_FEE = 'METERED_FEE';
-	const TYPE_SETUP_FEE = 'SETUP_FEE';
-	const TYPE_PERIOD_FEE = 'PERIOD_FEE';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_METERED_FEE,
-			self::TYPE_SETUP_FEE,
-			self::TYPE_PERIOD_FEE,
-		);
-	}
-	
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductComponent
 	 */
 	private $component;
 
 	/**
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $description;
@@ -108,11 +92,15 @@ class ProductSetupFee  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $name;
@@ -141,7 +129,7 @@ class ProductSetupFee  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ProductFeeType
 	 */
 	private $type;
 
@@ -168,9 +156,6 @@ class ProductSetupFee  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
 		}
@@ -183,6 +168,9 @@ class ProductSetupFee  {
 		if (isset($data['setupFee']) && $data['setupFee'] != null) {
 			$this->setSetupFee($data['setupFee']);
 		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
 		}
@@ -191,6 +179,8 @@ class ProductSetupFee  {
 
 	/**
 	 * Returns component.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
 	 */
@@ -212,6 +202,8 @@ class ProductSetupFee  {
 
 	/**
 	 * Returns description.
+	 *
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -257,6 +249,8 @@ class ProductSetupFee  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -269,7 +263,7 @@ class ProductSetupFee  {
 	 * @param int $linkedSpaceId
 	 * @return ProductSetupFee
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -277,6 +271,8 @@ class ProductSetupFee  {
 
 	/**
 	 * Returns name.
+	 *
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -370,7 +366,7 @@ class ProductSetupFee  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ProductFeeType
 	 */
 	public function getType() {
 		return $this->type;
@@ -379,14 +375,10 @@ class ProductSetupFee  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\ProductFeeType $type
 	 * @return ProductSetupFee
 	 */
-	protected function setType($type) {
-		$allowed_values = array('METERED_FEE', 'SETUP_FEE', 'PERIOD_FEE');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'METERED_FEE', 'SETUP_FEE', 'PERIOD_FEE'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -421,11 +413,6 @@ class ProductSetupFee  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("METERED_FEE", "SETUP_FEE", "PERIOD_FEE");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Charge model
@@ -53,10 +53,10 @@ class Charge extends TransactionAwareEntity  {
 		'language' => 'string',
 		'plannedPurgeDate' => '\DateTime',
 		'spaceViewId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\ChargeState',
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
-		'type' => 'string',
+		'type' => '\Wallee\Sdk\Model\ChargeType',
 		'version' => 'int'	);
 
 	/**
@@ -69,46 +69,6 @@ class Charge extends TransactionAwareEntity  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_ASYNCHRONOUS = 'ASYNCHRONOUS';
-	const TYPE_SYNCHRONOUS = 'SYNCHRONOUS';
-	const TYPE_TOKEN = 'TOKEN';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_ASYNCHRONOUS,
-			self::TYPE_SYNCHRONOUS,
-			self::TYPE_TOKEN,
-		);
-	}
-	
 
 	/**
 	 * The date on which the charge was created on.
@@ -118,6 +78,8 @@ class Charge extends TransactionAwareEntity  {
 	private $createdOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\FailureReason
 	 */
 	private $failureReason;
@@ -137,6 +99,8 @@ class Charge extends TransactionAwareEntity  {
 	private $plannedPurgeDate;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceViewId;
@@ -144,7 +108,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ChargeState
 	 */
 	private $state;
 
@@ -156,6 +120,8 @@ class Charge extends TransactionAwareEntity  {
 	private $timeoutOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -163,7 +129,7 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ChargeType
 	 */
 	private $type;
 
@@ -186,11 +152,14 @@ class Charge extends TransactionAwareEntity  {
 		if (isset($data['failureReason']) && $data['failureReason'] != null) {
 			$this->setFailureReason($data['failureReason']);
 		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
-			$this->setSpaceViewId($data['spaceViewId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 	}
 
@@ -220,6 +189,8 @@ class Charge extends TransactionAwareEntity  {
 
 	/**
 	 * Returns failureReason.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\FailureReason
 	 */
@@ -288,6 +259,8 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceViewId() {
@@ -300,7 +273,7 @@ class Charge extends TransactionAwareEntity  {
 	 * @param int $spaceViewId
 	 * @return Charge
 	 */
-	public function setSpaceViewId($spaceViewId) {
+	protected function setSpaceViewId($spaceViewId) {
 		$this->spaceViewId = $spaceViewId;
 
 		return $this;
@@ -311,7 +284,7 @@ class Charge extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ChargeState
 	 */
 	public function getState() {
 		return $this->state;
@@ -320,14 +293,10 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\ChargeState $state
 	 * @return Charge
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -359,6 +328,8 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Returns transaction.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function getTransaction() {
@@ -382,7 +353,7 @@ class Charge extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ChargeType
 	 */
 	public function getType() {
 		return $this->type;
@@ -391,14 +362,10 @@ class Charge extends TransactionAwareEntity  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\ChargeType $type
 	 * @return Charge
 	 */
-	protected function setType($type) {
-		$allowed_values = array('ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'ASYNCHRONOUS', 'SYNCHRONOUS', 'TOKEN'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -434,16 +401,6 @@ class Charge extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("PENDING", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
-		$allowed_values = array("ASYNCHRONOUS", "SYNCHRONOUS", "TOKEN");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

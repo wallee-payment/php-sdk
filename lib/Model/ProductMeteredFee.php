@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ProductMeteredFee model
@@ -54,8 +54,8 @@ class ProductMeteredFee  {
 		'linkedSpaceId' => 'int',
 		'metric' => '\Wallee\Sdk\Model\SubscriptionMetric',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-		'tierPricing' => 'string',
-		'type' => 'string',
+		'tierPricing' => '\Wallee\Sdk\Model\ProductMeteredTierPricing',
+		'type' => '\Wallee\Sdk\Model\ProductFeeType',
 		'version' => 'int'	);
 
 	/**
@@ -68,51 +68,17 @@ class ProductMeteredFee  {
 	}
 
 	
-	/**
-	 * Values of tierPricing.
-	 */
-	const TIER_PRICING_CHEAPEST_TIER_PRICING = 'CHEAPEST_TIER_PRICING';
-	const TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING = 'INCREMENTAL_DISCOUNT_PRICING';
-	
-	/**
-	 * Returns allowable values of tierPricing.
-	 *
-	 * @return string[]
-	 */
-	public function getTierPricingAllowableValues() {
-		return array(
-			self::TIER_PRICING_CHEAPEST_TIER_PRICING,
-			self::TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING,
-		);
-	}
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_METERED_FEE = 'METERED_FEE';
-	const TYPE_SETUP_FEE = 'SETUP_FEE';
-	const TYPE_PERIOD_FEE = 'PERIOD_FEE';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_METERED_FEE,
-			self::TYPE_SETUP_FEE,
-			self::TYPE_PERIOD_FEE,
-		);
-	}
-	
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductComponent
 	 */
 	private $component;
 
 	/**
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $description;
@@ -125,16 +91,22 @@ class ProductMeteredFee  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionMetric
 	 */
 	private $metric;
 
 	/**
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $name;
@@ -142,14 +114,14 @@ class ProductMeteredFee  {
 	/**
 	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ProductMeteredTierPricing
 	 */
 	private $tierPricing;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ProductFeeType
 	 */
 	private $type;
 
@@ -176,14 +148,17 @@ class ProductMeteredFee  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['metric']) && $data['metric'] != null) {
 			$this->setMetric($data['metric']);
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
+		}
+		if (isset($data['tierPricing']) && $data['tierPricing'] != null) {
+			$this->setTierPricing($data['tierPricing']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -193,6 +168,8 @@ class ProductMeteredFee  {
 
 	/**
 	 * Returns component.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
 	 */
@@ -214,6 +191,8 @@ class ProductMeteredFee  {
 
 	/**
 	 * Returns description.
+	 *
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -259,6 +238,8 @@ class ProductMeteredFee  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -271,7 +252,7 @@ class ProductMeteredFee  {
 	 * @param int $linkedSpaceId
 	 * @return ProductMeteredFee
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -279,6 +260,8 @@ class ProductMeteredFee  {
 
 	/**
 	 * Returns metric.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionMetric
 	 */
@@ -300,6 +283,8 @@ class ProductMeteredFee  {
 
 	/**
 	 * Returns name.
+	 *
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -324,7 +309,7 @@ class ProductMeteredFee  {
 	 *
 	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ProductMeteredTierPricing
 	 */
 	public function getTierPricing() {
 		return $this->tierPricing;
@@ -333,14 +318,10 @@ class ProductMeteredFee  {
 	/**
 	 * Sets tierPricing.
 	 *
-	 * @param string $tierPricing
+	 * @param \Wallee\Sdk\Model\ProductMeteredTierPricing $tierPricing
 	 * @return ProductMeteredFee
 	 */
-	protected function setTierPricing($tierPricing) {
-		$allowed_values = array('CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING');
-		if (!is_null($tierPricing) && (!in_array($tierPricing, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'tierPricing', must be one of 'CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING'");
-		}
+	public function setTierPricing($tierPricing) {
 		$this->tierPricing = $tierPricing;
 
 		return $this;
@@ -351,7 +332,7 @@ class ProductMeteredFee  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ProductFeeType
 	 */
 	public function getType() {
 		return $this->type;
@@ -360,14 +341,10 @@ class ProductMeteredFee  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\ProductFeeType $type
 	 * @return ProductMeteredFee
 	 */
-	protected function setType($type) {
-		$allowed_values = array('METERED_FEE', 'SETUP_FEE', 'PERIOD_FEE');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'METERED_FEE', 'SETUP_FEE', 'PERIOD_FEE'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -402,16 +379,6 @@ class ProductMeteredFee  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CHEAPEST_TIER_PRICING", "INCREMENTAL_DISCOUNT_PRICING");
-		if (!in_array($this->getTierPricing(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'tierPricing', must be one of #{allowed_values}.", 'tierPricing', $this);
-		}
-
-		$allowed_values = array("METERED_FEE", "SETUP_FEE", "PERIOD_FEE");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

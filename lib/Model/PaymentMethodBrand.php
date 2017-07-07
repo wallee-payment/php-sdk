@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentMethodBrand model
@@ -102,6 +102,8 @@ class PaymentMethodBrand  {
 	private $name;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $paymentMethod;
@@ -118,9 +120,6 @@ class PaymentMethodBrand  {
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
-		}
-		if (isset($data['paymentMethod']) && $data['paymentMethod'] != null) {
-			$this->setPaymentMethod($data['paymentMethod']);
 		}
 	}
 
@@ -243,6 +242,8 @@ class PaymentMethodBrand  {
 	/**
 	 * Returns paymentMethod.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getPaymentMethod() {
@@ -255,7 +256,7 @@ class PaymentMethodBrand  {
 	 * @param int $paymentMethod
 	 * @return PaymentMethodBrand
 	 */
-	public function setPaymentMethod($paymentMethod) {
+	protected function setPaymentMethod($paymentMethod) {
 		$this->paymentMethod = $paymentMethod;
 
 		return $this;

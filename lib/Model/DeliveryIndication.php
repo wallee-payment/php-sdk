@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * DeliveryIndication model
@@ -55,7 +55,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 		'manuallyDecidedBy' => 'int',
 		'manuallyDecidedOn' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\DeliveryIndicationState',
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction'	);
 
@@ -69,30 +69,10 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_NOT_SUITABLE = 'NOT_SUITABLE';
-	const STATE_MANUAL_CHECK_REQUIRED = 'MANUAL_CHECK_REQUIRED';
-	const STATE_SUITABLE = 'SUITABLE';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_NOT_SUITABLE,
-			self::STATE_MANUAL_CHECK_REQUIRED,
-			self::STATE_SUITABLE,
-		);
-	}
-	
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\DeliveryIndicationDecisionReason
 	 */
 	private $automaticDecisionReason;
@@ -142,7 +122,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\DeliveryIndicationState
 	 */
 	private $state;
 
@@ -154,6 +134,8 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	private $timeoutOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -170,6 +152,9 @@ class DeliveryIndication extends TransactionAwareEntity  {
 		if (isset($data['automaticDecisionReason']) && $data['automaticDecisionReason'] != null) {
 			$this->setAutomaticDecisionReason($data['automaticDecisionReason']);
 		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
 		}
@@ -178,6 +163,8 @@ class DeliveryIndication extends TransactionAwareEntity  {
 
 	/**
 	 * Returns automaticDecisionReason.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\DeliveryIndicationDecisionReason
 	 */
@@ -340,7 +327,7 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\DeliveryIndicationState
 	 */
 	public function getState() {
 		return $this->state;
@@ -349,14 +336,10 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\DeliveryIndicationState $state
 	 * @return DeliveryIndication
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'NOT_SUITABLE', 'MANUAL_CHECK_REQUIRED', 'SUITABLE');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'NOT_SUITABLE', 'MANUAL_CHECK_REQUIRED', 'SUITABLE'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -388,6 +371,8 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	/**
 	 * Returns transaction.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function getTransaction() {
@@ -413,11 +398,6 @@ class DeliveryIndication extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("PENDING", "NOT_SUITABLE", "MANUAL_CHECK_REQUIRED", "SUITABLE");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TokenVersion model
@@ -51,7 +51,7 @@ class TokenVersion  {
 		'activatedOn' => '\DateTime',
 		'billingAddress' => '\Wallee\Sdk\Model\Address',
 		'createdOn' => '\DateTime',
-		'environment' => 'string',
+		'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
 		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
@@ -62,7 +62,7 @@ class TokenVersion  {
 		'plannedPurgeDate' => '\DateTime',
 		'processorToken' => 'string',
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\TokenVersionState',
 		'token' => '\Wallee\Sdk\Model\Token',
 		'version' => 'int'	);
 
@@ -76,44 +76,6 @@ class TokenVersion  {
 	}
 
 	
-	/**
-	 * Values of environment.
-	 */
-	const ENVIRONMENT_PRODUCTION = 'PRODUCTION';
-	const ENVIRONMENT_TEST = 'TEST';
-	
-	/**
-	 * Returns allowable values of environment.
-	 *
-	 * @return string[]
-	 */
-	public function getEnvironmentAllowableValues() {
-		return array(
-			self::ENVIRONMENT_PRODUCTION,
-			self::ENVIRONMENT_TEST,
-		);
-	}
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_UNINITIALIZED = 'UNINITIALIZED';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_OBSOLETE = 'OBSOLETE';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_UNINITIALIZED,
-			self::STATE_ACTIVE,
-			self::STATE_OBSOLETE,
-		);
-	}
-	
 
 	/**
 	 * 
@@ -123,6 +85,8 @@ class TokenVersion  {
 	private $activatedOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Address
 	 */
 	private $billingAddress;
@@ -137,7 +101,7 @@ class TokenVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ChargeAttemptEnvironment
 	 */
 	private $environment;
 
@@ -163,6 +127,8 @@ class TokenVersion  {
 	private $language;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -182,6 +148,8 @@ class TokenVersion  {
 	private $obsoletedOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\PaymentConnectorConfiguration
 	 */
 	private $paymentConnectorConfiguration;
@@ -201,6 +169,8 @@ class TokenVersion  {
 	private $processorToken;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Address
 	 */
 	private $shippingAddress;
@@ -208,11 +178,13 @@ class TokenVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\TokenVersionState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Token
 	 */
 	private $token;
@@ -234,20 +206,23 @@ class TokenVersion  {
 		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
+		if (isset($data['environment']) && $data['environment'] != null) {
+			$this->setEnvironment($data['environment']);
+		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
 		if (isset($data['labels']) && $data['labels'] != null) {
 			$this->setLabels($data['labels']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['paymentConnectorConfiguration']) && $data['paymentConnectorConfiguration'] != null) {
 			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
 		}
 		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
 			$this->setShippingAddress($data['shippingAddress']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
@@ -283,6 +258,8 @@ class TokenVersion  {
 
 	/**
 	 * Returns billingAddress.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Address
 	 */
@@ -330,7 +307,7 @@ class TokenVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment
 	 */
 	public function getEnvironment() {
 		return $this->environment;
@@ -339,14 +316,10 @@ class TokenVersion  {
 	/**
 	 * Sets environment.
 	 *
-	 * @param string $environment
+	 * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $environment
 	 * @return TokenVersion
 	 */
-	protected function setEnvironment($environment) {
-		$allowed_values = array('PRODUCTION', 'TEST');
-		if (!is_null($environment) && (!in_array($environment, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'environment', must be one of 'PRODUCTION', 'TEST'");
-		}
+	public function setEnvironment($environment) {
 		$this->environment = $environment;
 
 		return $this;
@@ -424,6 +397,8 @@ class TokenVersion  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -436,7 +411,7 @@ class TokenVersion  {
 	 * @param int $linkedSpaceId
 	 * @return TokenVersion
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -490,6 +465,8 @@ class TokenVersion  {
 
 	/**
 	 * Returns paymentConnectorConfiguration.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
 	 */
@@ -558,6 +535,8 @@ class TokenVersion  {
 	/**
 	 * Returns shippingAddress.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Address
 	 */
 	public function getShippingAddress() {
@@ -581,7 +560,7 @@ class TokenVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\TokenVersionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -590,14 +569,10 @@ class TokenVersion  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\TokenVersionState $state
 	 * @return TokenVersion
 	 */
-	protected function setState($state) {
-		$allowed_values = array('UNINITIALIZED', 'ACTIVE', 'OBSOLETE');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'UNINITIALIZED', 'ACTIVE', 'OBSOLETE'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -605,6 +580,8 @@ class TokenVersion  {
 
 	/**
 	 * Returns token.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Token
 	 */
@@ -653,16 +630,6 @@ class TokenVersion  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("PRODUCTION", "TEST");
-		if (!in_array($this->getEnvironment(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'environment', must be one of #{allowed_values}.", 'environment', $this);
-		}
-
-		$allowed_values = array("UNINITIALIZED", "ACTIVE", "OBSOLETE");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

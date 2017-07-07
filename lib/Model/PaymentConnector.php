@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentConnector model
@@ -48,16 +48,16 @@ class PaymentConnector  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'dataCollectionType' => 'string',
+		'dataCollectionType' => '\Wallee\Sdk\Model\DataCollectionType',
 		'description' => 'map[string,string]',
 		'feature' => '\Wallee\Sdk\Model\Feature',
 		'id' => 'int',
 		'name' => 'map[string,string]',
 		'paymentMethod' => 'int',
 		'paymentMethodBrand' => '\Wallee\Sdk\Model\PaymentMethodBrand',
-		'primaryRiskTaker' => 'string',
+		'primaryRiskTaker' => '\Wallee\Sdk\Model\PaymentPrimaryRiskTaker',
 		'processor' => 'int',
-		'supportedCustomersPresences' => 'string[]',
+		'supportedCustomersPresences' => '\Wallee\Sdk\Model\CustomersPresence[]',
 		'supportedFeatures' => 'int[]'	);
 
 	/**
@@ -70,69 +70,11 @@ class PaymentConnector  {
 	}
 
 	
-	/**
-	 * Values of dataCollectionType.
-	 */
-	const DATA_COLLECTION_TYPE_ONSITE = 'ONSITE';
-	const DATA_COLLECTION_TYPE_OFFSITE = 'OFFSITE';
-	
-	/**
-	 * Returns allowable values of dataCollectionType.
-	 *
-	 * @return string[]
-	 */
-	public function getDataCollectionTypeAllowableValues() {
-		return array(
-			self::DATA_COLLECTION_TYPE_ONSITE,
-			self::DATA_COLLECTION_TYPE_OFFSITE,
-		);
-	}
-	
-	/**
-	 * Values of primaryRiskTaker.
-	 */
-	const PRIMARY_RISK_TAKER_CUSTOMER = 'CUSTOMER';
-	const PRIMARY_RISK_TAKER_MERCHANT = 'MERCHANT';
-	const PRIMARY_RISK_TAKER_THIRD_PARTY = 'THIRD_PARTY';
-	
-	/**
-	 * Returns allowable values of primaryRiskTaker.
-	 *
-	 * @return string[]
-	 */
-	public function getPrimaryRiskTakerAllowableValues() {
-		return array(
-			self::PRIMARY_RISK_TAKER_CUSTOMER,
-			self::PRIMARY_RISK_TAKER_MERCHANT,
-			self::PRIMARY_RISK_TAKER_THIRD_PARTY,
-		);
-	}
-	
-	/**
-	 * Values of supportedCustomersPresences.
-	 */
-	const SUPPORTED_CUSTOMERS_PRESENCES_NOT_PRESENT = 'NOT_PRESENT';
-	const SUPPORTED_CUSTOMERS_PRESENCES_VIRTUAL_PRESENT = 'VIRTUAL_PRESENT';
-	const SUPPORTED_CUSTOMERS_PRESENCES_PHYSICAL_PRESENT = 'PHYSICAL_PRESENT';
-	
-	/**
-	 * Returns allowable values of supportedCustomersPresences.
-	 *
-	 * @return string[]
-	 */
-	public function getSupportedCustomersPresencesAllowableValues() {
-		return array(
-			self::SUPPORTED_CUSTOMERS_PRESENCES_NOT_PRESENT,
-			self::SUPPORTED_CUSTOMERS_PRESENCES_VIRTUAL_PRESENT,
-			self::SUPPORTED_CUSTOMERS_PRESENCES_PHYSICAL_PRESENT,
-		);
-	}
-	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\DataCollectionType
 	 */
 	private $dataCollectionType;
 
@@ -144,6 +86,8 @@ class PaymentConnector  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Feature
 	 */
 	private $feature;
@@ -163,11 +107,15 @@ class PaymentConnector  {
 	private $name;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $paymentMethod;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\PaymentMethodBrand
 	 */
 	private $paymentMethodBrand;
@@ -175,11 +123,13 @@ class PaymentConnector  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\PaymentPrimaryRiskTaker
 	 */
 	private $primaryRiskTaker;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $processor;
@@ -187,11 +137,13 @@ class PaymentConnector  {
 	/**
 	 * 
 	 *
-	 * @var string[]
+	 * @var \Wallee\Sdk\Model\CustomersPresence[]
 	 */
 	private $supportedCustomersPresences;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $supportedFeatures;
@@ -203,6 +155,9 @@ class PaymentConnector  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['dataCollectionType']) && $data['dataCollectionType'] != null) {
+			$this->setDataCollectionType($data['dataCollectionType']);
+		}
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
@@ -212,14 +167,11 @@ class PaymentConnector  {
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['paymentMethod']) && $data['paymentMethod'] != null) {
-			$this->setPaymentMethod($data['paymentMethod']);
-		}
 		if (isset($data['paymentMethodBrand']) && $data['paymentMethodBrand'] != null) {
 			$this->setPaymentMethodBrand($data['paymentMethodBrand']);
 		}
-		if (isset($data['processor']) && $data['processor'] != null) {
-			$this->setProcessor($data['processor']);
+		if (isset($data['primaryRiskTaker']) && $data['primaryRiskTaker'] != null) {
+			$this->setPrimaryRiskTaker($data['primaryRiskTaker']);
 		}
 		if (isset($data['supportedCustomersPresences']) && $data['supportedCustomersPresences'] != null) {
 			$this->setSupportedCustomersPresences($data['supportedCustomersPresences']);
@@ -235,7 +187,7 @@ class PaymentConnector  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\DataCollectionType
 	 */
 	public function getDataCollectionType() {
 		return $this->dataCollectionType;
@@ -244,14 +196,10 @@ class PaymentConnector  {
 	/**
 	 * Sets dataCollectionType.
 	 *
-	 * @param string $dataCollectionType
+	 * @param \Wallee\Sdk\Model\DataCollectionType $dataCollectionType
 	 * @return PaymentConnector
 	 */
-	protected function setDataCollectionType($dataCollectionType) {
-		$allowed_values = array('ONSITE', 'OFFSITE');
-		if (!is_null($dataCollectionType) && (!in_array($dataCollectionType, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'dataCollectionType', must be one of 'ONSITE', 'OFFSITE'");
-		}
+	public function setDataCollectionType($dataCollectionType) {
 		$this->dataCollectionType = $dataCollectionType;
 
 		return $this;
@@ -282,6 +230,8 @@ class PaymentConnector  {
 
 	/**
 	 * Returns feature.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Feature
 	 */
@@ -350,6 +300,8 @@ class PaymentConnector  {
 	/**
 	 * Returns paymentMethod.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getPaymentMethod() {
@@ -362,7 +314,7 @@ class PaymentConnector  {
 	 * @param int $paymentMethod
 	 * @return PaymentConnector
 	 */
-	public function setPaymentMethod($paymentMethod) {
+	protected function setPaymentMethod($paymentMethod) {
 		$this->paymentMethod = $paymentMethod;
 
 		return $this;
@@ -370,6 +322,8 @@ class PaymentConnector  {
 
 	/**
 	 * Returns paymentMethodBrand.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\PaymentMethodBrand
 	 */
@@ -394,7 +348,7 @@ class PaymentConnector  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\PaymentPrimaryRiskTaker
 	 */
 	public function getPrimaryRiskTaker() {
 		return $this->primaryRiskTaker;
@@ -403,14 +357,10 @@ class PaymentConnector  {
 	/**
 	 * Sets primaryRiskTaker.
 	 *
-	 * @param string $primaryRiskTaker
+	 * @param \Wallee\Sdk\Model\PaymentPrimaryRiskTaker $primaryRiskTaker
 	 * @return PaymentConnector
 	 */
-	protected function setPrimaryRiskTaker($primaryRiskTaker) {
-		$allowed_values = array('CUSTOMER', 'MERCHANT', 'THIRD_PARTY');
-		if (!is_null($primaryRiskTaker) && (!in_array($primaryRiskTaker, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'primaryRiskTaker', must be one of 'CUSTOMER', 'MERCHANT', 'THIRD_PARTY'");
-		}
+	public function setPrimaryRiskTaker($primaryRiskTaker) {
 		$this->primaryRiskTaker = $primaryRiskTaker;
 
 		return $this;
@@ -418,6 +368,8 @@ class PaymentConnector  {
 
 	/**
 	 * Returns processor.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -431,7 +383,7 @@ class PaymentConnector  {
 	 * @param int $processor
 	 * @return PaymentConnector
 	 */
-	public function setProcessor($processor) {
+	protected function setProcessor($processor) {
 		$this->processor = $processor;
 
 		return $this;
@@ -442,7 +394,7 @@ class PaymentConnector  {
 	 *
 	 * 
 	 *
-	 * @return string[]
+	 * @return \Wallee\Sdk\Model\CustomersPresence[]
 	 */
 	public function getSupportedCustomersPresences() {
 		return $this->supportedCustomersPresences;
@@ -451,14 +403,10 @@ class PaymentConnector  {
 	/**
 	 * Sets supportedCustomersPresences.
 	 *
-	 * @param string[] $supportedCustomersPresences
+	 * @param \Wallee\Sdk\Model\CustomersPresence[] $supportedCustomersPresences
 	 * @return PaymentConnector
 	 */
 	public function setSupportedCustomersPresences($supportedCustomersPresences) {
-		$allowed_values = array('NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT');
-		if (!is_null($supportedCustomersPresences) && (array_diff($supportedCustomersPresences, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'supportedCustomersPresences', must be one of 'NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT'");
-		}
 		$this->supportedCustomersPresences = $supportedCustomersPresences;
 
 		return $this;
@@ -466,6 +414,8 @@ class PaymentConnector  {
 
 	/**
 	 * Returns supportedFeatures.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */
@@ -491,16 +441,6 @@ class PaymentConnector  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("ONSITE", "OFFSITE");
-		if (!in_array($this->getDataCollectionType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'dataCollectionType', must be one of #{allowed_values}.", 'dataCollectionType', $this);
-		}
-
-		$allowed_values = array("CUSTOMER", "MERCHANT", "THIRD_PARTY");
-		if (!in_array($this->getPrimaryRiskTaker(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'primaryRiskTaker', must be one of #{allowed_values}.", 'primaryRiskTaker', $this);
-		}
 
 	}
 

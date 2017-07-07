@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionMetricUsageReportCreate model
@@ -154,6 +154,8 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	/**
 	 * Returns metric.
 	 *
+	 * The metric usage report is linked to the metric for which the usage should be recorded.
+	 *
 	 * @return int
 	 */
 	public function getMetric() {
@@ -172,6 +174,8 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 
 	/**
 	 * Returns subscription.
+	 *
+	 * The subscription to which the usage is added to.
 	 *
 	 * @return int
 	 */
@@ -202,6 +206,12 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 		}
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
+		}
+		if ($this->getMetric() === null) {
+			throw new ValidationException("'metric' can't be null", 'metric', $this);
+		}
+		if ($this->getSubscription() === null) {
+			throw new ValidationException("'subscription' can't be null", 'subscription', $this);
 		}
 	}
 

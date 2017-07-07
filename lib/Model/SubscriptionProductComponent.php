@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductComponent model
@@ -79,6 +79,8 @@ class SubscriptionProductComponent  {
 	private $componentChangeWeight;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductComponentGroup
 	 */
 	private $componentGroup;
@@ -91,6 +93,8 @@ class SubscriptionProductComponent  {
 	private $defaultComponent;
 
 	/**
+	 * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $description;
@@ -103,16 +107,22 @@ class SubscriptionProductComponent  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * The component name is shown to the subscriber. It should describe in few words what the component does contain.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $name;
 
 	/**
+	 * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductComponentReference
 	 */
 	private $reference;
@@ -125,6 +135,8 @@ class SubscriptionProductComponent  {
 	private $sortOrder;
 
 	/**
+	 * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
+	 *
 	 * @var \Wallee\Sdk\Model\TaxClass
 	 */
 	private $taxClass;
@@ -151,9 +163,6 @@ class SubscriptionProductComponent  {
 		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
@@ -195,6 +204,8 @@ class SubscriptionProductComponent  {
 
 	/**
 	 * Returns componentGroup.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentGroup
 	 */
@@ -240,6 +251,8 @@ class SubscriptionProductComponent  {
 	/**
 	 * Returns description.
 	 *
+	 * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	public function getDescription() {
@@ -284,6 +297,8 @@ class SubscriptionProductComponent  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -296,7 +311,7 @@ class SubscriptionProductComponent  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductComponent
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -304,6 +319,8 @@ class SubscriptionProductComponent  {
 
 	/**
 	 * Returns name.
+	 *
+	 * The component name is shown to the subscriber. It should describe in few words what the component does contain.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -325,6 +342,8 @@ class SubscriptionProductComponent  {
 
 	/**
 	 * Returns reference.
+	 *
+	 * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference
 	 */
@@ -369,6 +388,8 @@ class SubscriptionProductComponent  {
 
 	/**
 	 * Returns taxClass.
+	 *
+	 * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
 	 *
 	 * @return \Wallee\Sdk\Model\TaxClass
 	 */

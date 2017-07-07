@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionSuspension model
@@ -50,7 +50,7 @@ class SubscriptionSuspension  {
 	private static $swaggerTypes = array(
 		'createdOn' => '\DateTime',
 		'effectiveEndDate' => '\DateTime',
-		'endAction' => 'string',
+		'endAction' => '\Wallee\Sdk\Model\SubscriptionSuspensionAction',
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
@@ -58,8 +58,8 @@ class SubscriptionSuspension  {
 		'periodBill' => 'int',
 		'plannedEndDate' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
-		'reason' => 'string',
-		'state' => 'string',
+		'reason' => '\Wallee\Sdk\Model\SubscriptionSuspensionReason',
+		'state' => '\Wallee\Sdk\Model\SubscriptionSuspensionState',
 		'subscription' => 'int',
 		'version' => 'int'	);
 
@@ -72,62 +72,6 @@ class SubscriptionSuspension  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of endAction.
-	 */
-	const END_ACTION_TERMINATE = 'TERMINATE';
-	const END_ACTION_REACTIVATE = 'REACTIVATE';
-	
-	/**
-	 * Returns allowable values of endAction.
-	 *
-	 * @return string[]
-	 */
-	public function getEndActionAllowableValues() {
-		return array(
-			self::END_ACTION_TERMINATE,
-			self::END_ACTION_REACTIVATE,
-		);
-	}
-	
-	/**
-	 * Values of reason.
-	 */
-	const REASON_FAILED_CHARGE = 'FAILED_CHARGE';
-	const REASON_SUBSCRIBER_INITIATED_REFUND = 'SUBSCRIBER_INITIATED_REFUND';
-	const REASON_MANUAL = 'MANUAL';
-	
-	/**
-	 * Returns allowable values of reason.
-	 *
-	 * @return string[]
-	 */
-	public function getReasonAllowableValues() {
-		return array(
-			self::REASON_FAILED_CHARGE,
-			self::REASON_SUBSCRIBER_INITIATED_REFUND,
-			self::REASON_MANUAL,
-		);
-	}
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_RUNNING = 'RUNNING';
-	const STATE_ENDED = 'ENDED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_RUNNING,
-			self::STATE_ENDED,
-		);
-	}
 	
 
 	/**
@@ -147,7 +91,7 @@ class SubscriptionSuspension  {
 	/**
 	 * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionSuspensionAction
 	 */
 	private $endAction;
 
@@ -166,6 +110,8 @@ class SubscriptionSuspension  {
 	private $language;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -178,6 +124,8 @@ class SubscriptionSuspension  {
 	private $note;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $periodBill;
@@ -199,18 +147,20 @@ class SubscriptionSuspension  {
 	/**
 	 * The suspension reason indicates why a suspension has been created.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionSuspensionReason
 	 */
 	private $reason;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionSuspensionState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $subscription;
@@ -229,17 +179,17 @@ class SubscriptionSuspension  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['endAction']) && $data['endAction'] != null) {
+			$this->setEndAction($data['endAction']);
+		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['reason']) && $data['reason'] != null) {
+			$this->setReason($data['reason']);
 		}
-		if (isset($data['periodBill']) && $data['periodBill'] != null) {
-			$this->setPeriodBill($data['periodBill']);
-		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
-			$this->setSubscription($data['subscription']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -298,7 +248,7 @@ class SubscriptionSuspension  {
 	 *
 	 * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspensionAction
 	 */
 	public function getEndAction() {
 		return $this->endAction;
@@ -307,14 +257,10 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets endAction.
 	 *
-	 * @param string $endAction
+	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionAction $endAction
 	 * @return SubscriptionSuspension
 	 */
-	protected function setEndAction($endAction) {
-		$allowed_values = array('TERMINATE', 'REACTIVATE');
-		if (!is_null($endAction) && (!in_array($endAction, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'endAction', must be one of 'TERMINATE', 'REACTIVATE'");
-		}
+	public function setEndAction($endAction) {
 		$this->endAction = $endAction;
 
 		return $this;
@@ -369,6 +315,8 @@ class SubscriptionSuspension  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -381,7 +329,7 @@ class SubscriptionSuspension  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionSuspension
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -413,6 +361,8 @@ class SubscriptionSuspension  {
 	/**
 	 * Returns periodBill.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getPeriodBill() {
@@ -425,7 +375,7 @@ class SubscriptionSuspension  {
 	 * @param int $periodBill
 	 * @return SubscriptionSuspension
 	 */
-	public function setPeriodBill($periodBill) {
+	protected function setPeriodBill($periodBill) {
 		$this->periodBill = $periodBill;
 
 		return $this;
@@ -482,7 +432,7 @@ class SubscriptionSuspension  {
 	 *
 	 * The suspension reason indicates why a suspension has been created.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspensionReason
 	 */
 	public function getReason() {
 		return $this->reason;
@@ -491,14 +441,10 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets reason.
 	 *
-	 * @param string $reason
+	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionReason $reason
 	 * @return SubscriptionSuspension
 	 */
-	protected function setReason($reason) {
-		$allowed_values = array('FAILED_CHARGE', 'SUBSCRIBER_INITIATED_REFUND', 'MANUAL');
-		if (!is_null($reason) && (!in_array($reason, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'reason', must be one of 'FAILED_CHARGE', 'SUBSCRIBER_INITIATED_REFUND', 'MANUAL'");
-		}
+	public function setReason($reason) {
 		$this->reason = $reason;
 
 		return $this;
@@ -509,7 +455,7 @@ class SubscriptionSuspension  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionSuspensionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -518,14 +464,10 @@ class SubscriptionSuspension  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionState $state
 	 * @return SubscriptionSuspension
 	 */
-	protected function setState($state) {
-		$allowed_values = array('RUNNING', 'ENDED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'RUNNING', 'ENDED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -533,6 +475,8 @@ class SubscriptionSuspension  {
 
 	/**
 	 * Returns subscription.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -546,7 +490,7 @@ class SubscriptionSuspension  {
 	 * @param int $subscription
 	 * @return SubscriptionSuspension
 	 */
-	public function setSubscription($subscription) {
+	protected function setSubscription($subscription) {
 		$this->subscription = $subscription;
 
 		return $this;
@@ -581,21 +525,6 @@ class SubscriptionSuspension  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("TERMINATE", "REACTIVATE");
-		if (!in_array($this->getEndAction(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'endAction', must be one of #{allowed_values}.", 'endAction', $this);
-		}
-
-		$allowed_values = array("FAILED_CHARGE", "SUBSCRIBER_INITIATED_REFUND", "MANUAL");
-		if (!in_array($this->getReason(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'reason', must be one of #{allowed_values}.", 'reason', $this);
-		}
-
-		$allowed_values = array("RUNNING", "ENDED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

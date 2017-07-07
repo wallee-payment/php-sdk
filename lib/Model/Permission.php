@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Permission model
@@ -77,6 +77,8 @@ class Permission  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $feature;
@@ -110,11 +112,15 @@ class Permission  {
 	private $name;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $parent;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $pathToRoot;
@@ -136,14 +142,8 @@ class Permission  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['feature']) && $data['feature'] != null) {
-			$this->setFeature($data['feature']);
-		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
-		}
-		if (isset($data['parent']) && $data['parent'] != null) {
-			$this->setParent($data['parent']);
 		}
 		if (isset($data['pathToRoot']) && $data['pathToRoot'] != null) {
 			$this->setPathToRoot($data['pathToRoot']);
@@ -180,6 +180,8 @@ class Permission  {
 	/**
 	 * Returns feature.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getFeature() {
@@ -192,7 +194,7 @@ class Permission  {
 	 * @param int $feature
 	 * @return Permission
 	 */
-	public function setFeature($feature) {
+	protected function setFeature($feature) {
 		$this->feature = $feature;
 
 		return $this;
@@ -293,6 +295,8 @@ class Permission  {
 	/**
 	 * Returns parent.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getParent() {
@@ -305,7 +309,7 @@ class Permission  {
 	 * @param int $parent
 	 * @return Permission
 	 */
-	public function setParent($parent) {
+	protected function setParent($parent) {
 		$this->parent = $parent;
 
 		return $this;
@@ -313,6 +317,8 @@ class Permission  {
 
 	/**
 	 * Returns pathToRoot.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */

@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Service;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\ApiException;
-use \Wallee\Sdk\ApiResponse;
-use \Wallee\Sdk\Http\HttpRequest;
+use Wallee\Sdk\ApiClient;
+use Wallee\Sdk\ApiException;
+use Wallee\Sdk\ApiResponse;
+use Wallee\Sdk\Http\HttpRequest;
 
 /**
  * SubscriptionProductPeriodFeeService service
@@ -170,7 +170,7 @@ class SubscriptionProductPeriodFeeService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductPeriodFeeUpdate $entity The period fee object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\ProductPeriodFeeUpdate
+	 * @return \Wallee\Sdk\Model\ProductPeriodFee
 	 */
 	public function create($spaceId, $entity) {
 		return $this->createWithHttpInfo($spaceId, $entity)->getData();
@@ -237,14 +237,14 @@ class SubscriptionProductPeriodFeeService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\ProductPeriodFeeUpdate',
+				'\Wallee\Sdk\Model\ProductPeriodFee',
 				'/subscription-product-period-fee/create'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductPeriodFeeUpdate', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductPeriodFee', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductPeriodFeeUpdate', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductPeriodFee', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -564,7 +564,7 @@ class SubscriptionProductPeriodFeeService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductPeriodFeeUpdate $entity The period fee object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\ProductPeriodFeeUpdate
+	 * @return \Wallee\Sdk\Model\ProductPeriodFee
 	 */
 	public function update($spaceId, $entity) {
 		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
@@ -631,14 +631,14 @@ class SubscriptionProductPeriodFeeService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\ProductPeriodFeeUpdate',
+				'\Wallee\Sdk\Model\ProductPeriodFee',
 				'/subscription-product-period-fee/update'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductPeriodFeeUpdate', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductPeriodFee', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductPeriodFeeUpdate', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductPeriodFee', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 409:

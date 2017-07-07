@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentProcessorConfiguration model
@@ -53,7 +53,7 @@ class PaymentProcessorConfiguration  {
 		'name' => 'string',
 		'plannedPurgeDate' => '\DateTime',
 		'processor' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'version' => 'int'	);
 
 	/**
@@ -66,30 +66,6 @@ class PaymentProcessorConfiguration  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -99,6 +75,8 @@ class PaymentProcessorConfiguration  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -118,6 +96,8 @@ class PaymentProcessorConfiguration  {
 	private $plannedPurgeDate;
 
 	/**
+	 * A processor handles the connection to a third part company (a Payment Service Provider) that technically manages the transaction and therefore processes the payment. For the same processor multiple processor configuration can be setup.
+	 *
 	 * @var int
 	 */
 	private $processor;
@@ -125,7 +105,7 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
@@ -146,11 +126,8 @@ class PaymentProcessorConfiguration  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['processor']) && $data['processor'] != null) {
-			$this->setProcessor($data['processor']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -184,6 +161,8 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -196,7 +175,7 @@ class PaymentProcessorConfiguration  {
 	 * @param int $linkedSpaceId
 	 * @return PaymentProcessorConfiguration
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -251,6 +230,8 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Returns processor.
 	 *
+	 * A processor handles the connection to a third part company (a Payment Service Provider) that technically manages the transaction and therefore processes the payment. For the same processor multiple processor configuration can be setup.
+	 *
 	 * @return int
 	 */
 	public function getProcessor() {
@@ -263,7 +244,7 @@ class PaymentProcessorConfiguration  {
 	 * @param int $processor
 	 * @return PaymentProcessorConfiguration
 	 */
-	public function setProcessor($processor) {
+	protected function setProcessor($processor) {
 		$this->processor = $processor;
 
 		return $this;
@@ -274,7 +255,7 @@ class PaymentProcessorConfiguration  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -283,14 +264,10 @@ class PaymentProcessorConfiguration  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return PaymentProcessorConfiguration
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -325,11 +302,6 @@ class PaymentProcessorConfiguration  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

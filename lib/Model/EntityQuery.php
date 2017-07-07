@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * EntityQuery model
@@ -66,6 +66,8 @@ class EntityQuery  {
 	
 
 	/**
+	 * The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
+	 *
 	 * @var \Wallee\Sdk\Model\EntityQueryFilter
 	 */
 	private $filter;
@@ -125,6 +127,8 @@ class EntityQuery  {
 
 	/**
 	 * Returns filter.
+	 *
+	 * The filter node defines the root filter node of the query. The root node may contain multiple sub nodes with different filters in it.
 	 *
 	 * @return \Wallee\Sdk\Model\EntityQueryFilter
 	 */

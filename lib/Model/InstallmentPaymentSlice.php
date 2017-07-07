@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * InstallmentPaymentSlice model
@@ -53,7 +53,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 		'installmentPayment' => '\Wallee\Sdk\Model\InstallmentPayment',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\InstallmentPaymentSliceState',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'version' => 'int'	);
 
@@ -66,34 +66,6 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_SCHEDULED = 'SCHEDULED';
-	const STATE_CANCELED = 'CANCELED';
-	const STATE_PREPARE_PROCESSING = 'PREPARE_PROCESSING';
-	const STATE_PROCESSING = 'PROCESSING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_SCHEDULED,
-			self::STATE_CANCELED,
-			self::STATE_PREPARE_PROCESSING,
-			self::STATE_PROCESSING,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
 	
 
 	/**
@@ -111,6 +83,8 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	private $createdOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\InstallmentPayment
 	 */
 	private $installmentPayment;
@@ -132,11 +106,13 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\InstallmentPaymentSliceState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -162,6 +138,9 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 		}
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
@@ -217,6 +196,8 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 
 	/**
 	 * Returns installmentPayment.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\InstallmentPayment
 	 */
@@ -287,7 +268,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\InstallmentPaymentSliceState
 	 */
 	public function getState() {
 		return $this->state;
@@ -296,14 +277,10 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\InstallmentPaymentSliceState $state
 	 * @return InstallmentPaymentSlice
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'SCHEDULED', 'CANCELED', 'PREPARE_PROCESSING', 'PROCESSING', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'SCHEDULED', 'CANCELED', 'PREPARE_PROCESSING', 'PROCESSING', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -311,6 +288,8 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 
 	/**
 	 * Returns transaction.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
@@ -360,11 +339,6 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("CREATE", "SCHEDULED", "CANCELED", "PREPARE_PROCESSING", "PROCESSING", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

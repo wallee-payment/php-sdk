@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Service;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\ApiException;
-use \Wallee\Sdk\ApiResponse;
-use \Wallee\Sdk\Http\HttpRequest;
+use Wallee\Sdk\ApiClient;
+use Wallee\Sdk\ApiException;
+use Wallee\Sdk\ApiResponse;
+use Wallee\Sdk\Http\HttpRequest;
 
 /**
  * TransactionService service
@@ -70,7 +70,7 @@ class TransactionService {
 	/**
 	 * Operation buildJavaScriptUrl
 	 *
-	 * buildJavaScriptUrl
+	 * Build JavaScript URL
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
@@ -84,7 +84,7 @@ class TransactionService {
 	/**
 	 * Operation buildJavaScriptUrlWithHttpInfo
 	 *
-	 * buildJavaScriptUrl
+	 * Build JavaScript URL
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
@@ -169,9 +169,101 @@ class TransactionService {
 	}
 
 	/**
+	 * Operation buildMobileSdkUrlWithCredentials
+	 *
+	 * Build Mobile SDK URL with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return string
+	 */
+	public function buildMobileSdkUrlWithCredentials($credentials) {
+		return $this->buildMobileSdkUrlWithCredentialsWithHttpInfo($credentials)->getData();
+	}
+
+	/**
+	 * Operation buildMobileSdkUrlWithCredentialsWithHttpInfo
+	 *
+	 * Build Mobile SDK URL with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function buildMobileSdkUrlWithCredentialsWithHttpInfo($credentials) {
+		// verify the required parameter 'credentials' is set
+		if ($credentials === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling buildMobileSdkUrlWithCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+
+		// query params
+		$queryParams = array();
+		if ($credentials !== null) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
+
+		// path params
+		$resourcePath = "/transaction/buildMobileSdkUrlWithCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'string',
+				'/transaction/buildMobileSdkUrlWithCredentials'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'string', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 409:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation buildPaymentPageUrl
 	 *
-	 * buildPaymentPageUrl
+	 * Build Payment Page URL
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
@@ -185,7 +277,7 @@ class TransactionService {
 	/**
 	 * Operation buildPaymentPageUrlWithHttpInfo
 	 *
-	 * buildPaymentPageUrl
+	 * Build Payment Page URL
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
@@ -272,7 +364,7 @@ class TransactionService {
 	/**
 	 * Operation confirm
 	 *
-	 * confirm
+	 * Confirm
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $transactionModel The transaction JSON object to update and confirm. (required)
@@ -286,7 +378,7 @@ class TransactionService {
 	/**
 	 * Operation confirmWithHttpInfo
 	 *
-	 * confirm
+	 * Confirm
 	 *
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $transactionModel The transaction JSON object to update and confirm. (required)
@@ -475,7 +567,7 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\TransactionCreate
+	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function create($spaceId, $transaction) {
 		return $this->createWithHttpInfo($spaceId, $transaction)->getData();
@@ -542,14 +634,292 @@ class TransactionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\TransactionCreate',
+				'\Wallee\Sdk\Model\Transaction',
 				'/transaction/create'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\TransactionCreate', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\TransactionCreate', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation createTransactionCredentials
+	 *
+	 * Create Transaction Credentials
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the transaction which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return string
+	 */
+	public function createTransactionCredentials($spaceId, $id) {
+		return $this->createTransactionCredentialsWithHttpInfo($spaceId, $id)->getData();
+	}
+
+	/**
+	 * Operation createTransactionCredentialsWithHttpInfo
+	 *
+	 * Create Transaction Credentials
+	 *
+	 * @param int $spaceId  (required)
+	 * @param int $id The id of the transaction which should be returned. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function createTransactionCredentialsWithHttpInfo($spaceId, $id) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling createTransactionCredentials');
+		}
+		// verify the required parameter 'id' is set
+		if ($id === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling createTransactionCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+		if ($id !== null) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		}
+
+		// path params
+		$resourcePath = "/transaction/createTransactionCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'string',
+				'/transaction/createTransactionCredentials'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'string', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation deleteOneClickTokenWithCredentials
+	 *
+	 * Delete One-Click Token with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @param int $tokenId The token ID will be used to find the token which should be removed. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return void
+	 */
+	public function deleteOneClickTokenWithCredentials($credentials, $tokenId) {
+		return $this->deleteOneClickTokenWithCredentialsWithHttpInfo($credentials, $tokenId)->getData();
+	}
+
+	/**
+	 * Operation deleteOneClickTokenWithCredentialsWithHttpInfo
+	 *
+	 * Delete One-Click Token with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @param int $tokenId The token ID will be used to find the token which should be removed. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function deleteOneClickTokenWithCredentialsWithHttpInfo($credentials, $tokenId) {
+		// verify the required parameter 'credentials' is set
+		if ($credentials === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling deleteOneClickTokenWithCredentials');
+		}
+		// verify the required parameter 'tokenId' is set
+		if ($tokenId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $tokenId when calling deleteOneClickTokenWithCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+
+		// query params
+		$queryParams = array();
+		if ($credentials !== null) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
+		if ($tokenId !== null) {
+			$queryParams['tokenId'] = $this->apiClient->getSerializer()->toQueryValue($tokenId);
+		}
+
+		// path params
+		$resourcePath = "/transaction/deleteOneClickTokenWithCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				null,
+				'/transaction/deleteOneClickTokenWithCredentials'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation fetchOneClickTokensWithCredentials
+	 *
+	 * Fetch One Click Tokens with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\TokenVersion[]
+	 */
+	public function fetchOneClickTokensWithCredentials($credentials) {
+		return $this->fetchOneClickTokensWithCredentialsWithHttpInfo($credentials)->getData();
+	}
+
+	/**
+	 * Operation fetchOneClickTokensWithCredentialsWithHttpInfo
+	 *
+	 * Fetch One Click Tokens with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function fetchOneClickTokensWithCredentialsWithHttpInfo($credentials) {
+		// verify the required parameter 'credentials' is set
+		if ($credentials === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling fetchOneClickTokensWithCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+
+		// query params
+		$queryParams = array();
+		if ($credentials !== null) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
+
+		// path params
+		$resourcePath = "/transaction/fetchOneClickTokensWithCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\TokenVersion[]',
+				'/transaction/fetchOneClickTokensWithCredentials'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\TokenVersion[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\TokenVersion[]', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -569,7 +939,7 @@ class TransactionService {
 	/**
 	 * Operation fetchPossiblePaymentMethods
 	 *
-	 * fetchPossiblePaymentMethods
+	 * Fetch Possible Payment Methods
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
@@ -583,7 +953,7 @@ class TransactionService {
 	/**
 	 * Operation fetchPossiblePaymentMethodsWithHttpInfo
 	 *
-	 * fetchPossiblePaymentMethods
+	 * Fetch Possible Payment Methods
 	 *
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
@@ -641,6 +1011,94 @@ class TransactionService {
 				$headerParams,
 				'\Wallee\Sdk\Model\PaymentMethodConfiguration[]',
 				'/transaction/fetchPossiblePaymentMethods'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\PaymentMethodConfiguration[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\PaymentMethodConfiguration[]', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation fetchPossiblePaymentMethodsWithCredentials
+	 *
+	 * Fetch Possible Payment Methods with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\PaymentMethodConfiguration[]
+	 */
+	public function fetchPossiblePaymentMethodsWithCredentials($credentials) {
+		return $this->fetchPossiblePaymentMethodsWithCredentialsWithHttpInfo($credentials)->getData();
+	}
+
+	/**
+	 * Operation fetchPossiblePaymentMethodsWithCredentialsWithHttpInfo
+	 *
+	 * Fetch Possible Payment Methods with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function fetchPossiblePaymentMethodsWithCredentialsWithHttpInfo($credentials) {
+		// verify the required parameter 'credentials' is set
+		if ($credentials === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling fetchPossiblePaymentMethodsWithCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($credentials !== null) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
+
+		// path params
+		$resourcePath = "/transaction/fetchPossiblePaymentMethodsWithCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\PaymentMethodConfiguration[]',
+				'/transaction/fetchPossiblePaymentMethodsWithCredentials'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\PaymentMethodConfiguration[]', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -955,6 +1413,103 @@ class TransactionService {
 	}
 
 	/**
+	 * Operation processOneClickTokenWithCredentials
+	 *
+	 * Process One-Click Token with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @param int $tokenId The token ID is used to load the corresponding token and to process the transaction with it. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\Transaction
+	 */
+	public function processOneClickTokenWithCredentials($credentials, $tokenId) {
+		return $this->processOneClickTokenWithCredentialsWithHttpInfo($credentials, $tokenId)->getData();
+	}
+
+	/**
+	 * Operation processOneClickTokenWithCredentialsWithHttpInfo
+	 *
+	 * Process One-Click Token with Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @param int $tokenId The token ID is used to load the corresponding token and to process the transaction with it. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function processOneClickTokenWithCredentialsWithHttpInfo($credentials, $tokenId) {
+		// verify the required parameter 'credentials' is set
+		if ($credentials === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling processOneClickTokenWithCredentials');
+		}
+		// verify the required parameter 'tokenId' is set
+		if ($tokenId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $tokenId when calling processOneClickTokenWithCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
+
+		// query params
+		$queryParams = array();
+		if ($credentials !== null) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
+		if ($tokenId !== null) {
+			$queryParams['tokenId'] = $this->apiClient->getSerializer()->toQueryValue($tokenId);
+		}
+
+		// path params
+		$resourcePath = "/transaction/processOneClickTokenWithCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\Transaction',
+				'/transaction/processOneClickTokenWithCredentials'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation read
 	 *
 	 * Read
@@ -1029,6 +1584,94 @@ class TransactionService {
 				$headerParams,
 				'\Wallee\Sdk\Model\Transaction',
 				'/transaction/read'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation readWithCredentials
+	 *
+	 * Read With Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return \Wallee\Sdk\Model\Transaction
+	 */
+	public function readWithCredentials($credentials) {
+		return $this->readWithCredentialsWithHttpInfo($credentials)->getData();
+	}
+
+	/**
+	 * Operation readWithCredentialsWithHttpInfo
+	 *
+	 * Read With Credentials
+	 *
+	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @return ApiResponse
+	 */
+	public function readWithCredentialsWithHttpInfo($credentials) {
+		// verify the required parameter 'credentials' is set
+		if ($credentials === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $credentials when calling readWithCredentials');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($credentials !== null) {
+			$queryParams['credentials'] = $this->apiClient->getSerializer()->toQueryValue($credentials);
+		}
+
+		// path params
+		$resourcePath = "/transaction/readWithCredentials";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\Transaction',
+				'/transaction/readWithCredentials'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -1158,7 +1801,7 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\TransactionPending
+	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function update($spaceId, $entity) {
 		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
@@ -1225,14 +1868,14 @@ class TransactionService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\TransactionPending',
+				'\Wallee\Sdk\Model\Transaction',
 				'/transaction/update'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\TransactionPending', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Transaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\TransactionPending', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\Transaction', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 409:

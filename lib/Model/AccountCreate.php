@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * AccountCreate model
@@ -79,7 +79,9 @@ class AccountCreate extends AccountUpdate  {
 	/**
 	 * Returns parentAccount.
 	 *
-	 * @return \Wallee\Sdk\Model\Account
+	 * The account which is responsible for administering the account.
+	 *
+	 * @return int
 	 */
 	public function getParentAccount() {
 		return parent::getParentAccount();
@@ -88,7 +90,7 @@ class AccountCreate extends AccountUpdate  {
 	/**
 	 * Sets parentAccount.
 	 *
-	 * @param \Wallee\Sdk\Model\Account $parentAccount
+	 * @param int $parentAccount
 	 * @return AccountCreate
 	 */
 	public function setParentAccount($parentAccount) {

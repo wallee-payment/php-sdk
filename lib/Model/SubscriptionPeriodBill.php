@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionPeriodBill model
@@ -56,7 +56,7 @@ class SubscriptionPeriodBill  {
 		'periodStartDate' => '\DateTime',
 		'plannedPeriodEndDate' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionPeriodBillState',
 		'subscriptionVersion' => '\Wallee\Sdk\Model\SubscriptionVersion',
 		'version' => 'int'	);
 
@@ -69,24 +69,6 @@ class SubscriptionPeriodBill  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_BILLED = 'BILLED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_BILLED,
-		);
-	}
 	
 
 	/**
@@ -118,6 +100,8 @@ class SubscriptionPeriodBill  {
 	private $language;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -146,11 +130,13 @@ class SubscriptionPeriodBill  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionPeriodBillState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionVersion
 	 */
 	private $subscriptionVersion;
@@ -172,8 +158,8 @@ class SubscriptionPeriodBill  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['subscriptionVersion']) && $data['subscriptionVersion'] != null) {
 			$this->setSubscriptionVersion($data['subscriptionVersion']);
@@ -279,6 +265,8 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -291,7 +279,7 @@ class SubscriptionPeriodBill  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionPeriodBill
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -371,7 +359,7 @@ class SubscriptionPeriodBill  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionPeriodBillState
 	 */
 	public function getState() {
 		return $this->state;
@@ -380,14 +368,10 @@ class SubscriptionPeriodBill  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionPeriodBillState $state
 	 * @return SubscriptionPeriodBill
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'BILLED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'BILLED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -395,6 +379,8 @@ class SubscriptionPeriodBill  {
 
 	/**
 	 * Returns subscriptionVersion.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionVersion
 	 */
@@ -443,11 +429,6 @@ class SubscriptionPeriodBill  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("PENDING", "BILLED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

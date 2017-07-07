@@ -21,8 +21,7 @@
 
 namespace Wallee\Sdk\Http;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\Http\ConnectionException;
+use Wallee\Sdk\ApiClient;
 
 /**
  * This class sends API calls via a socket.
@@ -162,7 +161,7 @@ final class SocketHttpClient implements IHttpClient {
 	 * We need this method because neither fread nor stream_get_contents do respect timeouts.
 	 *
 	 * @param ApiClient $apiClient the API client instance
-	 * @param socket $socket the socket from which should be read
+	 * @param resource $socket the socket from which should be read
 	 * @param int $maxNumberOfBytes the number of bytes to read
 	 * @throws ConnectionException
 	 * @return string
@@ -200,7 +199,7 @@ final class SocketHttpClient implements IHttpClient {
 	 * configured.
 	 *
 	 * @param ApiClient $apiClient the API client instance
-	 * @param socket $socket the socket from which should be read
+	 * @param resource $socket the socket from which should be read
 	 * @param int $maxNumberOfBytes the number of bytes to read
 	 * @throws ConnectionException
 	 * @return string
@@ -237,7 +236,7 @@ final class SocketHttpClient implements IHttpClient {
 	 * @param ApiClient $apiClient the API client instance
 	 * @param HttpRequest $request the HTTP request
 	 * @throws ConnectionException
-	 * @return stream
+	 * @return resource
 	 */
 	private function startStreamSocket(ApiClient $apiClient, HttpRequest $request) {
 		$this->configureRequest($request);
@@ -285,7 +284,7 @@ final class SocketHttpClient implements IHttpClient {
 	 * @param ApiClient $apiClient the API client instance
 	 * @param HttpRequest $request the HTTP request
 	 * @throws ConnectionException
-	 * @return stream resource
+	 * @return resource
 	 */
 	private function createSocketStream(ApiClient $apiClient, HttpRequest $request) {
 		if ($request->isSecureConnection()) {
@@ -352,13 +351,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		$possibleTransportProtocols = stream_get_transports();
 		if (!in_array($rs, $possibleTransportProtocols)) {
-			throw new \Exception(
-					Customweb_Core_String::_(
-							"The enforced SSL protocol is '@actual'. But this protocol is not supported by the web server. Supported stream protocols by the web server are @supported.")->format(
-							array(
-								'@actual' => $rs,
-								'@supported' => implode(',', $possibleTransportProtocols),
-							))->toString());
+			throw new \Exception("The enforced SSL protocol is '" . $rs . "'. But this protocol is not supported by the web server. Supported stream protocols by the web server are " . implode(', ', $possibleTransportProtocols) . ".");
 		}
 
 		return $rs;

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionMetricType model
@@ -72,6 +72,8 @@ class SubscriptionMetricType  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Feature
 	 */
 	private $feature;
@@ -134,6 +136,8 @@ class SubscriptionMetricType  {
 
 	/**
 	 * Returns feature.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Feature
 	 */

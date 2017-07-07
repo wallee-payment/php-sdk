@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ProductMeteredFeeUpdate model
@@ -60,24 +60,6 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	}
 
 	
-	/**
-	 * Values of tierPricing.
-	 */
-	const TIER_PRICING_CHEAPEST_TIER_PRICING = 'CHEAPEST_TIER_PRICING';
-	const TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING = 'INCREMENTAL_DISCOUNT_PRICING';
-	
-	/**
-	 * Returns allowable values of tierPricing.
-	 *
-	 * @return string[]
-	 */
-	public function getTierPricingAllowableValues() {
-		return array(
-			self::TIER_PRICING_CHEAPEST_TIER_PRICING,
-			self::TIER_PRICING_INCREMENTAL_DISCOUNT_PRICING,
-		);
-	}
-	
 
 
 	/**
@@ -103,13 +85,21 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 		if (isset($data['tierPricing']) && $data['tierPricing'] != null) {
 			$this->setTierPricing($data['tierPricing']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns component.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getComponent() {
 		return parent::getComponent();
@@ -118,7 +108,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Sets component.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+	 * @param int $component
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setComponent($component) {
@@ -128,7 +118,9 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Returns description.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getDescription() {
 		return parent::getDescription();
@@ -137,7 +129,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Sets description.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setDescription($description) {
@@ -147,7 +139,9 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Returns metric.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionMetric
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getMetric() {
 		return parent::getMetric();
@@ -156,7 +150,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Sets metric.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionMetric $metric
+	 * @param int $metric
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setMetric($metric) {
@@ -166,7 +160,9 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Returns name.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getName() {
 		return parent::getName();
@@ -175,7 +171,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Sets name.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setName($name) {
@@ -187,7 +183,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 *
 	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ProductMeteredTierPricing
 	 */
 	public function getTierPricing() {
 		return parent::getTierPricing();
@@ -196,15 +192,53 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	/**
 	 * Sets tierPricing.
 	 *
-	 * @param string $tierPricing
+	 * @param \Wallee\Sdk\Model\ProductMeteredTierPricing $tierPricing
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setTierPricing($tierPricing) {
-		$allowed_values = array('CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING');
-		if ((!in_array($tierPricing, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'tierPricing', must be one of 'CHEAPEST_TIER_PRICING', 'INCREMENTAL_DISCOUNT_PRICING'");
-		}
 		return parent::setTierPricing($tierPricing);
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
 	}
 
 	/**
@@ -215,14 +249,12 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getTierPricing() === null) {
-			throw new ValidationException("'tierPricing' can't be null", 'tierPricing', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
 		}
-		$allowed_values = array("CHEAPEST_TIER_PRICING", "INCREMENTAL_DISCOUNT_PRICING");
-		if (!in_array($this->getTierPricing(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'tierPricing', must be one of #{allowed_values}.", 'tierPricing', $this);
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
-
 	}
 
 	/**

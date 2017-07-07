@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Http;
 
-use \Wallee\Sdk\ObjectSerializer;
+use Wallee\Sdk\ObjectSerializer;
 
 /**
  * This class represents an HTTP request.
@@ -301,7 +301,7 @@ final class HttpRequest {
 	 * Sets the user agent header.
 	 *
 	 * @param string $userAgent the user agent header value
-	 * @return Customweb_Core_Http_Request
+	 * @return HttpRequest
 	 */
 	public function setUserAgent($userAgent) {
 		$this->userAgent = $userAgent;

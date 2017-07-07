@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Space model
@@ -58,7 +58,7 @@ class Space  {
 		'postalAddress' => '\Wallee\Sdk\Model\SpaceAddress',
 		'requestLimit' => 'int',
 		'restrictedActive' => 'bool',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'technicalContactAddresses' => 'string[]',
 		'timeZone' => 'string',
 		'version' => 'int'	);
@@ -73,32 +73,10 @@ class Space  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
+	 * The account to which the space belongs to.
+	 *
 	 * @var \Wallee\Sdk\Model\Account
 	 */
 	private $account;
@@ -118,6 +96,8 @@ class Space  {
 	private $activeOrRestrictedActive;
 
 	/**
+	 * The database in which the space's data are stored in.
+	 *
 	 * @var \Wallee\Sdk\Model\TenantDatabase
 	 */
 	private $database;
@@ -144,6 +124,8 @@ class Space  {
 	private $plannedPurgeDate;
 
 	/**
+	 * The address to use in communication with clients for example in email, documents etc.
+	 *
 	 * @var \Wallee\Sdk\Model\SpaceAddress
 	 */
 	private $postalAddress;
@@ -165,7 +147,7 @@ class Space  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
@@ -209,6 +191,9 @@ class Space  {
 		if (isset($data['postalAddress']) && $data['postalAddress'] != null) {
 			$this->setPostalAddress($data['postalAddress']);
 		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 		if (isset($data['technicalContactAddresses']) && $data['technicalContactAddresses'] != null) {
 			$this->setTechnicalContactAddresses($data['technicalContactAddresses']);
 		}
@@ -220,6 +205,8 @@ class Space  {
 
 	/**
 	 * Returns account.
+	 *
+	 * The account to which the space belongs to.
 	 *
 	 * @return \Wallee\Sdk\Model\Account
 	 */
@@ -287,6 +274,8 @@ class Space  {
 
 	/**
 	 * Returns database.
+	 *
+	 * The database in which the space's data are stored in.
 	 *
 	 * @return \Wallee\Sdk\Model\TenantDatabase
 	 */
@@ -378,6 +367,8 @@ class Space  {
 	/**
 	 * Returns postalAddress.
 	 *
+	 * The address to use in communication with clients for example in email, documents etc.
+	 *
 	 * @return \Wallee\Sdk\Model\SpaceAddress
 	 */
 	public function getPostalAddress() {
@@ -447,7 +438,7 @@ class Space  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -456,14 +447,10 @@ class Space  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return Space
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -544,11 +531,6 @@ class Space  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

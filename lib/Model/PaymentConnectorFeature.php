@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentConnectorFeature model
@@ -71,6 +71,8 @@ class PaymentConnectorFeature  {
 	private $displayName;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Feature
 	 */
 	private $feature;
@@ -120,6 +122,8 @@ class PaymentConnectorFeature  {
 
 	/**
 	 * Returns feature.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Feature
 	 */

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Scope model
@@ -49,15 +49,13 @@ class Scope  {
 	 */
 	private static $swaggerTypes = array(
 		'domainName' => 'string',
-		'emailSenderAddress' => 'string',
-		'emailSenderName' => 'string',
 		'features' => '\Wallee\Sdk\Model\Feature[]',
 		'id' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => '\DateTime',
 		'port' => 'int',
 		'sslActive' => 'bool',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'themes' => 'string[]',
 		'url' => 'string',
 		'version' => 'int'	);
@@ -72,30 +70,6 @@ class Scope  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
 	 * The domain name to which this scope is mapped to.
@@ -103,20 +77,6 @@ class Scope  {
 	 * @var string
 	 */
 	private $domainName;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $emailSenderAddress;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $emailSenderName;
 
 	/**
 	 * 
@@ -163,7 +123,7 @@ class Scope  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
@@ -201,6 +161,9 @@ class Scope  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
 		if (isset($data['themes']) && $data['themes'] != null) {
 			$this->setThemes($data['themes']);
 		}
@@ -229,52 +192,6 @@ class Scope  {
 	 */
 	protected function setDomainName($domainName) {
 		$this->domainName = $domainName;
-
-		return $this;
-	}
-
-	/**
-	 * Returns emailSenderAddress.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getEmailSenderAddress() {
-		return $this->emailSenderAddress;
-	}
-
-	/**
-	 * Sets emailSenderAddress.
-	 *
-	 * @param string $emailSenderAddress
-	 * @return Scope
-	 */
-	protected function setEmailSenderAddress($emailSenderAddress) {
-		$this->emailSenderAddress = $emailSenderAddress;
-
-		return $this;
-	}
-
-	/**
-	 * Returns emailSenderName.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getEmailSenderName() {
-		return $this->emailSenderName;
-	}
-
-	/**
-	 * Sets emailSenderName.
-	 *
-	 * @param string $emailSenderName
-	 * @return Scope
-	 */
-	protected function setEmailSenderName($emailSenderName) {
-		$this->emailSenderName = $emailSenderName;
 
 		return $this;
 	}
@@ -422,7 +339,7 @@ class Scope  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -431,14 +348,10 @@ class Scope  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return Scope
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -519,11 +432,6 @@ class Scope  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

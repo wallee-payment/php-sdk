@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionVersion model
@@ -60,7 +60,7 @@ class SubscriptionVersion  {
 		'plannedTerminationDate' => '\DateTime',
 		'productVersion' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
 		'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponent[]',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionVersionState',
 		'subscription' => '\Wallee\Sdk\Model\Subscription',
 		'terminatedOn' => '\DateTime',
 		'terminatingOn' => '\DateTime',
@@ -76,32 +76,6 @@ class SubscriptionVersion  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_INITIALIZING = 'INITIALIZING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_TERMINATING = 'TERMINATING';
-	const STATE_TERMINATED = 'TERMINATED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_INITIALIZING,
-			self::STATE_FAILED,
-			self::STATE_ACTIVE,
-			self::STATE_TERMINATING,
-			self::STATE_TERMINATED,
-		);
-	}
 	
 
 	/**
@@ -154,6 +128,8 @@ class SubscriptionVersion  {
 	private $language;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -173,6 +149,8 @@ class SubscriptionVersion  {
 	private $plannedTerminationDate;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductVersion
 	 */
 	private $productVersion;
@@ -187,11 +165,13 @@ class SubscriptionVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionVersionState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Subscription
 	 */
 	private $subscription;
@@ -234,14 +214,14 @@ class SubscriptionVersion  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['productVersion']) && $data['productVersion'] != null) {
 			$this->setProductVersion($data['productVersion']);
 		}
 		if (isset($data['selectedComponents']) && $data['selectedComponents'] != null) {
 			$this->setSelectedComponents($data['selectedComponents']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['subscription']) && $data['subscription'] != null) {
 			$this->setSubscription($data['subscription']);
@@ -416,6 +396,8 @@ class SubscriptionVersion  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -428,7 +410,7 @@ class SubscriptionVersion  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionVersion
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -483,6 +465,8 @@ class SubscriptionVersion  {
 	/**
 	 * Returns productVersion.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
 	 */
 	public function getProductVersion() {
@@ -529,7 +513,7 @@ class SubscriptionVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionVersionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -538,14 +522,10 @@ class SubscriptionVersion  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionVersionState $state
 	 * @return SubscriptionVersion
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'TERMINATING', 'TERMINATED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'TERMINATING', 'TERMINATED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -553,6 +533,8 @@ class SubscriptionVersion  {
 
 	/**
 	 * Returns subscription.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Subscription
 	 */
@@ -670,11 +652,6 @@ class SubscriptionVersion  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("PENDING", "INITIALIZING", "FAILED", "ACTIVE", "TERMINATING", "TERMINATED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionPending model
@@ -103,6 +103,9 @@ class TransactionPending extends Transaction  {
 		if (isset($data['merchantReference']) && $data['merchantReference'] != null) {
 			$this->setMerchantReference($data['merchantReference']);
 		}
+		if (isset($data['metaData']) && $data['metaData'] != null) {
+			$this->setMetaData($data['metaData']);
+		}
 		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
@@ -114,6 +117,12 @@ class TransactionPending extends Transaction  {
 		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
 		}
 	}
 
@@ -142,6 +151,8 @@ class TransactionPending extends Transaction  {
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
 	 *
+	 * 
+	 *
 	 * @return int[]
 	 */
 	public function getAllowedPaymentMethodConfigurations() {
@@ -160,6 +171,8 @@ class TransactionPending extends Transaction  {
 
 	/**
 	 * Returns billingAddress.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\AddressCreate
 	 */
@@ -346,7 +359,30 @@ class TransactionPending extends Transaction  {
 	}
 
 	/**
+	 * Returns metaData.
+	 *
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @return map[string,string]
+	 */
+	public function getMetaData() {
+		return parent::getMetaData();
+	}
+
+	/**
+	 * Sets metaData.
+	 *
+	 * @param map[string,string] $metaData
+	 * @return TransactionPending
+	 */
+	public function setMetaData($metaData) {
+		return parent::setMetaData($metaData);
+	}
+
+	/**
 	 * Returns shippingAddress.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\AddressCreate
 	 */
@@ -409,7 +445,9 @@ class TransactionPending extends Transaction  {
 	/**
 	 * Returns token.
 	 *
-	 * @return \Wallee\Sdk\Model\Token
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getToken() {
 		return parent::getToken();
@@ -418,11 +456,53 @@ class TransactionPending extends Transaction  {
 	/**
 	 * Sets token.
 	 *
-	 * @param \Wallee\Sdk\Model\Token $token
+	 * @param int $token
 	 * @return TransactionPending
 	 */
 	public function setToken($token) {
 		return parent::setToken($token);
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return TransactionPending
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return TransactionPending
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
 	}
 
 	/**
@@ -433,11 +513,11 @@ class TransactionPending extends Transaction  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCurrency() === null) {
-			throw new ValidationException("'currency' can't be null", 'currency', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
 		}
-		if ($this->getLineItems() === null) {
-			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
 	}
 

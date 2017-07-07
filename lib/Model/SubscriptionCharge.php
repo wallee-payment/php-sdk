@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionCharge model
@@ -59,14 +59,14 @@ class SubscriptionCharge  {
 		'linkedSpaceId' => 'int',
 		'plannedExecutionDate' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
-		'processingType' => 'string',
+		'processingType' => '\Wallee\Sdk\Model\SubscriptionChargeProcessingType',
 		'reference' => 'string',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionChargeState',
 		'subscription' => '\Wallee\Sdk\Model\Subscription',
 		'succeedOn' => '\DateTime',
 		'successUrl' => 'string',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
-		'type' => 'string',
+		'type' => '\Wallee\Sdk\Model\SubscriptionChargeType',
 		'version' => 'int'	);
 
 	/**
@@ -78,66 +78,6 @@ class SubscriptionCharge  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of processingType.
-	 */
-	const PROCESSING_TYPE_SYNCHRONOUS = 'SYNCHRONOUS';
-	const PROCESSING_TYPE_CHARGE_FLOW = 'CHARGE_FLOW';
-	
-	/**
-	 * Returns allowable values of processingType.
-	 *
-	 * @return string[]
-	 */
-	public function getProcessingTypeAllowableValues() {
-		return array(
-			self::PROCESSING_TYPE_SYNCHRONOUS,
-			self::PROCESSING_TYPE_CHARGE_FLOW,
-		);
-	}
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_SCHEDULED = 'SCHEDULED';
-	const STATE_DISCARDED = 'DISCARDED';
-	const STATE_PROCESSING = 'PROCESSING';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	const STATE_FAILED = 'FAILED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_SCHEDULED,
-			self::STATE_DISCARDED,
-			self::STATE_PROCESSING,
-			self::STATE_SUCCESSFUL,
-			self::STATE_FAILED,
-		);
-	}
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_MANUAL = 'MANUAL';
-	const TYPE_AUTOMATIC = 'AUTOMATIC';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_MANUAL,
-			self::TYPE_AUTOMATIC,
-		);
-	}
 	
 
 	/**
@@ -197,6 +137,8 @@ class SubscriptionCharge  {
 	private $ledgerEntries;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -218,7 +160,7 @@ class SubscriptionCharge  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionChargeProcessingType
 	 */
 	private $processingType;
 
@@ -232,11 +174,13 @@ class SubscriptionCharge  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionChargeState
 	 */
 	private $state;
 
 	/**
+	 * The field subscription indicates the subscription to which the charge belongs to.
+	 *
 	 * @var \Wallee\Sdk\Model\Subscription
 	 */
 	private $subscription;
@@ -256,6 +200,8 @@ class SubscriptionCharge  {
 	private $successUrl;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -263,7 +209,7 @@ class SubscriptionCharge  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionChargeType
 	 */
 	private $type;
 
@@ -287,14 +233,20 @@ class SubscriptionCharge  {
 		if (isset($data['ledgerEntries']) && $data['ledgerEntries'] != null) {
 			$this->setLedgerEntries($data['ledgerEntries']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['processingType']) && $data['processingType'] != null) {
+			$this->setProcessingType($data['processingType']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['subscription']) && $data['subscription'] != null) {
 			$this->setSubscription($data['subscription']);
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -489,6 +441,8 @@ class SubscriptionCharge  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -501,7 +455,7 @@ class SubscriptionCharge  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionCharge
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -558,7 +512,7 @@ class SubscriptionCharge  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionChargeProcessingType
 	 */
 	public function getProcessingType() {
 		return $this->processingType;
@@ -567,14 +521,10 @@ class SubscriptionCharge  {
 	/**
 	 * Sets processingType.
 	 *
-	 * @param string $processingType
+	 * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processingType
 	 * @return SubscriptionCharge
 	 */
-	protected function setProcessingType($processingType) {
-		$allowed_values = array('SYNCHRONOUS', 'CHARGE_FLOW');
-		if (!is_null($processingType) && (!in_array($processingType, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'processingType', must be one of 'SYNCHRONOUS', 'CHARGE_FLOW'");
-		}
+	public function setProcessingType($processingType) {
 		$this->processingType = $processingType;
 
 		return $this;
@@ -608,7 +558,7 @@ class SubscriptionCharge  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionChargeState
 	 */
 	public function getState() {
 		return $this->state;
@@ -617,14 +567,10 @@ class SubscriptionCharge  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionChargeState $state
 	 * @return SubscriptionCharge
 	 */
-	protected function setState($state) {
-		$allowed_values = array('SCHEDULED', 'DISCARDED', 'PROCESSING', 'SUCCESSFUL', 'FAILED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'SCHEDULED', 'DISCARDED', 'PROCESSING', 'SUCCESSFUL', 'FAILED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -632,6 +578,8 @@ class SubscriptionCharge  {
 
 	/**
 	 * Returns subscription.
+	 *
+	 * The field subscription indicates the subscription to which the charge belongs to.
 	 *
 	 * @return \Wallee\Sdk\Model\Subscription
 	 */
@@ -700,6 +648,8 @@ class SubscriptionCharge  {
 	/**
 	 * Returns transaction.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function getTransaction() {
@@ -723,7 +673,7 @@ class SubscriptionCharge  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionChargeType
 	 */
 	public function getType() {
 		return $this->type;
@@ -732,14 +682,10 @@ class SubscriptionCharge  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\SubscriptionChargeType $type
 	 * @return SubscriptionCharge
 	 */
-	protected function setType($type) {
-		$allowed_values = array('MANUAL', 'AUTOMATIC');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'MANUAL', 'AUTOMATIC'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -774,21 +720,6 @@ class SubscriptionCharge  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("SYNCHRONOUS", "CHARGE_FLOW");
-		if (!in_array($this->getProcessingType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'processingType', must be one of #{allowed_values}.", 'processingType', $this);
-		}
-
-		$allowed_values = array("SCHEDULED", "DISCARDED", "PROCESSING", "SUCCESSFUL", "FAILED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
-		$allowed_values = array("MANUAL", "AUTOMATIC");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

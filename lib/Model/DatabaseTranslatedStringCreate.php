@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
- * SubscriptionProductVersionRetiring model
+ * DatabaseTranslatedStringCreate model
  *
  * @category    Class
  * @description 
@@ -33,14 +33,14 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductVersionRetiring extends SubscriptionProductVersionRetired  {
+class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'SubscriptionProductVersion.Retiring';
+	private static $swaggerModelName = 'DatabaseTranslatedString.Create';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -70,8 +70,32 @@ class SubscriptionProductVersionRetiring extends SubscriptionProductVersionRetir
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['items']) && $data['items'] != null) {
+			$this->setItems($data['items']);
+		}
 	}
 
+
+	/**
+	 * Returns items.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringItemCreate[]
+	 */
+	public function getItems() {
+		return parent::getItems();
+	}
+
+	/**
+	 * Sets items.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringItemCreate[] $items
+	 * @return DatabaseTranslatedStringCreate
+	 */
+	public function setItems($items) {
+		return parent::setItems($items);
+	}
 
 	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.

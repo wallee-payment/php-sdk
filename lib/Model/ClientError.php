@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ClientError model
@@ -52,7 +52,7 @@ class ClientError  {
 		'defaultMessage' => 'string',
 		'id' => 'string',
 		'message' => 'string',
-		'type' => 'string'	);
+		'type' => '\Wallee\Sdk\Model\ClientErrorType'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -63,26 +63,6 @@ class ClientError  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_END_USER_ERROR = 'END_USER_ERROR';
-	const TYPE_CONFIGURATION_ERROR = 'CONFIGURATION_ERROR';
-	const TYPE_DEVELOPER_ERROR = 'DEVELOPER_ERROR';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_END_USER_ERROR,
-			self::TYPE_CONFIGURATION_ERROR,
-			self::TYPE_DEVELOPER_ERROR,
-		);
-	}
 	
 
 	/**
@@ -116,7 +96,7 @@ class ClientError  {
 	/**
 	 * The type of the client error.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ClientErrorType
 	 */
 	private $type;
 
@@ -127,6 +107,9 @@ class ClientError  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
+		}
 	}
 
 
@@ -227,7 +210,7 @@ class ClientError  {
 	 *
 	 * The type of the client error.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ClientErrorType
 	 */
 	public function getType() {
 		return $this->type;
@@ -236,14 +219,10 @@ class ClientError  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\ClientErrorType $type
 	 * @return ClientError
 	 */
-	protected function setType($type) {
-		$allowed_values = array('END_USER_ERROR', 'CONFIGURATION_ERROR', 'DEVELOPER_ERROR');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'END_USER_ERROR', 'CONFIGURATION_ERROR', 'DEVELOPER_ERROR'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -255,11 +234,6 @@ class ClientError  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("END_USER_ERROR", "CONFIGURATION_ERROR", "DEVELOPER_ERROR");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

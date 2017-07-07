@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionCreate model
@@ -60,26 +60,6 @@ class TransactionCreate extends TransactionPending  {
 	}
 
 	
-	/**
-	 * Values of customersPresence.
-	 */
-	const CUSTOMERS_PRESENCE_NOT_PRESENT = 'NOT_PRESENT';
-	const CUSTOMERS_PRESENCE_VIRTUAL_PRESENT = 'VIRTUAL_PRESENT';
-	const CUSTOMERS_PRESENCE_PHYSICAL_PRESENT = 'PHYSICAL_PRESENT';
-	
-	/**
-	 * Returns allowable values of customersPresence.
-	 *
-	 * @return string[]
-	 */
-	public function getCustomersPresenceAllowableValues() {
-		return array(
-			self::CUSTOMERS_PRESENCE_NOT_PRESENT,
-			self::CUSTOMERS_PRESENCE_VIRTUAL_PRESENT,
-			self::CUSTOMERS_PRESENCE_PHYSICAL_PRESENT,
-		);
-	}
-	
 
 
 	/**
@@ -116,6 +96,8 @@ class TransactionCreate extends TransactionPending  {
 
 	/**
 	 * Returns billingAddress.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\AddressCreate
 	 */
@@ -159,7 +141,7 @@ class TransactionCreate extends TransactionPending  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CustomersPresence
 	 */
 	public function getCustomersPresence() {
 		return parent::getCustomersPresence();
@@ -168,14 +150,10 @@ class TransactionCreate extends TransactionPending  {
 	/**
 	 * Sets customersPresence.
 	 *
-	 * @param string $customersPresence
+	 * @param \Wallee\Sdk\Model\CustomersPresence $customersPresence
 	 * @return TransactionCreate
 	 */
 	public function setCustomersPresence($customersPresence) {
-		$allowed_values = array('NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT');
-		if ((!in_array($customersPresence, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'customersPresence', must be one of 'NOT_PRESENT', 'VIRTUAL_PRESENT', 'PHYSICAL_PRESENT'");
-		}
 		return parent::setCustomersPresence($customersPresence);
 	}
 
@@ -203,6 +181,8 @@ class TransactionCreate extends TransactionPending  {
 	/**
 	 * Returns shippingAddress.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\AddressCreate
 	 */
 	public function getShippingAddress() {
@@ -221,6 +201,8 @@ class TransactionCreate extends TransactionPending  {
 
 	/**
 	 * Returns spaceViewId.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -241,7 +223,9 @@ class TransactionCreate extends TransactionPending  {
 	/**
 	 * Returns token.
 	 *
-	 * @return \Wallee\Sdk\Model\Token
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getToken() {
 		return parent::getToken();
@@ -250,7 +234,7 @@ class TransactionCreate extends TransactionPending  {
 	/**
 	 * Sets token.
 	 *
-	 * @param \Wallee\Sdk\Model\Token $token
+	 * @param int $token
 	 * @return TransactionCreate
 	 */
 	public function setToken($token) {
@@ -268,11 +252,6 @@ class TransactionCreate extends TransactionPending  {
 		if ($this->getCustomersPresence() === null) {
 			throw new ValidationException("'customersPresence' can't be null", 'customersPresence', $this);
 		}
-		$allowed_values = array("NOT_PRESENT", "VIRTUAL_PRESENT", "PHYSICAL_PRESENT");
-		if (!in_array($this->getCustomersPresence(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'customersPresence', must be one of #{allowed_values}.", 'customersPresence', $this);
-		}
-
 		if ($this->getLineItems() === null) {
 			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
 		}

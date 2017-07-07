@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ProductPeriodFeeUpdate model
@@ -85,13 +85,21 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 		if (isset($data['periodFee']) && $data['periodFee'] != null) {
 			$this->setPeriodFee($data['periodFee']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns component.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getComponent() {
 		return parent::getComponent();
@@ -100,7 +108,7 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	/**
 	 * Sets component.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+	 * @param int $component
 	 * @return ProductPeriodFeeUpdate
 	 */
 	public function setComponent($component) {
@@ -110,7 +118,9 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	/**
 	 * Returns description.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getDescription() {
 		return parent::getDescription();
@@ -119,7 +129,7 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	/**
 	 * Sets description.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
 	 * @return ProductPeriodFeeUpdate
 	 */
 	public function setDescription($description) {
@@ -129,7 +139,9 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	/**
 	 * Returns name.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getName() {
 		return parent::getName();
@@ -138,7 +150,7 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	/**
 	 * Sets name.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
 	 * @return ProductPeriodFeeUpdate
 	 */
 	public function setName($name) {
@@ -188,6 +200,48 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	}
 
 	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
+	}
+
+	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
 	 *
 	 * @throws ValidationException
@@ -195,8 +249,11 @@ class ProductPeriodFeeUpdate extends ProductPeriodFee  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getPeriodFee() === null) {
-			throw new ValidationException("'periodFee' can't be null", 'periodFee', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
+		}
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
 	}
 

@@ -19,15 +19,15 @@
  * limitations under the License.
  */
 
-namespace Wallee\Sdk\Http;
+namespace Wallee\Sdk;
 
-use \Exception;
+use Exception;
 
 /**
  * This exception is used to inform about a failed validation.
  *
  * @category Class
- * @package  Wallee\Sdk\Http
+ * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link	 https://github.com/wallee-payment/wallee-php-sdk

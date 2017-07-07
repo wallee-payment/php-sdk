@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * RenderedDocument model
@@ -72,6 +72,8 @@ class RenderedDocument  {
 	private $data;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $documentTemplateType;
@@ -99,9 +101,6 @@ class RenderedDocument  {
 	public function __construct(array $data = null) {
 		if (isset($data['data']) && $data['data'] != null) {
 			$this->setData($data['data']);
-		}
-		if (isset($data['documentTemplateType']) && $data['documentTemplateType'] != null) {
-			$this->setDocumentTemplateType($data['documentTemplateType']);
 		}
 	}
 
@@ -132,6 +131,8 @@ class RenderedDocument  {
 	/**
 	 * Returns documentTemplateType.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getDocumentTemplateType() {
@@ -144,7 +145,7 @@ class RenderedDocument  {
 	 * @param int $documentTemplateType
 	 * @return RenderedDocument
 	 */
-	public function setDocumentTemplateType($documentTemplateType) {
+	protected function setDocumentTemplateType($documentTemplateType) {
 		$this->documentTemplateType = $documentTemplateType;
 
 		return $this;

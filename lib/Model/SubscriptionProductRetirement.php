@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductRetirement model
@@ -82,11 +82,15 @@ class SubscriptionProductRetirement  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProduct
 	 */
 	private $product;
@@ -99,6 +103,8 @@ class SubscriptionProductRetirement  {
 	private $respectTerminiationPeriodsEnabled;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProduct
 	 */
 	private $targetProduct;
@@ -119,9 +125,6 @@ class SubscriptionProductRetirement  {
 	public function __construct(array $data = null) {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['product']) && $data['product'] != null) {
 			$this->setProduct($data['product']);
@@ -184,6 +187,8 @@ class SubscriptionProductRetirement  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -196,7 +201,7 @@ class SubscriptionProductRetirement  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductRetirement
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -204,6 +209,8 @@ class SubscriptionProductRetirement  {
 
 	/**
 	 * Returns product.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProduct
 	 */
@@ -248,6 +255,8 @@ class SubscriptionProductRetirement  {
 
 	/**
 	 * Returns targetProduct.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProduct
 	 */

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * EmailSender model
@@ -54,7 +54,7 @@ class EmailSender  {
 		'plannedPurgeDate' => '\DateTime',
 		'senderAddress' => 'string',
 		'senderName' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'type' => 'int',
 		'version' => 'int'	);
 
@@ -67,30 +67,6 @@ class EmailSender  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
 	
 
 	/**
@@ -108,6 +84,8 @@ class EmailSender  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -127,6 +105,8 @@ class EmailSender  {
 	private $senderAddress;
 
 	/**
+	 * The sender name is shown in the email. Choose an appropriate name as it will be displayed to your customer.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $senderName;
@@ -134,11 +114,13 @@ class EmailSender  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $type;
@@ -160,14 +142,11 @@ class EmailSender  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['senderName']) && $data['senderName'] != null) {
 			$this->setSenderName($data['senderName']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
-			$this->setType($data['type']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -224,6 +203,8 @@ class EmailSender  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -236,7 +217,7 @@ class EmailSender  {
 	 * @param int $linkedSpaceId
 	 * @return EmailSender
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -291,6 +272,8 @@ class EmailSender  {
 	/**
 	 * Returns senderName.
 	 *
+	 * The sender name is shown in the email. Choose an appropriate name as it will be displayed to your customer.
+	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	public function getSenderName() {
@@ -314,7 +297,7 @@ class EmailSender  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -323,14 +306,10 @@ class EmailSender  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return EmailSender
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -338,6 +317,8 @@ class EmailSender  {
 
 	/**
 	 * Returns type.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -351,7 +332,7 @@ class EmailSender  {
 	 * @param int $type
 	 * @return EmailSender
 	 */
-	public function setType($type) {
+	protected function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -386,11 +367,6 @@ class EmailSender  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

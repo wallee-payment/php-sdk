@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Address model
@@ -55,7 +55,7 @@ class Address  {
 		'dependentLocality' => 'string',
 		'emailAddress' => 'string',
 		'familyName' => 'string',
-		'gender' => 'string',
+		'gender' => '\Wallee\Sdk\Model\Gender',
 		'givenName' => 'string',
 		'legalOrganizationForm' => '\Wallee\Sdk\Model\LegalOrganizationForm',
 		'mobilePhoneNumber' => 'string',
@@ -78,24 +78,6 @@ class Address  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of gender.
-	 */
-	const GENDER_MALE = 'MALE';
-	const GENDER_FEMALE = 'FEMALE';
-	
-	/**
-	 * Returns allowable values of gender.
-	 *
-	 * @return string[]
-	 */
-	public function getGenderAllowableValues() {
-		return array(
-			self::GENDER_MALE,
-			self::GENDER_FEMALE,
-		);
-	}
 	
 
 	/**
@@ -150,7 +132,7 @@ class Address  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\Gender
 	 */
 	private $gender;
 
@@ -162,6 +144,8 @@ class Address  {
 	private $givenName;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\LegalOrganizationForm
 	 */
 	private $legalOrganizationForm;
@@ -243,6 +227,9 @@ class Address  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['gender']) && $data['gender'] != null) {
+			$this->setGender($data['gender']);
+		}
 		if (isset($data['legalOrganizationForm']) && $data['legalOrganizationForm'] != null) {
 			$this->setLegalOrganizationForm($data['legalOrganizationForm']);
 		}
@@ -415,7 +402,7 @@ class Address  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\Gender
 	 */
 	public function getGender() {
 		return $this->gender;
@@ -424,14 +411,10 @@ class Address  {
 	/**
 	 * Sets gender.
 	 *
-	 * @param string $gender
+	 * @param \Wallee\Sdk\Model\Gender $gender
 	 * @return Address
 	 */
-	protected function setGender($gender) {
-		$allowed_values = array('MALE', 'FEMALE');
-		if (!is_null($gender) && (!in_array($gender, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'gender', must be one of 'MALE', 'FEMALE'");
-		}
+	public function setGender($gender) {
 		$this->gender = $gender;
 
 		return $this;
@@ -462,6 +445,8 @@ class Address  {
 
 	/**
 	 * Returns legalOrganizationForm.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\LegalOrganizationForm
 	 */
@@ -717,11 +702,6 @@ class Address  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("MALE", "FEMALE");
-		if (!in_array($this->getGender(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'gender', must be one of #{allowed_values}.", 'gender', $this);
-		}
 
 	}
 

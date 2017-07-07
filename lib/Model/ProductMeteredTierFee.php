@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ProductMeteredTierFee model
@@ -80,6 +80,8 @@ class ProductMeteredTierFee  {
 	private $id;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\ProductMeteredFee
 	 */
 	private $meteredFee;
@@ -168,6 +170,8 @@ class ProductMeteredTierFee  {
 
 	/**
 	 * Returns meteredFee.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\ProductMeteredFee
 	 */

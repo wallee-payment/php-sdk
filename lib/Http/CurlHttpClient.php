@@ -21,8 +21,7 @@
 
 namespace Wallee\Sdk\Http;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\Http\ConnectionException;
+use Wallee\Sdk\ApiClient;
 
 /**
  * This class sends API calls via cURL.

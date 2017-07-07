@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * EntityQueryFilter model
@@ -50,8 +50,8 @@ class EntityQueryFilter  {
 	private static $swaggerTypes = array(
 		'children' => '\Wallee\Sdk\Model\EntityQueryFilter[]',
 		'fieldName' => 'string',
-		'operator' => 'string',
-		'type' => 'string',
+		'operator' => '\Wallee\Sdk\Model\CriteriaOperator',
+		'type' => '\Wallee\Sdk\Model\EntityQueryFilterType',
 		'value' => 'object'	);
 
 	/**
@@ -63,58 +63,6 @@ class EntityQueryFilter  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of operator.
-	 */
-	const OPERATOR_EQUALS = 'EQUALS';
-	const OPERATOR_GREATER_THAN = 'GREATER_THAN';
-	const OPERATOR_GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL';
-	const OPERATOR_LESS_THAN = 'LESS_THAN';
-	const OPERATOR_LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL';
-	const OPERATOR_CONTAINS = 'CONTAINS';
-	const OPERATOR_NOT_EQUALS = 'NOT_EQUALS';
-	const OPERATOR_NOT_CONTAINS = 'NOT_CONTAINS';
-	const OPERATOR_IS_NULL = 'IS_NULL';
-	
-	/**
-	 * Returns allowable values of operator.
-	 *
-	 * @return string[]
-	 */
-	public function getOperatorAllowableValues() {
-		return array(
-			self::OPERATOR_EQUALS,
-			self::OPERATOR_GREATER_THAN,
-			self::OPERATOR_GREATER_THAN_OR_EQUAL,
-			self::OPERATOR_LESS_THAN,
-			self::OPERATOR_LESS_THAN_OR_EQUAL,
-			self::OPERATOR_CONTAINS,
-			self::OPERATOR_NOT_EQUALS,
-			self::OPERATOR_NOT_CONTAINS,
-			self::OPERATOR_IS_NULL,
-		);
-	}
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_LEAF = 'LEAF';
-	const TYPE_OR = 'OR';
-	const TYPE_AND = 'AND';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_LEAF,
-			self::TYPE_OR,
-			self::TYPE_AND,
-		);
-	}
 	
 
 	/**
@@ -134,14 +82,14 @@ class EntityQueryFilter  {
 	/**
 	 * The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CriteriaOperator
 	 */
 	private $operator;
 
 	/**
 	 * The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\EntityQueryFilterType
 	 */
 	private $type;
 
@@ -228,7 +176,7 @@ class EntityQueryFilter  {
 	 *
 	 * The 'operator' indicates what kind of filtering on the 'fieldName' is executed on. This property is only applicable on filter type 'LEAF'.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CriteriaOperator
 	 */
 	public function getOperator() {
 		return $this->operator;
@@ -237,14 +185,10 @@ class EntityQueryFilter  {
 	/**
 	 * Sets operator.
 	 *
-	 * @param string $operator
+	 * @param \Wallee\Sdk\Model\CriteriaOperator $operator
 	 * @return EntityQueryFilter
 	 */
 	public function setOperator($operator) {
-		$allowed_values = array('EQUALS', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL', 'CONTAINS', 'NOT_EQUALS', 'NOT_CONTAINS', 'IS_NULL');
-		if (!is_null($operator) && (!in_array($operator, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'operator', must be one of 'EQUALS', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL', 'CONTAINS', 'NOT_EQUALS', 'NOT_CONTAINS', 'IS_NULL'");
-		}
 		$this->operator = $operator;
 
 		return $this;
@@ -255,7 +199,7 @@ class EntityQueryFilter  {
 	 *
 	 * The filter type controls how the query node is interpreted. I.e. if the node acts as leaf node or as a filter group.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\EntityQueryFilterType
 	 */
 	public function getType() {
 		return $this->type;
@@ -264,14 +208,10 @@ class EntityQueryFilter  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\EntityQueryFilterType $type
 	 * @return EntityQueryFilter
 	 */
 	public function setType($type) {
-		$allowed_values = array('LEAF', 'OR', 'AND');
-		if ((!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'LEAF', 'OR', 'AND'");
-		}
 		$this->type = $type;
 
 		return $this;
@@ -307,19 +247,9 @@ class EntityQueryFilter  {
 	 */
 	public function validate() {
 
-		$allowed_values = array("EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "CONTAINS", "NOT_EQUALS", "NOT_CONTAINS", "IS_NULL");
-		if (!in_array($this->getOperator(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'operator', must be one of #{allowed_values}.", 'operator', $this);
-		}
-
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);
 		}
-		$allowed_values = array("LEAF", "OR", "AND");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
-
 	}
 
 	/**

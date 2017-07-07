@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Feature model
@@ -104,6 +104,8 @@ class Feature  {
 	private $name;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $requiredFeatures;
@@ -258,6 +260,8 @@ class Feature  {
 
 	/**
 	 * Returns requiredFeatures.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */

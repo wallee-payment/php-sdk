@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * User model
@@ -51,8 +51,8 @@ class User  {
 		'id' => 'int',
 		'plannedPurgeDate' => '\DateTime',
 		'scope' => '\Wallee\Sdk\Model\Scope',
-		'state' => 'string',
-		'userType' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
+		'userType' => '\Wallee\Sdk\Model\UserType',
 		'version' => 'int'	);
 
 	/**
@@ -64,52 +64,6 @@ class User  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
-	/**
-	 * Values of userType.
-	 */
-	const USER_TYPE_HUMAN_USER = 'HUMAN_USER';
-	const USER_TYPE_APPLICATION_USER = 'APPLICATION_USER';
-	const USER_TYPE_ANONYMOUS_USER = 'ANONYMOUS_USER';
-	const USER_TYPE_SERVER_USER = 'SERVER_USER';
-	
-	/**
-	 * Returns allowable values of userType.
-	 *
-	 * @return string[]
-	 */
-	public function getUserTypeAllowableValues() {
-		return array(
-			self::USER_TYPE_HUMAN_USER,
-			self::USER_TYPE_APPLICATION_USER,
-			self::USER_TYPE_ANONYMOUS_USER,
-			self::USER_TYPE_SERVER_USER,
-		);
-	}
 	
 
 	/**
@@ -127,6 +81,8 @@ class User  {
 	private $plannedPurgeDate;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Scope
 	 */
 	private $scope;
@@ -134,14 +90,14 @@ class User  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\UserType
 	 */
 	private $userType;
 
@@ -164,6 +120,12 @@ class User  {
 		}
 		if (isset($data['scope']) && $data['scope'] != null) {
 			$this->setScope($data['scope']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
+		if (isset($data['userType']) && $data['userType'] != null) {
+			$this->setUserType($data['userType']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -220,6 +182,8 @@ class User  {
 	/**
 	 * Returns scope.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Scope
 	 */
 	public function getScope() {
@@ -243,7 +207,7 @@ class User  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -252,14 +216,10 @@ class User  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return User
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -270,7 +230,7 @@ class User  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\UserType
 	 */
 	public function getUserType() {
 		return $this->userType;
@@ -279,14 +239,10 @@ class User  {
 	/**
 	 * Sets userType.
 	 *
-	 * @param string $userType
+	 * @param \Wallee\Sdk\Model\UserType $userType
 	 * @return User
 	 */
-	protected function setUserType($userType) {
-		$allowed_values = array('HUMAN_USER', 'APPLICATION_USER', 'ANONYMOUS_USER', 'SERVER_USER');
-		if (!is_null($userType) && (!in_array($userType, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'userType', must be one of 'HUMAN_USER', 'APPLICATION_USER', 'ANONYMOUS_USER', 'SERVER_USER'");
-		}
+	public function setUserType($userType) {
 		$this->userType = $userType;
 
 		return $this;
@@ -321,16 +277,6 @@ class User  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
-		$allowed_values = array("HUMAN_USER", "APPLICATION_USER", "ANONYMOUS_USER", "SERVER_USER");
-		if (!in_array($this->getUserType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'userType', must be one of #{allowed_values}.", 'userType', $this);
-		}
 
 	}
 

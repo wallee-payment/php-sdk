@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionLedgerEntry model
@@ -58,7 +58,7 @@ class SubscriptionLedgerEntry  {
 		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => '\DateTime',
 		'quantity' => 'float',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionLedgerEntryState',
 		'subscriptionVersion' => 'int',
 		'taxAmount' => 'float',
 		'taxes' => '\Wallee\Sdk\Model\Tax[]',
@@ -74,26 +74,6 @@ class SubscriptionLedgerEntry  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_OPEN = 'OPEN';
-	const STATE_SCHEDULED = 'SCHEDULED';
-	const STATE_PAID = 'PAID';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_OPEN,
-			self::STATE_SCHEDULED,
-			self::STATE_PAID,
-		);
-	}
 	
 
 	/**
@@ -118,6 +98,8 @@ class SubscriptionLedgerEntry  {
 	private $amountIncludingTax;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $createdBy;
@@ -144,6 +126,8 @@ class SubscriptionLedgerEntry  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -165,11 +149,13 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionLedgerEntryState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $subscriptionVersion;
@@ -209,17 +195,11 @@ class SubscriptionLedgerEntry  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['createdBy']) && $data['createdBy'] != null) {
-			$this->setCreatedBy($data['createdBy']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['subscriptionVersion']) && $data['subscriptionVersion'] != null) {
-			$this->setSubscriptionVersion($data['subscriptionVersion']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['taxes']) && $data['taxes'] != null) {
 			$this->setTaxes($data['taxes']);
@@ -302,6 +282,8 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Returns createdBy.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getCreatedBy() {
@@ -314,7 +296,7 @@ class SubscriptionLedgerEntry  {
 	 * @param int $createdBy
 	 * @return SubscriptionLedgerEntry
 	 */
-	public function setCreatedBy($createdBy) {
+	protected function setCreatedBy($createdBy) {
 		$this->createdBy = $createdBy;
 
 		return $this;
@@ -392,6 +374,8 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -404,7 +388,7 @@ class SubscriptionLedgerEntry  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionLedgerEntry
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -461,7 +445,7 @@ class SubscriptionLedgerEntry  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionLedgerEntryState
 	 */
 	public function getState() {
 		return $this->state;
@@ -470,14 +454,10 @@ class SubscriptionLedgerEntry  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionLedgerEntryState $state
 	 * @return SubscriptionLedgerEntry
 	 */
-	protected function setState($state) {
-		$allowed_values = array('OPEN', 'SCHEDULED', 'PAID');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'OPEN', 'SCHEDULED', 'PAID'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -485,6 +465,8 @@ class SubscriptionLedgerEntry  {
 
 	/**
 	 * Returns subscriptionVersion.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -498,7 +480,7 @@ class SubscriptionLedgerEntry  {
 	 * @param int $subscriptionVersion
 	 * @return SubscriptionLedgerEntry
 	 */
-	public function setSubscriptionVersion($subscriptionVersion) {
+	protected function setSubscriptionVersion($subscriptionVersion) {
 		$this->subscriptionVersion = $subscriptionVersion;
 
 		return $this;
@@ -602,11 +584,6 @@ class SubscriptionLedgerEntry  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("OPEN", "SCHEDULED", "PAID");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

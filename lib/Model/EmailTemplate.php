@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * EmailTemplate model
@@ -49,7 +49,6 @@ class EmailTemplate  {
 	 */
 	private static $swaggerTypes = array(
 		'attachedDocumentTemplateTypes' => '\Wallee\Sdk\Model\DocumentTemplateType[]',
-		'attachmentResourcePaths' => '\Wallee\Sdk\Model\AttachmentResourceEditable[]',
 		'blindCarbonCopyRecipients' => 'string[]',
 		'carbonCopyRecipients' => 'string[]',
 		'htmlBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
@@ -57,7 +56,7 @@ class EmailTemplate  {
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'subject' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'textBodyTemplateResource' => '\Wallee\Sdk\Model\ModelResourcePath',
 		'type' => 'int',
@@ -73,30 +72,6 @@ class EmailTemplate  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
 	 * 
@@ -104,13 +79,6 @@ class EmailTemplate  {
 	 * @var \Wallee\Sdk\Model\DocumentTemplateType[]
 	 */
 	private $attachedDocumentTemplateTypes;
-
-	/**
-	 * 
-	 *
-	 * @var \Wallee\Sdk\Model\AttachmentResourceEditable[]
-	 */
-	private $attachmentResourcePaths;
 
 	/**
 	 * 
@@ -127,6 +95,8 @@ class EmailTemplate  {
 	private $carbonCopyRecipients;
 
 	/**
+	 * The HTML body resource is used to produce the actual HTML message of the email.
+	 *
 	 * @var \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	private $htmlBodyTemplateResource;
@@ -139,6 +109,8 @@ class EmailTemplate  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -160,21 +132,27 @@ class EmailTemplate  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
 	/**
+	 * The subject is going to be shown to the customer as a title.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $subject;
 
 	/**
+	 * The HTML body resource is used to produce the actual text message of the email. In case no resource is selected the HTML message is translated into the text format.
+	 *
 	 * @var \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	private $textBodyTemplateResource;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $type;
@@ -196,9 +174,6 @@ class EmailTemplate  {
 		if (isset($data['attachedDocumentTemplateTypes']) && $data['attachedDocumentTemplateTypes'] != null) {
 			$this->setAttachedDocumentTemplateTypes($data['attachedDocumentTemplateTypes']);
 		}
-		if (isset($data['attachmentResourcePaths']) && $data['attachmentResourcePaths'] != null) {
-			$this->setAttachmentResourcePaths($data['attachmentResourcePaths']);
-		}
 		if (isset($data['blindCarbonCopyRecipients']) && $data['blindCarbonCopyRecipients'] != null) {
 			$this->setBlindCarbonCopyRecipients($data['blindCarbonCopyRecipients']);
 		}
@@ -211,17 +186,14 @@ class EmailTemplate  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['subject']) && $data['subject'] != null) {
 			$this->setSubject($data['subject']);
 		}
 		if (isset($data['textBodyTemplateResource']) && $data['textBodyTemplateResource'] != null) {
 			$this->setTextBodyTemplateResource($data['textBodyTemplateResource']);
-		}
-		if (isset($data['type']) && $data['type'] != null) {
-			$this->setType($data['type']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -248,29 +220,6 @@ class EmailTemplate  {
 	 */
 	public function setAttachedDocumentTemplateTypes($attachedDocumentTemplateTypes) {
 		$this->attachedDocumentTemplateTypes = $attachedDocumentTemplateTypes;
-
-		return $this;
-	}
-
-	/**
-	 * Returns attachmentResourcePaths.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\AttachmentResourceEditable[]
-	 */
-	public function getAttachmentResourcePaths() {
-		return $this->attachmentResourcePaths;
-	}
-
-	/**
-	 * Sets attachmentResourcePaths.
-	 *
-	 * @param \Wallee\Sdk\Model\AttachmentResourceEditable[] $attachmentResourcePaths
-	 * @return EmailTemplate
-	 */
-	public function setAttachmentResourcePaths($attachmentResourcePaths) {
-		$this->attachmentResourcePaths = $attachmentResourcePaths;
 
 		return $this;
 	}
@@ -324,6 +273,8 @@ class EmailTemplate  {
 	/**
 	 * Returns htmlBodyTemplateResource.
 	 *
+	 * The HTML body resource is used to produce the actual HTML message of the email.
+	 *
 	 * @return \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	public function getHtmlBodyTemplateResource() {
@@ -368,6 +319,8 @@ class EmailTemplate  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -380,7 +333,7 @@ class EmailTemplate  {
 	 * @param int $linkedSpaceId
 	 * @return EmailTemplate
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -437,7 +390,7 @@ class EmailTemplate  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -446,14 +399,10 @@ class EmailTemplate  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return EmailTemplate
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -461,6 +410,8 @@ class EmailTemplate  {
 
 	/**
 	 * Returns subject.
+	 *
+	 * The subject is going to be shown to the customer as a title.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -483,6 +434,8 @@ class EmailTemplate  {
 	/**
 	 * Returns textBodyTemplateResource.
 	 *
+	 * The HTML body resource is used to produce the actual text message of the email. In case no resource is selected the HTML message is translated into the text format.
+	 *
 	 * @return \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	public function getTextBodyTemplateResource() {
@@ -504,6 +457,8 @@ class EmailTemplate  {
 	/**
 	 * Returns type.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getType() {
@@ -516,7 +471,7 @@ class EmailTemplate  {
 	 * @param int $type
 	 * @return EmailTemplate
 	 */
-	public function setType($type) {
+	protected function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -551,11 +506,6 @@ class EmailTemplate  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

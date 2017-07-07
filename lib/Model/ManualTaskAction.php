@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ManualTaskAction model
@@ -50,7 +50,7 @@ class ManualTaskAction  {
 	private static $swaggerTypes = array(
 		'id' => 'int',
 		'label' => 'map[string,string]',
-		'style' => 'string',
+		'style' => '\Wallee\Sdk\Model\ManualTaskActionStyle',
 		'taskType' => 'int'	);
 
 	/**
@@ -62,26 +62,6 @@ class ManualTaskAction  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of style.
-	 */
-	const STYLE_DEFAULT = 'DEFAULT';
-	const STYLE_PRIMARY = 'PRIMARY';
-	const STYLE_DANGER = 'DANGER';
-	
-	/**
-	 * Returns allowable values of style.
-	 *
-	 * @return string[]
-	 */
-	public function getStyleAllowableValues() {
-		return array(
-			self::STYLE_DEFAULT,
-			self::STYLE_PRIMARY,
-			self::STYLE_DANGER,
-		);
-	}
 	
 
 	/**
@@ -101,11 +81,13 @@ class ManualTaskAction  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ManualTaskActionStyle
 	 */
 	private $style;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $taskType;
@@ -120,8 +102,8 @@ class ManualTaskAction  {
 		if (isset($data['label']) && $data['label'] != null) {
 			$this->setLabel($data['label']);
 		}
-		if (isset($data['taskType']) && $data['taskType'] != null) {
-			$this->setTaskType($data['taskType']);
+		if (isset($data['style']) && $data['style'] != null) {
+			$this->setStyle($data['style']);
 		}
 	}
 
@@ -177,7 +159,7 @@ class ManualTaskAction  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ManualTaskActionStyle
 	 */
 	public function getStyle() {
 		return $this->style;
@@ -186,14 +168,10 @@ class ManualTaskAction  {
 	/**
 	 * Sets style.
 	 *
-	 * @param string $style
+	 * @param \Wallee\Sdk\Model\ManualTaskActionStyle $style
 	 * @return ManualTaskAction
 	 */
-	protected function setStyle($style) {
-		$allowed_values = array('DEFAULT', 'PRIMARY', 'DANGER');
-		if (!is_null($style) && (!in_array($style, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'style', must be one of 'DEFAULT', 'PRIMARY', 'DANGER'");
-		}
+	public function setStyle($style) {
 		$this->style = $style;
 
 		return $this;
@@ -201,6 +179,8 @@ class ManualTaskAction  {
 
 	/**
 	 * Returns taskType.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -214,7 +194,7 @@ class ManualTaskAction  {
 	 * @param int $taskType
 	 * @return ManualTaskAction
 	 */
-	public function setTaskType($taskType) {
+	protected function setTaskType($taskType) {
 		$this->taskType = $taskType;
 
 		return $this;
@@ -226,11 +206,6 @@ class ManualTaskAction  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("DEFAULT", "PRIMARY", "DANGER");
-		if (!in_array($this->getStyle(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'style', must be one of #{allowed_values}.", 'style', $this);
-		}
 
 	}
 

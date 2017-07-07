@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductVersionRetirement model
@@ -82,11 +82,15 @@ class SubscriptionProductVersionRetirement  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductVersion
 	 */
 	private $productVersion;
@@ -99,6 +103,8 @@ class SubscriptionProductVersionRetirement  {
 	private $respectTerminiationPeriodsEnabled;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProduct
 	 */
 	private $targetProduct;
@@ -119,9 +125,6 @@ class SubscriptionProductVersionRetirement  {
 	public function __construct(array $data = null) {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['productVersion']) && $data['productVersion'] != null) {
 			$this->setProductVersion($data['productVersion']);
@@ -184,6 +187,8 @@ class SubscriptionProductVersionRetirement  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -196,7 +201,7 @@ class SubscriptionProductVersionRetirement  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductVersionRetirement
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -204,6 +209,8 @@ class SubscriptionProductVersionRetirement  {
 
 	/**
 	 * Returns productVersion.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
 	 */
@@ -248,6 +255,8 @@ class SubscriptionProductVersionRetirement  {
 
 	/**
 	 * Returns targetProduct.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProduct
 	 */

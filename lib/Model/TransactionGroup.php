@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionGroup model
@@ -54,7 +54,7 @@ class TransactionGroup  {
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\TransactionGroupState',
 		'version' => 'int'	);
 
 	/**
@@ -66,26 +66,6 @@ class TransactionGroup  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
 	
 
 	/**
@@ -117,6 +97,8 @@ class TransactionGroup  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -131,7 +113,7 @@ class TransactionGroup  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\TransactionGroupState
 	 */
 	private $state;
 
@@ -152,8 +134,8 @@ class TransactionGroup  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -256,6 +238,8 @@ class TransactionGroup  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -268,7 +252,7 @@ class TransactionGroup  {
 	 * @param int $linkedSpaceId
 	 * @return TransactionGroup
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -302,7 +286,7 @@ class TransactionGroup  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\TransactionGroupState
 	 */
 	public function getState() {
 		return $this->state;
@@ -311,14 +295,10 @@ class TransactionGroup  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\TransactionGroupState $state
 	 * @return TransactionGroup
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -353,11 +333,6 @@ class TransactionGroup  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("PENDING", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

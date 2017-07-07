@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionMetricUsageReport model
@@ -79,6 +79,8 @@ class SubscriptionMetricUsageReport  {
 	private $consumedUnits;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $createdByUserId;
@@ -112,11 +114,15 @@ class SubscriptionMetricUsageReport  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * The metric usage report is linked to the metric for which the usage should be recorded.
+	 *
 	 * @var int
 	 */
 	private $metric;
@@ -129,6 +135,8 @@ class SubscriptionMetricUsageReport  {
 	private $plannedPurgeDate;
 
 	/**
+	 * The subscription to which the usage is added to.
+	 *
 	 * @var int
 	 */
 	private $subscription;
@@ -147,20 +155,8 @@ class SubscriptionMetricUsageReport  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['createdByUserId']) && $data['createdByUserId'] != null) {
-			$this->setCreatedByUserId($data['createdByUserId']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['metric']) && $data['metric'] != null) {
-			$this->setMetric($data['metric']);
-		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
-			$this->setSubscription($data['subscription']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -194,6 +190,8 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns createdByUserId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getCreatedByUserId() {
@@ -206,7 +204,7 @@ class SubscriptionMetricUsageReport  {
 	 * @param int $createdByUserId
 	 * @return SubscriptionMetricUsageReport
 	 */
-	public function setCreatedByUserId($createdByUserId) {
+	protected function setCreatedByUserId($createdByUserId) {
 		$this->createdByUserId = $createdByUserId;
 
 		return $this;
@@ -307,6 +305,8 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -319,7 +319,7 @@ class SubscriptionMetricUsageReport  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionMetricUsageReport
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -327,6 +327,8 @@ class SubscriptionMetricUsageReport  {
 
 	/**
 	 * Returns metric.
+	 *
+	 * The metric usage report is linked to the metric for which the usage should be recorded.
 	 *
 	 * @return int
 	 */
@@ -340,7 +342,7 @@ class SubscriptionMetricUsageReport  {
 	 * @param int $metric
 	 * @return SubscriptionMetricUsageReport
 	 */
-	public function setMetric($metric) {
+	protected function setMetric($metric) {
 		$this->metric = $metric;
 
 		return $this;
@@ -372,6 +374,8 @@ class SubscriptionMetricUsageReport  {
 	/**
 	 * Returns subscription.
 	 *
+	 * The subscription to which the usage is added to.
+	 *
 	 * @return int
 	 */
 	public function getSubscription() {
@@ -384,7 +388,7 @@ class SubscriptionMetricUsageReport  {
 	 * @param int $subscription
 	 * @return SubscriptionMetricUsageReport
 	 */
-	public function setSubscription($subscription) {
+	protected function setSubscription($subscription) {
 		$this->subscription = $subscription;
 
 		return $this;

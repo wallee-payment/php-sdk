@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * WebhookListener model
@@ -56,7 +56,7 @@ class WebhookListener  {
 		'name' => 'string',
 		'notifyEveryChange' => 'bool',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'url' => '\Wallee\Sdk\Model\WebhookUrl',
 		'version' => 'int'	);
 
@@ -70,32 +70,10 @@ class WebhookListener  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 	/**
+	 * The listener listens on state changes of the entity linked with the listener.
+	 *
 	 * @var int
 	 */
 	private $entity;
@@ -115,11 +93,15 @@ class WebhookListener  {
 	private $id;
 
 	/**
+	 * The identity which will be used to sign messages sent by this listener.
+	 *
 	 * @var \Wallee\Sdk\Model\WebhookIdentity
 	 */
 	private $identity;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -148,11 +130,13 @@ class WebhookListener  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
 
 	/**
+	 * The URL which is invoked by the listener to notify the application about the event.
+	 *
 	 * @var \Wallee\Sdk\Model\WebhookUrl
 	 */
 	private $url;
@@ -171,9 +155,6 @@ class WebhookListener  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['entity']) && $data['entity'] != null) {
-			$this->setEntity($data['entity']);
-		}
 		if (isset($data['entityStates']) && $data['entityStates'] != null) {
 			$this->setEntityStates($data['entityStates']);
 		}
@@ -183,8 +164,8 @@ class WebhookListener  {
 		if (isset($data['identity']) && $data['identity'] != null) {
 			$this->setIdentity($data['identity']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['url']) && $data['url'] != null) {
 			$this->setUrl($data['url']);
@@ -198,6 +179,8 @@ class WebhookListener  {
 	/**
 	 * Returns entity.
 	 *
+	 * The listener listens on state changes of the entity linked with the listener.
+	 *
 	 * @return int
 	 */
 	public function getEntity() {
@@ -210,7 +193,7 @@ class WebhookListener  {
 	 * @param int $entity
 	 * @return WebhookListener
 	 */
-	public function setEntity($entity) {
+	protected function setEntity($entity) {
 		$this->entity = $entity;
 
 		return $this;
@@ -265,6 +248,8 @@ class WebhookListener  {
 	/**
 	 * Returns identity.
 	 *
+	 * The identity which will be used to sign messages sent by this listener.
+	 *
 	 * @return \Wallee\Sdk\Model\WebhookIdentity
 	 */
 	public function getIdentity() {
@@ -286,6 +271,8 @@ class WebhookListener  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -298,7 +285,7 @@ class WebhookListener  {
 	 * @param int $linkedSpaceId
 	 * @return WebhookListener
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -378,7 +365,7 @@ class WebhookListener  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return $this->state;
@@ -387,14 +374,10 @@ class WebhookListener  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return WebhookListener
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -402,6 +385,8 @@ class WebhookListener  {
 
 	/**
 	 * Returns url.
+	 *
+	 * The URL which is invoked by the listener to notify the application about the event.
 	 *
 	 * @return \Wallee\Sdk\Model\WebhookUrl
 	 */
@@ -450,11 +435,6 @@ class WebhookListener  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

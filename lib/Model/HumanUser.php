@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * HumanUser model
@@ -103,6 +103,8 @@ class HumanUser extends User  {
 	private $lastname;
 
 	/**
+	 * The primary account links the user to a specific account.
+	 *
 	 * @var \Wallee\Sdk\Model\Account
 	 */
 	private $primaryAccount;
@@ -250,6 +252,8 @@ class HumanUser extends User  {
 	/**
 	 * Returns primaryAccount.
 	 *
+	 * The primary account links the user to a specific account.
+	 *
 	 * @return \Wallee\Sdk\Model\Account
 	 */
 	public function getPrimaryAccount() {
@@ -270,6 +274,8 @@ class HumanUser extends User  {
 
 	/**
 	 * Returns scope.
+	 *
+	 * The scope to which the user belongs to.
 	 *
 	 * @return \Wallee\Sdk\Model\Scope
 	 */

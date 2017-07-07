@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * AttachmentResource model
@@ -70,6 +70,8 @@ class AttachmentResource  {
 	private $attachmentName;
 
 	/**
+	 * The path to the resource which should be attached to the email.
+	 *
 	 * @var \Wallee\Sdk\Model\ModelResourcePath
 	 */
 	private $resourcePath;
@@ -115,6 +117,8 @@ class AttachmentResource  {
 
 	/**
 	 * Returns resourcePath.
+	 *
+	 * The path to the resource which should be attached to the email.
 	 *
 	 * @return \Wallee\Sdk\Model\ModelResourcePath
 	 */

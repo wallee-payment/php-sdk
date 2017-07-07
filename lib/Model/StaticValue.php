@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * StaticValue model
@@ -72,6 +72,8 @@ class StaticValue  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $features;
@@ -134,6 +136,8 @@ class StaticValue  {
 
 	/**
 	 * Returns features.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */

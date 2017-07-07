@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionPending model
@@ -79,6 +79,12 @@ class SubscriptionPending extends SubscriptionUpdate  {
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
@@ -106,7 +112,9 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	/**
 	 * Returns subscriber.
 	 *
-	 * @return \Wallee\Sdk\Model\Subscriber
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getSubscriber() {
 		return parent::getSubscriber();
@@ -115,7 +123,7 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	/**
 	 * Sets subscriber.
 	 *
-	 * @param \Wallee\Sdk\Model\Subscriber $subscriber
+	 * @param int $subscriber
 	 * @return SubscriptionPending
 	 */
 	public function setSubscriber($subscriber) {
@@ -125,7 +133,9 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	/**
 	 * Returns token.
 	 *
-	 * @return \Wallee\Sdk\Model\Token
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getToken() {
 		return parent::getToken();
@@ -134,11 +144,53 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	/**
 	 * Sets token.
 	 *
-	 * @param \Wallee\Sdk\Model\Token $token
+	 * @param int $token
 	 * @return SubscriptionPending
 	 */
 	public function setToken($token) {
 		return parent::setToken($token);
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionPending
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionPending
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
 	}
 
 	/**
@@ -149,8 +201,11 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getReference() === null) {
-			throw new ValidationException("'reference' can't be null", 'reference', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
+		}
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
 	}
 

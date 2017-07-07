@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * LabelDescriptor model
@@ -48,7 +48,7 @@ class LabelDescriptor  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'category' => 'string',
+		'category' => '\Wallee\Sdk\Model\LabelDescriptorCategory',
 		'description' => 'map[string,string]',
 		'features' => 'int[]',
 		'group' => 'int',
@@ -67,29 +67,11 @@ class LabelDescriptor  {
 	}
 
 	
-	/**
-	 * Values of category.
-	 */
-	const CATEGORY_HUMAN = 'HUMAN';
-	const CATEGORY_APPLICATION = 'APPLICATION';
-	
-	/**
-	 * Returns allowable values of category.
-	 *
-	 * @return string[]
-	 */
-	public function getCategoryAllowableValues() {
-		return array(
-			self::CATEGORY_HUMAN,
-			self::CATEGORY_APPLICATION,
-		);
-	}
-	
 
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\LabelDescriptorCategory
 	 */
 	private $category;
 
@@ -101,11 +83,15 @@ class LabelDescriptor  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $features;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $group;
@@ -125,6 +111,8 @@ class LabelDescriptor  {
 	private $name;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $type;
@@ -143,20 +131,17 @@ class LabelDescriptor  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['category']) && $data['category'] != null) {
+			$this->setCategory($data['category']);
+		}
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
 		if (isset($data['features']) && $data['features'] != null) {
 			$this->setFeatures($data['features']);
 		}
-		if (isset($data['group']) && $data['group'] != null) {
-			$this->setGroup($data['group']);
-		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
-		}
-		if (isset($data['type']) && $data['type'] != null) {
-			$this->setType($data['type']);
 		}
 	}
 
@@ -166,7 +151,7 @@ class LabelDescriptor  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\LabelDescriptorCategory
 	 */
 	public function getCategory() {
 		return $this->category;
@@ -175,14 +160,10 @@ class LabelDescriptor  {
 	/**
 	 * Sets category.
 	 *
-	 * @param string $category
+	 * @param \Wallee\Sdk\Model\LabelDescriptorCategory $category
 	 * @return LabelDescriptor
 	 */
-	protected function setCategory($category) {
-		$allowed_values = array('HUMAN', 'APPLICATION');
-		if (!is_null($category) && (!in_array($category, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'category', must be one of 'HUMAN', 'APPLICATION'");
-		}
+	public function setCategory($category) {
 		$this->category = $category;
 
 		return $this;
@@ -214,6 +195,8 @@ class LabelDescriptor  {
 	/**
 	 * Returns features.
 	 *
+	 * 
+	 *
 	 * @return int[]
 	 */
 	public function getFeatures() {
@@ -235,6 +218,8 @@ class LabelDescriptor  {
 	/**
 	 * Returns group.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getGroup() {
@@ -247,7 +232,7 @@ class LabelDescriptor  {
 	 * @param int $group
 	 * @return LabelDescriptor
 	 */
-	public function setGroup($group) {
+	protected function setGroup($group) {
 		$this->group = $group;
 
 		return $this;
@@ -302,6 +287,8 @@ class LabelDescriptor  {
 	/**
 	 * Returns type.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getType() {
@@ -314,7 +301,7 @@ class LabelDescriptor  {
 	 * @param int $type
 	 * @return LabelDescriptor
 	 */
-	public function setType($type) {
+	protected function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -349,11 +336,6 @@ class LabelDescriptor  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("HUMAN", "APPLICATION");
-		if (!in_array($this->getCategory(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'category', must be one of #{allowed_values}.", 'category', $this);
-		}
 
 	}
 

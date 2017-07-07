@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
- * DatabaseTranslatedStringItemUpdate model
+ * LineItemAttribute model
  *
  * @category    Class
  * @description 
@@ -33,14 +33,14 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
+class LineItemAttribute  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'DatabaseTranslatedStringItem.Update';
+	private static $swaggerModelName = 'LineItemAttribute';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -48,7 +48,8 @@ class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'label' => 'string',
+		'value' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +57,24 @@ class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $label;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $value;
 
 
 	/**
@@ -68,57 +83,53 @@ class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['language']) && $data['language'] != null) {
-			$this->setLanguage($data['language']);
-		}
-		if (isset($data['translation']) && $data['translation'] != null) {
-			$this->setTranslation($data['translation']);
-		}
 	}
 
 
 	/**
-	 * Returns language.
+	 * Returns label.
 	 *
 	 * 
 	 *
 	 * @return string
 	 */
-	public function getLanguage() {
-		return parent::getLanguage();
+	public function getLabel() {
+		return $this->label;
 	}
 
 	/**
-	 * Sets language.
+	 * Sets label.
 	 *
-	 * @param string $language
-	 * @return DatabaseTranslatedStringItemUpdate
+	 * @param string $label
+	 * @return LineItemAttribute
 	 */
-	public function setLanguage($language) {
-		return parent::setLanguage($language);
+	protected function setLabel($label) {
+		$this->label = $label;
+
+		return $this;
 	}
 
 	/**
-	 * Returns translation.
+	 * Returns value.
 	 *
 	 * 
 	 *
 	 * @return string
 	 */
-	public function getTranslation() {
-		return parent::getTranslation();
+	public function getValue() {
+		return $this->value;
 	}
 
 	/**
-	 * Sets translation.
+	 * Sets value.
 	 *
-	 * @param string $translation
-	 * @return DatabaseTranslatedStringItemUpdate
+	 * @param string $value
+	 * @return LineItemAttribute
 	 */
-	public function setTranslation($translation) {
-		return parent::setTranslation($translation);
+	protected function setValue($value) {
+		$this->value = $value;
+
+		return $this;
 	}
 
 	/**
@@ -127,11 +138,7 @@ class DatabaseTranslatedStringItemUpdate extends DatabaseTranslatedStringItem  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
-		if ($this->getLanguage() === null) {
-			throw new ValidationException("'language' can't be null", 'language', $this);
-		}
 	}
 
 	/**

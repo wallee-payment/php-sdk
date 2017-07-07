@@ -21,13 +21,13 @@
 
 namespace Wallee\Sdk\Service;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\ApiException;
-use \Wallee\Sdk\ApiResponse;
-use \Wallee\Sdk\Http\HttpRequest;
+use Wallee\Sdk\ApiClient;
+use Wallee\Sdk\ApiException;
+use Wallee\Sdk\ApiResponse;
+use Wallee\Sdk\Http\HttpRequest;
 
 /**
- * SubscriptionProductMeteredTierFeeService service
+ * SubscriptionProductFeeTierService service
  *
  * @category Class
  * @package  Wallee\Sdk
@@ -35,7 +35,7 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductMeteredTierFeeService {
+class SubscriptionProductFeeTierService {
 
 	/**
 	 * The API client instance.
@@ -170,7 +170,7 @@ class SubscriptionProductMeteredTierFeeService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductMeteredTierFeeUpdate $entity The metered fee tier object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\ProductMeteredTierFeeUpdate
+	 * @return \Wallee\Sdk\Model\ProductMeteredTierFee
 	 */
 	public function create($spaceId, $entity) {
 		return $this->createWithHttpInfo($spaceId, $entity)->getData();
@@ -237,14 +237,14 @@ class SubscriptionProductMeteredTierFeeService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\ProductMeteredTierFeeUpdate',
+				'\Wallee\Sdk\Model\ProductMeteredTierFee',
 				'/subscription-product-fee-tier/create'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductMeteredTierFeeUpdate', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductMeteredTierFee', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductMeteredTierFeeUpdate', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductMeteredTierFee', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 442:
@@ -564,7 +564,7 @@ class SubscriptionProductMeteredTierFeeService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\ProductMeteredTierFeeUpdate $entity The metered fee tier object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
-	 * @return \Wallee\Sdk\Model\ProductMeteredTierFeeUpdate
+	 * @return \Wallee\Sdk\Model\ProductMeteredTierFee
 	 */
 	public function update($spaceId, $entity) {
 		return $this->updateWithHttpInfo($spaceId, $entity)->getData();
@@ -631,14 +631,14 @@ class SubscriptionProductMeteredTierFeeService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\ProductMeteredTierFeeUpdate',
+				'\Wallee\Sdk\Model\ProductMeteredTierFee',
 				'/subscription-product-fee-tier/update'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductMeteredTierFeeUpdate', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ProductMeteredTierFee', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
 				case 200:
-					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductMeteredTierFeeUpdate', $e->getResponseHeaders());
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ProductMeteredTierFee', $e->getResponseHeaders());
 					$e = new ApiException($responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
 					break;
 				case 409:

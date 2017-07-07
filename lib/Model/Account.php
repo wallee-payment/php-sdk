@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Account model
@@ -55,9 +55,9 @@ class Account  {
 		'parentAccount' => '\Wallee\Sdk\Model\Account',
 		'plannedPurgeDate' => '\DateTime',
 		'restrictedActive' => 'bool',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\AccountState',
 		'subaccountLimit' => 'int',
-		'type' => 'string',
+		'type' => '\Wallee\Sdk\Model\AccountType',
 		'version' => 'int'	);
 
 	/**
@@ -69,52 +69,6 @@ class Account  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_RESTRICTED_ACTIVE = 'RESTRICTED_ACTIVE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_RESTRICTED_ACTIVE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_MASTER = 'MASTER';
-	const TYPE_REGULAR = 'REGULAR';
-	const TYPE_SUBACCOUNT = 'SUBACCOUNT';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_MASTER,
-			self::TYPE_REGULAR,
-			self::TYPE_SUBACCOUNT,
-		);
-	}
 	
 
 	/**
@@ -146,6 +100,8 @@ class Account  {
 	private $name;
 
 	/**
+	 * The account which is responsible for administering the account.
+	 *
 	 * @var \Wallee\Sdk\Model\Account
 	 */
 	private $parentAccount;
@@ -167,7 +123,7 @@ class Account  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\AccountState
 	 */
 	private $state;
 
@@ -181,7 +137,7 @@ class Account  {
 	/**
 	 * The account type defines which role and capabilities it has.
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\AccountType
 	 */
 	private $type;
 
@@ -204,6 +160,12 @@ class Account  {
 		}
 		if (isset($data['parentAccount']) && $data['parentAccount'] != null) {
 			$this->setParentAccount($data['parentAccount']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -306,6 +268,8 @@ class Account  {
 	/**
 	 * Returns parentAccount.
 	 *
+	 * The account which is responsible for administering the account.
+	 *
 	 * @return \Wallee\Sdk\Model\Account
 	 */
 	public function getParentAccount() {
@@ -375,7 +339,7 @@ class Account  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\AccountState
 	 */
 	public function getState() {
 		return $this->state;
@@ -384,14 +348,10 @@ class Account  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\AccountState $state
 	 * @return Account
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'RESTRICTED_ACTIVE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'RESTRICTED_ACTIVE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -425,7 +385,7 @@ class Account  {
 	 *
 	 * The account type defines which role and capabilities it has.
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\AccountType
 	 */
 	public function getType() {
 		return $this->type;
@@ -434,14 +394,10 @@ class Account  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\AccountType $type
 	 * @return Account
 	 */
-	protected function setType($type) {
-		$allowed_values = array('MASTER', 'REGULAR', 'SUBACCOUNT');
-		if (!is_null($type) && (!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'MASTER', 'REGULAR', 'SUBACCOUNT'");
-		}
+	public function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -476,16 +432,6 @@ class Account  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "RESTRICTED_ACTIVE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
-		$allowed_values = array("MASTER", "REGULAR", "SUBACCOUNT");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
 
 	}
 

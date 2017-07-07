@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionLineItemVersion model
@@ -113,6 +113,8 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	private $plannedPurgeDate;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceViewId;
@@ -125,6 +127,8 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	private $taxAmount;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -147,9 +151,6 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
-		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
-			$this->setSpaceViewId($data['spaceViewId']);
 		}
 		if (isset($data['transaction']) && $data['transaction'] != null) {
 			$this->setTransaction($data['transaction']);
@@ -298,6 +299,8 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceViewId() {
@@ -310,7 +313,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	 * @param int $spaceViewId
 	 * @return TransactionLineItemVersion
 	 */
-	public function setSpaceViewId($spaceViewId) {
+	protected function setSpaceViewId($spaceViewId) {
 		$this->spaceViewId = $spaceViewId;
 
 		return $this;
@@ -341,6 +344,8 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 
 	/**
 	 * Returns transaction.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk;
 
-use \Exception;
+use Exception;
 
 /**
  * This exception is used to inform about problems during an API call.

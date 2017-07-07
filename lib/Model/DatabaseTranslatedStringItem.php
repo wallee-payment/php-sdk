@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * DatabaseTranslatedStringItem model
@@ -48,11 +48,9 @@ class DatabaseTranslatedStringItem  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'id' => 'int',
 		'language' => 'string',
 		'languageCode' => 'string',
-		'translation' => 'string',
-		'version' => 'int'	);
+		'translation' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -64,13 +62,6 @@ class DatabaseTranslatedStringItem  {
 	}
 
 	
-
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
 
 	/**
 	 * 
@@ -93,13 +84,6 @@ class DatabaseTranslatedStringItem  {
 	 */
 	private $translation;
 
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
 
 	/**
 	 * Constructor.
@@ -107,37 +91,8 @@ class DatabaseTranslatedStringItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return DatabaseTranslatedStringItem
-	 */
-	public function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
 
 	/**
 	 * Returns language.
@@ -204,29 +159,6 @@ class DatabaseTranslatedStringItem  {
 	 */
 	protected function setTranslation($translation) {
 		$this->translation = $translation;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return DatabaseTranslatedStringItem
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
 
 		return $this;
 	}

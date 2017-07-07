@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SpaceUpdate model
@@ -85,6 +85,12 @@ class SpaceUpdate extends Space  {
 		if (isset($data['timeZone']) && $data['timeZone'] != null) {
 			$this->setTimeZone($data['timeZone']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
@@ -111,6 +117,8 @@ class SpaceUpdate extends Space  {
 
 	/**
 	 * Returns postalAddress.
+	 *
+	 * The address to use in communication with clients for example in email, documents etc.
 	 *
 	 * @return \Wallee\Sdk\Model\SpaceAddressSetter
 	 */
@@ -192,6 +200,48 @@ class SpaceUpdate extends Space  {
 	}
 
 	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SpaceUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SpaceUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
+	}
+
+	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
 	 *
 	 * @throws ValidationException
@@ -199,11 +249,11 @@ class SpaceUpdate extends Space  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
 		}
-		if ($this->getTimeZone() === null) {
-			throw new ValidationException("'timeZone' can't be null", 'timeZone', $this);
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
 	}
 

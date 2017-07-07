@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ApplicationUser model
@@ -71,6 +71,8 @@ class ApplicationUser extends User  {
 	private $name;
 
 	/**
+	 * The account that this user is associated with. The account owner will be able to manage this user.
+	 *
 	 * @var \Wallee\Sdk\Model\Account
 	 */
 	private $primaryAccount;
@@ -119,6 +121,8 @@ class ApplicationUser extends User  {
 	/**
 	 * Returns primaryAccount.
 	 *
+	 * The account that this user is associated with. The account owner will be able to manage this user.
+	 *
 	 * @return \Wallee\Sdk\Model\Account
 	 */
 	public function getPrimaryAccount() {
@@ -139,6 +143,8 @@ class ApplicationUser extends User  {
 
 	/**
 	 * Returns scope.
+	 *
+	 * The scope to which the user belongs to.
 	 *
 	 * @return \Wallee\Sdk\Model\Scope
 	 */

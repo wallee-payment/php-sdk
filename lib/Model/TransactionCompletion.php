@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionCompletion model
@@ -55,13 +55,13 @@ class TransactionCompletion extends TransactionAwareEntity  {
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
 		'lineItemVersion' => '\Wallee\Sdk\Model\TransactionLineItemVersion',
-		'mode' => 'string',
+		'mode' => '\Wallee\Sdk\Model\TransactionCompletionMode',
 		'nextUpdateOn' => '\DateTime',
 		'paymentInformation' => 'string',
 		'plannedPurgeDate' => '\DateTime',
 		'processorReference' => 'string',
 		'spaceViewId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\TransactionCompletionState',
 		'succeededOn' => '\DateTime',
 		'timeoutOn' => '\DateTime',
 		'version' => 'int'	);
@@ -75,48 +75,6 @@ class TransactionCompletion extends TransactionAwareEntity  {
 		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
-	
-	/**
-	 * Values of mode.
-	 */
-	const MODE_DIRECT = 'DIRECT';
-	const MODE_ONLINE = 'ONLINE';
-	const MODE_OFFLINE = 'OFFLINE';
-	
-	/**
-	 * Returns allowable values of mode.
-	 *
-	 * @return string[]
-	 */
-	public function getModeAllowableValues() {
-		return array(
-			self::MODE_DIRECT,
-			self::MODE_ONLINE,
-			self::MODE_OFFLINE,
-		);
-	}
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_PENDING = 'PENDING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_PENDING,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
 	
 
 	/**
@@ -141,6 +99,8 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	private $failedOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\FailureReason
 	 */
 	private $failureReason;
@@ -160,6 +120,8 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	private $language;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\TransactionLineItemVersion
 	 */
 	private $lineItemVersion;
@@ -167,7 +129,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\TransactionCompletionMode
 	 */
 	private $mode;
 
@@ -200,6 +162,8 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	private $processorReference;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceViewId;
@@ -207,7 +171,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\TransactionCompletionState
 	 */
 	private $state;
 
@@ -250,8 +214,11 @@ class TransactionCompletion extends TransactionAwareEntity  {
 		if (isset($data['lineItemVersion']) && $data['lineItemVersion'] != null) {
 			$this->setLineItemVersion($data['lineItemVersion']);
 		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
-			$this->setSpaceViewId($data['spaceViewId']);
+		if (isset($data['mode']) && $data['mode'] != null) {
+			$this->setMode($data['mode']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 	}
 
@@ -328,6 +295,8 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Returns failureReason.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\FailureReason
 	 */
 	public function getFailureReason() {
@@ -395,6 +364,8 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Returns lineItemVersion.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\TransactionLineItemVersion
 	 */
 	public function getLineItemVersion() {
@@ -418,7 +389,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\TransactionCompletionMode
 	 */
 	public function getMode() {
 		return $this->mode;
@@ -427,14 +398,10 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Sets mode.
 	 *
-	 * @param string $mode
+	 * @param \Wallee\Sdk\Model\TransactionCompletionMode $mode
 	 * @return TransactionCompletion
 	 */
-	protected function setMode($mode) {
-		$allowed_values = array('DIRECT', 'ONLINE', 'OFFLINE');
-		if (!is_null($mode) && (!in_array($mode, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'mode', must be one of 'DIRECT', 'ONLINE', 'OFFLINE'");
-		}
+	public function setMode($mode) {
 		$this->mode = $mode;
 
 		return $this;
@@ -535,6 +502,8 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceViewId() {
@@ -547,7 +516,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 * @param int $spaceViewId
 	 * @return TransactionCompletion
 	 */
-	public function setSpaceViewId($spaceViewId) {
+	protected function setSpaceViewId($spaceViewId) {
 		$this->spaceViewId = $spaceViewId;
 
 		return $this;
@@ -558,7 +527,7 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\TransactionCompletionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -567,14 +536,10 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\TransactionCompletionState $state
 	 * @return TransactionCompletion
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'PENDING', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'PENDING', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -656,16 +621,6 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("DIRECT", "ONLINE", "OFFLINE");
-		if (!in_array($this->getMode(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'mode', must be one of #{allowed_values}.", 'mode', $this);
-		}
-
-		$allowed_values = array("CREATE", "PENDING", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

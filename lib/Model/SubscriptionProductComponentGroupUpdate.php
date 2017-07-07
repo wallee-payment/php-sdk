@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductComponentGroupUpdate model
@@ -82,13 +82,21 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
 			$this->setSortOrder($data['sortOrder']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns name.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The component group name will be shown when the components are selected. This can be visible to the subscriber.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getName() {
 		return parent::getName();
@@ -97,7 +105,7 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	/**
 	 * Sets name.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
 	 * @return SubscriptionProductComponentGroupUpdate
 	 */
 	public function setName($name) {
@@ -128,7 +136,9 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	/**
 	 * Returns productVersion.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getProductVersion() {
 		return parent::getProductVersion();
@@ -137,7 +147,7 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	/**
 	 * Sets productVersion.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductVersion $productVersion
+	 * @param int $productVersion
 	 * @return SubscriptionProductComponentGroupUpdate
 	 */
 	public function setProductVersion($productVersion) {
@@ -166,6 +176,48 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	}
 
 	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductComponentGroupUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductComponentGroupUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
+	}
+
+	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
 	 *
 	 * @throws ValidationException
@@ -173,6 +225,12 @@ class SubscriptionProductComponentGroupUpdate extends SubscriptionProductCompone
 	public function validate() {
 		parent::validate();
 
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
+		}
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
+		}
 	}
 
 	/**

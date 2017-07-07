@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * EntityQueryOrderBy model
@@ -49,7 +49,7 @@ class EntityQueryOrderBy  {
 	 */
 	private static $swaggerTypes = array(
 		'fieldName' => 'string',
-		'sorting' => 'string'	);
+		'sorting' => '\Wallee\Sdk\Model\EntityQueryOrderByType'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,24 +60,6 @@ class EntityQueryOrderBy  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of sorting.
-	 */
-	const SORTING_DESC = 'DESC';
-	const SORTING_ASC = 'ASC';
-	
-	/**
-	 * Returns allowable values of sorting.
-	 *
-	 * @return string[]
-	 */
-	public function getSortingAllowableValues() {
-		return array(
-			self::SORTING_DESC,
-			self::SORTING_ASC,
-		);
-	}
 	
 
 	/**
@@ -90,7 +72,7 @@ class EntityQueryOrderBy  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\EntityQueryOrderByType
 	 */
 	private $sorting;
 
@@ -138,7 +120,7 @@ class EntityQueryOrderBy  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\EntityQueryOrderByType
 	 */
 	public function getSorting() {
 		return $this->sorting;
@@ -147,14 +129,10 @@ class EntityQueryOrderBy  {
 	/**
 	 * Sets sorting.
 	 *
-	 * @param string $sorting
+	 * @param \Wallee\Sdk\Model\EntityQueryOrderByType $sorting
 	 * @return EntityQueryOrderBy
 	 */
 	public function setSorting($sorting) {
-		$allowed_values = array('DESC', 'ASC');
-		if (!is_null($sorting) && (!in_array($sorting, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'sorting', must be one of 'DESC', 'ASC'");
-		}
 		$this->sorting = $sorting;
 
 		return $this;
@@ -166,11 +144,6 @@ class EntityQueryOrderBy  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("DESC", "ASC");
-		if (!in_array($this->getSorting(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'sorting', must be one of #{allowed_values}.", 'sorting', $this);
-		}
 
 	}
 

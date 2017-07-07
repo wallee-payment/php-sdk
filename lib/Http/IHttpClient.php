@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Http;
 
-use \Wallee\Sdk\ApiClient;
+use Wallee\Sdk\ApiClient;
 
 /**
  * This interface defines an HTTP client that sends API requests.

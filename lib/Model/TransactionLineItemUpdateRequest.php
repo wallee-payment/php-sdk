@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionLineItemUpdateRequest model
@@ -48,7 +48,7 @@ class TransactionLineItemUpdateRequest  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'newLineItems' => '\Wallee\Sdk\Model\LineItem[]',
+		'newLineItems' => '\Wallee\Sdk\Model\LineItemCreate[]',
 		'transactionId' => 'int'	);
 
 	/**
@@ -65,7 +65,7 @@ class TransactionLineItemUpdateRequest  {
 	/**
 	 * 
 	 *
-	 * @var \Wallee\Sdk\Model\LineItem[]
+	 * @var \Wallee\Sdk\Model\LineItemCreate[]
 	 */
 	private $newLineItems;
 
@@ -97,7 +97,7 @@ class TransactionLineItemUpdateRequest  {
 	 *
 	 * 
 	 *
-	 * @return \Wallee\Sdk\Model\LineItem[]
+	 * @return \Wallee\Sdk\Model\LineItemCreate[]
 	 */
 	public function getNewLineItems() {
 		return $this->newLineItems;
@@ -106,7 +106,7 @@ class TransactionLineItemUpdateRequest  {
 	/**
 	 * Sets newLineItems.
 	 *
-	 * @param \Wallee\Sdk\Model\LineItem[] $newLineItems
+	 * @param \Wallee\Sdk\Model\LineItemCreate[] $newLineItems
 	 * @return TransactionLineItemUpdateRequest
 	 */
 	public function setNewLineItems($newLineItems) {

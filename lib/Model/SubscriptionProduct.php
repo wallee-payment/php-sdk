@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProduct model
@@ -57,7 +57,7 @@ class SubscriptionProduct  {
 		'reference' => 'string',
 		'sortOrder' => 'int',
 		'spaceId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionProductState',
 		'version' => 'int'	);
 
 	/**
@@ -70,32 +70,10 @@ class SubscriptionProduct  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_RETIRING = 'RETIRING';
-	const STATE_RETIRED = 'RETIRED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_RETIRING,
-			self::STATE_RETIRED,
-		);
-	}
-	
 
 	/**
+	 * The allowed payment method configurations control which payment methods can be used with this product. When none is selected all methods will be allowed.
+	 *
 	 * @var int[]
 	 */
 	private $allowedPaymentMethodConfigurations;
@@ -115,6 +93,8 @@ class SubscriptionProduct  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -157,7 +137,7 @@ class SubscriptionProduct  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionProductState
 	 */
 	private $state;
 
@@ -181,8 +161,8 @@ class SubscriptionProduct  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -192,6 +172,8 @@ class SubscriptionProduct  {
 
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
+	 *
+	 * The allowed payment method configurations control which payment methods can be used with this product. When none is selected all methods will be allowed.
 	 *
 	 * @return int[]
 	 */
@@ -260,6 +242,8 @@ class SubscriptionProduct  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -272,7 +256,7 @@ class SubscriptionProduct  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionProduct
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -398,7 +382,7 @@ class SubscriptionProduct  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionProductState
 	 */
 	public function getState() {
 		return $this->state;
@@ -407,14 +391,10 @@ class SubscriptionProduct  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionProductState $state
 	 * @return SubscriptionProduct
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -449,11 +429,6 @@ class SubscriptionProduct  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

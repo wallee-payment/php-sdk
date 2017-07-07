@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * DocumentTemplateType model
@@ -73,6 +73,8 @@ class DocumentTemplateType  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $feature;
@@ -108,9 +110,6 @@ class DocumentTemplateType  {
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['feature']) && $data['feature'] != null) {
-			$this->setFeature($data['feature']);
-		}
 		if (isset($data['title']) && $data['title'] != null) {
 			$this->setTitle($data['title']);
 		}
@@ -143,6 +142,8 @@ class DocumentTemplateType  {
 	/**
 	 * Returns feature.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getFeature() {
@@ -155,7 +156,7 @@ class DocumentTemplateType  {
 	 * @param int $feature
 	 * @return DocumentTemplateType
 	 */
-	public function setFeature($feature) {
+	protected function setFeature($feature) {
 		$this->feature = $feature;
 
 		return $this;

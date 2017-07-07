@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductVersion model
@@ -66,7 +66,7 @@ class SubscriptionProductVersion  {
 		'reference' => 'string',
 		'retiringFinishedOn' => '\DateTime',
 		'retiringStartedOn' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionProductVersionState',
 		'version' => 'int'	);
 
 	/**
@@ -78,30 +78,6 @@ class SubscriptionProductVersion  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_OBSOLETE = 'OBSOLETE';
-	const STATE_RETIRING = 'RETIRING';
-	const STATE_RETIRED = 'RETIRED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_ACTIVE,
-			self::STATE_OBSOLETE,
-			self::STATE_RETIRING,
-			self::STATE_RETIRED,
-		);
-	}
 	
 
 	/**
@@ -161,6 +137,8 @@ class SubscriptionProductVersion  {
 	private $incrementNumber;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -173,6 +151,8 @@ class SubscriptionProductVersion  {
 	private $minimalNumberOfPeriods;
 
 	/**
+	 * The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $name;
@@ -199,6 +179,8 @@ class SubscriptionProductVersion  {
 	private $plannedPurgeDate;
 
 	/**
+	 * Each product version is linked to a product.
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProduct
 	 */
 	private $product;
@@ -227,7 +209,7 @@ class SubscriptionProductVersion  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionProductVersionState
 	 */
 	private $state;
 
@@ -251,14 +233,14 @@ class SubscriptionProductVersion  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
 		}
 		if (isset($data['product']) && $data['product'] != null) {
 			$this->setProduct($data['product']);
+		}
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -453,6 +435,8 @@ class SubscriptionProductVersion  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -465,7 +449,7 @@ class SubscriptionProductVersion  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductVersion
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -496,6 +480,8 @@ class SubscriptionProductVersion  {
 
 	/**
 	 * Returns name.
+	 *
+	 * The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -586,6 +572,8 @@ class SubscriptionProductVersion  {
 
 	/**
 	 * Returns product.
+	 *
+	 * Each product version is linked to a product.
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProduct
 	 */
@@ -679,7 +667,7 @@ class SubscriptionProductVersion  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionProductVersionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -688,14 +676,10 @@ class SubscriptionProductVersion  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionProductVersionState $state
 	 * @return SubscriptionProductVersion
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'ACTIVE', 'OBSOLETE', 'RETIRING', 'RETIRED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'ACTIVE', 'OBSOLETE', 'RETIRING', 'RETIRED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -730,11 +714,6 @@ class SubscriptionProductVersion  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("PENDING", "ACTIVE", "OBSOLETE", "RETIRING", "RETIRED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
- * DatabaseTranslatedStringUpdate model
+ * LineItemAttributeCreate model
  *
  * @category    Class
  * @description 
@@ -33,14 +33,14 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class DatabaseTranslatedStringUpdate extends DatabaseTranslatedString  {
+class LineItemAttributeCreate extends LineItemAttribute  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'DatabaseTranslatedString.Update';
+	private static $swaggerModelName = 'LineItemAttribute.Create';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -70,31 +70,55 @@ class DatabaseTranslatedStringUpdate extends DatabaseTranslatedString  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['items']) && $data['items'] != null) {
-			$this->setItems($data['items']);
+		if (isset($data['label']) && $data['label'] != null) {
+			$this->setLabel($data['label']);
+		}
+		if (isset($data['value']) && $data['value'] != null) {
+			$this->setValue($data['value']);
 		}
 	}
 
 
 	/**
-	 * Returns items.
+	 * Returns label.
 	 *
 	 * 
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringItemUpdate[]
+	 * @return string
 	 */
-	public function getItems() {
-		return parent::getItems();
+	public function getLabel() {
+		return parent::getLabel();
 	}
 
 	/**
-	 * Sets items.
+	 * Sets label.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringItemUpdate[] $items
-	 * @return DatabaseTranslatedStringUpdate
+	 * @param string $label
+	 * @return LineItemAttributeCreate
 	 */
-	public function setItems($items) {
-		return parent::setItems($items);
+	public function setLabel($label) {
+		return parent::setLabel($label);
+	}
+
+	/**
+	 * Returns value.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getValue() {
+		return parent::getValue();
+	}
+
+	/**
+	 * Sets value.
+	 *
+	 * @param string $value
+	 * @return LineItemAttributeCreate
+	 */
+	public function setValue($value) {
+		return parent::setValue($value);
 	}
 
 	/**

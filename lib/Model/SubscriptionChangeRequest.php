@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionChangeRequest model
@@ -73,6 +73,8 @@ class SubscriptionChangeRequest  {
 	private $currency;
 
 	/**
+	 * The subscription has to be linked with a product.
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProduct
 	 */
 	private $product;
@@ -92,6 +94,8 @@ class SubscriptionChangeRequest  {
 	private $selectedComponents;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Subscription
 	 */
 	private $subscription;
@@ -146,6 +150,8 @@ class SubscriptionChangeRequest  {
 
 	/**
 	 * Returns product.
+	 *
+	 * The subscription has to be linked with a product.
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProduct
 	 */
@@ -214,6 +220,8 @@ class SubscriptionChangeRequest  {
 	/**
 	 * Returns subscription.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Subscription
 	 */
 	public function getSubscription() {
@@ -241,6 +249,9 @@ class SubscriptionChangeRequest  {
 
 		if ($this->getCurrency() === null) {
 			throw new ValidationException("'currency' can't be null", 'currency', $this);
+		}
+		if ($this->getProduct() === null) {
+			throw new ValidationException("'product' can't be null", 'product', $this);
 		}
 	}
 

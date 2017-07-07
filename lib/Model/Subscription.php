@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Subscription model
@@ -57,7 +57,7 @@ class Subscription  {
 		'plannedPurgeDate' => '\DateTime',
 		'plannedTerminationDate' => '\DateTime',
 		'reference' => 'string',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SubscriptionState',
 		'subscriber' => '\Wallee\Sdk\Model\Subscriber',
 		'terminatedOn' => '\DateTime',
 		'terminatingOn' => '\DateTime',
@@ -73,34 +73,6 @@ class Subscription  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PENDING = 'PENDING';
-	const STATE_INITIALIZING = 'INITIALIZING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_SUSPENDED = 'SUSPENDED';
-	const STATE_TERMINATING = 'TERMINATING';
-	const STATE_TERMINATED = 'TERMINATED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PENDING,
-			self::STATE_INITIALIZING,
-			self::STATE_FAILED,
-			self::STATE_ACTIVE,
-			self::STATE_SUSPENDED,
-			self::STATE_TERMINATING,
-			self::STATE_TERMINATED,
-		);
-	}
 	
 
 	/**
@@ -139,6 +111,8 @@ class Subscription  {
 	private $language;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -167,11 +141,13 @@ class Subscription  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SubscriptionState
 	 */
 	private $state;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Subscriber
 	 */
 	private $subscriber;
@@ -191,6 +167,8 @@ class Subscription  {
 	private $terminatingOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Token
 	 */
 	private $token;
@@ -212,8 +190,8 @@ class Subscription  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['subscriber']) && $data['subscriber'] != null) {
 			$this->setSubscriber($data['subscriber']);
@@ -345,6 +323,8 @@ class Subscription  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -357,7 +337,7 @@ class Subscription  {
 	 * @param int $linkedSpaceId
 	 * @return Subscription
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -437,7 +417,7 @@ class Subscription  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionState
 	 */
 	public function getState() {
 		return $this->state;
@@ -446,14 +426,10 @@ class Subscription  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionState $state
 	 * @return Subscription
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'SUSPENDED', 'TERMINATING', 'TERMINATED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PENDING', 'INITIALIZING', 'FAILED', 'ACTIVE', 'SUSPENDED', 'TERMINATING', 'TERMINATED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -461,6 +437,8 @@ class Subscription  {
 
 	/**
 	 * Returns subscriber.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Subscriber
 	 */
@@ -529,6 +507,8 @@ class Subscription  {
 	/**
 	 * Returns token.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Token
 	 */
 	public function getToken() {
@@ -576,11 +556,6 @@ class Subscription  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("PENDING", "INITIALIZING", "FAILED", "ACTIVE", "SUSPENDED", "TERMINATING", "TERMINATED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

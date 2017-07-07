@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * InstallmentCalculatedPlan model
@@ -66,6 +66,8 @@ class InstallmentCalculatedPlan  {
 	
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\InstallmentPlanConfiguration
 	 */
 	private $configuration;
@@ -92,6 +94,8 @@ class InstallmentCalculatedPlan  {
 	private $totalAmount;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $transaction;
@@ -120,6 +124,8 @@ class InstallmentCalculatedPlan  {
 
 	/**
 	 * Returns configuration.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\InstallmentPlanConfiguration
 	 */
@@ -210,6 +216,8 @@ class InstallmentCalculatedPlan  {
 
 	/**
 	 * Returns transaction.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */

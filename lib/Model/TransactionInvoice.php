@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * TransactionInvoice model
@@ -57,10 +57,11 @@ class TransactionInvoice extends TransactionAwareEntity  {
 		'language' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'merchantReference' => 'string',
+		'outstandingAmount' => 'float',
 		'paidOn' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
 		'spaceViewId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\TransactionInvoiceState',
 		'taxAmount' => 'float',
 		'version' => 'int'	);
 
@@ -74,34 +75,6 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_OPEN = 'OPEN';
-	const STATE_OVERDUE = 'OVERDUE';
-	const STATE_CANCELED = 'CANCELED';
-	const STATE_PAID = 'PAID';
-	const STATE_DERECOGNIZED = 'DERECOGNIZED';
-	const STATE_NOT_APPLICABLE = 'NOT_APPLICABLE';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_OPEN,
-			self::STATE_OVERDUE,
-			self::STATE_CANCELED,
-			self::STATE_PAID,
-			self::STATE_DERECOGNIZED,
-			self::STATE_NOT_APPLICABLE,
-		);
-	}
-	
 
 	/**
 	 * 
@@ -111,6 +84,8 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	private $amount;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\TransactionCompletion
 	 */
 	private $completion;
@@ -165,6 +140,13 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	private $merchantReference;
 
 	/**
+	 * The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
+	 *
+	 * @var float
+	 */
+	private $outstandingAmount;
+
+	/**
 	 * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
 	 *
 	 * @var \DateTime
@@ -179,6 +161,8 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	private $plannedPurgeDate;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceViewId;
@@ -186,7 +170,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\TransactionInvoiceState
 	 */
 	private $state;
 
@@ -219,8 +203,8 @@ class TransactionInvoice extends TransactionAwareEntity  {
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
-			$this->setSpaceViewId($data['spaceViewId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 	}
 
@@ -250,6 +234,8 @@ class TransactionInvoice extends TransactionAwareEntity  {
 
 	/**
 	 * Returns completion.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\TransactionCompletion
 	 */
@@ -431,6 +417,29 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	}
 
 	/**
+	 * Returns outstandingAmount.
+	 *
+	 * The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
+	 *
+	 * @return float
+	 */
+	public function getOutstandingAmount() {
+		return $this->outstandingAmount;
+	}
+
+	/**
+	 * Sets outstandingAmount.
+	 *
+	 * @param float $outstandingAmount
+	 * @return TransactionInvoice
+	 */
+	protected function setOutstandingAmount($outstandingAmount) {
+		$this->outstandingAmount = $outstandingAmount;
+
+		return $this;
+	}
+
+	/**
 	 * Returns paidOn.
 	 *
 	 * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
@@ -479,6 +488,8 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceViewId() {
@@ -491,7 +502,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 * @param int $spaceViewId
 	 * @return TransactionInvoice
 	 */
-	public function setSpaceViewId($spaceViewId) {
+	protected function setSpaceViewId($spaceViewId) {
 		$this->spaceViewId = $spaceViewId;
 
 		return $this;
@@ -502,7 +513,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\TransactionInvoiceState
 	 */
 	public function getState() {
 		return $this->state;
@@ -511,14 +522,10 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\TransactionInvoiceState $state
 	 * @return TransactionInvoice
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'OPEN', 'OVERDUE', 'CANCELED', 'PAID', 'DERECOGNIZED', 'NOT_APPLICABLE');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'OPEN', 'OVERDUE', 'CANCELED', 'PAID', 'DERECOGNIZED', 'NOT_APPLICABLE'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -577,11 +584,6 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("CREATE", "OPEN", "OVERDUE", "CANCELED", "PAID", "DERECOGNIZED", "NOT_APPLICABLE");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

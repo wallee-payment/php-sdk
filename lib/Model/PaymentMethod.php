@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentMethod model
@@ -48,7 +48,7 @@ class PaymentMethod  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'dataCollectionTypes' => 'string[]',
+		'dataCollectionTypes' => '\Wallee\Sdk\Model\DataCollectionType[]',
 		'description' => 'map[string,string]',
 		'id' => 'int',
 		'imagePath' => 'string',
@@ -65,29 +65,11 @@ class PaymentMethod  {
 	}
 
 	
-	/**
-	 * Values of dataCollectionTypes.
-	 */
-	const DATA_COLLECTION_TYPES_ONSITE = 'ONSITE';
-	const DATA_COLLECTION_TYPES_OFFSITE = 'OFFSITE';
-	
-	/**
-	 * Returns allowable values of dataCollectionTypes.
-	 *
-	 * @return string[]
-	 */
-	public function getDataCollectionTypesAllowableValues() {
-		return array(
-			self::DATA_COLLECTION_TYPES_ONSITE,
-			self::DATA_COLLECTION_TYPES_OFFSITE,
-		);
-	}
-	
 
 	/**
 	 * 
 	 *
-	 * @var string[]
+	 * @var \Wallee\Sdk\Model\DataCollectionType[]
 	 */
 	private $dataCollectionTypes;
 
@@ -153,7 +135,7 @@ class PaymentMethod  {
 	 *
 	 * 
 	 *
-	 * @return string[]
+	 * @return \Wallee\Sdk\Model\DataCollectionType[]
 	 */
 	public function getDataCollectionTypes() {
 		return $this->dataCollectionTypes;
@@ -162,14 +144,10 @@ class PaymentMethod  {
 	/**
 	 * Sets dataCollectionTypes.
 	 *
-	 * @param string[] $dataCollectionTypes
+	 * @param \Wallee\Sdk\Model\DataCollectionType[] $dataCollectionTypes
 	 * @return PaymentMethod
 	 */
 	public function setDataCollectionTypes($dataCollectionTypes) {
-		$allowed_values = array('ONSITE', 'OFFSITE');
-		if (!is_null($dataCollectionTypes) && (array_diff($dataCollectionTypes, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'dataCollectionTypes', must be one of 'ONSITE', 'OFFSITE'");
-		}
 		$this->dataCollectionTypes = $dataCollectionTypes;
 
 		return $this;

@@ -21,10 +21,10 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
- * SubscriptionProductVersionObsolete model
+ * DatabaseTranslatedStringItemCreate model
  *
  * @category    Class
  * @description 
@@ -33,14 +33,14 @@ use \Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductVersionObsolete extends SubscriptionProductVersionRetiring  {
+class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'SubscriptionProductVersion.Obsolete';
+	private static $swaggerModelName = 'DatabaseTranslatedStringItem.Create';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -70,8 +70,56 @@ class SubscriptionProductVersionObsolete extends SubscriptionProductVersionRetir
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['language']) && $data['language'] != null) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['translation']) && $data['translation'] != null) {
+			$this->setTranslation($data['translation']);
+		}
 	}
 
+
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return parent::getLanguage();
+	}
+
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return DatabaseTranslatedStringItemCreate
+	 */
+	public function setLanguage($language) {
+		return parent::setLanguage($language);
+	}
+
+	/**
+	 * Returns translation.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getTranslation() {
+		return parent::getTranslation();
+	}
+
+	/**
+	 * Sets translation.
+	 *
+	 * @param string $translation
+	 * @return DatabaseTranslatedStringItemCreate
+	 */
+	public function setTranslation($translation) {
+		return parent::setTranslation($translation);
+	}
 
 	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
@@ -81,6 +129,9 @@ class SubscriptionProductVersionObsolete extends SubscriptionProductVersionRetir
 	public function validate() {
 		parent::validate();
 
+		if ($this->getLanguage() === null) {
+			throw new ValidationException("'language' can't be null", 'language', $this);
+		}
 	}
 
 	/**

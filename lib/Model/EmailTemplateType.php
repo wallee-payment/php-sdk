@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * EmailTemplateType model
@@ -91,6 +91,8 @@ class EmailTemplateType  {
 	private $documentAttachments;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $feature;
@@ -145,9 +147,6 @@ class EmailTemplateType  {
 		}
 		if (isset($data['documentAttachments']) && $data['documentAttachments'] != null) {
 			$this->setDocumentAttachments($data['documentAttachments']);
-		}
-		if (isset($data['feature']) && $data['feature'] != null) {
-			$this->setFeature($data['feature']);
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
@@ -230,6 +229,8 @@ class EmailTemplateType  {
 	/**
 	 * Returns feature.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getFeature() {
@@ -242,7 +243,7 @@ class EmailTemplateType  {
 	 * @param int $feature
 	 * @return EmailTemplateType
 	 */
-	public function setFeature($feature) {
+	protected function setFeature($feature) {
 		$this->feature = $feature;
 
 		return $this;

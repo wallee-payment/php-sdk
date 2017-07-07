@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SpaceReference model
@@ -53,7 +53,7 @@ class SpaceReference  {
 		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => '\DateTime',
 		'spaceId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\SpaceReferenceState',
 		'version' => 'int'	);
 
 	/**
@@ -65,30 +65,6 @@ class SpaceReference  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_RESTRICTED_ACTIVE = 'RESTRICTED_ACTIVE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_RESTRICTED_ACTIVE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
 	
 
 	/**
@@ -106,6 +82,8 @@ class SpaceReference  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -118,6 +96,8 @@ class SpaceReference  {
 	private $plannedPurgeDate;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceId;
@@ -125,7 +105,7 @@ class SpaceReference  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\SpaceReferenceState
 	 */
 	private $state;
 
@@ -146,11 +126,8 @@ class SpaceReference  {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['spaceId']) && $data['spaceId'] != null) {
-			$this->setSpaceId($data['spaceId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -207,6 +184,8 @@ class SpaceReference  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -219,7 +198,7 @@ class SpaceReference  {
 	 * @param int $linkedSpaceId
 	 * @return SpaceReference
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -251,6 +230,8 @@ class SpaceReference  {
 	/**
 	 * Returns spaceId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceId() {
@@ -263,7 +244,7 @@ class SpaceReference  {
 	 * @param int $spaceId
 	 * @return SpaceReference
 	 */
-	public function setSpaceId($spaceId) {
+	protected function setSpaceId($spaceId) {
 		$this->spaceId = $spaceId;
 
 		return $this;
@@ -274,7 +255,7 @@ class SpaceReference  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SpaceReferenceState
 	 */
 	public function getState() {
 		return $this->state;
@@ -283,14 +264,10 @@ class SpaceReference  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SpaceReferenceState $state
 	 * @return SpaceReference
 	 */
-	protected function setState($state) {
-		$allowed_values = array('RESTRICTED_ACTIVE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'RESTRICTED_ACTIVE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -325,11 +302,6 @@ class SpaceReference  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("RESTRICTED_ACTIVE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

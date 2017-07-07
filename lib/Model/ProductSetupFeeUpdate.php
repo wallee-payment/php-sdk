@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ProductSetupFeeUpdate model
@@ -88,13 +88,21 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 		if (isset($data['setupFee']) && $data['setupFee'] != null) {
 			$this->setSetupFee($data['setupFee']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns component.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductComponent
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getComponent() {
 		return parent::getComponent();
@@ -103,7 +111,7 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	/**
 	 * Sets component.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component
+	 * @param int $component
 	 * @return ProductSetupFeeUpdate
 	 */
 	public function setComponent($component) {
@@ -113,7 +121,9 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	/**
 	 * Returns description.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getDescription() {
 		return parent::getDescription();
@@ -122,7 +132,7 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	/**
 	 * Sets description.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
 	 * @return ProductSetupFeeUpdate
 	 */
 	public function setDescription($description) {
@@ -132,7 +142,9 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	/**
 	 * Returns name.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getName() {
 		return parent::getName();
@@ -141,7 +153,7 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	/**
 	 * Sets name.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
 	 * @return ProductSetupFeeUpdate
 	 */
 	public function setName($name) {
@@ -212,6 +224,48 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	}
 
 	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return ProductSetupFeeUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
+	}
+
+	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
 	 *
 	 * @throws ValidationException
@@ -219,14 +273,11 @@ class ProductSetupFeeUpdate extends ProductSetupFee  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getOnDowngradeCreditedAmount() === null) {
-			throw new ValidationException("'onDowngradeCreditedAmount' can't be null", 'onDowngradeCreditedAmount', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
 		}
-		if ($this->getOnUpgradeCreditedAmount() === null) {
-			throw new ValidationException("'onUpgradeCreditedAmount' can't be null", 'onUpgradeCreditedAmount', $this);
-		}
-		if ($this->getSetupFee() === null) {
-			throw new ValidationException("'setupFee' can't be null", 'setupFee', $this);
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
 	}
 

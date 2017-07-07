@@ -21,13 +21,13 @@
 
 namespace Wallee\Sdk\Service;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\ApiException;
-use \Wallee\Sdk\ApiResponse;
-use \Wallee\Sdk\Http\HttpRequest;
+use Wallee\Sdk\ApiClient;
+use Wallee\Sdk\ApiException;
+use Wallee\Sdk\ApiResponse;
+use Wallee\Sdk\Http\HttpRequest;
 
 /**
- * LabelDescriptorService service
+ * LabelDescriptionService service
  *
  * @category Class
  * @package  Wallee\Sdk
@@ -35,7 +35,7 @@ use \Wallee\Sdk\Http\HttpRequest;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
-class LabelDescriptorService {
+class LabelDescriptionService {
 
 	/**
 	 * The API client instance.

@@ -21,9 +21,8 @@
 
 namespace Wallee\Sdk;
 
-use \Wallee\Sdk\Http\HttpRequest;
-use \Wallee\Sdk\Http\HttpClientFactory;
-use \Wallee\Sdk\ApiException;
+use Wallee\Sdk\Http\HttpRequest;
+use Wallee\Sdk\Http\HttpClientFactory;
 
 /**
  * This class sends API calls to the endpoint.
@@ -231,7 +230,7 @@ final class ApiClient {
 	 * Sets the connection timeout in seconds.
 	 *
 	 * @param int $connectionTimeout the connection timeout in seconds
-	 * @return IHttpClient
+	 * @return ApiClient
 	 */
 	public function setConnectionTimeout($connectionTimeout) {
 		if (!is_numeric($connectionTimeout) || $connectionTimeout < 0) {

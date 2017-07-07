@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ConnectorInvocation model
@@ -50,7 +50,7 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	private static $swaggerTypes = array(
 		'createdOn' => '\DateTime',
 		'plannedPurgeDate' => '\DateTime',
-		'stage' => 'string',
+		'stage' => '\Wallee\Sdk\Model\ConnectorInvocationStage',
 		'timeTookInMilliseconds' => 'int',
 		'transaction' => 'int',
 		'version' => 'int'	);
@@ -64,28 +64,6 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
-	
-	/**
-	 * Values of stage.
-	 */
-	const STAGE_PAYMENT_METHOD_LIST = 'PAYMENT_METHOD_LIST';
-	const STAGE_FORM_GENERATION = 'FORM_GENERATION';
-	const STAGE_VALIDATION = 'VALIDATION';
-	const STAGE_AUTHORIZATION = 'AUTHORIZATION';
-	
-	/**
-	 * Returns allowable values of stage.
-	 *
-	 * @return string[]
-	 */
-	public function getStageAllowableValues() {
-		return array(
-			self::STAGE_PAYMENT_METHOD_LIST,
-			self::STAGE_FORM_GENERATION,
-			self::STAGE_VALIDATION,
-			self::STAGE_AUTHORIZATION,
-		);
-	}
 	
 
 	/**
@@ -105,7 +83,7 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ConnectorInvocationStage
 	 */
 	private $stage;
 
@@ -117,6 +95,8 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	private $timeTookInMilliseconds;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $transaction;
@@ -137,8 +117,8 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['transaction']) && $data['transaction'] != null) {
-			$this->setTransaction($data['transaction']);
+		if (isset($data['stage']) && $data['stage'] != null) {
+			$this->setStage($data['stage']);
 		}
 	}
 
@@ -194,7 +174,7 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ConnectorInvocationStage
 	 */
 	public function getStage() {
 		return $this->stage;
@@ -203,14 +183,10 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	/**
 	 * Sets stage.
 	 *
-	 * @param string $stage
+	 * @param \Wallee\Sdk\Model\ConnectorInvocationStage $stage
 	 * @return ConnectorInvocation
 	 */
-	protected function setStage($stage) {
-		$allowed_values = array('PAYMENT_METHOD_LIST', 'FORM_GENERATION', 'VALIDATION', 'AUTHORIZATION');
-		if (!is_null($stage) && (!in_array($stage, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'stage', must be one of 'PAYMENT_METHOD_LIST', 'FORM_GENERATION', 'VALIDATION', 'AUTHORIZATION'");
-		}
+	public function setStage($stage) {
 		$this->stage = $stage;
 
 		return $this;
@@ -242,6 +218,8 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	/**
 	 * Returns transaction.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getTransaction() {
@@ -254,7 +232,7 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	 * @param int $transaction
 	 * @return ConnectorInvocation
 	 */
-	public function setTransaction($transaction) {
+	protected function setTransaction($transaction) {
 		$this->transaction = $transaction;
 
 		return $this;
@@ -290,11 +268,6 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("PAYMENT_METHOD_LIST", "FORM_GENERATION", "VALIDATION", "AUTHORIZATION");
-		if (!in_array($this->getStage(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'stage', must be one of #{allowed_values}.", 'stage', $this);
-		}
 
 	}
 

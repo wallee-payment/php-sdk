@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SpaceCreate model
@@ -60,30 +60,6 @@ class SpaceCreate extends SpaceUpdate  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 
 	/**
@@ -106,7 +82,9 @@ class SpaceCreate extends SpaceUpdate  {
 	/**
 	 * Returns account.
 	 *
-	 * @return \Wallee\Sdk\Model\Account
+	 * The account to which the space belongs to.
+	 *
+	 * @return int
 	 */
 	public function getAccount() {
 		return parent::getAccount();
@@ -115,7 +93,7 @@ class SpaceCreate extends SpaceUpdate  {
 	/**
 	 * Sets account.
 	 *
-	 * @param \Wallee\Sdk\Model\Account $account
+	 * @param int $account
 	 * @return SpaceCreate
 	 */
 	public function setAccount($account) {
@@ -127,7 +105,7 @@ class SpaceCreate extends SpaceUpdate  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return parent::getState();
@@ -136,14 +114,10 @@ class SpaceCreate extends SpaceUpdate  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return SpaceCreate
 	 */
 	public function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
 		return parent::setState($state);
 	}
 
@@ -155,14 +129,12 @@ class SpaceCreate extends SpaceUpdate  {
 	public function validate() {
 		parent::validate();
 
+		if ($this->getAccount() === null) {
+			throw new ValidationException("'account' can't be null", 'account', $this);
+		}
 		if ($this->getState() === null) {
 			throw new ValidationException("'state' can't be null", 'state', $this);
 		}
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
 	}
 
 	/**

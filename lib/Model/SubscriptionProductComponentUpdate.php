@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductComponentUpdate model
@@ -94,6 +94,12 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 		if (isset($data['taxClass']) && $data['taxClass'] != null) {
 			$this->setTaxClass($data['taxClass']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
@@ -121,7 +127,9 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Returns componentGroup.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentGroup
+	 * 
+	 *
+	 * @return int
 	 */
 	public function getComponentGroup() {
 		return parent::getComponentGroup();
@@ -130,7 +138,7 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Sets componentGroup.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroup $componentGroup
+	 * @param int $componentGroup
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setComponentGroup($componentGroup) {
@@ -161,7 +169,9 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Returns description.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getDescription() {
 		return parent::getDescription();
@@ -170,7 +180,7 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Sets description.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $description
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setDescription($description) {
@@ -180,7 +190,9 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Returns name.
 	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate
+	 * The component name is shown to the subscriber. It should describe in few words what the component does contain.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
 	 */
 	public function getName() {
 		return parent::getName();
@@ -189,7 +201,7 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Sets name.
 	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringUpdate $name
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setName($name) {
@@ -199,7 +211,9 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Returns reference.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductComponentReference
+	 * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
+	 *
+	 * @return int
 	 */
 	public function getReference() {
 		return parent::getReference();
@@ -208,7 +222,7 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Sets reference.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentReference $reference
+	 * @param int $reference
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setReference($reference) {
@@ -239,7 +253,9 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Returns taxClass.
 	 *
-	 * @return \Wallee\Sdk\Model\TaxClass
+	 * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
+	 *
+	 * @return int
 	 */
 	public function getTaxClass() {
 		return parent::getTaxClass();
@@ -248,11 +264,53 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	/**
 	 * Sets taxClass.
 	 *
-	 * @param \Wallee\Sdk\Model\TaxClass $taxClass
+	 * @param int $taxClass
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setTaxClass($taxClass) {
 		return parent::setTaxClass($taxClass);
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
 	}
 
 	/**
@@ -263,6 +321,12 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	public function validate() {
 		parent::validate();
 
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
+		}
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
+		}
 	}
 
 	/**

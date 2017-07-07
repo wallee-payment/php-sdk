@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionChargeCreate model
@@ -59,24 +59,6 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
-	
-	/**
-	 * Values of processingType.
-	 */
-	const PROCESSING_TYPE_SYNCHRONOUS = 'SYNCHRONOUS';
-	const PROCESSING_TYPE_CHARGE_FLOW = 'CHARGE_FLOW';
-	
-	/**
-	 * Returns allowable values of processingType.
-	 *
-	 * @return string[]
-	 */
-	public function getProcessingTypeAllowableValues() {
-		return array(
-			self::PROCESSING_TYPE_SYNCHRONOUS,
-			self::PROCESSING_TYPE_CHARGE_FLOW,
-		);
-	}
 	
 
 
@@ -180,7 +162,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionChargeProcessingType
 	 */
 	public function getProcessingType() {
 		return parent::getProcessingType();
@@ -189,14 +171,10 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	/**
 	 * Sets processingType.
 	 *
-	 * @param string $processingType
+	 * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processingType
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setProcessingType($processingType) {
-		$allowed_values = array('SYNCHRONOUS', 'CHARGE_FLOW');
-		if ((!in_array($processingType, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'processingType', must be one of 'SYNCHRONOUS', 'CHARGE_FLOW'");
-		}
 		return parent::setProcessingType($processingType);
 	}
 
@@ -224,7 +202,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	/**
 	 * Returns subscription.
 	 *
-	 * @return \Wallee\Sdk\Model\Subscription
+	 * The field subscription indicates the subscription to which the charge belongs to.
+	 *
+	 * @return int
 	 */
 	public function getSubscription() {
 		return parent::getSubscription();
@@ -233,7 +213,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\Subscription $subscription
+	 * @param int $subscription
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setSubscription($subscription) {
@@ -275,11 +255,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 		if ($this->getProcessingType() === null) {
 			throw new ValidationException("'processingType' can't be null", 'processingType', $this);
 		}
-		$allowed_values = array("SYNCHRONOUS", "CHARGE_FLOW");
-		if (!in_array($this->getProcessingType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'processingType', must be one of #{allowed_values}.", 'processingType', $this);
+		if ($this->getSubscription() === null) {
+			throw new ValidationException("'subscription' can't be null", 'subscription', $this);
 		}
-
 	}
 
 	/**

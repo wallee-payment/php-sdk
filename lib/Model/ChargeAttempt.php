@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ChargeAttempt model
@@ -51,7 +51,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 		'charge' => '\Wallee\Sdk\Model\Charge',
 		'connectorConfiguration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
 		'createdOn' => '\DateTime',
-		'environment' => 'string',
+		'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
 		'failedOn' => '\DateTime',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
 		'initializingTokenVersion' => 'bool',
@@ -62,7 +62,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 		'plannedPurgeDate' => '\DateTime',
 		'redirectionUrl' => 'string',
 		'spaceViewId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\ChargeAttemptState',
 		'succeededOn' => '\DateTime',
 		'timeoutOn' => '\DateTime',
 		'tokenVersion' => '\Wallee\Sdk\Model\TokenVersion',
@@ -79,51 +79,17 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	}
 
 	
-	/**
-	 * Values of environment.
-	 */
-	const ENVIRONMENT_PRODUCTION = 'PRODUCTION';
-	const ENVIRONMENT_TEST = 'TEST';
-	
-	/**
-	 * Returns allowable values of environment.
-	 *
-	 * @return string[]
-	 */
-	public function getEnvironmentAllowableValues() {
-		return array(
-			self::ENVIRONMENT_PRODUCTION,
-			self::ENVIRONMENT_TEST,
-		);
-	}
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_PROCESSING = 'PROCESSING';
-	const STATE_FAILED = 'FAILED';
-	const STATE_SUCCESSFUL = 'SUCCESSFUL';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_PROCESSING,
-			self::STATE_FAILED,
-			self::STATE_SUCCESSFUL,
-		);
-	}
-	
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Charge
 	 */
 	private $charge;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\PaymentConnectorConfiguration
 	 */
 	private $connectorConfiguration;
@@ -138,7 +104,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ChargeAttemptEnvironment
 	 */
 	private $environment;
 
@@ -150,6 +116,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	private $failedOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\FailureReason
 	 */
 	private $failureReason;
@@ -162,6 +130,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	private $initializingTokenVersion;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\ConnectorInvocation
 	 */
 	private $invocation;
@@ -202,6 +172,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	private $redirectionUrl;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $spaceViewId;
@@ -209,7 +181,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ChargeAttemptState
 	 */
 	private $state;
 
@@ -228,6 +200,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	private $timeoutOn;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\TokenVersion
 	 */
 	private $tokenVersion;
@@ -261,6 +235,9 @@ class ChargeAttempt extends TransactionAwareEntity  {
 		if (isset($data['connectorConfiguration']) && $data['connectorConfiguration'] != null) {
 			$this->setConnectorConfiguration($data['connectorConfiguration']);
 		}
+		if (isset($data['environment']) && $data['environment'] != null) {
+			$this->setEnvironment($data['environment']);
+		}
 		if (isset($data['failureReason']) && $data['failureReason'] != null) {
 			$this->setFailureReason($data['failureReason']);
 		}
@@ -270,8 +247,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 		if (isset($data['labels']) && $data['labels'] != null) {
 			$this->setLabels($data['labels']);
 		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
-			$this->setSpaceViewId($data['spaceViewId']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['tokenVersion']) && $data['tokenVersion'] != null) {
 			$this->setTokenVersion($data['tokenVersion']);
@@ -281,6 +258,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 
 	/**
 	 * Returns charge.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\Charge
 	 */
@@ -302,6 +281,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 
 	/**
 	 * Returns connectorConfiguration.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
 	 */
@@ -349,7 +330,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment
 	 */
 	public function getEnvironment() {
 		return $this->environment;
@@ -358,14 +339,10 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets environment.
 	 *
-	 * @param string $environment
+	 * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $environment
 	 * @return ChargeAttempt
 	 */
-	protected function setEnvironment($environment) {
-		$allowed_values = array('PRODUCTION', 'TEST');
-		if (!is_null($environment) && (!in_array($environment, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'environment', must be one of 'PRODUCTION', 'TEST'");
-		}
+	public function setEnvironment($environment) {
 		$this->environment = $environment;
 
 		return $this;
@@ -396,6 +373,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 
 	/**
 	 * Returns failureReason.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\FailureReason
 	 */
@@ -440,6 +419,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 
 	/**
 	 * Returns invocation.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\ConnectorInvocation
 	 */
@@ -577,6 +558,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Returns spaceViewId.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getSpaceViewId() {
@@ -589,7 +572,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 * @param int $spaceViewId
 	 * @return ChargeAttempt
 	 */
-	public function setSpaceViewId($spaceViewId) {
+	protected function setSpaceViewId($spaceViewId) {
 		$this->spaceViewId = $spaceViewId;
 
 		return $this;
@@ -600,7 +583,7 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ChargeAttemptState
 	 */
 	public function getState() {
 		return $this->state;
@@ -609,14 +592,10 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\ChargeAttemptState $state
 	 * @return ChargeAttempt
 	 */
-	protected function setState($state) {
-		$allowed_values = array('PROCESSING', 'FAILED', 'SUCCESSFUL');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'PROCESSING', 'FAILED', 'SUCCESSFUL'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -670,6 +649,8 @@ class ChargeAttempt extends TransactionAwareEntity  {
 
 	/**
 	 * Returns tokenVersion.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\TokenVersion
 	 */
@@ -742,16 +723,6 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	 */
 	public function validate() {
 		parent::validate();
-
-		$allowed_values = array("PRODUCTION", "TEST");
-		if (!in_array($this->getEnvironment(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'environment', must be one of #{allowed_values}.", 'environment', $this);
-		}
-
-		$allowed_values = array("PROCESSING", "FAILED", "SUCCESSFUL");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

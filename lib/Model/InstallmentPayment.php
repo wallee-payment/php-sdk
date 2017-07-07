@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * InstallmentPayment model
@@ -55,7 +55,7 @@ class InstallmentPayment  {
 		'linkedSpaceId' => 'int',
 		'planConfiguration' => 'int',
 		'plannedPurgeDate' => '\DateTime',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\InstallmentPaymentState',
 		'version' => 'int'	);
 
 	/**
@@ -67,36 +67,6 @@ class InstallmentPayment  {
 		return self::$swaggerTypes;
 	}
 
-	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_CONFIRMED = 'CONFIRMED';
-	const STATE_AUTHORIZED = 'AUTHORIZED';
-	const STATE_REJECTED = 'REJECTED';
-	const STATE_COMPLETED = 'COMPLETED';
-	const STATE_RUNNING = 'RUNNING';
-	const STATE_DONE = 'DONE';
-	const STATE_DEFAULTED = 'DEFAULTED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_CONFIRMED,
-			self::STATE_AUTHORIZED,
-			self::STATE_REJECTED,
-			self::STATE_COMPLETED,
-			self::STATE_RUNNING,
-			self::STATE_DONE,
-			self::STATE_DEFAULTED,
-		);
-	}
 	
 
 	/**
@@ -114,6 +84,8 @@ class InstallmentPayment  {
 	private $id;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\Transaction
 	 */
 	private $initialTransaction;
@@ -126,11 +98,15 @@ class InstallmentPayment  {
 	private $lineItems;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $planConfiguration;
@@ -145,7 +121,7 @@ class InstallmentPayment  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\InstallmentPaymentState
 	 */
 	private $state;
 
@@ -172,11 +148,8 @@ class InstallmentPayment  {
 		if (isset($data['lineItems']) && $data['lineItems'] != null) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['planConfiguration']) && $data['planConfiguration'] != null) {
-			$this->setPlanConfiguration($data['planConfiguration']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -233,6 +206,8 @@ class InstallmentPayment  {
 	/**
 	 * Returns initialTransaction.
 	 *
+	 * 
+	 *
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function getInitialTransaction() {
@@ -277,6 +252,8 @@ class InstallmentPayment  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -289,7 +266,7 @@ class InstallmentPayment  {
 	 * @param int $linkedSpaceId
 	 * @return InstallmentPayment
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -297,6 +274,8 @@ class InstallmentPayment  {
 
 	/**
 	 * Returns planConfiguration.
+	 *
+	 * 
 	 *
 	 * @return int
 	 */
@@ -310,7 +289,7 @@ class InstallmentPayment  {
 	 * @param int $planConfiguration
 	 * @return InstallmentPayment
 	 */
-	public function setPlanConfiguration($planConfiguration) {
+	protected function setPlanConfiguration($planConfiguration) {
 		$this->planConfiguration = $planConfiguration;
 
 		return $this;
@@ -344,7 +323,7 @@ class InstallmentPayment  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\InstallmentPaymentState
 	 */
 	public function getState() {
 		return $this->state;
@@ -353,14 +332,10 @@ class InstallmentPayment  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\InstallmentPaymentState $state
 	 * @return InstallmentPayment
 	 */
-	protected function setState($state) {
-		$allowed_values = array('CREATE', 'CONFIRMED', 'AUTHORIZED', 'REJECTED', 'COMPLETED', 'RUNNING', 'DONE', 'DEFAULTED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'CONFIRMED', 'AUTHORIZED', 'REJECTED', 'COMPLETED', 'RUNNING', 'DONE', 'DEFAULTED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -395,11 +370,6 @@ class InstallmentPayment  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("CREATE", "CONFIRMED", "AUTHORIZED", "REJECTED", "COMPLETED", "RUNNING", "DONE", "DEFAULTED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

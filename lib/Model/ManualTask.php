@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * ManualTask model
@@ -56,7 +56,7 @@ class ManualTask  {
 		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => '\DateTime',
 		'spaceId' => 'int',
-		'state' => 'string',
+		'state' => '\Wallee\Sdk\Model\ManualTaskState',
 		'type' => 'int'	);
 
 	/**
@@ -69,28 +69,10 @@ class ManualTask  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_OPEN = 'OPEN';
-	const STATE_DONE = 'DONE';
-	const STATE_EXPIRED = 'EXPIRED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_OPEN,
-			self::STATE_DONE,
-			self::STATE_EXPIRED,
-		);
-	}
-	
 
 	/**
+	 * 
+	 *
 	 * @var int[]
 	 */
 	private $actions;
@@ -124,6 +106,8 @@ class ManualTask  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
@@ -145,11 +129,13 @@ class ManualTask  {
 	/**
 	 * 
 	 *
-	 * @var string
+	 * @var \Wallee\Sdk\Model\ManualTaskState
 	 */
 	private $state;
 
 	/**
+	 * The type categorizes the manual task.
+	 *
 	 * @var int
 	 */
 	private $type;
@@ -164,17 +150,16 @@ class ManualTask  {
 		if (isset($data['actions']) && $data['actions'] != null) {
 			$this->setActions($data['actions']);
 		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
-		}
-		if (isset($data['type']) && $data['type'] != null) {
-			$this->setType($data['type']);
+		if (isset($data['state']) && $data['state'] != null) {
+			$this->setState($data['state']);
 		}
 	}
 
 
 	/**
 	 * Returns actions.
+	 *
+	 * 
 	 *
 	 * @return int[]
 	 */
@@ -289,6 +274,8 @@ class ManualTask  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -301,7 +288,7 @@ class ManualTask  {
 	 * @param int $linkedSpaceId
 	 * @return ManualTask
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -358,7 +345,7 @@ class ManualTask  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\ManualTaskState
 	 */
 	public function getState() {
 		return $this->state;
@@ -367,14 +354,10 @@ class ManualTask  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\ManualTaskState $state
 	 * @return ManualTask
 	 */
-	protected function setState($state) {
-		$allowed_values = array('OPEN', 'DONE', 'EXPIRED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'OPEN', 'DONE', 'EXPIRED'");
-		}
+	public function setState($state) {
 		$this->state = $state;
 
 		return $this;
@@ -382,6 +365,8 @@ class ManualTask  {
 
 	/**
 	 * Returns type.
+	 *
+	 * The type categorizes the manual task.
 	 *
 	 * @return int
 	 */
@@ -395,7 +380,7 @@ class ManualTask  {
 	 * @param int $type
 	 * @return ManualTask
 	 */
-	public function setType($type) {
+	protected function setType($type) {
 		$this->type = $type;
 
 		return $this;
@@ -407,11 +392,6 @@ class ManualTask  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-
-		$allowed_values = array("OPEN", "DONE", "EXPIRED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
 
 	}
 

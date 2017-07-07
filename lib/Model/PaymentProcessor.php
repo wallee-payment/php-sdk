@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * PaymentProcessor model
@@ -83,6 +83,8 @@ class PaymentProcessor  {
 	private $description;
 
 	/**
+	 * 
+	 *
 	 * @var int
 	 */
 	private $feature;
@@ -134,9 +136,6 @@ class PaymentProcessor  {
 		}
 		if (isset($data['description']) && $data['description'] != null) {
 			$this->setDescription($data['description']);
-		}
-		if (isset($data['feature']) && $data['feature'] != null) {
-			$this->setFeature($data['feature']);
 		}
 		if (isset($data['headquartersLocation']) && $data['headquartersLocation'] != null) {
 			$this->setHeadquartersLocation($data['headquartersLocation']);
@@ -199,6 +198,8 @@ class PaymentProcessor  {
 	/**
 	 * Returns feature.
 	 *
+	 * 
+	 *
 	 * @return int
 	 */
 	public function getFeature() {
@@ -211,7 +212,7 @@ class PaymentProcessor  {
 	 * @param int $feature
 	 * @return PaymentProcessor
 	 */
-	public function setFeature($feature) {
+	protected function setFeature($feature) {
 		$this->feature = $feature;
 
 		return $this;

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductActive model
@@ -60,30 +60,6 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_RETIRING = 'RETIRING';
-	const STATE_RETIRED = 'RETIRED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_RETIRING,
-			self::STATE_RETIRED,
-		);
-	}
-	
 
 
 	/**
@@ -109,11 +85,19 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
 		}
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 	}
 
 
 	/**
 	 * Returns allowedPaymentMethodConfigurations.
+	 *
+	 * The allowed payment method configurations control which payment methods can be used with this product. When none is selected all methods will be allowed.
 	 *
 	 * @return int[]
 	 */
@@ -199,7 +183,7 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\SubscriptionProductState
 	 */
 	public function getState() {
 		return parent::getState();
@@ -208,15 +192,53 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\SubscriptionProductState $state
 	 * @return SubscriptionProductActive
 	 */
 	public function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED');
-		if (!is_null($state) && (!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'RETIRING', 'RETIRED'");
-		}
 		return parent::setState($state);
+	}
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductActive
+	 */
+	public function setId($id) {
+		return parent::setId($id);
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return parent::getVersion();
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductActive
+	 */
+	public function setVersion($version) {
+		return parent::setVersion($version);
 	}
 
 	/**
@@ -227,17 +249,12 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getFailedPaymentSuspensionPeriod() === null) {
-			throw new ValidationException("'failedPaymentSuspensionPeriod' can't be null", 'failedPaymentSuspensionPeriod', $this);
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
 		}
-		if ($this->getName() === null) {
-			throw new ValidationException("'name' can't be null", 'name', $this);
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
 		}
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "RETIRING", "RETIRED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
-		}
-
 	}
 
 	/**

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * Label model
@@ -80,6 +80,8 @@ class Label  {
 	private $contentAsString;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\LabelDescriptor
 	 */
 	private $descriptor;
@@ -168,6 +170,8 @@ class Label  {
 
 	/**
 	 * Returns descriptor.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\LabelDescriptor
 	 */

@@ -21,9 +21,9 @@
 
 namespace Wallee\Sdk;
 
-use \Wallee\Sdk\ApiClient;
-use \Wallee\Sdk\Http\HttpClientFactory;
-use \PHPUnit\Framework\TestCase;
+use Wallee\Sdk\ApiClient;
+use Wallee\Sdk\Http\HttpClientFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class tests the basic functionality of the SDK.

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * LineItemCreate model
@@ -60,28 +60,6 @@ class LineItemCreate extends LineItem  {
 	}
 
 	
-	/**
-	 * Values of type.
-	 */
-	const TYPE_SHIPPING = 'SHIPPING';
-	const TYPE_DISCOUNT = 'DISCOUNT';
-	const TYPE_FEE = 'FEE';
-	const TYPE_PRODUCT = 'PRODUCT';
-	
-	/**
-	 * Returns allowable values of type.
-	 *
-	 * @return string[]
-	 */
-	public function getTypeAllowableValues() {
-		return array(
-			self::TYPE_SHIPPING,
-			self::TYPE_DISCOUNT,
-			self::TYPE_FEE,
-			self::TYPE_PRODUCT,
-		);
-	}
-	
 
 
 	/**
@@ -94,6 +72,9 @@ class LineItemCreate extends LineItem  {
 
 		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
 			$this->setAmountIncludingTax($data['amountIncludingTax']);
+		}
+		if (isset($data['attributes']) && $data['attributes'] != null) {
+			$this->setAttributes($data['attributes']);
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
@@ -138,6 +119,27 @@ class LineItemCreate extends LineItem  {
 	 */
 	public function setAmountIncludingTax($amountIncludingTax) {
 		return parent::setAmountIncludingTax($amountIncludingTax);
+	}
+
+	/**
+	 * Returns attributes.
+	 *
+	 * 
+	 *
+	 * @return map[string,\Wallee\Sdk\Model\LineItemAttributeCreate]
+	 */
+	public function getAttributes() {
+		return parent::getAttributes();
+	}
+
+	/**
+	 * Sets attributes.
+	 *
+	 * @param map[string,\Wallee\Sdk\Model\LineItemAttributeCreate] $attributes
+	 * @return LineItemCreate
+	 */
+	public function setAttributes($attributes) {
+		return parent::setAttributes($attributes);
 	}
 
 	/**
@@ -250,7 +252,7 @@ class LineItemCreate extends LineItem  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\LineItemType
 	 */
 	public function getType() {
 		return parent::getType();
@@ -259,14 +261,10 @@ class LineItemCreate extends LineItem  {
 	/**
 	 * Sets type.
 	 *
-	 * @param string $type
+	 * @param \Wallee\Sdk\Model\LineItemType $type
 	 * @return LineItemCreate
 	 */
 	public function setType($type) {
-		$allowed_values = array('SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT');
-		if ((!in_array($type, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'SHIPPING', 'DISCOUNT', 'FEE', 'PRODUCT'");
-		}
 		return parent::setType($type);
 	}
 
@@ -311,11 +309,6 @@ class LineItemCreate extends LineItem  {
 		if ($this->getType() === null) {
 			throw new ValidationException("'type' can't be null", 'type', $this);
 		}
-		$allowed_values = array("SHIPPING", "DISCOUNT", "FEE", "PRODUCT");
-		if (!in_array($this->getType(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'type', must be one of #{allowed_values}.", 'type', $this);
-		}
-
 		if ($this->getUniqueId() === null) {
 			throw new ValidationException("'uniqueId' can't be null", 'uniqueId', $this);
 		}

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * WebhookListenerCreate model
@@ -60,30 +60,6 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	}
 
 	
-	/**
-	 * Values of state.
-	 */
-	const STATE_CREATE = 'CREATE';
-	const STATE_ACTIVE = 'ACTIVE';
-	const STATE_INACTIVE = 'INACTIVE';
-	const STATE_DELETING = 'DELETING';
-	const STATE_DELETED = 'DELETED';
-	
-	/**
-	 * Returns allowable values of state.
-	 *
-	 * @return string[]
-	 */
-	public function getStateAllowableValues() {
-		return array(
-			self::STATE_CREATE,
-			self::STATE_ACTIVE,
-			self::STATE_INACTIVE,
-			self::STATE_DELETING,
-			self::STATE_DELETED,
-		);
-	}
-	
 
 
 	/**
@@ -117,6 +93,8 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 
 	/**
 	 * Returns entity.
+	 *
+	 * The listener listens on state changes of the entity linked with the listener.
 	 *
 	 * @return int
 	 */
@@ -158,7 +136,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	/**
 	 * Returns identity.
 	 *
-	 * @return \Wallee\Sdk\Model\WebhookIdentity
+	 * The identity which will be used to sign messages sent by this listener.
+	 *
+	 * @return int
 	 */
 	public function getIdentity() {
 		return parent::getIdentity();
@@ -167,7 +147,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	/**
 	 * Sets identity.
 	 *
-	 * @param \Wallee\Sdk\Model\WebhookIdentity $identity
+	 * @param int $identity
 	 * @return WebhookListenerCreate
 	 */
 	public function setIdentity($identity) {
@@ -200,7 +180,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 *
 	 * 
 	 *
-	 * @return string
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
 		return parent::getState();
@@ -209,21 +189,19 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	/**
 	 * Sets state.
 	 *
-	 * @param string $state
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
 	 * @return WebhookListenerCreate
 	 */
 	public function setState($state) {
-		$allowed_values = array('CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED');
-		if ((!in_array($state, $allowed_values))) {
-			throw new \InvalidArgumentException("Invalid value for 'state', must be one of 'CREATE', 'ACTIVE', 'INACTIVE', 'DELETING', 'DELETED'");
-		}
 		return parent::setState($state);
 	}
 
 	/**
 	 * Returns url.
 	 *
-	 * @return \Wallee\Sdk\Model\WebhookUrl
+	 * The URL which is invoked by the listener to notify the application about the event.
+	 *
+	 * @return int
 	 */
 	public function getUrl() {
 		return parent::getUrl();
@@ -232,7 +210,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	/**
 	 * Sets url.
 	 *
-	 * @param \Wallee\Sdk\Model\WebhookUrl $url
+	 * @param int $url
 	 * @return WebhookListenerCreate
 	 */
 	public function setUrl($url) {
@@ -247,17 +225,18 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	public function validate() {
 		parent::validate();
 
+		if ($this->getEntity() === null) {
+			throw new ValidationException("'entity' can't be null", 'entity', $this);
+		}
 		if ($this->getEntityStates() === null) {
 			throw new ValidationException("'entityStates' can't be null", 'entityStates', $this);
 		}
 		if ($this->getState() === null) {
 			throw new ValidationException("'state' can't be null", 'state', $this);
 		}
-		$allowed_values = array("CREATE", "ACTIVE", "INACTIVE", "DELETING", "DELETED");
-		if (!in_array($this->getState(), $allowed_values)) {
-			throw new ValidationException("invalid value for 'state', must be one of #{allowed_values}.", 'state', $this);
+		if ($this->getUrl() === null) {
+			throw new ValidationException("'url' can't be null", 'url', $this);
 		}
-
 	}
 
 	/**

@@ -21,7 +21,7 @@
 
 namespace Wallee\Sdk\Model;
 
-use \Wallee\Sdk\ValidationException;
+use Wallee\Sdk\ValidationException;
 
 /**
  * SubscriptionProductComponentGroup model
@@ -75,11 +75,15 @@ class SubscriptionProductComponentGroup  {
 	private $id;
 
 	/**
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @var int
 	 */
 	private $linkedSpaceId;
 
 	/**
+	 * The component group name will be shown when the components are selected. This can be visible to the subscriber.
+	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
 	private $name;
@@ -92,6 +96,8 @@ class SubscriptionProductComponentGroup  {
 	private $optional;
 
 	/**
+	 * 
+	 *
 	 * @var \Wallee\Sdk\Model\SubscriptionProductVersion
 	 */
 	private $productVersion;
@@ -119,9 +125,6 @@ class SubscriptionProductComponentGroup  {
 	public function __construct(array $data = null) {
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
-		}
-		if (isset($data['linkedSpaceId']) && $data['linkedSpaceId'] != null) {
-			$this->setLinkedSpaceId($data['linkedSpaceId']);
 		}
 		if (isset($data['name']) && $data['name'] != null) {
 			$this->setName($data['name']);
@@ -161,6 +164,8 @@ class SubscriptionProductComponentGroup  {
 	/**
 	 * Returns linkedSpaceId.
 	 *
+	 * The linked space id holds the ID of the space to which the entity belongs to.
+	 *
 	 * @return int
 	 */
 	public function getLinkedSpaceId() {
@@ -173,7 +178,7 @@ class SubscriptionProductComponentGroup  {
 	 * @param int $linkedSpaceId
 	 * @return SubscriptionProductComponentGroup
 	 */
-	public function setLinkedSpaceId($linkedSpaceId) {
+	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
 
 		return $this;
@@ -181,6 +186,8 @@ class SubscriptionProductComponentGroup  {
 
 	/**
 	 * Returns name.
+	 *
+	 * The component group name will be shown when the components are selected. This can be visible to the subscriber.
 	 *
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
 	 */
@@ -225,6 +232,8 @@ class SubscriptionProductComponentGroup  {
 
 	/**
 	 * Returns productVersion.
+	 *
+	 * 
 	 *
 	 * @return \Wallee\Sdk\Model\SubscriptionProductVersion
 	 */
