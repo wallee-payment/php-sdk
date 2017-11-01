@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
+class ProductMeteredTierFeeUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,11 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int',
+		'fee' => '\Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]',
+		'meteredFee' => 'int',
+		'startRange' => 'float'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +60,45 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
+	/**
+	 * The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
+	 *
+	 * @var \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+	 */
+	private $fee;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $meteredFee;
+
+	/**
+	 * The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
+	 *
+	 * @var float
+	 */
+	private $startRange;
 
 
 	/**
@@ -68,8 +107,12 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 		if (isset($data['fee']) && $data['fee'] != null) {
 			$this->setFee($data['fee']);
 		}
@@ -79,77 +122,8 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 		if (isset($data['startRange']) && $data['startRange'] != null) {
 			$this->setStartRange($data['startRange']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
-
-	/**
-	 * Returns fee.
-	 *
-	 * The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
-	 *
-	 * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
-	 */
-	public function getFee() {
-		return parent::getFee();
-	}
-
-	/**
-	 * Sets fee.
-	 *
-	 * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $fee
-	 * @return ProductMeteredTierFeeUpdate
-	 */
-	public function setFee($fee) {
-		return parent::setFee($fee);
-	}
-
-	/**
-	 * Returns meteredFee.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getMeteredFee() {
-		return parent::getMeteredFee();
-	}
-
-	/**
-	 * Sets meteredFee.
-	 *
-	 * @param int $meteredFee
-	 * @return ProductMeteredTierFeeUpdate
-	 */
-	public function setMeteredFee($meteredFee) {
-		return parent::setMeteredFee($meteredFee);
-	}
-
-	/**
-	 * Returns startRange.
-	 *
-	 * The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
-	 *
-	 * @return float
-	 */
-	public function getStartRange() {
-		return parent::getStartRange();
-	}
-
-	/**
-	 * Sets startRange.
-	 *
-	 * @param float $startRange
-	 * @return ProductMeteredTierFeeUpdate
-	 */
-	public function setStartRange($startRange) {
-		return parent::setStartRange($startRange);
-	}
 
 	/**
 	 * Returns id.
@@ -159,7 +133,7 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -169,7 +143,9 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @return ProductMeteredTierFeeUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -180,7 +156,7 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -190,7 +166,78 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @return ProductMeteredTierFeeUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
+	}
+
+	/**
+	 * Returns fee.
+	 *
+	 * The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
+	 *
+	 * @return \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]
+	 */
+	public function getFee() {
+		return $this->fee;
+	}
+
+	/**
+	 * Sets fee.
+	 *
+	 * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $fee
+	 * @return ProductMeteredTierFeeUpdate
+	 */
+	public function setFee($fee) {
+		$this->fee = $fee;
+
+		return $this;
+	}
+
+	/**
+	 * Returns meteredFee.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getMeteredFee() {
+		return $this->meteredFee;
+	}
+
+	/**
+	 * Sets meteredFee.
+	 *
+	 * @param int $meteredFee
+	 * @return ProductMeteredTierFeeUpdate
+	 */
+	public function setMeteredFee($meteredFee) {
+		$this->meteredFee = $meteredFee;
+
+		return $this;
+	}
+
+	/**
+	 * Returns startRange.
+	 *
+	 * The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
+	 *
+	 * @return float
+	 */
+	public function getStartRange() {
+		return $this->startRange;
+	}
+
+	/**
+	 * Sets startRange.
+	 *
+	 * @param float $startRange
+	 * @return ProductMeteredTierFeeUpdate
+	 */
+	public function setStartRange($startRange) {
+		$this->startRange = $startRange;
+
+		return $this;
 	}
 
 	/**
@@ -199,7 +246,6 @@ class ProductMeteredTierFeeUpdate extends ProductMeteredTierFee  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getId() === null) {
 			throw new ValidationException("'id' can't be null", 'id', $this);

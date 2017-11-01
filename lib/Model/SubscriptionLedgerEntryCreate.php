@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
+class SubscriptionLedgerEntryCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,12 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'amountIncludingTax' => 'float',
+		'externalId' => 'string',
+		'quantity' => 'float',
+		'subscriptionVersion' => 'int',
+		'taxes' => '\Wallee\Sdk\Model\TaxCreate[]',
+		'title' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +61,52 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $amountIncludingTax;
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $quantity;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $subscriptionVersion;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\TaxCreate[]
+	 */
+	private $taxes;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $title;
 
 
 	/**
@@ -68,8 +115,6 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
 			$this->setAmountIncludingTax($data['amountIncludingTax']);
 		}
@@ -99,7 +144,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return float
 	 */
 	public function getAmountIncludingTax() {
-		return parent::getAmountIncludingTax();
+		return $this->amountIncludingTax;
 	}
 
 	/**
@@ -109,7 +154,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setAmountIncludingTax($amountIncludingTax) {
-		return parent::setAmountIncludingTax($amountIncludingTax);
+		$this->amountIncludingTax = $amountIncludingTax;
+
+		return $this;
 	}
 
 	/**
@@ -120,7 +167,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -130,7 +177,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -141,7 +190,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return float
 	 */
 	public function getQuantity() {
-		return parent::getQuantity();
+		return $this->quantity;
 	}
 
 	/**
@@ -151,7 +200,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setQuantity($quantity) {
-		return parent::setQuantity($quantity);
+		$this->quantity = $quantity;
+
+		return $this;
 	}
 
 	/**
@@ -162,7 +213,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return int
 	 */
 	public function getSubscriptionVersion() {
-		return parent::getSubscriptionVersion();
+		return $this->subscriptionVersion;
 	}
 
 	/**
@@ -172,7 +223,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setSubscriptionVersion($subscriptionVersion) {
-		return parent::setSubscriptionVersion($subscriptionVersion);
+		$this->subscriptionVersion = $subscriptionVersion;
+
+		return $this;
 	}
 
 	/**
@@ -183,7 +236,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return \Wallee\Sdk\Model\TaxCreate[]
 	 */
 	public function getTaxes() {
-		return parent::getTaxes();
+		return $this->taxes;
 	}
 
 	/**
@@ -193,7 +246,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setTaxes($taxes) {
-		return parent::setTaxes($taxes);
+		$this->taxes = $taxes;
+
+		return $this;
 	}
 
 	/**
@@ -204,7 +259,7 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return string
 	 */
 	public function getTitle() {
-		return parent::getTitle();
+		return $this->title;
 	}
 
 	/**
@@ -214,7 +269,9 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @return SubscriptionLedgerEntryCreate
 	 */
 	public function setTitle($title) {
-		return parent::setTitle($title);
+		$this->title = $title;
+
+		return $this;
 	}
 
 	/**
@@ -223,7 +280,6 @@ class SubscriptionLedgerEntryCreate extends SubscriptionLedgerEntry  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getAmountIncludingTax() === null) {
 			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);

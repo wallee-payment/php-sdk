@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class RefundCreate extends Refund  {
+class RefundCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,11 @@ class RefundCreate extends Refund  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'externalId' => 'string',
+		'merchantReference' => 'string',
+		'reductions' => '\Wallee\Sdk\Model\LineItemReductionCreate[]',
+		'transaction' => 'int',
+		'type' => '\Wallee\Sdk\Model\RefundType'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +60,45 @@ class RefundCreate extends Refund  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $merchantReference;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LineItemReductionCreate[]
+	 */
+	private $reductions;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $transaction;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\RefundType
+	 */
+	private $type;
 
 
 	/**
@@ -68,8 +107,6 @@ class RefundCreate extends Refund  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['externalId']) && $data['externalId'] != null) {
 			$this->setExternalId($data['externalId']);
 		}
@@ -96,7 +133,7 @@ class RefundCreate extends Refund  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -106,7 +143,9 @@ class RefundCreate extends Refund  {
 	 * @return RefundCreate
 	 */
 	public function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -117,7 +156,7 @@ class RefundCreate extends Refund  {
 	 * @return string
 	 */
 	public function getMerchantReference() {
-		return parent::getMerchantReference();
+		return $this->merchantReference;
 	}
 
 	/**
@@ -127,7 +166,9 @@ class RefundCreate extends Refund  {
 	 * @return RefundCreate
 	 */
 	public function setMerchantReference($merchantReference) {
-		return parent::setMerchantReference($merchantReference);
+		$this->merchantReference = $merchantReference;
+
+		return $this;
 	}
 
 	/**
@@ -138,7 +179,7 @@ class RefundCreate extends Refund  {
 	 * @return \Wallee\Sdk\Model\LineItemReductionCreate[]
 	 */
 	public function getReductions() {
-		return parent::getReductions();
+		return $this->reductions;
 	}
 
 	/**
@@ -148,7 +189,9 @@ class RefundCreate extends Refund  {
 	 * @return RefundCreate
 	 */
 	public function setReductions($reductions) {
-		return parent::setReductions($reductions);
+		$this->reductions = $reductions;
+
+		return $this;
 	}
 
 	/**
@@ -159,7 +202,7 @@ class RefundCreate extends Refund  {
 	 * @return int
 	 */
 	public function getTransaction() {
-		return parent::getTransaction();
+		return $this->transaction;
 	}
 
 	/**
@@ -169,7 +212,9 @@ class RefundCreate extends Refund  {
 	 * @return RefundCreate
 	 */
 	public function setTransaction($transaction) {
-		return parent::setTransaction($transaction);
+		$this->transaction = $transaction;
+
+		return $this;
 	}
 
 	/**
@@ -180,7 +225,7 @@ class RefundCreate extends Refund  {
 	 * @return \Wallee\Sdk\Model\RefundType
 	 */
 	public function getType() {
-		return parent::getType();
+		return $this->type;
 	}
 
 	/**
@@ -190,7 +235,9 @@ class RefundCreate extends Refund  {
 	 * @return RefundCreate
 	 */
 	public function setType($type) {
-		return parent::setType($type);
+		$this->type = $type;
+
+		return $this;
 	}
 
 	/**
@@ -199,7 +246,6 @@ class RefundCreate extends Refund  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);

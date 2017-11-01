@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class TokenCreate extends TokenUpdate  {
+class TokenCreate extends AbstractTokenUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class TokenCreate extends TokenUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'externalId' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +61,20 @@ class TokenCreate extends TokenUpdate  {
 	}
 
 	
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\CreationEntityState
+	 */
+	private $state;
 
 
 	/**
@@ -87,7 +102,7 @@ class TokenCreate extends TokenUpdate  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -97,7 +112,9 @@ class TokenCreate extends TokenUpdate  {
 	 * @return TokenCreate
 	 */
 	public function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -108,7 +125,7 @@ class TokenCreate extends TokenUpdate  {
 	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
-		return parent::getState();
+		return $this->state;
 	}
 
 	/**
@@ -118,7 +135,9 @@ class TokenCreate extends TokenUpdate  {
 	 * @return TokenCreate
 	 */
 	public function setState($state) {
-		return parent::setState($state);
+		$this->state = $state;
+
+		return $this;
 	}
 
 	/**

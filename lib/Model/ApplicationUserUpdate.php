@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ApplicationUserUpdate extends ApplicationUser  {
+class ApplicationUserUpdate extends AbstractApplicationUserUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class ApplicationUserUpdate extends ApplicationUser  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class ApplicationUserUpdate extends ApplicationUser  {
 
 	
 
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
 
 	/**
 	 * Constructor.
@@ -70,12 +85,6 @@ class ApplicationUserUpdate extends ApplicationUser  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['name']) && $data['name'] != null) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['state']) && $data['state'] != null) {
-			$this->setState($data['state']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
@@ -86,48 +95,6 @@ class ApplicationUserUpdate extends ApplicationUser  {
 
 
 	/**
-	 * Returns name.
-	 *
-	 * The user name is used to identify the application user in administrative interfaces.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return ApplicationUserUpdate
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return parent::getState();
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \Wallee\Sdk\Model\CreationEntityState $state
-	 * @return ApplicationUserUpdate
-	 */
-	public function setState($state) {
-		return parent::setState($state);
-	}
-
-	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -135,7 +102,7 @@ class ApplicationUserUpdate extends ApplicationUser  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -145,7 +112,9 @@ class ApplicationUserUpdate extends ApplicationUser  {
 	 * @return ApplicationUserUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -156,7 +125,7 @@ class ApplicationUserUpdate extends ApplicationUser  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -166,7 +135,9 @@ class ApplicationUserUpdate extends ApplicationUser  {
 	 * @return ApplicationUserUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**

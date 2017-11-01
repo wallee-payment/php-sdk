@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
+class PersistableCurrencyAmountUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'amount' => 'float',
+		'currency' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +57,24 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $amount;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $currency;
 
 
 	/**
@@ -68,8 +83,6 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['amount']) && $data['amount'] != null) {
 			$this->setAmount($data['amount']);
 		}
@@ -87,7 +100,7 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @return float
 	 */
 	public function getAmount() {
-		return parent::getAmount();
+		return $this->amount;
 	}
 
 	/**
@@ -97,7 +110,9 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @return PersistableCurrencyAmountUpdate
 	 */
 	public function setAmount($amount) {
-		return parent::setAmount($amount);
+		$this->amount = $amount;
+
+		return $this;
 	}
 
 	/**
@@ -108,7 +123,7 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @return string
 	 */
 	public function getCurrency() {
-		return parent::getCurrency();
+		return $this->currency;
 	}
 
 	/**
@@ -118,7 +133,9 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @return PersistableCurrencyAmountUpdate
 	 */
 	public function setCurrency($currency) {
-		return parent::setCurrency($currency);
+		$this->currency = $currency;
+
+		return $this;
 	}
 
 	/**
@@ -127,7 +144,6 @@ class PersistableCurrencyAmountUpdate extends PersistableCurrencyAmount  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 	}
 

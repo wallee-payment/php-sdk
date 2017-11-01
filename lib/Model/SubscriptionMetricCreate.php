@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionMetricCreate extends SubscriptionMetricActive  {
+class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class SubscriptionMetricCreate extends SubscriptionMetricActive  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'type' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +60,13 @@ class SubscriptionMetricCreate extends SubscriptionMetricActive  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $type;
 
 
 	/**
@@ -132,7 +139,7 @@ class SubscriptionMetricCreate extends SubscriptionMetricActive  {
 	 * @return int
 	 */
 	public function getType() {
-		return parent::getType();
+		return $this->type;
 	}
 
 	/**
@@ -142,7 +149,9 @@ class SubscriptionMetricCreate extends SubscriptionMetricActive  {
 	 * @return SubscriptionMetricCreate
 	 */
 	public function setType($type) {
-		return parent::setType($type);
+		$this->type = $type;
+
+		return $this;
 	}
 
 	/**

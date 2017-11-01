@@ -57,6 +57,7 @@ class Charge extends TransactionAwareEntity  {
 		'timeoutOn' => '\DateTime',
 		'transaction' => '\Wallee\Sdk\Model\Transaction',
 		'type' => '\Wallee\Sdk\Model\ChargeType',
+		'userFailureMessage' => 'string',
 		'version' => 'int'	);
 
 	/**
@@ -132,6 +133,13 @@ class Charge extends TransactionAwareEntity  {
 	 * @var \Wallee\Sdk\Model\ChargeType
 	 */
 	private $type;
+
+	/**
+	 * The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
+	 *
+	 * @var string
+	 */
+	private $userFailureMessage;
 
 	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -367,6 +375,29 @@ class Charge extends TransactionAwareEntity  {
 	 */
 	public function setType($type) {
 		$this->type = $type;
+
+		return $this;
+	}
+
+	/**
+	 * Returns userFailureMessage.
+	 *
+	 * The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
+	 *
+	 * @return string
+	 */
+	public function getUserFailureMessage() {
+		return $this->userFailureMessage;
+	}
+
+	/**
+	 * Sets userFailureMessage.
+	 *
+	 * @param string $userFailureMessage
+	 * @return Charge
+	 */
+	protected function setUserFailureMessage($userFailureMessage) {
+		$this->userFailureMessage = $userFailureMessage;
 
 		return $this;
 	}

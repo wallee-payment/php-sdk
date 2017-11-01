@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
+class SubscriptionSuspensionCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,10 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'endAction' => '\Wallee\Sdk\Model\SubscriptionSuspensionAction',
+		'note' => 'string',
+		'plannedEndDate' => '\DateTime',
+		'subscription' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +59,38 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
+	 *
+	 * @var \Wallee\Sdk\Model\SubscriptionSuspensionAction
+	 */
+	private $endAction;
+
+	/**
+	 * The note may contain some internal information for the suspension. The note will not be disclosed to the subscriber.
+	 *
+	 * @var string
+	 */
+	private $note;
+
+	/**
+	 * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
+	 *
+	 * @var \DateTime
+	 */
+	private $plannedEndDate;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $subscription;
 
 
 	/**
@@ -68,8 +99,6 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['endAction']) && $data['endAction'] != null) {
 			$this->setEndAction($data['endAction']);
 		}
@@ -93,7 +122,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return \Wallee\Sdk\Model\SubscriptionSuspensionAction
 	 */
 	public function getEndAction() {
-		return parent::getEndAction();
+		return $this->endAction;
 	}
 
 	/**
@@ -103,7 +132,9 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setEndAction($endAction) {
-		return parent::setEndAction($endAction);
+		$this->endAction = $endAction;
+
+		return $this;
 	}
 
 	/**
@@ -114,7 +145,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return string
 	 */
 	public function getNote() {
-		return parent::getNote();
+		return $this->note;
 	}
 
 	/**
@@ -124,7 +155,9 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setNote($note) {
-		return parent::setNote($note);
+		$this->note = $note;
+
+		return $this;
 	}
 
 	/**
@@ -135,7 +168,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return \DateTime
 	 */
 	public function getPlannedEndDate() {
-		return parent::getPlannedEndDate();
+		return $this->plannedEndDate;
 	}
 
 	/**
@@ -145,7 +178,9 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setPlannedEndDate($plannedEndDate) {
-		return parent::setPlannedEndDate($plannedEndDate);
+		$this->plannedEndDate = $plannedEndDate;
+
+		return $this;
 	}
 
 	/**
@@ -156,7 +191,7 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return int
 	 */
 	public function getSubscription() {
-		return parent::getSubscription();
+		return $this->subscription;
 	}
 
 	/**
@@ -166,7 +201,9 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @return SubscriptionSuspensionCreate
 	 */
 	public function setSubscription($subscription) {
-		return parent::setSubscription($subscription);
+		$this->subscription = $subscription;
+
+		return $this;
 	}
 
 	/**
@@ -175,7 +212,6 @@ class SubscriptionSuspensionCreate extends SubscriptionSuspensionRunning  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getEndAction() === null) {
 			throw new ValidationException("'endAction' can't be null", 'endAction', $this);

@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriberCreate extends SubscriberActive  {
+class SubscriberCreate extends AbstractSubscriberUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class SubscriberCreate extends SubscriberActive  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'state' => '\Wallee\Sdk\Model\CreationEntityState',
+		'externalId' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class SubscriberCreate extends SubscriberActive  {
 
 	
 
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\CreationEntityState
+	 */
+	private $state;
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
 
 	/**
 	 * Constructor.
@@ -70,35 +85,14 @@ class SubscriberCreate extends SubscriberActive  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['externalId']) && $data['externalId'] != null) {
-			$this->setExternalId($data['externalId']);
-		}
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
 		}
+		if (isset($data['externalId']) && $data['externalId'] != null) {
+			$this->setExternalId($data['externalId']);
+		}
 	}
 
-
-	/**
-	 * Returns externalId.
-	 *
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @return string
-	 */
-	public function getExternalId() {
-		return parent::getExternalId();
-	}
-
-	/**
-	 * Sets externalId.
-	 *
-	 * @param string $externalId
-	 * @return SubscriberCreate
-	 */
-	public function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
-	}
 
 	/**
 	 * Returns state.
@@ -108,7 +102,7 @@ class SubscriberCreate extends SubscriberActive  {
 	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
-		return parent::getState();
+		return $this->state;
 	}
 
 	/**
@@ -118,7 +112,32 @@ class SubscriberCreate extends SubscriberActive  {
 	 * @return SubscriberCreate
 	 */
 	public function setState($state) {
-		return parent::setState($state);
+		$this->state = $state;
+
+		return $this;
+	}
+
+	/**
+	 * Returns externalId.
+	 *
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @return string
+	 */
+	public function getExternalId() {
+		return $this->externalId;
+	}
+
+	/**
+	 * Sets externalId.
+	 *
+	 * @param string $externalId
+	 * @return SubscriberCreate
+	 */
+	public function setExternalId($externalId) {
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**

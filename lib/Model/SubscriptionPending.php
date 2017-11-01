@@ -48,7 +48,9 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'reference' => 'string',
+		'subscriber' => 'int',
+		'token' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +62,27 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $reference;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $subscriber;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $token;
 
 
 	/**
@@ -79,12 +102,6 @@ class SubscriptionPending extends SubscriptionUpdate  {
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
 
@@ -96,7 +113,7 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @return string
 	 */
 	public function getReference() {
-		return parent::getReference();
+		return $this->reference;
 	}
 
 	/**
@@ -106,7 +123,9 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @return SubscriptionPending
 	 */
 	public function setReference($reference) {
-		return parent::setReference($reference);
+		$this->reference = $reference;
+
+		return $this;
 	}
 
 	/**
@@ -117,7 +136,7 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @return int
 	 */
 	public function getSubscriber() {
-		return parent::getSubscriber();
+		return $this->subscriber;
 	}
 
 	/**
@@ -127,7 +146,9 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @return SubscriptionPending
 	 */
 	public function setSubscriber($subscriber) {
-		return parent::setSubscriber($subscriber);
+		$this->subscriber = $subscriber;
+
+		return $this;
 	}
 
 	/**
@@ -138,7 +159,7 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @return int
 	 */
 	public function getToken() {
-		return parent::getToken();
+		return $this->token;
 	}
 
 	/**
@@ -148,49 +169,9 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @return SubscriptionPending
 	 */
 	public function setToken($token) {
-		return parent::setToken($token);
-	}
+		$this->token = $token;
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return parent::getId();
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return SubscriptionPending
-	 */
-	public function setId($id) {
-		return parent::setId($id);
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return parent::getVersion();
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return SubscriptionPending
-	 */
-	public function setVersion($version) {
-		return parent::setVersion($version);
+		return $this;
 	}
 
 	/**
@@ -201,12 +182,6 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getId() === null) {
-			throw new ValidationException("'id' can't be null", 'id', $this);
-		}
-		if ($this->getVersion() === null) {
-			throw new ValidationException("'version' can't be null", 'version', $this);
-		}
 	}
 
 	/**

@@ -48,6 +48,7 @@ class WebhookListenerEntity  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'displayName' => 'string',
 		'id' => 'int',
 		'name' => 'map[string,string]',
 		'technicalName' => 'string'	);
@@ -62,6 +63,13 @@ class WebhookListenerEntity  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $displayName;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -96,6 +104,29 @@ class WebhookListenerEntity  {
 		}
 	}
 
+
+	/**
+	 * Returns displayName.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDisplayName() {
+		return $this->displayName;
+	}
+
+	/**
+	 * Sets displayName.
+	 *
+	 * @param string $displayName
+	 * @return WebhookListenerEntity
+	 */
+	protected function setDisplayName($displayName) {
+		$this->displayName = $displayName;
+
+		return $this;
+	}
 
 	/**
 	 * Returns id.

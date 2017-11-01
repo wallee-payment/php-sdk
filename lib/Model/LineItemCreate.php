@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class LineItemCreate extends LineItem  {
+class LineItemCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,15 @@ class LineItemCreate extends LineItem  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'amountIncludingTax' => 'float',
+		'attributes' => 'map[string,\Wallee\Sdk\Model\LineItemAttributeCreate]',
+		'name' => 'string',
+		'quantity' => 'float',
+		'shippingRequired' => 'bool',
+		'sku' => 'string',
+		'taxes' => '\Wallee\Sdk\Model\TaxCreate[]',
+		'type' => '\Wallee\Sdk\Model\LineItemType',
+		'uniqueId' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +64,73 @@ class LineItemCreate extends LineItem  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $amountIncludingTax;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,\Wallee\Sdk\Model\LineItemAttributeCreate]
+	 */
+	private $attributes;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $quantity;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $shippingRequired;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $sku;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\TaxCreate[]
+	 */
+	private $taxes;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\LineItemType
+	 */
+	private $type;
+
+	/**
+	 * The unique id identifies the line item within the set of line items associated with the transaction.
+	 *
+	 * @var string
+	 */
+	private $uniqueId;
 
 
 	/**
@@ -68,8 +139,6 @@ class LineItemCreate extends LineItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
 			$this->setAmountIncludingTax($data['amountIncludingTax']);
 		}
@@ -108,7 +177,7 @@ class LineItemCreate extends LineItem  {
 	 * @return float
 	 */
 	public function getAmountIncludingTax() {
-		return parent::getAmountIncludingTax();
+		return $this->amountIncludingTax;
 	}
 
 	/**
@@ -118,7 +187,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setAmountIncludingTax($amountIncludingTax) {
-		return parent::setAmountIncludingTax($amountIncludingTax);
+		$this->amountIncludingTax = $amountIncludingTax;
+
+		return $this;
 	}
 
 	/**
@@ -129,7 +200,7 @@ class LineItemCreate extends LineItem  {
 	 * @return map[string,\Wallee\Sdk\Model\LineItemAttributeCreate]
 	 */
 	public function getAttributes() {
-		return parent::getAttributes();
+		return $this->attributes;
 	}
 
 	/**
@@ -139,7 +210,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setAttributes($attributes) {
-		return parent::setAttributes($attributes);
+		$this->attributes = $attributes;
+
+		return $this;
 	}
 
 	/**
@@ -150,7 +223,7 @@ class LineItemCreate extends LineItem  {
 	 * @return string
 	 */
 	public function getName() {
-		return parent::getName();
+		return $this->name;
 	}
 
 	/**
@@ -160,7 +233,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setName($name) {
-		return parent::setName($name);
+		$this->name = $name;
+
+		return $this;
 	}
 
 	/**
@@ -171,7 +246,7 @@ class LineItemCreate extends LineItem  {
 	 * @return float
 	 */
 	public function getQuantity() {
-		return parent::getQuantity();
+		return $this->quantity;
 	}
 
 	/**
@@ -181,7 +256,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setQuantity($quantity) {
-		return parent::setQuantity($quantity);
+		$this->quantity = $quantity;
+
+		return $this;
 	}
 
 	/**
@@ -192,7 +269,7 @@ class LineItemCreate extends LineItem  {
 	 * @return bool
 	 */
 	public function getShippingRequired() {
-		return parent::getShippingRequired();
+		return $this->shippingRequired;
 	}
 
 	/**
@@ -202,7 +279,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setShippingRequired($shippingRequired) {
-		return parent::setShippingRequired($shippingRequired);
+		$this->shippingRequired = $shippingRequired;
+
+		return $this;
 	}
 
 	/**
@@ -213,7 +292,7 @@ class LineItemCreate extends LineItem  {
 	 * @return string
 	 */
 	public function getSku() {
-		return parent::getSku();
+		return $this->sku;
 	}
 
 	/**
@@ -223,7 +302,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setSku($sku) {
-		return parent::setSku($sku);
+		$this->sku = $sku;
+
+		return $this;
 	}
 
 	/**
@@ -234,7 +315,7 @@ class LineItemCreate extends LineItem  {
 	 * @return \Wallee\Sdk\Model\TaxCreate[]
 	 */
 	public function getTaxes() {
-		return parent::getTaxes();
+		return $this->taxes;
 	}
 
 	/**
@@ -244,7 +325,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setTaxes($taxes) {
-		return parent::setTaxes($taxes);
+		$this->taxes = $taxes;
+
+		return $this;
 	}
 
 	/**
@@ -255,7 +338,7 @@ class LineItemCreate extends LineItem  {
 	 * @return \Wallee\Sdk\Model\LineItemType
 	 */
 	public function getType() {
-		return parent::getType();
+		return $this->type;
 	}
 
 	/**
@@ -265,7 +348,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setType($type) {
-		return parent::setType($type);
+		$this->type = $type;
+
+		return $this;
 	}
 
 	/**
@@ -276,7 +361,7 @@ class LineItemCreate extends LineItem  {
 	 * @return string
 	 */
 	public function getUniqueId() {
-		return parent::getUniqueId();
+		return $this->uniqueId;
 	}
 
 	/**
@@ -286,7 +371,9 @@ class LineItemCreate extends LineItem  {
 	 * @return LineItemCreate
 	 */
 	public function setUniqueId($uniqueId) {
-		return parent::setUniqueId($uniqueId);
+		$this->uniqueId = $uniqueId;
+
+		return $this;
 	}
 
 	/**
@@ -295,7 +382,6 @@ class LineItemCreate extends LineItem  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getAmountIncludingTax() === null) {
 			throw new ValidationException("'amountIncludingTax' can't be null", 'amountIncludingTax', $this);

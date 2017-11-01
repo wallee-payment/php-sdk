@@ -57,6 +57,7 @@ class Subscriber  {
 		'id' => 'int',
 		'language' => 'string',
 		'linkedSpaceId' => 'int',
+		'metaData' => 'map[string,string]',
 		'plannedPurgeDate' => '\DateTime',
 		'reference' => 'string',
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
@@ -138,6 +139,13 @@ class Subscriber  {
 	private $linkedSpaceId;
 
 	/**
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @var map[string,string]
+	 */
+	private $metaData;
+
+	/**
 	 * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
 	 *
 	 * @var \DateTime
@@ -190,6 +198,9 @@ class Subscriber  {
 		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
+		}
+		if (isset($data['metaData']) && $data['metaData'] != null) {
+			$this->setMetaData($data['metaData']);
 		}
 		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
 			$this->setShippingAddress($data['shippingAddress']);
@@ -406,6 +417,29 @@ class Subscriber  {
 	 */
 	protected function setLinkedSpaceId($linkedSpaceId) {
 		$this->linkedSpaceId = $linkedSpaceId;
+
+		return $this;
+	}
+
+	/**
+	 * Returns metaData.
+	 *
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @return map[string,string]
+	 */
+	public function getMetaData() {
+		return $this->metaData;
+	}
+
+	/**
+	 * Sets metaData.
+	 *
+	 * @param map[string,string] $metaData
+	 * @return Subscriber
+	 */
+	public function setMetaData($metaData) {
+		$this->metaData = $metaData;
 
 		return $this;
 	}

@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class LineItemReductionCreate extends LineItemReduction  {
+class LineItemReductionCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,9 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'lineItemUniqueId' => 'string',
+		'quantityReduction' => 'float',
+		'unitPriceReduction' => 'float'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +58,31 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The unique id identifies the line item on which the reduction is applied on.
+	 *
+	 * @var string
+	 */
+	private $lineItemUniqueId;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $quantityReduction;
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $unitPriceReduction;
 
 
 	/**
@@ -68,8 +91,6 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['lineItemUniqueId']) && $data['lineItemUniqueId'] != null) {
 			$this->setLineItemUniqueId($data['lineItemUniqueId']);
 		}
@@ -90,7 +111,7 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return string
 	 */
 	public function getLineItemUniqueId() {
-		return parent::getLineItemUniqueId();
+		return $this->lineItemUniqueId;
 	}
 
 	/**
@@ -100,7 +121,9 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return LineItemReductionCreate
 	 */
 	public function setLineItemUniqueId($lineItemUniqueId) {
-		return parent::setLineItemUniqueId($lineItemUniqueId);
+		$this->lineItemUniqueId = $lineItemUniqueId;
+
+		return $this;
 	}
 
 	/**
@@ -111,7 +134,7 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return float
 	 */
 	public function getQuantityReduction() {
-		return parent::getQuantityReduction();
+		return $this->quantityReduction;
 	}
 
 	/**
@@ -121,7 +144,9 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return LineItemReductionCreate
 	 */
 	public function setQuantityReduction($quantityReduction) {
-		return parent::setQuantityReduction($quantityReduction);
+		$this->quantityReduction = $quantityReduction;
+
+		return $this;
 	}
 
 	/**
@@ -132,7 +157,7 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return float
 	 */
 	public function getUnitPriceReduction() {
-		return parent::getUnitPriceReduction();
+		return $this->unitPriceReduction;
 	}
 
 	/**
@@ -142,7 +167,9 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @return LineItemReductionCreate
 	 */
 	public function setUnitPriceReduction($unitPriceReduction) {
-		return parent::setUnitPriceReduction($unitPriceReduction);
+		$this->unitPriceReduction = $unitPriceReduction;
+
+		return $this;
 	}
 
 	/**
@@ -151,7 +178,6 @@ class LineItemReductionCreate extends LineItemReduction  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getLineItemUniqueId() === null) {
 			throw new ValidationException("'lineItemUniqueId' can't be null", 'lineItemUniqueId', $this);

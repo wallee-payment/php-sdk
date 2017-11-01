@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class WebhookListenerCreate extends WebhookListenerUpdate  {
+class WebhookListenerCreate extends AbstractWebhookListenerUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,11 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'entity' => 'int',
+		'entityStates' => 'string[]',
+		'identity' => 'int',
+		'notifyEveryChange' => 'bool',
+		'url' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +64,41 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	}
 
 	
+
+	/**
+	 * The listener listens on state changes of the entity linked with the listener.
+	 *
+	 * @var int
+	 */
+	private $entity;
+
+	/**
+	 * The target state identifies the state into which entities need to move into to trigger the webhook listener.
+	 *
+	 * @var string[]
+	 */
+	private $entityStates;
+
+	/**
+	 * The identity which will be used to sign messages sent by this listener.
+	 *
+	 * @var int
+	 */
+	private $identity;
+
+	/**
+	 * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+	 *
+	 * @var bool
+	 */
+	private $notifyEveryChange;
+
+	/**
+	 * The URL which is invoked by the listener to notify the application about the event.
+	 *
+	 * @var int
+	 */
+	private $url;
 
 
 	/**
@@ -82,9 +121,6 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 		if (isset($data['notifyEveryChange']) && $data['notifyEveryChange'] != null) {
 			$this->setNotifyEveryChange($data['notifyEveryChange']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
-			$this->setState($data['state']);
-		}
 		if (isset($data['url']) && $data['url'] != null) {
 			$this->setUrl($data['url']);
 		}
@@ -99,7 +135,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return int
 	 */
 	public function getEntity() {
-		return parent::getEntity();
+		return $this->entity;
 	}
 
 	/**
@@ -109,7 +145,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return WebhookListenerCreate
 	 */
 	public function setEntity($entity) {
-		return parent::setEntity($entity);
+		$this->entity = $entity;
+
+		return $this;
 	}
 
 	/**
@@ -120,7 +158,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return string[]
 	 */
 	public function getEntityStates() {
-		return parent::getEntityStates();
+		return $this->entityStates;
 	}
 
 	/**
@@ -130,7 +168,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return WebhookListenerCreate
 	 */
 	public function setEntityStates($entityStates) {
-		return parent::setEntityStates($entityStates);
+		$this->entityStates = $entityStates;
+
+		return $this;
 	}
 
 	/**
@@ -141,7 +181,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return int
 	 */
 	public function getIdentity() {
-		return parent::getIdentity();
+		return $this->identity;
 	}
 
 	/**
@@ -151,7 +191,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return WebhookListenerCreate
 	 */
 	public function setIdentity($identity) {
-		return parent::setIdentity($identity);
+		$this->identity = $identity;
+
+		return $this;
 	}
 
 	/**
@@ -162,7 +204,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return bool
 	 */
 	public function getNotifyEveryChange() {
-		return parent::getNotifyEveryChange();
+		return $this->notifyEveryChange;
 	}
 
 	/**
@@ -172,28 +214,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return WebhookListenerCreate
 	 */
 	public function setNotifyEveryChange($notifyEveryChange) {
-		return parent::setNotifyEveryChange($notifyEveryChange);
-	}
+		$this->notifyEveryChange = $notifyEveryChange;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return parent::getState();
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \Wallee\Sdk\Model\CreationEntityState $state
-	 * @return WebhookListenerCreate
-	 */
-	public function setState($state) {
-		return parent::setState($state);
+		return $this;
 	}
 
 	/**
@@ -204,7 +227,7 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return int
 	 */
 	public function getUrl() {
-		return parent::getUrl();
+		return $this->url;
 	}
 
 	/**
@@ -214,7 +237,9 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 	 * @return WebhookListenerCreate
 	 */
 	public function setUrl($url) {
-		return parent::setUrl($url);
+		$this->url = $url;
+
+		return $this;
 	}
 
 	/**
@@ -230,9 +255,6 @@ class WebhookListenerCreate extends WebhookListenerUpdate  {
 		}
 		if ($this->getEntityStates() === null) {
 			throw new ValidationException("'entityStates' can't be null", 'entityStates', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
 		}
 		if ($this->getUrl() === null) {
 			throw new ValidationException("'url' can't be null", 'url', $this);

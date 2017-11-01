@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
+class DatabaseTranslatedStringItemCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'language' => 'string',
+		'translation' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +57,24 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $translation;
 
 
 	/**
@@ -68,8 +83,6 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['language']) && $data['language'] != null) {
 			$this->setLanguage($data['language']);
 		}
@@ -87,7 +100,7 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @return string
 	 */
 	public function getLanguage() {
-		return parent::getLanguage();
+		return $this->language;
 	}
 
 	/**
@@ -97,7 +110,9 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @return DatabaseTranslatedStringItemCreate
 	 */
 	public function setLanguage($language) {
-		return parent::setLanguage($language);
+		$this->language = $language;
+
+		return $this;
 	}
 
 	/**
@@ -108,7 +123,7 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @return string
 	 */
 	public function getTranslation() {
-		return parent::getTranslation();
+		return $this->translation;
 	}
 
 	/**
@@ -118,7 +133,9 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @return DatabaseTranslatedStringItemCreate
 	 */
 	public function setTranslation($translation) {
-		return parent::setTranslation($translation);
+		$this->translation = $translation;
+
+		return $this;
 	}
 
 	/**
@@ -127,7 +144,6 @@ class DatabaseTranslatedStringItemCreate extends DatabaseTranslatedStringItem  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getLanguage() === null) {
 			throw new ValidationException("'language' can't be null", 'language', $this);

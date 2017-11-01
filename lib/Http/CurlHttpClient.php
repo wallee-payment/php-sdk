@@ -77,7 +77,7 @@ final class CurlHttpClient implements IHttpClient {
 			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getBody());
 		} elseif ($request->getMethod() !== HttpRequest::GET) {
-			throw new ConnectionException($request->getUrl(), 'Method ' . $request->getMethod() . ' is not recognized.');
+			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] Method ' . $request->getMethod() . ' is not recognized.');
 		}
 		curl_setopt($curl, CURLOPT_URL, $request->getUrl());
 
@@ -100,7 +100,7 @@ final class CurlHttpClient implements IHttpClient {
 
 		// Make the request
 		$response = curl_exec($curl);
-		$response = $this->handleResponse($apiClient, $curl, $response, $request->getUrl());
+		$response = $this->handleResponse($apiClient, $request, $curl, $response, $request->getUrl());
 		curl_close($curl);
 		fclose($debugFilePointer);
 
@@ -111,12 +111,13 @@ final class CurlHttpClient implements IHttpClient {
 	 * Puts together the HTTP response.
 	 *
 	 * @param ApiClient $apiClient the API client instance
+	 * @param HttpRequest $request the HTTP request
 	 * @param resource $curl the cURL handler
 	 * @param mixed $response the response the of HTTP request
 	 * @param string $url the url of the HTTP request
 	 * @return HttpResponse
 	 */
-	private function handleResponse(ApiClient $apiClient, $curl, $response, $url) {
+	private function handleResponse(ApiClient $apiClient, HttpRequest $request, $curl, $response, $url) {
 		$http_header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
 		$http_header = substr($response, 0, $http_header_size);
 		$http_body = substr($response, $http_header_size);
@@ -132,9 +133,9 @@ final class CurlHttpClient implements IHttpClient {
 
 			// curl_exec can sometimes fail but still return a blank message from curl_error().
 			if (!empty($curl_error_message)) {
-				throw new ConnectionException($url, $curl_error_message);
+				throw new ConnectionException($url, '[' . $request->getLogToken() . '] ' . $curl_error_message);
 			} else {
-				throw new ConnectionException($url, 'API call failed for an unknown reason. This could happen if you are disconnected from the network.');
+				throw new ConnectionException($url, '[' . $request->getLogToken() . '] API call failed for an unknown reason. This could happen if you are disconnected from the network.');
 			}
 		} else {
 			return new HttpResponse($response_info['http_code'], $http_header, $http_body);

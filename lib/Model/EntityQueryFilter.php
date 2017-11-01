@@ -110,9 +110,6 @@ class EntityQueryFilter  {
 		if (isset($data['children']) && $data['children'] != null) {
 			$this->setChildren($data['children']);
 		}
-		if (isset($data['fieldName']) && $data['fieldName'] != null) {
-			$this->setFieldName($data['fieldName']);
-		}
 		if (isset($data['operator']) && $data['operator'] != null) {
 			$this->setOperator($data['operator']);
 		}

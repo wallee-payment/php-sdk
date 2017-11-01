@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class AccountUpdate extends Account  {
+class AccountUpdate extends AbstractAccountUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class AccountUpdate extends Account  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class AccountUpdate extends Account  {
 
 	
 
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
 
 	/**
 	 * Constructor.
@@ -70,12 +85,6 @@ class AccountUpdate extends Account  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['name']) && $data['name'] != null) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['subaccountLimit']) && $data['subaccountLimit'] != null) {
-			$this->setSubaccountLimit($data['subaccountLimit']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
@@ -86,48 +95,6 @@ class AccountUpdate extends Account  {
 
 
 	/**
-	 * Returns name.
-	 *
-	 * The name of the account identifies the account within the administrative interface.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return AccountUpdate
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
-	 * Returns subaccountLimit.
-	 *
-	 * This property restricts the number of subaccounts which can be created within this account.
-	 *
-	 * @return int
-	 */
-	public function getSubaccountLimit() {
-		return parent::getSubaccountLimit();
-	}
-
-	/**
-	 * Sets subaccountLimit.
-	 *
-	 * @param int $subaccountLimit
-	 * @return AccountUpdate
-	 */
-	public function setSubaccountLimit($subaccountLimit) {
-		return parent::setSubaccountLimit($subaccountLimit);
-	}
-
-	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -135,7 +102,7 @@ class AccountUpdate extends Account  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -145,7 +112,9 @@ class AccountUpdate extends Account  {
 	 * @return AccountUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -156,7 +125,7 @@ class AccountUpdate extends Account  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -166,7 +135,9 @@ class AccountUpdate extends Account  {
 	 * @return AccountUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**

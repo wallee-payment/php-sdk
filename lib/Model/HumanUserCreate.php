@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class HumanUserCreate extends HumanUserUpdate  {
+class HumanUserCreate extends AbstractHumanUserUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class HumanUserCreate extends HumanUserUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'primaryAccount' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +61,13 @@ class HumanUserCreate extends HumanUserUpdate  {
 
 	
 
+	/**
+	 * The primary account links the user to a specific account.
+	 *
+	 * @var int
+	 */
+	private $primaryAccount;
+
 
 	/**
 	 * Constructor.
@@ -70,8 +77,34 @@ class HumanUserCreate extends HumanUserUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
+			$this->setPrimaryAccount($data['primaryAccount']);
+		}
 	}
 
+
+	/**
+	 * Returns primaryAccount.
+	 *
+	 * The primary account links the user to a specific account.
+	 *
+	 * @return int
+	 */
+	public function getPrimaryAccount() {
+		return $this->primaryAccount;
+	}
+
+	/**
+	 * Sets primaryAccount.
+	 *
+	 * @param int $primaryAccount
+	 * @return HumanUserCreate
+	 */
+	public function setPrimaryAccount($primaryAccount) {
+		$this->primaryAccount = $primaryAccount;
+
+		return $this;
+	}
 
 	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.

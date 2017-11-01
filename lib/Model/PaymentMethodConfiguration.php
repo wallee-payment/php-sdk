@@ -57,6 +57,9 @@ class PaymentMethodConfiguration  {
 		'oneClickPaymentMode' => '\Wallee\Sdk\Model\OneClickPaymentMode',
 		'paymentMethod' => 'int',
 		'plannedPurgeDate' => '\DateTime',
+		'resolvedDescription' => 'map[string,string]',
+		'resolvedImageUrl' => 'string',
+		'resolvedTitle' => 'map[string,string]',
 		'sortOrder' => 'int',
 		'spaceId' => 'int',
 		'state' => '\Wallee\Sdk\Model\CreationEntityState',
@@ -138,6 +141,27 @@ class PaymentMethodConfiguration  {
 	private $plannedPurgeDate;
 
 	/**
+	 * The resolved description uses the specified description or the default one when it is not overridden.
+	 *
+	 * @var map[string,string]
+	 */
+	private $resolvedDescription;
+
+	/**
+	 * The resolved URL of the image to use with this payment method.
+	 *
+	 * @var string
+	 */
+	private $resolvedImageUrl;
+
+	/**
+	 * The resolved title uses the specified title or the default one when it is not overridden.
+	 *
+	 * @var map[string,string]
+	 */
+	private $resolvedTitle;
+
+	/**
 	 * The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
 	 *
 	 * @var int
@@ -193,6 +217,12 @@ class PaymentMethodConfiguration  {
 		}
 		if (isset($data['oneClickPaymentMode']) && $data['oneClickPaymentMode'] != null) {
 			$this->setOneClickPaymentMode($data['oneClickPaymentMode']);
+		}
+		if (isset($data['resolvedDescription']) && $data['resolvedDescription'] != null) {
+			$this->setResolvedDescription($data['resolvedDescription']);
+		}
+		if (isset($data['resolvedTitle']) && $data['resolvedTitle'] != null) {
+			$this->setResolvedTitle($data['resolvedTitle']);
 		}
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
@@ -409,6 +439,75 @@ class PaymentMethodConfiguration  {
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
 		$this->plannedPurgeDate = $plannedPurgeDate;
+
+		return $this;
+	}
+
+	/**
+	 * Returns resolvedDescription.
+	 *
+	 * The resolved description uses the specified description or the default one when it is not overridden.
+	 *
+	 * @return map[string,string]
+	 */
+	public function getResolvedDescription() {
+		return $this->resolvedDescription;
+	}
+
+	/**
+	 * Sets resolvedDescription.
+	 *
+	 * @param map[string,string] $resolvedDescription
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setResolvedDescription($resolvedDescription) {
+		$this->resolvedDescription = $resolvedDescription;
+
+		return $this;
+	}
+
+	/**
+	 * Returns resolvedImageUrl.
+	 *
+	 * The resolved URL of the image to use with this payment method.
+	 *
+	 * @return string
+	 */
+	public function getResolvedImageUrl() {
+		return $this->resolvedImageUrl;
+	}
+
+	/**
+	 * Sets resolvedImageUrl.
+	 *
+	 * @param string $resolvedImageUrl
+	 * @return PaymentMethodConfiguration
+	 */
+	protected function setResolvedImageUrl($resolvedImageUrl) {
+		$this->resolvedImageUrl = $resolvedImageUrl;
+
+		return $this;
+	}
+
+	/**
+	 * Returns resolvedTitle.
+	 *
+	 * The resolved title uses the specified title or the default one when it is not overridden.
+	 *
+	 * @return map[string,string]
+	 */
+	public function getResolvedTitle() {
+		return $this->resolvedTitle;
+	}
+
+	/**
+	 * Sets resolvedTitle.
+	 *
+	 * @param map[string,string] $resolvedTitle
+	 * @return PaymentMethodConfiguration
+	 */
+	public function setResolvedTitle($resolvedTitle) {
+		$this->resolvedTitle = $resolvedTitle;
 
 		return $this;
 	}

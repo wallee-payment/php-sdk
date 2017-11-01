@@ -76,6 +76,13 @@ final class HttpRequest {
 	 * @var string
 	 */
 	const HEADER_KEY_ACCEPT = 'accept';
+	
+	/**
+	 * The key of the 'x-wallee-logtoken' header.
+	 *
+	 * @var string
+	 */
+	const HEADER_LOG_TOKEN = 'x-wallee-logtoken';
 
 	/**
 	 * The object serializer.
@@ -153,6 +160,13 @@ final class HttpRequest {
 	 * @var string
 	 */
 	private $userAgent;
+	
+	/**
+	 * The log token.
+	 *
+	 * @var string
+	 */
+	private $logToken;
 
 	/**
 	 * Constructor.
@@ -160,8 +174,9 @@ final class HttpRequest {
 	 * @param ObjectSerializer $serializer the object serializer
 	 * @param string $url the full qualified URL on which the request is executed
 	 * @param string $method the request method (typically GET or POST)
+	 * @param string $logToken the request's log token
 	 */
-	public function __construct(ObjectSerializer $serializer, $url, $method) {
+	public function __construct(ObjectSerializer $serializer, $url, $method, $logToken) {
 		$this->serializer = $serializer;
 		$this->url = $url;
 		$this->method = strtoupper($method);
@@ -170,8 +185,10 @@ final class HttpRequest {
 		$this->host = parse_url($url, PHP_URL_HOST);
 		$this->port = parse_url($url, PHP_URL_PORT);
 		$this->query = parse_url($url, PHP_URL_QUERY);
+		$this->logToken = $logToken;
 
 		$this->addHeader(self::HEADER_KEY_HOST, $this->host);
+		$this->addHeader(self::HEADER_LOG_TOKEN, $this->logToken);
 	}
 
 	/**
@@ -309,6 +326,15 @@ final class HttpRequest {
 		$this->addHeader(self::HEADER_KEY_USER_AGENT, $userAgent);
 		return $this;
 	}
+	
+	/**
+	 * Returns the log token.
+	 *
+	 * @return string
+	 */
+	public function getLogToken() {
+		return $this->logToken;
+	}
 
 	/**
 	 * Returns the query part of the request as string.
@@ -331,8 +357,8 @@ final class HttpRequest {
 			(!isset($this->headers[self::HEADER_KEY_CONTENT_TYPE]) || $this->headers[self::HEADER_KEY_CONTENT_TYPE] != 'multipart/form-data')) {
 			return json_encode($this->serializer->sanitizeForSerialization($this->body));
 		} else {
-      return $this->body;
-    }
+	      return $this->body;
+	    }
 	}
 
 	/**

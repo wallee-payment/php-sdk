@@ -52,6 +52,7 @@ class TokenVersion  {
 		'billingAddress' => '\Wallee\Sdk\Model\Address',
 		'createdOn' => '\DateTime',
 		'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
+		'expiresOn' => '\DateTime',
 		'id' => 'int',
 		'labels' => '\Wallee\Sdk\Model\Label[]',
 		'language' => 'string',
@@ -64,6 +65,7 @@ class TokenVersion  {
 		'shippingAddress' => '\Wallee\Sdk\Model\Address',
 		'state' => '\Wallee\Sdk\Model\TokenVersionState',
 		'token' => '\Wallee\Sdk\Model\Token',
+		'type' => '\Wallee\Sdk\Model\TokenVersionType',
 		'version' => 'int'	);
 
 	/**
@@ -104,6 +106,13 @@ class TokenVersion  {
 	 * @var \Wallee\Sdk\Model\ChargeAttemptEnvironment
 	 */
 	private $environment;
+
+	/**
+	 * The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+	 *
+	 * @var \DateTime
+	 */
+	private $expiresOn;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -190,6 +199,13 @@ class TokenVersion  {
 	private $token;
 
 	/**
+	 * The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+	 *
+	 * @var \Wallee\Sdk\Model\TokenVersionType
+	 */
+	private $type;
+
+	/**
 	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
 	 *
 	 * @var int
@@ -226,6 +242,9 @@ class TokenVersion  {
 		}
 		if (isset($data['token']) && $data['token'] != null) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['type']) && $data['type'] != null) {
+			$this->setType($data['type']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
@@ -321,6 +340,29 @@ class TokenVersion  {
 	 */
 	public function setEnvironment($environment) {
 		$this->environment = $environment;
+
+		return $this;
+	}
+
+	/**
+	 * Returns expiresOn.
+	 *
+	 * The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+	 *
+	 * @return \DateTime
+	 */
+	public function getExpiresOn() {
+		return $this->expiresOn;
+	}
+
+	/**
+	 * Sets expiresOn.
+	 *
+	 * @param \DateTime $expiresOn
+	 * @return TokenVersion
+	 */
+	protected function setExpiresOn($expiresOn) {
+		$this->expiresOn = $expiresOn;
 
 		return $this;
 	}
@@ -597,6 +639,29 @@ class TokenVersion  {
 	 */
 	public function setToken($token) {
 		$this->token = $token;
+
+		return $this;
+	}
+
+	/**
+	 * Returns type.
+	 *
+	 * The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+	 *
+	 * @return \Wallee\Sdk\Model\TokenVersionType
+	 */
+	public function getType() {
+		return $this->type;
+	}
+
+	/**
+	 * Sets type.
+	 *
+	 * @param \Wallee\Sdk\Model\TokenVersionType $type
+	 * @return TokenVersion
+	 */
+	public function setType($type) {
+		$this->type = $type;
 
 		return $this;
 	}

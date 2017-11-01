@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class AccountCreate extends AccountUpdate  {
+class AccountCreate extends AbstractAccountUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class AccountCreate extends AccountUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'parentAccount' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +60,13 @@ class AccountCreate extends AccountUpdate  {
 	}
 
 	
+
+	/**
+	 * The account which is responsible for administering the account.
+	 *
+	 * @var int
+	 */
+	private $parentAccount;
 
 
 	/**
@@ -84,7 +91,7 @@ class AccountCreate extends AccountUpdate  {
 	 * @return int
 	 */
 	public function getParentAccount() {
-		return parent::getParentAccount();
+		return $this->parentAccount;
 	}
 
 	/**
@@ -94,7 +101,9 @@ class AccountCreate extends AccountUpdate  {
 	 * @return AccountCreate
 	 */
 	public function setParentAccount($parentAccount) {
-		return parent::setParentAccount($parentAccount);
+		$this->parentAccount = $parentAccount;
+
+		return $this;
 	}
 
 	/**

@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
+class DatabaseTranslatedStringCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'items' => '\Wallee\Sdk\Model\DatabaseTranslatedStringItemCreate[]'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +56,17 @@ class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringItemCreate[]
+	 */
+	private $items;
 
 
 	/**
@@ -68,8 +75,6 @@ class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['items']) && $data['items'] != null) {
 			$this->setItems($data['items']);
 		}
@@ -84,7 +89,7 @@ class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringItemCreate[]
 	 */
 	public function getItems() {
-		return parent::getItems();
+		return $this->items;
 	}
 
 	/**
@@ -94,7 +99,9 @@ class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 	 * @return DatabaseTranslatedStringCreate
 	 */
 	public function setItems($items) {
-		return parent::setItems($items);
+		$this->items = $items;
+
+		return $this;
 	}
 
 	/**
@@ -103,7 +110,6 @@ class DatabaseTranslatedStringCreate extends DatabaseTranslatedString  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 	}
 

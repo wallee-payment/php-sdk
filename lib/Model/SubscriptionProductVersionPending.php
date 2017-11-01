@@ -48,6 +48,8 @@ class SubscriptionProductVersionPending  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'id' => 'int',
+		'version' => 'int',
 		'billingCycle' => 'string',
 		'comment' => 'string',
 		'defaultCurrency' => 'string',
@@ -56,9 +58,7 @@ class SubscriptionProductVersionPending  {
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
 		'numberOfNoticePeriods' => 'int',
 		'product' => 'int',
-		'state' => '\Wallee\Sdk\Model\SubscriptionProductVersionState',
-		'id' => 'int',
-		'version' => 'int'	);
+		'state' => '\Wallee\Sdk\Model\SubscriptionProductVersionState'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -70,6 +70,20 @@ class SubscriptionProductVersionPending  {
 	}
 
 	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 	/**
 	 * The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
@@ -134,20 +148,6 @@ class SubscriptionProductVersionPending  {
 	 */
 	private $state;
 
-	/**
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @var int
-	 */
-	private $id;
-
-	/**
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @var int
-	 */
-	private $version;
-
 
 	/**
 	 * Constructor.
@@ -155,6 +155,12 @@ class SubscriptionProductVersionPending  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 		if (isset($data['billingCycle']) && $data['billingCycle'] != null) {
 			$this->setBillingCycle($data['billingCycle']);
 		}
@@ -182,14 +188,54 @@ class SubscriptionProductVersionPending  {
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return SubscriptionProductVersionPending
+	 */
+	public function setId($id) {
+		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return SubscriptionProductVersionPending
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+
+		return $this;
+	}
 
 	/**
 	 * Returns billingCycle.
@@ -394,52 +440,6 @@ class SubscriptionProductVersionPending  {
 	 */
 	public function setState($state) {
 		$this->state = $state;
-
-		return $this;
-	}
-
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return SubscriptionProductVersionPending
-	 */
-	public function setId($id) {
-		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return $this->version;
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return SubscriptionProductVersionPending
-	 */
-	public function setVersion($version) {
-		$this->version = $version;
 
 		return $this;
 	}

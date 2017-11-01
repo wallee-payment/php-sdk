@@ -52,7 +52,7 @@ final class ValidationException extends Exception {
 	 * Constructor.
 	 *
 	 * @param string $message	the error message
-	 * @param string $property	the name of the invalid propery
+	 * @param string $property	the name of the invalid property
 	 * @param object $model		the instance of the validated model
 	 */
 	public function __construct($message = "", $property = null, $model = null) {

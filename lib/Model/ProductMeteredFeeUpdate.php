@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ProductMeteredFeeUpdate extends ProductMeteredFee  {
+class ProductMeteredFeeUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,13 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int',
+		'component' => 'int',
+		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+		'metric' => 'int',
+		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+		'tierPricing' => '\Wallee\Sdk\Model\ProductMeteredTierPricing'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +62,59 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $component;
+
+	/**
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	private $description;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $metric;
+
+	/**
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	private $name;
+
+	/**
+	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
+	 *
+	 * @var \Wallee\Sdk\Model\ProductMeteredTierPricing
+	 */
+	private $tierPricing;
 
 
 	/**
@@ -68,8 +123,12 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 		if (isset($data['component']) && $data['component'] != null) {
 			$this->setComponent($data['component']);
 		}
@@ -85,119 +144,8 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 		if (isset($data['tierPricing']) && $data['tierPricing'] != null) {
 			$this->setTierPricing($data['tierPricing']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
-
-	/**
-	 * Returns component.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getComponent() {
-		return parent::getComponent();
-	}
-
-	/**
-	 * Sets component.
-	 *
-	 * @param int $component
-	 * @return ProductMeteredFeeUpdate
-	 */
-	public function setComponent($component) {
-		return parent::setComponent($component);
-	}
-
-	/**
-	 * Returns description.
-	 *
-	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
-	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
-	 */
-	public function getDescription() {
-		return parent::getDescription();
-	}
-
-	/**
-	 * Sets description.
-	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
-	 * @return ProductMeteredFeeUpdate
-	 */
-	public function setDescription($description) {
-		return parent::setDescription($description);
-	}
-
-	/**
-	 * Returns metric.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getMetric() {
-		return parent::getMetric();
-	}
-
-	/**
-	 * Sets metric.
-	 *
-	 * @param int $metric
-	 * @return ProductMeteredFeeUpdate
-	 */
-	public function setMetric($metric) {
-		return parent::setMetric($metric);
-	}
-
-	/**
-	 * Returns name.
-	 *
-	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
-	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
-	 * @return ProductMeteredFeeUpdate
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
-	 * Returns tierPricing.
-	 *
-	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
-	 *
-	 * @return \Wallee\Sdk\Model\ProductMeteredTierPricing
-	 */
-	public function getTierPricing() {
-		return parent::getTierPricing();
-	}
-
-	/**
-	 * Sets tierPricing.
-	 *
-	 * @param \Wallee\Sdk\Model\ProductMeteredTierPricing $tierPricing
-	 * @return ProductMeteredFeeUpdate
-	 */
-	public function setTierPricing($tierPricing) {
-		return parent::setTierPricing($tierPricing);
-	}
 
 	/**
 	 * Returns id.
@@ -207,7 +155,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -217,7 +165,9 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -228,7 +178,7 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -238,7 +188,124 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @return ProductMeteredFeeUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
+	}
+
+	/**
+	 * Returns component.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getComponent() {
+		return $this->component;
+	}
+
+	/**
+	 * Sets component.
+	 *
+	 * @param int $component
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setComponent($component) {
+		$this->component = $component;
+
+		return $this;
+	}
+
+	/**
+	 * Returns description.
+	 *
+	 * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Returns metric.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getMetric() {
+		return $this->metric;
+	}
+
+	/**
+	 * Sets metric.
+	 *
+	 * @param int $metric
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setMetric($metric) {
+		$this->metric = $metric;
+
+		return $this;
+	}
+
+	/**
+	 * Returns name.
+	 *
+	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setName($name) {
+		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Returns tierPricing.
+	 *
+	 * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
+	 *
+	 * @return \Wallee\Sdk\Model\ProductMeteredTierPricing
+	 */
+	public function getTierPricing() {
+		return $this->tierPricing;
+	}
+
+	/**
+	 * Sets tierPricing.
+	 *
+	 * @param \Wallee\Sdk\Model\ProductMeteredTierPricing $tierPricing
+	 * @return ProductMeteredFeeUpdate
+	 */
+	public function setTierPricing($tierPricing) {
+		$this->tierPricing = $tierPricing;
+
+		return $this;
 	}
 
 	/**
@@ -247,7 +314,6 @@ class ProductMeteredFeeUpdate extends ProductMeteredFee  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getId() === null) {
 			throw new ValidationException("'id' can't be null", 'id', $this);

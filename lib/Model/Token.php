@@ -58,6 +58,7 @@ class Token  {
 		'linkedSpaceId' => 'int',
 		'plannedPurgeDate' => '\DateTime',
 		'state' => '\Wallee\Sdk\Model\CreationEntityState',
+		'timeZone' => 'string',
 		'tokenReference' => 'string',
 		'version' => 'int'	);
 
@@ -141,6 +142,13 @@ class Token  {
 	 * @var \Wallee\Sdk\Model\CreationEntityState
 	 */
 	private $state;
+
+	/**
+	 * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+	 *
+	 * @var string
+	 */
+	private $timeZone;
 
 	/**
 	 * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
@@ -401,6 +409,29 @@ class Token  {
 	 */
 	public function setState($state) {
 		$this->state = $state;
+
+		return $this;
+	}
+
+	/**
+	 * Returns timeZone.
+	 *
+	 * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return Token
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
 
 		return $this;
 	}

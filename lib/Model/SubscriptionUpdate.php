@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionUpdate extends Subscription  {
+class SubscriptionUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,10 @@ class SubscriptionUpdate extends Subscription  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int',
+		'description' => 'string',
+		'plannedTerminationDate' => '\DateTime'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +59,38 @@ class SubscriptionUpdate extends Subscription  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $description;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $plannedTerminationDate;
 
 
 	/**
@@ -68,64 +99,20 @@ class SubscriptionUpdate extends Subscription  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
-		if (isset($data['description']) && $data['description'] != null) {
-			$this->setDescription($data['description']);
-		}
-		if (isset($data['plannedTerminationDate']) && $data['plannedTerminationDate'] != null) {
-			$this->setPlannedTerminationDate($data['plannedTerminationDate']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
 		if (isset($data['version']) && $data['version'] != null) {
 			$this->setVersion($data['version']);
 		}
+		if (isset($data['description']) && $data['description'] != null) {
+			$this->setDescription($data['description']);
+		}
+		if (isset($data['plannedTerminationDate']) && $data['plannedTerminationDate'] != null) {
+			$this->setPlannedTerminationDate($data['plannedTerminationDate']);
+		}
 	}
 
-
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return parent::getDescription();
-	}
-
-	/**
-	 * Sets description.
-	 *
-	 * @param string $description
-	 * @return SubscriptionUpdate
-	 */
-	public function setDescription($description) {
-		return parent::setDescription($description);
-	}
-
-	/**
-	 * Returns plannedTerminationDate.
-	 *
-	 * 
-	 *
-	 * @return \DateTime
-	 */
-	public function getPlannedTerminationDate() {
-		return parent::getPlannedTerminationDate();
-	}
-
-	/**
-	 * Sets plannedTerminationDate.
-	 *
-	 * @param \DateTime $plannedTerminationDate
-	 * @return SubscriptionUpdate
-	 */
-	public function setPlannedTerminationDate($plannedTerminationDate) {
-		return parent::setPlannedTerminationDate($plannedTerminationDate);
-	}
 
 	/**
 	 * Returns id.
@@ -135,7 +122,7 @@ class SubscriptionUpdate extends Subscription  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -145,7 +132,9 @@ class SubscriptionUpdate extends Subscription  {
 	 * @return SubscriptionUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -156,7 +145,7 @@ class SubscriptionUpdate extends Subscription  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -166,7 +155,55 @@ class SubscriptionUpdate extends Subscription  {
 	 * @return SubscriptionUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
+	}
+
+	/**
+	 * Returns description.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * Sets description.
+	 *
+	 * @param string $description
+	 * @return SubscriptionUpdate
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Returns plannedTerminationDate.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getPlannedTerminationDate() {
+		return $this->plannedTerminationDate;
+	}
+
+	/**
+	 * Sets plannedTerminationDate.
+	 *
+	 * @param \DateTime $plannedTerminationDate
+	 * @return SubscriptionUpdate
+	 */
+	public function setPlannedTerminationDate($plannedTerminationDate) {
+		$this->plannedTerminationDate = $plannedTerminationDate;
+
+		return $this;
 	}
 
 	/**
@@ -175,7 +212,6 @@ class SubscriptionUpdate extends Subscription  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getId() === null) {
 			throw new ValidationException("'id' can't be null", 'id', $this);

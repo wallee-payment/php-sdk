@@ -99,9 +99,6 @@ class SubscriptionCreateRequest  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['currency']) && $data['currency'] != null) {
-			$this->setCurrency($data['currency']);
-		}
 		if (isset($data['product']) && $data['product'] != null) {
 			$this->setProduct($data['product']);
 		}
@@ -131,7 +128,7 @@ class SubscriptionCreateRequest  {
 	 * @param string $currency
 	 * @return SubscriptionCreateRequest
 	 */
-	public function setCurrency($currency) {
+	protected function setCurrency($currency) {
 		$this->currency = $currency;
 
 		return $this;

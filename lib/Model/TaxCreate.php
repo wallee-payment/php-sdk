@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class TaxCreate extends Tax  {
+class TaxCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class TaxCreate extends Tax  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'rate' => 'float',
+		'title' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +57,24 @@ class TaxCreate extends Tax  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var float
+	 */
+	private $rate;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $title;
 
 
 	/**
@@ -68,8 +83,6 @@ class TaxCreate extends Tax  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['rate']) && $data['rate'] != null) {
 			$this->setRate($data['rate']);
 		}
@@ -87,7 +100,7 @@ class TaxCreate extends Tax  {
 	 * @return float
 	 */
 	public function getRate() {
-		return parent::getRate();
+		return $this->rate;
 	}
 
 	/**
@@ -97,7 +110,9 @@ class TaxCreate extends Tax  {
 	 * @return TaxCreate
 	 */
 	public function setRate($rate) {
-		return parent::setRate($rate);
+		$this->rate = $rate;
+
+		return $this;
 	}
 
 	/**
@@ -108,7 +123,7 @@ class TaxCreate extends Tax  {
 	 * @return string
 	 */
 	public function getTitle() {
-		return parent::getTitle();
+		return $this->title;
 	}
 
 	/**
@@ -118,7 +133,9 @@ class TaxCreate extends Tax  {
 	 * @return TaxCreate
 	 */
 	public function setTitle($title) {
-		return parent::setTitle($title);
+		$this->title = $title;
+
+		return $this;
 	}
 
 	/**
@@ -127,7 +144,6 @@ class TaxCreate extends Tax  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getRate() === null) {
 			throw new ValidationException("'rate' can't be null", 'rate', $this);

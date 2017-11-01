@@ -48,7 +48,7 @@ class SubscriberActive extends SubscriberUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'state' => '\Wallee\Sdk\Model\CreationEntityState'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +60,13 @@ class SubscriberActive extends SubscriberUpdate  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\CreationEntityState
+	 */
+	private $state;
 
 
 	/**
@@ -73,12 +80,6 @@ class SubscriberActive extends SubscriberUpdate  {
 		if (isset($data['state']) && $data['state'] != null) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
 
@@ -90,7 +91,7 @@ class SubscriberActive extends SubscriberUpdate  {
 	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
 	public function getState() {
-		return parent::getState();
+		return $this->state;
 	}
 
 	/**
@@ -100,49 +101,9 @@ class SubscriberActive extends SubscriberUpdate  {
 	 * @return SubscriberActive
 	 */
 	public function setState($state) {
-		return parent::setState($state);
-	}
+		$this->state = $state;
 
-	/**
-	 * Returns id.
-	 *
-	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return parent::getId();
-	}
-
-	/**
-	 * Sets id.
-	 *
-	 * @param int $id
-	 * @return SubscriberActive
-	 */
-	public function setId($id) {
-		return parent::setId($id);
-	}
-
-	/**
-	 * Returns version.
-	 *
-	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-	 *
-	 * @return int
-	 */
-	public function getVersion() {
-		return parent::getVersion();
-	}
-
-	/**
-	 * Sets version.
-	 *
-	 * @param int $version
-	 * @return SubscriberActive
-	 */
-	public function setVersion($version) {
-		return parent::setVersion($version);
+		return $this;
 	}
 
 	/**
@@ -153,12 +114,6 @@ class SubscriberActive extends SubscriberUpdate  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getId() === null) {
-			throw new ValidationException("'id' can't be null", 'id', $this);
-		}
-		if ($this->getVersion() === null) {
-			throw new ValidationException("'version' can't be null", 'version', $this);
-		}
 	}
 
 	/**

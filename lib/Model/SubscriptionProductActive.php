@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductActive extends SubscriptionProduct  {
+class SubscriptionProductActive extends AbstractSubscriptionProductActive  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 
 	
 
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
 
 	/**
 	 * Constructor.
@@ -70,21 +85,6 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
-			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
-		}
-		if (isset($data['failedPaymentSuspensionPeriod']) && $data['failedPaymentSuspensionPeriod'] != null) {
-			$this->setFailedPaymentSuspensionPeriod($data['failedPaymentSuspensionPeriod']);
-		}
-		if (isset($data['name']) && $data['name'] != null) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
-			$this->setSortOrder($data['sortOrder']);
-		}
-		if (isset($data['state']) && $data['state'] != null) {
-			$this->setState($data['state']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
@@ -95,111 +95,6 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 
 
 	/**
-	 * Returns allowedPaymentMethodConfigurations.
-	 *
-	 * The allowed payment method configurations control which payment methods can be used with this product. When none is selected all methods will be allowed.
-	 *
-	 * @return int[]
-	 */
-	public function getAllowedPaymentMethodConfigurations() {
-		return parent::getAllowedPaymentMethodConfigurations();
-	}
-
-	/**
-	 * Sets allowedPaymentMethodConfigurations.
-	 *
-	 * @param int[] $allowedPaymentMethodConfigurations
-	 * @return SubscriptionProductActive
-	 */
-	public function setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations) {
-		return parent::setAllowedPaymentMethodConfigurations($allowedPaymentMethodConfigurations);
-	}
-
-	/**
-	 * Returns failedPaymentSuspensionPeriod.
-	 *
-	 * When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
-	 *
-	 * @return string
-	 */
-	public function getFailedPaymentSuspensionPeriod() {
-		return parent::getFailedPaymentSuspensionPeriod();
-	}
-
-	/**
-	 * Sets failedPaymentSuspensionPeriod.
-	 *
-	 * @param string $failedPaymentSuspensionPeriod
-	 * @return SubscriptionProductActive
-	 */
-	public function setFailedPaymentSuspensionPeriod($failedPaymentSuspensionPeriod) {
-		return parent::setFailedPaymentSuspensionPeriod($failedPaymentSuspensionPeriod);
-	}
-
-	/**
-	 * Returns name.
-	 *
-	 * The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return SubscriptionProductActive
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
-	 * Returns sortOrder.
-	 *
-	 * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
-	 *
-	 * @return int
-	 */
-	public function getSortOrder() {
-		return parent::getSortOrder();
-	}
-
-	/**
-	 * Sets sortOrder.
-	 *
-	 * @param int $sortOrder
-	 * @return SubscriptionProductActive
-	 */
-	public function setSortOrder($sortOrder) {
-		return parent::setSortOrder($sortOrder);
-	}
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProductState
-	 */
-	public function getState() {
-		return parent::getState();
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProductState $state
-	 * @return SubscriptionProductActive
-	 */
-	public function setState($state) {
-		return parent::setState($state);
-	}
-
-	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -207,7 +102,7 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -217,7 +112,9 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 * @return SubscriptionProductActive
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -228,7 +125,7 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -238,7 +135,9 @@ class SubscriptionProductActive extends SubscriptionProduct  {
 	 * @return SubscriptionProductActive
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**

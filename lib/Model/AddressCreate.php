@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class AddressCreate extends Address  {
+class AddressCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,26 @@ class AddressCreate extends Address  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'city' => 'string',
+		'commercialRegisterNumber' => 'string',
+		'country' => 'string',
+		'dateOfBirth' => '\DateTime',
+		'dependentLocality' => 'string',
+		'emailAddress' => 'string',
+		'familyName' => 'string',
+		'gender' => '\Wallee\Sdk\Model\Gender',
+		'givenName' => 'string',
+		'legalOrganizationForm' => 'int',
+		'mobilePhoneNumber' => 'string',
+		'organizationName' => 'string',
+		'phoneNumber' => 'string',
+		'postCode' => 'string',
+		'postalState' => 'string',
+		'salesTaxNumber' => 'string',
+		'salutation' => 'string',
+		'socialSecurityNumber' => 'string',
+		'sortingCode' => 'string',
+		'street' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +75,150 @@ class AddressCreate extends Address  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $city;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $commercialRegisterNumber;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $country;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $dateOfBirth;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $dependentLocality;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $emailAddress;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $familyName;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Gender
+	 */
+	private $gender;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $givenName;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $legalOrganizationForm;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $mobilePhoneNumber;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $organizationName;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $phoneNumber;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $postCode;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $postalState;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $salesTaxNumber;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $salutation;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $socialSecurityNumber;
+
+	/**
+	 * The sorting code identifies the post office at which the post box is located in.
+	 *
+	 * @var string
+	 */
+	private $sortingCode;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $street;
 
 
 	/**
@@ -68,8 +227,6 @@ class AddressCreate extends Address  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['city']) && $data['city'] != null) {
 			$this->setCity($data['city']);
 		}
@@ -141,7 +298,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getCity() {
-		return parent::getCity();
+		return $this->city;
 	}
 
 	/**
@@ -151,7 +308,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setCity($city) {
-		return parent::setCity($city);
+		$this->city = $city;
+
+		return $this;
 	}
 
 	/**
@@ -162,7 +321,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getCommercialRegisterNumber() {
-		return parent::getCommercialRegisterNumber();
+		return $this->commercialRegisterNumber;
 	}
 
 	/**
@@ -172,7 +331,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setCommercialRegisterNumber($commercialRegisterNumber) {
-		return parent::setCommercialRegisterNumber($commercialRegisterNumber);
+		$this->commercialRegisterNumber = $commercialRegisterNumber;
+
+		return $this;
 	}
 
 	/**
@@ -183,7 +344,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getCountry() {
-		return parent::getCountry();
+		return $this->country;
 	}
 
 	/**
@@ -193,7 +354,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setCountry($country) {
-		return parent::setCountry($country);
+		$this->country = $country;
+
+		return $this;
 	}
 
 	/**
@@ -204,7 +367,7 @@ class AddressCreate extends Address  {
 	 * @return \DateTime
 	 */
 	public function getDateOfBirth() {
-		return parent::getDateOfBirth();
+		return $this->dateOfBirth;
 	}
 
 	/**
@@ -214,7 +377,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setDateOfBirth($dateOfBirth) {
-		return parent::setDateOfBirth($dateOfBirth);
+		$this->dateOfBirth = $dateOfBirth;
+
+		return $this;
 	}
 
 	/**
@@ -225,7 +390,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getDependentLocality() {
-		return parent::getDependentLocality();
+		return $this->dependentLocality;
 	}
 
 	/**
@@ -235,7 +400,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setDependentLocality($dependentLocality) {
-		return parent::setDependentLocality($dependentLocality);
+		$this->dependentLocality = $dependentLocality;
+
+		return $this;
 	}
 
 	/**
@@ -246,7 +413,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getEmailAddress() {
-		return parent::getEmailAddress();
+		return $this->emailAddress;
 	}
 
 	/**
@@ -256,7 +423,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setEmailAddress($emailAddress) {
-		return parent::setEmailAddress($emailAddress);
+		$this->emailAddress = $emailAddress;
+
+		return $this;
 	}
 
 	/**
@@ -267,7 +436,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getFamilyName() {
-		return parent::getFamilyName();
+		return $this->familyName;
 	}
 
 	/**
@@ -277,7 +446,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setFamilyName($familyName) {
-		return parent::setFamilyName($familyName);
+		$this->familyName = $familyName;
+
+		return $this;
 	}
 
 	/**
@@ -288,7 +459,7 @@ class AddressCreate extends Address  {
 	 * @return \Wallee\Sdk\Model\Gender
 	 */
 	public function getGender() {
-		return parent::getGender();
+		return $this->gender;
 	}
 
 	/**
@@ -298,7 +469,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setGender($gender) {
-		return parent::setGender($gender);
+		$this->gender = $gender;
+
+		return $this;
 	}
 
 	/**
@@ -309,7 +482,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getGivenName() {
-		return parent::getGivenName();
+		return $this->givenName;
 	}
 
 	/**
@@ -319,7 +492,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setGivenName($givenName) {
-		return parent::setGivenName($givenName);
+		$this->givenName = $givenName;
+
+		return $this;
 	}
 
 	/**
@@ -330,7 +505,7 @@ class AddressCreate extends Address  {
 	 * @return int
 	 */
 	public function getLegalOrganizationForm() {
-		return parent::getLegalOrganizationForm();
+		return $this->legalOrganizationForm;
 	}
 
 	/**
@@ -340,7 +515,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setLegalOrganizationForm($legalOrganizationForm) {
-		return parent::setLegalOrganizationForm($legalOrganizationForm);
+		$this->legalOrganizationForm = $legalOrganizationForm;
+
+		return $this;
 	}
 
 	/**
@@ -351,7 +528,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getMobilePhoneNumber() {
-		return parent::getMobilePhoneNumber();
+		return $this->mobilePhoneNumber;
 	}
 
 	/**
@@ -361,7 +538,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setMobilePhoneNumber($mobilePhoneNumber) {
-		return parent::setMobilePhoneNumber($mobilePhoneNumber);
+		$this->mobilePhoneNumber = $mobilePhoneNumber;
+
+		return $this;
 	}
 
 	/**
@@ -372,7 +551,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getOrganizationName() {
-		return parent::getOrganizationName();
+		return $this->organizationName;
 	}
 
 	/**
@@ -382,7 +561,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setOrganizationName($organizationName) {
-		return parent::setOrganizationName($organizationName);
+		$this->organizationName = $organizationName;
+
+		return $this;
 	}
 
 	/**
@@ -393,7 +574,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getPhoneNumber() {
-		return parent::getPhoneNumber();
+		return $this->phoneNumber;
 	}
 
 	/**
@@ -403,7 +584,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setPhoneNumber($phoneNumber) {
-		return parent::setPhoneNumber($phoneNumber);
+		$this->phoneNumber = $phoneNumber;
+
+		return $this;
 	}
 
 	/**
@@ -414,7 +597,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getPostCode() {
-		return parent::getPostCode();
+		return $this->postCode;
 	}
 
 	/**
@@ -424,7 +607,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setPostCode($postCode) {
-		return parent::setPostCode($postCode);
+		$this->postCode = $postCode;
+
+		return $this;
 	}
 
 	/**
@@ -435,7 +620,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getPostalState() {
-		return parent::getPostalState();
+		return $this->postalState;
 	}
 
 	/**
@@ -445,7 +630,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setPostalState($postalState) {
-		return parent::setPostalState($postalState);
+		$this->postalState = $postalState;
+
+		return $this;
 	}
 
 	/**
@@ -456,7 +643,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getSalesTaxNumber() {
-		return parent::getSalesTaxNumber();
+		return $this->salesTaxNumber;
 	}
 
 	/**
@@ -466,7 +653,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setSalesTaxNumber($salesTaxNumber) {
-		return parent::setSalesTaxNumber($salesTaxNumber);
+		$this->salesTaxNumber = $salesTaxNumber;
+
+		return $this;
 	}
 
 	/**
@@ -477,7 +666,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getSalutation() {
-		return parent::getSalutation();
+		return $this->salutation;
 	}
 
 	/**
@@ -487,7 +676,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setSalutation($salutation) {
-		return parent::setSalutation($salutation);
+		$this->salutation = $salutation;
+
+		return $this;
 	}
 
 	/**
@@ -498,7 +689,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getSocialSecurityNumber() {
-		return parent::getSocialSecurityNumber();
+		return $this->socialSecurityNumber;
 	}
 
 	/**
@@ -508,7 +699,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setSocialSecurityNumber($socialSecurityNumber) {
-		return parent::setSocialSecurityNumber($socialSecurityNumber);
+		$this->socialSecurityNumber = $socialSecurityNumber;
+
+		return $this;
 	}
 
 	/**
@@ -519,7 +712,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getSortingCode() {
-		return parent::getSortingCode();
+		return $this->sortingCode;
 	}
 
 	/**
@@ -529,7 +722,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setSortingCode($sortingCode) {
-		return parent::setSortingCode($sortingCode);
+		$this->sortingCode = $sortingCode;
+
+		return $this;
 	}
 
 	/**
@@ -540,7 +735,7 @@ class AddressCreate extends Address  {
 	 * @return string
 	 */
 	public function getStreet() {
-		return parent::getStreet();
+		return $this->street;
 	}
 
 	/**
@@ -550,7 +745,9 @@ class AddressCreate extends Address  {
 	 * @return AddressCreate
 	 */
 	public function setStreet($street) {
-		return parent::setStreet($street);
+		$this->street = $street;
+
+		return $this;
 	}
 
 	/**
@@ -559,7 +756,6 @@ class AddressCreate extends Address  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 	}
 

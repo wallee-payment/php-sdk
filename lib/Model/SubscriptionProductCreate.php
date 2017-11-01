@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductCreate extends SubscriptionProductActive  {
+class SubscriptionProductCreate extends AbstractSubscriptionProductActive  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class SubscriptionProductCreate extends SubscriptionProductActive  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'reference' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +60,13 @@ class SubscriptionProductCreate extends SubscriptionProductActive  {
 	}
 
 	
+
+	/**
+	 * The product reference identifies the product for external systems. This field may contain the product's SKU.
+	 *
+	 * @var string
+	 */
+	private $reference;
 
 
 	/**
@@ -84,7 +91,7 @@ class SubscriptionProductCreate extends SubscriptionProductActive  {
 	 * @return string
 	 */
 	public function getReference() {
-		return parent::getReference();
+		return $this->reference;
 	}
 
 	/**
@@ -94,7 +101,9 @@ class SubscriptionProductCreate extends SubscriptionProductActive  {
 	 * @return SubscriptionProductCreate
 	 */
 	public function setReference($reference) {
-		return parent::setReference($reference);
+		$this->reference = $reference;
+
+		return $this;
 	}
 
 	/**

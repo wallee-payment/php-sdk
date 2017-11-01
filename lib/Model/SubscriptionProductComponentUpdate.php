@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
+class SubscriptionProductComponentUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,16 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int',
+		'componentChangeWeight' => 'int',
+		'componentGroup' => 'int',
+		'defaultComponent' => 'bool',
+		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+		'reference' => 'int',
+		'sortOrder' => 'int',
+		'taxClass' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +65,80 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
+	/**
+	 * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+	 *
+	 * @var int
+	 */
+	private $componentChangeWeight;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $componentGroup;
+
+	/**
+	 * When a component is marked as a 'default' component it is used when no other component is selected by the user.
+	 *
+	 * @var bool
+	 */
+	private $defaultComponent;
+
+	/**
+	 * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	private $description;
+
+	/**
+	 * The component name is shown to the subscriber. It should describe in few words what the component does contain.
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	private $name;
+
+	/**
+	 * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
+	 *
+	 * @var int
+	 */
+	private $reference;
+
+	/**
+	 * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+	 *
+	 * @var int
+	 */
+	private $sortOrder;
+
+	/**
+	 * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
+	 *
+	 * @var int
+	 */
+	private $taxClass;
 
 
 	/**
@@ -68,8 +147,12 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
+		if (isset($data['id']) && $data['id'] != null) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version']) && $data['version'] != null) {
+			$this->setVersion($data['version']);
+		}
 		if (isset($data['componentChangeWeight']) && $data['componentChangeWeight'] != null) {
 			$this->setComponentChangeWeight($data['componentChangeWeight']);
 		}
@@ -94,182 +177,8 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 		if (isset($data['taxClass']) && $data['taxClass'] != null) {
 			$this->setTaxClass($data['taxClass']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
-			$this->setId($data['id']);
-		}
-		if (isset($data['version']) && $data['version'] != null) {
-			$this->setVersion($data['version']);
-		}
 	}
 
-
-	/**
-	 * Returns componentChangeWeight.
-	 *
-	 * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
-	 *
-	 * @return int
-	 */
-	public function getComponentChangeWeight() {
-		return parent::getComponentChangeWeight();
-	}
-
-	/**
-	 * Sets componentChangeWeight.
-	 *
-	 * @param int $componentChangeWeight
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setComponentChangeWeight($componentChangeWeight) {
-		return parent::setComponentChangeWeight($componentChangeWeight);
-	}
-
-	/**
-	 * Returns componentGroup.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getComponentGroup() {
-		return parent::getComponentGroup();
-	}
-
-	/**
-	 * Sets componentGroup.
-	 *
-	 * @param int $componentGroup
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setComponentGroup($componentGroup) {
-		return parent::setComponentGroup($componentGroup);
-	}
-
-	/**
-	 * Returns defaultComponent.
-	 *
-	 * When a component is marked as a 'default' component it is used when no other component is selected by the user.
-	 *
-	 * @return bool
-	 */
-	public function getDefaultComponent() {
-		return parent::getDefaultComponent();
-	}
-
-	/**
-	 * Sets defaultComponent.
-	 *
-	 * @param bool $defaultComponent
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setDefaultComponent($defaultComponent) {
-		return parent::setDefaultComponent($defaultComponent);
-	}
-
-	/**
-	 * Returns description.
-	 *
-	 * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
-	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
-	 */
-	public function getDescription() {
-		return parent::getDescription();
-	}
-
-	/**
-	 * Sets description.
-	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setDescription($description) {
-		return parent::setDescription($description);
-	}
-
-	/**
-	 * Returns name.
-	 *
-	 * The component name is shown to the subscriber. It should describe in few words what the component does contain.
-	 *
-	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
-	 * Returns reference.
-	 *
-	 * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
-	 *
-	 * @return int
-	 */
-	public function getReference() {
-		return parent::getReference();
-	}
-
-	/**
-	 * Sets reference.
-	 *
-	 * @param int $reference
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setReference($reference) {
-		return parent::setReference($reference);
-	}
-
-	/**
-	 * Returns sortOrder.
-	 *
-	 * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
-	 *
-	 * @return int
-	 */
-	public function getSortOrder() {
-		return parent::getSortOrder();
-	}
-
-	/**
-	 * Sets sortOrder.
-	 *
-	 * @param int $sortOrder
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setSortOrder($sortOrder) {
-		return parent::setSortOrder($sortOrder);
-	}
-
-	/**
-	 * Returns taxClass.
-	 *
-	 * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
-	 *
-	 * @return int
-	 */
-	public function getTaxClass() {
-		return parent::getTaxClass();
-	}
-
-	/**
-	 * Sets taxClass.
-	 *
-	 * @param int $taxClass
-	 * @return SubscriptionProductComponentUpdate
-	 */
-	public function setTaxClass($taxClass) {
-		return parent::setTaxClass($taxClass);
-	}
 
 	/**
 	 * Returns id.
@@ -279,7 +188,7 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -289,7 +198,9 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -300,7 +211,7 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -310,7 +221,193 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @return SubscriptionProductComponentUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
+	}
+
+	/**
+	 * Returns componentChangeWeight.
+	 *
+	 * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+	 *
+	 * @return int
+	 */
+	public function getComponentChangeWeight() {
+		return $this->componentChangeWeight;
+	}
+
+	/**
+	 * Sets componentChangeWeight.
+	 *
+	 * @param int $componentChangeWeight
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setComponentChangeWeight($componentChangeWeight) {
+		$this->componentChangeWeight = $componentChangeWeight;
+
+		return $this;
+	}
+
+	/**
+	 * Returns componentGroup.
+	 *
+	 * 
+	 *
+	 * @return int
+	 */
+	public function getComponentGroup() {
+		return $this->componentGroup;
+	}
+
+	/**
+	 * Sets componentGroup.
+	 *
+	 * @param int $componentGroup
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setComponentGroup($componentGroup) {
+		$this->componentGroup = $componentGroup;
+
+		return $this;
+	}
+
+	/**
+	 * Returns defaultComponent.
+	 *
+	 * When a component is marked as a 'default' component it is used when no other component is selected by the user.
+	 *
+	 * @return bool
+	 */
+	public function getDefaultComponent() {
+		return $this->defaultComponent;
+	}
+
+	/**
+	 * Sets defaultComponent.
+	 *
+	 * @param bool $defaultComponent
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setDefaultComponent($defaultComponent) {
+		$this->defaultComponent = $defaultComponent;
+
+		return $this;
+	}
+
+	/**
+	 * Returns description.
+	 *
+	 * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * Sets description.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Returns name.
+	 *
+	 * The component name is shown to the subscriber. It should describe in few words what the component does contain.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * Sets name.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setName($name) {
+		$this->name = $name;
+
+		return $this;
+	}
+
+	/**
+	 * Returns reference.
+	 *
+	 * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
+	 *
+	 * @return int
+	 */
+	public function getReference() {
+		return $this->reference;
+	}
+
+	/**
+	 * Sets reference.
+	 *
+	 * @param int $reference
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setReference($reference) {
+		$this->reference = $reference;
+
+		return $this;
+	}
+
+	/**
+	 * Returns sortOrder.
+	 *
+	 * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+	 *
+	 * @return int
+	 */
+	public function getSortOrder() {
+		return $this->sortOrder;
+	}
+
+	/**
+	 * Sets sortOrder.
+	 *
+	 * @param int $sortOrder
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setSortOrder($sortOrder) {
+		$this->sortOrder = $sortOrder;
+
+		return $this;
+	}
+
+	/**
+	 * Returns taxClass.
+	 *
+	 * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
+	 *
+	 * @return int
+	 */
+	public function getTaxClass() {
+		return $this->taxClass;
+	}
+
+	/**
+	 * Sets taxClass.
+	 *
+	 * @param int $taxClass
+	 * @return SubscriptionProductComponentUpdate
+	 */
+	public function setTaxClass($taxClass) {
+		$this->taxClass = $taxClass;
+
+		return $this;
 	}
 
 	/**
@@ -319,7 +416,6 @@ class SubscriptionProductComponentUpdate extends SubscriptionProductComponent  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getId() === null) {
 			throw new ValidationException("'id' can't be null", 'id', $this);

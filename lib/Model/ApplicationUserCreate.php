@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class ApplicationUserCreate extends ApplicationUserUpdate  {
+class ApplicationUserCreate extends AbstractApplicationUserUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'primaryAccount' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +60,13 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	}
 
 	
+
+	/**
+	 * The account that this user is associated with. The account owner will be able to manage this user.
+	 *
+	 * @var int
+	 */
+	private $primaryAccount;
 
 
 	/**
@@ -84,7 +91,7 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	 * @return int
 	 */
 	public function getPrimaryAccount() {
-		return parent::getPrimaryAccount();
+		return $this->primaryAccount;
 	}
 
 	/**
@@ -94,7 +101,9 @@ class ApplicationUserCreate extends ApplicationUserUpdate  {
 	 * @return ApplicationUserCreate
 	 */
 	public function setPrimaryAccount($primaryAccount) {
-		return parent::setPrimaryAccount($primaryAccount);
+		$this->primaryAccount = $primaryAccount;
+
+		return $this;
 	}
 
 	/**

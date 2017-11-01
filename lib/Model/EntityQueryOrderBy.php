@@ -83,9 +83,6 @@ class EntityQueryOrderBy  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['fieldName']) && $data['fieldName'] != null) {
-			$this->setFieldName($data['fieldName']);
-		}
 		if (isset($data['sorting']) && $data['sorting'] != null) {
 			$this->setSorting($data['sorting']);
 		}
@@ -145,6 +142,12 @@ class EntityQueryOrderBy  {
 	 */
 	public function validate() {
 
+		if ($this->getFieldName() === null) {
+			throw new ValidationException("'fieldName' can't be null", 'fieldName', $this);
+		}
+		if ($this->getSorting() === null) {
+			throw new ValidationException("'sorting' can't be null", 'sorting', $this);
+		}
 	}
 
 	/**

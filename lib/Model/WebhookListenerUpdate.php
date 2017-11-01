@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class WebhookListenerUpdate extends WebhookListener  {
+class WebhookListenerUpdate extends AbstractWebhookListenerUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class WebhookListenerUpdate extends WebhookListener  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class WebhookListenerUpdate extends WebhookListener  {
 
 	
 
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
 
 	/**
 	 * Constructor.
@@ -70,9 +85,6 @@ class WebhookListenerUpdate extends WebhookListener  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['name']) && $data['name'] != null) {
-			$this->setName($data['name']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
@@ -83,27 +95,6 @@ class WebhookListenerUpdate extends WebhookListener  {
 
 
 	/**
-	 * Returns name.
-	 *
-	 * The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return WebhookListenerUpdate
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -111,7 +102,7 @@ class WebhookListenerUpdate extends WebhookListener  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -121,7 +112,9 @@ class WebhookListenerUpdate extends WebhookListener  {
 	 * @return WebhookListenerUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -132,7 +125,7 @@ class WebhookListenerUpdate extends WebhookListener  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -142,7 +135,9 @@ class WebhookListenerUpdate extends WebhookListener  {
 	 * @return WebhookListenerUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**

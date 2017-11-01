@@ -51,9 +51,16 @@ class ApiException extends Exception {
 	/**
 	 * The deserialized response object.
 	 *
-	 * @var $responseObject
+	 * @var mixed
 	 */
 	private $responseObject;
+	
+	/**
+	 * The log token.
+	 *
+	 * @var string
+	 */
+	private $logToken;
 
 	/**
 	 * Constructor.
@@ -64,11 +71,12 @@ class ApiException extends Exception {
 	 * @param mixed  $responseBody	the HTTP body of the server response either as Json or string
 	 * @param mixed  $responseObject  the deseralized response object
 	 */
-	public function __construct($message = "", $code = 0, $responseHeaders = null, $responseBody = null, $responseObject = null) {
-		parent::__construct($message, $code);
+	public function __construct($logToken = null, $message = "", $code = 0, $responseHeaders = null, $responseBody = null, $responseObject = null) {
+		parent::__construct(($logToken != null ? '[' . $logToken . '] ' : '') . $message, $code);
 		$this->responseHeaders = $responseHeaders;
 		$this->responseBody = $responseBody;
 		$this->responseObject = $responseObject;
+		$this->logToken = $logToken;
 	}
 
 	/**
@@ -96,6 +104,15 @@ class ApiException extends Exception {
 	 */
 	public function getResponseObject() {
 		return $this->responseObject;
+	}
+	
+	/**
+	 * Return the log token.
+	 *
+	 * @return string
+	 */
+	public function getLogToken() {
+		return $this->logToken;
 	}
 
 }

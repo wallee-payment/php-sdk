@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SpaceCreate extends SpaceUpdate  {
+class SpaceCreate extends AbstractSpaceUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,7 @@ class SpaceCreate extends SpaceUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'account' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -60,6 +60,13 @@ class SpaceCreate extends SpaceUpdate  {
 	}
 
 	
+
+	/**
+	 * The account to which the space belongs to.
+	 *
+	 * @var int
+	 */
+	private $account;
 
 
 	/**
@@ -73,9 +80,6 @@ class SpaceCreate extends SpaceUpdate  {
 		if (isset($data['account']) && $data['account'] != null) {
 			$this->setAccount($data['account']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
-			$this->setState($data['state']);
-		}
 	}
 
 
@@ -87,7 +91,7 @@ class SpaceCreate extends SpaceUpdate  {
 	 * @return int
 	 */
 	public function getAccount() {
-		return parent::getAccount();
+		return $this->account;
 	}
 
 	/**
@@ -97,28 +101,9 @@ class SpaceCreate extends SpaceUpdate  {
 	 * @return SpaceCreate
 	 */
 	public function setAccount($account) {
-		return parent::setAccount($account);
-	}
+		$this->account = $account;
 
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return parent::getState();
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \Wallee\Sdk\Model\CreationEntityState $state
-	 * @return SpaceCreate
-	 */
-	public function setState($state) {
-		return parent::setState($state);
+		return $this;
 	}
 
 	/**
@@ -131,9 +116,6 @@ class SpaceCreate extends SpaceUpdate  {
 
 		if ($this->getAccount() === null) {
 			throw new ValidationException("'account' can't be null", 'account', $this);
-		}
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
 		}
 	}
 

@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class TransactionCreate extends TransactionPending  {
+class TransactionCreate extends AbstractTransactionPending  {
 
 	/**
 	 * The original name of the model.
@@ -48,6 +48,10 @@ class TransactionCreate extends TransactionPending  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'autoConfirmationEnabled' => 'bool',
+		'chargeRetryEnabled' => 'bool',
+		'customersPresence' => '\Wallee\Sdk\Model\CustomersPresence',
+		'spaceViewId' => 'int',
 	);
 
 	/**
@@ -61,6 +65,34 @@ class TransactionCreate extends TransactionPending  {
 
 	
 
+	/**
+	 * When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+	 *
+	 * @var bool
+	 */
+	private $autoConfirmationEnabled;
+
+	/**
+	 * When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
+	 *
+	 * @var bool
+	 */
+	private $chargeRetryEnabled;
+
+	/**
+	 * The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+	 *
+	 * @var \Wallee\Sdk\Model\CustomersPresence
+	 */
+	private $customersPresence;
+
+	/**
+	 * 
+	 *
+	 * @var int
+	 */
+	private $spaceViewId;
+
 
 	/**
 	 * Constructor.
@@ -70,6 +102,9 @@ class TransactionCreate extends TransactionPending  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
+		if (isset($data['autoConfirmationEnabled']) && $data['autoConfirmationEnabled'] != null) {
+			$this->setAutoConfirmationEnabled($data['autoConfirmationEnabled']);
+		}
 		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
@@ -93,6 +128,29 @@ class TransactionCreate extends TransactionPending  {
 		}
 	}
 
+
+	/**
+	 * Returns autoConfirmationEnabled.
+	 *
+	 * When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+	 *
+	 * @return bool
+	 */
+	public function getAutoConfirmationEnabled() {
+		return $this->autoConfirmationEnabled;
+	}
+
+	/**
+	 * Sets autoConfirmationEnabled.
+	 *
+	 * @param bool $autoConfirmationEnabled
+	 * @return TransactionCreate
+	 */
+	public function setAutoConfirmationEnabled($autoConfirmationEnabled) {
+		$this->autoConfirmationEnabled = $autoConfirmationEnabled;
+
+		return $this;
+	}
 
 	/**
 	 * Returns billingAddress.
@@ -123,7 +181,7 @@ class TransactionCreate extends TransactionPending  {
 	 * @return bool
 	 */
 	public function getChargeRetryEnabled() {
-		return parent::getChargeRetryEnabled();
+		return $this->chargeRetryEnabled;
 	}
 
 	/**
@@ -133,18 +191,20 @@ class TransactionCreate extends TransactionPending  {
 	 * @return TransactionCreate
 	 */
 	public function setChargeRetryEnabled($chargeRetryEnabled) {
-		return parent::setChargeRetryEnabled($chargeRetryEnabled);
+		$this->chargeRetryEnabled = $chargeRetryEnabled;
+
+		return $this;
 	}
 
 	/**
 	 * Returns customersPresence.
 	 *
-	 * 
+	 * The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
 	 *
 	 * @return \Wallee\Sdk\Model\CustomersPresence
 	 */
 	public function getCustomersPresence() {
-		return parent::getCustomersPresence();
+		return $this->customersPresence;
 	}
 
 	/**
@@ -154,7 +214,9 @@ class TransactionCreate extends TransactionPending  {
 	 * @return TransactionCreate
 	 */
 	public function setCustomersPresence($customersPresence) {
-		return parent::setCustomersPresence($customersPresence);
+		$this->customersPresence = $customersPresence;
+
+		return $this;
 	}
 
 	/**
@@ -207,7 +269,7 @@ class TransactionCreate extends TransactionPending  {
 	 * @return int
 	 */
 	public function getSpaceViewId() {
-		return parent::getSpaceViewId();
+		return $this->spaceViewId;
 	}
 
 	/**
@@ -217,7 +279,9 @@ class TransactionCreate extends TransactionPending  {
 	 * @return TransactionCreate
 	 */
 	public function setSpaceViewId($spaceViewId) {
-		return parent::setSpaceViewId($spaceViewId);
+		$this->spaceViewId = $spaceViewId;
+
+		return $this;
 	}
 
 	/**
@@ -249,9 +313,6 @@ class TransactionCreate extends TransactionPending  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getCustomersPresence() === null) {
-			throw new ValidationException("'customersPresence' can't be null", 'customersPresence', $this);
-		}
 		if ($this->getLineItems() === null) {
 			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
 		}

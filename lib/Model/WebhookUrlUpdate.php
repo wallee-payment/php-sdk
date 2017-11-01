@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class WebhookUrlUpdate extends WebhookUrl  {
+class WebhookUrlUpdate extends AbstractWebhookUrlUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class WebhookUrlUpdate extends WebhookUrl  {
 
 	
 
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
 
 	/**
 	 * Constructor.
@@ -70,12 +85,6 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['name']) && $data['name'] != null) {
-			$this->setName($data['name']);
-		}
-		if (isset($data['url']) && $data['url'] != null) {
-			$this->setUrl($data['url']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
@@ -86,48 +95,6 @@ class WebhookUrlUpdate extends WebhookUrl  {
 
 
 	/**
-	 * Returns name.
-	 *
-	 * The URL name is used internally to identify the URL in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return parent::getName();
-	}
-
-	/**
-	 * Sets name.
-	 *
-	 * @param string $name
-	 * @return WebhookUrlUpdate
-	 */
-	public function setName($name) {
-		return parent::setName($name);
-	}
-
-	/**
-	 * Returns url.
-	 *
-	 * The URL to which the HTTP requests are sent to. An example URL could look like https://www.example.com/some/path?some-query-parameter=value.
-	 *
-	 * @return string
-	 */
-	public function getUrl() {
-		return parent::getUrl();
-	}
-
-	/**
-	 * Sets url.
-	 *
-	 * @param string $url
-	 * @return WebhookUrlUpdate
-	 */
-	public function setUrl($url) {
-		return parent::setUrl($url);
-	}
-
-	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -135,7 +102,7 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -145,7 +112,9 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	 * @return WebhookUrlUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -156,7 +125,7 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -166,7 +135,9 @@ class WebhookUrlUpdate extends WebhookUrl  {
 	 * @return WebhookUrlUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**

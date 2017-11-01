@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionChargeCreate extends SubscriptionCharge  {
+class SubscriptionChargeCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,13 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'externalId' => 'string',
+		'failedUrl' => 'string',
+		'plannedExecutionDate' => '\DateTime',
+		'processingType' => '\Wallee\Sdk\Model\SubscriptionChargeProcessingType',
+		'reference' => 'string',
+		'subscription' => 'int',
+		'successUrl' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +62,59 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+	 *
+	 * @var string
+	 */
+	private $failedUrl;
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $plannedExecutionDate;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\SubscriptionChargeProcessingType
+	 */
+	private $processingType;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $reference;
+
+	/**
+	 * The field subscription indicates the subscription to which the charge belongs to.
+	 *
+	 * @var int
+	 */
+	private $subscription;
+
+	/**
+	 * The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+	 *
+	 * @var string
+	 */
+	private $successUrl;
 
 
 	/**
@@ -68,8 +123,6 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['externalId']) && $data['externalId'] != null) {
 			$this->setExternalId($data['externalId']);
 		}
@@ -102,7 +155,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -112,7 +165,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -123,7 +178,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return string
 	 */
 	public function getFailedUrl() {
-		return parent::getFailedUrl();
+		return $this->failedUrl;
 	}
 
 	/**
@@ -133,7 +188,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setFailedUrl($failedUrl) {
-		return parent::setFailedUrl($failedUrl);
+		$this->failedUrl = $failedUrl;
+
+		return $this;
 	}
 
 	/**
@@ -144,7 +201,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return \DateTime
 	 */
 	public function getPlannedExecutionDate() {
-		return parent::getPlannedExecutionDate();
+		return $this->plannedExecutionDate;
 	}
 
 	/**
@@ -154,7 +211,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setPlannedExecutionDate($plannedExecutionDate) {
-		return parent::setPlannedExecutionDate($plannedExecutionDate);
+		$this->plannedExecutionDate = $plannedExecutionDate;
+
+		return $this;
 	}
 
 	/**
@@ -165,7 +224,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return \Wallee\Sdk\Model\SubscriptionChargeProcessingType
 	 */
 	public function getProcessingType() {
-		return parent::getProcessingType();
+		return $this->processingType;
 	}
 
 	/**
@@ -175,7 +234,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setProcessingType($processingType) {
-		return parent::setProcessingType($processingType);
+		$this->processingType = $processingType;
+
+		return $this;
 	}
 
 	/**
@@ -186,7 +247,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return string
 	 */
 	public function getReference() {
-		return parent::getReference();
+		return $this->reference;
 	}
 
 	/**
@@ -196,7 +257,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setReference($reference) {
-		return parent::setReference($reference);
+		$this->reference = $reference;
+
+		return $this;
 	}
 
 	/**
@@ -207,7 +270,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return int
 	 */
 	public function getSubscription() {
-		return parent::getSubscription();
+		return $this->subscription;
 	}
 
 	/**
@@ -217,7 +280,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setSubscription($subscription) {
-		return parent::setSubscription($subscription);
+		$this->subscription = $subscription;
+
+		return $this;
 	}
 
 	/**
@@ -228,7 +293,7 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return string
 	 */
 	public function getSuccessUrl() {
-		return parent::getSuccessUrl();
+		return $this->successUrl;
 	}
 
 	/**
@@ -238,7 +303,9 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @return SubscriptionChargeCreate
 	 */
 	public function setSuccessUrl($successUrl) {
-		return parent::setSuccessUrl($successUrl);
+		$this->successUrl = $successUrl;
+
+		return $this;
 	}
 
 	/**
@@ -247,7 +314,6 @@ class SubscriptionChargeCreate extends SubscriptionCharge  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);

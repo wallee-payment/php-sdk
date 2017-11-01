@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class WebhookUrlCreate extends WebhookUrlUpdate  {
+class WebhookUrlCreate extends AbstractWebhookUrlUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -70,32 +70,8 @@ class WebhookUrlCreate extends WebhookUrlUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['state']) && $data['state'] != null) {
-			$this->setState($data['state']);
-		}
 	}
 
-
-	/**
-	 * Returns state.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\CreationEntityState
-	 */
-	public function getState() {
-		return parent::getState();
-	}
-
-	/**
-	 * Sets state.
-	 *
-	 * @param \Wallee\Sdk\Model\CreationEntityState $state
-	 * @return WebhookUrlCreate
-	 */
-	public function setState($state) {
-		return parent::setState($state);
-	}
 
 	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
@@ -105,9 +81,6 @@ class WebhookUrlCreate extends WebhookUrlUpdate  {
 	public function validate() {
 		parent::validate();
 
-		if ($this->getState() === null) {
-			throw new ValidationException("'state' can't be null", 'state', $this);
-		}
 	}
 
 	/**

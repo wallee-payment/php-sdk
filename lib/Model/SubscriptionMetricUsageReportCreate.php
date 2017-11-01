@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport  {
+class SubscriptionMetricUsageReportCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,11 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'consumedUnits' => 'float',
+		'description' => 'string',
+		'externalId' => 'string',
+		'metric' => 'int',
+		'subscription' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +60,45 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
+	 *
+	 * @var float
+	 */
+	private $consumedUnits;
+
+	/**
+	 * The metric usage report description describe the reported usage. This description may be shown to the end user.
+	 *
+	 * @var string
+	 */
+	private $description;
+
+	/**
+	 * The external id identifies the metric usage uniquely.
+	 *
+	 * @var string
+	 */
+	private $externalId;
+
+	/**
+	 * The metric usage report is linked to the metric for which the usage should be recorded.
+	 *
+	 * @var int
+	 */
+	private $metric;
+
+	/**
+	 * The subscription to which the usage is added to.
+	 *
+	 * @var int
+	 */
+	private $subscription;
 
 
 	/**
@@ -68,8 +107,6 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['consumedUnits']) && $data['consumedUnits'] != null) {
 			$this->setConsumedUnits($data['consumedUnits']);
 		}
@@ -96,7 +133,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return float
 	 */
 	public function getConsumedUnits() {
-		return parent::getConsumedUnits();
+		return $this->consumedUnits;
 	}
 
 	/**
@@ -106,7 +143,9 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setConsumedUnits($consumedUnits) {
-		return parent::setConsumedUnits($consumedUnits);
+		$this->consumedUnits = $consumedUnits;
+
+		return $this;
 	}
 
 	/**
@@ -117,7 +156,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return string
 	 */
 	public function getDescription() {
-		return parent::getDescription();
+		return $this->description;
 	}
 
 	/**
@@ -127,7 +166,9 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setDescription($description) {
-		return parent::setDescription($description);
+		$this->description = $description;
+
+		return $this;
 	}
 
 	/**
@@ -138,7 +179,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return string
 	 */
 	public function getExternalId() {
-		return parent::getExternalId();
+		return $this->externalId;
 	}
 
 	/**
@@ -148,7 +189,9 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setExternalId($externalId) {
-		return parent::setExternalId($externalId);
+		$this->externalId = $externalId;
+
+		return $this;
 	}
 
 	/**
@@ -159,7 +202,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return int
 	 */
 	public function getMetric() {
-		return parent::getMetric();
+		return $this->metric;
 	}
 
 	/**
@@ -169,7 +212,9 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setMetric($metric) {
-		return parent::setMetric($metric);
+		$this->metric = $metric;
+
+		return $this;
 	}
 
 	/**
@@ -180,7 +225,7 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return int
 	 */
 	public function getSubscription() {
-		return parent::getSubscription();
+		return $this->subscription;
 	}
 
 	/**
@@ -190,7 +235,9 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @return SubscriptionMetricUsageReportCreate
 	 */
 	public function setSubscription($subscription) {
-		return parent::setSubscription($subscription);
+		$this->subscription = $subscription;
+
+		return $this;
 	}
 
 	/**
@@ -199,7 +246,6 @@ class SubscriptionMetricUsageReportCreate extends SubscriptionMetricUsageReport 
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
 		if ($this->getConsumedUnits() === null) {
 			throw new ValidationException("'consumedUnits' can't be null", 'consumedUnits', $this);

@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class LineItemAttributeCreate extends LineItemAttribute  {
+class LineItemAttributeCreate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'label' => 'string',
+		'value' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +57,24 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $label;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $value;
 
 
 	/**
@@ -68,8 +83,6 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
 		if (isset($data['label']) && $data['label'] != null) {
 			$this->setLabel($data['label']);
 		}
@@ -87,7 +100,7 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @return string
 	 */
 	public function getLabel() {
-		return parent::getLabel();
+		return $this->label;
 	}
 
 	/**
@@ -97,7 +110,9 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @return LineItemAttributeCreate
 	 */
 	public function setLabel($label) {
-		return parent::setLabel($label);
+		$this->label = $label;
+
+		return $this;
 	}
 
 	/**
@@ -108,7 +123,7 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @return string
 	 */
 	public function getValue() {
-		return parent::getValue();
+		return $this->value;
 	}
 
 	/**
@@ -118,7 +133,9 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @return LineItemAttributeCreate
 	 */
 	public function setValue($value) {
-		return parent::setValue($value);
+		$this->value = $value;
+
+		return $this;
 	}
 
 	/**
@@ -127,8 +144,13 @@ class LineItemAttributeCreate extends LineItemAttribute  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
+		if ($this->getLabel() === null) {
+			throw new ValidationException("'label' can't be null", 'label', $this);
+		}
+		if ($this->getValue() === null) {
+			throw new ValidationException("'value' can't be null", 'value', $this);
+		}
 	}
 
 	/**

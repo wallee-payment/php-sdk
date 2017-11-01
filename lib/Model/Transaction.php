@@ -52,7 +52,9 @@ class Transaction  {
 		'allowedPaymentMethodBrands' => '\Wallee\Sdk\Model\PaymentMethodBrand[]',
 		'allowedPaymentMethodConfigurations' => 'int[]',
 		'authorizationAmount' => 'float',
+		'authorizationTimeoutOn' => '\DateTime',
 		'authorizedOn' => '\DateTime',
+		'autoConfirmationEnabled' => 'bool',
 		'billingAddress' => '\Wallee\Sdk\Model\Address',
 		'chargeRetryEnabled' => 'bool',
 		'completedOn' => '\DateTime',
@@ -68,6 +70,7 @@ class Transaction  {
 		'endOfLife' => '\DateTime',
 		'failedOn' => '\DateTime',
 		'failedUrl' => 'string',
+		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
 		'group' => '\Wallee\Sdk\Model\TransactionGroup',
 		'id' => 'int',
 		'internetProtocolAddress' => 'string',
@@ -87,8 +90,10 @@ class Transaction  {
 		'spaceViewId' => 'int',
 		'state' => '\Wallee\Sdk\Model\TransactionState',
 		'successUrl' => 'string',
+		'timeZone' => 'string',
 		'token' => '\Wallee\Sdk\Model\Token',
 		'userAgentHeader' => 'string',
+		'userFailureMessage' => 'string',
 		'userInterfaceType' => '\Wallee\Sdk\Model\TransactionUserInterfaceType',
 		'version' => 'int'	);
 
@@ -132,11 +137,25 @@ class Transaction  {
 	private $authorizationAmount;
 
 	/**
+	 * This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
+	 *
+	 * @var \DateTime
+	 */
+	private $authorizationTimeoutOn;
+
+	/**
 	 * 
 	 *
 	 * @var \DateTime
 	 */
 	private $authorizedOn;
+
+	/**
+	 * When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+	 *
+	 * @var bool
+	 */
+	private $autoConfirmationEnabled;
 
 	/**
 	 * 
@@ -202,7 +221,7 @@ class Transaction  {
 	private $currency;
 
 	/**
-	 * The customer email address is the email address of the customer. If no email address is used provided on the shipping or billing address this address is used.
+	 * The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
 	 *
 	 * @var string
 	 */
@@ -216,7 +235,7 @@ class Transaction  {
 	private $customerId;
 
 	/**
-	 * 
+	 * The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
 	 *
 	 * @var \Wallee\Sdk\Model\CustomersPresence
 	 */
@@ -242,6 +261,13 @@ class Transaction  {
 	 * @var string
 	 */
 	private $failedUrl;
+
+	/**
+	 * The failure reason describes why the transaction failed. This is only provided when the transaction is marked as failed.
+	 *
+	 * @var \Wallee\Sdk\Model\FailureReason
+	 */
+	private $failureReason;
 
 	/**
 	 * 
@@ -377,6 +403,13 @@ class Transaction  {
 	private $successUrl;
 
 	/**
+	 * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+	 *
+	 * @var string
+	 */
+	private $timeZone;
+
+	/**
 	 * 
 	 *
 	 * @var \Wallee\Sdk\Model\Token
@@ -389,6 +422,13 @@ class Transaction  {
 	 * @var string
 	 */
 	private $userAgentHeader;
+
+	/**
+	 * The failure message describes for an end user why the transaction is failed in the language of the user. This is only provided when the transaction is marked as failed.
+	 *
+	 * @var string
+	 */
+	private $userFailureMessage;
 
 	/**
 	 * The user interface type defines through which user interface the transaction has been processed resp. created.
@@ -422,6 +462,9 @@ class Transaction  {
 		}
 		if (isset($data['customersPresence']) && $data['customersPresence'] != null) {
 			$this->setCustomersPresence($data['customersPresence']);
+		}
+		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+			$this->setFailureReason($data['failureReason']);
 		}
 		if (isset($data['group']) && $data['group'] != null) {
 			$this->setGroup($data['group']);
@@ -549,6 +592,29 @@ class Transaction  {
 	}
 
 	/**
+	 * Returns authorizationTimeoutOn.
+	 *
+	 * This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
+	 *
+	 * @return \DateTime
+	 */
+	public function getAuthorizationTimeoutOn() {
+		return $this->authorizationTimeoutOn;
+	}
+
+	/**
+	 * Sets authorizationTimeoutOn.
+	 *
+	 * @param \DateTime $authorizationTimeoutOn
+	 * @return Transaction
+	 */
+	protected function setAuthorizationTimeoutOn($authorizationTimeoutOn) {
+		$this->authorizationTimeoutOn = $authorizationTimeoutOn;
+
+		return $this;
+	}
+
+	/**
 	 * Returns authorizedOn.
 	 *
 	 * 
@@ -567,6 +633,29 @@ class Transaction  {
 	 */
 	protected function setAuthorizedOn($authorizedOn) {
 		$this->authorizedOn = $authorizedOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns autoConfirmationEnabled.
+	 *
+	 * When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+	 *
+	 * @return bool
+	 */
+	public function getAutoConfirmationEnabled() {
+		return $this->autoConfirmationEnabled;
+	}
+
+	/**
+	 * Sets autoConfirmationEnabled.
+	 *
+	 * @param bool $autoConfirmationEnabled
+	 * @return Transaction
+	 */
+	protected function setAutoConfirmationEnabled($autoConfirmationEnabled) {
+		$this->autoConfirmationEnabled = $autoConfirmationEnabled;
 
 		return $this;
 	}
@@ -781,7 +870,7 @@ class Transaction  {
 	/**
 	 * Returns customerEmailAddress.
 	 *
-	 * The customer email address is the email address of the customer. If no email address is used provided on the shipping or billing address this address is used.
+	 * The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
 	 *
 	 * @return string
 	 */
@@ -827,7 +916,7 @@ class Transaction  {
 	/**
 	 * Returns customersPresence.
 	 *
-	 * 
+	 * The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
 	 *
 	 * @return \Wallee\Sdk\Model\CustomersPresence
 	 */
@@ -912,6 +1001,29 @@ class Transaction  {
 	 */
 	protected function setFailedUrl($failedUrl) {
 		$this->failedUrl = $failedUrl;
+
+		return $this;
+	}
+
+	/**
+	 * Returns failureReason.
+	 *
+	 * The failure reason describes why the transaction failed. This is only provided when the transaction is marked as failed.
+	 *
+	 * @return \Wallee\Sdk\Model\FailureReason
+	 */
+	public function getFailureReason() {
+		return $this->failureReason;
+	}
+
+	/**
+	 * Sets failureReason.
+	 *
+	 * @param \Wallee\Sdk\Model\FailureReason $failureReason
+	 * @return Transaction
+	 */
+	public function setFailureReason($failureReason) {
+		$this->failureReason = $failureReason;
 
 		return $this;
 	}
@@ -1354,6 +1466,29 @@ class Transaction  {
 	}
 
 	/**
+	 * Returns timeZone.
+	 *
+	 * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+	 *
+	 * @return string
+	 */
+	public function getTimeZone() {
+		return $this->timeZone;
+	}
+
+	/**
+	 * Sets timeZone.
+	 *
+	 * @param string $timeZone
+	 * @return Transaction
+	 */
+	protected function setTimeZone($timeZone) {
+		$this->timeZone = $timeZone;
+
+		return $this;
+	}
+
+	/**
 	 * Returns token.
 	 *
 	 * 
@@ -1395,6 +1530,29 @@ class Transaction  {
 	 */
 	protected function setUserAgentHeader($userAgentHeader) {
 		$this->userAgentHeader = $userAgentHeader;
+
+		return $this;
+	}
+
+	/**
+	 * Returns userFailureMessage.
+	 *
+	 * The failure message describes for an end user why the transaction is failed in the language of the user. This is only provided when the transaction is marked as failed.
+	 *
+	 * @return string
+	 */
+	public function getUserFailureMessage() {
+		return $this->userFailureMessage;
+	}
+
+	/**
+	 * Sets userFailureMessage.
+	 *
+	 * @param string $userFailureMessage
+	 * @return Transaction
+	 */
+	protected function setUserFailureMessage($userFailureMessage) {
+		$this->userFailureMessage = $userFailureMessage;
 
 		return $this;
 	}

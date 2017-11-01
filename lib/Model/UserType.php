@@ -36,6 +36,7 @@ namespace Wallee\Sdk\Model;
 class UserType implements IEnum {
 
 	const HUMAN_USER = 'HUMAN_USER';
+	const SINGLE_SIGNON_USER = 'SINGLE_SIGNON_USER';
 	const APPLICATION_USER = 'APPLICATION_USER';
 	const ANONYMOUS_USER = 'ANONYMOUS_USER';
 	const SERVER_USER = 'SERVER_USER';

@@ -33,7 +33,7 @@ use Wallee\Sdk\ValidationException;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class TokenUpdate extends Token  {
+class TokenUpdate extends AbstractTokenUpdate  {
 
 	/**
 	 * The original name of the model.
@@ -48,7 +48,8 @@ class TokenUpdate extends Token  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -61,6 +62,20 @@ class TokenUpdate extends Token  {
 
 	
 
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
+
 
 	/**
 	 * Constructor.
@@ -70,21 +85,6 @@ class TokenUpdate extends Token  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['customerEmailAddress']) && $data['customerEmailAddress'] != null) {
-			$this->setCustomerEmailAddress($data['customerEmailAddress']);
-		}
-		if (isset($data['customerId']) && $data['customerId'] != null) {
-			$this->setCustomerId($data['customerId']);
-		}
-		if (isset($data['enabledForOneClickPayment']) && $data['enabledForOneClickPayment'] != null) {
-			$this->setEnabledForOneClickPayment($data['enabledForOneClickPayment']);
-		}
-		if (isset($data['language']) && $data['language'] != null) {
-			$this->setLanguage($data['language']);
-		}
-		if (isset($data['tokenReference']) && $data['tokenReference'] != null) {
-			$this->setTokenReference($data['tokenReference']);
-		}
 		if (isset($data['id']) && $data['id'] != null) {
 			$this->setId($data['id']);
 		}
@@ -95,111 +95,6 @@ class TokenUpdate extends Token  {
 
 
 	/**
-	 * Returns customerEmailAddress.
-	 *
-	 * The customer email address is the email address of the customer.
-	 *
-	 * @return string
-	 */
-	public function getCustomerEmailAddress() {
-		return parent::getCustomerEmailAddress();
-	}
-
-	/**
-	 * Sets customerEmailAddress.
-	 *
-	 * @param string $customerEmailAddress
-	 * @return TokenUpdate
-	 */
-	public function setCustomerEmailAddress($customerEmailAddress) {
-		return parent::setCustomerEmailAddress($customerEmailAddress);
-	}
-
-	/**
-	 * Returns customerId.
-	 *
-	 * The customer ID identifies the customer in the merchant system. In case the customer ID has been provided it has to correspond with the customer ID provided on the transaction. The customer ID will not be changed automatically. The merchant system has to provide it.
-	 *
-	 * @return string
-	 */
-	public function getCustomerId() {
-		return parent::getCustomerId();
-	}
-
-	/**
-	 * Sets customerId.
-	 *
-	 * @param string $customerId
-	 * @return TokenUpdate
-	 */
-	public function setCustomerId($customerId) {
-		return parent::setCustomerId($customerId);
-	}
-
-	/**
-	 * Returns enabledForOneClickPayment.
-	 *
-	 * When a token is enabled for one-click payments the buyer will be able to select the token within the iFrame or on the payment page to pay with the token. The usage of the token will reduce the number of steps the buyer has to go through. The buyer is linked via the customer ID on the transaction with the token. Means the token will be visible for buyers with the same customer ID. Additionally the payment method has to be configured to allow the one-click payments.
-	 *
-	 * @return bool
-	 */
-	public function getEnabledForOneClickPayment() {
-		return parent::getEnabledForOneClickPayment();
-	}
-
-	/**
-	 * Sets enabledForOneClickPayment.
-	 *
-	 * @param bool $enabledForOneClickPayment
-	 * @return TokenUpdate
-	 */
-	public function setEnabledForOneClickPayment($enabledForOneClickPayment) {
-		return parent::setEnabledForOneClickPayment($enabledForOneClickPayment);
-	}
-
-	/**
-	 * Returns language.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getLanguage() {
-		return parent::getLanguage();
-	}
-
-	/**
-	 * Sets language.
-	 *
-	 * @param string $language
-	 * @return TokenUpdate
-	 */
-	public function setLanguage($language) {
-		return parent::setLanguage($language);
-	}
-
-	/**
-	 * Returns tokenReference.
-	 *
-	 * Use something that it is easy to identify and may help you find the token (e.g. customer id, email address).
-	 *
-	 * @return string
-	 */
-	public function getTokenReference() {
-		return parent::getTokenReference();
-	}
-
-	/**
-	 * Sets tokenReference.
-	 *
-	 * @param string $tokenReference
-	 * @return TokenUpdate
-	 */
-	public function setTokenReference($tokenReference) {
-		return parent::setTokenReference($tokenReference);
-	}
-
-	/**
 	 * Returns id.
 	 *
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -207,7 +102,7 @@ class TokenUpdate extends Token  {
 	 * @return int
 	 */
 	public function getId() {
-		return parent::getId();
+		return $this->id;
 	}
 
 	/**
@@ -217,7 +112,9 @@ class TokenUpdate extends Token  {
 	 * @return TokenUpdate
 	 */
 	public function setId($id) {
-		return parent::setId($id);
+		$this->id = $id;
+
+		return $this;
 	}
 
 	/**
@@ -228,7 +125,7 @@ class TokenUpdate extends Token  {
 	 * @return int
 	 */
 	public function getVersion() {
-		return parent::getVersion();
+		return $this->version;
 	}
 
 	/**
@@ -238,7 +135,9 @@ class TokenUpdate extends Token  {
 	 * @return TokenUpdate
 	 */
 	public function setVersion($version) {
-		return parent::setVersion($version);
+		$this->version = $version;
+
+		return $this;
 	}
 
 	/**

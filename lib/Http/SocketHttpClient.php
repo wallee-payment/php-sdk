@@ -48,7 +48,7 @@ final class SocketHttpClient implements IHttpClient {
 	public function send(ApiClient $apiClient, HttpRequest $request) {
 		$this->resetStartTime();
 		$socket = $this->startStreamSocket($apiClient, $request);
-		$responseMessage = $this->readFromSocket($apiClient, $socket);
+		$responseMessage = $this->readFromSocket($apiClient, $request, $socket);
 		fclose($socket);
 
 		// debug HTTP response
@@ -58,7 +58,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		if (empty($responseMessage)) {
 			throw new ConnectionException($request->getUrl(),
-					"The server responded with an empty response (no HTTP header and no HTTP body).");
+					'[' . $request->getLogToken() . '] The server responded with an empty response (no HTTP header and no HTTP body).');
 		}
 
 		return new HttpResponse($responseMessage);
@@ -71,11 +71,12 @@ final class SocketHttpClient implements IHttpClient {
 	 * chunks, the connection can be closed earlier after the last chunk.
 	 *
 	 * @param ApiClient $apiClient the API client instance
+	 * @param HttpRequest $request the HTTP request
 	 * @param resource $socket the socket
 	 * @throws ConnectionException
 	 * @return string
 	 */
-	private function readFromSocket($apiClient, $socket) {
+	private function readFromSocket(ApiClient $apiClient, HttpRequest $request, $socket) {
 		$inBody = false;
 		$responseMessage = '';
 		$chunked = false;
@@ -85,7 +86,7 @@ final class SocketHttpClient implements IHttpClient {
 		$endReached = false;
 		while ($maxTime > time() && !feof($socket) && !$endReached) {
 			if ($inBody === false) {
-				$line = $this->readLineFromSocket($apiClient, $socket, 2048);
+				$line = $this->readLineFromSocket($apiClient, $request, $socket, 2048);
 				if ($line == "\r\n") {
 					$inBody = true;
 				}
@@ -111,7 +112,7 @@ final class SocketHttpClient implements IHttpClient {
 					if ($contentLength > 0) {
 						$readBytes = $contentLength;
 					}
-					$tmp = $this->readContentFromSocket($apiClient, $socket, $readBytes);
+					$tmp = $this->readContentFromSocket($apiClient, $request, $socket, $readBytes);
 					$responseMessage .= $tmp;
 					if (strlen($tmp) == $readBytes) {
 						$endReached = true;
@@ -130,7 +131,7 @@ final class SocketHttpClient implements IHttpClient {
 
 					// We have to read the chunk, when it is greater than zero. The last one is always 0.
 					else if ($chunkLength > 0) {
-						$responseMessage .= $this->readContentFromSocket($apiClient, $socket, $chunkLength);
+						$responseMessage .= $this->readContentFromSocket($apiClient, $request, $socket, $chunkLength);
 
 						// We skip the next line break.
 						fseek($socket, 2, SEEK_CUR);
@@ -151,7 +152,7 @@ final class SocketHttpClient implements IHttpClient {
 		}
 		else {
 			throw new ConnectionException(null,
-					"The remote server did not respond within '" . $apiClient->getConnectionTimeout() . "' seconds.");
+					'[' . $request->getLogToken() . '] The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
 	}
 
@@ -161,12 +162,13 @@ final class SocketHttpClient implements IHttpClient {
 	 * We need this method because neither fread nor stream_get_contents do respect timeouts.
 	 *
 	 * @param ApiClient $apiClient the API client instance
+	 * @param HttpRequest $request the HTTP request
 	 * @param resource $socket the socket from which should be read
 	 * @param int $maxNumberOfBytes the number of bytes to read
 	 * @throws ConnectionException
 	 * @return string
 	 */
-	private function readContentFromSocket($apiClient, $socket, $maxNumberOfBytes) {
+	private function readContentFromSocket(ApiClient $apiClient, HttpRequest $request, $socket, $maxNumberOfBytes) {
 		stream_set_blocking($socket, false);
 		$maxTime = $this->getStartTime() + $apiClient->getConnectionTimeout();
 		$numberOfBytesRead = 0;
@@ -190,7 +192,7 @@ final class SocketHttpClient implements IHttpClient {
 		}
 		else {
 			throw new ConnectionException(null,
-				"The remote server did not respond within '" . $apiClient->getConnectionTimeout() . "' seconds.");
+				'[' . $request->getLogToken() . '] The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
 	}
 
@@ -199,12 +201,13 @@ final class SocketHttpClient implements IHttpClient {
 	 * configured.
 	 *
 	 * @param ApiClient $apiClient the API client instance
+	 * @param HttpRequest $request the HTTP request
 	 * @param resource $socket the socket from which should be read
 	 * @param int $maxNumberOfBytes the number of bytes to read
 	 * @throws ConnectionException
 	 * @return string
 	 */
-	private function readLineFromSocket($apiClient, $socket, $maxNumberOfBytes) {
+	private function readLineFromSocket(ApiClient $apiClient, HttpRequest $request, $socket, $maxNumberOfBytes) {
 		stream_set_blocking($socket, false);
 		$maxTime = $this->getStartTime() + $apiClient->getConnectionTimeout();
 		$result = false;
@@ -225,7 +228,7 @@ final class SocketHttpClient implements IHttpClient {
 		}
 		else {
 			throw new ConnectionException(null,
-					"The remote server did not respond within '" . $apiClient->getConnectionTimeout() . "' seconds.");
+					'[' . $request->getLogToken() . '] The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
 	}
 
@@ -250,7 +253,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		$result = fwrite($socket, $message);
 		if ($result == false) {
-			throw new ConnectionException($request->getUrl(), 'Could not send the message to the server.');
+			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] Could not send the message to the server.');
 		}
 		return $socket;
 	}
@@ -307,12 +310,12 @@ final class SocketHttpClient implements IHttpClient {
 				$this->createStreamContext($apiClient, $request));
 
 		if ($filePointer === false) {
-			throw new ConnectionException($request->getUrl(), $errstr);
+			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] ' . $errstr);
 		}
 
 		if (!(get_resource_type($filePointer) == 'stream')) {
 			$errorMessage = 'Could not connect to the server. The returned socket was not a stream.';
-			throw new ConnectionException($request->getUrl(), $errorMessage);
+			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] ' . $errorMessage);
 		}
 
 		return $filePointer;
