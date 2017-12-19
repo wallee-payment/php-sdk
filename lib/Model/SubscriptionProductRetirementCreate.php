@@ -91,13 +91,13 @@ class SubscriptionProductRetirementCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['product']) && $data['product'] != null) {
+		if (isset($data['product'])) {
 			$this->setProduct($data['product']);
 		}
-		if (isset($data['respectTerminiationPeriodsEnabled']) && $data['respectTerminiationPeriodsEnabled'] != null) {
+		if (isset($data['respectTerminiationPeriodsEnabled'])) {
 			$this->setRespectTerminiationPeriodsEnabled($data['respectTerminiationPeriodsEnabled']);
 		}
-		if (isset($data['targetProduct']) && $data['targetProduct'] != null) {
+		if (isset($data['targetProduct'])) {
 			$this->setTargetProduct($data['targetProduct']);
 		}
 	}

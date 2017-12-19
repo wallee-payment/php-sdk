@@ -219,34 +219,34 @@ class TokenVersion  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
-		if (isset($data['environment']) && $data['environment'] != null) {
+		if (isset($data['environment'])) {
 			$this->setEnvironment($data['environment']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['labels']) && $data['labels'] != null) {
+		if (isset($data['labels'])) {
 			$this->setLabels($data['labels']);
 		}
-		if (isset($data['paymentConnectorConfiguration']) && $data['paymentConnectorConfiguration'] != null) {
+		if (isset($data['paymentConnectorConfiguration'])) {
 			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
 		}
-		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+		if (isset($data['shippingAddress'])) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['token']) && $data['token'] != null) {
+		if (isset($data['token'])) {
 			$this->setToken($data['token']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

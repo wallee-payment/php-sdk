@@ -187,28 +187,28 @@ class Subscriber  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['additionalAllowedPaymentMethodConfigurations']) && $data['additionalAllowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['additionalAllowedPaymentMethodConfigurations'])) {
 			$this->setAdditionalAllowedPaymentMethodConfigurations($data['additionalAllowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
-		if (isset($data['disallowedPaymentMethodConfigurations']) && $data['disallowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['disallowedPaymentMethodConfigurations'])) {
 			$this->setDisallowedPaymentMethodConfigurations($data['disallowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['metaData']) && $data['metaData'] != null) {
+		if (isset($data['metaData'])) {
 			$this->setMetaData($data['metaData']);
 		}
-		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+		if (isset($data['shippingAddress'])) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

@@ -147,19 +147,19 @@ class InstallmentPlanSliceConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['lineItemTitle']) && $data['lineItemTitle'] != null) {
+		if (isset($data['lineItemTitle'])) {
 			$this->setLineItemTitle($data['lineItemTitle']);
 		}
-		if (isset($data['plan']) && $data['plan'] != null) {
+		if (isset($data['plan'])) {
 			$this->setPlan($data['plan']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

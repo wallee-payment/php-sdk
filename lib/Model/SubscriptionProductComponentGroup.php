@@ -123,16 +123,16 @@ class SubscriptionProductComponentGroup  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['productVersion']) && $data['productVersion'] != null) {
+		if (isset($data['productVersion'])) {
 			$this->setProductVersion($data['productVersion']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

@@ -77,7 +77,7 @@ class AccountCreate extends AbstractAccountUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['parentAccount']) && $data['parentAccount'] != null) {
+		if (isset($data['parentAccount'])) {
 			$this->setParentAccount($data['parentAccount']);
 		}
 	}

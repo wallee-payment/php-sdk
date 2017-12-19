@@ -40,17 +40,34 @@ final class ConnectionException extends Exception {
 	 * @var string
 	 */
 	private $url;
+	
+	/**
+	 * The log token of the request.
+	 *
+	 * @var string
+	 */
+	private $requestToken;
+	
+	/**
+	 * The error message without prefixed log token.
+	 *
+	 * @var string
+	 */
+	private $errorMessage;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param string $url the URL of the connection
+	 * @param string $requestToken the log token of the request
 	 * @param string $message the error message
 	 * @param int	$code the error code
 	 */
-	public function __construct($url = null, $message = "", $code = 0) {
-		parent::__construct($message, $code);
+	public function __construct($url = null, $requestToken = "", $message = "", $code = 0) {
+		parent::__construct('[' . $requestToken . '] ' . $message, $code);
 		$this->url = $url;
+		$this->requestToken = $requestToken;
+		$this->errorMessage = $message;
 	}
 
 	/**
@@ -60,6 +77,24 @@ final class ConnectionException extends Exception {
 	 */
 	public function getUrl() {
 		return $this->url;
+	}
+	
+	/**
+	 * Returns the log token of the request.
+	 *
+	 * @return string
+	 */
+	public function getRequestToken() {
+		return $this->requestToken;
+	}
+	
+	/**
+	 * Returns the  error message without prefixed log token.
+	 *
+	 * @return string
+	 */
+	public function getErrorMessage() {
+		return $this->errorMessage;
 	}
 
 }

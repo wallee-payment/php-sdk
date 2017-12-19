@@ -114,22 +114,22 @@ class AbstractSpaceUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['postalAddress']) && $data['postalAddress'] != null) {
+		if (isset($data['postalAddress'])) {
 			$this->setPostalAddress($data['postalAddress']);
 		}
-		if (isset($data['requestLimit']) && $data['requestLimit'] != null) {
+		if (isset($data['requestLimit'])) {
 			$this->setRequestLimit($data['requestLimit']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['technicalContactAddresses']) && $data['technicalContactAddresses'] != null) {
+		if (isset($data['technicalContactAddresses'])) {
 			$this->setTechnicalContactAddresses($data['technicalContactAddresses']);
 		}
-		if (isset($data['timeZone']) && $data['timeZone'] != null) {
+		if (isset($data['timeZone'])) {
 			$this->setTimeZone($data['timeZone']);
 		}
 	}

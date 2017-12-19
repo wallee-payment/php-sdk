@@ -229,28 +229,28 @@ class ChargeAttempt extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['charge']) && $data['charge'] != null) {
+		if (isset($data['charge'])) {
 			$this->setCharge($data['charge']);
 		}
-		if (isset($data['connectorConfiguration']) && $data['connectorConfiguration'] != null) {
+		if (isset($data['connectorConfiguration'])) {
 			$this->setConnectorConfiguration($data['connectorConfiguration']);
 		}
-		if (isset($data['environment']) && $data['environment'] != null) {
+		if (isset($data['environment'])) {
 			$this->setEnvironment($data['environment']);
 		}
-		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+		if (isset($data['failureReason'])) {
 			$this->setFailureReason($data['failureReason']);
 		}
-		if (isset($data['invocation']) && $data['invocation'] != null) {
+		if (isset($data['invocation'])) {
 			$this->setInvocation($data['invocation']);
 		}
-		if (isset($data['labels']) && $data['labels'] != null) {
+		if (isset($data['labels'])) {
 			$this->setLabels($data['labels']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['tokenVersion']) && $data['tokenVersion'] != null) {
+		if (isset($data['tokenVersion'])) {
 			$this->setTokenVersion($data['tokenVersion']);
 		}
 	}

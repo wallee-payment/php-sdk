@@ -99,13 +99,13 @@ class StaticValue  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['features']) && $data['features'] != null) {
+		if (isset($data['features'])) {
 			$this->setFeatures($data['features']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
 	}

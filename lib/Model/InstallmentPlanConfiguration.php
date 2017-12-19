@@ -203,31 +203,31 @@ class InstallmentPlanConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['conditions']) && $data['conditions'] != null) {
+		if (isset($data['conditions'])) {
 			$this->setConditions($data['conditions']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['paymentMethodConfigurations']) && $data['paymentMethodConfigurations'] != null) {
+		if (isset($data['paymentMethodConfigurations'])) {
 			$this->setPaymentMethodConfigurations($data['paymentMethodConfigurations']);
 		}
-		if (isset($data['spaceReference']) && $data['spaceReference'] != null) {
+		if (isset($data['spaceReference'])) {
 			$this->setSpaceReference($data['spaceReference']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['taxClass']) && $data['taxClass'] != null) {
+		if (isset($data['taxClass'])) {
 			$this->setTaxClass($data['taxClass']);
 		}
-		if (isset($data['termsAndConditions']) && $data['termsAndConditions'] != null) {
+		if (isset($data['termsAndConditions'])) {
 			$this->setTermsAndConditions($data['termsAndConditions']);
 		}
-		if (isset($data['title']) && $data['title'] != null) {
+		if (isset($data['title'])) {
 			$this->setTitle($data['title']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

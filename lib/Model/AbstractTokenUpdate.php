@@ -114,22 +114,22 @@ class AbstractTokenUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['customerEmailAddress']) && $data['customerEmailAddress'] != null) {
+		if (isset($data['customerEmailAddress'])) {
 			$this->setCustomerEmailAddress($data['customerEmailAddress']);
 		}
-		if (isset($data['customerId']) && $data['customerId'] != null) {
+		if (isset($data['customerId'])) {
 			$this->setCustomerId($data['customerId']);
 		}
-		if (isset($data['enabledForOneClickPayment']) && $data['enabledForOneClickPayment'] != null) {
+		if (isset($data['enabledForOneClickPayment'])) {
 			$this->setEnabledForOneClickPayment($data['enabledForOneClickPayment']);
 		}
-		if (isset($data['language']) && $data['language'] != null) {
+		if (isset($data['language'])) {
 			$this->setLanguage($data['language']);
 		}
-		if (isset($data['timeZone']) && $data['timeZone'] != null) {
+		if (isset($data['timeZone'])) {
 			$this->setTimeZone($data['timeZone']);
 		}
-		if (isset($data['tokenReference']) && $data['tokenReference'] != null) {
+		if (isset($data['tokenReference'])) {
 			$this->setTokenReference($data['tokenReference']);
 		}
 	}

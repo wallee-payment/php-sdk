@@ -109,19 +109,19 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['entity']) && $data['entity'] != null) {
+		if (isset($data['entity'])) {
 			$this->setEntity($data['entity']);
 		}
-		if (isset($data['entityStates']) && $data['entityStates'] != null) {
+		if (isset($data['entityStates'])) {
 			$this->setEntityStates($data['entityStates']);
 		}
-		if (isset($data['identity']) && $data['identity'] != null) {
+		if (isset($data['identity'])) {
 			$this->setIdentity($data['identity']);
 		}
-		if (isset($data['notifyEveryChange']) && $data['notifyEveryChange'] != null) {
+		if (isset($data['notifyEveryChange'])) {
 			$this->setNotifyEveryChange($data['notifyEveryChange']);
 		}
-		if (isset($data['url']) && $data['url'] != null) {
+		if (isset($data['url'])) {
 			$this->setUrl($data['url']);
 		}
 	}

@@ -85,10 +85,10 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

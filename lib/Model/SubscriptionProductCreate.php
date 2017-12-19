@@ -77,7 +77,7 @@ class SubscriptionProductCreate extends AbstractSubscriptionProductActive  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['reference']) && $data['reference'] != null) {
+		if (isset($data['reference'])) {
 			$this->setReference($data['reference']);
 		}
 	}

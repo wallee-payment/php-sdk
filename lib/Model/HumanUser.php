@@ -131,10 +131,10 @@ class HumanUser  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
+		if (isset($data['primaryAccount'])) {
 			$this->setPrimaryAccount($data['primaryAccount']);
 		}
-		if (isset($data['scope']) && $data['scope'] != null) {
+		if (isset($data['scope'])) {
 			$this->setScope($data['scope']);
 		}
 	}

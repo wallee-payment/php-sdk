@@ -107,16 +107,19 @@ class EntityQueryFilter  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['children']) && $data['children'] != null) {
+		if (isset($data['children'])) {
 			$this->setChildren($data['children']);
 		}
-		if (isset($data['operator']) && $data['operator'] != null) {
+		if (isset($data['fieldName'])) {
+			$this->setFieldName($data['fieldName']);
+		}
+		if (isset($data['operator'])) {
 			$this->setOperator($data['operator']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
-		if (isset($data['value']) && $data['value'] != null) {
+		if (isset($data['value'])) {
 			$this->setValue($data['value']);
 		}
 	}

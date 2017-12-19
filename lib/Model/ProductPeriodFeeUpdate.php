@@ -123,25 +123,25 @@ class ProductPeriodFeeUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
-		if (isset($data['component']) && $data['component'] != null) {
+		if (isset($data['component'])) {
 			$this->setComponent($data['component']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['numberOfFreeTrialPeriods']) && $data['numberOfFreeTrialPeriods'] != null) {
+		if (isset($data['numberOfFreeTrialPeriods'])) {
 			$this->setNumberOfFreeTrialPeriods($data['numberOfFreeTrialPeriods']);
 		}
-		if (isset($data['periodFee']) && $data['periodFee'] != null) {
+		if (isset($data['periodFee'])) {
 			$this->setPeriodFee($data['periodFee']);
 		}
 	}

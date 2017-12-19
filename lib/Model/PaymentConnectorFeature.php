@@ -91,7 +91,7 @@ class PaymentConnectorFeature  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['feature']) && $data['feature'] != null) {
+		if (isset($data['feature'])) {
 			$this->setFeature($data['feature']);
 		}
 	}

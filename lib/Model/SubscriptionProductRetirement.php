@@ -123,16 +123,16 @@ class SubscriptionProductRetirement  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['product']) && $data['product'] != null) {
+		if (isset($data['product'])) {
 			$this->setProduct($data['product']);
 		}
-		if (isset($data['targetProduct']) && $data['targetProduct'] != null) {
+		if (isset($data['targetProduct'])) {
 			$this->setTargetProduct($data['targetProduct']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

@@ -107,16 +107,16 @@ class InstallmentCalculatedPlan  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['configuration']) && $data['configuration'] != null) {
+		if (isset($data['configuration'])) {
 			$this->setConfiguration($data['configuration']);
 		}
-		if (isset($data['paymentMethodConfigurations']) && $data['paymentMethodConfigurations'] != null) {
+		if (isset($data['paymentMethodConfigurations'])) {
 			$this->setPaymentMethodConfigurations($data['paymentMethodConfigurations']);
 		}
-		if (isset($data['slices']) && $data['slices'] != null) {
+		if (isset($data['slices'])) {
 			$this->setSlices($data['slices']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
 	}

@@ -171,25 +171,25 @@ class PaymentConnectorConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['conditions']) && $data['conditions'] != null) {
+		if (isset($data['conditions'])) {
 			$this->setConditions($data['conditions']);
 		}
-		if (isset($data['enabledSpaceViews']) && $data['enabledSpaceViews'] != null) {
+		if (isset($data['enabledSpaceViews'])) {
 			$this->setEnabledSpaceViews($data['enabledSpaceViews']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['paymentMethodConfiguration']) && $data['paymentMethodConfiguration'] != null) {
+		if (isset($data['paymentMethodConfiguration'])) {
 			$this->setPaymentMethodConfiguration($data['paymentMethodConfiguration']);
 		}
-		if (isset($data['processorConfiguration']) && $data['processorConfiguration'] != null) {
+		if (isset($data['processorConfiguration'])) {
 			$this->setProcessorConfiguration($data['processorConfiguration']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

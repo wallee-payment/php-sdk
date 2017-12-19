@@ -123,25 +123,25 @@ class SubscriptionChargeCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['externalId']) && $data['externalId'] != null) {
+		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['failedUrl']) && $data['failedUrl'] != null) {
+		if (isset($data['failedUrl'])) {
 			$this->setFailedUrl($data['failedUrl']);
 		}
-		if (isset($data['plannedExecutionDate']) && $data['plannedExecutionDate'] != null) {
+		if (isset($data['plannedExecutionDate'])) {
 			$this->setPlannedExecutionDate($data['plannedExecutionDate']);
 		}
-		if (isset($data['processingType']) && $data['processingType'] != null) {
+		if (isset($data['processingType'])) {
 			$this->setProcessingType($data['processingType']);
 		}
-		if (isset($data['reference']) && $data['reference'] != null) {
+		if (isset($data['reference'])) {
 			$this->setReference($data['reference']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
-		if (isset($data['successUrl']) && $data['successUrl'] != null) {
+		if (isset($data['successUrl'])) {
 			$this->setSuccessUrl($data['successUrl']);
 		}
 	}

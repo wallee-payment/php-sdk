@@ -211,22 +211,22 @@ class SubscriptionVersion  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['productVersion']) && $data['productVersion'] != null) {
+		if (isset($data['productVersion'])) {
 			$this->setProductVersion($data['productVersion']);
 		}
-		if (isset($data['selectedComponents']) && $data['selectedComponents'] != null) {
+		if (isset($data['selectedComponents'])) {
 			$this->setSelectedComponents($data['selectedComponents']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

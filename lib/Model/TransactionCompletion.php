@@ -205,19 +205,19 @@ class TransactionCompletion extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+		if (isset($data['failureReason'])) {
 			$this->setFailureReason($data['failureReason']);
 		}
-		if (isset($data['labels']) && $data['labels'] != null) {
+		if (isset($data['labels'])) {
 			$this->setLabels($data['labels']);
 		}
-		if (isset($data['lineItemVersion']) && $data['lineItemVersion'] != null) {
+		if (isset($data['lineItemVersion'])) {
 			$this->setLineItemVersion($data['lineItemVersion']);
 		}
-		if (isset($data['mode']) && $data['mode'] != null) {
+		if (isset($data['mode'])) {
 			$this->setMode($data['mode']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}

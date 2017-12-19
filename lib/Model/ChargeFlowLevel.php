@@ -149,13 +149,13 @@ class ChargeFlowLevel extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['configuration']) && $data['configuration'] != null) {
+		if (isset($data['configuration'])) {
 			$this->setConfiguration($data['configuration']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
 	}

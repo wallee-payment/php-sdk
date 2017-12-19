@@ -85,10 +85,10 @@ class TokenCreate extends AbstractTokenUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['externalId']) && $data['externalId'] != null) {
+		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}

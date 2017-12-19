@@ -106,19 +106,19 @@ class AbstractSubscriptionProductActive  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['allowedPaymentMethodConfigurations'])) {
 			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['failedPaymentSuspensionPeriod']) && $data['failedPaymentSuspensionPeriod'] != null) {
+		if (isset($data['failedPaymentSuspensionPeriod'])) {
 			$this->setFailedPaymentSuspensionPeriod($data['failedPaymentSuspensionPeriod']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
+		if (isset($data['sortOrder'])) {
 			$this->setSortOrder($data['sortOrder']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}

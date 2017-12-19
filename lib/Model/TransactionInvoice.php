@@ -197,13 +197,13 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['completion']) && $data['completion'] != null) {
+		if (isset($data['completion'])) {
 			$this->setCompletion($data['completion']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}

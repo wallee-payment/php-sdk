@@ -155,22 +155,22 @@ class WebhookListener  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['entityStates']) && $data['entityStates'] != null) {
+		if (isset($data['entityStates'])) {
 			$this->setEntityStates($data['entityStates']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['identity']) && $data['identity'] != null) {
+		if (isset($data['identity'])) {
 			$this->setIdentity($data['identity']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['url']) && $data['url'] != null) {
+		if (isset($data['url'])) {
 			$this->setUrl($data['url']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

@@ -115,22 +115,22 @@ class SubscriptionLedgerEntryCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
+		if (isset($data['amountIncludingTax'])) {
 			$this->setAmountIncludingTax($data['amountIncludingTax']);
 		}
-		if (isset($data['externalId']) && $data['externalId'] != null) {
+		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['quantity']) && $data['quantity'] != null) {
+		if (isset($data['quantity'])) {
 			$this->setQuantity($data['quantity']);
 		}
-		if (isset($data['subscriptionVersion']) && $data['subscriptionVersion'] != null) {
+		if (isset($data['subscriptionVersion'])) {
 			$this->setSubscriptionVersion($data['subscriptionVersion']);
 		}
-		if (isset($data['taxes']) && $data['taxes'] != null) {
+		if (isset($data['taxes'])) {
 			$this->setTaxes($data['taxes']);
 		}
-		if (isset($data['title']) && $data['title'] != null) {
+		if (isset($data['title'])) {
 			$this->setTitle($data['title']);
 		}
 	}

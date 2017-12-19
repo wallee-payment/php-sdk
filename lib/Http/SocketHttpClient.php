@@ -57,8 +57,8 @@ final class SocketHttpClient implements IHttpClient {
 		}
 
 		if (empty($responseMessage)) {
-			throw new ConnectionException($request->getUrl(),
-					'[' . $request->getLogToken() . '] The server responded with an empty response (no HTTP header and no HTTP body).');
+			throw new ConnectionException($request->getUrl(), $request->getLogToken(),
+					'The server responded with an empty response (no HTTP header and no HTTP body).');
 		}
 
 		return new HttpResponse($responseMessage);
@@ -151,8 +151,8 @@ final class SocketHttpClient implements IHttpClient {
 			return $responseMessage;
 		}
 		else {
-			throw new ConnectionException(null,
-					'[' . $request->getLogToken() . '] The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
+			throw new ConnectionException(null, $request->getLogToken(),
+					'The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
 	}
 
@@ -191,8 +191,8 @@ final class SocketHttpClient implements IHttpClient {
 			return $result;
 		}
 		else {
-			throw new ConnectionException(null,
-				'[' . $request->getLogToken() . '] The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
+			throw new ConnectionException(null, $request->getLogToken(),
+					'The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
 	}
 
@@ -227,8 +227,8 @@ final class SocketHttpClient implements IHttpClient {
 			return $result;
 		}
 		else {
-			throw new ConnectionException(null,
-					'[' . $request->getLogToken() . '] The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
+			throw new ConnectionException(null, $request->getLogToken(),
+					'The remote server did not respond within ' . $apiClient->getConnectionTimeout() . ' seconds.');
 		}
 	}
 
@@ -253,7 +253,7 @@ final class SocketHttpClient implements IHttpClient {
 
 		$result = fwrite($socket, $message);
 		if ($result == false) {
-			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] Could not send the message to the server.');
+			throw new ConnectionException($request->getUrl(), $request->getLogToken(), 'Could not send the message to the server.');
 		}
 		return $socket;
 	}
@@ -310,12 +310,12 @@ final class SocketHttpClient implements IHttpClient {
 				$this->createStreamContext($apiClient, $request));
 
 		if ($filePointer === false) {
-			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] ' . $errstr);
+			throw new ConnectionException($request->getUrl(), $request->getLogToken(), $errstr);
 		}
 
 		if (!(get_resource_type($filePointer) == 'stream')) {
 			$errorMessage = 'Could not connect to the server. The returned socket was not a stream.';
-			throw new ConnectionException($request->getUrl(), '[' . $request->getLogToken() . '] ' . $errorMessage);
+			throw new ConnectionException($request->getUrl(), $request->getLogToken(), $errorMessage);
 		}
 
 		return $filePointer;

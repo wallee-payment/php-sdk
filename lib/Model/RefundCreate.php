@@ -107,19 +107,19 @@ class RefundCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['externalId']) && $data['externalId'] != null) {
+		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['merchantReference']) && $data['merchantReference'] != null) {
+		if (isset($data['merchantReference'])) {
 			$this->setMerchantReference($data['merchantReference']);
 		}
-		if (isset($data['reductions']) && $data['reductions'] != null) {
+		if (isset($data['reductions'])) {
 			$this->setReductions($data['reductions']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
 	}

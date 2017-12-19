@@ -107,11 +107,20 @@ class EntityQuery  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['filter']) && $data['filter'] != null) {
+		if (isset($data['filter'])) {
 			$this->setFilter($data['filter']);
 		}
-		if (isset($data['orderBys']) && $data['orderBys'] != null) {
+		if (isset($data['language'])) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['numberOfEntities'])) {
+			$this->setNumberOfEntities($data['numberOfEntities']);
+		}
+		if (isset($data['orderBys'])) {
 			$this->setOrderBys($data['orderBys']);
+		}
+		if (isset($data['startingEntity'])) {
+			$this->setStartingEntity($data['startingEntity']);
 		}
 	}
 
@@ -156,7 +165,7 @@ class EntityQuery  {
 	 * @param string $language
 	 * @return EntityQuery
 	 */
-	protected function setLanguage($language) {
+	public function setLanguage($language) {
 		$this->language = $language;
 
 		return $this;
@@ -225,7 +234,7 @@ class EntityQuery  {
 	 * @param int $startingEntity
 	 * @return EntityQuery
 	 */
-	protected function setStartingEntity($startingEntity) {
+	public function setStartingEntity($startingEntity) {
 		$this->startingEntity = $startingEntity;
 
 		return $this;

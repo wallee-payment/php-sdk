@@ -83,7 +83,10 @@ class EntityQueryOrderBy  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['sorting']) && $data['sorting'] != null) {
+		if (isset($data['fieldName'])) {
+			$this->setFieldName($data['fieldName']);
+		}
+		if (isset($data['sorting'])) {
 			$this->setSorting($data['sorting']);
 		}
 	}

@@ -107,19 +107,19 @@ class SubscriptionMetricUsageReportCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['consumedUnits']) && $data['consumedUnits'] != null) {
+		if (isset($data['consumedUnits'])) {
 			$this->setConsumedUnits($data['consumedUnits']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['externalId']) && $data['externalId'] != null) {
+		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['metric']) && $data['metric'] != null) {
+		if (isset($data['metric'])) {
 			$this->setMetric($data['metric']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
 	}

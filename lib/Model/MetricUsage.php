@@ -99,10 +99,10 @@ class MetricUsage  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['metricDescription']) && $data['metricDescription'] != null) {
+		if (isset($data['metricDescription'])) {
 			$this->setMetricDescription($data['metricDescription']);
 		}
-		if (isset($data['metricName']) && $data['metricName'] != null) {
+		if (isset($data['metricName'])) {
 			$this->setMetricName($data['metricName']);
 		}
 	}

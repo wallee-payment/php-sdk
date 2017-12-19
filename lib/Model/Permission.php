@@ -139,16 +139,16 @@ class Permission  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['pathToRoot']) && $data['pathToRoot'] != null) {
+		if (isset($data['pathToRoot'])) {
 			$this->setPathToRoot($data['pathToRoot']);
 		}
-		if (isset($data['title']) && $data['title'] != null) {
+		if (isset($data['title'])) {
 			$this->setTitle($data['title']);
 		}
 	}

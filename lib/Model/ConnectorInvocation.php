@@ -117,7 +117,7 @@ class ConnectorInvocation extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['stage']) && $data['stage'] != null) {
+		if (isset($data['stage'])) {
 			$this->setStage($data['stage']);
 		}
 	}

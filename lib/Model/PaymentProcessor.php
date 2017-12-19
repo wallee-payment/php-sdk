@@ -131,19 +131,19 @@ class PaymentProcessor  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['companyName']) && $data['companyName'] != null) {
+		if (isset($data['companyName'])) {
 			$this->setCompanyName($data['companyName']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['headquartersLocation']) && $data['headquartersLocation'] != null) {
+		if (isset($data['headquartersLocation'])) {
 			$this->setHeadquartersLocation($data['headquartersLocation']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['productName']) && $data['productName'] != null) {
+		if (isset($data['productName'])) {
 			$this->setProductName($data['productName']);
 		}
 	}

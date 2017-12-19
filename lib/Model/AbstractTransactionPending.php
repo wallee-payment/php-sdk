@@ -202,55 +202,55 @@ class AbstractTransactionPending  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['allowedPaymentMethodBrands']) && $data['allowedPaymentMethodBrands'] != null) {
+		if (isset($data['allowedPaymentMethodBrands'])) {
 			$this->setAllowedPaymentMethodBrands($data['allowedPaymentMethodBrands']);
 		}
-		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['allowedPaymentMethodConfigurations'])) {
 			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
-		if (isset($data['currency']) && $data['currency'] != null) {
+		if (isset($data['currency'])) {
 			$this->setCurrency($data['currency']);
 		}
-		if (isset($data['customerEmailAddress']) && $data['customerEmailAddress'] != null) {
+		if (isset($data['customerEmailAddress'])) {
 			$this->setCustomerEmailAddress($data['customerEmailAddress']);
 		}
-		if (isset($data['customerId']) && $data['customerId'] != null) {
+		if (isset($data['customerId'])) {
 			$this->setCustomerId($data['customerId']);
 		}
-		if (isset($data['failedUrl']) && $data['failedUrl'] != null) {
+		if (isset($data['failedUrl'])) {
 			$this->setFailedUrl($data['failedUrl']);
 		}
-		if (isset($data['invoiceMerchantReference']) && $data['invoiceMerchantReference'] != null) {
+		if (isset($data['invoiceMerchantReference'])) {
 			$this->setInvoiceMerchantReference($data['invoiceMerchantReference']);
 		}
-		if (isset($data['language']) && $data['language'] != null) {
+		if (isset($data['language'])) {
 			$this->setLanguage($data['language']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['merchantReference']) && $data['merchantReference'] != null) {
+		if (isset($data['merchantReference'])) {
 			$this->setMerchantReference($data['merchantReference']);
 		}
-		if (isset($data['metaData']) && $data['metaData'] != null) {
+		if (isset($data['metaData'])) {
 			$this->setMetaData($data['metaData']);
 		}
-		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+		if (isset($data['shippingAddress'])) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
-		if (isset($data['shippingMethod']) && $data['shippingMethod'] != null) {
+		if (isset($data['shippingMethod'])) {
 			$this->setShippingMethod($data['shippingMethod']);
 		}
-		if (isset($data['successUrl']) && $data['successUrl'] != null) {
+		if (isset($data['successUrl'])) {
 			$this->setSuccessUrl($data['successUrl']);
 		}
-		if (isset($data['timeZone']) && $data['timeZone'] != null) {
+		if (isset($data['timeZone'])) {
 			$this->setTimeZone($data['timeZone']);
 		}
-		if (isset($data['token']) && $data['token'] != null) {
+		if (isset($data['token'])) {
 			$this->setToken($data['token']);
 		}
 	}

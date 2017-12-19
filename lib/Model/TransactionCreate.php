@@ -51,6 +51,8 @@ class TransactionCreate extends AbstractTransactionPending  {
 		'autoConfirmationEnabled' => 'bool',
 		'chargeRetryEnabled' => 'bool',
 		'customersPresence' => '\Wallee\Sdk\Model\CustomersPresence',
+		'deviceSessionIdentifier' => 'string',
+		'environmentSelectionStrategy' => '\Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy',
 		'spaceViewId' => 'int',
 	);
 
@@ -87,6 +89,20 @@ class TransactionCreate extends AbstractTransactionPending  {
 	private $customersPresence;
 
 	/**
+	 * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+	 *
+	 * @var string
+	 */
+	private $deviceSessionIdentifier;
+
+	/**
+	 * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+	 *
+	 * @var \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy
+	 */
+	private $environmentSelectionStrategy;
+
+	/**
 	 * 
 	 *
 	 * @var int
@@ -102,28 +118,34 @@ class TransactionCreate extends AbstractTransactionPending  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['autoConfirmationEnabled']) && $data['autoConfirmationEnabled'] != null) {
+		if (isset($data['autoConfirmationEnabled'])) {
 			$this->setAutoConfirmationEnabled($data['autoConfirmationEnabled']);
 		}
-		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
-		if (isset($data['chargeRetryEnabled']) && $data['chargeRetryEnabled'] != null) {
+		if (isset($data['chargeRetryEnabled'])) {
 			$this->setChargeRetryEnabled($data['chargeRetryEnabled']);
 		}
-		if (isset($data['customersPresence']) && $data['customersPresence'] != null) {
+		if (isset($data['customersPresence'])) {
 			$this->setCustomersPresence($data['customersPresence']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['deviceSessionIdentifier'])) {
+			$this->setDeviceSessionIdentifier($data['deviceSessionIdentifier']);
+		}
+		if (isset($data['environmentSelectionStrategy'])) {
+			$this->setEnvironmentSelectionStrategy($data['environmentSelectionStrategy']);
+		}
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+		if (isset($data['shippingAddress'])) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
-		if (isset($data['spaceViewId']) && $data['spaceViewId'] != null) {
+		if (isset($data['spaceViewId'])) {
 			$this->setSpaceViewId($data['spaceViewId']);
 		}
-		if (isset($data['token']) && $data['token'] != null) {
+		if (isset($data['token'])) {
 			$this->setToken($data['token']);
 		}
 	}
@@ -215,6 +237,52 @@ class TransactionCreate extends AbstractTransactionPending  {
 	 */
 	public function setCustomersPresence($customersPresence) {
 		$this->customersPresence = $customersPresence;
+
+		return $this;
+	}
+
+	/**
+	 * Returns deviceSessionIdentifier.
+	 *
+	 * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+	 *
+	 * @return string
+	 */
+	public function getDeviceSessionIdentifier() {
+		return $this->deviceSessionIdentifier;
+	}
+
+	/**
+	 * Sets deviceSessionIdentifier.
+	 *
+	 * @param string $deviceSessionIdentifier
+	 * @return TransactionCreate
+	 */
+	public function setDeviceSessionIdentifier($deviceSessionIdentifier) {
+		$this->deviceSessionIdentifier = $deviceSessionIdentifier;
+
+		return $this;
+	}
+
+	/**
+	 * Returns environmentSelectionStrategy.
+	 *
+	 * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+	 *
+	 * @return \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy
+	 */
+	public function getEnvironmentSelectionStrategy() {
+		return $this->environmentSelectionStrategy;
+	}
+
+	/**
+	 * Sets environmentSelectionStrategy.
+	 *
+	 * @param \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy $environmentSelectionStrategy
+	 * @return TransactionCreate
+	 */
+	public function setEnvironmentSelectionStrategy($environmentSelectionStrategy) {
+		$this->environmentSelectionStrategy = $environmentSelectionStrategy;
 
 		return $this;
 	}

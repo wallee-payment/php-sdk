@@ -91,7 +91,7 @@ class InstallmentCalculatedSlice  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
 	}

@@ -227,10 +227,10 @@ class Address  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['gender']) && $data['gender'] != null) {
+		if (isset($data['gender'])) {
 			$this->setGender($data['gender']);
 		}
-		if (isset($data['legalOrganizationForm']) && $data['legalOrganizationForm'] != null) {
+		if (isset($data['legalOrganizationForm'])) {
 			$this->setLegalOrganizationForm($data['legalOrganizationForm']);
 		}
 	}

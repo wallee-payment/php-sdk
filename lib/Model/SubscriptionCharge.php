@@ -227,28 +227,28 @@ class SubscriptionCharge  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['ledgerEntries']) && $data['ledgerEntries'] != null) {
+		if (isset($data['ledgerEntries'])) {
 			$this->setLedgerEntries($data['ledgerEntries']);
 		}
-		if (isset($data['processingType']) && $data['processingType'] != null) {
+		if (isset($data['processingType'])) {
 			$this->setProcessingType($data['processingType']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

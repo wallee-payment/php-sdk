@@ -187,13 +187,13 @@ class LineItem  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['attributes']) && $data['attributes'] != null) {
+		if (isset($data['attributes'])) {
 			$this->setAttributes($data['attributes']);
 		}
-		if (isset($data['taxes']) && $data['taxes'] != null) {
+		if (isset($data['taxes'])) {
 			$this->setTaxes($data['taxes']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
 	}

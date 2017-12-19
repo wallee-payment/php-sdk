@@ -82,10 +82,10 @@ class AbstractAccountUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['subaccountLimit']) && $data['subaccountLimit'] != null) {
+		if (isset($data['subaccountLimit'])) {
 			$this->setSubaccountLimit($data['subaccountLimit']);
 		}
 	}

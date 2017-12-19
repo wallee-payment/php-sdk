@@ -77,7 +77,7 @@ class SpaceCreate extends AbstractSpaceUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['account']) && $data['account'] != null) {
+		if (isset($data['account'])) {
 			$this->setAccount($data['account']);
 		}
 	}

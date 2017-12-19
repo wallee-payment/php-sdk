@@ -93,13 +93,13 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['reference']) && $data['reference'] != null) {
+		if (isset($data['reference'])) {
 			$this->setReference($data['reference']);
 		}
-		if (isset($data['subscriber']) && $data['subscriber'] != null) {
+		if (isset($data['subscriber'])) {
 			$this->setSubscriber($data['subscriber']);
 		}
-		if (isset($data['token']) && $data['token'] != null) {
+		if (isset($data['token'])) {
 			$this->setToken($data['token']);
 		}
 	}

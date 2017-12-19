@@ -171,43 +171,43 @@ class SpaceAddressCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['city']) && $data['city'] != null) {
+		if (isset($data['city'])) {
 			$this->setCity($data['city']);
 		}
-		if (isset($data['country']) && $data['country'] != null) {
+		if (isset($data['country'])) {
 			$this->setCountry($data['country']);
 		}
-		if (isset($data['dependentLocality']) && $data['dependentLocality'] != null) {
+		if (isset($data['dependentLocality'])) {
 			$this->setDependentLocality($data['dependentLocality']);
 		}
-		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+		if (isset($data['emailAddress'])) {
 			$this->setEmailAddress($data['emailAddress']);
 		}
-		if (isset($data['familyName']) && $data['familyName'] != null) {
+		if (isset($data['familyName'])) {
 			$this->setFamilyName($data['familyName']);
 		}
-		if (isset($data['givenName']) && $data['givenName'] != null) {
+		if (isset($data['givenName'])) {
 			$this->setGivenName($data['givenName']);
 		}
-		if (isset($data['organizationName']) && $data['organizationName'] != null) {
+		if (isset($data['organizationName'])) {
 			$this->setOrganizationName($data['organizationName']);
 		}
-		if (isset($data['postCode']) && $data['postCode'] != null) {
+		if (isset($data['postCode'])) {
 			$this->setPostCode($data['postCode']);
 		}
-		if (isset($data['postalState']) && $data['postalState'] != null) {
+		if (isset($data['postalState'])) {
 			$this->setPostalState($data['postalState']);
 		}
-		if (isset($data['salesTaxNumber']) && $data['salesTaxNumber'] != null) {
+		if (isset($data['salesTaxNumber'])) {
 			$this->setSalesTaxNumber($data['salesTaxNumber']);
 		}
-		if (isset($data['salutation']) && $data['salutation'] != null) {
+		if (isset($data['salutation'])) {
 			$this->setSalutation($data['salutation']);
 		}
-		if (isset($data['sortingCode']) && $data['sortingCode'] != null) {
+		if (isset($data['sortingCode'])) {
 			$this->setSortingCode($data['sortingCode']);
 		}
-		if (isset($data['street']) && $data['street'] != null) {
+		if (isset($data['street'])) {
 			$this->setStreet($data['street']);
 		}
 	}

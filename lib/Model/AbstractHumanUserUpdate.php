@@ -114,22 +114,22 @@ class AbstractHumanUserUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+		if (isset($data['emailAddress'])) {
 			$this->setEmailAddress($data['emailAddress']);
 		}
-		if (isset($data['firstname']) && $data['firstname'] != null) {
+		if (isset($data['firstname'])) {
 			$this->setFirstname($data['firstname']);
 		}
-		if (isset($data['language']) && $data['language'] != null) {
+		if (isset($data['language'])) {
 			$this->setLanguage($data['language']);
 		}
-		if (isset($data['lastname']) && $data['lastname'] != null) {
+		if (isset($data['lastname'])) {
 			$this->setLastname($data['lastname']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['timeZone']) && $data['timeZone'] != null) {
+		if (isset($data['timeZone'])) {
 			$this->setTimeZone($data['timeZone']);
 		}
 	}

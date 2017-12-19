@@ -155,28 +155,28 @@ class PaymentConnector  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['dataCollectionType']) && $data['dataCollectionType'] != null) {
+		if (isset($data['dataCollectionType'])) {
 			$this->setDataCollectionType($data['dataCollectionType']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['feature']) && $data['feature'] != null) {
+		if (isset($data['feature'])) {
 			$this->setFeature($data['feature']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['paymentMethodBrand']) && $data['paymentMethodBrand'] != null) {
+		if (isset($data['paymentMethodBrand'])) {
 			$this->setPaymentMethodBrand($data['paymentMethodBrand']);
 		}
-		if (isset($data['primaryRiskTaker']) && $data['primaryRiskTaker'] != null) {
+		if (isset($data['primaryRiskTaker'])) {
 			$this->setPrimaryRiskTaker($data['primaryRiskTaker']);
 		}
-		if (isset($data['supportedCustomersPresences']) && $data['supportedCustomersPresences'] != null) {
+		if (isset($data['supportedCustomersPresences'])) {
 			$this->setSupportedCustomersPresences($data['supportedCustomersPresences']);
 		}
-		if (isset($data['supportedFeatures']) && $data['supportedFeatures'] != null) {
+		if (isset($data['supportedFeatures'])) {
 			$this->setSupportedFeatures($data['supportedFeatures']);
 		}
 	}

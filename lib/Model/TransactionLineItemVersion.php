@@ -149,10 +149,10 @@ class TransactionLineItemVersion extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
 	}

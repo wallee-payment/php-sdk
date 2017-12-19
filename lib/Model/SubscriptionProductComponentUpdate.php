@@ -147,34 +147,34 @@ class SubscriptionProductComponentUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
-		if (isset($data['componentChangeWeight']) && $data['componentChangeWeight'] != null) {
+		if (isset($data['componentChangeWeight'])) {
 			$this->setComponentChangeWeight($data['componentChangeWeight']);
 		}
-		if (isset($data['componentGroup']) && $data['componentGroup'] != null) {
+		if (isset($data['componentGroup'])) {
 			$this->setComponentGroup($data['componentGroup']);
 		}
-		if (isset($data['defaultComponent']) && $data['defaultComponent'] != null) {
+		if (isset($data['defaultComponent'])) {
 			$this->setDefaultComponent($data['defaultComponent']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['reference']) && $data['reference'] != null) {
+		if (isset($data['reference'])) {
 			$this->setReference($data['reference']);
 		}
-		if (isset($data['sortOrder']) && $data['sortOrder'] != null) {
+		if (isset($data['sortOrder'])) {
 			$this->setSortOrder($data['sortOrder']);
 		}
-		if (isset($data['taxClass']) && $data['taxClass'] != null) {
+		if (isset($data['taxClass'])) {
 			$this->setTaxClass($data['taxClass']);
 		}
 	}

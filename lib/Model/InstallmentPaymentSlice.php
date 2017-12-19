@@ -133,16 +133,16 @@ class InstallmentPaymentSlice extends TransactionAwareEntity  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['installmentPayment']) && $data['installmentPayment'] != null) {
+		if (isset($data['installmentPayment'])) {
 			$this->setInstallmentPayment($data['installmentPayment']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
 	}

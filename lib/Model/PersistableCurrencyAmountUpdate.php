@@ -83,10 +83,10 @@ class PersistableCurrencyAmountUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['amount']) && $data['amount'] != null) {
+		if (isset($data['amount'])) {
 			$this->setAmount($data['amount']);
 		}
-		if (isset($data['currency']) && $data['currency'] != null) {
+		if (isset($data['currency'])) {
 			$this->setCurrency($data['currency']);
 		}
 	}

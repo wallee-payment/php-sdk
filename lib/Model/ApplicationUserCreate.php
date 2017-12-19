@@ -77,7 +77,7 @@ class ApplicationUserCreate extends AbstractApplicationUserUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
+		if (isset($data['primaryAccount'])) {
 			$this->setPrimaryAccount($data['primaryAccount']);
 		}
 	}

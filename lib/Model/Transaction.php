@@ -49,6 +49,7 @@ class Transaction  {
 	 */
 	private static $swaggerTypes = array(
 		'acceptHeader' => 'string',
+		'acceptLanguageHeader' => 'string',
 		'allowedPaymentMethodBrands' => '\Wallee\Sdk\Model\PaymentMethodBrand[]',
 		'allowedPaymentMethodConfigurations' => 'int[]',
 		'authorizationAmount' => 'float',
@@ -67,7 +68,9 @@ class Transaction  {
 		'customerEmailAddress' => 'string',
 		'customerId' => 'string',
 		'customersPresence' => '\Wallee\Sdk\Model\CustomersPresence',
+		'deviceSessionIdentifier' => 'string',
 		'endOfLife' => '\DateTime',
+		'environmentSelectionStrategy' => '\Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy',
 		'failedOn' => '\DateTime',
 		'failedUrl' => 'string',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
@@ -114,6 +117,13 @@ class Transaction  {
 	 * @var string
 	 */
 	private $acceptHeader;
+
+	/**
+	 * The accept language contains the header which indicates the language preferences of the buyer.
+	 *
+	 * @var string
+	 */
+	private $acceptLanguageHeader;
 
 	/**
 	 * 
@@ -242,11 +252,25 @@ class Transaction  {
 	private $customersPresence;
 
 	/**
+	 * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+	 *
+	 * @var string
+	 */
+	private $deviceSessionIdentifier;
+
+	/**
 	 * The transaction's end of life indicates the date from which on no operation can be carried out anymore.
 	 *
 	 * @var \DateTime
 	 */
 	private $endOfLife;
+
+	/**
+	 * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+	 *
+	 * @var \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy
+	 */
+	private $environmentSelectionStrategy;
 
 	/**
 	 * 
@@ -284,7 +308,7 @@ class Transaction  {
 	private $id;
 
 	/**
-	 * 
+	 * The Internet Protocol (IP) address identifies the device of the buyer.
 	 *
 	 * @var string
 	 */
@@ -417,7 +441,7 @@ class Transaction  {
 	private $token;
 
 	/**
-	 * 
+	 * The user agent header provides the exact string which contains the user agent of the buyer.
 	 *
 	 * @var string
 	 */
@@ -451,49 +475,52 @@ class Transaction  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['allowedPaymentMethodBrands']) && $data['allowedPaymentMethodBrands'] != null) {
+		if (isset($data['allowedPaymentMethodBrands'])) {
 			$this->setAllowedPaymentMethodBrands($data['allowedPaymentMethodBrands']);
 		}
-		if (isset($data['allowedPaymentMethodConfigurations']) && $data['allowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['allowedPaymentMethodConfigurations'])) {
 			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
-		if (isset($data['customersPresence']) && $data['customersPresence'] != null) {
+		if (isset($data['customersPresence'])) {
 			$this->setCustomersPresence($data['customersPresence']);
 		}
-		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+		if (isset($data['environmentSelectionStrategy'])) {
+			$this->setEnvironmentSelectionStrategy($data['environmentSelectionStrategy']);
+		}
+		if (isset($data['failureReason'])) {
 			$this->setFailureReason($data['failureReason']);
 		}
-		if (isset($data['group']) && $data['group'] != null) {
+		if (isset($data['group'])) {
 			$this->setGroup($data['group']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['metaData']) && $data['metaData'] != null) {
+		if (isset($data['metaData'])) {
 			$this->setMetaData($data['metaData']);
 		}
-		if (isset($data['paymentConnectorConfiguration']) && $data['paymentConnectorConfiguration'] != null) {
+		if (isset($data['paymentConnectorConfiguration'])) {
 			$this->setPaymentConnectorConfiguration($data['paymentConnectorConfiguration']);
 		}
-		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+		if (isset($data['shippingAddress'])) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['token']) && $data['token'] != null) {
+		if (isset($data['token'])) {
 			$this->setToken($data['token']);
 		}
-		if (isset($data['userInterfaceType']) && $data['userInterfaceType'] != null) {
+		if (isset($data['userInterfaceType'])) {
 			$this->setUserInterfaceType($data['userInterfaceType']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}
@@ -518,6 +545,29 @@ class Transaction  {
 	 */
 	protected function setAcceptHeader($acceptHeader) {
 		$this->acceptHeader = $acceptHeader;
+
+		return $this;
+	}
+
+	/**
+	 * Returns acceptLanguageHeader.
+	 *
+	 * The accept language contains the header which indicates the language preferences of the buyer.
+	 *
+	 * @return string
+	 */
+	public function getAcceptLanguageHeader() {
+		return $this->acceptLanguageHeader;
+	}
+
+	/**
+	 * Sets acceptLanguageHeader.
+	 *
+	 * @param string $acceptLanguageHeader
+	 * @return Transaction
+	 */
+	protected function setAcceptLanguageHeader($acceptLanguageHeader) {
+		$this->acceptLanguageHeader = $acceptLanguageHeader;
 
 		return $this;
 	}
@@ -937,6 +987,29 @@ class Transaction  {
 	}
 
 	/**
+	 * Returns deviceSessionIdentifier.
+	 *
+	 * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+	 *
+	 * @return string
+	 */
+	public function getDeviceSessionIdentifier() {
+		return $this->deviceSessionIdentifier;
+	}
+
+	/**
+	 * Sets deviceSessionIdentifier.
+	 *
+	 * @param string $deviceSessionIdentifier
+	 * @return Transaction
+	 */
+	protected function setDeviceSessionIdentifier($deviceSessionIdentifier) {
+		$this->deviceSessionIdentifier = $deviceSessionIdentifier;
+
+		return $this;
+	}
+
+	/**
 	 * Returns endOfLife.
 	 *
 	 * The transaction's end of life indicates the date from which on no operation can be carried out anymore.
@@ -955,6 +1028,29 @@ class Transaction  {
 	 */
 	protected function setEndOfLife($endOfLife) {
 		$this->endOfLife = $endOfLife;
+
+		return $this;
+	}
+
+	/**
+	 * Returns environmentSelectionStrategy.
+	 *
+	 * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+	 *
+	 * @return \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy
+	 */
+	public function getEnvironmentSelectionStrategy() {
+		return $this->environmentSelectionStrategy;
+	}
+
+	/**
+	 * Sets environmentSelectionStrategy.
+	 *
+	 * @param \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy $environmentSelectionStrategy
+	 * @return Transaction
+	 */
+	public function setEnvironmentSelectionStrategy($environmentSelectionStrategy) {
+		$this->environmentSelectionStrategy = $environmentSelectionStrategy;
 
 		return $this;
 	}
@@ -1077,7 +1173,7 @@ class Transaction  {
 	/**
 	 * Returns internetProtocolAddress.
 	 *
-	 * 
+	 * The Internet Protocol (IP) address identifies the device of the buyer.
 	 *
 	 * @return string
 	 */
@@ -1514,7 +1610,7 @@ class Transaction  {
 	/**
 	 * Returns userAgentHeader.
 	 *
-	 * 
+	 * The user agent header provides the exact string which contains the user agent of the buyer.
 	 *
 	 * @return string
 	 */

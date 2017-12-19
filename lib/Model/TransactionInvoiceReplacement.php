@@ -107,19 +107,19 @@ class TransactionInvoiceReplacement  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['dueOn']) && $data['dueOn'] != null) {
+		if (isset($data['dueOn'])) {
 			$this->setDueOn($data['dueOn']);
 		}
-		if (isset($data['externalId']) && $data['externalId'] != null) {
+		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['merchantReference']) && $data['merchantReference'] != null) {
+		if (isset($data['merchantReference'])) {
 			$this->setMerchantReference($data['merchantReference']);
 		}
-		if (isset($data['sentToCustomer']) && $data['sentToCustomer'] != null) {
+		if (isset($data['sentToCustomer'])) {
 			$this->setSentToCustomer($data['sentToCustomer']);
 		}
 	}

@@ -99,16 +99,16 @@ class SubscriptionSuspensionCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['endAction']) && $data['endAction'] != null) {
+		if (isset($data['endAction'])) {
 			$this->setEndAction($data['endAction']);
 		}
-		if (isset($data['note']) && $data['note'] != null) {
+		if (isset($data['note'])) {
 			$this->setNote($data['note']);
 		}
-		if (isset($data['plannedEndDate']) && $data['plannedEndDate'] != null) {
+		if (isset($data['plannedEndDate'])) {
 			$this->setPlannedEndDate($data['plannedEndDate']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
 	}

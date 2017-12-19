@@ -99,10 +99,10 @@ class ManualTaskAction  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['label']) && $data['label'] != null) {
+		if (isset($data['label'])) {
 			$this->setLabel($data['label']);
 		}
-		if (isset($data['style']) && $data['style'] != null) {
+		if (isset($data['style'])) {
 			$this->setStyle($data['style']);
 		}
 	}

@@ -138,31 +138,31 @@ class AbstractSubscriberUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['additionalAllowedPaymentMethodConfigurations']) && $data['additionalAllowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['additionalAllowedPaymentMethodConfigurations'])) {
 			$this->setAdditionalAllowedPaymentMethodConfigurations($data['additionalAllowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['billingAddress']) && $data['billingAddress'] != null) {
+		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['disallowedPaymentMethodConfigurations']) && $data['disallowedPaymentMethodConfigurations'] != null) {
+		if (isset($data['disallowedPaymentMethodConfigurations'])) {
 			$this->setDisallowedPaymentMethodConfigurations($data['disallowedPaymentMethodConfigurations']);
 		}
-		if (isset($data['emailAddress']) && $data['emailAddress'] != null) {
+		if (isset($data['emailAddress'])) {
 			$this->setEmailAddress($data['emailAddress']);
 		}
-		if (isset($data['language']) && $data['language'] != null) {
+		if (isset($data['language'])) {
 			$this->setLanguage($data['language']);
 		}
-		if (isset($data['metaData']) && $data['metaData'] != null) {
+		if (isset($data['metaData'])) {
 			$this->setMetaData($data['metaData']);
 		}
-		if (isset($data['reference']) && $data['reference'] != null) {
+		if (isset($data['reference'])) {
 			$this->setReference($data['reference']);
 		}
-		if (isset($data['shippingAddress']) && $data['shippingAddress'] != null) {
+		if (isset($data['shippingAddress'])) {
 			$this->setShippingAddress($data['shippingAddress']);
 		}
 	}

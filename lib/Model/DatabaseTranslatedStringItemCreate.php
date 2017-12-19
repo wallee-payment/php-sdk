@@ -83,10 +83,10 @@ class DatabaseTranslatedStringItemCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['language']) && $data['language'] != null) {
+		if (isset($data['language'])) {
 			$this->setLanguage($data['language']);
 		}
-		if (isset($data['translation']) && $data['translation'] != null) {
+		if (isset($data['translation'])) {
 			$this->setTranslation($data['translation']);
 		}
 	}

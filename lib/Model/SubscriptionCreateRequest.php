@@ -49,9 +49,9 @@ class SubscriptionCreateRequest  {
 	 */
 	private static $swaggerTypes = array(
 		'currency' => 'string',
-		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
+		'product' => 'int',
 		'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
-		'subscription' => '\Wallee\Sdk\Model\SubscriptionPending'	);
+		'subscription' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -74,7 +74,7 @@ class SubscriptionCreateRequest  {
 	/**
 	 * The subscription has to be linked with a product.
 	 *
-	 * @var \Wallee\Sdk\Model\SubscriptionProduct
+	 * @var int
 	 */
 	private $product;
 
@@ -88,7 +88,7 @@ class SubscriptionCreateRequest  {
 	/**
 	 * 
 	 *
-	 * @var \Wallee\Sdk\Model\SubscriptionPending
+	 * @var int
 	 */
 	private $subscription;
 
@@ -99,13 +99,16 @@ class SubscriptionCreateRequest  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['product']) && $data['product'] != null) {
+		if (isset($data['currency'])) {
+			$this->setCurrency($data['currency']);
+		}
+		if (isset($data['product'])) {
 			$this->setProduct($data['product']);
 		}
-		if (isset($data['selectedComponents']) && $data['selectedComponents'] != null) {
+		if (isset($data['selectedComponents'])) {
 			$this->setSelectedComponents($data['selectedComponents']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
 	}
@@ -128,7 +131,7 @@ class SubscriptionCreateRequest  {
 	 * @param string $currency
 	 * @return SubscriptionCreateRequest
 	 */
-	protected function setCurrency($currency) {
+	public function setCurrency($currency) {
 		$this->currency = $currency;
 
 		return $this;
@@ -139,7 +142,7 @@ class SubscriptionCreateRequest  {
 	 *
 	 * The subscription has to be linked with a product.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 * @return int
 	 */
 	public function getProduct() {
 		return $this->product;
@@ -148,7 +151,7 @@ class SubscriptionCreateRequest  {
 	/**
 	 * Sets product.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProduct $product
+	 * @param int $product
 	 * @return SubscriptionCreateRequest
 	 */
 	public function setProduct($product) {
@@ -185,7 +188,7 @@ class SubscriptionCreateRequest  {
 	 *
 	 * 
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionPending
+	 * @return int
 	 */
 	public function getSubscription() {
 		return $this->subscription;
@@ -194,7 +197,7 @@ class SubscriptionCreateRequest  {
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionPending $subscription
+	 * @param int $subscription
 	 * @return SubscriptionCreateRequest
 	 */
 	public function setSubscription($subscription) {

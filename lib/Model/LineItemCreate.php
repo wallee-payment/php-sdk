@@ -139,31 +139,31 @@ class LineItemCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['amountIncludingTax']) && $data['amountIncludingTax'] != null) {
+		if (isset($data['amountIncludingTax'])) {
 			$this->setAmountIncludingTax($data['amountIncludingTax']);
 		}
-		if (isset($data['attributes']) && $data['attributes'] != null) {
+		if (isset($data['attributes'])) {
 			$this->setAttributes($data['attributes']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['quantity']) && $data['quantity'] != null) {
+		if (isset($data['quantity'])) {
 			$this->setQuantity($data['quantity']);
 		}
-		if (isset($data['shippingRequired']) && $data['shippingRequired'] != null) {
+		if (isset($data['shippingRequired'])) {
 			$this->setShippingRequired($data['shippingRequired']);
 		}
-		if (isset($data['sku']) && $data['sku'] != null) {
+		if (isset($data['sku'])) {
 			$this->setSku($data['sku']);
 		}
-		if (isset($data['taxes']) && $data['taxes'] != null) {
+		if (isset($data['taxes'])) {
 			$this->setTaxes($data['taxes']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
-		if (isset($data['uniqueId']) && $data['uniqueId'] != null) {
+		if (isset($data['uniqueId'])) {
 			$this->setUniqueId($data['uniqueId']);
 		}
 	}

@@ -86,10 +86,10 @@ class ApplicationUser extends User  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['primaryAccount']) && $data['primaryAccount'] != null) {
+		if (isset($data['primaryAccount'])) {
 			$this->setPrimaryAccount($data['primaryAccount']);
 		}
-		if (isset($data['scope']) && $data['scope'] != null) {
+		if (isset($data['scope'])) {
 			$this->setScope($data['scope']);
 		}
 	}

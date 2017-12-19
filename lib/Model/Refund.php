@@ -267,40 +267,40 @@ class Refund  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['baseLineItems']) && $data['baseLineItems'] != null) {
+		if (isset($data['baseLineItems'])) {
 			$this->setBaseLineItems($data['baseLineItems']);
 		}
-		if (isset($data['failureReason']) && $data['failureReason'] != null) {
+		if (isset($data['failureReason'])) {
 			$this->setFailureReason($data['failureReason']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['labels']) && $data['labels'] != null) {
+		if (isset($data['labels'])) {
 			$this->setLabels($data['labels']);
 		}
-		if (isset($data['lineItems']) && $data['lineItems'] != null) {
+		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
 		}
-		if (isset($data['reducedLineItems']) && $data['reducedLineItems'] != null) {
+		if (isset($data['reducedLineItems'])) {
 			$this->setReducedLineItems($data['reducedLineItems']);
 		}
-		if (isset($data['reductions']) && $data['reductions'] != null) {
+		if (isset($data['reductions'])) {
 			$this->setReductions($data['reductions']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['taxes']) && $data['taxes'] != null) {
+		if (isset($data['taxes'])) {
 			$this->setTaxes($data['taxes']);
 		}
-		if (isset($data['transaction']) && $data['transaction'] != null) {
+		if (isset($data['transaction'])) {
 			$this->setTransaction($data['transaction']);
 		}
-		if (isset($data['type']) && $data['type'] != null) {
+		if (isset($data['type'])) {
 			$this->setType($data['type']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

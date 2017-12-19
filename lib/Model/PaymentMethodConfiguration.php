@@ -203,34 +203,34 @@ class PaymentMethodConfiguration  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['dataCollectionType']) && $data['dataCollectionType'] != null) {
+		if (isset($data['dataCollectionType'])) {
 			$this->setDataCollectionType($data['dataCollectionType']);
 		}
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['imageResourcePath']) && $data['imageResourcePath'] != null) {
+		if (isset($data['imageResourcePath'])) {
 			$this->setImageResourcePath($data['imageResourcePath']);
 		}
-		if (isset($data['oneClickPaymentMode']) && $data['oneClickPaymentMode'] != null) {
+		if (isset($data['oneClickPaymentMode'])) {
 			$this->setOneClickPaymentMode($data['oneClickPaymentMode']);
 		}
-		if (isset($data['resolvedDescription']) && $data['resolvedDescription'] != null) {
+		if (isset($data['resolvedDescription'])) {
 			$this->setResolvedDescription($data['resolvedDescription']);
 		}
-		if (isset($data['resolvedTitle']) && $data['resolvedTitle'] != null) {
+		if (isset($data['resolvedTitle'])) {
 			$this->setResolvedTitle($data['resolvedTitle']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['title']) && $data['title'] != null) {
+		if (isset($data['title'])) {
 			$this->setTitle($data['title']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
 	}

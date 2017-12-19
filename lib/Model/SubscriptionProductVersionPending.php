@@ -155,37 +155,37 @@ class SubscriptionProductVersionPending  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['id']) && $data['id'] != null) {
+		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
-		if (isset($data['version']) && $data['version'] != null) {
+		if (isset($data['version'])) {
 			$this->setVersion($data['version']);
 		}
-		if (isset($data['billingCycle']) && $data['billingCycle'] != null) {
+		if (isset($data['billingCycle'])) {
 			$this->setBillingCycle($data['billingCycle']);
 		}
-		if (isset($data['comment']) && $data['comment'] != null) {
+		if (isset($data['comment'])) {
 			$this->setComment($data['comment']);
 		}
-		if (isset($data['defaultCurrency']) && $data['defaultCurrency'] != null) {
+		if (isset($data['defaultCurrency'])) {
 			$this->setDefaultCurrency($data['defaultCurrency']);
 		}
-		if (isset($data['enabledCurrencies']) && $data['enabledCurrencies'] != null) {
+		if (isset($data['enabledCurrencies'])) {
 			$this->setEnabledCurrencies($data['enabledCurrencies']);
 		}
-		if (isset($data['minimalNumberOfPeriods']) && $data['minimalNumberOfPeriods'] != null) {
+		if (isset($data['minimalNumberOfPeriods'])) {
 			$this->setMinimalNumberOfPeriods($data['minimalNumberOfPeriods']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['numberOfNoticePeriods']) && $data['numberOfNoticePeriods'] != null) {
+		if (isset($data['numberOfNoticePeriods'])) {
 			$this->setNumberOfNoticePeriods($data['numberOfNoticePeriods']);
 		}
-		if (isset($data['product']) && $data['product'] != null) {
+		if (isset($data['product'])) {
 			$this->setProduct($data['product']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}

@@ -91,13 +91,13 @@ class LineItemReductionCreate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['lineItemUniqueId']) && $data['lineItemUniqueId'] != null) {
+		if (isset($data['lineItemUniqueId'])) {
 			$this->setLineItemUniqueId($data['lineItemUniqueId']);
 		}
-		if (isset($data['quantityReduction']) && $data['quantityReduction'] != null) {
+		if (isset($data['quantityReduction'])) {
 			$this->setQuantityReduction($data['quantityReduction']);
 		}
-		if (isset($data['unitPriceReduction']) && $data['unitPriceReduction'] != null) {
+		if (isset($data['unitPriceReduction'])) {
 			$this->setUnitPriceReduction($data['unitPriceReduction']);
 		}
 	}

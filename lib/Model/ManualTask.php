@@ -147,10 +147,10 @@ class ManualTask  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['actions']) && $data['actions'] != null) {
+		if (isset($data['actions'])) {
 			$this->setActions($data['actions']);
 		}
-		if (isset($data['state']) && $data['state'] != null) {
+		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
 	}

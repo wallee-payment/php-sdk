@@ -49,10 +49,10 @@ class SubscriptionChangeRequest  {
 	 */
 	private static $swaggerTypes = array(
 		'currency' => 'string',
-		'product' => '\Wallee\Sdk\Model\SubscriptionProduct',
+		'product' => 'int',
 		'respectTerminationPeriod' => 'bool',
 		'selectedComponents' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
-		'subscription' => '\Wallee\Sdk\Model\Subscription'	);
+		'subscription' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -75,7 +75,7 @@ class SubscriptionChangeRequest  {
 	/**
 	 * The subscription has to be linked with a product.
 	 *
-	 * @var \Wallee\Sdk\Model\SubscriptionProduct
+	 * @var int
 	 */
 	private $product;
 
@@ -96,7 +96,7 @@ class SubscriptionChangeRequest  {
 	/**
 	 * 
 	 *
-	 * @var \Wallee\Sdk\Model\Subscription
+	 * @var int
 	 */
 	private $subscription;
 
@@ -107,13 +107,19 @@ class SubscriptionChangeRequest  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['product']) && $data['product'] != null) {
+		if (isset($data['currency'])) {
+			$this->setCurrency($data['currency']);
+		}
+		if (isset($data['product'])) {
 			$this->setProduct($data['product']);
 		}
-		if (isset($data['selectedComponents']) && $data['selectedComponents'] != null) {
+		if (isset($data['respectTerminationPeriod'])) {
+			$this->setRespectTerminationPeriod($data['respectTerminationPeriod']);
+		}
+		if (isset($data['selectedComponents'])) {
 			$this->setSelectedComponents($data['selectedComponents']);
 		}
-		if (isset($data['subscription']) && $data['subscription'] != null) {
+		if (isset($data['subscription'])) {
 			$this->setSubscription($data['subscription']);
 		}
 	}
@@ -136,7 +142,7 @@ class SubscriptionChangeRequest  {
 	 * @param string $currency
 	 * @return SubscriptionChangeRequest
 	 */
-	protected function setCurrency($currency) {
+	public function setCurrency($currency) {
 		$this->currency = $currency;
 
 		return $this;
@@ -147,7 +153,7 @@ class SubscriptionChangeRequest  {
 	 *
 	 * The subscription has to be linked with a product.
 	 *
-	 * @return \Wallee\Sdk\Model\SubscriptionProduct
+	 * @return int
 	 */
 	public function getProduct() {
 		return $this->product;
@@ -156,7 +162,7 @@ class SubscriptionChangeRequest  {
 	/**
 	 * Sets product.
 	 *
-	 * @param \Wallee\Sdk\Model\SubscriptionProduct $product
+	 * @param int $product
 	 * @return SubscriptionChangeRequest
 	 */
 	public function setProduct($product) {
@@ -182,7 +188,7 @@ class SubscriptionChangeRequest  {
 	 * @param bool $respectTerminationPeriod
 	 * @return SubscriptionChangeRequest
 	 */
-	protected function setRespectTerminationPeriod($respectTerminationPeriod) {
+	public function setRespectTerminationPeriod($respectTerminationPeriod) {
 		$this->respectTerminationPeriod = $respectTerminationPeriod;
 
 		return $this;
@@ -216,7 +222,7 @@ class SubscriptionChangeRequest  {
 	 *
 	 * 
 	 *
-	 * @return \Wallee\Sdk\Model\Subscription
+	 * @return int
 	 */
 	public function getSubscription() {
 		return $this->subscription;
@@ -225,7 +231,7 @@ class SubscriptionChangeRequest  {
 	/**
 	 * Sets subscription.
 	 *
-	 * @param \Wallee\Sdk\Model\Subscription $subscription
+	 * @param int $subscription
 	 * @return SubscriptionChangeRequest
 	 */
 	public function setSubscription($subscription) {

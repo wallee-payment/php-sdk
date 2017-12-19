@@ -131,13 +131,13 @@ class Feature  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['description']) && $data['description'] != null) {
+		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
+		if (isset($data['name'])) {
 			$this->setName($data['name']);
 		}
-		if (isset($data['requiredFeatures']) && $data['requiredFeatures'] != null) {
+		if (isset($data['requiredFeatures'])) {
 			$this->setRequiredFeatures($data['requiredFeatures']);
 		}
 	}
