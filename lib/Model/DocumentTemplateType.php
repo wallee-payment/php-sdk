@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class DocumentTemplateType  {
 
@@ -51,7 +50,6 @@ class DocumentTemplateType  {
 		'description' => 'map[string,string]',
 		'feature' => 'int',
 		'id' => 'int',
-		'templateResource' => 'string',
 		'title' => 'map[string,string]'	);
 
 	/**
@@ -85,13 +83,6 @@ class DocumentTemplateType  {
 	 * @var int
 	 */
 	private $id;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $templateResource;
 
 	/**
 	 * 
@@ -181,29 +172,6 @@ class DocumentTemplateType  {
 	 */
 	protected function setId($id) {
 		$this->id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Returns templateResource.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getTemplateResource() {
-		return $this->templateResource;
-	}
-
-	/**
-	 * Sets templateResource.
-	 *
-	 * @param string $templateResource
-	 * @return DocumentTemplateType
-	 */
-	protected function setTemplateResource($templateResource) {
-		$this->templateResource = $templateResource;
 
 		return $this;
 	}

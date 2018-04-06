@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class TransactionCreate extends AbstractTransactionPending  {
 
@@ -52,6 +51,7 @@ class TransactionCreate extends AbstractTransactionPending  {
 		'chargeRetryEnabled' => 'bool',
 		'customersPresence' => '\Wallee\Sdk\Model\CustomersPresence',
 		'deviceSessionIdentifier' => 'string',
+		'environment' => '\Wallee\Sdk\Model\Environment',
 		'environmentSelectionStrategy' => '\Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy',
 		'spaceViewId' => 'int',
 	);
@@ -96,6 +96,13 @@ class TransactionCreate extends AbstractTransactionPending  {
 	private $deviceSessionIdentifier;
 
 	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Environment
+	 */
+	private $environment;
+
+	/**
 	 * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
 	 *
 	 * @var \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy
@@ -132,6 +139,9 @@ class TransactionCreate extends AbstractTransactionPending  {
 		}
 		if (isset($data['deviceSessionIdentifier'])) {
 			$this->setDeviceSessionIdentifier($data['deviceSessionIdentifier']);
+		}
+		if (isset($data['environment'])) {
+			$this->setEnvironment($data['environment']);
 		}
 		if (isset($data['environmentSelectionStrategy'])) {
 			$this->setEnvironmentSelectionStrategy($data['environmentSelectionStrategy']);
@@ -260,6 +270,29 @@ class TransactionCreate extends AbstractTransactionPending  {
 	 */
 	public function setDeviceSessionIdentifier($deviceSessionIdentifier) {
 		$this->deviceSessionIdentifier = $deviceSessionIdentifier;
+
+		return $this;
+	}
+
+	/**
+	 * Returns environment.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\Environment
+	 */
+	public function getEnvironment() {
+		return $this->environment;
+	}
+
+	/**
+	 * Sets environment.
+	 *
+	 * @param \Wallee\Sdk\Model\Environment $environment
+	 * @return TransactionCreate
+	 */
+	public function setEnvironment($environment) {
+		$this->environment = $environment;
 
 		return $this;
 	}

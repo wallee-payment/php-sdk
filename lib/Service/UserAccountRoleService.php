@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,6 @@ use Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class UserAccountRoleService {
 
@@ -77,6 +76,8 @@ class UserAccountRoleService {
 	 * @param int $roleId The role which is mapped to the user and account. (required)
 	 * @param bool $appliesOnSubaccount Whether the role applies only on subaccount. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\UserAccountRole
 	 */
 	public function addRole($userId, $accountId, $roleId, $appliesOnSubaccount = null) {
@@ -93,6 +94,8 @@ class UserAccountRoleService {
 	 * @param int $roleId The role which is mapped to the user and account. (required)
 	 * @param bool $appliesOnSubaccount Whether the role applies only on subaccount. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function addRoleWithHttpInfo($userId, $accountId, $roleId, $appliesOnSubaccount = null) {
@@ -110,11 +113,11 @@ class UserAccountRoleService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -186,6 +189,8 @@ class UserAccountRoleService {
 	 * @param int $userId The id of the user to whom the role is assigned. (required)
 	 * @param int $accountId The account to which the role is mapped. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\UserAccountRole[]
 	 */
 	public function callList($userId, $accountId) {
@@ -200,6 +205,8 @@ class UserAccountRoleService {
 	 * @param int $userId The id of the user to whom the role is assigned. (required)
 	 * @param int $accountId The account to which the role is mapped. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function callListWithHttpInfo($userId, $accountId) {
@@ -213,11 +220,11 @@ class UserAccountRoleService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -282,6 +289,8 @@ class UserAccountRoleService {
 	 *
 	 * @param int $id The id of user account role which should be removed (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function removeRole($id) {
@@ -295,6 +304,8 @@ class UserAccountRoleService {
 	 *
 	 * @param int $id The id of user account role which should be removed (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function removeRoleWithHttpInfo($id) {
@@ -304,11 +315,11 @@ class UserAccountRoleService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();

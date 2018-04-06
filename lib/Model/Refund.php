@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class Refund  {
 
@@ -52,6 +51,7 @@ class Refund  {
 		'baseLineItems' => '\Wallee\Sdk\Model\LineItem[]',
 		'createdBy' => 'int',
 		'createdOn' => '\DateTime',
+		'environment' => '\Wallee\Sdk\Model\Environment',
 		'externalId' => 'string',
 		'failedOn' => '\DateTime',
 		'failureReason' => '\Wallee\Sdk\Model\FailureReason',
@@ -112,6 +112,13 @@ class Refund  {
 	 * @var \DateTime
 	 */
 	private $createdOn;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Environment
+	 */
+	private $environment;
 
 	/**
 	 * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
@@ -270,6 +277,9 @@ class Refund  {
 		if (isset($data['baseLineItems'])) {
 			$this->setBaseLineItems($data['baseLineItems']);
 		}
+		if (isset($data['environment'])) {
+			$this->setEnvironment($data['environment']);
+		}
 		if (isset($data['failureReason'])) {
 			$this->setFailureReason($data['failureReason']);
 		}
@@ -394,6 +404,29 @@ class Refund  {
 	 */
 	protected function setCreatedOn($createdOn) {
 		$this->createdOn = $createdOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns environment.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\Environment
+	 */
+	public function getEnvironment() {
+		return $this->environment;
+	}
+
+	/**
+	 * Sets environment.
+	 *
+	 * @param \Wallee\Sdk\Model\Environment $environment
+	 * @return Refund
+	 */
+	public function setEnvironment($environment) {
+		$this->environment = $environment;
 
 		return $this;
 	}

@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class Transaction  {
 
@@ -68,8 +67,10 @@ class Transaction  {
 		'customerEmailAddress' => 'string',
 		'customerId' => 'string',
 		'customersPresence' => '\Wallee\Sdk\Model\CustomersPresence',
+		'deliveryDecisionMadeOn' => '\DateTime',
 		'deviceSessionIdentifier' => 'string',
 		'endOfLife' => '\DateTime',
+		'environment' => '\Wallee\Sdk\Model\Environment',
 		'environmentSelectionStrategy' => '\Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy',
 		'failedOn' => '\DateTime',
 		'failedUrl' => 'string',
@@ -95,6 +96,7 @@ class Transaction  {
 		'successUrl' => 'string',
 		'timeZone' => 'string',
 		'token' => '\Wallee\Sdk\Model\Token',
+		'tokenizationMode' => '\Wallee\Sdk\Model\TokenizationnMode',
 		'userAgentHeader' => 'string',
 		'userFailureMessage' => 'string',
 		'userInterfaceType' => '\Wallee\Sdk\Model\TransactionUserInterfaceType',
@@ -252,6 +254,13 @@ class Transaction  {
 	private $customersPresence;
 
 	/**
+	 * This date indicates when the decision has been made if a transaction should be delivered or not.
+	 *
+	 * @var \DateTime
+	 */
+	private $deliveryDecisionMadeOn;
+
+	/**
 	 * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
 	 *
 	 * @var string
@@ -264,6 +273,13 @@ class Transaction  {
 	 * @var \DateTime
 	 */
 	private $endOfLife;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Environment
+	 */
+	private $environment;
 
 	/**
 	 * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
@@ -441,6 +457,13 @@ class Transaction  {
 	private $token;
 
 	/**
+	 * The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+	 *
+	 * @var \Wallee\Sdk\Model\TokenizationnMode
+	 */
+	private $tokenizationMode;
+
+	/**
 	 * The user agent header provides the exact string which contains the user agent of the buyer.
 	 *
 	 * @var string
@@ -487,6 +510,9 @@ class Transaction  {
 		if (isset($data['customersPresence'])) {
 			$this->setCustomersPresence($data['customersPresence']);
 		}
+		if (isset($data['environment'])) {
+			$this->setEnvironment($data['environment']);
+		}
 		if (isset($data['environmentSelectionStrategy'])) {
 			$this->setEnvironmentSelectionStrategy($data['environmentSelectionStrategy']);
 		}
@@ -516,6 +542,9 @@ class Transaction  {
 		}
 		if (isset($data['token'])) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['tokenizationMode'])) {
+			$this->setTokenizationMode($data['tokenizationMode']);
 		}
 		if (isset($data['userInterfaceType'])) {
 			$this->setUserInterfaceType($data['userInterfaceType']);
@@ -987,6 +1016,29 @@ class Transaction  {
 	}
 
 	/**
+	 * Returns deliveryDecisionMadeOn.
+	 *
+	 * This date indicates when the decision has been made if a transaction should be delivered or not.
+	 *
+	 * @return \DateTime
+	 */
+	public function getDeliveryDecisionMadeOn() {
+		return $this->deliveryDecisionMadeOn;
+	}
+
+	/**
+	 * Sets deliveryDecisionMadeOn.
+	 *
+	 * @param \DateTime $deliveryDecisionMadeOn
+	 * @return Transaction
+	 */
+	protected function setDeliveryDecisionMadeOn($deliveryDecisionMadeOn) {
+		$this->deliveryDecisionMadeOn = $deliveryDecisionMadeOn;
+
+		return $this;
+	}
+
+	/**
 	 * Returns deviceSessionIdentifier.
 	 *
 	 * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
@@ -1028,6 +1080,29 @@ class Transaction  {
 	 */
 	protected function setEndOfLife($endOfLife) {
 		$this->endOfLife = $endOfLife;
+
+		return $this;
+	}
+
+	/**
+	 * Returns environment.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\Environment
+	 */
+	public function getEnvironment() {
+		return $this->environment;
+	}
+
+	/**
+	 * Sets environment.
+	 *
+	 * @param \Wallee\Sdk\Model\Environment $environment
+	 * @return Transaction
+	 */
+	public function setEnvironment($environment) {
+		$this->environment = $environment;
 
 		return $this;
 	}
@@ -1603,6 +1678,29 @@ class Transaction  {
 	 */
 	public function setToken($token) {
 		$this->token = $token;
+
+		return $this;
+	}
+
+	/**
+	 * Returns tokenizationMode.
+	 *
+	 * The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+	 *
+	 * @return \Wallee\Sdk\Model\TokenizationnMode
+	 */
+	public function getTokenizationMode() {
+		return $this->tokenizationMode;
+	}
+
+	/**
+	 * Sets tokenizationMode.
+	 *
+	 * @param \Wallee\Sdk\Model\TokenizationnMode $tokenizationMode
+	 * @return Transaction
+	 */
+	public function setTokenizationMode($tokenizationMode) {
+		$this->tokenizationMode = $tokenizationMode;
 
 		return $this;
 	}

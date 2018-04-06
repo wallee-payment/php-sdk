@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class TransactionInvoice extends TransactionAwareEntity  {
 
@@ -53,6 +52,7 @@ class TransactionInvoice extends TransactionAwareEntity  {
 		'createdOn' => '\DateTime',
 		'derecognizedOn' => '\DateTime',
 		'dueOn' => '\DateTime',
+		'environment' => '\Wallee\Sdk\Model\Environment',
 		'externalId' => 'string',
 		'language' => 'string',
 		'lineItems' => '\Wallee\Sdk\Model\LineItem[]',
@@ -110,6 +110,13 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 * @var \DateTime
 	 */
 	private $dueOn;
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\Environment
+	 */
+	private $environment;
 
 	/**
 	 * 
@@ -199,6 +206,9 @@ class TransactionInvoice extends TransactionAwareEntity  {
 
 		if (isset($data['completion'])) {
 			$this->setCompletion($data['completion']);
+		}
+		if (isset($data['environment'])) {
+			$this->setEnvironment($data['environment']);
 		}
 		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
@@ -320,6 +330,29 @@ class TransactionInvoice extends TransactionAwareEntity  {
 	 */
 	protected function setDueOn($dueOn) {
 		$this->dueOn = $dueOn;
+
+		return $this;
+	}
+
+	/**
+	 * Returns environment.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\Environment
+	 */
+	public function getEnvironment() {
+		return $this->environment;
+	}
+
+	/**
+	 * Sets environment.
+	 *
+	 * @param \Wallee\Sdk\Model\Environment $environment
+	 * @return TransactionInvoice
+	 */
+	public function setEnvironment($environment) {
+		$this->environment = $environment;
 
 		return $this;
 	}

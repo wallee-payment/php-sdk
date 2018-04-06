@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,6 @@ use Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class WebhookUrlService {
 
@@ -75,6 +74,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return int
 	 */
 	public function count($spaceId, $filter = null) {
@@ -89,6 +90,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function countWithHttpInfo($spaceId, $filter = null) {
@@ -170,6 +173,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\WebhookUrlCreate $entity The webhook url object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\WebhookUrl
 	 */
 	public function create($spaceId, $entity) {
@@ -184,6 +189,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\WebhookUrlCreate $entity The webhook url object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createWithHttpInfo($spaceId, $entity) {
@@ -269,6 +276,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function delete($spaceId, $id) {
@@ -283,6 +292,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function deleteWithHttpInfo($spaceId, $id) {
@@ -368,6 +379,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the webhook url which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\WebhookUrl
 	 */
 	public function read($spaceId, $id) {
@@ -382,6 +395,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the webhook url which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($spaceId, $id) {
@@ -395,11 +410,11 @@ class WebhookUrlService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -465,6 +480,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the webhook urls which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\WebhookUrl[]
 	 */
 	public function search($spaceId, $query) {
@@ -479,6 +496,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the webhook urls which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function searchWithHttpInfo($spaceId, $query) {
@@ -564,6 +583,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\WebhookUrlUpdate $entity The webhook url object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\WebhookUrl
 	 */
 	public function update($spaceId, $entity) {
@@ -578,6 +599,8 @@ class WebhookUrlService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\WebhookUrlUpdate $entity The webhook url object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateWithHttpInfo($spaceId, $entity) {

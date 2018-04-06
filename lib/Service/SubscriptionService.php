@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,6 @@ use Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class SubscriptionService {
 
@@ -75,6 +74,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionChangeRequest $request  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionVersion
 	 */
 	public function applyChanges($spaceId, $request) {
@@ -89,6 +90,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionChangeRequest $request  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function applyChangesWithHttpInfo($spaceId, $request) {
@@ -102,11 +105,11 @@ class SubscriptionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -178,6 +181,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return int
 	 */
 	public function count($spaceId, $filter = null) {
@@ -192,6 +197,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function countWithHttpInfo($spaceId, $filter = null) {
@@ -273,6 +280,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionCreateRequest $createRequest  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionVersion
 	 */
 	public function create($spaceId, $createRequest) {
@@ -287,6 +296,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionCreateRequest $createRequest  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createWithHttpInfo($spaceId, $createRequest) {
@@ -372,6 +383,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param int $subscriptionId The provided subscription id will be used to lookup the subscription which should be initialized. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionCharge
 	 */
 	public function initialize($spaceId, $subscriptionId) {
@@ -386,6 +399,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param int $subscriptionId The provided subscription id will be used to lookup the subscription which should be initialized. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function initializeWithHttpInfo($spaceId, $subscriptionId) {
@@ -399,11 +414,11 @@ class SubscriptionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -471,6 +486,8 @@ class SubscriptionService {
 	 * @param string $successUrl The subscriber will be redirected to the success URL when the transaction is successful. (optional)
 	 * @param string $failedUrl The subscriber will be redirected to the fail URL when the transaction fails. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionCharge
 	 */
 	public function initializeSubscriberPresent($spaceId, $subscriptionId, $successUrl = null, $failedUrl = null) {
@@ -487,6 +504,8 @@ class SubscriptionService {
 	 * @param string $successUrl The subscriber will be redirected to the success URL when the transaction is successful. (optional)
 	 * @param string $failedUrl The subscriber will be redirected to the fail URL when the transaction fails. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function initializeSubscriberPresentWithHttpInfo($spaceId, $subscriptionId, $successUrl = null, $failedUrl = null) {
@@ -500,11 +519,11 @@ class SubscriptionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -580,6 +599,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the subscription which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Subscription
 	 */
 	public function read($spaceId, $id) {
@@ -594,6 +615,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the subscription which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($spaceId, $id) {
@@ -607,11 +630,11 @@ class SubscriptionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -677,6 +700,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscriptions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Subscription[]
 	 */
 	public function search($spaceId, $query) {
@@ -691,6 +716,8 @@ class SubscriptionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscriptions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function searchWithHttpInfo($spaceId, $query) {
@@ -777,6 +804,8 @@ class SubscriptionService {
 	 * @param int $subscriptionId The subscription id identifies the subscription which should be terminated. (required)
 	 * @param bool $respectTerminationPeriod The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function terminate($spaceId, $subscriptionId, $respectTerminationPeriod) {
@@ -792,6 +821,8 @@ class SubscriptionService {
 	 * @param int $subscriptionId The subscription id identifies the subscription which should be terminated. (required)
 	 * @param bool $respectTerminationPeriod The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function terminateWithHttpInfo($spaceId, $subscriptionId, $respectTerminationPeriod) {
@@ -809,11 +840,11 @@ class SubscriptionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -879,6 +910,8 @@ class SubscriptionService {
 	 * @param int $subscriptionId The subscription id identifies the subscription which should be updated to the latest version. (required)
 	 * @param bool $respectTerminationPeriod The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionVersion
 	 */
 	public function updateProductVersion($spaceId, $subscriptionId, $respectTerminationPeriod) {
@@ -894,6 +927,8 @@ class SubscriptionService {
 	 * @param int $subscriptionId The subscription id identifies the subscription which should be updated to the latest version. (required)
 	 * @param bool $respectTerminationPeriod The subscription version may be retired. The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateProductVersionWithHttpInfo($spaceId, $subscriptionId, $respectTerminationPeriod) {
@@ -911,11 +946,11 @@ class SubscriptionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();

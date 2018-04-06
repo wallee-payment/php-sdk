@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class PaymentProcessorConfiguration  {
 
@@ -48,6 +47,7 @@ class PaymentProcessorConfiguration  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'contractId' => 'int',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
@@ -66,6 +66,13 @@ class PaymentProcessorConfiguration  {
 	}
 
 	
+
+	/**
+	 * The contract links the processor configuration with the contract that is used to process payments.
+	 *
+	 * @var int
+	 */
+	private $contractId;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -134,6 +141,29 @@ class PaymentProcessorConfiguration  {
 		}
 	}
 
+
+	/**
+	 * Returns contractId.
+	 *
+	 * The contract links the processor configuration with the contract that is used to process payments.
+	 *
+	 * @return int
+	 */
+	public function getContractId() {
+		return $this->contractId;
+	}
+
+	/**
+	 * Sets contractId.
+	 *
+	 * @param int $contractId
+	 * @return PaymentProcessorConfiguration
+	 */
+	protected function setContractId($contractId) {
+		$this->contractId = $contractId;
+
+		return $this;
+	}
 
 	/**
 	 * Returns id.

@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,6 @@ use Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class ChargeFlowService {
 
@@ -75,6 +74,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function applyFlow($spaceId, $id) {
@@ -89,6 +90,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The transaction id of the transaction which should be process asynchronously. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function applyFlowWithHttpInfo($spaceId, $id) {
@@ -102,11 +105,11 @@ class ChargeFlowService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -172,6 +175,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return int
 	 */
 	public function count($spaceId, $filter = null) {
@@ -186,6 +191,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function countWithHttpInfo($spaceId, $filter = null) {
@@ -267,6 +274,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the charge flow which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\ChargeFlow
 	 */
 	public function read($spaceId, $id) {
@@ -281,6 +290,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the charge flow which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($spaceId, $id) {
@@ -294,11 +305,11 @@ class ChargeFlowService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -364,6 +375,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\ChargeFlow[]
 	 */
 	public function search($spaceId, $query) {
@@ -378,6 +391,8 @@ class ChargeFlowService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge flows which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function searchWithHttpInfo($spaceId, $query) {
@@ -465,6 +480,8 @@ class ChargeFlowService {
 	 * @param int $type The id of the charge flow configuration type to recipient should be updated for. (required)
 	 * @param string $recipient The recipient address that should be used to send the payment URL. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function updateRecipient($spaceId, $transactionId, $type, $recipient) {
@@ -481,6 +498,8 @@ class ChargeFlowService {
 	 * @param int $type The id of the charge flow configuration type to recipient should be updated for. (required)
 	 * @param string $recipient The recipient address that should be used to send the payment URL. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateRecipientWithHttpInfo($spaceId, $transactionId, $type, $recipient) {
@@ -502,11 +521,11 @@ class ChargeFlowService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();

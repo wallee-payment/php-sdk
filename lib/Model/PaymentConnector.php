@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class PaymentConnector  {
 
@@ -49,6 +48,8 @@ class PaymentConnector  {
 	 */
 	private static $swaggerTypes = array(
 		'dataCollectionType' => '\Wallee\Sdk\Model\DataCollectionType',
+		'deprecated' => 'bool',
+		'deprecationReason' => 'map[string,string]',
 		'description' => 'map[string,string]',
 		'feature' => '\Wallee\Sdk\Model\Feature',
 		'id' => 'int',
@@ -77,6 +78,20 @@ class PaymentConnector  {
 	 * @var \Wallee\Sdk\Model\DataCollectionType
 	 */
 	private $dataCollectionType;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $deprecated;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
+	private $deprecationReason;
 
 	/**
 	 * 
@@ -158,6 +173,9 @@ class PaymentConnector  {
 		if (isset($data['dataCollectionType'])) {
 			$this->setDataCollectionType($data['dataCollectionType']);
 		}
+		if (isset($data['deprecationReason'])) {
+			$this->setDeprecationReason($data['deprecationReason']);
+		}
 		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
 		}
@@ -201,6 +219,52 @@ class PaymentConnector  {
 	 */
 	public function setDataCollectionType($dataCollectionType) {
 		$this->dataCollectionType = $dataCollectionType;
+
+		return $this;
+	}
+
+	/**
+	 * Returns deprecated.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getDeprecated() {
+		return $this->deprecated;
+	}
+
+	/**
+	 * Sets deprecated.
+	 *
+	 * @param bool $deprecated
+	 * @return PaymentConnector
+	 */
+	protected function setDeprecated($deprecated) {
+		$this->deprecated = $deprecated;
+
+		return $this;
+	}
+
+	/**
+	 * Returns deprecationReason.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getDeprecationReason() {
+		return $this->deprecationReason;
+	}
+
+	/**
+	 * Sets deprecationReason.
+	 *
+	 * @param map[string,string] $deprecationReason
+	 * @return PaymentConnector
+	 */
+	public function setDeprecationReason($deprecationReason) {
+		$this->deprecationReason = $deprecationReason;
 
 		return $this;
 	}

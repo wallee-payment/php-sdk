@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,6 @@ use Exception;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class ApiException extends Exception {
 
@@ -69,7 +68,7 @@ class ApiException extends Exception {
 	 * @param int	$code			the HTTP status code
 	 * @param string $responseHeaders the HTTP response header
 	 * @param mixed  $responseBody	the HTTP body of the server response either as Json or string
-	 * @param mixed  $responseObject  the deseralized response object
+	 * @param mixed  $responseObject  the deserialized response object
 	 */
 	public function __construct($logToken = null, $message = "", $code = 0, $responseHeaders = null, $responseBody = null, $responseObject = null) {
 		parent::__construct(($logToken != null ? '[' . $logToken . '] ' : '') . $message, $code);

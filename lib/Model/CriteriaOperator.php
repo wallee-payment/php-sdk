@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ namespace Wallee\Sdk\Model;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class CriteriaOperator implements IEnum {
 
@@ -44,6 +43,7 @@ class CriteriaOperator implements IEnum {
 	const NOT_EQUALS = 'NOT_EQUALS';
 	const NOT_CONTAINS = 'NOT_CONTAINS';
 	const IS_NULL = 'IS_NULL';
+	const IS_NOT_NULL = 'IS_NOT_NULL';
 	
 
 	

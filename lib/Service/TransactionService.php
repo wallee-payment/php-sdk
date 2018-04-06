@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,6 @@ use Wallee\Sdk\Http\HttpRequest;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 class TransactionService {
 
@@ -75,6 +74,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return string
 	 */
 	public function buildJavaScriptUrl($spaceId, $id) {
@@ -89,6 +90,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function buildJavaScriptUrlWithHttpInfo($spaceId, $id) {
@@ -175,6 +178,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return string
 	 */
 	public function buildMobileSdkUrlWithCredentials($credentials) {
@@ -188,6 +193,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function buildMobileSdkUrlWithCredentialsWithHttpInfo($credentials) {
@@ -268,6 +275,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return string
 	 */
 	public function buildPaymentPageUrl($spaceId, $id) {
@@ -282,6 +291,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function buildPaymentPageUrlWithHttpInfo($spaceId, $id) {
@@ -369,6 +380,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $transactionModel The transaction JSON object to update and confirm. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function confirm($spaceId, $transactionModel) {
@@ -383,6 +396,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $transactionModel The transaction JSON object to update and confirm. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function confirmWithHttpInfo($spaceId, $transactionModel) {
@@ -396,11 +411,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -472,6 +487,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return int
 	 */
 	public function count($spaceId, $filter = null) {
@@ -486,6 +503,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function countWithHttpInfo($spaceId, $filter = null) {
@@ -567,6 +586,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function create($spaceId, $transaction) {
@@ -581,6 +602,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionCreate $transaction The transaction object which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createWithHttpInfo($spaceId, $transaction) {
@@ -666,6 +689,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return string
 	 */
 	public function createTransactionCredentials($spaceId, $id) {
@@ -680,6 +705,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function createTransactionCredentialsWithHttpInfo($spaceId, $id) {
@@ -763,6 +790,8 @@ class TransactionService {
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $tokenId The token ID will be used to find the token which should be removed. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return void
 	 */
 	public function deleteOneClickTokenWithCredentials($credentials, $tokenId) {
@@ -777,6 +806,8 @@ class TransactionService {
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $tokenId The token ID will be used to find the token which should be removed. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function deleteOneClickTokenWithCredentialsWithHttpInfo($credentials, $tokenId) {
@@ -849,12 +880,117 @@ class TransactionService {
 	}
 
 	/**
+	 * Operation export
+	 *
+	 * Export
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return string
+	 */
+	public function export($spaceId, $request) {
+		return $this->exportWithHttpInfo($spaceId, $request)->getData();
+	}
+
+	/**
+	 * Operation exportWithHttpInfo
+	 *
+	 * Export
+	 *
+	 * @param int $spaceId  (required)
+	 * @param \Wallee\Sdk\Model\EntityExportRequest $request The request controls the entries which are exported. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function exportWithHttpInfo($spaceId, $request) {
+		// verify the required parameter 'spaceId' is set
+		if ($spaceId === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $spaceId when calling export');
+		}
+		// verify the required parameter 'request' is set
+		if ($request === null) {
+			throw new \InvalidArgumentException('Missing the required parameter $request when calling export');
+		}
+		// header params
+		$headerParams = array();
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('text/csv'));
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+
+		// query params
+		$queryParams = array();
+		if ($spaceId !== null) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($spaceId);
+		}
+
+		// path params
+		$resourcePath = "/transaction/export";
+		// default format to json
+		$resourcePath = str_replace("{format}", "json", $resourcePath);
+
+		// form params
+		$formParams = array();
+		// body params
+		$tempBody = null;
+		if (isset($request)) {
+			$tempBody = $request;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (count($formParams) > 0) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'string',
+				'/transaction/export'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+				case 200:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), 'string', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 442:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ClientError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+				case 542:
+					$responseObject = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Wallee\Sdk\Model\ServerError', $e->getResponseHeaders());
+					$e = new ApiException($e->getLogToken(), $responseObject->getMessage(), $e->getCode(), $e->getResponseHeaders(), $e->getResponseBody(), $responseObject);
+					break;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation fetchOneClickTokensWithCredentials
 	 *
 	 * Fetch One Click Tokens with Credentials
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\TokenVersion[]
 	 */
 	public function fetchOneClickTokensWithCredentials($credentials) {
@@ -868,6 +1004,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function fetchOneClickTokensWithCredentialsWithHttpInfo($credentials) {
@@ -944,6 +1082,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\PaymentMethodConfiguration[]
 	 */
 	public function fetchPossiblePaymentMethods($spaceId, $id) {
@@ -958,6 +1098,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function fetchPossiblePaymentMethodsWithHttpInfo($spaceId, $id) {
@@ -971,11 +1113,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -1040,6 +1182,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\PaymentMethodConfiguration[]
 	 */
 	public function fetchPossiblePaymentMethodsWithCredentials($credentials) {
@@ -1053,6 +1197,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function fetchPossiblePaymentMethodsWithCredentialsWithHttpInfo($credentials) {
@@ -1062,11 +1208,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -1129,6 +1275,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction to get the invoice document for. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\RenderedDocument
 	 */
 	public function getInvoiceDocument($spaceId, $id) {
@@ -1143,6 +1291,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction to get the invoice document for. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function getInvoiceDocumentWithHttpInfo($spaceId, $id) {
@@ -1156,11 +1306,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -1226,6 +1376,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction to get the latest line item version for. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\TransactionLineItemVersion
 	 */
 	public function getLatestTransactionLineItemVersion($spaceId, $id) {
@@ -1240,6 +1392,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction to get the latest line item version for. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function getLatestTransactionLineItemVersionWithHttpInfo($spaceId, $id) {
@@ -1253,11 +1407,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();
@@ -1323,6 +1477,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction to get the packing slip for. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\RenderedDocument
 	 */
 	public function getPackingSlip($spaceId, $id) {
@@ -1337,6 +1493,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction to get the packing slip for. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function getPackingSlipWithHttpInfo($spaceId, $id) {
@@ -1350,11 +1508,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -1420,6 +1578,8 @@ class TransactionService {
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $tokenId The token ID is used to load the corresponding token and to process the transaction with it. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function processOneClickTokenWithCredentials($credentials, $tokenId) {
@@ -1434,6 +1594,8 @@ class TransactionService {
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @param int $tokenId The token ID is used to load the corresponding token and to process the transaction with it. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function processOneClickTokenWithCredentialsWithHttpInfo($credentials, $tokenId) {
@@ -1517,6 +1679,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function read($spaceId, $id) {
@@ -1531,6 +1695,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param int $id The id of the transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithHttpInfo($spaceId, $id) {
@@ -1544,11 +1710,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -1613,6 +1779,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function readWithCredentials($credentials) {
@@ -1626,6 +1794,8 @@ class TransactionService {
 	 *
 	 * @param string $credentials The credentials identifies the transaction and contains the security details which grants the access this operation. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function readWithCredentialsWithHttpInfo($credentials) {
@@ -1635,11 +1805,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('*/*'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('*/*'));
 
 		// query params
 		$queryParams = array();
@@ -1702,6 +1872,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction[]
 	 */
 	public function search($spaceId, $query) {
@@ -1716,6 +1888,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function searchWithHttpInfo($spaceId, $query) {
@@ -1801,6 +1975,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\Transaction
 	 */
 	public function update($spaceId, $entity) {
@@ -1815,6 +1991,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionPending $entity The transaction object with the properties which should be updated. (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateWithHttpInfo($spaceId, $entity) {
@@ -1904,6 +2082,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionLineItemUpdateRequest $updateRequest  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\TransactionLineItemVersion
 	 */
 	public function updateTransactionLineItems($spaceId, $updateRequest) {
@@ -1918,6 +2098,8 @@ class TransactionService {
 	 * @param int $spaceId  (required)
 	 * @param \Wallee\Sdk\Model\TransactionLineItemUpdateRequest $updateRequest  (required)
 	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
 	public function updateTransactionLineItemsWithHttpInfo($spaceId, $updateRequest) {
@@ -1931,11 +2113,11 @@ class TransactionService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array());
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array('application/json;charset=utf-8'));
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(array());
 
 		// query params
 		$queryParams = array();

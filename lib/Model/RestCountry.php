@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class RestCountry  {
 
@@ -50,6 +49,7 @@ class RestCountry  {
 	private static $swaggerTypes = array(
 		'iSOCode2Letter' => 'string',
 		'iSOCode3Letter' => 'string',
+		'addressFormat' => '\Wallee\Sdk\Model\RestAddressFormat',
 		'name' => 'string',
 		'numericCode' => 'string',
 		'stateCodes' => 'string[]'	);
@@ -80,6 +80,13 @@ class RestCountry  {
 	private $iSOCode3Letter;
 
 	/**
+	 * The address format of the country indicates how an address has to look like for the country.
+	 *
+	 * @var \Wallee\Sdk\Model\RestAddressFormat
+	 */
+	private $addressFormat;
+
+	/**
 	 * The name labels the country by a name in English.
 	 *
 	 * @var string
@@ -107,6 +114,9 @@ class RestCountry  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['addressFormat'])) {
+			$this->setAddressFormat($data['addressFormat']);
+		}
 		if (isset($data['stateCodes'])) {
 			$this->setStateCodes($data['stateCodes']);
 		}
@@ -155,6 +165,29 @@ class RestCountry  {
 	 */
 	protected function setISOCode3Letter($iSOCode3Letter) {
 		$this->iSOCode3Letter = $iSOCode3Letter;
+
+		return $this;
+	}
+
+	/**
+	 * Returns addressFormat.
+	 *
+	 * The address format of the country indicates how an address has to look like for the country.
+	 *
+	 * @return \Wallee\Sdk\Model\RestAddressFormat
+	 */
+	public function getAddressFormat() {
+		return $this->addressFormat;
+	}
+
+	/**
+	 * Sets addressFormat.
+	 *
+	 * @param \Wallee\Sdk\Model\RestAddressFormat $addressFormat
+	 * @return RestCountry
+	 */
+	public function setAddressFormat($addressFormat) {
+		$this->addressFormat = $addressFormat;
 
 		return $this;
 	}

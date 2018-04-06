@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\Http\HttpClientFactory;
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link	 https://github.com/wallee-payment/wallee-php-sdk
  */
 final class ApiClient {
 
@@ -429,6 +428,7 @@ final class ApiClient {
 	 * @param string $responseType the expected response type
 	 * @param string $endpointPath the path to the method endpoint before expanding parameters
 	 * @throws ApiException on a non 2xx response
+	 * @throws VersioningException on a versioning/locking problem
 	 * @return mixed
 	 */
 	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null) {

@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class AbstractTransactionPending  {
 
@@ -63,7 +62,8 @@ class AbstractTransactionPending  {
 		'shippingMethod' => 'string',
 		'successUrl' => 'string',
 		'timeZone' => 'string',
-		'token' => 'int'	);
+		'token' => 'int',
+		'tokenizationMode' => '\Wallee\Sdk\Model\TokenizationnMode'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -195,6 +195,13 @@ class AbstractTransactionPending  {
 	 */
 	private $token;
 
+	/**
+	 * The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+	 *
+	 * @var \Wallee\Sdk\Model\TokenizationnMode
+	 */
+	private $tokenizationMode;
+
 
 	/**
 	 * Constructor.
@@ -252,6 +259,9 @@ class AbstractTransactionPending  {
 		}
 		if (isset($data['token'])) {
 			$this->setToken($data['token']);
+		}
+		if (isset($data['tokenizationMode'])) {
+			$this->setTokenizationMode($data['tokenizationMode']);
 		}
 	}
 
@@ -643,6 +653,29 @@ class AbstractTransactionPending  {
 	 */
 	public function setToken($token) {
 		$this->token = $token;
+
+		return $this;
+	}
+
+	/**
+	 * Returns tokenizationMode.
+	 *
+	 * The tokenization mode controls if and how a token is automatically applied to the transaction. When a token is directly assigned to the transaction the mode will have no effect at all. Obmitting the mode will disable the automatic application of a token.
+	 *
+	 * @return \Wallee\Sdk\Model\TokenizationnMode
+	 */
+	public function getTokenizationMode() {
+		return $this->tokenizationMode;
+	}
+
+	/**
+	 * Sets tokenizationMode.
+	 *
+	 * @param \Wallee\Sdk\Model\TokenizationnMode $tokenizationMode
+	 * @return AbstractTransactionPending
+	 */
+	public function setTokenizationMode($tokenizationMode) {
+		$this->tokenizationMode = $tokenizationMode;
 
 		return $this;
 	}

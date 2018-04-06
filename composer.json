@@ -1,6 +1,6 @@
 {
 	"name": "wallee/sdk",
-	"description": "Wallee SDK for PHP",
+	"description": "wallee SDK for PHP",
 	"keywords": [
 		"wallee",
 		"payment",
@@ -8,12 +8,12 @@
 		"sdk",
 		"api"
 	],
-	"homepage": "http://wallee.com",
+	"homepage": "",
 	"license": "Apache-2.0",
 	"authors": [
 		{
 			"name": "customweb GmbH",
-			"homepage": "https://wallee.com"
+			"homepage": "https://customweb.com"
 		}
 	],
 	"require": {

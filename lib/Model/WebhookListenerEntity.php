@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,6 @@ use Wallee\Sdk\ValidationException;
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
 class WebhookListenerEntity  {
 
@@ -48,7 +47,6 @@ class WebhookListenerEntity  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'displayName' => 'string',
 		'id' => 'int',
 		'name' => 'map[string,string]',
 		'technicalName' => 'string'	);
@@ -63,13 +61,6 @@ class WebhookListenerEntity  {
 	}
 
 	
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $displayName;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -104,29 +95,6 @@ class WebhookListenerEntity  {
 		}
 	}
 
-
-	/**
-	 * Returns displayName.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getDisplayName() {
-		return $this->displayName;
-	}
-
-	/**
-	 * Sets displayName.
-	 *
-	 * @param string $displayName
-	 * @return WebhookListenerEntity
-	 */
-	protected function setDisplayName($displayName) {
-		$this->displayName = $displayName;
-
-		return $this;
-	}
 
 	/**
 	 * Returns id.
