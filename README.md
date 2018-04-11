@@ -6,7 +6,7 @@ This repository contains the open source PHP SDK that allows you to access walle
 
 ## Requirements
 
-* [PHP 5.4.0 and later](http://www.php.net/)
+* [PHP 5.6.0 and later](http://www.php.net/)
 
 ## Documentation
 

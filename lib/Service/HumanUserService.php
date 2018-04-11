@@ -377,7 +377,7 @@ class HumanUserService {
 		}
 		// header params
 		$headerParams = array();
-		$headerAccept = $this->apiClient->selectHeaderAccept(array('text/csv'));
+		$headerAccept = $this->apiClient->selectHeaderAccept(array('application/json;charset=utf-8', 'text/csv'));
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
