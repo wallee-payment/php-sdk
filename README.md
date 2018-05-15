@@ -30,7 +30,7 @@ composer require wallee/sdk
 
 ### Manual Installation
 
-Alternatively you can download the package in its entirety. The [Releases](/releases) page lists all stable versions.
+Alternatively you can download the package in its entirety. The [Releases](../../releases) page lists all stable versions.
 
 Uncompress the zip file you download, and include the autoloader in your project:
 
