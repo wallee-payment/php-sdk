@@ -46,25 +46,30 @@ require_once '/path/to/php-sdk/autoload.php';
 <?php
 require_once(__DIR__ . '/autoload.php');
 
-
 // Setup API client
 $client = new \Wallee\Sdk\ApiClient('YOUR_USER_ID', 'YOUR_API_KEY');
 
 // Create API service instance
-$service = new \Wallee\Sdk\Service\AccountService($apiClient);
-// The filter which restricts the entities which are used to calculate the count.
+$service = new \Wallee\Sdk\Service\SpaceService($client);
+
+// The query restricts the spaces which are returned by the search.
 $filter = new \Wallee\Sdk\Model\EntityQueryFilter();
+$filter->setType(\Wallee\Sdk\Model\EntityQueryFilterType::LEAF);
+$filter->setOperator(\Wallee\Sdk\Model\CriteriaOperator::EQUALS);
+$filter->setFieldName('state');
+$filter->setValue(\Wallee\Sdk\Model\CreationEntityState::ACTIVE);
+
+$query = new \Wallee\Sdk\Model\EntityQuery();
+$query->setFilter($filter);
 
 try {
-    $result = $apiService->count($filter);
+    $result = $service->search($query);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AccountService->count: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling SpaceService->search: ', $e->getMessage(), PHP_EOL;
 }
-
-?>
 ```
 
 ## License
 
-Please see the [license file](/blob/master/LICENSE) for more information.
+Please see the [license file](LICENSE) for more information.
