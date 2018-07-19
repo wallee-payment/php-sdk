@@ -47,6 +47,7 @@ class Subscription  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'affiliate' => '\Wallee\Sdk\Model\SubscriptionAffiliate',
 		'createdOn' => '\DateTime',
 		'description' => 'string',
 		'id' => 'int',
@@ -73,6 +74,13 @@ class Subscription  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var \Wallee\Sdk\Model\SubscriptionAffiliate
+	 */
+	private $affiliate;
 
 	/**
 	 * 
@@ -186,6 +194,9 @@ class Subscription  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		if (isset($data['affiliate'])) {
+			$this->setAffiliate($data['affiliate']);
+		}
 		if (isset($data['id'])) {
 			$this->setId($data['id']);
 		}
@@ -203,6 +214,29 @@ class Subscription  {
 		}
 	}
 
+
+	/**
+	 * Returns affiliate.
+	 *
+	 * 
+	 *
+	 * @return \Wallee\Sdk\Model\SubscriptionAffiliate
+	 */
+	public function getAffiliate() {
+		return $this->affiliate;
+	}
+
+	/**
+	 * Sets affiliate.
+	 *
+	 * @param \Wallee\Sdk\Model\SubscriptionAffiliate $affiliate
+	 * @return Subscription
+	 */
+	public function setAffiliate($affiliate) {
+		$this->affiliate = $affiliate;
+
+		return $this;
+	}
 
 	/**
 	 * Returns createdOn.

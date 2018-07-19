@@ -61,6 +61,7 @@ class PaymentLink  {
 		'maximalNumberOfTransactions' => 'int',
 		'name' => 'string',
 		'plannedPurgeDate' => '\DateTime',
+		'protectionMode' => '\Wallee\Sdk\Model\PaymentLinkProtectionMode',
 		'shippingAddressRequired' => 'bool',
 		'state' => '\Wallee\Sdk\Model\CreationEntityState',
 		'url' => 'string',
@@ -176,6 +177,13 @@ class PaymentLink  {
 	private $plannedPurgeDate;
 
 	/**
+	 * The protection mode determines if the payment link is protected against tampering and in what way.
+	 *
+	 * @var \Wallee\Sdk\Model\PaymentLinkProtectionMode
+	 */
+	private $protectionMode;
+
+	/**
 	 * By making the shipping address required the transaction can only be created when a shipping address is provided within the request.
 	 *
 	 * @var bool
@@ -218,6 +226,9 @@ class PaymentLink  {
 		}
 		if (isset($data['lineItems'])) {
 			$this->setLineItems($data['lineItems']);
+		}
+		if (isset($data['protectionMode'])) {
+			$this->setProtectionMode($data['protectionMode']);
 		}
 		if (isset($data['state'])) {
 			$this->setState($data['state']);
@@ -546,6 +557,29 @@ class PaymentLink  {
 	 */
 	protected function setPlannedPurgeDate($plannedPurgeDate) {
 		$this->plannedPurgeDate = $plannedPurgeDate;
+
+		return $this;
+	}
+
+	/**
+	 * Returns protectionMode.
+	 *
+	 * The protection mode determines if the payment link is protected against tampering and in what way.
+	 *
+	 * @return \Wallee\Sdk\Model\PaymentLinkProtectionMode
+	 */
+	public function getProtectionMode() {
+		return $this->protectionMode;
+	}
+
+	/**
+	 * Sets protectionMode.
+	 *
+	 * @param \Wallee\Sdk\Model\PaymentLinkProtectionMode $protectionMode
+	 * @return PaymentLink
+	 */
+	public function setProtectionMode($protectionMode) {
+		$this->protectionMode = $protectionMode;
 
 		return $this;
 	}

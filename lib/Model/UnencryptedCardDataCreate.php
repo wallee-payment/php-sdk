@@ -212,9 +212,6 @@ class UnencryptedCardDataCreate  {
 	 */
 	public function validate() {
 
-		if ($this->getExpiryDate() === null) {
-			throw new ValidationException("'expiryDate' can't be null", 'expiryDate', $this);
-		}
 		if ($this->getPrimaryAccountNumber() === null) {
 			throw new ValidationException("'primaryAccountNumber' can't be null", 'primaryAccountNumber', $this);
 		}

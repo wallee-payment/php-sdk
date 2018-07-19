@@ -52,6 +52,7 @@ class Transaction  {
 		'allowedPaymentMethodBrands' => '\Wallee\Sdk\Model\PaymentMethodBrand[]',
 		'allowedPaymentMethodConfigurations' => 'int[]',
 		'authorizationAmount' => 'float',
+		'authorizationEnvironment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
 		'authorizationTimeoutOn' => '\DateTime',
 		'authorizedOn' => '\DateTime',
 		'autoConfirmationEnabled' => 'bool',
@@ -147,6 +148,13 @@ class Transaction  {
 	 * @var float
 	 */
 	private $authorizationAmount;
+
+	/**
+	 * The environment in which this transaction was successfully authorized.
+	 *
+	 * @var \Wallee\Sdk\Model\ChargeAttemptEnvironment
+	 */
+	private $authorizationEnvironment;
 
 	/**
 	 * This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
@@ -504,6 +512,9 @@ class Transaction  {
 		if (isset($data['allowedPaymentMethodConfigurations'])) {
 			$this->setAllowedPaymentMethodConfigurations($data['allowedPaymentMethodConfigurations']);
 		}
+		if (isset($data['authorizationEnvironment'])) {
+			$this->setAuthorizationEnvironment($data['authorizationEnvironment']);
+		}
 		if (isset($data['billingAddress'])) {
 			$this->setBillingAddress($data['billingAddress']);
 		}
@@ -666,6 +677,29 @@ class Transaction  {
 	 */
 	protected function setAuthorizationAmount($authorizationAmount) {
 		$this->authorizationAmount = $authorizationAmount;
+
+		return $this;
+	}
+
+	/**
+	 * Returns authorizationEnvironment.
+	 *
+	 * The environment in which this transaction was successfully authorized.
+	 *
+	 * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment
+	 */
+	public function getAuthorizationEnvironment() {
+		return $this->authorizationEnvironment;
+	}
+
+	/**
+	 * Sets authorizationEnvironment.
+	 *
+	 * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $authorizationEnvironment
+	 * @return Transaction
+	 */
+	public function setAuthorizationEnvironment($authorizationEnvironment) {
+		$this->authorizationEnvironment = $authorizationEnvironment;
 
 		return $this;
 	}

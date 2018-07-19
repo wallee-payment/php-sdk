@@ -24,7 +24,7 @@ namespace Wallee\Sdk\Model;
 use Wallee\Sdk\ValidationException;
 
 /**
- * SubscriptionPending model
+ * SubscriptionAffiliateDeleting model
  *
  * @category    Class
  * @description 
@@ -32,14 +32,14 @@ use Wallee\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class SubscriptionPending extends SubscriptionUpdate  {
+class SubscriptionAffiliateDeleting extends SubscriptionAffiliateDeleted  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'Subscription.Pending';
+	private static $swaggerModelName = 'SubscriptionAffiliate.Deleting';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -47,10 +47,7 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'affiliate' => 'int',
-		'reference' => 'string',
-		'subscriber' => 'int',
-		'token' => 'int'	);
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -63,34 +60,6 @@ class SubscriptionPending extends SubscriptionUpdate  {
 
 	
 
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $affiliate;
-
-	/**
-	 * 
-	 *
-	 * @var string
-	 */
-	private $reference;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $subscriber;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $token;
-
 
 	/**
 	 * Constructor.
@@ -100,112 +69,8 @@ class SubscriptionPending extends SubscriptionUpdate  {
 	public function __construct(array $data = null) {
 		parent::__construct($data);
 
-		if (isset($data['affiliate'])) {
-			$this->setAffiliate($data['affiliate']);
-		}
-		if (isset($data['reference'])) {
-			$this->setReference($data['reference']);
-		}
-		if (isset($data['subscriber'])) {
-			$this->setSubscriber($data['subscriber']);
-		}
-		if (isset($data['token'])) {
-			$this->setToken($data['token']);
-		}
 	}
 
-
-	/**
-	 * Returns affiliate.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getAffiliate() {
-		return $this->affiliate;
-	}
-
-	/**
-	 * Sets affiliate.
-	 *
-	 * @param int $affiliate
-	 * @return SubscriptionPending
-	 */
-	public function setAffiliate($affiliate) {
-		$this->affiliate = $affiliate;
-
-		return $this;
-	}
-
-	/**
-	 * Returns reference.
-	 *
-	 * 
-	 *
-	 * @return string
-	 */
-	public function getReference() {
-		return $this->reference;
-	}
-
-	/**
-	 * Sets reference.
-	 *
-	 * @param string $reference
-	 * @return SubscriptionPending
-	 */
-	public function setReference($reference) {
-		$this->reference = $reference;
-
-		return $this;
-	}
-
-	/**
-	 * Returns subscriber.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getSubscriber() {
-		return $this->subscriber;
-	}
-
-	/**
-	 * Sets subscriber.
-	 *
-	 * @param int $subscriber
-	 * @return SubscriptionPending
-	 */
-	public function setSubscriber($subscriber) {
-		$this->subscriber = $subscriber;
-
-		return $this;
-	}
-
-	/**
-	 * Returns token.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getToken() {
-		return $this->token;
-	}
-
-	/**
-	 * Sets token.
-	 *
-	 * @param int $token
-	 * @return SubscriptionPending
-	 */
-	public function setToken($token) {
-		$this->token = $token;
-
-		return $this;
-	}
 
 	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.

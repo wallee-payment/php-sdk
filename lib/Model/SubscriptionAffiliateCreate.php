@@ -24,7 +24,7 @@ namespace Wallee\Sdk\Model;
 use Wallee\Sdk\ValidationException;
 
 /**
- * TransactionInvoiceReplacement model
+ * SubscriptionAffiliateCreate model
  *
  * @category    Class
  * @description 
@@ -32,14 +32,14 @@ use Wallee\Sdk\ValidationException;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionInvoiceReplacement  {
+class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'TransactionInvoiceReplacement';
+	private static $swaggerModelName = 'SubscriptionAffiliate.Create';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -47,11 +47,9 @@ class TransactionInvoiceReplacement  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'dueOn' => '\DateTime',
 		'externalId' => 'string',
-		'lineItems' => '\Wallee\Sdk\Model\LineItemCreate[]',
-		'merchantReference' => 'string',
-		'sentToCustomer' => 'bool'	);
+		'reference' => 'string',
+	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -59,17 +57,10 @@ class TransactionInvoiceReplacement  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
-
-	/**
-	 * The date on which the invoice should be paid on.
-	 *
-	 * @var \DateTime
-	 */
-	private $dueOn;
 
 	/**
 	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
@@ -81,23 +72,9 @@ class TransactionInvoiceReplacement  {
 	/**
 	 * 
 	 *
-	 * @var \Wallee\Sdk\Model\LineItemCreate[]
-	 */
-	private $lineItems;
-
-	/**
-	 * 
-	 *
 	 * @var string
 	 */
-	private $merchantReference;
-
-	/**
-	 * When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
-	 *
-	 * @var bool
-	 */
-	private $sentToCustomer;
+	private $reference;
 
 
 	/**
@@ -106,46 +83,19 @@ class TransactionInvoiceReplacement  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['dueOn'])) {
-			$this->setDueOn($data['dueOn']);
-		}
+		parent::__construct($data);
+
 		if (isset($data['externalId'])) {
 			$this->setExternalId($data['externalId']);
 		}
-		if (isset($data['lineItems'])) {
-			$this->setLineItems($data['lineItems']);
+		if (isset($data['reference'])) {
+			$this->setReference($data['reference']);
 		}
-		if (isset($data['merchantReference'])) {
-			$this->setMerchantReference($data['merchantReference']);
-		}
-		if (isset($data['sentToCustomer'])) {
-			$this->setSentToCustomer($data['sentToCustomer']);
+		if (isset($data['state'])) {
+			$this->setState($data['state']);
 		}
 	}
 
-
-	/**
-	 * Returns dueOn.
-	 *
-	 * The date on which the invoice should be paid on.
-	 *
-	 * @return \DateTime
-	 */
-	public function getDueOn() {
-		return $this->dueOn;
-	}
-
-	/**
-	 * Sets dueOn.
-	 *
-	 * @param \DateTime $dueOn
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setDueOn($dueOn) {
-		$this->dueOn = $dueOn;
-
-		return $this;
-	}
 
 	/**
 	 * Returns externalId.
@@ -162,7 +112,7 @@ class TransactionInvoiceReplacement  {
 	 * Sets externalId.
 	 *
 	 * @param string $externalId
-	 * @return TransactionInvoiceReplacement
+	 * @return SubscriptionAffiliateCreate
 	 */
 	public function setExternalId($externalId) {
 		$this->externalId = $externalId;
@@ -171,72 +121,47 @@ class TransactionInvoiceReplacement  {
 	}
 
 	/**
-	 * Returns lineItems.
-	 *
-	 * 
-	 *
-	 * @return \Wallee\Sdk\Model\LineItemCreate[]
-	 */
-	public function getLineItems() {
-		return $this->lineItems;
-	}
-
-	/**
-	 * Sets lineItems.
-	 *
-	 * @param \Wallee\Sdk\Model\LineItemCreate[] $lineItems
-	 * @return TransactionInvoiceReplacement
-	 */
-	public function setLineItems($lineItems) {
-		$this->lineItems = $lineItems;
-
-		return $this;
-	}
-
-	/**
-	 * Returns merchantReference.
+	 * Returns reference.
 	 *
 	 * 
 	 *
 	 * @return string
 	 */
-	public function getMerchantReference() {
-		return $this->merchantReference;
+	public function getReference() {
+		return $this->reference;
 	}
 
 	/**
-	 * Sets merchantReference.
+	 * Sets reference.
 	 *
-	 * @param string $merchantReference
-	 * @return TransactionInvoiceReplacement
+	 * @param string $reference
+	 * @return SubscriptionAffiliateCreate
 	 */
-	public function setMerchantReference($merchantReference) {
-		$this->merchantReference = $merchantReference;
+	public function setReference($reference) {
+		$this->reference = $reference;
 
 		return $this;
 	}
 
 	/**
-	 * Returns sentToCustomer.
+	 * Returns state.
 	 *
-	 * When the connector is configured to send the invoice to the customer and this property is true the customer will receive an email with the updated invoice. When this property is false no invoice is sent.
+	 * 
 	 *
-	 * @return bool
+	 * @return \Wallee\Sdk\Model\CreationEntityState
 	 */
-	public function getSentToCustomer() {
-		return $this->sentToCustomer;
+	public function getState() {
+		return parent::getState();
 	}
 
 	/**
-	 * Sets sentToCustomer.
+	 * Sets state.
 	 *
-	 * @param bool $sentToCustomer
-	 * @return TransactionInvoiceReplacement
+	 * @param \Wallee\Sdk\Model\CreationEntityState $state
+	 * @return SubscriptionAffiliateCreate
 	 */
-	public function setSentToCustomer($sentToCustomer) {
-		$this->sentToCustomer = $sentToCustomer;
-
-		return $this;
+	public function setState($state) {
+		return parent::setState($state);
 	}
 
 	/**
@@ -245,12 +170,10 @@ class TransactionInvoiceReplacement  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
-		if ($this->getLineItems() === null) {
-			throw new ValidationException("'lineItems' can't be null", 'lineItems', $this);
 		}
 	}
 

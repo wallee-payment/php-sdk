@@ -51,6 +51,7 @@ class PaymentMethod  {
 		'description' => 'map[string,string]',
 		'id' => 'int',
 		'imagePath' => 'string',
+		'merchantDescription' => 'map[string,string]',
 		'name' => 'map[string,string]',
 		'supportedCurrencies' => 'string[]'	);
 
@@ -98,6 +99,13 @@ class PaymentMethod  {
 	 *
 	 * @var map[string,string]
 	 */
+	private $merchantDescription;
+
+	/**
+	 * 
+	 *
+	 * @var map[string,string]
+	 */
 	private $name;
 
 	/**
@@ -119,6 +127,9 @@ class PaymentMethod  {
 		}
 		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
+		}
+		if (isset($data['merchantDescription'])) {
+			$this->setMerchantDescription($data['merchantDescription']);
 		}
 		if (isset($data['name'])) {
 			$this->setName($data['name']);
@@ -217,6 +228,29 @@ class PaymentMethod  {
 	 */
 	protected function setImagePath($imagePath) {
 		$this->imagePath = $imagePath;
+
+		return $this;
+	}
+
+	/**
+	 * Returns merchantDescription.
+	 *
+	 * 
+	 *
+	 * @return map[string,string]
+	 */
+	public function getMerchantDescription() {
+		return $this->merchantDescription;
+	}
+
+	/**
+	 * Sets merchantDescription.
+	 *
+	 * @param map[string,string] $merchantDescription
+	 * @return PaymentMethod
+	 */
+	public function setMerchantDescription($merchantDescription) {
+		$this->merchantDescription = $merchantDescription;
 
 		return $this;
 	}

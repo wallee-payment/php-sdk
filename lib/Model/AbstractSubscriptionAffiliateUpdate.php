@@ -24,22 +24,21 @@ namespace Wallee\Sdk\Model;
 use Wallee\Sdk\ValidationException;
 
 /**
- * PaymentLinkCreate model
+ * AbstractSubscriptionAffiliateUpdate model
  *
  * @category    Class
- * @description The payment link defines an URL to automatically create transactions.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
+class AbstractSubscriptionAffiliateUpdate  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'PaymentLink.Create';
+	private static $swaggerModelName = 'Abstract.SubscriptionAffiliate.Update';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -47,9 +46,10 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'state' => '\Wallee\Sdk\Model\CreationEntityState',
-		'externalId' => 'string',
-		'protectionMode' => '\Wallee\Sdk\Model\PaymentLinkProtectionMode'	);
+		'language' => 'string',
+		'metaData' => 'map[string,string]',
+		'name' => 'string',
+		'state' => '\Wallee\Sdk\Model\CreationEntityState'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -57,10 +57,31 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes + parent::swaggerTypes();
+		return self::$swaggerTypes;
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
+
+	/**
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @var map[string,string]
+	 */
+	private $metaData;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $name;
 
 	/**
 	 * 
@@ -69,20 +90,6 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
 	 */
 	private $state;
 
-	/**
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @var string
-	 */
-	private $externalId;
-
-	/**
-	 * The protection mode determines if the payment link is protected against tampering and in what way.
-	 *
-	 * @var \Wallee\Sdk\Model\PaymentLinkProtectionMode
-	 */
-	private $protectionMode;
-
 
 	/**
 	 * Constructor.
@@ -90,19 +97,89 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		parent::__construct($data);
-
+		if (isset($data['language'])) {
+			$this->setLanguage($data['language']);
+		}
+		if (isset($data['metaData'])) {
+			$this->setMetaData($data['metaData']);
+		}
+		if (isset($data['name'])) {
+			$this->setName($data['name']);
+		}
 		if (isset($data['state'])) {
 			$this->setState($data['state']);
 		}
-		if (isset($data['externalId'])) {
-			$this->setExternalId($data['externalId']);
-		}
-		if (isset($data['protectionMode'])) {
-			$this->setProtectionMode($data['protectionMode']);
-		}
 	}
 
+
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
+
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return AbstractSubscriptionAffiliateUpdate
+	 */
+	public function setLanguage($language) {
+		$this->language = $language;
+
+		return $this;
+	}
+
+	/**
+	 * Returns metaData.
+	 *
+	 * Meta data allow to store additional data along the object.
+	 *
+	 * @return map[string,string]
+	 */
+	public function getMetaData() {
+		return $this->metaData;
+	}
+
+	/**
+	 * Sets metaData.
+	 *
+	 * @param map[string,string] $metaData
+	 * @return AbstractSubscriptionAffiliateUpdate
+	 */
+	public function setMetaData($metaData) {
+		$this->metaData = $metaData;
+
+		return $this;
+	}
+
+	/**
+	 * Returns name.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * Sets name.
+	 *
+	 * @param string $name
+	 * @return AbstractSubscriptionAffiliateUpdate
+	 */
+	public function setName($name) {
+		$this->name = $name;
+
+		return $this;
+	}
 
 	/**
 	 * Returns state.
@@ -119,56 +196,10 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
 	 * Sets state.
 	 *
 	 * @param \Wallee\Sdk\Model\CreationEntityState $state
-	 * @return PaymentLinkCreate
+	 * @return AbstractSubscriptionAffiliateUpdate
 	 */
 	public function setState($state) {
 		$this->state = $state;
-
-		return $this;
-	}
-
-	/**
-	 * Returns externalId.
-	 *
-	 * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
-	 *
-	 * @return string
-	 */
-	public function getExternalId() {
-		return $this->externalId;
-	}
-
-	/**
-	 * Sets externalId.
-	 *
-	 * @param string $externalId
-	 * @return PaymentLinkCreate
-	 */
-	public function setExternalId($externalId) {
-		$this->externalId = $externalId;
-
-		return $this;
-	}
-
-	/**
-	 * Returns protectionMode.
-	 *
-	 * The protection mode determines if the payment link is protected against tampering and in what way.
-	 *
-	 * @return \Wallee\Sdk\Model\PaymentLinkProtectionMode
-	 */
-	public function getProtectionMode() {
-		return $this->protectionMode;
-	}
-
-	/**
-	 * Sets protectionMode.
-	 *
-	 * @param \Wallee\Sdk\Model\PaymentLinkProtectionMode $protectionMode
-	 * @return PaymentLinkCreate
-	 */
-	public function setProtectionMode($protectionMode) {
-		$this->protectionMode = $protectionMode;
 
 		return $this;
 	}
@@ -179,11 +210,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
-		parent::validate();
 
-		if ($this->getExternalId() === null) {
-			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
-		}
 	}
 
 	/**
