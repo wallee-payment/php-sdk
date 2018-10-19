@@ -44,30 +44,42 @@ require_once '/path/to/php-sdk/autoload.php';
 
 ```php
 <?php
+
 require_once(__DIR__ . '/autoload.php');
 
+// Configuration
+$spaceId = 405;
+$userId = 512;
+$secret = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=";
+
 // Setup API client
-$client = new \Wallee\Sdk\ApiClient('YOUR_USER_ID', 'YOUR_API_KEY');
+$client = new \Wallee\Sdk\Sdk\ApiClient($userId, $secret);
 
 // Create API service instance
-$service = new \Wallee\Sdk\Service\SpaceService($client);
+$transactionService = new \Wallee\Sdk\Sdk\Service\TransactionService($client);
 
-// The query restricts the spaces which are returned by the search.
-$filter = new \Wallee\Sdk\Model\EntityQueryFilter();
-$filter->setType(\Wallee\Sdk\Model\EntityQueryFilterType::LEAF);
-$filter->setOperator(\Wallee\Sdk\Model\CriteriaOperator::EQUALS);
-$filter->setFieldName('state');
-$filter->setValue(\Wallee\Sdk\Model\CreationEntityState::ACTIVE);
+// Create transaction
+$lineItem = new \Wallee\Sdk\Sdk\Model\LineItemCreate();
+$lineItem->setName('Red T-Shirt');
+$lineItem->setUniqueId('5412');
+$lineItem->setSku('red-t-shirt-123');
+$lineItem->setQuantity(1);
+$lineItem->setAmountIncludingTax(29.95);
+$lineItem->setType(\Wallee\Sdk\Sdk\Model\LineItemType::PRODUCT);
 
-$query = new \Wallee\Sdk\Model\EntityQuery();
-$query->setFilter($filter);
 
-try {
-    $result = $service->search($query);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling SpaceService->search: ', $e->getMessage(), PHP_EOL;
-}
+$transaction = new \Wallee\Sdk\Sdk\Model\TransactionCreate();
+$transaction->setCurrency("EUR");
+$transaction->setLineItems(array($lineItem));
+$transaction->setAutoConfirmationEnabled(true);
+
+$createdTransaction = $transactionService->create($spaceId, $transaction);
+
+// Create Payment Page URL:
+$redirectionUrl = $transactionService->buildPaymentPageUrl($spaceId, $createdTransaction->getId());
+
+header('Location: ' . $redirectionUrl);
+
 ```
 
 ## License
