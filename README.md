@@ -53,22 +53,22 @@ $userId = 512;
 $secret = "FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=";
 
 // Setup API client
-$client = new \Wallee\Sdk\Sdk\ApiClient($userId, $secret);
+$client = new \Wallee\Sdk\ApiClient($userId, $secret);
 
 // Create API service instance
-$transactionService = new \Wallee\Sdk\Sdk\Service\TransactionService($client);
+$transactionService = new \Wallee\Sdk\Service\TransactionService($client);
 
 // Create transaction
-$lineItem = new \Wallee\Sdk\Sdk\Model\LineItemCreate();
+$lineItem = new \Wallee\Sdk\Model\LineItemCreate();
 $lineItem->setName('Red T-Shirt');
 $lineItem->setUniqueId('5412');
 $lineItem->setSku('red-t-shirt-123');
 $lineItem->setQuantity(1);
 $lineItem->setAmountIncludingTax(29.95);
-$lineItem->setType(\Wallee\Sdk\Sdk\Model\LineItemType::PRODUCT);
+$lineItem->setType(\Wallee\Sdk\Model\LineItemType::PRODUCT);
 
 
-$transaction = new \Wallee\Sdk\Sdk\Model\TransactionCreate();
+$transaction = new \Wallee\Sdk\Model\TransactionCreate();
 $transaction->setCurrency("EUR");
 $transaction->setLineItems(array($lineItem));
 $transaction->setAutoConfirmationEnabled(true);
