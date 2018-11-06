@@ -47,6 +47,8 @@ class DocumentTemplate  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'defaultTemplate' => 'bool',
+		'deliveryEnabled' => 'bool',
 		'id' => 'int',
 		'linkedSpaceId' => 'int',
 		'name' => 'string',
@@ -67,6 +69,20 @@ class DocumentTemplate  {
 	}
 
 	
+
+	/**
+	 * The default document template is used whenever no specific template is specified for a particular template type.
+	 *
+	 * @var bool
+	 */
+	private $defaultTemplate;
+
+	/**
+	 * 
+	 *
+	 * @var bool
+	 */
+	private $deliveryEnabled;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -152,6 +168,52 @@ class DocumentTemplate  {
 		}
 	}
 
+
+	/**
+	 * Returns defaultTemplate.
+	 *
+	 * The default document template is used whenever no specific template is specified for a particular template type.
+	 *
+	 * @return bool
+	 */
+	public function getDefaultTemplate() {
+		return $this->defaultTemplate;
+	}
+
+	/**
+	 * Sets defaultTemplate.
+	 *
+	 * @param bool $defaultTemplate
+	 * @return DocumentTemplate
+	 */
+	protected function setDefaultTemplate($defaultTemplate) {
+		$this->defaultTemplate = $defaultTemplate;
+
+		return $this;
+	}
+
+	/**
+	 * Returns deliveryEnabled.
+	 *
+	 * 
+	 *
+	 * @return bool
+	 */
+	public function getDeliveryEnabled() {
+		return $this->deliveryEnabled;
+	}
+
+	/**
+	 * Sets deliveryEnabled.
+	 *
+	 * @param bool $deliveryEnabled
+	 * @return DocumentTemplate
+	 */
+	protected function setDeliveryEnabled($deliveryEnabled) {
+		$this->deliveryEnabled = $deliveryEnabled;
+
+		return $this;
+	}
 
 	/**
 	 * Returns id.
