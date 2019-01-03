@@ -54,6 +54,7 @@ class SubscriptionCharge  {
 		'failedOn' => '\DateTime',
 		'failedUrl' => 'string',
 		'id' => 'int',
+		'language' => 'string',
 		'ledgerEntries' => '\Wallee\Sdk\Model\SubscriptionLedgerEntry[]',
 		'linkedSpaceId' => 'int',
 		'plannedExecutionDate' => '\DateTime',
@@ -127,6 +128,13 @@ class SubscriptionCharge  {
 	 * @var int
 	 */
 	private $id;
+
+	/**
+	 * 
+	 *
+	 * @var string
+	 */
+	private $language;
 
 	/**
 	 * 
@@ -410,6 +418,29 @@ class SubscriptionCharge  {
 	 */
 	public function setId($id) {
 		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns language.
+	 *
+	 * 
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->language;
+	}
+
+	/**
+	 * Sets language.
+	 *
+	 * @param string $language
+	 * @return SubscriptionCharge
+	 */
+	protected function setLanguage($language) {
+		$this->language = $language;
 
 		return $this;
 	}
