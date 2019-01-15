@@ -222,7 +222,11 @@ class SubscriptionAffiliateUpdate  {
 	 * @return SubscriptionAffiliateUpdate
 	 */
 	public function setMetaData($metaData) {
-		$this->metaData = $metaData;
+		if (is_array($metaData) && empty($metaData)) {
+			$this->metaData = new \stdClass;
+		} else {
+			$this->metaData = $metaData;
+		}
 
 		return $this;
 	}

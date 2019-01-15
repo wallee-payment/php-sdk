@@ -148,7 +148,11 @@ class MetricUsage  {
 	 * @return MetricUsage
 	 */
 	public function setMetricDescription($metricDescription) {
-		$this->metricDescription = $metricDescription;
+		if (is_array($metricDescription) && empty($metricDescription)) {
+			$this->metricDescription = new \stdClass;
+		} else {
+			$this->metricDescription = $metricDescription;
+		}
 
 		return $this;
 	}
@@ -194,7 +198,11 @@ class MetricUsage  {
 	 * @return MetricUsage
 	 */
 	public function setMetricName($metricName) {
-		$this->metricName = $metricName;
+		if (is_array($metricName) && empty($metricName)) {
+			$this->metricName = new \stdClass;
+		} else {
+			$this->metricName = $metricName;
+		}
 
 		return $this;
 	}
