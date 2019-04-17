@@ -50,6 +50,7 @@ class ProductPeriodFee  {
 		'component' => '\Wallee\Sdk\Model\SubscriptionProductComponent',
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'id' => 'int',
+		'ledgerEntryTitle' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'linkedSpaceId' => 'int',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
 		'numberOfFreeTrialPeriods' => 'int',
@@ -88,6 +89,13 @@ class ProductPeriodFee  {
 	 * @var int
 	 */
 	private $id;
+
+	/**
+	 * The ledger entry title will be used for the title in the ledger entry and in the invoice.
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	private $ledgerEntryTitle;
 
 	/**
 	 * The linked space id holds the ID of the space to which the entity belongs to.
@@ -146,6 +154,9 @@ class ProductPeriodFee  {
 		}
 		if (isset($data['id'])) {
 			$this->setId($data['id']);
+		}
+		if (isset($data['ledgerEntryTitle'])) {
+			$this->setLedgerEntryTitle($data['ledgerEntryTitle']);
 		}
 		if (isset($data['name'])) {
 			$this->setName($data['name']);
@@ -227,6 +238,29 @@ class ProductPeriodFee  {
 	 */
 	public function setId($id) {
 		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns ledgerEntryTitle.
+	 *
+	 * The ledger entry title will be used for the title in the ledger entry and in the invoice.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+	 */
+	public function getLedgerEntryTitle() {
+		return $this->ledgerEntryTitle;
+	}
+
+	/**
+	 * Sets ledgerEntryTitle.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedString $ledgerEntryTitle
+	 * @return ProductPeriodFee
+	 */
+	public function setLedgerEntryTitle($ledgerEntryTitle) {
+		$this->ledgerEntryTitle = $ledgerEntryTitle;
 
 		return $this;
 	}

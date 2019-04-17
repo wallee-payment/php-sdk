@@ -51,6 +51,7 @@ class ProductPeriodFeeUpdate  {
 		'version' => 'int',
 		'component' => 'int',
 		'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+		'ledgerEntryTitle' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
 		'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
 		'numberOfFreeTrialPeriods' => 'int',
 		'periodFee' => '\Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[]'	);
@@ -95,6 +96,13 @@ class ProductPeriodFeeUpdate  {
 	private $description;
 
 	/**
+	 * The ledger entry title will be used for the title in the ledger entry and in the invoice.
+	 *
+	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	private $ledgerEntryTitle;
+
+	/**
 	 * The name of the fee should describe for the subscriber in few words for what the fee is for.
 	 *
 	 * @var \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
@@ -133,6 +141,9 @@ class ProductPeriodFeeUpdate  {
 		}
 		if (isset($data['description'])) {
 			$this->setDescription($data['description']);
+		}
+		if (isset($data['ledgerEntryTitle'])) {
+			$this->setLedgerEntryTitle($data['ledgerEntryTitle']);
 		}
 		if (isset($data['name'])) {
 			$this->setName($data['name']);
@@ -234,6 +245,29 @@ class ProductPeriodFeeUpdate  {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Returns ledgerEntryTitle.
+	 *
+	 * The ledger entry title will be used for the title in the ledger entry and in the invoice.
+	 *
+	 * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+	 */
+	public function getLedgerEntryTitle() {
+		return $this->ledgerEntryTitle;
+	}
+
+	/**
+	 * Sets ledgerEntryTitle.
+	 *
+	 * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $ledgerEntryTitle
+	 * @return ProductPeriodFeeUpdate
+	 */
+	public function setLedgerEntryTitle($ledgerEntryTitle) {
+		$this->ledgerEntryTitle = $ledgerEntryTitle;
 
 		return $this;
 	}
