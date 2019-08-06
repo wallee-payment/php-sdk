@@ -212,6 +212,9 @@ class UnencryptedCardDataCreate  {
 	 */
 	public function validate() {
 
+		if ($this->getPrimaryAccountNumber() === null) {
+			throw new ValidationException("'primaryAccountNumber' can't be null", 'primaryAccountNumber', $this);
+		}
 	}
 
 	/**

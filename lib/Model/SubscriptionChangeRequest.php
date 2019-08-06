@@ -252,6 +252,9 @@ class SubscriptionChangeRequest  {
 		if ($this->getProduct() === null) {
 			throw new ValidationException("'product' can't be null", 'product', $this);
 		}
+		if ($this->getSubscription() === null) {
+			throw new ValidationException("'subscription' can't be null", 'subscription', $this);
+		}
 	}
 
 	/**

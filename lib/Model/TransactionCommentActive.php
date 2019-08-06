@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,23 +24,22 @@ namespace Wallee\Sdk\Model;
 use Wallee\Sdk\ValidationException;
 
 /**
- * EmailSenderType model
+ * TransactionCommentActive model
  *
  * @category    Class
  * @description 
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class EmailSenderType  {
+class TransactionCommentActive extends AbstractTransactionCommentActive  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'EmailSenderType';
+	private static $swaggerModelName = 'TransactionComment.Active';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -48,10 +47,8 @@ class EmailSenderType  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'description' => 'map[string,string]',
-		'feature' => 'int',
 		'id' => 'int',
-		'name' => 'map[string,string]'	);
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -59,24 +56,10 @@ class EmailSenderType  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
-
-	/**
-	 * 
-	 *
-	 * @var map[string,string]
-	 */
-	private $description;
-
-	/**
-	 * 
-	 *
-	 * @var int
-	 */
-	private $feature;
 
 	/**
 	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -86,11 +69,11 @@ class EmailSenderType  {
 	private $id;
 
 	/**
-	 * 
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
 	 *
-	 * @var map[string,string]
+	 * @var int
 	 */
-	private $name;
+	private $version;
 
 
 	/**
@@ -99,60 +82,16 @@ class EmailSenderType  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['description']) && $data['description'] != null) {
-			$this->setDescription($data['description']);
+		parent::__construct($data);
+
+		if (isset($data['id'])) {
+			$this->setId($data['id']);
 		}
-		if (isset($data['name']) && $data['name'] != null) {
-			$this->setName($data['name']);
+		if (isset($data['version'])) {
+			$this->setVersion($data['version']);
 		}
 	}
 
-
-	/**
-	 * Returns description.
-	 *
-	 * 
-	 *
-	 * @return map[string,string]
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 * Sets description.
-	 *
-	 * @param map[string,string] $description
-	 * @return EmailSenderType
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-
-		return $this;
-	}
-
-	/**
-	 * Returns feature.
-	 *
-	 * 
-	 *
-	 * @return int
-	 */
-	public function getFeature() {
-		return $this->feature;
-	}
-
-	/**
-	 * Sets feature.
-	 *
-	 * @param int $feature
-	 * @return EmailSenderType
-	 */
-	protected function setFeature($feature) {
-		$this->feature = $feature;
-
-		return $this;
-	}
 
 	/**
 	 * Returns id.
@@ -169,33 +108,33 @@ class EmailSenderType  {
 	 * Sets id.
 	 *
 	 * @param int $id
-	 * @return EmailSenderType
+	 * @return TransactionCommentActive
 	 */
-	protected function setId($id) {
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
 	}
 
 	/**
-	 * Returns name.
+	 * Returns version.
 	 *
-	 * 
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
 	 *
-	 * @return map[string,string]
+	 * @return int
 	 */
-	public function getName() {
-		return $this->name;
+	public function getVersion() {
+		return $this->version;
 	}
 
 	/**
-	 * Sets name.
+	 * Sets version.
 	 *
-	 * @param map[string,string] $name
-	 * @return EmailSenderType
+	 * @param int $version
+	 * @return TransactionCommentActive
 	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setVersion($version) {
+		$this->version = $version;
 
 		return $this;
 	}
@@ -206,7 +145,14 @@ class EmailSenderType  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
+		}
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
+		}
 	}
 
 	/**

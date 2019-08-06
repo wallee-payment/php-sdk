@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,23 +24,22 @@ namespace Wallee\Sdk\Model;
 use Wallee\Sdk\ValidationException;
 
 /**
- * EntityReference model
+ * RefundCommentActive model
  *
  * @category    Class
- * @description The entity reference holds the id of an entity which can be fetched over the corresponding service.
+ * @description 
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class EntityReference  {
+class RefundCommentActive extends AbstractRefundCommentActive  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'entity-reference';
+	private static $swaggerModelName = 'RefundComment.Active';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -48,7 +47,8 @@ class EntityReference  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-	);
+		'id' => 'int',
+		'version' => 'int'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -56,10 +56,24 @@ class EntityReference  {
 	 * @return string[]
 	 */
 	public static function swaggerTypes() {
-		return self::$swaggerTypes;
+		return self::$swaggerTypes + parent::swaggerTypes();
 	}
 
 	
+
+	/**
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @var int
+	 */
+	private $id;
+
+	/**
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @var int
+	 */
+	private $version;
 
 
 	/**
@@ -68,8 +82,62 @@ class EntityReference  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
+		parent::__construct($data);
+
+		if (isset($data['id'])) {
+			$this->setId($data['id']);
+		}
+		if (isset($data['version'])) {
+			$this->setVersion($data['version']);
+		}
 	}
 
+
+	/**
+	 * Returns id.
+	 *
+	 * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+	 *
+	 * @return int
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Sets id.
+	 *
+	 * @param int $id
+	 * @return RefundCommentActive
+	 */
+	public function setId($id) {
+		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Returns version.
+	 *
+	 * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+	 *
+	 * @return int
+	 */
+	public function getVersion() {
+		return $this->version;
+	}
+
+	/**
+	 * Sets version.
+	 *
+	 * @param int $version
+	 * @return RefundCommentActive
+	 */
+	public function setVersion($version) {
+		$this->version = $version;
+
+		return $this;
+	}
 
 	/**
 	 * Validates the model's properties and throws a ValidationException if the validation fails.
@@ -77,7 +145,14 @@ class EntityReference  {
 	 * @throws ValidationException
 	 */
 	public function validate() {
+		parent::validate();
 
+		if ($this->getId() === null) {
+			throw new ValidationException("'id' can't be null", 'id', $this);
+		}
+		if ($this->getVersion() === null) {
+			throw new ValidationException("'version' can't be null", 'version', $this);
+		}
 	}
 
 	/**

@@ -47,6 +47,7 @@ class Subscription  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
+		'activatedOn' => '\DateTime',
 		'affiliate' => '\Wallee\Sdk\Model\SubscriptionAffiliate',
 		'createdOn' => '\DateTime',
 		'description' => 'string',
@@ -74,6 +75,13 @@ class Subscription  {
 	}
 
 	
+
+	/**
+	 * 
+	 *
+	 * @var \DateTime
+	 */
+	private $activatedOn;
 
 	/**
 	 * 
@@ -214,6 +222,29 @@ class Subscription  {
 		}
 	}
 
+
+	/**
+	 * Returns activatedOn.
+	 *
+	 * 
+	 *
+	 * @return \DateTime
+	 */
+	public function getActivatedOn() {
+		return $this->activatedOn;
+	}
+
+	/**
+	 * Sets activatedOn.
+	 *
+	 * @param \DateTime $activatedOn
+	 * @return Subscription
+	 */
+	protected function setActivatedOn($activatedOn) {
+		$this->activatedOn = $activatedOn;
+
+		return $this;
+	}
 
 	/**
 	 * Returns affiliate.

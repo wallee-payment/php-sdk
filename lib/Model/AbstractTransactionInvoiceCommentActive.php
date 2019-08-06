@@ -1,9 +1,9 @@
 <?php
 /**
- * Wallee SDK
+ * wallee SDK
  *
- * This library allows to interact with the Wallee payment service.
- * Wallee SDK: 1.0.0
+ * This library allows to interact with the wallee payment service.
+ * wallee SDK: 1.0.0
  * 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,23 +24,21 @@ namespace Wallee\Sdk\Model;
 use Wallee\Sdk\ValidationException;
 
 /**
- * AttachmentResource model
+ * AbstractTransactionInvoiceCommentActive model
  *
  * @category    Class
- * @description The attachment resource allows the attachment of resources to emails.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
- * @link        https://github.com/wallee-payment/wallee-php-sdk
  */
-class AttachmentResource  {
+class AbstractTransactionInvoiceCommentActive  {
 
 	/**
 	 * The original name of the model.
 	 *
 	 * @var string
 	 */
-	private static $swaggerModelName = 'AttachmentResource';
+	private static $swaggerModelName = 'Abstract.TransactionInvoiceComment.Active';
 
 	/**
 	 * An array of property to type mappings. Used for (de)serialization.
@@ -48,8 +46,7 @@ class AttachmentResource  {
 	 * @var string[]
 	 */
 	private static $swaggerTypes = array(
-		'attachmentName' => 'map[string,string]',
-		'resourcePath' => '\Wallee\Sdk\Model\ModelResourcePath'	);
+		'content' => 'string'	);
 
 	/**
 	 * Returns an array of property to type mappings.
@@ -63,18 +60,11 @@ class AttachmentResource  {
 	
 
 	/**
-	 * The name of the attachment which is shown to the user within the email client.
+	 * 
 	 *
-	 * @var map[string,string]
+	 * @var string
 	 */
-	private $attachmentName;
-
-	/**
-	 * The path to the resource which should be attached to the email.
-	 *
-	 * @var \Wallee\Sdk\Model\ModelResourcePath
-	 */
-	private $resourcePath;
+	private $content;
 
 
 	/**
@@ -83,57 +73,31 @@ class AttachmentResource  {
 	 * @param mixed[] $data an associated array of property values initializing the model
 	 */
 	public function __construct(array $data = null) {
-		if (isset($data['attachmentName']) && $data['attachmentName'] != null) {
-			$this->setAttachmentName($data['attachmentName']);
-		}
-		if (isset($data['resourcePath']) && $data['resourcePath'] != null) {
-			$this->setResourcePath($data['resourcePath']);
+		if (isset($data['content'])) {
+			$this->setContent($data['content']);
 		}
 	}
 
 
 	/**
-	 * Returns attachmentName.
+	 * Returns content.
 	 *
-	 * The name of the attachment which is shown to the user within the email client.
+	 * 
 	 *
-	 * @return map[string,string]
+	 * @return string
 	 */
-	public function getAttachmentName() {
-		return $this->attachmentName;
+	public function getContent() {
+		return $this->content;
 	}
 
 	/**
-	 * Sets attachmentName.
+	 * Sets content.
 	 *
-	 * @param map[string,string] $attachmentName
-	 * @return AttachmentResource
+	 * @param string $content
+	 * @return AbstractTransactionInvoiceCommentActive
 	 */
-	public function setAttachmentName($attachmentName) {
-		$this->attachmentName = $attachmentName;
-
-		return $this;
-	}
-
-	/**
-	 * Returns resourcePath.
-	 *
-	 * The path to the resource which should be attached to the email.
-	 *
-	 * @return \Wallee\Sdk\Model\ModelResourcePath
-	 */
-	public function getResourcePath() {
-		return $this->resourcePath;
-	}
-
-	/**
-	 * Sets resourcePath.
-	 *
-	 * @param \Wallee\Sdk\Model\ModelResourcePath $resourcePath
-	 * @return AttachmentResource
-	 */
-	public function setResourcePath($resourcePath) {
-		$this->resourcePath = $resourcePath;
+	public function setContent($content) {
+		$this->content = $content;
 
 		return $this;
 	}

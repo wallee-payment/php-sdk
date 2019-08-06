@@ -184,6 +184,9 @@ class DebtCollectionCaseCreate extends AbstractDebtCollectionCaseUpdate  {
 		if ($this->getExternalId() === null) {
 			throw new ValidationException("'externalId' can't be null", 'externalId', $this);
 		}
+		if ($this->getReference() === null) {
+			throw new ValidationException("'reference' can't be null", 'reference', $this);
+		}
 	}
 
 	/**
