@@ -44,6 +44,11 @@ final class CurlHttpClient implements IHttpClient {
 		if ($apiClient->getConnectionTimeout() !== 0) {
 			curl_setopt($curl, CURLOPT_TIMEOUT, $apiClient->getConnectionTimeout());
 		}
+		// The number of seconds to keep DNS entries in memory. 
+		// Note that DNS entries have a "TTL" property but libcurl doesn't use that.
+		// As Wallee uses CloudFlare the default 120s cache is sometimes to long
+		// because CloudFlare can have lower TTL
+		curl_setopt($curl, CURLOPT_DNS_CACHE_TIMEOUT, 5);
 		// return the result on success, rather than just true
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
