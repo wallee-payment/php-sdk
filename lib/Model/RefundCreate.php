@@ -1,0 +1,468 @@
+<?php
+/**
+ *  SDK
+ *
+ * This library allows to interact with the  payment service.
+ *  SDK: 2.0.1
+ * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace Wallee\Sdk\Model;
+
+use \ArrayAccess;
+use \Wallee\Sdk\ObjectSerializer;
+
+/**
+ * RefundCreate model
+ *
+ * @category    Class
+ * @description The refund represents a credit back to the customer. It can be issued by the merchant or by the customer (reversal).
+ * @package     Wallee\Sdk
+ * @author      customweb GmbH
+ * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ */
+class RefundCreate implements ModelInterface, ArrayAccess
+{
+    const DISCRIMINATOR = null;
+
+    /**
+      * The original name of the model.
+      *
+      * @var string
+      */
+    protected static $swaggerModelName = 'Refund.Create';
+
+    /**
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerTypes = [
+        'completion' => 'int',
+        'external_id' => 'string',
+        'merchant_reference' => 'string',
+        'reductions' => '\Wallee\Sdk\Model\LineItemReductionCreate[]',
+        'transaction' => 'int',
+        'type' => '\Wallee\Sdk\Model\RefundType'
+    ];
+
+    /**
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $swaggerFormats = [
+        'completion' => 'int64',
+        'external_id' => null,
+        'merchant_reference' => null,
+        'reductions' => null,
+        'transaction' => 'int64',
+        'type' => null
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'completion' => 'completion',
+        'external_id' => 'externalId',
+        'merchant_reference' => 'merchantReference',
+        'reductions' => 'reductions',
+        'transaction' => 'transaction',
+        'type' => 'type'
+    ];
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+        'completion' => 'setCompletion',
+        'external_id' => 'setExternalId',
+        'merchant_reference' => 'setMerchantReference',
+        'reductions' => 'setReductions',
+        'transaction' => 'setTransaction',
+        'type' => 'setType'
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+        'completion' => 'getCompletion',
+        'external_id' => 'getExternalId',
+        'merchant_reference' => 'getMerchantReference',
+        'reductions' => 'getReductions',
+        'transaction' => 'getTransaction',
+        'type' => 'getType'
+    ];
+
+    
+
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
+     */
+    public function __construct(array $data = null)
+    {
+        
+        $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
+        
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['merchant_reference'] = isset($data['merchant_reference']) ? $data['merchant_reference'] : null;
+        
+        $this->container['reductions'] = isset($data['reductions']) ? $data['reductions'] : null;
+        
+        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        
+    }
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array invalid properties with reasons
+     */
+    public function listInvalidProperties()
+    {
+        $invalidProperties = [];
+
+        if ($this->container['external_id'] === null) {
+            $invalidProperties[] = "'external_id' can't be null";
+        }
+        if ($this->container['reductions'] === null) {
+            $invalidProperties[] = "'reductions' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        return $invalidProperties;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerTypes()
+    {
+        return self::$swaggerTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats()
+    {
+        return self::$swaggerFormats;
+    }
+
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
+    }
+
+    
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool True if all properties are valid
+     */
+    public function valid()
+    {
+        return count($this->listInvalidProperties()) === 0;
+    }
+
+    
+
+    /**
+     * Gets completion
+     *
+     * @return int
+     */
+    public function getCompletion()
+    {
+        return $this->container['completion'];
+    }
+
+    /**
+     * Sets completion
+     *
+     * @param int $completion 
+     *
+     * @return $this
+     */
+    public function setCompletion($completion)
+    {
+        $this->container['completion'] = $completion;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets merchant_reference
+     *
+     * @return string
+     */
+    public function getMerchantReference()
+    {
+        return $this->container['merchant_reference'];
+    }
+
+    /**
+     * Sets merchant_reference
+     *
+     * @param string $merchant_reference 
+     *
+     * @return $this
+     */
+    public function setMerchantReference($merchant_reference)
+    {
+        $this->container['merchant_reference'] = $merchant_reference;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets reductions
+     *
+     * @return \Wallee\Sdk\Model\LineItemReductionCreate[]
+     */
+    public function getReductions()
+    {
+        return $this->container['reductions'];
+    }
+
+    /**
+     * Sets reductions
+     *
+     * @param \Wallee\Sdk\Model\LineItemReductionCreate[] $reductions 
+     *
+     * @return $this
+     */
+    public function setReductions($reductions)
+    {
+        $this->container['reductions'] = $reductions;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets transaction
+     *
+     * @return int
+     */
+    public function getTransaction()
+    {
+        return $this->container['transaction'];
+    }
+
+    /**
+     * Sets transaction
+     *
+     * @param int $transaction 
+     *
+     * @return $this
+     */
+    public function setTransaction($transaction)
+    {
+        $this->container['transaction'] = $transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return \Wallee\Sdk\Model\RefundType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \Wallee\Sdk\Model\RefundType $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+    
+    /**
+     * Returns true if offset exists. False otherwise.
+     *
+     * @param integer $offset Offset
+     *
+     * @return boolean
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->container[$offset]);
+    }
+
+    /**
+     * Gets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+    }
+
+    /**
+     * Sets value based on offset.
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->container[] = $value;
+        } else {
+            $this->container[$offset] = $value;
+        }
+    }
+
+    /**
+     * Unsets offset.
+     *
+     * @param integer $offset Offset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->container[$offset]);
+    }
+
+    /**
+     * Gets the string presentation of the object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
+        }
+
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+}
+
+
