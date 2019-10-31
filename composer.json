@@ -1,9 +1,9 @@
 {
-    "name": "wallee-payment/php-sdk",
-    "version": "2.0.1",
+    "name": "wallee/sdk",
+    "version": "2.0.2",
 	"description": "wallee SDK for PHP",
 	"keywords": [
-		"wallee-payment",
+		"wallee",
 		"payment",
 		"php",
 		"sdk",
