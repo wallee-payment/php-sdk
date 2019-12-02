@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * RenderedDocument model
+ * RenderedTerminalReceipt model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RenderedDocument implements ModelInterface, ArrayAccess
+class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RenderedDocument';
+    protected static $swaggerModelName = 'RenderedTerminalReceipt';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,9 +50,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'data' => 'string',
-        'document_template_type' => 'int',
-        'mime_type' => 'string',
-        'title' => 'string'
+        'mime_type' => 'string'
     ];
 
     /**
@@ -62,9 +60,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'data' => 'byte',
-        'document_template_type' => 'int64',
-        'mime_type' => null,
-        'title' => null
+        'mime_type' => null
     ];
 
     /**
@@ -75,9 +71,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'data' => 'data',
-        'document_template_type' => 'documentTemplateType',
-        'mime_type' => 'mimeType',
-        'title' => 'title'
+        'mime_type' => 'mimeType'
     ];
 
     /**
@@ -87,9 +81,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'data' => 'setData',
-        'document_template_type' => 'setDocumentTemplateType',
-        'mime_type' => 'setMimeType',
-        'title' => 'setTitle'
+        'mime_type' => 'setMimeType'
     ];
 
     /**
@@ -99,9 +91,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'data' => 'getData',
-        'document_template_type' => 'getDocumentTemplateType',
-        'mime_type' => 'getMimeType',
-        'title' => 'getTitle'
+        'mime_type' => 'getMimeType'
     ];
 
     
@@ -124,11 +114,7 @@ class RenderedDocument implements ModelInterface, ArrayAccess
         
         $this->container['data'] = isset($data['data']) ? $data['data'] : null;
         
-        $this->container['document_template_type'] = isset($data['document_template_type']) ? $data['document_template_type'] : null;
-        
         $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
-        
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         
     }
 
@@ -246,35 +232,10 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     {
 
         if (!is_null($data) && (!preg_match("/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/", $data))) {
-            throw new \InvalidArgumentException("invalid value for $data when calling RenderedDocument., must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.");
+            throw new \InvalidArgumentException("invalid value for $data when calling RenderedTerminalReceipt., must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.");
         }
 
         $this->container['data'] = $data;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets document_template_type
-     *
-     * @return int
-     */
-    public function getDocumentTemplateType()
-    {
-        return $this->container['document_template_type'];
-    }
-
-    /**
-     * Sets document_template_type
-     *
-     * @param int $document_template_type 
-     *
-     * @return $this
-     */
-    public function setDocumentTemplateType($document_template_type)
-    {
-        $this->container['document_template_type'] = $document_template_type;
 
         return $this;
     }
@@ -300,31 +261,6 @@ class RenderedDocument implements ModelInterface, ArrayAccess
     public function setMimeType($mime_type)
     {
         $this->container['mime_type'] = $mime_type;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title 
-     *
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->container['title'] = $title;
 
         return $this;
     }

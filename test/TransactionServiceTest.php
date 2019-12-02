@@ -29,6 +29,7 @@ use Wallee\Sdk\Model\EntityQueryFilter;
 use Wallee\Sdk\Model\EntityQueryFilterType;
 use Wallee\Sdk\Model\LineItemCreate;
 use Wallee\Sdk\Model\LineItemType;
+use Wallee\Sdk\Model\RenderedDocument;
 use Wallee\Sdk\Model\TransactionCreate;
 use Wallee\Sdk\Model\TransactionState;
 use Wallee\Sdk\Service\TransactionPaymentPageService;
@@ -193,5 +194,12 @@ final class TransactionServiceTest extends TestCase {
         foreach ($transactionSearch as $transaction) {
             $this->assertEquals($transaction->getState(), TransactionState::PENDING);
         }
+    }
+
+    public function testDocumentDownload(){
+        $transactionService = $this->getTransactionService();
+        $transactionId = 4479214; // random transaction id
+        $renderedDocument = $transactionService->getInvoiceDocument($this->spaceId, $transactionId);
+        $this->assertEquals(true, !is_null($renderedDocument));
     }
 }
