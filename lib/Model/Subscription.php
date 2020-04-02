@@ -62,6 +62,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'reference' => 'string',
         'state' => '\Wallee\Sdk\Model\SubscriptionState',
         'subscriber' => '\Wallee\Sdk\Model\Subscriber',
+        'terminated_by' => 'int',
         'terminated_on' => '\DateTime',
         'terminating_on' => '\DateTime',
         'token' => '\Wallee\Sdk\Model\Token',
@@ -87,6 +88,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'reference' => null,
         'state' => null,
         'subscriber' => null,
+        'terminated_by' => 'int64',
         'terminated_on' => 'date-time',
         'terminating_on' => 'date-time',
         'token' => null,
@@ -113,6 +115,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'reference' => 'reference',
         'state' => 'state',
         'subscriber' => 'subscriber',
+        'terminated_by' => 'terminatedBy',
         'terminated_on' => 'terminatedOn',
         'terminating_on' => 'terminatingOn',
         'token' => 'token',
@@ -138,6 +141,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'reference' => 'setReference',
         'state' => 'setState',
         'subscriber' => 'setSubscriber',
+        'terminated_by' => 'setTerminatedBy',
         'terminated_on' => 'setTerminatedOn',
         'terminating_on' => 'setTerminatingOn',
         'token' => 'setToken',
@@ -163,6 +167,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'reference' => 'getReference',
         'state' => 'getState',
         'subscriber' => 'getSubscriber',
+        'terminated_by' => 'getTerminatedBy',
         'terminated_on' => 'getTerminatedOn',
         'terminating_on' => 'getTerminatingOn',
         'token' => 'getToken',
@@ -212,6 +217,8 @@ class Subscription implements ModelInterface, ArrayAccess
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
         $this->container['subscriber'] = isset($data['subscriber']) ? $data['subscriber'] : null;
+        
+        $this->container['terminated_by'] = isset($data['terminated_by']) ? $data['terminated_by'] : null;
         
         $this->container['terminated_on'] = isset($data['terminated_on']) ? $data['terminated_on'] : null;
         
@@ -632,6 +639,31 @@ class Subscription implements ModelInterface, ArrayAccess
     public function setSubscriber($subscriber)
     {
         $this->container['subscriber'] = $subscriber;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets terminated_by
+     *
+     * @return int
+     */
+    public function getTerminatedBy()
+    {
+        return $this->container['terminated_by'];
+    }
+
+    /**
+     * Sets terminated_by
+     *
+     * @param int $terminated_by 
+     *
+     * @return $this
+     */
+    public function setTerminatedBy($terminated_by)
+    {
+        $this->container['terminated_by'] = $terminated_by;
 
         return $this;
     }

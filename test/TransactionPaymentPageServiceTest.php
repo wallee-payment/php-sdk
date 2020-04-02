@@ -23,11 +23,12 @@ namespace Wallee\Sdk\Test;
 use PHPUnit\Framework\TestCase;
 use Wallee\Sdk\ApiClient;
 use Wallee\Sdk\Http\HttpClientFactory;
-use Wallee\Sdk\Service\TransactionPaymentPageService;
-use Wallee\Sdk\Service\TransactionService;
+use Wallee\Sdk\Model\AddressCreate;
 use Wallee\Sdk\Model\LineItemCreate;
 use Wallee\Sdk\Model\LineItemType;
 use Wallee\Sdk\Model\TransactionCreate;
+use Wallee\Sdk\Service\TransactionPaymentPageService;
+use Wallee\Sdk\Service\TransactionService;
 
 /**
  * This class tests the basic functionality of the SDK.
@@ -37,7 +38,8 @@ use Wallee\Sdk\Model\TransactionCreate;
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-final class TransactionPaymentPageServiceTest extends TestCase {
+class TransactionPaymentPageServiceTest extends TestCase
+{
 
     /**
      * @var Wallee\Sdk\ApiClient
@@ -47,16 +49,9 @@ final class TransactionPaymentPageServiceTest extends TestCase {
     /**
      * @var Wallee\Sdk\Model\TransactionCreate
      */
-    private $transaction;
-
-    /**
-    * @var Wallee\Sdk\Service\TransactionPaymentPageService
-    */
+    private $transactionBag;
+    
     private $transactionPaymentPageService;
-
-    /**
-     * @var Wallee\Sdk\Service\TransactionService
-     */
     private $transactionService;
 
     /**
@@ -80,6 +75,28 @@ final class TransactionPaymentPageServiceTest extends TestCase {
     public function setUp()
     {
         parent::setUp();
+
+        if (is_null($this->transactionPaymentPageService)) {
+            $this->transactionPaymentPageService = new TransactionPaymentPageService($this->getApiClient());
+        }
+
+        if (is_null($this->transactionService)) {
+            $this->transactionService = new TransactionService($this->getApiClient());
+        }
+
+        $this->transactionBag = $this->getTransactionBag();
+    }
+
+    /**
+     * @return Wallee\Sdk\ApiClient
+     */
+    private function getApiClient()
+    {
+        if (is_null($this->apiClient)) {
+            $this->apiClient = new ApiClient($this->userId, $this->secret);
+            $this->apiClient->setHttpClientType($this->getHttpClient());
+        }
+        return $this->apiClient;
     }
 
     /**
@@ -97,58 +114,51 @@ final class TransactionPaymentPageServiceTest extends TestCase {
         return $httpClientType;
     }
 
-    private function getApiClient()
-    {
-        $apiClient = new ApiClient($this->userId, $this->secret);
-        $apiClient->setHttpClientType($this->getHttpClient());
-        return $apiClient;
-    }
-
     /**
-     * @return Wallee\Sdk\Service\TransactionService
+     * @return TransactionCreate
      */
-    private function getTransactionService()
+    private function getTransactionBag()
     {
-        return new TransactionService($this->getApiClient());
-    }
+        if (is_null($this->transactionBag)) {
+            // line item
+            $lineItem = new LineItemCreate();
+            $lineItem->setName('Red T-Shirt');
+            $lineItem->setUniqueId('5412');
+            $lineItem->setSku('red-t-shirt-123');
+            $lineItem->setQuantity(1);
+            $lineItem->setAmountIncludingTax(29.95);
+            $lineItem->setType(LineItemType::PRODUCT);
 
-    /**
-     * @return Wallee\Sdk\Service\TransactionPaymentPageService
-     */
-    private function getTransactionPaymentPageService()
-    {
-        return new TransactionPaymentPageService($this->getApiClient());
-    }
+            // Customer Billing Address
+            $billingAddress = new AddressCreate();
+            $billingAddress->setCity('Winterthur');
+            $billingAddress->setCountry('CH');
+            $billingAddress->setEmailAddress('test@wallee.com');
+            $billingAddress->setFamilyName('Customer');
+            $billingAddress->setGivenName('Good');
+            $billingAddress->setPostCode('8400');
+            $billingAddress->setPostalState('ZH');
+            $billingAddress->setOrganizationName('Test GmbH');
+            $billingAddress->setPhoneNumber('+41791234567');
+            $billingAddress->setSalutation('Ms');
 
-    private function getTransaction()
-    {
-        // Create transaction
-        $lineItem = new LineItemCreate();
-        $lineItem->setName('Red T-Shirt');
-        $lineItem->setUniqueId('5412');
-        $lineItem->setSku('red-t-shirt-123');
-        $lineItem->setQuantity(1);
-        $lineItem->setAmountIncludingTax(29.95);
-        $lineItem->setType(LineItemType::PRODUCT);
-
-        $transaction = new TransactionCreate();
-        $transaction->setCurrency('EUR');
-        $transaction->setLineItems([$lineItem]);
-        $transaction->setAutoConfirmationEnabled(true);
-        return $transaction;
+            $this->transactionBag = new TransactionCreate();
+            $this->transactionBag->setCurrency('CHF');
+            $this->transactionBag->setLineItems([$lineItem]);
+            $this->transactionBag->setAutoConfirmationEnabled(true);
+            $this->transactionBag->setBillingAddress($billingAddress);
+            $this->transactionBag->setShippingAddress($billingAddress);
+        }
+        return $this->transactionBag;
     }
 
     /**
      * Test the cURL HTTP client.
      */
-    public function testPaymentPageUrl() {
-        $transactionService = $this->getTransactionService();
-        $transaction = $this->getTransaction();
-        $transactionPaymentPageService = $this->getTransactionPaymentPageService();
-        $createdTransaction = $transactionService->create($this->spaceId, $transaction);
-        $paymentPageUrl     = $transactionPaymentPageService->paymentPageUrl($this->spaceId, $createdTransaction->getId());
+    public function testPaymentPageUrl()
+    {
+        $transaction    = $this->transactionService->create($this->spaceId, $this->getTransactionBag());
+        $paymentPageUrl = $this->transactionPaymentPageService->paymentPageUrl($this->spaceId, $transaction->getId());
         $this->assertEquals(0, strpos($paymentPageUrl, 'http'));
-        // header('Location: ' .  $paymentPageUrl);
     }
-
 }

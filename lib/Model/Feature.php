@@ -50,6 +50,7 @@ class Feature implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'beta' => 'bool',
+        'category' => '\Wallee\Sdk\Model\FeatureCategory',
         'description' => 'map[string,string]',
         'id' => 'int',
         'logo_path' => 'string',
@@ -66,6 +67,7 @@ class Feature implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'beta' => null,
+        'category' => null,
         'description' => null,
         'id' => 'int64',
         'logo_path' => null,
@@ -83,6 +85,7 @@ class Feature implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'beta' => 'beta',
+        'category' => 'category',
         'description' => 'description',
         'id' => 'id',
         'logo_path' => 'logoPath',
@@ -99,6 +102,7 @@ class Feature implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'beta' => 'setBeta',
+        'category' => 'setCategory',
         'description' => 'setDescription',
         'id' => 'setId',
         'logo_path' => 'setLogoPath',
@@ -115,6 +119,7 @@ class Feature implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'beta' => 'getBeta',
+        'category' => 'getCategory',
         'description' => 'getDescription',
         'id' => 'getId',
         'logo_path' => 'getLogoPath',
@@ -143,6 +148,8 @@ class Feature implements ModelInterface, ArrayAccess
     {
         
         $this->container['beta'] = isset($data['beta']) ? $data['beta'] : null;
+        
+        $this->container['category'] = isset($data['category']) ? $data['category'] : null;
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
@@ -269,6 +276,31 @@ class Feature implements ModelInterface, ArrayAccess
     public function setBeta($beta)
     {
         $this->container['beta'] = $beta;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets category
+     *
+     * @return \Wallee\Sdk\Model\FeatureCategory
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
+
+    /**
+     * Sets category
+     *
+     * @param \Wallee\Sdk\Model\FeatureCategory $category 
+     *
+     * @return $this
+     */
+    public function setCategory($category)
+    {
+        $this->container['category'] = $category;
 
         return $this;
     }

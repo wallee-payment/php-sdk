@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.0.11/php';
+	private $userAgent = 'PHP-Client/2.0.12/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -456,7 +456,7 @@ final class ApiClient {
 			}
 		} else {
 			if ($response->getStatusCode() == 409) {
-				throw new VersioningException();
+				throw new VersioningException($resourcePath);
 			}
 
 			$data = json_decode($response->getBody());

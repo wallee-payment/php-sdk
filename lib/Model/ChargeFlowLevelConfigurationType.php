@@ -51,6 +51,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'description' => 'map[string,string]',
         'id' => 'int',
+        'label' => 'map[string,string]',
         'name' => 'map[string,string]'
     ];
 
@@ -62,6 +63,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'description' => null,
         'id' => 'int64',
+        'label' => null,
         'name' => null
     ];
 
@@ -74,6 +76,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'description' => 'description',
         'id' => 'id',
+        'label' => 'label',
         'name' => 'name'
     ];
 
@@ -85,6 +88,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     protected static $setters = [
         'description' => 'setDescription',
         'id' => 'setId',
+        'label' => 'setLabel',
         'name' => 'setName'
     ];
 
@@ -96,6 +100,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     protected static $getters = [
         'description' => 'getDescription',
         'id' => 'getId',
+        'label' => 'getLabel',
         'name' => 'getName'
     ];
 
@@ -120,6 +125,8 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['label'] = isset($data['label']) ? $data['label'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
@@ -259,6 +266,31 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets label
+     *
+     * @return map[string,string]
+     */
+    public function getLabel()
+    {
+        return $this->container['label'];
+    }
+
+    /**
+     * Sets label
+     *
+     * @param map[string,string] $label 
+     *
+     * @return $this
+     */
+    public function setLabel($label)
+    {
+        $this->container['label'] = $label;
 
         return $this;
     }
