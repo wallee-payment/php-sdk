@@ -1,8 +1,8 @@
 <?php
 /**
- *  SDK
+ * wallee SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the wallee payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,6 +76,7 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'store_order_confirmation_email_enabled' => 'bool',
         'subscriber_suspension_allowed' => 'bool',
         'termination_billing_cycles' => 'int',
+        'updated_at' => '\DateTime',
         'version' => 'int'
     ];
 
@@ -112,6 +113,7 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'store_order_confirmation_email_enabled' => null,
         'subscriber_suspension_allowed' => null,
         'termination_billing_cycles' => 'int32',
+        'updated_at' => 'date-time',
         'version' => 'int32'
     ];
 
@@ -149,6 +151,7 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'store_order_confirmation_email_enabled' => 'storeOrderConfirmationEmailEnabled',
         'subscriber_suspension_allowed' => 'subscriberSuspensionAllowed',
         'termination_billing_cycles' => 'terminationBillingCycles',
+        'updated_at' => 'updatedAt',
         'version' => 'version'
     ];
 
@@ -185,6 +188,7 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'store_order_confirmation_email_enabled' => 'setStoreOrderConfirmationEmailEnabled',
         'subscriber_suspension_allowed' => 'setSubscriberSuspensionAllowed',
         'termination_billing_cycles' => 'setTerminationBillingCycles',
+        'updated_at' => 'setUpdatedAt',
         'version' => 'setVersion'
     ];
 
@@ -221,6 +225,7 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         'store_order_confirmation_email_enabled' => 'getStoreOrderConfirmationEmailEnabled',
         'subscriber_suspension_allowed' => 'getSubscriberSuspensionAllowed',
         'termination_billing_cycles' => 'getTerminationBillingCycles',
+        'updated_at' => 'getUpdatedAt',
         'version' => 'getVersion'
     ];
 
@@ -295,6 +300,8 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
         $this->container['subscriber_suspension_allowed'] = isset($data['subscriber_suspension_allowed']) ? $data['subscriber_suspension_allowed'] : null;
         
         $this->container['termination_billing_cycles'] = isset($data['termination_billing_cycles']) ? $data['termination_billing_cycles'] : null;
+        
+        $this->container['updated_at'] = isset($data['updated_at']) ? $data['updated_at'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -1059,6 +1066,31 @@ class ShopifySubscriptionProduct implements ModelInterface, ArrayAccess
     public function setTerminationBillingCycles($termination_billing_cycles)
     {
         $this->container['termination_billing_cycles'] = $termination_billing_cycles;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets updated_at
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     *
+     * @param \DateTime $updated_at 
+     *
+     * @return $this
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

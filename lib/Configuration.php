@@ -1,9 +1,9 @@
 <?php
 
 /**
- *  SDK
+ * wallee SDK
  *
- * This library allows to interact with the  payment service.
+ * This library allows to interact with the wallee payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'Wallee\Sdk/2.0.17/php';
+    protected $userAgent = 'Wallee\Sdk/2.0.18/php';
 
     /**
      * Debug switch (default set to false)
@@ -388,8 +388,8 @@ class Configuration
         $report  = 'PHP SDK (Wallee\Sdk) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    OpenAPI Spec Version: 2.0.17' . PHP_EOL;
-        $report .= '    SDK Package Version: 2.0.17' . PHP_EOL;
+        $report .= '    OpenAPI Spec Version: 2.0.18' . PHP_EOL;
+        $report .= '    SDK Package Version: 2.0.18' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
