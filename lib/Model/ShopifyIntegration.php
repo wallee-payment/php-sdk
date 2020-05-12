@@ -54,6 +54,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'app_version' => '\Wallee\Sdk\Model\ShopifyIntegrationAppVersion',
         'currency' => 'string',
         'id' => 'int',
+        'installed' => 'bool',
         'integrated_payment_form_enabled' => 'bool',
         'language' => 'string',
         'login_name' => 'string',
@@ -81,6 +82,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'app_version' => null,
         'currency' => null,
         'id' => 'int64',
+        'installed' => null,
         'integrated_payment_form_enabled' => null,
         'language' => null,
         'login_name' => null,
@@ -109,6 +111,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'app_version' => 'appVersion',
         'currency' => 'currency',
         'id' => 'id',
+        'installed' => 'installed',
         'integrated_payment_form_enabled' => 'integratedPaymentFormEnabled',
         'language' => 'language',
         'login_name' => 'loginName',
@@ -136,6 +139,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'app_version' => 'setAppVersion',
         'currency' => 'setCurrency',
         'id' => 'setId',
+        'installed' => 'setInstalled',
         'integrated_payment_form_enabled' => 'setIntegratedPaymentFormEnabled',
         'language' => 'setLanguage',
         'login_name' => 'setLoginName',
@@ -163,6 +167,7 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         'app_version' => 'getAppVersion',
         'currency' => 'getCurrency',
         'id' => 'getId',
+        'installed' => 'getInstalled',
         'integrated_payment_form_enabled' => 'getIntegratedPaymentFormEnabled',
         'language' => 'getLanguage',
         'login_name' => 'getLoginName',
@@ -206,6 +211,8 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
         $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['installed'] = isset($data['installed']) ? $data['installed'] : null;
         
         $this->container['integrated_payment_form_enabled'] = isset($data['integrated_payment_form_enabled']) ? $data['integrated_payment_form_enabled'] : null;
         
@@ -446,6 +453,31 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets installed
+     *
+     * @return bool
+     */
+    public function getInstalled()
+    {
+        return $this->container['installed'];
+    }
+
+    /**
+     * Sets installed
+     *
+     * @param bool $installed 
+     *
+     * @return $this
+     */
+    public function setInstalled($installed)
+    {
+        $this->container['installed'] = $installed;
 
         return $this;
     }
