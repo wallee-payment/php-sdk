@@ -28,6 +28,7 @@ use Wallee\Sdk\Model\LineItemCreate;
 use Wallee\Sdk\Model\LineItemType;
 use Wallee\Sdk\Model\TransactionCompletionState;
 use Wallee\Sdk\Model\TransactionCreate;
+use Wallee\Sdk\Model\TransactionState;
 
 /**
  * This class tests the basic functionality of the SDK.
@@ -150,8 +151,21 @@ class TransactionCompletionServiceTest extends TestCase
     {
         $transaction = $this->apiClient->getTransactionService()->create($this->spaceId, $this->getTransactionPayload());
         $this->apiClient->getTransactionService()->processWithoutUserInteraction($this->spaceId, $transaction->getId());
-        $transactionCompletion = $this->apiClient->getTransactionCompletionService()->completeOffline($this->spaceId, $transaction->getId());
-        $this->assertEquals(true, in_array($transactionCompletion->getState(), [TransactionCompletionState::SUCCESSFUL, TransactionCompletionState::PENDING]));
+		echo $transaction->getId() . PHP_EOL;
+		for ($i = 1; $i <= 5; $i++) {
+			echo $transaction->getState() . PHP_EOL;
+			if ($transaction->getState() == TransactionState::AUTHORIZED) {
+				break;
+			}
+			sleep($i * 30);
+			$transaction = $this->apiClient->getTransactionService()->read($this->spaceId, $transaction->getId());
+		}
+		if ($transaction->getState() == TransactionState::AUTHORIZED) {
+			$transactionCompletion = $this->apiClient->getTransactionCompletionService()->completeOffline($this->spaceId, $transaction->getId());
+			$this->assertEquals(true, in_array($transactionCompletion->getState(), [TransactionCompletionState::SUCCESSFUL, TransactionCompletionState::PENDING]));
+		} else {
+			$this->assertEquals(true, $transaction->getState() != TransactionState::AUTHORIZED);
+		}
     }
 
     /**

@@ -121,12 +121,36 @@ class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 255)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
         }
+        if ((mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if ((mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['reference'] === null) {
             $invalidProperties[] = "'reference' can't be null";
         }
+        if ((mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if ((mb_strlen($this->container['reference']) < 3)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
@@ -226,6 +250,13 @@ class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate
      */
     public function setExternalId($external_id)
     {
+        if ((mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling SubscriptionAffiliateCreate., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling SubscriptionAffiliateCreate., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -251,6 +282,13 @@ class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate
      */
     public function setReference($reference)
     {
+        if ((mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionAffiliateCreate., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($reference) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionAffiliateCreate., must be bigger than or equal to 3.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

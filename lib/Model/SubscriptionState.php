@@ -40,6 +40,7 @@ class SubscriptionState
     const FAILED = 'FAILED';
     const ACTIVE = 'ACTIVE';
     const SUSPENDED = 'SUSPENDED';
+    const TERMINATION_SCHEDULED = 'TERMINATION_SCHEDULED';
     const TERMINATING = 'TERMINATING';
     const TERMINATED = 'TERMINATED';
     
@@ -55,6 +56,7 @@ class SubscriptionState
             self::FAILED,
             self::ACTIVE,
             self::SUSPENDED,
+            self::TERMINATION_SCHEDULED,
             self::TERMINATING,
             self::TERMINATED,
         ];

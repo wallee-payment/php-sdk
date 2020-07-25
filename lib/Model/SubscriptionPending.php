@@ -134,6 +134,14 @@ class SubscriptionPending extends SubscriptionUpdate
         if ($this->container['version'] === null) {
             $invalidProperties[] = "'version' can't be null";
         }
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 200)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 200.";
+        }
+
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -233,6 +241,10 @@ class SubscriptionPending extends SubscriptionUpdate
      */
     public function setReference($reference)
     {
+        if (!is_null($reference) && (mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionPending., must be smaller than or equal to 100.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

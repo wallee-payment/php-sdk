@@ -130,6 +130,10 @@ class DatabaseTranslatedStringItemCreate implements ModelInterface, ArrayAccess
         if ($this->container['language'] === null) {
             $invalidProperties[] = "'language' can't be null";
         }
+        if (!is_null($this->container['translation']) && (mb_strlen($this->container['translation']) > 16777216)) {
+            $invalidProperties[] = "invalid value for 'translation', the character length must be smaller than or equal to 16777216.";
+        }
+
         return $invalidProperties;
     }
 
@@ -254,6 +258,10 @@ class DatabaseTranslatedStringItemCreate implements ModelInterface, ArrayAccess
      */
     public function setTranslation($translation)
     {
+        if (!is_null($translation) && (mb_strlen($translation) > 16777216)) {
+            throw new \InvalidArgumentException('invalid length for $translation when calling DatabaseTranslatedStringItemCreate., must be smaller than or equal to 16777216.');
+        }
+
         $this->container['translation'] = $translation;
 
         return $this;

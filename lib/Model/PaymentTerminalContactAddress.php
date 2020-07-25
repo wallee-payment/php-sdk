@@ -22,7 +22,7 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * WebhookUrlUpdate model
+ * PaymentTerminalContactAddress model
  *
  * @category    Class
  * @description 
@@ -30,7 +30,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class WebhookUrlUpdate extends AbstractWebhookUrlUpdate 
+class PaymentTerminalContactAddress extends PaymentTerminalAddress 
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +39,7 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WebhookUrl.Update';
+    protected static $swaggerModelName = 'PaymentTerminalContactAddress';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +47,7 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'int',
-        'version' => 'int'
+        
     ];
 
     /**
@@ -57,8 +56,7 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => 'int64',
-        'version' => 'int64'
+        
     ];
 
     /**
@@ -68,8 +66,7 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'version' => 'version'
+        
     ];
 
     /**
@@ -78,8 +75,7 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'version' => 'setVersion'
+        
     ];
 
     /**
@@ -88,8 +84,7 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'version' => 'getVersion'
+        
     ];
 
     
@@ -106,10 +101,6 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
         parent::__construct($data);
 
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
     }
 
     /**
@@ -121,16 +112,26 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
         }
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
         }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
         }
+
+        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
+            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -209,56 +210,6 @@ class WebhookUrlUpdate extends AbstractWebhookUrlUpdate
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version
-     *
-     * @return int
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
-
-        return $this;
-    }
     
     /**
      * Returns true if offset exists. False otherwise.

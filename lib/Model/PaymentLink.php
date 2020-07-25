@@ -246,6 +246,18 @@ class PaymentLink implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -495,6 +507,13 @@ class PaymentLink implements ModelInterface, ArrayAccess
      */
     public function setExternalId($external_id)
     {
+        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentLink., must be smaller than or equal to 100.');
+        }
+        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentLink., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -645,6 +664,10 @@ class PaymentLink implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling PaymentLink., must be smaller than or equal to 100.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;

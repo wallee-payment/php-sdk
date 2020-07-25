@@ -253,6 +253,10 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 125)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 125.";
+        }
+
         return $invalidProperties;
     }
 
@@ -727,6 +731,10 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
      */
     public function setReference($reference)
     {
+        if (!is_null($reference) && (mb_strlen($reference) > 125)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionProductVersion., must be smaller than or equal to 125.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

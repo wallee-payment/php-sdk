@@ -27,14 +27,14 @@ use Wallee\Sdk\Http\HttpRequest;
 use Wallee\Sdk\ObjectSerializer;
 
 /**
- * DebtCollectorConfigurationService service
+ * ShopifyTransactionService service
  *
  * @category Class
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DebtCollectorConfigurationService {
+class ShopifyTransactionService {
 
 	/**
 	 * The API client instance.
@@ -114,7 +114,7 @@ class DebtCollectorConfigurationService {
 		}
 
 		// path params
-		$resourcePath = '/debt-collector-configuration/count';
+		$resourcePath = '/shopify-transaction/count';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -142,7 +142,7 @@ class DebtCollectorConfigurationService {
 				$httpBody,
 				$headerParams,
 				'int',
-				'/debt-collector-configuration/count'
+				'/shopify-transaction/count'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -182,11 +182,11 @@ class DebtCollectorConfigurationService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The id of the debt collector configuration which should be returned. (required)
+	 * @param int $id The id of the Shopify transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\DebtCollectorConfiguration
+	 * @return \Wallee\Sdk\Model\ShopifyTransaction
 	 */
 	public function read($space_id, $id) {
 		return $this->readWithHttpInfo($space_id, $id)->getData();
@@ -198,7 +198,7 @@ class DebtCollectorConfigurationService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The id of the debt collector configuration which should be returned. (required)
+	 * @param int $id The id of the Shopify transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -231,7 +231,7 @@ class DebtCollectorConfigurationService {
 		}
 
 		// path params
-		$resourcePath = '/debt-collector-configuration/read';
+		$resourcePath = '/shopify-transaction/read';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -253,16 +253,16 @@ class DebtCollectorConfigurationService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\DebtCollectorConfiguration',
-				'/debt-collector-configuration/read'
+				'\Wallee\Sdk\Model\ShopifyTransaction',
+				'/shopify-transaction/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\DebtCollectorConfiguration', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ShopifyTransaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\DebtCollectorConfiguration',
+                        '\Wallee\Sdk\Model\ShopifyTransaction',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -294,11 +294,11 @@ class DebtCollectorConfigurationService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the debt collector configuration which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the Shopify transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\DebtCollectorConfiguration[]
+	 * @return \Wallee\Sdk\Model\ShopifyTransaction[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -310,7 +310,7 @@ class DebtCollectorConfigurationService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the debt collector configuration which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the Shopify transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -340,7 +340,7 @@ class DebtCollectorConfigurationService {
 		}
 
 		// path params
-		$resourcePath = '/debt-collector-configuration/search';
+		$resourcePath = '/shopify-transaction/search';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -367,16 +367,16 @@ class DebtCollectorConfigurationService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\DebtCollectorConfiguration[]',
-				'/debt-collector-configuration/search'
+				'\Wallee\Sdk\Model\ShopifyTransaction[]',
+				'/shopify-transaction/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\DebtCollectorConfiguration[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ShopifyTransaction[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\DebtCollectorConfiguration[]',
+                        '\Wallee\Sdk\Model\ShopifyTransaction[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

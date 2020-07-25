@@ -141,6 +141,26 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['card_holder_name']) && (mb_strlen($this->container['card_holder_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'card_holder_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['card_verification_code']) && (mb_strlen($this->container['card_verification_code']) > 4)) {
+            $invalidProperties[] = "invalid value for 'card_verification_code', the character length must be smaller than or equal to 4.";
+        }
+
+        if (!is_null($this->container['card_verification_code']) && (mb_strlen($this->container['card_verification_code']) < 3)) {
+            $invalidProperties[] = "invalid value for 'card_verification_code', the character length must be bigger than or equal to 3.";
+        }
+
+        if (!is_null($this->container['primary_account_number']) && (mb_strlen($this->container['primary_account_number']) > 30)) {
+            $invalidProperties[] = "invalid value for 'primary_account_number', the character length must be smaller than or equal to 30.";
+        }
+
+        if (!is_null($this->container['primary_account_number']) && (mb_strlen($this->container['primary_account_number']) < 10)) {
+            $invalidProperties[] = "invalid value for 'primary_account_number', the character length must be bigger than or equal to 10.";
+        }
+
         return $invalidProperties;
     }
 
@@ -240,6 +260,10 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      */
     public function setCardHolderName($card_holder_name)
     {
+        if (!is_null($card_holder_name) && (mb_strlen($card_holder_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $card_holder_name when calling UnencryptedCardData., must be smaller than or equal to 100.');
+        }
+
         $this->container['card_holder_name'] = $card_holder_name;
 
         return $this;
@@ -265,6 +289,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      */
     public function setCardVerificationCode($card_verification_code)
     {
+        if (!is_null($card_verification_code) && (mb_strlen($card_verification_code) > 4)) {
+            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling UnencryptedCardData., must be smaller than or equal to 4.');
+        }
+        if (!is_null($card_verification_code) && (mb_strlen($card_verification_code) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling UnencryptedCardData., must be bigger than or equal to 3.');
+        }
+
         $this->container['card_verification_code'] = $card_verification_code;
 
         return $this;
@@ -315,6 +346,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      */
     public function setPrimaryAccountNumber($primary_account_number)
     {
+        if (!is_null($primary_account_number) && (mb_strlen($primary_account_number) > 30)) {
+            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling UnencryptedCardData., must be smaller than or equal to 30.');
+        }
+        if (!is_null($primary_account_number) && (mb_strlen($primary_account_number) < 10)) {
+            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling UnencryptedCardData., must be bigger than or equal to 10.');
+        }
+
         $this->container['primary_account_number'] = $primary_account_number;
 
         return $this;

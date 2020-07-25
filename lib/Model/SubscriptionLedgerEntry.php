@@ -225,6 +225,14 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 150)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) < 1)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -674,6 +682,13 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      */
     public function setTitle($title)
     {
+        if (!is_null($title) && (mb_strlen($title) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling SubscriptionLedgerEntry., must be smaller than or equal to 150.');
+        }
+        if (!is_null($title) && (mb_strlen($title) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling SubscriptionLedgerEntry., must be bigger than or equal to 1.');
+        }
+
         $this->container['title'] = $title;
 
         return $this;

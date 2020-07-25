@@ -112,6 +112,66 @@ class ShopifySubscriptionAddress extends Address
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['city']) && (mb_strlen($this->container['city']) > 100)) {
+            $invalidProperties[] = "invalid value for 'city', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['commercial_register_number']) && (mb_strlen($this->container['commercial_register_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'commercial_register_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['family_name']) && (mb_strlen($this->container['family_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'family_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['organization_name']) && (mb_strlen($this->container['organization_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'organization_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['postcode']) && (mb_strlen($this->container['postcode']) > 40)) {
+            $invalidProperties[] = "invalid value for 'postcode', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['sales_tax_number']) && (mb_strlen($this->container['sales_tax_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sales_tax_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
+            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['social_security_number']) && (mb_strlen($this->container['social_security_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'social_security_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['street']) && (mb_strlen($this->container['street']) > 300)) {
+            $invalidProperties[] = "invalid value for 'street', the character length must be smaller than or equal to 300.";
+        }
+
         return $invalidProperties;
     }
 

@@ -53,7 +53,7 @@ class SubscriptionCreateRequest implements ModelInterface, ArrayAccess
         'currency' => 'string',
         'product' => 'int',
         'selected_components' => '\Wallee\Sdk\Model\SubscriptionProductComponentReference[]',
-        'subscription' => 'int'
+        'subscription' => '\Wallee\Sdk\Model\SubscriptionPending'
     ];
 
     /**
@@ -66,7 +66,7 @@ class SubscriptionCreateRequest implements ModelInterface, ArrayAccess
         'currency' => null,
         'product' => 'int64',
         'selected_components' => null,
-        'subscription' => 'int64'
+        'subscription' => null
     ];
 
     /**
@@ -340,7 +340,7 @@ class SubscriptionCreateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets subscription
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\SubscriptionPending
      */
     public function getSubscription()
     {
@@ -350,7 +350,7 @@ class SubscriptionCreateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets subscription
      *
-     * @param int $subscription 
+     * @param \Wallee\Sdk\Model\SubscriptionPending $subscription 
      *
      * @return $this
      */

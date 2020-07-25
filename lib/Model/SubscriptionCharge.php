@@ -260,6 +260,10 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -684,6 +688,10 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      */
     public function setReference($reference)
     {
+        if (!is_null($reference) && (mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionCharge., must be smaller than or equal to 100.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

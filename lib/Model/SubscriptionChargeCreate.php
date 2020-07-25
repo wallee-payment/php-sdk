@@ -168,6 +168,10 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
         if ($this->container['processing_type'] === null) {
             $invalidProperties[] = "'processing_type' can't be null";
         }
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
         if ($this->container['subscription'] === null) {
             $invalidProperties[] = "'subscription' can't be null";
         }
@@ -370,6 +374,10 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
      */
     public function setReference($reference)
     {
+        if (!is_null($reference) && (mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionChargeCreate., must be smaller than or equal to 100.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

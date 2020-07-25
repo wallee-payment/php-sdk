@@ -175,6 +175,18 @@ class AbstractSubscriberUpdate implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 200)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 200.";
+        }
+
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -324,6 +336,10 @@ class AbstractSubscriberUpdate implements ModelInterface, ArrayAccess
      */
     public function setDescription($description)
     {
+        if (!is_null($description) && (mb_strlen($description) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling AbstractSubscriberUpdate., must be smaller than or equal to 200.');
+        }
+
         $this->container['description'] = $description;
 
         return $this;
@@ -374,6 +390,10 @@ class AbstractSubscriberUpdate implements ModelInterface, ArrayAccess
      */
     public function setEmailAddress($email_address)
     {
+        if (!is_null($email_address) && (mb_strlen($email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $email_address when calling AbstractSubscriberUpdate., must be smaller than or equal to 254.');
+        }
+
         $this->container['email_address'] = $email_address;
 
         return $this;
@@ -449,6 +469,10 @@ class AbstractSubscriberUpdate implements ModelInterface, ArrayAccess
      */
     public function setReference($reference)
     {
+        if (!is_null($reference) && (mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling AbstractSubscriberUpdate., must be smaller than or equal to 100.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

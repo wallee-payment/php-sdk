@@ -154,6 +154,14 @@ class AbstractTokenUpdate implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 150)) {
+            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['token_reference']) && (mb_strlen($this->container['token_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'token_reference', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -253,6 +261,10 @@ class AbstractTokenUpdate implements ModelInterface, ArrayAccess
      */
     public function setCustomerEmailAddress($customer_email_address)
     {
+        if (!is_null($customer_email_address) && (mb_strlen($customer_email_address) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $customer_email_address when calling AbstractTokenUpdate., must be smaller than or equal to 150.');
+        }
+
         $this->container['customer_email_address'] = $customer_email_address;
 
         return $this;
@@ -378,6 +390,10 @@ class AbstractTokenUpdate implements ModelInterface, ArrayAccess
      */
     public function setTokenReference($token_reference)
     {
+        if (!is_null($token_reference) && (mb_strlen($token_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $token_reference when calling AbstractTokenUpdate., must be smaller than or equal to 100.');
+        }
+
         $this->container['token_reference'] = $token_reference;
 
         return $this;

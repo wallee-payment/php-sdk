@@ -108,9 +108,9 @@ $userId = 512;
 $secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 // Setup API client
-$client = new \Wallee\Sdk\Sdk\ApiClient($userId, $secret);
+$client = new \Wallee\Sdk\ApiClient($userId, $secret);
 
-$httpClientType = \Wallee\Sdk\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \Wallee\Sdk\Sdk\Http\HttpClientFactory::TYPE_SOCKET
+$httpClientType = \Wallee\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \Wallee\Sdk\Http\HttpClientFactory::TYPE_SOCKET
 
 $client->setHttpClientType($httpClientType);
 ```

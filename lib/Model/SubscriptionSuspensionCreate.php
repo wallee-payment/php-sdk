@@ -144,6 +144,10 @@ class SubscriptionSuspensionCreate implements ModelInterface, ArrayAccess
         if ($this->container['end_action'] === null) {
             $invalidProperties[] = "'end_action' can't be null";
         }
+        if (!is_null($this->container['note']) && (mb_strlen($this->container['note']) > 300)) {
+            $invalidProperties[] = "invalid value for 'note', the character length must be smaller than or equal to 300.";
+        }
+
         if ($this->container['planned_end_date'] === null) {
             $invalidProperties[] = "'planned_end_date' can't be null";
         }
@@ -274,6 +278,10 @@ class SubscriptionSuspensionCreate implements ModelInterface, ArrayAccess
      */
     public function setNote($note)
     {
+        if (!is_null($note) && (mb_strlen($note) > 300)) {
+            throw new \InvalidArgumentException('invalid length for $note when calling SubscriptionSuspensionCreate., must be smaller than or equal to 300.');
+        }
+
         $this->container['note'] = $note;
 
         return $this;

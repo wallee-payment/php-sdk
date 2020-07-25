@@ -183,6 +183,30 @@ class SubscriptionAffiliate implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 255)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) < 3)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
@@ -282,6 +306,13 @@ class SubscriptionAffiliate implements ModelInterface, ArrayAccess
      */
     public function setExternalId($external_id)
     {
+        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling SubscriptionAffiliate., must be smaller than or equal to 100.');
+        }
+        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling SubscriptionAffiliate., must be bigger than or equal to 1.');
+        }
+
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -407,6 +438,13 @@ class SubscriptionAffiliate implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 255)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling SubscriptionAffiliate., must be smaller than or equal to 255.');
+        }
+        if (!is_null($name) && (mb_strlen($name) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling SubscriptionAffiliate., must be bigger than or equal to 3.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;
@@ -457,6 +495,13 @@ class SubscriptionAffiliate implements ModelInterface, ArrayAccess
      */
     public function setReference($reference)
     {
+        if (!is_null($reference) && (mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionAffiliate., must be smaller than or equal to 100.');
+        }
+        if (!is_null($reference) && (mb_strlen($reference) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionAffiliate., must be bigger than or equal to 3.');
+        }
+
         $this->container['reference'] = $reference;
 
         return $this;

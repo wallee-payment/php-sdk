@@ -190,6 +190,10 @@ class SubscriptionMetricUsageReport implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 100)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -364,6 +368,10 @@ class SubscriptionMetricUsageReport implements ModelInterface, ArrayAccess
      */
     public function setDescription($description)
     {
+        if (!is_null($description) && (mb_strlen($description) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling SubscriptionMetricUsageReport., must be smaller than or equal to 100.');
+        }
+
         $this->container['description'] = $description;
 
         return $this;

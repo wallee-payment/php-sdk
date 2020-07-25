@@ -253,6 +253,18 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['login_name']) && (mb_strlen($this->container['login_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'login_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['shop_name']) && (mb_strlen($this->container['shop_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'shop_name', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -552,6 +564,10 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
      */
     public function setLoginName($login_name)
     {
+        if (!is_null($login_name) && (mb_strlen($login_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $login_name when calling ShopifyIntegration., must be smaller than or equal to 100.');
+        }
+
         $this->container['login_name'] = $login_name;
 
         return $this;
@@ -577,6 +593,10 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
      */
     public function setName($name)
     {
+        if (!is_null($name) && (mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling ShopifyIntegration., must be smaller than or equal to 100.');
+        }
+
         $this->container['name'] = $name;
 
         return $this;
@@ -677,6 +697,10 @@ class ShopifyIntegration implements ModelInterface, ArrayAccess
      */
     public function setShopName($shop_name)
     {
+        if (!is_null($shop_name) && (mb_strlen($shop_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $shop_name when calling ShopifyIntegration., must be smaller than or equal to 100.');
+        }
+
         $this->container['shop_name'] = $shop_name;
 
         return $this;

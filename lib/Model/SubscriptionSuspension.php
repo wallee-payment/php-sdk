@@ -211,6 +211,10 @@ class SubscriptionSuspension implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['note']) && (mb_strlen($this->container['note']) > 300)) {
+            $invalidProperties[] = "invalid value for 'note', the character length must be smaller than or equal to 300.";
+        }
+
         return $invalidProperties;
     }
 
@@ -460,6 +464,10 @@ class SubscriptionSuspension implements ModelInterface, ArrayAccess
      */
     public function setNote($note)
     {
+        if (!is_null($note) && (mb_strlen($note) > 300)) {
+            throw new \InvalidArgumentException('invalid length for $note when calling SubscriptionSuspension., must be smaller than or equal to 300.');
+        }
+
         $this->container['note'] = $note;
 
         return $this;

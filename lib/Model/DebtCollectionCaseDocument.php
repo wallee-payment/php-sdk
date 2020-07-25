@@ -190,6 +190,18 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['file_name']) && (mb_strlen($this->container['file_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'file_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['storage_id']) && (mb_strlen($this->container['storage_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'storage_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['unique_id']) && (mb_strlen($this->container['unique_id']) > 500)) {
+            $invalidProperties[] = "invalid value for 'unique_id', the character length must be smaller than or equal to 500.";
+        }
+
         return $invalidProperties;
     }
 
@@ -339,6 +351,10 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
      */
     public function setFileName($file_name)
     {
+        if (!is_null($file_name) && (mb_strlen($file_name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $file_name when calling DebtCollectionCaseDocument., must be smaller than or equal to 100.');
+        }
+
         $this->container['file_name'] = $file_name;
 
         return $this;
@@ -489,6 +505,10 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
      */
     public function setStorageId($storage_id)
     {
+        if (!is_null($storage_id) && (mb_strlen($storage_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $storage_id when calling DebtCollectionCaseDocument., must be smaller than or equal to 100.');
+        }
+
         $this->container['storage_id'] = $storage_id;
 
         return $this;
@@ -514,6 +534,10 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
      */
     public function setUniqueId($unique_id)
     {
+        if (!is_null($unique_id) && (mb_strlen($unique_id) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $unique_id when calling DebtCollectionCaseDocument., must be smaller than or equal to 500.');
+        }
+
         $this->container['unique_id'] = $unique_id;
 
         return $this;
