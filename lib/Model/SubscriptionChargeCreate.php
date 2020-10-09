@@ -165,6 +165,14 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
         }
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 500)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 500.";
+        }
+
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
+        }
+
         if ($this->container['processing_type'] === null) {
             $invalidProperties[] = "'processing_type' can't be null";
         }
@@ -175,6 +183,14 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
         if ($this->container['subscription'] === null) {
             $invalidProperties[] = "'subscription' can't be null";
         }
+        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 500)) {
+            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 500.";
+        }
+
+        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'success_url', the character length must be bigger than or equal to 9.";
+        }
+
         return $invalidProperties;
     }
 
@@ -299,6 +315,13 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
      */
     public function setFailedUrl($failed_url)
     {
+        if (!is_null($failed_url) && (mb_strlen($failed_url) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling SubscriptionChargeCreate., must be smaller than or equal to 500.');
+        }
+        if (!is_null($failed_url) && (mb_strlen($failed_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling SubscriptionChargeCreate., must be bigger than or equal to 9.');
+        }
+
         $this->container['failed_url'] = $failed_url;
 
         return $this;
@@ -428,6 +451,13 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
      */
     public function setSuccessUrl($success_url)
     {
+        if (!is_null($success_url) && (mb_strlen($success_url) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling SubscriptionChargeCreate., must be smaller than or equal to 500.');
+        }
+        if (!is_null($success_url) && (mb_strlen($success_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling SubscriptionChargeCreate., must be bigger than or equal to 9.');
+        }
+
         $this->container['success_url'] = $success_url;
 
         return $this;

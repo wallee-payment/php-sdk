@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionEditModelTaxLine model
+ * ShopifySubscriptionUpdateAddressesRequest model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
+class ShopifySubscriptionUpdateAddressesRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscriptionEditModel.TaxLine';
+    protected static $swaggerModelName = 'ShopifySubscriptionUpdateAddressesRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,8 +49,9 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'rate' => 'float',
-        'title' => 'string'
+        'billing_address' => '\Wallee\Sdk\Model\ShopifySubscriptionAddressCreate',
+        'id' => 'int',
+        'shipping_address' => '\Wallee\Sdk\Model\ShopifySubscriptionAddressCreate'
     ];
 
     /**
@@ -59,8 +60,9 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'rate' => null,
-        'title' => null
+        'billing_address' => null,
+        'id' => 'int64',
+        'shipping_address' => null
     ];
 
     /**
@@ -70,8 +72,9 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'rate' => 'rate',
-        'title' => 'title'
+        'billing_address' => 'billingAddress',
+        'id' => 'id',
+        'shipping_address' => 'shippingAddress'
     ];
 
     /**
@@ -80,8 +83,9 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'rate' => 'setRate',
-        'title' => 'setTitle'
+        'billing_address' => 'setBillingAddress',
+        'id' => 'setId',
+        'shipping_address' => 'setShippingAddress'
     ];
 
     /**
@@ -90,8 +94,9 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'rate' => 'getRate',
-        'title' => 'getTitle'
+        'billing_address' => 'getBillingAddress',
+        'id' => 'getId',
+        'shipping_address' => 'getShippingAddress'
     ];
 
     
@@ -112,9 +117,11 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['rate'] = isset($data['rate']) ? $data['rate'] : null;
+        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
         
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['shipping_address'] = isset($data['shipping_address']) ? $data['shipping_address'] : null;
         
     }
 
@@ -208,50 +215,75 @@ class ShopifySubscriptionEditModelTaxLine implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets rate
+     * Gets billing_address
      *
-     * @return float
+     * @return \Wallee\Sdk\Model\ShopifySubscriptionAddressCreate
      */
-    public function getRate()
+    public function getBillingAddress()
     {
-        return $this->container['rate'];
+        return $this->container['billing_address'];
     }
 
     /**
-     * Sets rate
+     * Sets billing_address
      *
-     * @param float $rate 
+     * @param \Wallee\Sdk\Model\ShopifySubscriptionAddressCreate $billing_address 
      *
      * @return $this
      */
-    public function setRate($rate)
+    public function setBillingAddress($billing_address)
     {
-        $this->container['rate'] = $rate;
+        $this->container['billing_address'] = $billing_address;
 
         return $this;
     }
     
 
     /**
-     * Gets title
+     * Gets id
      *
-     * @return string
+     * @return int
      */
-    public function getTitle()
+    public function getId()
     {
-        return $this->container['title'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets title
+     * Sets id
      *
-     * @param string $title 
+     * @param int $id 
      *
      * @return $this
      */
-    public function setTitle($title)
+    public function setId($id)
     {
-        $this->container['title'] = $title;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets shipping_address
+     *
+     * @return \Wallee\Sdk\Model\ShopifySubscriptionAddressCreate
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shipping_address'];
+    }
+
+    /**
+     * Sets shipping_address
+     *
+     * @param \Wallee\Sdk\Model\ShopifySubscriptionAddressCreate $shipping_address 
+     *
+     * @return $this
+     */
+    public function setShippingAddress($shipping_address)
+    {
+        $this->container['shipping_address'] = $shipping_address;
 
         return $this;
     }

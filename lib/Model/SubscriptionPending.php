@@ -47,6 +47,7 @@ class SubscriptionPending extends SubscriptionUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'affiliate' => 'int',
         'reference' => 'string',
         'subscriber' => 'int',
         'token' => 'int'
@@ -58,6 +59,7 @@ class SubscriptionPending extends SubscriptionUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'affiliate' => 'int64',
         'reference' => null,
         'subscriber' => 'int64',
         'token' => 'int64'
@@ -70,6 +72,7 @@ class SubscriptionPending extends SubscriptionUpdate
      * @var string[]
      */
     protected static $attributeMap = [
+        'affiliate' => 'affiliate',
         'reference' => 'reference',
         'subscriber' => 'subscriber',
         'token' => 'token'
@@ -81,6 +84,7 @@ class SubscriptionPending extends SubscriptionUpdate
      * @var string[]
      */
     protected static $setters = [
+        'affiliate' => 'setAffiliate',
         'reference' => 'setReference',
         'subscriber' => 'setSubscriber',
         'token' => 'setToken'
@@ -92,6 +96,7 @@ class SubscriptionPending extends SubscriptionUpdate
      * @var string[]
      */
     protected static $getters = [
+        'affiliate' => 'getAffiliate',
         'reference' => 'getReference',
         'subscriber' => 'getSubscriber',
         'token' => 'getToken'
@@ -111,6 +116,8 @@ class SubscriptionPending extends SubscriptionUpdate
         parent::__construct($data);
 
         
+        $this->container['affiliate'] = isset($data['affiliate']) ? $data['affiliate'] : null;
+        
         $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
         
         $this->container['subscriber'] = isset($data['subscriber']) ? $data['subscriber'] : null;
@@ -127,16 +134,6 @@ class SubscriptionPending extends SubscriptionUpdate
     public function listInvalidProperties()
     {
         $invalidProperties = parent::listInvalidProperties();
-
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 200)) {
-            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 200.";
-        }
 
         if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
             $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
@@ -220,6 +217,31 @@ class SubscriptionPending extends SubscriptionUpdate
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets affiliate
+     *
+     * @return int
+     */
+    public function getAffiliate()
+    {
+        return $this->container['affiliate'];
+    }
+
+    /**
+     * Sets affiliate
+     *
+     * @param int $affiliate 
+     *
+     * @return $this
+     */
+    public function setAffiliate($affiliate)
+    {
+        $this->container['affiliate'] = $affiliate;
+
+        return $this;
+    }
     
 
     /**

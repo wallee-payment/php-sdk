@@ -121,10 +121,6 @@ class SubscriptionProductActive extends AbstractSubscriptionProductActive
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
-
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }

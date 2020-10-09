@@ -30,7 +30,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProductActive 
+class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProductUpdate 
 {
     const DISCRIMINATOR = null;
 
@@ -128,11 +128,14 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['state'] === null) {
-            $invalidProperties[] = "'state' can't be null";
+        if ($this->container['product_id'] === null) {
+            $invalidProperties[] = "'product_id' can't be null";
         }
         if ($this->container['product_variant_id'] === null) {
             $invalidProperties[] = "'product_variant_id' can't be null";
+        }
+        if ($this->container['shop'] === null) {
+            $invalidProperties[] = "'shop' can't be null";
         }
         return $invalidProperties;
     }

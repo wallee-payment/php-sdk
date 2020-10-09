@@ -59,7 +59,8 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
         'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
         'number_of_notice_periods' => 'int',
         'product' => 'int',
-        'state' => '\Wallee\Sdk\Model\SubscriptionProductVersionState'
+        'state' => '\Wallee\Sdk\Model\SubscriptionProductVersionState',
+        'tax_calculation' => '\Wallee\Sdk\Model\TaxCalculation'
     ];
 
     /**
@@ -78,7 +79,8 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
         'name' => null,
         'number_of_notice_periods' => 'int32',
         'product' => 'int64',
-        'state' => null
+        'state' => null,
+        'tax_calculation' => null
     ];
 
     /**
@@ -98,7 +100,8 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
         'name' => 'name',
         'number_of_notice_periods' => 'numberOfNoticePeriods',
         'product' => 'product',
-        'state' => 'state'
+        'state' => 'state',
+        'tax_calculation' => 'taxCalculation'
     ];
 
     /**
@@ -117,7 +120,8 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
         'name' => 'setName',
         'number_of_notice_periods' => 'setNumberOfNoticePeriods',
         'product' => 'setProduct',
-        'state' => 'setState'
+        'state' => 'setState',
+        'tax_calculation' => 'setTaxCalculation'
     ];
 
     /**
@@ -136,7 +140,8 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
         'name' => 'getName',
         'number_of_notice_periods' => 'getNumberOfNoticePeriods',
         'product' => 'getProduct',
-        'state' => 'getState'
+        'state' => 'getState',
+        'tax_calculation' => 'getTaxCalculation'
     ];
 
     
@@ -178,6 +183,8 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
         $this->container['product'] = isset($data['product']) ? $data['product'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['tax_calculation'] = isset($data['tax_calculation']) ? $data['tax_calculation'] : null;
         
     }
 
@@ -546,6 +553,31 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets tax_calculation
+     *
+     * @return \Wallee\Sdk\Model\TaxCalculation
+     */
+    public function getTaxCalculation()
+    {
+        return $this->container['tax_calculation'];
+    }
+
+    /**
+     * Sets tax_calculation
+     *
+     * @param \Wallee\Sdk\Model\TaxCalculation $tax_calculation Strategy that is used for tax calculation in fees.
+     *
+     * @return $this
+     */
+    public function setTaxCalculation($tax_calculation)
+    {
+        $this->container['tax_calculation'] = $tax_calculation;
 
         return $this;
     }

@@ -51,8 +51,10 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'created_by' => 'int',
         'created_on' => '\DateTime',
+        'external_id' => 'string',
         'id' => 'int',
-        'initial_transaction' => 'int',
+        'initial_payment_transaction' => 'int',
+        'initial_shopify_transaction' => 'int',
         'language' => 'string',
         'linked_space_id' => 'int',
         'order_recurrence_number' => 'int',
@@ -73,8 +75,10 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'created_by' => 'int64',
         'created_on' => 'date-time',
+        'external_id' => null,
         'id' => 'int64',
-        'initial_transaction' => 'int64',
+        'initial_payment_transaction' => 'int64',
+        'initial_shopify_transaction' => 'int64',
         'language' => null,
         'linked_space_id' => 'int64',
         'order_recurrence_number' => 'int32',
@@ -96,8 +100,10 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'external_id' => 'externalId',
         'id' => 'id',
-        'initial_transaction' => 'initialTransaction',
+        'initial_payment_transaction' => 'initialPaymentTransaction',
+        'initial_shopify_transaction' => 'initialShopifyTransaction',
         'language' => 'language',
         'linked_space_id' => 'linkedSpaceId',
         'order_recurrence_number' => 'orderRecurrenceNumber',
@@ -118,8 +124,10 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     protected static $setters = [
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'external_id' => 'setExternalId',
         'id' => 'setId',
-        'initial_transaction' => 'setInitialTransaction',
+        'initial_payment_transaction' => 'setInitialPaymentTransaction',
+        'initial_shopify_transaction' => 'setInitialShopifyTransaction',
         'language' => 'setLanguage',
         'linked_space_id' => 'setLinkedSpaceId',
         'order_recurrence_number' => 'setOrderRecurrenceNumber',
@@ -140,8 +148,10 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     protected static $getters = [
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'external_id' => 'getExternalId',
         'id' => 'getId',
-        'initial_transaction' => 'getInitialTransaction',
+        'initial_payment_transaction' => 'getInitialPaymentTransaction',
+        'initial_shopify_transaction' => 'getInitialShopifyTransaction',
         'language' => 'getLanguage',
         'linked_space_id' => 'getLinkedSpaceId',
         'order_recurrence_number' => 'getOrderRecurrenceNumber',
@@ -176,9 +186,13 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['initial_transaction'] = isset($data['initial_transaction']) ? $data['initial_transaction'] : null;
+        $this->container['initial_payment_transaction'] = isset($data['initial_payment_transaction']) ? $data['initial_payment_transaction'] : null;
+        
+        $this->container['initial_shopify_transaction'] = isset($data['initial_shopify_transaction']) ? $data['initial_shopify_transaction'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
@@ -210,6 +224,14 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
+        }
 
         return $invalidProperties;
     }
@@ -342,6 +364,38 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     *
+     * @return $this
+     */
+    public function setExternalId($external_id)
+    {
+        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling ShopifySubscription., must be smaller than or equal to 100.');
+        }
+        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling ShopifySubscription., must be bigger than or equal to 1.');
+        }
+
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets id
      *
      * @return int
@@ -367,25 +421,50 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets initial_transaction
+     * Gets initial_payment_transaction
      *
      * @return int
      */
-    public function getInitialTransaction()
+    public function getInitialPaymentTransaction()
     {
-        return $this->container['initial_transaction'];
+        return $this->container['initial_payment_transaction'];
     }
 
     /**
-     * Sets initial_transaction
+     * Sets initial_payment_transaction
      *
-     * @param int $initial_transaction 
+     * @param int $initial_payment_transaction 
      *
      * @return $this
      */
-    public function setInitialTransaction($initial_transaction)
+    public function setInitialPaymentTransaction($initial_payment_transaction)
     {
-        $this->container['initial_transaction'] = $initial_transaction;
+        $this->container['initial_payment_transaction'] = $initial_payment_transaction;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_shopify_transaction
+     *
+     * @return int
+     */
+    public function getInitialShopifyTransaction()
+    {
+        return $this->container['initial_shopify_transaction'];
+    }
+
+    /**
+     * Sets initial_shopify_transaction
+     *
+     * @param int $initial_shopify_transaction 
+     *
+     * @return $this
+     */
+    public function setInitialShopifyTransaction($initial_shopify_transaction)
+    {
+        $this->container['initial_shopify_transaction'] = $initial_shopify_transaction;
 
         return $this;
     }

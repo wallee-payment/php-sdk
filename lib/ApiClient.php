@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.1.2/php';
+	private $userAgent = 'PHP-Client/2.1.3/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -76,6 +76,7 @@ final class ApiClient {
 	 * @var integer
 	 */
 	private $connectionTimeout = 20;
+	CONST CONNECTION_TIMEOUT = 20;
 
 	/**
 	 * The http client type to use for communication.
@@ -238,6 +239,16 @@ final class ApiClient {
 		}
 
 		$this->connectionTimeout = $connectionTimeout;
+		return $this;
+	}
+
+	/**
+	 * Resets the connection timeout in seconds.
+	 *
+	 * @return ApiClient
+	 */
+	public function resetConnectionTimeout() {
+		$this->connectionTimeout = self::CONNECTION_TIMEOUT;
 		return $this;
 	}
 

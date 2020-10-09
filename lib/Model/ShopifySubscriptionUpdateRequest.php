@@ -49,18 +49,11 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'billing_day_of_month' => 'int',
-        'billing_interval_amount' => 'int',
-        'billing_interval_unit' => '\Wallee\Sdk\Model\ShopifySubscriptionBillingIntervalUnit',
-        'billing_weekday' => '\Wallee\Sdk\Model\ShopifySubscriptionWeekday',
+        'billing_configuration' => '\Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration',
         'id' => 'int',
-        'items' => '\Wallee\Sdk\Model\ShopifySubscriptionEditModelItem[]',
-        'maximal_billing_cycles' => 'int',
-        'maximal_suspendable_cycles' => 'int',
-        'minimal_billing_cycles' => 'int',
+        'items' => '\Wallee\Sdk\Model\ShopifySubscriptionModelItem[]',
         'store_order_confirmation_email_enabled' => 'bool',
-        'subscriber_suspension_allowed' => 'bool',
-        'termination_billing_cycles' => 'int'
+        'subscriber_suspension_allowed' => 'bool'
     ];
 
     /**
@@ -69,18 +62,11 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'billing_day_of_month' => 'int32',
-        'billing_interval_amount' => 'int32',
-        'billing_interval_unit' => null,
-        'billing_weekday' => null,
+        'billing_configuration' => null,
         'id' => 'int64',
         'items' => null,
-        'maximal_billing_cycles' => 'int32',
-        'maximal_suspendable_cycles' => 'int32',
-        'minimal_billing_cycles' => 'int32',
         'store_order_confirmation_email_enabled' => null,
-        'subscriber_suspension_allowed' => null,
-        'termination_billing_cycles' => 'int32'
+        'subscriber_suspension_allowed' => null
     ];
 
     /**
@@ -90,18 +76,11 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'billing_day_of_month' => 'billingDayOfMonth',
-        'billing_interval_amount' => 'billingIntervalAmount',
-        'billing_interval_unit' => 'billingIntervalUnit',
-        'billing_weekday' => 'billingWeekday',
+        'billing_configuration' => 'billingConfiguration',
         'id' => 'id',
         'items' => 'items',
-        'maximal_billing_cycles' => 'maximalBillingCycles',
-        'maximal_suspendable_cycles' => 'maximalSuspendableCycles',
-        'minimal_billing_cycles' => 'minimalBillingCycles',
         'store_order_confirmation_email_enabled' => 'storeOrderConfirmationEmailEnabled',
-        'subscriber_suspension_allowed' => 'subscriberSuspensionAllowed',
-        'termination_billing_cycles' => 'terminationBillingCycles'
+        'subscriber_suspension_allowed' => 'subscriberSuspensionAllowed'
     ];
 
     /**
@@ -110,18 +89,11 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'billing_day_of_month' => 'setBillingDayOfMonth',
-        'billing_interval_amount' => 'setBillingIntervalAmount',
-        'billing_interval_unit' => 'setBillingIntervalUnit',
-        'billing_weekday' => 'setBillingWeekday',
+        'billing_configuration' => 'setBillingConfiguration',
         'id' => 'setId',
         'items' => 'setItems',
-        'maximal_billing_cycles' => 'setMaximalBillingCycles',
-        'maximal_suspendable_cycles' => 'setMaximalSuspendableCycles',
-        'minimal_billing_cycles' => 'setMinimalBillingCycles',
         'store_order_confirmation_email_enabled' => 'setStoreOrderConfirmationEmailEnabled',
-        'subscriber_suspension_allowed' => 'setSubscriberSuspensionAllowed',
-        'termination_billing_cycles' => 'setTerminationBillingCycles'
+        'subscriber_suspension_allowed' => 'setSubscriberSuspensionAllowed'
     ];
 
     /**
@@ -130,18 +102,11 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'billing_day_of_month' => 'getBillingDayOfMonth',
-        'billing_interval_amount' => 'getBillingIntervalAmount',
-        'billing_interval_unit' => 'getBillingIntervalUnit',
-        'billing_weekday' => 'getBillingWeekday',
+        'billing_configuration' => 'getBillingConfiguration',
         'id' => 'getId',
         'items' => 'getItems',
-        'maximal_billing_cycles' => 'getMaximalBillingCycles',
-        'maximal_suspendable_cycles' => 'getMaximalSuspendableCycles',
-        'minimal_billing_cycles' => 'getMinimalBillingCycles',
         'store_order_confirmation_email_enabled' => 'getStoreOrderConfirmationEmailEnabled',
-        'subscriber_suspension_allowed' => 'getSubscriberSuspensionAllowed',
-        'termination_billing_cycles' => 'getTerminationBillingCycles'
+        'subscriber_suspension_allowed' => 'getSubscriberSuspensionAllowed'
     ];
 
     
@@ -162,29 +127,15 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['billing_day_of_month'] = isset($data['billing_day_of_month']) ? $data['billing_day_of_month'] : null;
-        
-        $this->container['billing_interval_amount'] = isset($data['billing_interval_amount']) ? $data['billing_interval_amount'] : null;
-        
-        $this->container['billing_interval_unit'] = isset($data['billing_interval_unit']) ? $data['billing_interval_unit'] : null;
-        
-        $this->container['billing_weekday'] = isset($data['billing_weekday']) ? $data['billing_weekday'] : null;
+        $this->container['billing_configuration'] = isset($data['billing_configuration']) ? $data['billing_configuration'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['items'] = isset($data['items']) ? $data['items'] : null;
         
-        $this->container['maximal_billing_cycles'] = isset($data['maximal_billing_cycles']) ? $data['maximal_billing_cycles'] : null;
-        
-        $this->container['maximal_suspendable_cycles'] = isset($data['maximal_suspendable_cycles']) ? $data['maximal_suspendable_cycles'] : null;
-        
-        $this->container['minimal_billing_cycles'] = isset($data['minimal_billing_cycles']) ? $data['minimal_billing_cycles'] : null;
-        
         $this->container['store_order_confirmation_email_enabled'] = isset($data['store_order_confirmation_email_enabled']) ? $data['store_order_confirmation_email_enabled'] : null;
         
         $this->container['subscriber_suspension_allowed'] = isset($data['subscriber_suspension_allowed']) ? $data['subscriber_suspension_allowed'] : null;
-        
-        $this->container['termination_billing_cycles'] = isset($data['termination_billing_cycles']) ? $data['termination_billing_cycles'] : null;
         
     }
 
@@ -278,100 +229,25 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets billing_day_of_month
+     * Gets billing_configuration
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration
      */
-    public function getBillingDayOfMonth()
+    public function getBillingConfiguration()
     {
-        return $this->container['billing_day_of_month'];
+        return $this->container['billing_configuration'];
     }
 
     /**
-     * Sets billing_day_of_month
+     * Sets billing_configuration
      *
-     * @param int $billing_day_of_month Define the day of the month on which the recurring orders should be created.
+     * @param \Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration $billing_configuration 
      *
      * @return $this
      */
-    public function setBillingDayOfMonth($billing_day_of_month)
+    public function setBillingConfiguration($billing_configuration)
     {
-        $this->container['billing_day_of_month'] = $billing_day_of_month;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets billing_interval_amount
-     *
-     * @return int
-     */
-    public function getBillingIntervalAmount()
-    {
-        return $this->container['billing_interval_amount'];
-    }
-
-    /**
-     * Sets billing_interval_amount
-     *
-     * @param int $billing_interval_amount 
-     *
-     * @return $this
-     */
-    public function setBillingIntervalAmount($billing_interval_amount)
-    {
-        $this->container['billing_interval_amount'] = $billing_interval_amount;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets billing_interval_unit
-     *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionBillingIntervalUnit
-     */
-    public function getBillingIntervalUnit()
-    {
-        return $this->container['billing_interval_unit'];
-    }
-
-    /**
-     * Sets billing_interval_unit
-     *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionBillingIntervalUnit $billing_interval_unit Define how frequently recurring orders should be created.
-     *
-     * @return $this
-     */
-    public function setBillingIntervalUnit($billing_interval_unit)
-    {
-        $this->container['billing_interval_unit'] = $billing_interval_unit;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets billing_weekday
-     *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionWeekday
-     */
-    public function getBillingWeekday()
-    {
-        return $this->container['billing_weekday'];
-    }
-
-    /**
-     * Sets billing_weekday
-     *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionWeekday $billing_weekday Define the weekday on which the recurring orders should be created.
-     *
-     * @return $this
-     */
-    public function setBillingWeekday($billing_weekday)
-    {
-        $this->container['billing_weekday'] = $billing_weekday;
+        $this->container['billing_configuration'] = $billing_configuration;
 
         return $this;
     }
@@ -405,7 +281,7 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets items
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionEditModelItem[]
+     * @return \Wallee\Sdk\Model\ShopifySubscriptionModelItem[]
      */
     public function getItems()
     {
@@ -415,88 +291,13 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets items
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionEditModelItem[] $items 
+     * @param \Wallee\Sdk\Model\ShopifySubscriptionModelItem[] $items 
      *
      * @return $this
      */
     public function setItems($items)
     {
         $this->container['items'] = $items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets maximal_billing_cycles
-     *
-     * @return int
-     */
-    public function getMaximalBillingCycles()
-    {
-        return $this->container['maximal_billing_cycles'];
-    }
-
-    /**
-     * Sets maximal_billing_cycles
-     *
-     * @param int $maximal_billing_cycles Define the maximum number of orders the subscription will run for.
-     *
-     * @return $this
-     */
-    public function setMaximalBillingCycles($maximal_billing_cycles)
-    {
-        $this->container['maximal_billing_cycles'] = $maximal_billing_cycles;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets maximal_suspendable_cycles
-     *
-     * @return int
-     */
-    public function getMaximalSuspendableCycles()
-    {
-        return $this->container['maximal_suspendable_cycles'];
-    }
-
-    /**
-     * Sets maximal_suspendable_cycles
-     *
-     * @param int $maximal_suspendable_cycles Define the maximum number of orders the subscription can be suspended for at a time.
-     *
-     * @return $this
-     */
-    public function setMaximalSuspendableCycles($maximal_suspendable_cycles)
-    {
-        $this->container['maximal_suspendable_cycles'] = $maximal_suspendable_cycles;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets minimal_billing_cycles
-     *
-     * @return int
-     */
-    public function getMinimalBillingCycles()
-    {
-        return $this->container['minimal_billing_cycles'];
-    }
-
-    /**
-     * Sets minimal_billing_cycles
-     *
-     * @param int $minimal_billing_cycles Define the minimal number of orders the subscription will run for.
-     *
-     * @return $this
-     */
-    public function setMinimalBillingCycles($minimal_billing_cycles)
-    {
-        $this->container['minimal_billing_cycles'] = $minimal_billing_cycles;
 
         return $this;
     }
@@ -547,31 +348,6 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     public function setSubscriberSuspensionAllowed($subscriber_suspension_allowed)
     {
         $this->container['subscriber_suspension_allowed'] = $subscriber_suspension_allowed;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets termination_billing_cycles
-     *
-     * @return int
-     */
-    public function getTerminationBillingCycles()
-    {
-        return $this->container['termination_billing_cycles'];
-    }
-
-    /**
-     * Sets termination_billing_cycles
-     *
-     * @param int $termination_billing_cycles Define the number of orders the subscription will keep running for after its termination has been requested.
-     *
-     * @return $this
-     */
-    public function setTerminationBillingCycles($termination_billing_cycles)
-    {
-        $this->container['termination_billing_cycles'] = $termination_billing_cycles;
 
         return $this;
     }

@@ -112,12 +112,6 @@ class SubscriptionMetricActive extends SubscriptionMetricUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
         return $invalidProperties;
     }
 

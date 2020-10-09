@@ -112,10 +112,6 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if (!is_null($this->container['note']) && (mb_strlen($this->container['note']) > 300)) {
-            $invalidProperties[] = "invalid value for 'note', the character length must be smaller than or equal to 300.";
-        }
-
         return $invalidProperties;
     }
 
