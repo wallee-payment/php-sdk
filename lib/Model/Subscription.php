@@ -52,6 +52,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'activated_on' => '\DateTime',
         'affiliate' => '\Wallee\Sdk\Model\SubscriptionAffiliate',
         'created_on' => '\DateTime',
+        'current_product_version' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
         'description' => 'string',
         'id' => 'int',
         'initialized_on' => '\DateTime',
@@ -79,6 +80,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'activated_on' => 'date-time',
         'affiliate' => null,
         'created_on' => 'date-time',
+        'current_product_version' => null,
         'description' => null,
         'id' => 'int64',
         'initialized_on' => 'date-time',
@@ -107,6 +109,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'activated_on' => 'activatedOn',
         'affiliate' => 'affiliate',
         'created_on' => 'createdOn',
+        'current_product_version' => 'currentProductVersion',
         'description' => 'description',
         'id' => 'id',
         'initialized_on' => 'initializedOn',
@@ -134,6 +137,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'activated_on' => 'setActivatedOn',
         'affiliate' => 'setAffiliate',
         'created_on' => 'setCreatedOn',
+        'current_product_version' => 'setCurrentProductVersion',
         'description' => 'setDescription',
         'id' => 'setId',
         'initialized_on' => 'setInitializedOn',
@@ -161,6 +165,7 @@ class Subscription implements ModelInterface, ArrayAccess
         'activated_on' => 'getActivatedOn',
         'affiliate' => 'getAffiliate',
         'created_on' => 'getCreatedOn',
+        'current_product_version' => 'getCurrentProductVersion',
         'description' => 'getDescription',
         'id' => 'getId',
         'initialized_on' => 'getInitializedOn',
@@ -202,6 +207,8 @@ class Subscription implements ModelInterface, ArrayAccess
         $this->container['affiliate'] = isset($data['affiliate']) ? $data['affiliate'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['current_product_version'] = isset($data['current_product_version']) ? $data['current_product_version'] : null;
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
@@ -404,6 +411,31 @@ class Subscription implements ModelInterface, ArrayAccess
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets current_product_version
+     *
+     * @return \Wallee\Sdk\Model\SubscriptionProductVersion
+     */
+    public function getCurrentProductVersion()
+    {
+        return $this->container['current_product_version'];
+    }
+
+    /**
+     * Sets current_product_version
+     *
+     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $current_product_version 
+     *
+     * @return $this
+     */
+    public function setCurrentProductVersion($current_product_version)
+    {
+        $this->container['current_product_version'] = $current_product_version;
 
         return $this;
     }

@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.1.3/php';
+	private $userAgent = 'PHP-Client/2.1.4/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -439,9 +439,11 @@ final class ApiClient {
 	 * @param array  $headerParams the header parameters
 	 * @param string $responseType the expected response type
 	 * @param string $endpointPath the path to the method endpoint before expanding parameters
-	 * @throws ApiException on a non 2xx response
-	 * @throws VersioningException on a versioning/locking problem
-	 * @return mixed
+	 *
+	 * @return \Wallee\Sdk\ApiResponse
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @throws \Wallee\Sdk\VersioningException
 	 */
 	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null) {
 		$request = new HttpRequest($this->getSerializer(), $this->buildRequestUrl($resourcePath, $queryParams), $method, $this->generateUniqueToken());
@@ -1036,6 +1038,18 @@ final class ApiClient {
             $this->paymentTerminalService = new \Wallee\Sdk\Service\PaymentTerminalService($this);
         }
         return $this->paymentTerminalService;
+    }
+    
+    protected $paymentTerminalTillService;
+
+    /**
+     * @return \Wallee\Sdk\Service\PaymentTerminalTillService
+     */
+    public function getPaymentTerminalTillService() {
+        if(is_null($this->paymentTerminalTillService)){
+            $this->paymentTerminalTillService = new \Wallee\Sdk\Service\PaymentTerminalTillService($this);
+        }
+        return $this->paymentTerminalTillService;
     }
     
     protected $permissionService;

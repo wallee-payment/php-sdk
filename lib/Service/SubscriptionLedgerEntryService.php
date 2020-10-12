@@ -135,7 +135,7 @@ class SubscriptionLedgerEntryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->resetConnectionTimeout();
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -250,7 +250,7 @@ class SubscriptionLedgerEntryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->resetConnectionTimeout();
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -363,7 +363,7 @@ class SubscriptionLedgerEntryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->resetConnectionTimeout();
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -478,7 +478,7 @@ class SubscriptionLedgerEntryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->resetConnectionTimeout();
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
