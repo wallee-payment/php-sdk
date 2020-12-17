@@ -1126,6 +1126,138 @@ class SubscriptionService {
 	}
 
 	/**
+	 * Operation update
+	 *
+	 * update
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $subscription_id  (required)
+	 * @param \Wallee\Sdk\Model\SubscriptionUpdateRequest $request  (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return \Wallee\Sdk\Model\Subscription
+	 */
+	public function update($space_id, $subscription_id, $request) {
+		return $this->updateWithHttpInfo($space_id, $subscription_id, $request)->getData();
+	}
+
+	/**
+	 * Operation updateWithHttpInfo
+	 *
+	 * update
+	 *
+	 * @param int $space_id  (required)
+	 * @param int $subscription_id  (required)
+	 * @param \Wallee\Sdk\Model\SubscriptionUpdateRequest $request  (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function updateWithHttpInfo($space_id, $subscription_id, $request) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling update');
+		}
+		// verify the required parameter 'subscription_id' is set
+		if (is_null($subscription_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $subscription_id when calling update');
+		}
+		// verify the required parameter 'request' is set
+		if (is_null($request)) {
+			throw new \InvalidArgumentException('Missing the required parameter $request when calling update');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+		if (!is_null($subscription_id)) {
+			$queryParams['subscriptionId'] = $this->apiClient->getSerializer()->toQueryValue($subscription_id);
+		}
+
+		// path params
+		$resourcePath = '/subscription/update';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		// body params
+		$tempBody = null;
+		if (isset($request)) {
+			$tempBody = $request;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\Subscription',
+				'/subscription/update'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\Subscription', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\Subscription',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
 	 * Operation updateProductVersion
 	 *
 	 * update product version

@@ -19,18 +19,20 @@
 
 
 namespace Wallee\Sdk\Model;
+
+use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TransactionPending model
+ * SubscriptionUpdateRequest model
  *
  * @category    Class
- * @description 
+ * @description The subscription update request allows to change a subscription properites.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionPending extends AbstractTransactionPending 
+class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class TransactionPending extends AbstractTransactionPending
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Transaction.Pending';
+    protected static $swaggerModelName = 'SubscriptionUpdateRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,8 +49,7 @@ class TransactionPending extends AbstractTransactionPending
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'int',
-        'version' => 'int'
+        'description' => 'string'
     ];
 
     /**
@@ -57,8 +58,7 @@ class TransactionPending extends AbstractTransactionPending
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => 'int64',
-        'version' => 'int64'
+        'description' => null
     ];
 
     /**
@@ -68,8 +68,7 @@ class TransactionPending extends AbstractTransactionPending
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'version' => 'version'
+        'description' => 'description'
     ];
 
     /**
@@ -78,8 +77,7 @@ class TransactionPending extends AbstractTransactionPending
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'version' => 'setVersion'
+        'description' => 'setDescription'
     ];
 
     /**
@@ -88,12 +86,17 @@ class TransactionPending extends AbstractTransactionPending
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'version' => 'getVersion'
+        'description' => 'getDescription'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -103,12 +106,8 @@ class TransactionPending extends AbstractTransactionPending
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
     }
 
@@ -119,46 +118,12 @@ class TransactionPending extends AbstractTransactionPending
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 1000)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 1000.";
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 200)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 200.";
         }
 
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
-        }
-
-        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
-            $invalidProperties[] = "invalid value for 'shipping_method', the character length must be smaller than or equal to 200.";
-        }
-
-        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 1000)) {
-            $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 1000.";
-        }
-
-        if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) < 9)) {
-            $invalidProperties[] = "invalid value for 'success_url', the character length must be bigger than or equal to 9.";
-        }
-
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -169,7 +134,7 @@ class TransactionPending extends AbstractTransactionPending
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -179,7 +144,7 @@ class TransactionPending extends AbstractTransactionPending
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -191,7 +156,7 @@ class TransactionPending extends AbstractTransactionPending
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -201,7 +166,7 @@ class TransactionPending extends AbstractTransactionPending
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -211,7 +176,7 @@ class TransactionPending extends AbstractTransactionPending
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -240,50 +205,29 @@ class TransactionPending extends AbstractTransactionPending
     
 
     /**
-     * Gets id
+     * Gets description
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getDescription()
     {
-        return $this->container['id'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets id
+     * Sets description
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param string $description 
      *
      * @return $this
      */
-    public function setId($id)
+    public function setDescription($description)
     {
-        $this->container['id'] = $id;
+        if (!is_null($description) && (mb_strlen($description) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling SubscriptionUpdateRequest., must be smaller than or equal to 200.');
+        }
 
-        return $this;
-    }
-    
-
-    /**
-     * Gets version
-     *
-     * @return int
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
+        $this->container['description'] = $description;
 
         return $this;
     }

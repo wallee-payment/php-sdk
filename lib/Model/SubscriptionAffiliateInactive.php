@@ -112,6 +112,20 @@ class SubscriptionAffiliateInactive extends SubscriptionAffiliateUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 255)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
