@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.1.6/php';
+	private $userAgent = 'PHP-Client/3.0.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -572,6 +572,30 @@ final class ApiClient {
         return $this->applicationUserService;
     }
     
+    protected $bankAccountService;
+
+    /**
+     * @return \Wallee\Sdk\Service\BankAccountService
+     */
+    public function getBankAccountService() {
+        if(is_null($this->bankAccountService)){
+            $this->bankAccountService = new \Wallee\Sdk\Service\BankAccountService($this);
+        }
+        return $this->bankAccountService;
+    }
+    
+    protected $bankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\BankTransactionService
+     */
+    public function getBankTransactionService() {
+        if(is_null($this->bankTransactionService)){
+            $this->bankTransactionService = new \Wallee\Sdk\Service\BankTransactionService($this);
+        }
+        return $this->bankTransactionService;
+    }
+    
     protected $cardProcessingService;
 
     /**
@@ -594,6 +618,18 @@ final class ApiClient {
             $this->chargeAttemptService = new \Wallee\Sdk\Service\ChargeAttemptService($this);
         }
         return $this->chargeAttemptService;
+    }
+    
+    protected $chargeBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\ChargeBankTransactionService
+     */
+    public function getChargeBankTransactionService() {
+        if(is_null($this->chargeBankTransactionService)){
+            $this->chargeBankTransactionService = new \Wallee\Sdk\Service\ChargeBankTransactionService($this);
+        }
+        return $this->chargeBankTransactionService;
     }
     
     protected $chargeFlowLevelPaymentLinkService;
@@ -666,6 +702,18 @@ final class ApiClient {
             $this->countryStateService = new \Wallee\Sdk\Service\CountryStateService($this);
         }
         return $this->countryStateService;
+    }
+    
+    protected $currencyBankAccountService;
+
+    /**
+     * @return \Wallee\Sdk\Service\CurrencyBankAccountService
+     */
+    public function getCurrencyBankAccountService() {
+        if(is_null($this->currencyBankAccountService)){
+            $this->currencyBankAccountService = new \Wallee\Sdk\Service\CurrencyBankAccountService($this);
+        }
+        return $this->currencyBankAccountService;
     }
     
     protected $currencyService;
@@ -788,6 +836,18 @@ final class ApiClient {
         return $this->documentTemplateTypeService;
     }
     
+    protected $externalTransferBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\ExternalTransferBankTransactionService
+     */
+    public function getExternalTransferBankTransactionService() {
+        if(is_null($this->externalTransferBankTransactionService)){
+            $this->externalTransferBankTransactionService = new \Wallee\Sdk\Service\ExternalTransferBankTransactionService($this);
+        }
+        return $this->externalTransferBankTransactionService;
+    }
+    
     protected $humanUserService;
 
     /**
@@ -858,6 +918,18 @@ final class ApiClient {
             $this->installmentPlanSliceConfigurationService = new \Wallee\Sdk\Service\InstallmentPlanSliceConfigurationService($this);
         }
         return $this->installmentPlanSliceConfigurationService;
+    }
+    
+    protected $internalTransferBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InternalTransferBankTransactionService
+     */
+    public function getInternalTransferBankTransactionService() {
+        if(is_null($this->internalTransferBankTransactionService)){
+            $this->internalTransferBankTransactionService = new \Wallee\Sdk\Service\InternalTransferBankTransactionService($this);
+        }
+        return $this->internalTransferBankTransactionService;
     }
     
     protected $labelDescriptionGroupService;
@@ -1064,6 +1136,18 @@ final class ApiClient {
         return $this->permissionService;
     }
     
+    protected $refundBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\RefundBankTransactionService
+     */
+    public function getRefundBankTransactionService() {
+        if(is_null($this->refundBankTransactionService)){
+            $this->refundBankTransactionService = new \Wallee\Sdk\Service\RefundBankTransactionService($this);
+        }
+        return $this->refundBankTransactionService;
+    }
+    
     protected $refundCommentService;
 
     /**
@@ -1074,6 +1158,18 @@ final class ApiClient {
             $this->refundCommentService = new \Wallee\Sdk\Service\RefundCommentService($this);
         }
         return $this->refundCommentService;
+    }
+    
+    protected $refundRecoveryBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\RefundRecoveryBankTransactionService
+     */
+    public function getRefundRecoveryBankTransactionService() {
+        if(is_null($this->refundRecoveryBankTransactionService)){
+            $this->refundRecoveryBankTransactionService = new \Wallee\Sdk\Service\RefundRecoveryBankTransactionService($this);
+        }
+        return $this->refundRecoveryBankTransactionService;
     }
     
     protected $refundService;
@@ -1614,6 +1710,18 @@ final class ApiClient {
             $this->userSpaceRoleService = new \Wallee\Sdk\Service\UserSpaceRoleService($this);
         }
         return $this->userSpaceRoleService;
+    }
+    
+    protected $webAppService;
+
+    /**
+     * @return \Wallee\Sdk\Service\WebAppService
+     */
+    public function getWebAppService() {
+        if(is_null($this->webAppService)){
+            $this->webAppService = new \Wallee\Sdk\Service\WebAppService($this);
+        }
+        return $this->webAppService;
     }
     
     protected $webhookListenerService;

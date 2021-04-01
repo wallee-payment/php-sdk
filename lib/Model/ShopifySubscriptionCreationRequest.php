@@ -53,6 +53,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
         'billing_configuration' => '\Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration',
         'currency' => 'string',
         'external_id' => 'string',
+        'initial_execution_date' => '\DateTime',
         'integration' => 'int',
         'items' => '\Wallee\Sdk\Model\ShopifySubscriptionModelItem[]',
         'language' => 'string',
@@ -74,6 +75,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
         'billing_configuration' => null,
         'currency' => null,
         'external_id' => null,
+        'initial_execution_date' => 'date-time',
         'integration' => 'int64',
         'items' => null,
         'language' => null,
@@ -96,6 +98,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
         'billing_configuration' => 'billingConfiguration',
         'currency' => 'currency',
         'external_id' => 'externalId',
+        'initial_execution_date' => 'initialExecutionDate',
         'integration' => 'integration',
         'items' => 'items',
         'language' => 'language',
@@ -117,6 +120,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
         'billing_configuration' => 'setBillingConfiguration',
         'currency' => 'setCurrency',
         'external_id' => 'setExternalId',
+        'initial_execution_date' => 'setInitialExecutionDate',
         'integration' => 'setIntegration',
         'items' => 'setItems',
         'language' => 'setLanguage',
@@ -138,6 +142,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
         'billing_configuration' => 'getBillingConfiguration',
         'currency' => 'getCurrency',
         'external_id' => 'getExternalId',
+        'initial_execution_date' => 'getInitialExecutionDate',
         'integration' => 'getIntegration',
         'items' => 'getItems',
         'language' => 'getLanguage',
@@ -174,6 +179,8 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
         $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['initial_execution_date'] = isset($data['initial_execution_date']) ? $data['initial_execution_date'] : null;
         
         $this->container['integration'] = isset($data['integration']) ? $data['integration'] : null;
         
@@ -403,6 +410,31 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     public function setExternalId($external_id)
     {
         $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_execution_date
+     *
+     * @return \DateTime
+     */
+    public function getInitialExecutionDate()
+    {
+        return $this->container['initial_execution_date'];
+    }
+
+    /**
+     * Sets initial_execution_date
+     *
+     * @param \DateTime $initial_execution_date 
+     *
+     * @return $this
+     */
+    public function setInitialExecutionDate($initial_execution_date)
+    {
+        $this->container['initial_execution_date'] = $initial_execution_date;
 
         return $this;
     }

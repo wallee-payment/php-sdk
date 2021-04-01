@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * RenderedTerminalReceipt model
+ * TokenizedCardData model
  *
  * @category    Class
- * @description 
+ * @description This model holds the card data in plain.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
+class TokenizedCardData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RenderedTerminalReceipt';
+    protected static $swaggerModelName = 'TokenizedCardData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,9 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => 'string',
-        'mime_type' => 'string',
-        'printed' => 'bool',
-        'receipt_type' => '\Wallee\Sdk\Model\PaymentTerminalReceiptType'
+        'cryptogram' => '\Wallee\Sdk\Model\CardCryptogram',
+        'recurring_indicator' => '\Wallee\Sdk\Model\RecurringIndicator',
+        'token_requestor_id' => 'string'
     ];
 
     /**
@@ -61,10 +60,9 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'data' => 'byte',
-        'mime_type' => null,
-        'printed' => null,
-        'receipt_type' => null
+        'cryptogram' => null,
+        'recurring_indicator' => null,
+        'token_requestor_id' => null
     ];
 
     /**
@@ -74,10 +72,9 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'mime_type' => 'mimeType',
-        'printed' => 'printed',
-        'receipt_type' => 'receiptType'
+        'cryptogram' => 'cryptogram',
+        'recurring_indicator' => 'recurringIndicator',
+        'token_requestor_id' => 'tokenRequestorId'
     ];
 
     /**
@@ -86,10 +83,9 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'mime_type' => 'setMimeType',
-        'printed' => 'setPrinted',
-        'receipt_type' => 'setReceiptType'
+        'cryptogram' => 'setCryptogram',
+        'recurring_indicator' => 'setRecurringIndicator',
+        'token_requestor_id' => 'setTokenRequestorId'
     ];
 
     /**
@@ -98,10 +94,9 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'mime_type' => 'getMimeType',
-        'printed' => 'getPrinted',
-        'receipt_type' => 'getReceiptType'
+        'cryptogram' => 'getCryptogram',
+        'recurring_indicator' => 'getRecurringIndicator',
+        'token_requestor_id' => 'getTokenRequestorId'
     ];
 
     
@@ -122,13 +117,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
         
-        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
+        $this->container['recurring_indicator'] = isset($data['recurring_indicator']) ? $data['recurring_indicator'] : null;
         
-        $this->container['printed'] = isset($data['printed']) ? $data['printed'] : null;
-        
-        $this->container['receipt_type'] = isset($data['receipt_type']) ? $data['receipt_type'] : null;
+        $this->container['token_requestor_id'] = isset($data['token_requestor_id']) ? $data['token_requestor_id'] : null;
         
     }
 
@@ -222,102 +215,75 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets data
+     * Gets cryptogram
+     *
+     * @return \Wallee\Sdk\Model\CardCryptogram
+     */
+    public function getCryptogram()
+    {
+        return $this->container['cryptogram'];
+    }
+
+    /**
+     * Sets cryptogram
+     *
+     * @param \Wallee\Sdk\Model\CardCryptogram $cryptogram The additional authentication value used to secure the tokenized card transactions.
+     *
+     * @return $this
+     */
+    public function setCryptogram($cryptogram)
+    {
+        $this->container['cryptogram'] = $cryptogram;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets recurring_indicator
+     *
+     * @return \Wallee\Sdk\Model\RecurringIndicator
+     */
+    public function getRecurringIndicator()
+    {
+        return $this->container['recurring_indicator'];
+    }
+
+    /**
+     * Sets recurring_indicator
+     *
+     * @param \Wallee\Sdk\Model\RecurringIndicator $recurring_indicator 
+     *
+     * @return $this
+     */
+    public function setRecurringIndicator($recurring_indicator)
+    {
+        $this->container['recurring_indicator'] = $recurring_indicator;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets token_requestor_id
      *
      * @return string
      */
-    public function getData()
+    public function getTokenRequestorId()
     {
-        return $this->container['data'];
+        return $this->container['token_requestor_id'];
     }
 
     /**
-     * Sets data
+     * Sets token_requestor_id
      *
-     * @param string $data data
+     * @param string $token_requestor_id 
      *
      * @return $this
      */
-    public function setData($data)
+    public function setTokenRequestorId($token_requestor_id)
     {
-
-
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets mime_type
-     *
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->container['mime_type'];
-    }
-
-    /**
-     * Sets mime_type
-     *
-     * @param string $mime_type The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
-     *
-     * @return $this
-     */
-    public function setMimeType($mime_type)
-    {
-        $this->container['mime_type'] = $mime_type;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets printed
-     *
-     * @return bool
-     */
-    public function getPrinted()
-    {
-        return $this->container['printed'];
-    }
-
-    /**
-     * Sets printed
-     *
-     * @param bool $printed The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
-     *
-     * @return $this
-     */
-    public function setPrinted($printed)
-    {
-        $this->container['printed'] = $printed;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets receipt_type
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalReceiptType
-     */
-    public function getReceiptType()
-    {
-        return $this->container['receipt_type'];
-    }
-
-    /**
-     * Sets receipt_type
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalReceiptType $receipt_type Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
-     *
-     * @return $this
-     */
-    public function setReceiptType($receipt_type)
-    {
-        $this->container['receipt_type'] = $receipt_type;
+        $this->container['token_requestor_id'] = $token_requestor_id;
 
         return $this;
     }

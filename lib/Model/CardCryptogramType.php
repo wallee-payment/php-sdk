@@ -22,21 +22,20 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TaxCalculation model
+ * CardCryptogramType model
  *
  * @category    Class
- * @description 
+ * @description This model defines the card cryptogram types.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TaxCalculation
+class CardCryptogramType
 {
     /**
      * Possible values of this enum
      */
-    const TAX_INCLUDED = 'TAX_INCLUDED';
-    const TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED';
+    const SCHEME_TOKEN = 'SCHEME_TOKEN';
     
     /**
      * Gets allowable values of the enum
@@ -45,8 +44,7 @@ class TaxCalculation
     public static function getAllowableEnumValues()
     {
         return [
-            self::TAX_INCLUDED,
-            self::TAX_NOT_INCLUDED,
+            self::SCHEME_TOKEN,
         ];
     }
 }

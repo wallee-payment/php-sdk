@@ -19,20 +19,18 @@
 
 
 namespace Wallee\Sdk\Model;
-
-use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * RenderedTerminalReceipt model
+ * AuthenticatedCardData model
  *
  * @category    Class
- * @description 
+ * @description This model holds the card data and optional cardholder authentication details.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
+class AuthenticatedCardData extends TokenizedCardData 
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +39,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RenderedTerminalReceipt';
+    protected static $swaggerModelName = 'AuthenticatedCardData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +47,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => 'string',
-        'mime_type' => 'string',
-        'printed' => 'bool',
-        'receipt_type' => '\Wallee\Sdk\Model\PaymentTerminalReceiptType'
+        'cardholder_authentication' => '\Wallee\Sdk\Model\CardholderAuthentication'
     ];
 
     /**
@@ -61,10 +56,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'data' => 'byte',
-        'mime_type' => null,
-        'printed' => null,
-        'receipt_type' => null
+        'cardholder_authentication' => null
     ];
 
     /**
@@ -74,10 +66,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'mime_type' => 'mimeType',
-        'printed' => 'printed',
-        'receipt_type' => 'receiptType'
+        'cardholder_authentication' => 'cardholderAuthentication'
     ];
 
     /**
@@ -86,10 +75,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'mime_type' => 'setMimeType',
-        'printed' => 'setPrinted',
-        'receipt_type' => 'setReceiptType'
+        'cardholder_authentication' => 'setCardholderAuthentication'
     ];
 
     /**
@@ -98,20 +84,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'mime_type' => 'getMimeType',
-        'printed' => 'getPrinted',
-        'receipt_type' => 'getReceiptType'
+        'cardholder_authentication' => 'getCardholderAuthentication'
     ];
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -121,14 +98,10 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        parent::__construct($data);
+
         
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
-        
-        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
-        
-        $this->container['printed'] = isset($data['printed']) ? $data['printed'] : null;
-        
-        $this->container['receipt_type'] = isset($data['receipt_type']) ? $data['receipt_type'] : null;
+        $this->container['cardholder_authentication'] = isset($data['cardholder_authentication']) ? $data['cardholder_authentication'] : null;
         
     }
 
@@ -139,7 +112,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -151,7 +124,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -161,7 +134,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -173,7 +146,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -183,7 +156,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -193,7 +166,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -222,102 +195,25 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets data
+     * Gets cardholder_authentication
      *
-     * @return string
+     * @return \Wallee\Sdk\Model\CardholderAuthentication
      */
-    public function getData()
+    public function getCardholderAuthentication()
     {
-        return $this->container['data'];
+        return $this->container['cardholder_authentication'];
     }
 
     /**
-     * Sets data
+     * Sets cardholder_authentication
      *
-     * @param string $data data
+     * @param \Wallee\Sdk\Model\CardholderAuthentication $cardholder_authentication The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
      *
      * @return $this
      */
-    public function setData($data)
+    public function setCardholderAuthentication($cardholder_authentication)
     {
-
-
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets mime_type
-     *
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->container['mime_type'];
-    }
-
-    /**
-     * Sets mime_type
-     *
-     * @param string $mime_type The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
-     *
-     * @return $this
-     */
-    public function setMimeType($mime_type)
-    {
-        $this->container['mime_type'] = $mime_type;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets printed
-     *
-     * @return bool
-     */
-    public function getPrinted()
-    {
-        return $this->container['printed'];
-    }
-
-    /**
-     * Sets printed
-     *
-     * @param bool $printed The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
-     *
-     * @return $this
-     */
-    public function setPrinted($printed)
-    {
-        $this->container['printed'] = $printed;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets receipt_type
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalReceiptType
-     */
-    public function getReceiptType()
-    {
-        return $this->container['receipt_type'];
-    }
-
-    /**
-     * Sets receipt_type
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalReceiptType $receipt_type Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
-     *
-     * @return $this
-     */
-    public function setReceiptType($receipt_type)
-    {
-        $this->container['receipt_type'] = $receipt_type;
+        $this->container['cardholder_authentication'] = $cardholder_authentication;
 
         return $this;
     }

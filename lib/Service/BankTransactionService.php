@@ -27,14 +27,14 @@ use Wallee\Sdk\Http\HttpRequest;
 use Wallee\Sdk\ObjectSerializer;
 
 /**
- * TransactionTerminalService service
+ * BankTransactionService service
  *
  * @category Class
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionTerminalService {
+class BankTransactionService {
 
 	/**
 	 * The API client instance.
@@ -67,41 +67,37 @@ class TransactionTerminalService {
 
 
 	/**
-	 * Operation fetchReceipts
+	 * Operation count
 	 *
-	 * Fetch Receipts
+	 * Count
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\RenderedTerminalReceipt[]
+	 * @return int
 	 */
-	public function fetchReceipts($space_id, $request) {
-		return $this->fetchReceiptsWithHttpInfo($space_id, $request)->getData();
+	public function count($space_id, $filter = null) {
+		return $this->countWithHttpInfo($space_id, $filter)->getData();
 	}
 
 	/**
-	 * Operation fetchReceiptsWithHttpInfo
+	 * Operation countWithHttpInfo
 	 *
-	 * Fetch Receipts
+	 * Count
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
+	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function fetchReceiptsWithHttpInfo($space_id, $request) {
+	public function countWithHttpInfo($space_id, $filter = null) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling fetchReceipts');
-		}
-		// verify the required parameter 'request' is set
-		if (is_null($request)) {
-			throw new \InvalidArgumentException('Missing the required parameter $request when calling fetchReceipts');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling count');
 		}
 		// header params
 		$headerParams = [];
@@ -118,7 +114,7 @@ class TransactionTerminalService {
 		}
 
 		// path params
-		$resourcePath = '/transaction-terminal/fetch-receipts';
+		$resourcePath = '/bank-transaction/count';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -126,8 +122,8 @@ class TransactionTerminalService {
 		$formParams = [];
 		// body params
 		$tempBody = null;
-		if (isset($request)) {
-			$tempBody = $request;
+		if (isset($filter)) {
+			$tempBody = $filter;
 		}
 
 		// for model (json/xml)
@@ -146,16 +142,16 @@ class TransactionTerminalService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\RenderedTerminalReceipt[]',
-				'/transaction-terminal/fetch-receipts'
+				'int',
+				'/bank-transaction/count'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedTerminalReceipt[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\RenderedTerminalReceipt[]',
+                        'int',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -182,75 +178,61 @@ class TransactionTerminalService {
 	}
 
 	/**
-	 * Operation tillConnectionCredentials
+	 * Operation read
 	 *
-	 * Create Till Connection Credentials
+	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
-	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
-	 * @param string $language The language in which the messages should be rendered in. (optional)
+	 * @param int $id The ID of the bank transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return string
+	 * @return \Wallee\Sdk\Model\BankTransaction
 	 */
-	public function tillConnectionCredentials($space_id, $transaction_id, $terminal_id, $language = null) {
-		return $this->tillConnectionCredentialsWithHttpInfo($space_id, $transaction_id, $terminal_id, $language)->getData();
+	public function read($space_id, $id) {
+		return $this->readWithHttpInfo($space_id, $id)->getData();
 	}
 
 	/**
-	 * Operation tillConnectionCredentialsWithHttpInfo
+	 * Operation readWithHttpInfo
 	 *
-	 * Create Till Connection Credentials
+	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
-	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
-	 * @param string $language The language in which the messages should be rendered in. (optional)
+	 * @param int $id The ID of the bank transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function tillConnectionCredentialsWithHttpInfo($space_id, $transaction_id, $terminal_id, $language = null) {
+	public function readWithHttpInfo($space_id, $id) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling tillConnectionCredentials');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling read');
 		}
-		// verify the required parameter 'transaction_id' is set
-		if (is_null($transaction_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $transaction_id when calling tillConnectionCredentials');
-		}
-		// verify the required parameter 'terminal_id' is set
-		if (is_null($terminal_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $terminal_id when calling tillConnectionCredentials');
+		// verify the required parameter 'id' is set
+		if (is_null($id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $id when calling read');
 		}
 		// header params
 		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
 
 		// query params
 		$queryParams = [];
 		if (!is_null($space_id)) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if (!is_null($transaction_id)) {
-			$queryParams['transactionId'] = $this->apiClient->getSerializer()->toQueryValue($transaction_id);
-		}
-		if (!is_null($terminal_id)) {
-			$queryParams['terminalId'] = $this->apiClient->getSerializer()->toQueryValue($terminal_id);
-		}
-		if (!is_null($language)) {
-			$queryParams['language'] = $this->apiClient->getSerializer()->toQueryValue($language);
+		if (!is_null($id)) {
+			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
 		}
 
 		// path params
-		$resourcePath = '/transaction-terminal/till-connection-credentials';
+		$resourcePath = '/bank-transaction/read';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -269,20 +251,135 @@ class TransactionTerminalService {
 			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
-				'POST',
+				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'string',
-				'/transaction-terminal/till-connection-credentials'
+				'\Wallee\Sdk\Model\BankTransaction',
+				'/bank-transaction/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\BankTransaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\Wallee\Sdk\Model\BankTransaction',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation search
+	 *
+	 * Search
+	 *
+	 * @param int $space_id  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the bank transactions which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return \Wallee\Sdk\Model\BankTransaction[]
+	 */
+	public function search($space_id, $query) {
+		return $this->searchWithHttpInfo($space_id, $query)->getData();
+	}
+
+	/**
+	 * Operation searchWithHttpInfo
+	 *
+	 * Search
+	 *
+	 * @param int $space_id  (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the bank transactions which are returned by the search. (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function searchWithHttpInfo($space_id, $query) {
+		// verify the required parameter 'space_id' is set
+		if (is_null($space_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling search');
+		}
+		// verify the required parameter 'query' is set
+		if (is_null($query)) {
+			throw new \InvalidArgumentException('Missing the required parameter $query when calling search');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+
+		// query params
+		$queryParams = [];
+		if (!is_null($space_id)) {
+			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
+		}
+
+		// path params
+		$resourcePath = '/bank-transaction/search';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		// body params
+		$tempBody = null;
+		if (isset($query)) {
+			$tempBody = $query;
+		}
+
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'POST',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'\Wallee\Sdk\Model\BankTransaction[]',
+				'/bank-transaction/search'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\BankTransaction[]', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\BankTransaction[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

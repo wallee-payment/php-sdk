@@ -27,14 +27,14 @@ use Wallee\Sdk\Http\HttpRequest;
 use Wallee\Sdk\ObjectSerializer;
 
 /**
- * TransactionTerminalService service
+ * WebAppService service
  *
  * @category Class
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionTerminalService {
+class WebAppService {
 
 	/**
 	 * The API client instance.
@@ -67,41 +67,35 @@ class TransactionTerminalService {
 
 
 	/**
-	 * Operation fetchReceipts
+	 * Operation checkInstallation
 	 *
-	 * Fetch Receipts
+	 * Check Installation
 	 *
-	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
+	 * @param int $space_id This parameter identifies the space which should be checked if the web app is installed. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\RenderedTerminalReceipt[]
+	 * @return bool
 	 */
-	public function fetchReceipts($space_id, $request) {
-		return $this->fetchReceiptsWithHttpInfo($space_id, $request)->getData();
+	public function checkInstallation($space_id) {
+		return $this->checkInstallationWithHttpInfo($space_id)->getData();
 	}
 
 	/**
-	 * Operation fetchReceiptsWithHttpInfo
+	 * Operation checkInstallationWithHttpInfo
 	 *
-	 * Fetch Receipts
+	 * Check Installation
 	 *
-	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
+	 * @param int $space_id This parameter identifies the space which should be checked if the web app is installed. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function fetchReceiptsWithHttpInfo($space_id, $request) {
+	public function checkInstallationWithHttpInfo($space_id) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling fetchReceipts');
-		}
-		// verify the required parameter 'request' is set
-		if (is_null($request)) {
-			throw new \InvalidArgumentException('Missing the required parameter $request when calling fetchReceipts');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling checkInstallation');
 		}
 		// header params
 		$headerParams = [];
@@ -109,7 +103,7 @@ class TransactionTerminalService {
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
 		$queryParams = [];
@@ -118,7 +112,108 @@ class TransactionTerminalService {
 		}
 
 		// path params
-		$resourcePath = '/transaction-terminal/fetch-receipts';
+		$resourcePath = '/web-app/check-installation';
+		// default format to json
+		$resourcePath = str_replace('{format}', 'json', $resourcePath);
+
+		// form params
+		$formParams = [];
+		
+		// for model (json/xml)
+		$httpBody = '';
+		if (isset($tempBody)) {
+			$httpBody = $tempBody; // $tempBody is the method argument, if present
+		} elseif (!empty($formParams)) {
+			$httpBody = $formParams; // for HTTP post (form)
+		}
+		// make the API Call
+		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+			$response = $this->apiClient->callApi(
+				$resourcePath,
+				'GET',
+				$queryParams,
+				$httpBody,
+				$headerParams,
+				'bool',
+				'/web-app/check-installation'
+			);
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'bool', $response->getHeaders()));
+		} catch (ApiException $e) {
+			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'bool',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Operation confirm
+	 *
+	 * Confirm
+	 *
+	 * @param \Wallee\Sdk\Model\WebAppConfirmationRequest $request  (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return \Wallee\Sdk\Model\WebAppConfirmationResponse
+	 */
+	public function confirm($request) {
+		return $this->confirmWithHttpInfo($request)->getData();
+	}
+
+	/**
+	 * Operation confirmWithHttpInfo
+	 *
+	 * Confirm
+	 *
+	 * @param \Wallee\Sdk\Model\WebAppConfirmationRequest $request  (required)
+	 * @throws \Wallee\Sdk\ApiException
+	 * @throws \Wallee\Sdk\VersioningException
+	 * @throws \Wallee\Sdk\Http\ConnectionException
+	 * @return ApiResponse
+	 */
+	public function confirmWithHttpInfo($request) {
+		// verify the required parameter 'request' is set
+		if (is_null($request)) {
+			throw new \InvalidArgumentException('Missing the required parameter $request when calling confirm');
+		}
+		// header params
+		$headerParams = [];
+		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		if (!is_null($headerAccept)) {
+			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
+		}
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
+
+		// query params
+		$queryParams = [];
+
+		// path params
+		$resourcePath = '/web-app/confirm';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -146,16 +241,16 @@ class TransactionTerminalService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\RenderedTerminalReceipt[]',
-				'/transaction-terminal/fetch-receipts'
+				'\Wallee\Sdk\Model\WebAppConfirmationResponse',
+				'/web-app/confirm'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedTerminalReceipt[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\WebAppConfirmationResponse', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\RenderedTerminalReceipt[]',
+                        '\Wallee\Sdk\Model\WebAppConfirmationResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -182,49 +277,35 @@ class TransactionTerminalService {
 	}
 
 	/**
-	 * Operation tillConnectionCredentials
+	 * Operation uninstall
 	 *
-	 * Create Till Connection Credentials
+	 * Uninstall
 	 *
-	 * @param int $space_id  (required)
-	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
-	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
-	 * @param string $language The language in which the messages should be rendered in. (optional)
+	 * @param int $space_id This parameter identifies the space within which the web app should be uninstalled. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return string
+	 * @return void
 	 */
-	public function tillConnectionCredentials($space_id, $transaction_id, $terminal_id, $language = null) {
-		return $this->tillConnectionCredentialsWithHttpInfo($space_id, $transaction_id, $terminal_id, $language)->getData();
+	public function uninstall($space_id) {
+		return $this->uninstallWithHttpInfo($space_id)->getData();
 	}
 
 	/**
-	 * Operation tillConnectionCredentialsWithHttpInfo
+	 * Operation uninstallWithHttpInfo
 	 *
-	 * Create Till Connection Credentials
+	 * Uninstall
 	 *
-	 * @param int $space_id  (required)
-	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
-	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
-	 * @param string $language The language in which the messages should be rendered in. (optional)
+	 * @param int $space_id This parameter identifies the space within which the web app should be uninstalled. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function tillConnectionCredentialsWithHttpInfo($space_id, $transaction_id, $terminal_id, $language = null) {
+	public function uninstallWithHttpInfo($space_id) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling tillConnectionCredentials');
-		}
-		// verify the required parameter 'transaction_id' is set
-		if (is_null($transaction_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $transaction_id when calling tillConnectionCredentials');
-		}
-		// verify the required parameter 'terminal_id' is set
-		if (is_null($terminal_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $terminal_id when calling tillConnectionCredentials');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling uninstall');
 		}
 		// header params
 		$headerParams = [];
@@ -239,18 +320,9 @@ class TransactionTerminalService {
 		if (!is_null($space_id)) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if (!is_null($transaction_id)) {
-			$queryParams['transactionId'] = $this->apiClient->getSerializer()->toQueryValue($transaction_id);
-		}
-		if (!is_null($terminal_id)) {
-			$queryParams['terminalId'] = $this->apiClient->getSerializer()->toQueryValue($terminal_id);
-		}
-		if (!is_null($language)) {
-			$queryParams['language'] = $this->apiClient->getSerializer()->toQueryValue($language);
-		}
 
 		// path params
-		$resourcePath = '/transaction-terminal/till-connection-credentials';
+		$resourcePath = '/web-app/uninstall';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -273,20 +345,12 @@ class TransactionTerminalService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'string',
-				'/transaction-terminal/till-connection-credentials'
+				null,
+				'/web-app/uninstall'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'string',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
                 case 442:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),

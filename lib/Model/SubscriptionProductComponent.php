@@ -354,7 +354,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
     /**
      * Sets default_component
      *
-     * @param bool $default_component When a component is marked as a 'default' component it is used when no other component is selected by the user.
+     * @param bool $default_component When a component is marked as a 'default' component it is used as the default component in its group and will be preselected in the product configuration.
      *
      * @return $this
      */

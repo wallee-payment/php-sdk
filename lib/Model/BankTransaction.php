@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscription model
+ * BankTransaction model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscription implements ModelInterface, ArrayAccess
+class BankTransaction implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscription';
+    protected static $swaggerModelName = 'BankTransaction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,22 +49,23 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'adjustments' => '\Wallee\Sdk\Model\PaymentAdjustment[]',
         'created_by' => 'int',
         'created_on' => '\DateTime',
+        'currency_bank_account' => '\Wallee\Sdk\Model\CurrencyBankAccount',
         'external_id' => 'string',
+        'flow_direction' => '\Wallee\Sdk\Model\BankTransactionFlowDirection',
         'id' => 'int',
-        'initial_execution_date' => '\DateTime',
-        'initial_payment_transaction' => 'int',
-        'initial_shopify_transaction' => 'int',
-        'language' => 'string',
         'linked_space_id' => 'int',
-        'order_recurrence_number' => 'int',
-        'shop' => 'int',
-        'state' => '\Wallee\Sdk\Model\ShopifySubscriptionState',
-        'subscriber' => '\Wallee\Sdk\Model\ShopifySubscriber',
-        'terminated_by' => 'int',
-        'terminated_on' => '\DateTime',
-        'termination_request_date' => '\DateTime',
+        'planned_purge_date' => '\DateTime',
+        'posting_amount' => 'float',
+        'reference' => 'string',
+        'source' => 'int',
+        'state' => '\Wallee\Sdk\Model\BankTransactionState',
+        'total_adjustment_amount_including_tax' => 'float',
+        'type' => 'int',
+        'value_amount' => 'float',
+        'value_date' => '\DateTime',
         'version' => 'int'
     ];
 
@@ -74,22 +75,23 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'adjustments' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
+        'currency_bank_account' => null,
         'external_id' => null,
+        'flow_direction' => null,
         'id' => 'int64',
-        'initial_execution_date' => 'date-time',
-        'initial_payment_transaction' => 'int64',
-        'initial_shopify_transaction' => 'int64',
-        'language' => null,
         'linked_space_id' => 'int64',
-        'order_recurrence_number' => 'int32',
-        'shop' => 'int64',
+        'planned_purge_date' => 'date-time',
+        'posting_amount' => null,
+        'reference' => null,
+        'source' => 'int64',
         'state' => null,
-        'subscriber' => null,
-        'terminated_by' => 'int64',
-        'terminated_on' => 'date-time',
-        'termination_request_date' => 'date-time',
+        'total_adjustment_amount_including_tax' => null,
+        'type' => 'int64',
+        'value_amount' => null,
+        'value_date' => 'date-time',
         'version' => 'int32'
     ];
 
@@ -100,22 +102,23 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'adjustments' => 'adjustments',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'currency_bank_account' => 'currencyBankAccount',
         'external_id' => 'externalId',
+        'flow_direction' => 'flowDirection',
         'id' => 'id',
-        'initial_execution_date' => 'initialExecutionDate',
-        'initial_payment_transaction' => 'initialPaymentTransaction',
-        'initial_shopify_transaction' => 'initialShopifyTransaction',
-        'language' => 'language',
         'linked_space_id' => 'linkedSpaceId',
-        'order_recurrence_number' => 'orderRecurrenceNumber',
-        'shop' => 'shop',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'posting_amount' => 'postingAmount',
+        'reference' => 'reference',
+        'source' => 'source',
         'state' => 'state',
-        'subscriber' => 'subscriber',
-        'terminated_by' => 'terminatedBy',
-        'terminated_on' => 'terminatedOn',
-        'termination_request_date' => 'terminationRequestDate',
+        'total_adjustment_amount_including_tax' => 'totalAdjustmentAmountIncludingTax',
+        'type' => 'type',
+        'value_amount' => 'valueAmount',
+        'value_date' => 'valueDate',
         'version' => 'version'
     ];
 
@@ -125,22 +128,23 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'adjustments' => 'setAdjustments',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'currency_bank_account' => 'setCurrencyBankAccount',
         'external_id' => 'setExternalId',
+        'flow_direction' => 'setFlowDirection',
         'id' => 'setId',
-        'initial_execution_date' => 'setInitialExecutionDate',
-        'initial_payment_transaction' => 'setInitialPaymentTransaction',
-        'initial_shopify_transaction' => 'setInitialShopifyTransaction',
-        'language' => 'setLanguage',
         'linked_space_id' => 'setLinkedSpaceId',
-        'order_recurrence_number' => 'setOrderRecurrenceNumber',
-        'shop' => 'setShop',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'posting_amount' => 'setPostingAmount',
+        'reference' => 'setReference',
+        'source' => 'setSource',
         'state' => 'setState',
-        'subscriber' => 'setSubscriber',
-        'terminated_by' => 'setTerminatedBy',
-        'terminated_on' => 'setTerminatedOn',
-        'termination_request_date' => 'setTerminationRequestDate',
+        'total_adjustment_amount_including_tax' => 'setTotalAdjustmentAmountIncludingTax',
+        'type' => 'setType',
+        'value_amount' => 'setValueAmount',
+        'value_date' => 'setValueDate',
         'version' => 'setVersion'
     ];
 
@@ -150,22 +154,23 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'adjustments' => 'getAdjustments',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'currency_bank_account' => 'getCurrencyBankAccount',
         'external_id' => 'getExternalId',
+        'flow_direction' => 'getFlowDirection',
         'id' => 'getId',
-        'initial_execution_date' => 'getInitialExecutionDate',
-        'initial_payment_transaction' => 'getInitialPaymentTransaction',
-        'initial_shopify_transaction' => 'getInitialShopifyTransaction',
-        'language' => 'getLanguage',
         'linked_space_id' => 'getLinkedSpaceId',
-        'order_recurrence_number' => 'getOrderRecurrenceNumber',
-        'shop' => 'getShop',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'posting_amount' => 'getPostingAmount',
+        'reference' => 'getReference',
+        'source' => 'getSource',
         'state' => 'getState',
-        'subscriber' => 'getSubscriber',
-        'terminated_by' => 'getTerminatedBy',
-        'terminated_on' => 'getTerminatedOn',
-        'termination_request_date' => 'getTerminationRequestDate',
+        'total_adjustment_amount_including_tax' => 'getTotalAdjustmentAmountIncludingTax',
+        'type' => 'getType',
+        'value_amount' => 'getValueAmount',
+        'value_date' => 'getValueDate',
         'version' => 'getVersion'
     ];
 
@@ -187,37 +192,39 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
+        $this->container['adjustments'] = isset($data['adjustments']) ? $data['adjustments'] : null;
+        
         $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['currency_bank_account'] = isset($data['currency_bank_account']) ? $data['currency_bank_account'] : null;
+        
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['flow_direction'] = isset($data['flow_direction']) ? $data['flow_direction'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['initial_execution_date'] = isset($data['initial_execution_date']) ? $data['initial_execution_date'] : null;
-        
-        $this->container['initial_payment_transaction'] = isset($data['initial_payment_transaction']) ? $data['initial_payment_transaction'] : null;
-        
-        $this->container['initial_shopify_transaction'] = isset($data['initial_shopify_transaction']) ? $data['initial_shopify_transaction'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
-        $this->container['order_recurrence_number'] = isset($data['order_recurrence_number']) ? $data['order_recurrence_number'] : null;
+        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
-        $this->container['shop'] = isset($data['shop']) ? $data['shop'] : null;
+        $this->container['posting_amount'] = isset($data['posting_amount']) ? $data['posting_amount'] : null;
+        
+        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
+        
+        $this->container['source'] = isset($data['source']) ? $data['source'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
-        $this->container['subscriber'] = isset($data['subscriber']) ? $data['subscriber'] : null;
+        $this->container['total_adjustment_amount_including_tax'] = isset($data['total_adjustment_amount_including_tax']) ? $data['total_adjustment_amount_including_tax'] : null;
         
-        $this->container['terminated_by'] = isset($data['terminated_by']) ? $data['terminated_by'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
-        $this->container['terminated_on'] = isset($data['terminated_on']) ? $data['terminated_on'] : null;
+        $this->container['value_amount'] = isset($data['value_amount']) ? $data['value_amount'] : null;
         
-        $this->container['termination_request_date'] = isset($data['termination_request_date']) ? $data['termination_request_date'] : null;
+        $this->container['value_date'] = isset($data['value_date']) ? $data['value_date'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -321,6 +328,31 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets adjustments
+     *
+     * @return \Wallee\Sdk\Model\PaymentAdjustment[]
+     */
+    public function getAdjustments()
+    {
+        return $this->container['adjustments'];
+    }
+
+    /**
+     * Sets adjustments
+     *
+     * @param \Wallee\Sdk\Model\PaymentAdjustment[] $adjustments The adjustments applied on this bank transaction.
+     *
+     * @return $this
+     */
+    public function setAdjustments($adjustments)
+    {
+        $this->container['adjustments'] = $adjustments;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets created_by
      *
      * @return int
@@ -333,7 +365,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by 
+     * @param int $created_by The created by indicates the user which has created the bank transaction.
      *
      * @return $this
      */
@@ -358,13 +390,38 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on 
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
      *
      * @return $this
      */
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets currency_bank_account
+     *
+     * @return \Wallee\Sdk\Model\CurrencyBankAccount
+     */
+    public function getCurrencyBankAccount()
+    {
+        return $this->container['currency_bank_account'];
+    }
+
+    /**
+     * Sets currency_bank_account
+     *
+     * @param \Wallee\Sdk\Model\CurrencyBankAccount $currency_bank_account The currency bank account which is used to handle money flow.
+     *
+     * @return $this
+     */
+    public function setCurrencyBankAccount($currency_bank_account)
+    {
+        $this->container['currency_bank_account'] = $currency_bank_account;
 
         return $this;
     }
@@ -383,20 +440,45 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     * @param string $external_id 
      *
      * @return $this
      */
     public function setExternalId($external_id)
     {
         if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling ShopifySubscription., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid length for $external_id when calling BankTransaction., must be smaller than or equal to 100.');
         }
         if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling ShopifySubscription., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $external_id when calling BankTransaction., must be bigger than or equal to 1.');
         }
 
         $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets flow_direction
+     *
+     * @return \Wallee\Sdk\Model\BankTransactionFlowDirection
+     */
+    public function getFlowDirection()
+    {
+        return $this->container['flow_direction'];
+    }
+
+    /**
+     * Sets flow_direction
+     *
+     * @param \Wallee\Sdk\Model\BankTransactionFlowDirection $flow_direction 
+     *
+     * @return $this
+     */
+    public function setFlowDirection($flow_direction)
+    {
+        $this->container['flow_direction'] = $flow_direction;
 
         return $this;
     }
@@ -428,106 +510,6 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets initial_execution_date
-     *
-     * @return \DateTime
-     */
-    public function getInitialExecutionDate()
-    {
-        return $this->container['initial_execution_date'];
-    }
-
-    /**
-     * Sets initial_execution_date
-     *
-     * @param \DateTime $initial_execution_date 
-     *
-     * @return $this
-     */
-    public function setInitialExecutionDate($initial_execution_date)
-    {
-        $this->container['initial_execution_date'] = $initial_execution_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets initial_payment_transaction
-     *
-     * @return int
-     */
-    public function getInitialPaymentTransaction()
-    {
-        return $this->container['initial_payment_transaction'];
-    }
-
-    /**
-     * Sets initial_payment_transaction
-     *
-     * @param int $initial_payment_transaction 
-     *
-     * @return $this
-     */
-    public function setInitialPaymentTransaction($initial_payment_transaction)
-    {
-        $this->container['initial_payment_transaction'] = $initial_payment_transaction;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets initial_shopify_transaction
-     *
-     * @return int
-     */
-    public function getInitialShopifyTransaction()
-    {
-        return $this->container['initial_shopify_transaction'];
-    }
-
-    /**
-     * Sets initial_shopify_transaction
-     *
-     * @param int $initial_shopify_transaction 
-     *
-     * @return $this
-     */
-    public function setInitialShopifyTransaction($initial_shopify_transaction)
-    {
-        $this->container['initial_shopify_transaction'] = $initial_shopify_transaction;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string $language 
-     *
-     * @return $this
-     */
-    public function setLanguage($language)
-    {
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets linked_space_id
      *
      * @return int
@@ -553,50 +535,100 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets order_recurrence_number
+     * Gets planned_purge_date
      *
-     * @return int
+     * @return \DateTime
      */
-    public function getOrderRecurrenceNumber()
+    public function getPlannedPurgeDate()
     {
-        return $this->container['order_recurrence_number'];
+        return $this->container['planned_purge_date'];
     }
 
     /**
-     * Sets order_recurrence_number
+     * Sets planned_purge_date
      *
-     * @param int $order_recurrence_number 
+     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
      *
      * @return $this
      */
-    public function setOrderRecurrenceNumber($order_recurrence_number)
+    public function setPlannedPurgeDate($planned_purge_date)
     {
-        $this->container['order_recurrence_number'] = $order_recurrence_number;
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
     
 
     /**
-     * Gets shop
+     * Gets posting_amount
      *
-     * @return int
+     * @return float
      */
-    public function getShop()
+    public function getPostingAmount()
     {
-        return $this->container['shop'];
+        return $this->container['posting_amount'];
     }
 
     /**
-     * Sets shop
+     * Sets posting_amount
      *
-     * @param int $shop 
+     * @param float $posting_amount The posting amount indicates the amount including adjustments.
      *
      * @return $this
      */
-    public function setShop($shop)
+    public function setPostingAmount($posting_amount)
     {
-        $this->container['shop'] = $shop;
+        $this->container['posting_amount'] = $posting_amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->container['reference'];
+    }
+
+    /**
+     * Sets reference
+     *
+     * @param string $reference 
+     *
+     * @return $this
+     */
+    public function setReference($reference)
+    {
+        $this->container['reference'] = $reference;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets source
+     *
+     * @return int
+     */
+    public function getSource()
+    {
+        return $this->container['source'];
+    }
+
+    /**
+     * Sets source
+     *
+     * @param int $source 
+     *
+     * @return $this
+     */
+    public function setSource($source)
+    {
+        $this->container['source'] = $source;
 
         return $this;
     }
@@ -605,7 +637,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionState
+     * @return \Wallee\Sdk\Model\BankTransactionState
      */
     public function getState()
     {
@@ -615,7 +647,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionState $state 
+     * @param \Wallee\Sdk\Model\BankTransactionState $state 
      *
      * @return $this
      */
@@ -628,100 +660,100 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets subscriber
+     * Gets total_adjustment_amount_including_tax
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriber
+     * @return float
      */
-    public function getSubscriber()
+    public function getTotalAdjustmentAmountIncludingTax()
     {
-        return $this->container['subscriber'];
+        return $this->container['total_adjustment_amount_including_tax'];
     }
 
     /**
-     * Sets subscriber
+     * Sets total_adjustment_amount_including_tax
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriber $subscriber 
+     * @param float $total_adjustment_amount_including_tax 
      *
      * @return $this
      */
-    public function setSubscriber($subscriber)
+    public function setTotalAdjustmentAmountIncludingTax($total_adjustment_amount_including_tax)
     {
-        $this->container['subscriber'] = $subscriber;
+        $this->container['total_adjustment_amount_including_tax'] = $total_adjustment_amount_including_tax;
 
         return $this;
     }
     
 
     /**
-     * Gets terminated_by
+     * Gets type
      *
      * @return int
      */
-    public function getTerminatedBy()
+    public function getType()
     {
-        return $this->container['terminated_by'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets terminated_by
+     * Sets type
      *
-     * @param int $terminated_by 
+     * @param int $type 
      *
      * @return $this
      */
-    public function setTerminatedBy($terminated_by)
+    public function setType($type)
     {
-        $this->container['terminated_by'] = $terminated_by;
+        $this->container['type'] = $type;
 
         return $this;
     }
     
 
     /**
-     * Gets terminated_on
+     * Gets value_amount
      *
-     * @return \DateTime
+     * @return float
      */
-    public function getTerminatedOn()
+    public function getValueAmount()
     {
-        return $this->container['terminated_on'];
+        return $this->container['value_amount'];
     }
 
     /**
-     * Sets terminated_on
+     * Sets value_amount
      *
-     * @param \DateTime $terminated_on 
+     * @param float $value_amount 
      *
      * @return $this
      */
-    public function setTerminatedOn($terminated_on)
+    public function setValueAmount($value_amount)
     {
-        $this->container['terminated_on'] = $terminated_on;
+        $this->container['value_amount'] = $value_amount;
 
         return $this;
     }
     
 
     /**
-     * Gets termination_request_date
+     * Gets value_date
      *
      * @return \DateTime
      */
-    public function getTerminationRequestDate()
+    public function getValueDate()
     {
-        return $this->container['termination_request_date'];
+        return $this->container['value_date'];
     }
 
     /**
-     * Sets termination_request_date
+     * Sets value_date
      *
-     * @param \DateTime $termination_request_date 
+     * @param \DateTime $value_date The value date describes the date the amount is effective on the account.
      *
      * @return $this
      */
-    public function setTerminationRequestDate($termination_request_date)
+    public function setValueDate($value_date)
     {
-        $this->container['termination_request_date'] = $termination_request_date;
+        $this->container['value_date'] = $value_date;
 
         return $this;
     }

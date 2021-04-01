@@ -22,7 +22,7 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TaxCalculation model
+ * BankAccountState model
  *
  * @category    Class
  * @description 
@@ -30,13 +30,15 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TaxCalculation
+class BankAccountState
 {
     /**
      * Possible values of this enum
      */
-    const TAX_INCLUDED = 'TAX_INCLUDED';
-    const TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED';
+    const CREATE = 'CREATE';
+    const ACTIVE = 'ACTIVE';
+    const DELETING = 'DELETING';
+    const DELETED = 'DELETED';
     
     /**
      * Gets allowable values of the enum
@@ -45,8 +47,10 @@ class TaxCalculation
     public static function getAllowableEnumValues()
     {
         return [
-            self::TAX_INCLUDED,
-            self::TAX_NOT_INCLUDED,
+            self::CREATE,
+            self::ACTIVE,
+            self::DELETING,
+            self::DELETED,
         ];
     }
 }

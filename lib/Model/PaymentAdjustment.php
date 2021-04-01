@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * RenderedTerminalReceipt model
+ * PaymentAdjustment model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
+class PaymentAdjustment implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RenderedTerminalReceipt';
+    protected static $swaggerModelName = 'PaymentAdjustment';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => 'string',
-        'mime_type' => 'string',
-        'printed' => 'bool',
-        'receipt_type' => '\Wallee\Sdk\Model\PaymentTerminalReceiptType'
+        'amount_excluding_tax' => 'float',
+        'amount_including_tax' => 'float',
+        'rate_in_percentage' => 'float',
+        'tax' => '\Wallee\Sdk\Model\Tax',
+        'type' => 'int'
     ];
 
     /**
@@ -61,10 +62,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'data' => 'byte',
-        'mime_type' => null,
-        'printed' => null,
-        'receipt_type' => null
+        'amount_excluding_tax' => null,
+        'amount_including_tax' => null,
+        'rate_in_percentage' => null,
+        'tax' => null,
+        'type' => 'int64'
     ];
 
     /**
@@ -74,10 +76,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'mime_type' => 'mimeType',
-        'printed' => 'printed',
-        'receipt_type' => 'receiptType'
+        'amount_excluding_tax' => 'amountExcludingTax',
+        'amount_including_tax' => 'amountIncludingTax',
+        'rate_in_percentage' => 'rateInPercentage',
+        'tax' => 'tax',
+        'type' => 'type'
     ];
 
     /**
@@ -86,10 +89,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'mime_type' => 'setMimeType',
-        'printed' => 'setPrinted',
-        'receipt_type' => 'setReceiptType'
+        'amount_excluding_tax' => 'setAmountExcludingTax',
+        'amount_including_tax' => 'setAmountIncludingTax',
+        'rate_in_percentage' => 'setRateInPercentage',
+        'tax' => 'setTax',
+        'type' => 'setType'
     ];
 
     /**
@@ -98,10 +102,11 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'mime_type' => 'getMimeType',
-        'printed' => 'getPrinted',
-        'receipt_type' => 'getReceiptType'
+        'amount_excluding_tax' => 'getAmountExcludingTax',
+        'amount_including_tax' => 'getAmountIncludingTax',
+        'rate_in_percentage' => 'getRateInPercentage',
+        'tax' => 'getTax',
+        'type' => 'getType'
     ];
 
     
@@ -122,13 +127,15 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['amount_excluding_tax'] = isset($data['amount_excluding_tax']) ? $data['amount_excluding_tax'] : null;
         
-        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
+        $this->container['amount_including_tax'] = isset($data['amount_including_tax']) ? $data['amount_including_tax'] : null;
         
-        $this->container['printed'] = isset($data['printed']) ? $data['printed'] : null;
+        $this->container['rate_in_percentage'] = isset($data['rate_in_percentage']) ? $data['rate_in_percentage'] : null;
         
-        $this->container['receipt_type'] = isset($data['receipt_type']) ? $data['receipt_type'] : null;
+        $this->container['tax'] = isset($data['tax']) ? $data['tax'] : null;
+        
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
     }
 
@@ -222,102 +229,125 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets data
+     * Gets amount_excluding_tax
      *
-     * @return string
+     * @return float
      */
-    public function getData()
+    public function getAmountExcludingTax()
     {
-        return $this->container['data'];
+        return $this->container['amount_excluding_tax'];
     }
 
     /**
-     * Sets data
+     * Sets amount_excluding_tax
      *
-     * @param string $data data
+     * @param float $amount_excluding_tax 
      *
      * @return $this
      */
-    public function setData($data)
+    public function setAmountExcludingTax($amount_excluding_tax)
     {
-
-
-        $this->container['data'] = $data;
+        $this->container['amount_excluding_tax'] = $amount_excluding_tax;
 
         return $this;
     }
     
 
     /**
-     * Gets mime_type
+     * Gets amount_including_tax
      *
-     * @return string
+     * @return float
      */
-    public function getMimeType()
+    public function getAmountIncludingTax()
     {
-        return $this->container['mime_type'];
+        return $this->container['amount_including_tax'];
     }
 
     /**
-     * Sets mime_type
+     * Sets amount_including_tax
      *
-     * @param string $mime_type The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
+     * @param float $amount_including_tax The total amount of this adjustment including taxes.
      *
      * @return $this
      */
-    public function setMimeType($mime_type)
+    public function setAmountIncludingTax($amount_including_tax)
     {
-        $this->container['mime_type'] = $mime_type;
+        $this->container['amount_including_tax'] = $amount_including_tax;
 
         return $this;
     }
     
 
     /**
-     * Gets printed
+     * Gets rate_in_percentage
      *
-     * @return bool
+     * @return float
      */
-    public function getPrinted()
+    public function getRateInPercentage()
     {
-        return $this->container['printed'];
+        return $this->container['rate_in_percentage'];
     }
 
     /**
-     * Sets printed
+     * Sets rate_in_percentage
      *
-     * @param bool $printed The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
+     * @param float $rate_in_percentage The rate in percentage is the rate on which the adjustment amount was calculated with.
      *
      * @return $this
      */
-    public function setPrinted($printed)
+    public function setRateInPercentage($rate_in_percentage)
     {
-        $this->container['printed'] = $printed;
+        $this->container['rate_in_percentage'] = $rate_in_percentage;
 
         return $this;
     }
     
 
     /**
-     * Gets receipt_type
+     * Gets tax
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalReceiptType
+     * @return \Wallee\Sdk\Model\Tax
      */
-    public function getReceiptType()
+    public function getTax()
     {
-        return $this->container['receipt_type'];
+        return $this->container['tax'];
     }
 
     /**
-     * Sets receipt_type
+     * Sets tax
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalReceiptType $receipt_type Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
+     * @param \Wallee\Sdk\Model\Tax $tax 
      *
      * @return $this
      */
-    public function setReceiptType($receipt_type)
+    public function setTax($tax)
     {
-        $this->container['receipt_type'] = $receipt_type;
+        $this->container['tax'] = $tax;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets type
+     *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param int $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }

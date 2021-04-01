@@ -22,7 +22,7 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TaxCalculation model
+ * RecurringIndicator model
  *
  * @category    Class
  * @description 
@@ -30,13 +30,15 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TaxCalculation
+class RecurringIndicator
 {
     /**
      * Possible values of this enum
      */
-    const TAX_INCLUDED = 'TAX_INCLUDED';
-    const TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED';
+    const REGULAR_TRANSACTION = 'REGULAR_TRANSACTION';
+    const INITIAL_RECURRING_TRANSACTION = 'INITIAL_RECURRING_TRANSACTION';
+    const MERCHANT_INITIATED_RECURRING_TRANSACTION = 'MERCHANT_INITIATED_RECURRING_TRANSACTION';
+    const CUSTOMER_INITIATED_RECURRING_TRANSACTION = 'CUSTOMER_INITIATED_RECURRING_TRANSACTION';
     
     /**
      * Gets allowable values of the enum
@@ -45,8 +47,10 @@ class TaxCalculation
     public static function getAllowableEnumValues()
     {
         return [
-            self::TAX_INCLUDED,
-            self::TAX_NOT_INCLUDED,
+            self::REGULAR_TRANSACTION,
+            self::INITIAL_RECURRING_TRANSACTION,
+            self::MERCHANT_INITIATED_RECURRING_TRANSACTION,
+            self::CUSTOMER_INITIATED_RECURRING_TRANSACTION,
         ];
     }
 }

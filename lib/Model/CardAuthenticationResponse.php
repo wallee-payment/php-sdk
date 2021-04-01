@@ -22,7 +22,7 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TaxCalculation model
+ * CardAuthenticationResponse model
  *
  * @category    Class
  * @description 
@@ -30,13 +30,16 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TaxCalculation
+class CardAuthenticationResponse
 {
     /**
      * Possible values of this enum
      */
-    const TAX_INCLUDED = 'TAX_INCLUDED';
-    const TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED';
+    const ENROLLMENT_VERIFICATION_ERROR = 'ENROLLMENT_VERIFICATION_ERROR';
+    const NOT_ENROLLED = 'NOT_ENROLLED';
+    const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+    const AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED';
+    const FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED';
     
     /**
      * Gets allowable values of the enum
@@ -45,8 +48,11 @@ class TaxCalculation
     public static function getAllowableEnumValues()
     {
         return [
-            self::TAX_INCLUDED,
-            self::TAX_NOT_INCLUDED,
+            self::ENROLLMENT_VERIFICATION_ERROR,
+            self::NOT_ENROLLED,
+            self::AUTHENTICATION_ERROR,
+            self::AUTHENTICATION_NOT_REQUIRED,
+            self::FULLY_AUTHENTICATED,
         ];
     }
 }

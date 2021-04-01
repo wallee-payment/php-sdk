@@ -22,21 +22,21 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TaxCalculation model
+ * CardAuthenticationVersion model
  *
  * @category    Class
- * @description 
+ * @description This model defines the card authentication versions.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TaxCalculation
+class CardAuthenticationVersion
 {
     /**
      * Possible values of this enum
      */
-    const TAX_INCLUDED = 'TAX_INCLUDED';
-    const TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED';
+    const V1 = 'V1';
+    const V2 = 'V2';
     
     /**
      * Gets allowable values of the enum
@@ -45,8 +45,8 @@ class TaxCalculation
     public static function getAllowableEnumValues()
     {
         return [
-            self::TAX_INCLUDED,
-            self::TAX_NOT_INCLUDED,
+            self::V1,
+            self::V2,
         ];
     }
 }

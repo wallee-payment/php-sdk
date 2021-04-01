@@ -27,14 +27,14 @@ use Wallee\Sdk\Http\HttpRequest;
 use Wallee\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriberService service
+ * RefundRecoveryBankTransactionService service
  *
  * @category Class
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriberService {
+class RefundRecoveryBankTransactionService {
 
 	/**
 	 * The API client instance.
@@ -114,7 +114,7 @@ class ShopifySubscriberService {
 		}
 
 		// path params
-		$resourcePath = '/shopify-subscriber/count';
+		$resourcePath = '/refund-recovery-bank-transaction/count';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -143,7 +143,7 @@ class ShopifySubscriberService {
 				$httpBody,
 				$headerParams,
 				'int',
-				'/shopify-subscriber/count'
+				'/refund-recovery-bank-transaction/count'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -183,11 +183,11 @@ class ShopifySubscriberService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The id of the Shopify subscriber which should be returned. (required)
+	 * @param int $id The ID of the refund recovery bank transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\ShopifySubscriber
+	 * @return \Wallee\Sdk\Model\RefundRecoveryBankTransaction
 	 */
 	public function read($space_id, $id) {
 		return $this->readWithHttpInfo($space_id, $id)->getData();
@@ -199,7 +199,7 @@ class ShopifySubscriberService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The id of the Shopify subscriber which should be returned. (required)
+	 * @param int $id The ID of the refund recovery bank transaction which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -232,7 +232,7 @@ class ShopifySubscriberService {
 		}
 
 		// path params
-		$resourcePath = '/shopify-subscriber/read';
+		$resourcePath = '/refund-recovery-bank-transaction/read';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -255,16 +255,16 @@ class ShopifySubscriberService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\ShopifySubscriber',
-				'/shopify-subscriber/read'
+				'\Wallee\Sdk\Model\RefundRecoveryBankTransaction',
+				'/refund-recovery-bank-transaction/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ShopifySubscriber', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RefundRecoveryBankTransaction', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ShopifySubscriber',
+                        '\Wallee\Sdk\Model\RefundRecoveryBankTransaction',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -296,11 +296,11 @@ class ShopifySubscriberService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the Shopify subscribers which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the refund recovery bank transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\ShopifySubscriber[]
+	 * @return \Wallee\Sdk\Model\RefundRecoveryBankTransaction[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -312,7 +312,7 @@ class ShopifySubscriberService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the Shopify subscribers which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the refund recovery bank transactions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -342,7 +342,7 @@ class ShopifySubscriberService {
 		}
 
 		// path params
-		$resourcePath = '/shopify-subscriber/search';
+		$resourcePath = '/refund-recovery-bank-transaction/search';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -370,139 +370,16 @@ class ShopifySubscriberService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\ShopifySubscriber[]',
-				'/shopify-subscriber/search'
+				'\Wallee\Sdk\Model\RefundRecoveryBankTransaction[]',
+				'/refund-recovery-bank-transaction/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ShopifySubscriber[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RefundRecoveryBankTransaction[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ShopifySubscriber[]',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation update
-	 *
-	 * Update
-	 *
-	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\ShopifySubscriberActive $query The Shopify subscriber object with all the properties which should be updated. The id and the version are required properties. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @throws \Wallee\Sdk\VersioningException
-	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\ShopifySubscriber
-	 */
-	public function update($space_id, $query) {
-		return $this->updateWithHttpInfo($space_id, $query)->getData();
-	}
-
-	/**
-	 * Operation updateWithHttpInfo
-	 *
-	 * Update
-	 *
-	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\ShopifySubscriberActive $query The Shopify subscriber object with all the properties which should be updated. The id and the version are required properties. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @throws \Wallee\Sdk\VersioningException
-	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function updateWithHttpInfo($space_id, $query) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling update');
-		}
-		// verify the required parameter 'query' is set
-		if (is_null($query)) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling update');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-
-		// path params
-		$resourcePath = '/shopify-subscriber/update';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($query)) {
-			$tempBody = $query;
-		}
-
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				'\Wallee\Sdk\Model\ShopifySubscriber',
-				'/shopify-subscriber/update'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\ShopifySubscriber', $response->getHeaders()));
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ShopifySubscriber',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 409:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ClientError',
+                        '\Wallee\Sdk\Model\RefundRecoveryBankTransaction[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

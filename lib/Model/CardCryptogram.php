@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * RenderedTerminalReceipt model
+ * CardCryptogram model
  *
  * @category    Class
- * @description 
+ * @description This model holds the additional card authentication.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
+class CardCryptogram implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RenderedTerminalReceipt';
+    protected static $swaggerModelName = 'CardCryptogram';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,8 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => 'string',
-        'mime_type' => 'string',
-        'printed' => 'bool',
-        'receipt_type' => '\Wallee\Sdk\Model\PaymentTerminalReceiptType'
+        'type' => '\Wallee\Sdk\Model\CardCryptogramType',
+        'value' => 'string'
     ];
 
     /**
@@ -61,10 +59,8 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'data' => 'byte',
-        'mime_type' => null,
-        'printed' => null,
-        'receipt_type' => null
+        'type' => null,
+        'value' => null
     ];
 
     /**
@@ -74,10 +70,8 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data',
-        'mime_type' => 'mimeType',
-        'printed' => 'printed',
-        'receipt_type' => 'receiptType'
+        'type' => 'type',
+        'value' => 'value'
     ];
 
     /**
@@ -86,10 +80,8 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData',
-        'mime_type' => 'setMimeType',
-        'printed' => 'setPrinted',
-        'receipt_type' => 'setReceiptType'
+        'type' => 'setType',
+        'value' => 'setValue'
     ];
 
     /**
@@ -98,10 +90,8 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData',
-        'mime_type' => 'getMimeType',
-        'printed' => 'getPrinted',
-        'receipt_type' => 'getReceiptType'
+        'type' => 'getType',
+        'value' => 'getValue'
     ];
 
     
@@ -122,13 +112,9 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
-        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
-        
-        $this->container['printed'] = isset($data['printed']) ? $data['printed'] : null;
-        
-        $this->container['receipt_type'] = isset($data['receipt_type']) ? $data['receipt_type'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
         
     }
 
@@ -222,102 +208,50 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets data
+     * Gets type
+     *
+     * @return \Wallee\Sdk\Model\CardCryptogramType
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \Wallee\Sdk\Model\CardCryptogramType $type 
+     *
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets value
      *
      * @return string
      */
-    public function getData()
+    public function getValue()
     {
-        return $this->container['data'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets data
+     * Sets value
      *
-     * @param string $data data
+     * @param string $value 
      *
      * @return $this
      */
-    public function setData($data)
+    public function setValue($value)
     {
-
-
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets mime_type
-     *
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->container['mime_type'];
-    }
-
-    /**
-     * Sets mime_type
-     *
-     * @param string $mime_type The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
-     *
-     * @return $this
-     */
-    public function setMimeType($mime_type)
-    {
-        $this->container['mime_type'] = $mime_type;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets printed
-     *
-     * @return bool
-     */
-    public function getPrinted()
-    {
-        return $this->container['printed'];
-    }
-
-    /**
-     * Sets printed
-     *
-     * @param bool $printed The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
-     *
-     * @return $this
-     */
-    public function setPrinted($printed)
-    {
-        $this->container['printed'] = $printed;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets receipt_type
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalReceiptType
-     */
-    public function getReceiptType()
-    {
-        return $this->container['receipt_type'];
-    }
-
-    /**
-     * Sets receipt_type
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalReceiptType $receipt_type Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
-     *
-     * @return $this
-     */
-    public function setReceiptType($receipt_type)
-    {
-        $this->container['receipt_type'] = $receipt_type;
+        $this->container['value'] = $value;
 
         return $this;
     }

@@ -74,7 +74,7 @@ class CardProcessingService {
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which should be processed. (required)
 	 * @param int $payment_method_configuration_id The payment method configuration ID which is applied to the transaction. (required)
-	 * @param \Wallee\Sdk\Model\UnencryptedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
+	 * @param \Wallee\Sdk\Model\AuthenticatedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -92,7 +92,7 @@ class CardProcessingService {
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which should be processed. (required)
 	 * @param int $payment_method_configuration_id The payment method configuration ID which is applied to the transaction. (required)
-	 * @param \Wallee\Sdk\Model\UnencryptedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
+	 * @param \Wallee\Sdk\Model\AuthenticatedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -215,7 +215,7 @@ class CardProcessingService {
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which should be processed. (required)
 	 * @param int $payment_method_configuration_id The payment method configuration ID which is applied to the transaction. (required)
-	 * @param \Wallee\Sdk\Model\UnencryptedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
+	 * @param \Wallee\Sdk\Model\TokenizedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -233,7 +233,7 @@ class CardProcessingService {
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which should be processed. (required)
 	 * @param int $payment_method_configuration_id The payment method configuration ID which is applied to the transaction. (required)
-	 * @param \Wallee\Sdk\Model\UnencryptedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
+	 * @param \Wallee\Sdk\Model\TokenizedCardDataCreate $card_data The card details as JSON in plain which should be used to authorize the payment. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException

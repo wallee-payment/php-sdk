@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalLocation model
+ * CardholderAuthenticationCreate model
  *
  * @category    Class
- * @description 
+ * @description This model holds the cardholder authentication data (e.g. 3-D Secure authentication).
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalLocation implements ModelInterface, ArrayAccess
+class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocation';
+    protected static $swaggerModelName = 'CardholderAuthentication.Create';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,14 +49,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contact_address' => '\Wallee\Sdk\Model\PaymentTerminalAddress',
-        'default_configuration' => '\Wallee\Sdk\Model\PaymentTerminalConfiguration',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'name' => 'string',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\PaymentTerminalLocationState',
-        'version' => 'int'
+        'authentication_identifier' => 'string',
+        'authentication_response' => '\Wallee\Sdk\Model\CardAuthenticationResponse',
+        'authentication_value' => 'string',
+        'electronic_commerce_indicator' => 'string',
+        'version' => '\Wallee\Sdk\Model\CardAuthenticationVersion'
     ];
 
     /**
@@ -65,14 +62,11 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'contact_address' => null,
-        'default_configuration' => null,
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'name' => null,
-        'planned_purge_date' => 'date-time',
-        'state' => null,
-        'version' => 'int32'
+        'authentication_identifier' => null,
+        'authentication_response' => null,
+        'authentication_value' => null,
+        'electronic_commerce_indicator' => null,
+        'version' => null
     ];
 
     /**
@@ -82,13 +76,10 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'contact_address' => 'contactAddress',
-        'default_configuration' => 'defaultConfiguration',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
+        'authentication_identifier' => 'authenticationIdentifier',
+        'authentication_response' => 'authenticationResponse',
+        'authentication_value' => 'authenticationValue',
+        'electronic_commerce_indicator' => 'electronicCommerceIndicator',
         'version' => 'version'
     ];
 
@@ -98,13 +89,10 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'contact_address' => 'setContactAddress',
-        'default_configuration' => 'setDefaultConfiguration',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
+        'authentication_identifier' => 'setAuthenticationIdentifier',
+        'authentication_response' => 'setAuthenticationResponse',
+        'authentication_value' => 'setAuthenticationValue',
+        'electronic_commerce_indicator' => 'setElectronicCommerceIndicator',
         'version' => 'setVersion'
     ];
 
@@ -114,13 +102,10 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'contact_address' => 'getContactAddress',
-        'default_configuration' => 'getDefaultConfiguration',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
+        'authentication_identifier' => 'getAuthenticationIdentifier',
+        'authentication_response' => 'getAuthenticationResponse',
+        'authentication_value' => 'getAuthenticationValue',
+        'electronic_commerce_indicator' => 'getElectronicCommerceIndicator',
         'version' => 'getVersion'
     ];
 
@@ -142,19 +127,13 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
+        $this->container['authentication_identifier'] = isset($data['authentication_identifier']) ? $data['authentication_identifier'] : null;
         
-        $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
+        $this->container['authentication_response'] = isset($data['authentication_response']) ? $data['authentication_response'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['authentication_value'] = isset($data['authentication_value']) ? $data['authentication_value'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['electronic_commerce_indicator'] = isset($data['electronic_commerce_indicator']) ? $data['electronic_commerce_indicator'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -169,10 +148,12 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        if ($this->container['authentication_response'] === null) {
+            $invalidProperties[] = "'authentication_response' can't be null";
         }
-
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -254,179 +235,100 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets contact_address
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getContactAddress()
-    {
-        return $this->container['contact_address'];
-    }
-
-    /**
-     * Sets contact_address
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalAddress $contact_address 
-     *
-     * @return $this
-     */
-    public function setContactAddress($contact_address)
-    {
-        $this->container['contact_address'] = $contact_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets default_configuration
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalConfiguration
-     */
-    public function getDefaultConfiguration()
-    {
-        return $this->container['default_configuration'];
-    }
-
-    /**
-     * Sets default_configuration
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalConfiguration $default_configuration 
-     *
-     * @return $this
-     */
-    public function setDefaultConfiguration($default_configuration)
-    {
-        $this->container['default_configuration'] = $default_configuration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
+     * Gets authentication_identifier
      *
      * @return string
      */
-    public function getName()
+    public function getAuthenticationIdentifier()
     {
-        return $this->container['name'];
+        return $this->container['authentication_identifier'];
     }
 
     /**
-     * Sets name
+     * Sets authentication_identifier
      *
-     * @param string $name The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $authentication_identifier The authentication identifier as assigned by authentication system (e.g. XID or DSTransactionID).
      *
      * @return $this
      */
-    public function setName($name)
+    public function setAuthenticationIdentifier($authentication_identifier)
     {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminalLocation., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
+        $this->container['authentication_identifier'] = $authentication_identifier;
 
         return $this;
     }
     
 
     /**
-     * Gets planned_purge_date
+     * Gets authentication_response
      *
-     * @return \DateTime
+     * @return \Wallee\Sdk\Model\CardAuthenticationResponse
      */
-    public function getPlannedPurgeDate()
+    public function getAuthenticationResponse()
     {
-        return $this->container['planned_purge_date'];
+        return $this->container['authentication_response'];
     }
 
     /**
-     * Sets planned_purge_date
+     * Sets authentication_response
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \Wallee\Sdk\Model\CardAuthenticationResponse $authentication_response 
      *
      * @return $this
      */
-    public function setPlannedPurgeDate($planned_purge_date)
+    public function setAuthenticationResponse($authentication_response)
     {
-        $this->container['planned_purge_date'] = $planned_purge_date;
+        $this->container['authentication_response'] = $authentication_response;
 
         return $this;
     }
     
 
     /**
-     * Gets state
+     * Gets authentication_value
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalLocationState
+     * @return string
      */
-    public function getState()
+    public function getAuthenticationValue()
     {
-        return $this->container['state'];
+        return $this->container['authentication_value'];
     }
 
     /**
-     * Sets state
+     * Sets authentication_value
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalLocationState $state 
+     * @param string $authentication_value The cardholder authentication value. Also known as Cardholder Authentication Verification Value (CAVV).
      *
      * @return $this
      */
-    public function setState($state)
+    public function setAuthenticationValue($authentication_value)
     {
-        $this->container['state'] = $state;
+        $this->container['authentication_value'] = $authentication_value;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets electronic_commerce_indicator
+     *
+     * @return string
+     */
+    public function getElectronicCommerceIndicator()
+    {
+        return $this->container['electronic_commerce_indicator'];
+    }
+
+    /**
+     * Sets electronic_commerce_indicator
+     *
+     * @param string $electronic_commerce_indicator The Electronic Commerce Indicator (ECI) value. The ECI is returned by authentication system and indicates the outcome/status of authentication.
+     *
+     * @return $this
+     */
+    public function setElectronicCommerceIndicator($electronic_commerce_indicator)
+    {
+        $this->container['electronic_commerce_indicator'] = $electronic_commerce_indicator;
 
         return $this;
     }
@@ -435,7 +337,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Gets version
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\CardAuthenticationVersion
      */
     public function getVersion()
     {
@@ -445,7 +347,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param \Wallee\Sdk\Model\CardAuthenticationVersion $version 
      *
      * @return $this
      */

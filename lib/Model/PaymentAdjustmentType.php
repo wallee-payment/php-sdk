@@ -19,10 +19,12 @@
 
 
 namespace Wallee\Sdk\Model;
+
+use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalContactAddress model
+ * PaymentAdjustmentType model
  *
  * @category    Class
  * @description 
@@ -30,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalContactAddress extends PaymentTerminalAddress 
+class PaymentAdjustmentType implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -39,7 +41,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalContactAddress';
+    protected static $swaggerModelName = 'PaymentAdjustmentType';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -47,7 +49,9 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       * @var string[]
       */
     protected static $swaggerTypes = [
-        
+        'description' => 'map[string,string]',
+        'id' => 'int',
+        'name' => 'map[string,string]'
     ];
 
     /**
@@ -56,7 +60,9 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
       * @var string[]
       */
     protected static $swaggerFormats = [
-        
+        'description' => null,
+        'id' => 'int64',
+        'name' => null
     ];
 
     /**
@@ -66,7 +72,9 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'description' => 'description',
+        'id' => 'id',
+        'name' => 'name'
     ];
 
     /**
@@ -75,7 +83,9 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $setters = [
-        
+        'description' => 'setDescription',
+        'id' => 'setId',
+        'name' => 'setName'
     ];
 
     /**
@@ -84,11 +94,19 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      * @var string[]
      */
     protected static $getters = [
-        
+        'description' => 'getDescription',
+        'id' => 'getId',
+        'name' => 'getName'
     ];
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -98,8 +116,12 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
+        
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
     }
 
@@ -110,27 +132,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
-
-        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
-            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
-            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
-            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
-        }
-
-        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
-        }
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -142,7 +144,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -152,7 +154,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -164,7 +166,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -174,7 +176,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -184,7 +186,7 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -210,6 +212,81 @@ class PaymentTerminalContactAddress extends PaymentTerminalAddress
         return count($this->listInvalidProperties()) === 0;
     }
 
+    
+
+    /**
+     * Gets description
+     *
+     * @return map[string,string]
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param map[string,string] $description 
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets name
+     *
+     * @return map[string,string]
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param map[string,string] $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
     
     /**
      * Returns true if offset exists. False otherwise.

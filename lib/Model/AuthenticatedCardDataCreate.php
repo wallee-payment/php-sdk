@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * UnencryptedCardData model
+ * AuthenticatedCardDataCreate model
  *
  * @category    Class
- * @description This model holds the card data in plain.
+ * @description This model holds the card data and optional cardholder authentication details.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class UnencryptedCardData implements ModelInterface, ArrayAccess
+class AuthenticatedCardDataCreate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'UnencryptedCardData';
+    protected static $swaggerModelName = 'AuthenticatedCardData.Create';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'card_holder_name' => 'string',
         'card_verification_code' => 'string',
+        'cardholder_authentication' => '\Wallee\Sdk\Model\CardholderAuthenticationCreate',
+        'cryptogram' => '\Wallee\Sdk\Model\CardCryptogramCreate',
         'expiry_date' => 'string',
-        'primary_account_number' => 'string'
+        'primary_account_number' => 'string',
+        'recurring_indicator' => '\Wallee\Sdk\Model\RecurringIndicator',
+        'scheme_transaction_reference' => 'string',
+        'token_requestor_id' => 'string'
     ];
 
     /**
@@ -63,8 +68,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'card_holder_name' => null,
         'card_verification_code' => null,
+        'cardholder_authentication' => null,
+        'cryptogram' => null,
         'expiry_date' => null,
-        'primary_account_number' => null
+        'primary_account_number' => null,
+        'recurring_indicator' => null,
+        'scheme_transaction_reference' => null,
+        'token_requestor_id' => null
     ];
 
     /**
@@ -76,8 +86,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'card_holder_name' => 'cardHolderName',
         'card_verification_code' => 'cardVerificationCode',
+        'cardholder_authentication' => 'cardholderAuthentication',
+        'cryptogram' => 'cryptogram',
         'expiry_date' => 'expiryDate',
-        'primary_account_number' => 'primaryAccountNumber'
+        'primary_account_number' => 'primaryAccountNumber',
+        'recurring_indicator' => 'recurringIndicator',
+        'scheme_transaction_reference' => 'schemeTransactionReference',
+        'token_requestor_id' => 'tokenRequestorId'
     ];
 
     /**
@@ -88,8 +103,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     protected static $setters = [
         'card_holder_name' => 'setCardHolderName',
         'card_verification_code' => 'setCardVerificationCode',
+        'cardholder_authentication' => 'setCardholderAuthentication',
+        'cryptogram' => 'setCryptogram',
         'expiry_date' => 'setExpiryDate',
-        'primary_account_number' => 'setPrimaryAccountNumber'
+        'primary_account_number' => 'setPrimaryAccountNumber',
+        'recurring_indicator' => 'setRecurringIndicator',
+        'scheme_transaction_reference' => 'setSchemeTransactionReference',
+        'token_requestor_id' => 'setTokenRequestorId'
     ];
 
     /**
@@ -100,8 +120,13 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     protected static $getters = [
         'card_holder_name' => 'getCardHolderName',
         'card_verification_code' => 'getCardVerificationCode',
+        'cardholder_authentication' => 'getCardholderAuthentication',
+        'cryptogram' => 'getCryptogram',
         'expiry_date' => 'getExpiryDate',
-        'primary_account_number' => 'getPrimaryAccountNumber'
+        'primary_account_number' => 'getPrimaryAccountNumber',
+        'recurring_indicator' => 'getRecurringIndicator',
+        'scheme_transaction_reference' => 'getSchemeTransactionReference',
+        'token_requestor_id' => 'getTokenRequestorId'
     ];
 
     
@@ -126,9 +151,19 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
         
         $this->container['card_verification_code'] = isset($data['card_verification_code']) ? $data['card_verification_code'] : null;
         
+        $this->container['cardholder_authentication'] = isset($data['cardholder_authentication']) ? $data['cardholder_authentication'] : null;
+        
+        $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
+        
         $this->container['expiry_date'] = isset($data['expiry_date']) ? $data['expiry_date'] : null;
         
         $this->container['primary_account_number'] = isset($data['primary_account_number']) ? $data['primary_account_number'] : null;
+        
+        $this->container['recurring_indicator'] = isset($data['recurring_indicator']) ? $data['recurring_indicator'] : null;
+        
+        $this->container['scheme_transaction_reference'] = isset($data['scheme_transaction_reference']) ? $data['scheme_transaction_reference'] : null;
+        
+        $this->container['token_requestor_id'] = isset($data['token_requestor_id']) ? $data['token_requestor_id'] : null;
         
     }
 
@@ -153,12 +188,19 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'card_verification_code', the character length must be bigger than or equal to 3.";
         }
 
-        if (!is_null($this->container['primary_account_number']) && (mb_strlen($this->container['primary_account_number']) > 30)) {
+        if ($this->container['primary_account_number'] === null) {
+            $invalidProperties[] = "'primary_account_number' can't be null";
+        }
+        if ((mb_strlen($this->container['primary_account_number']) > 30)) {
             $invalidProperties[] = "invalid value for 'primary_account_number', the character length must be smaller than or equal to 30.";
         }
 
-        if (!is_null($this->container['primary_account_number']) && (mb_strlen($this->container['primary_account_number']) < 10)) {
+        if ((mb_strlen($this->container['primary_account_number']) < 10)) {
             $invalidProperties[] = "invalid value for 'primary_account_number', the character length must be bigger than or equal to 10.";
+        }
+
+        if (!is_null($this->container['scheme_transaction_reference']) && (mb_strlen($this->container['scheme_transaction_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'scheme_transaction_reference', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -261,7 +303,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     public function setCardHolderName($card_holder_name)
     {
         if (!is_null($card_holder_name) && (mb_strlen($card_holder_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $card_holder_name when calling UnencryptedCardData., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid length for $card_holder_name when calling AuthenticatedCardDataCreate., must be smaller than or equal to 100.');
         }
 
         $this->container['card_holder_name'] = $card_holder_name;
@@ -290,13 +332,63 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     public function setCardVerificationCode($card_verification_code)
     {
         if (!is_null($card_verification_code) && (mb_strlen($card_verification_code) > 4)) {
-            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling UnencryptedCardData., must be smaller than or equal to 4.');
+            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling AuthenticatedCardDataCreate., must be smaller than or equal to 4.');
         }
         if (!is_null($card_verification_code) && (mb_strlen($card_verification_code) < 3)) {
-            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling UnencryptedCardData., must be bigger than or equal to 3.');
+            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling AuthenticatedCardDataCreate., must be bigger than or equal to 3.');
         }
 
         $this->container['card_verification_code'] = $card_verification_code;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets cardholder_authentication
+     *
+     * @return \Wallee\Sdk\Model\CardholderAuthenticationCreate
+     */
+    public function getCardholderAuthentication()
+    {
+        return $this->container['cardholder_authentication'];
+    }
+
+    /**
+     * Sets cardholder_authentication
+     *
+     * @param \Wallee\Sdk\Model\CardholderAuthenticationCreate $cardholder_authentication The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+     *
+     * @return $this
+     */
+    public function setCardholderAuthentication($cardholder_authentication)
+    {
+        $this->container['cardholder_authentication'] = $cardholder_authentication;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets cryptogram
+     *
+     * @return \Wallee\Sdk\Model\CardCryptogramCreate
+     */
+    public function getCryptogram()
+    {
+        return $this->container['cryptogram'];
+    }
+
+    /**
+     * Sets cryptogram
+     *
+     * @param \Wallee\Sdk\Model\CardCryptogramCreate $cryptogram The additional authentication value used to secure the tokenized card transactions.
+     *
+     * @return $this
+     */
+    public function setCryptogram($cryptogram)
+    {
+        $this->container['cryptogram'] = $cryptogram;
 
         return $this;
     }
@@ -346,14 +438,93 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      */
     public function setPrimaryAccountNumber($primary_account_number)
     {
-        if (!is_null($primary_account_number) && (mb_strlen($primary_account_number) > 30)) {
-            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling UnencryptedCardData., must be smaller than or equal to 30.');
+        if ((mb_strlen($primary_account_number) > 30)) {
+            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling AuthenticatedCardDataCreate., must be smaller than or equal to 30.');
         }
-        if (!is_null($primary_account_number) && (mb_strlen($primary_account_number) < 10)) {
-            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling UnencryptedCardData., must be bigger than or equal to 10.');
+        if ((mb_strlen($primary_account_number) < 10)) {
+            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling AuthenticatedCardDataCreate., must be bigger than or equal to 10.');
         }
 
         $this->container['primary_account_number'] = $primary_account_number;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets recurring_indicator
+     *
+     * @return \Wallee\Sdk\Model\RecurringIndicator
+     */
+    public function getRecurringIndicator()
+    {
+        return $this->container['recurring_indicator'];
+    }
+
+    /**
+     * Sets recurring_indicator
+     *
+     * @param \Wallee\Sdk\Model\RecurringIndicator $recurring_indicator 
+     *
+     * @return $this
+     */
+    public function setRecurringIndicator($recurring_indicator)
+    {
+        $this->container['recurring_indicator'] = $recurring_indicator;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets scheme_transaction_reference
+     *
+     * @return string
+     */
+    public function getSchemeTransactionReference()
+    {
+        return $this->container['scheme_transaction_reference'];
+    }
+
+    /**
+     * Sets scheme_transaction_reference
+     *
+     * @param string $scheme_transaction_reference 
+     *
+     * @return $this
+     */
+    public function setSchemeTransactionReference($scheme_transaction_reference)
+    {
+        if (!is_null($scheme_transaction_reference) && (mb_strlen($scheme_transaction_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $scheme_transaction_reference when calling AuthenticatedCardDataCreate., must be smaller than or equal to 100.');
+        }
+
+        $this->container['scheme_transaction_reference'] = $scheme_transaction_reference;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets token_requestor_id
+     *
+     * @return string
+     */
+    public function getTokenRequestorId()
+    {
+        return $this->container['token_requestor_id'];
+    }
+
+    /**
+     * Sets token_requestor_id
+     *
+     * @param string $token_requestor_id 
+     *
+     * @return $this
+     */
+    public function setTokenRequestorId($token_requestor_id)
+    {
+        $this->container['token_requestor_id'] = $token_requestor_id;
 
         return $this;
     }

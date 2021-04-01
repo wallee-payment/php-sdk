@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminal model
+ * BankAccount model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminal implements ModelInterface, ArrayAccess
+class BankAccount implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminal';
+    protected static $swaggerModelName = 'BankAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,16 +49,13 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'configuration_version' => '\Wallee\Sdk\Model\PaymentTerminalConfigurationVersion',
-        'default_currency' => 'string',
+        'description' => 'string',
         'id' => 'int',
         'identifier' => 'string',
         'linked_space_id' => 'int',
-        'location_version' => '\Wallee\Sdk\Model\PaymentTerminalLocationVersion',
-        'name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\PaymentTerminalState',
-        'type' => '\Wallee\Sdk\Model\PaymentTerminalType',
+        'state' => '\Wallee\Sdk\Model\BankAccountState',
+        'type' => 'int',
         'version' => 'int'
     ];
 
@@ -68,16 +65,13 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'configuration_version' => null,
-        'default_currency' => null,
+        'description' => null,
         'id' => 'int64',
         'identifier' => null,
         'linked_space_id' => 'int64',
-        'location_version' => null,
-        'name' => null,
         'planned_purge_date' => 'date-time',
         'state' => null,
-        'type' => null,
+        'type' => 'int64',
         'version' => 'int32'
     ];
 
@@ -88,13 +82,10 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'configuration_version' => 'configurationVersion',
-        'default_currency' => 'defaultCurrency',
+        'description' => 'description',
         'id' => 'id',
         'identifier' => 'identifier',
         'linked_space_id' => 'linkedSpaceId',
-        'location_version' => 'locationVersion',
-        'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
         'type' => 'type',
@@ -107,13 +98,10 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'configuration_version' => 'setConfigurationVersion',
-        'default_currency' => 'setDefaultCurrency',
+        'description' => 'setDescription',
         'id' => 'setId',
         'identifier' => 'setIdentifier',
         'linked_space_id' => 'setLinkedSpaceId',
-        'location_version' => 'setLocationVersion',
-        'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
         'type' => 'setType',
@@ -126,13 +114,10 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'configuration_version' => 'getConfigurationVersion',
-        'default_currency' => 'getDefaultCurrency',
+        'description' => 'getDescription',
         'id' => 'getId',
         'identifier' => 'getIdentifier',
         'linked_space_id' => 'getLinkedSpaceId',
-        'location_version' => 'getLocationVersion',
-        'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
         'type' => 'getType',
@@ -157,19 +142,13 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
-        
-        $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['identifier'] = isset($data['identifier']) ? $data['identifier'] : null;
         
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['location_version'] = isset($data['location_version']) ? $data['location_version'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -190,8 +169,12 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 100)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['identifier']) && (mb_strlen($this->container['identifier']) > 100)) {
+            $invalidProperties[] = "invalid value for 'identifier', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -275,50 +258,29 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets configuration_version
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalConfigurationVersion
-     */
-    public function getConfigurationVersion()
-    {
-        return $this->container['configuration_version'];
-    }
-
-    /**
-     * Sets configuration_version
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version 
-     *
-     * @return $this
-     */
-    public function setConfigurationVersion($configuration_version)
-    {
-        $this->container['configuration_version'] = $configuration_version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets default_currency
+     * Gets description
      *
      * @return string
      */
-    public function getDefaultCurrency()
+    public function getDescription()
     {
-        return $this->container['default_currency'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets default_currency
+     * Sets description
      *
-     * @param string $default_currency 
+     * @param string $description The optional description is shown along the identifier. The intention of the description is to give an alternative name to the bank account.
      *
      * @return $this
      */
-    public function setDefaultCurrency($default_currency)
+    public function setDescription($description)
     {
-        $this->container['default_currency'] = $default_currency;
+        if (!is_null($description) && (mb_strlen($description) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling BankAccount., must be smaller than or equal to 100.');
+        }
+
+        $this->container['description'] = $description;
 
         return $this;
     }
@@ -362,12 +324,16 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets identifier
      *
-     * @param string $identifier The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
+     * @param string $identifier The bank account identifier is responsible to uniquely identify the bank account.
      *
      * @return $this
      */
     public function setIdentifier($identifier)
     {
+        if (!is_null($identifier) && (mb_strlen($identifier) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $identifier when calling BankAccount., must be smaller than or equal to 100.');
+        }
+
         $this->container['identifier'] = $identifier;
 
         return $this;
@@ -394,60 +360,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function setLinkedSpaceId($linked_space_id)
     {
         $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets location_version
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalLocationVersion
-     */
-    public function getLocationVersion()
-    {
-        return $this->container['location_version'];
-    }
-
-    /**
-     * Sets location_version
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalLocationVersion $location_version 
-     *
-     * @return $this
-     */
-    public function setLocationVersion($location_version)
-    {
-        $this->container['location_version'] = $location_version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminal., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
 
         return $this;
     }
@@ -481,7 +393,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalState
+     * @return \Wallee\Sdk\Model\BankAccountState
      */
     public function getState()
     {
@@ -491,7 +403,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalState $state 
+     * @param \Wallee\Sdk\Model\BankAccountState $state 
      *
      * @return $this
      */
@@ -506,7 +418,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalType
+     * @return int
      */
     public function getType()
     {
@@ -516,7 +428,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalType $type 
+     * @param int $type 
      *
      * @return $this
      */

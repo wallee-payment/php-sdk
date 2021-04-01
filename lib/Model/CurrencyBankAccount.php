@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminal model
+ * CurrencyBankAccount model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminal implements ModelInterface, ArrayAccess
+class CurrencyBankAccount implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminal';
+    protected static $swaggerModelName = 'CurrencyBankAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,16 +49,11 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'configuration_version' => '\Wallee\Sdk\Model\PaymentTerminalConfigurationVersion',
-        'default_currency' => 'string',
+        'bank_account' => '\Wallee\Sdk\Model\BankAccount',
+        'currency' => 'string',
+        'environment' => '\Wallee\Sdk\Model\BankAccountEnvironment',
         'id' => 'int',
-        'identifier' => 'string',
         'linked_space_id' => 'int',
-        'location_version' => '\Wallee\Sdk\Model\PaymentTerminalLocationVersion',
-        'name' => 'string',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\PaymentTerminalState',
-        'type' => '\Wallee\Sdk\Model\PaymentTerminalType',
         'version' => 'int'
     ];
 
@@ -68,16 +63,11 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'configuration_version' => null,
-        'default_currency' => null,
+        'bank_account' => null,
+        'currency' => null,
+        'environment' => null,
         'id' => 'int64',
-        'identifier' => null,
         'linked_space_id' => 'int64',
-        'location_version' => null,
-        'name' => null,
-        'planned_purge_date' => 'date-time',
-        'state' => null,
-        'type' => null,
         'version' => 'int32'
     ];
 
@@ -88,16 +78,11 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'configuration_version' => 'configurationVersion',
-        'default_currency' => 'defaultCurrency',
+        'bank_account' => 'bankAccount',
+        'currency' => 'currency',
+        'environment' => 'environment',
         'id' => 'id',
-        'identifier' => 'identifier',
         'linked_space_id' => 'linkedSpaceId',
-        'location_version' => 'locationVersion',
-        'name' => 'name',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
-        'type' => 'type',
         'version' => 'version'
     ];
 
@@ -107,16 +92,11 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'configuration_version' => 'setConfigurationVersion',
-        'default_currency' => 'setDefaultCurrency',
+        'bank_account' => 'setBankAccount',
+        'currency' => 'setCurrency',
+        'environment' => 'setEnvironment',
         'id' => 'setId',
-        'identifier' => 'setIdentifier',
         'linked_space_id' => 'setLinkedSpaceId',
-        'location_version' => 'setLocationVersion',
-        'name' => 'setName',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
-        'type' => 'setType',
         'version' => 'setVersion'
     ];
 
@@ -126,16 +106,11 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'configuration_version' => 'getConfigurationVersion',
-        'default_currency' => 'getDefaultCurrency',
+        'bank_account' => 'getBankAccount',
+        'currency' => 'getCurrency',
+        'environment' => 'getEnvironment',
         'id' => 'getId',
-        'identifier' => 'getIdentifier',
         'linked_space_id' => 'getLinkedSpaceId',
-        'location_version' => 'getLocationVersion',
-        'name' => 'getName',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
-        'type' => 'getType',
         'version' => 'getVersion'
     ];
 
@@ -157,25 +132,15 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['configuration_version'] = isset($data['configuration_version']) ? $data['configuration_version'] : null;
+        $this->container['bank_account'] = isset($data['bank_account']) ? $data['bank_account'] : null;
         
-        $this->container['default_currency'] = isset($data['default_currency']) ? $data['default_currency'] : null;
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
+        
+        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['identifier'] = isset($data['identifier']) ? $data['identifier'] : null;
-        
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['location_version'] = isset($data['location_version']) ? $data['location_version'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
@@ -189,10 +154,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
-        }
 
         return $invalidProperties;
     }
@@ -275,50 +236,75 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets configuration_version
+     * Gets bank_account
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalConfigurationVersion
+     * @return \Wallee\Sdk\Model\BankAccount
      */
-    public function getConfigurationVersion()
+    public function getBankAccount()
     {
-        return $this->container['configuration_version'];
+        return $this->container['bank_account'];
     }
 
     /**
-     * Sets configuration_version
+     * Sets bank_account
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalConfigurationVersion $configuration_version 
+     * @param \Wallee\Sdk\Model\BankAccount $bank_account 
      *
      * @return $this
      */
-    public function setConfigurationVersion($configuration_version)
+    public function setBankAccount($bank_account)
     {
-        $this->container['configuration_version'] = $configuration_version;
+        $this->container['bank_account'] = $bank_account;
 
         return $this;
     }
     
 
     /**
-     * Gets default_currency
+     * Gets currency
      *
      * @return string
      */
-    public function getDefaultCurrency()
+    public function getCurrency()
     {
-        return $this->container['default_currency'];
+        return $this->container['currency'];
     }
 
     /**
-     * Sets default_currency
+     * Sets currency
      *
-     * @param string $default_currency 
+     * @param string $currency 
      *
      * @return $this
      */
-    public function setDefaultCurrency($default_currency)
+    public function setCurrency($currency)
     {
-        $this->container['default_currency'] = $default_currency;
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets environment
+     *
+     * @return \Wallee\Sdk\Model\BankAccountEnvironment
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \Wallee\Sdk\Model\BankAccountEnvironment $environment 
+     *
+     * @return $this
+     */
+    public function setEnvironment($environment)
+    {
+        $this->container['environment'] = $environment;
 
         return $this;
     }
@@ -350,31 +336,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets identifier
-     *
-     * @return string
-     */
-    public function getIdentifier()
-    {
-        return $this->container['identifier'];
-    }
-
-    /**
-     * Sets identifier
-     *
-     * @param string $identifier The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
-     *
-     * @return $this
-     */
-    public function setIdentifier($identifier)
-    {
-        $this->container['identifier'] = $identifier;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets linked_space_id
      *
      * @return int
@@ -394,135 +355,6 @@ class PaymentTerminal implements ModelInterface, ArrayAccess
     public function setLinkedSpaceId($linked_space_id)
     {
         $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets location_version
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalLocationVersion
-     */
-    public function getLocationVersion()
-    {
-        return $this->container['location_version'];
-    }
-
-    /**
-     * Sets location_version
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalLocationVersion $location_version 
-     *
-     * @return $this
-     */
-    public function setLocationVersion($location_version)
-    {
-        $this->container['location_version'] = $location_version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling PaymentTerminal., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalState $state 
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets type
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalType
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalType $type 
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->container['type'] = $type;
 
         return $this;
     }
