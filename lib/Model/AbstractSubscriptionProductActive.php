@@ -51,6 +51,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'int[]',
         'failed_payment_suspension_period' => 'string',
         'name' => 'string',
+        'product_locked' => 'bool',
         'sort_order' => 'int',
         'state' => '\Wallee\Sdk\Model\SubscriptionProductState'
     ];
@@ -64,6 +65,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'int64',
         'failed_payment_suspension_period' => null,
         'name' => null,
+        'product_locked' => null,
         'sort_order' => 'int32',
         'state' => null
     ];
@@ -78,6 +80,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
         'failed_payment_suspension_period' => 'failedPaymentSuspensionPeriod',
         'name' => 'name',
+        'product_locked' => 'productLocked',
         'sort_order' => 'sortOrder',
         'state' => 'state'
     ];
@@ -91,6 +94,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
         'failed_payment_suspension_period' => 'setFailedPaymentSuspensionPeriod',
         'name' => 'setName',
+        'product_locked' => 'setProductLocked',
         'sort_order' => 'setSortOrder',
         'state' => 'setState'
     ];
@@ -104,6 +108,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
         'failed_payment_suspension_period' => 'getFailedPaymentSuspensionPeriod',
         'name' => 'getName',
+        'product_locked' => 'getProductLocked',
         'sort_order' => 'getSortOrder',
         'state' => 'getState'
     ];
@@ -131,6 +136,8 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         $this->container['failed_payment_suspension_period'] = isset($data['failed_payment_suspension_period']) ? $data['failed_payment_suspension_period'] : null;
         
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['product_locked'] = isset($data['product_locked']) ? $data['product_locked'] : null;
         
         $this->container['sort_order'] = isset($data['sort_order']) ? $data['sort_order'] : null;
         
@@ -305,6 +312,31 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
         }
 
         $this->container['name'] = $name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets product_locked
+     *
+     * @return bool
+     */
+    public function getProductLocked()
+    {
+        return $this->container['product_locked'];
+    }
+
+    /**
+     * Sets product_locked
+     *
+     * @param bool $product_locked Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+     *
+     * @return $this
+     */
+    public function setProductLocked($product_locked)
+    {
+        $this->container['product_locked'] = $product_locked;
 
         return $this;
     }

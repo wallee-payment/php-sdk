@@ -54,7 +54,7 @@ class Role implements ModelInterface, ArrayAccess
         'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
         'permissions' => '\Wallee\Sdk\Model\Permission[]',
         'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\CreationEntityState',
+        'state' => '\Wallee\Sdk\Model\RoleState',
         'two_factor_required' => 'bool',
         'version' => 'int'
     ];
@@ -377,7 +377,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\CreationEntityState
+     * @return \Wallee\Sdk\Model\RoleState
      */
     public function getState()
     {
@@ -387,7 +387,7 @@ class Role implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state 
+     * @param \Wallee\Sdk\Model\RoleState $state 
      *
      * @return $this
      */

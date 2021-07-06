@@ -52,6 +52,7 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
         'billing_day_of_month' => 'int',
         'billing_interval_amount' => 'int',
         'billing_interval_unit' => '\Wallee\Sdk\Model\ShopifySubscriptionBillingIntervalUnit',
+        'billing_reference_date' => '\DateTime',
         'billing_weekday' => '\Wallee\Sdk\Model\ShopifySubscriptionWeekday',
         'maximal_billing_cycles' => 'int',
         'maximal_suspendable_cycles' => 'int',
@@ -68,6 +69,7 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
         'billing_day_of_month' => 'int32',
         'billing_interval_amount' => 'int32',
         'billing_interval_unit' => null,
+        'billing_reference_date' => 'date-time',
         'billing_weekday' => null,
         'maximal_billing_cycles' => 'int32',
         'maximal_suspendable_cycles' => 'int32',
@@ -85,6 +87,7 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
         'billing_day_of_month' => 'billingDayOfMonth',
         'billing_interval_amount' => 'billingIntervalAmount',
         'billing_interval_unit' => 'billingIntervalUnit',
+        'billing_reference_date' => 'billingReferenceDate',
         'billing_weekday' => 'billingWeekday',
         'maximal_billing_cycles' => 'maximalBillingCycles',
         'maximal_suspendable_cycles' => 'maximalSuspendableCycles',
@@ -101,6 +104,7 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
         'billing_day_of_month' => 'setBillingDayOfMonth',
         'billing_interval_amount' => 'setBillingIntervalAmount',
         'billing_interval_unit' => 'setBillingIntervalUnit',
+        'billing_reference_date' => 'setBillingReferenceDate',
         'billing_weekday' => 'setBillingWeekday',
         'maximal_billing_cycles' => 'setMaximalBillingCycles',
         'maximal_suspendable_cycles' => 'setMaximalSuspendableCycles',
@@ -117,6 +121,7 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
         'billing_day_of_month' => 'getBillingDayOfMonth',
         'billing_interval_amount' => 'getBillingIntervalAmount',
         'billing_interval_unit' => 'getBillingIntervalUnit',
+        'billing_reference_date' => 'getBillingReferenceDate',
         'billing_weekday' => 'getBillingWeekday',
         'maximal_billing_cycles' => 'getMaximalBillingCycles',
         'maximal_suspendable_cycles' => 'getMaximalSuspendableCycles',
@@ -147,6 +152,8 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
         $this->container['billing_interval_amount'] = isset($data['billing_interval_amount']) ? $data['billing_interval_amount'] : null;
         
         $this->container['billing_interval_unit'] = isset($data['billing_interval_unit']) ? $data['billing_interval_unit'] : null;
+        
+        $this->container['billing_reference_date'] = isset($data['billing_reference_date']) ? $data['billing_reference_date'] : null;
         
         $this->container['billing_weekday'] = isset($data['billing_weekday']) ? $data['billing_weekday'] : null;
         
@@ -319,6 +326,31 @@ class ShopifySubscriptionModelBillingConfiguration implements ModelInterface, Ar
     public function setBillingIntervalUnit($billing_interval_unit)
     {
         $this->container['billing_interval_unit'] = $billing_interval_unit;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_reference_date
+     *
+     * @return \DateTime
+     */
+    public function getBillingReferenceDate()
+    {
+        return $this->container['billing_reference_date'];
+    }
+
+    /**
+     * Sets billing_reference_date
+     *
+     * @param \DateTime $billing_reference_date This date will be used as basis to calculate the dates of recurring orders.
+     *
+     * @return $this
+     */
+    public function setBillingReferenceDate($billing_reference_date)
+    {
+        $this->container['billing_reference_date'] = $billing_reference_date;
 
         return $this;
     }

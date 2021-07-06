@@ -53,6 +53,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'int',
         'billing_interval_amount' => 'int',
         'billing_interval_unit' => '\Wallee\Sdk\Model\ShopifySubscriptionBillingIntervalUnit',
+        'billing_reference_date' => '\DateTime',
         'billing_weekday' => '\Wallee\Sdk\Model\ShopifySubscriptionWeekday',
         'created_by' => 'int',
         'created_on' => '\DateTime',
@@ -88,6 +89,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'int32',
         'billing_interval_amount' => 'int32',
         'billing_interval_unit' => null,
+        'billing_reference_date' => 'date-time',
         'billing_weekday' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
@@ -124,6 +126,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'billingDayOfMonth',
         'billing_interval_amount' => 'billingIntervalAmount',
         'billing_interval_unit' => 'billingIntervalUnit',
+        'billing_reference_date' => 'billingReferenceDate',
         'billing_weekday' => 'billingWeekday',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
@@ -159,6 +162,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'setBillingDayOfMonth',
         'billing_interval_amount' => 'setBillingIntervalAmount',
         'billing_interval_unit' => 'setBillingIntervalUnit',
+        'billing_reference_date' => 'setBillingReferenceDate',
         'billing_weekday' => 'setBillingWeekday',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
@@ -194,6 +198,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'getBillingDayOfMonth',
         'billing_interval_amount' => 'getBillingIntervalAmount',
         'billing_interval_unit' => 'getBillingIntervalUnit',
+        'billing_reference_date' => 'getBillingReferenceDate',
         'billing_weekday' => 'getBillingWeekday',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
@@ -244,6 +249,8 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         $this->container['billing_interval_amount'] = isset($data['billing_interval_amount']) ? $data['billing_interval_amount'] : null;
         
         $this->container['billing_interval_unit'] = isset($data['billing_interval_unit']) ? $data['billing_interval_unit'] : null;
+        
+        $this->container['billing_reference_date'] = isset($data['billing_reference_date']) ? $data['billing_reference_date'] : null;
         
         $this->container['billing_weekday'] = isset($data['billing_weekday']) ? $data['billing_weekday'] : null;
         
@@ -477,6 +484,31 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
     public function setBillingIntervalUnit($billing_interval_unit)
     {
         $this->container['billing_interval_unit'] = $billing_interval_unit;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_reference_date
+     *
+     * @return \DateTime
+     */
+    public function getBillingReferenceDate()
+    {
+        return $this->container['billing_reference_date'];
+    }
+
+    /**
+     * Sets billing_reference_date
+     *
+     * @param \DateTime $billing_reference_date 
+     *
+     * @return $this
+     */
+    public function setBillingReferenceDate($billing_reference_date)
+    {
+        $this->container['billing_reference_date'] = $billing_reference_date;
 
         return $this;
     }
