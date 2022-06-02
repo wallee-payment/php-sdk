@@ -1,6 +1,6 @@
 {
     "name": "wallee/sdk",
-    "version": "3.0.1",
+    "version": "3.0.2",
 	"description": "wallee SDK for PHP",
 	"keywords": [
 		"wallee",
@@ -23,7 +23,7 @@
 		"ext-mbstring": "*"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~4.8"
+		"phpunit/phpunit": "~8"
 	},
 	"autoload": {
 		"psr-4": { "Wallee\\Sdk\\" : "lib/" }

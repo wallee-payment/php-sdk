@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.0.1/php';
+	private $userAgent = 'PHP-Client/3.0.2/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -560,6 +560,18 @@ final class ApiClient {
         return $this->accountService;
     }
     
+    protected $analyticsQueryService;
+
+    /**
+     * @return \Wallee\Sdk\Service\AnalyticsQueryService
+     */
+    public function getAnalyticsQueryService() {
+        if(is_null($this->analyticsQueryService)){
+            $this->analyticsQueryService = new \Wallee\Sdk\Service\AnalyticsQueryService($this);
+        }
+        return $this->analyticsQueryService;
+    }
+    
     protected $applicationUserService;
 
     /**
@@ -932,6 +944,30 @@ final class ApiClient {
         return $this->internalTransferBankTransactionService;
     }
     
+    protected $invoiceReconciliationRecordService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InvoiceReconciliationRecordService
+     */
+    public function getInvoiceReconciliationRecordService() {
+        if(is_null($this->invoiceReconciliationRecordService)){
+            $this->invoiceReconciliationRecordService = new \Wallee\Sdk\Service\InvoiceReconciliationRecordService($this);
+        }
+        return $this->invoiceReconciliationRecordService;
+    }
+    
+    protected $invoiceReimbursementService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InvoiceReimbursementService
+     */
+    public function getInvoiceReimbursementService() {
+        if(is_null($this->invoiceReimbursementService)){
+            $this->invoiceReimbursementService = new \Wallee\Sdk\Service\InvoiceReimbursementService($this);
+        }
+        return $this->invoiceReimbursementService;
+    }
+    
     protected $labelDescriptionGroupService;
 
     /**
@@ -1122,6 +1158,30 @@ final class ApiClient {
             $this->paymentTerminalTillService = new \Wallee\Sdk\Service\PaymentTerminalTillService($this);
         }
         return $this->paymentTerminalTillService;
+    }
+    
+    protected $paymentTerminalTransactionSummaryService;
+
+    /**
+     * @return \Wallee\Sdk\Service\PaymentTerminalTransactionSummaryService
+     */
+    public function getPaymentTerminalTransactionSummaryService() {
+        if(is_null($this->paymentTerminalTransactionSummaryService)){
+            $this->paymentTerminalTransactionSummaryService = new \Wallee\Sdk\Service\PaymentTerminalTransactionSummaryService($this);
+        }
+        return $this->paymentTerminalTransactionSummaryService;
+    }
+    
+    protected $paymentWebAppService;
+
+    /**
+     * @return \Wallee\Sdk\Service\PaymentWebAppService
+     */
+    public function getPaymentWebAppService() {
+        if(is_null($this->paymentWebAppService)){
+            $this->paymentWebAppService = new \Wallee\Sdk\Service\PaymentWebAppService($this);
+        }
+        return $this->paymentWebAppService;
     }
     
     protected $permissionService;
@@ -1626,6 +1686,18 @@ final class ApiClient {
             $this->transactionLightboxService = new \Wallee\Sdk\Service\TransactionLightboxService($this);
         }
         return $this->transactionLightboxService;
+    }
+    
+    protected $transactionLineItemVersionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\TransactionLineItemVersionService
+     */
+    public function getTransactionLineItemVersionService() {
+        if(is_null($this->transactionLineItemVersionService)){
+            $this->transactionLineItemVersionService = new \Wallee\Sdk\Service\TransactionLineItemVersionService($this);
+        }
+        return $this->transactionLineItemVersionService;
     }
     
     protected $transactionMobileSdkService;

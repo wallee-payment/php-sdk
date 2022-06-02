@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TransactionLineItemUpdateRequest model
+ * PaymentInitiationAdviceFile model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
+class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TransactionLineItemUpdateRequest';
+    protected static $swaggerModelName = 'PaymentInitiationAdviceFile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,8 +49,13 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'new_line_items' => '\Wallee\Sdk\Model\LineItemCreate[]',
-        'transaction_id' => 'int'
+        'created_on' => '\DateTime',
+        'file_generated_on' => '\DateTime',
+        'id' => 'int',
+        'linked_space_id' => 'int',
+        'name' => 'string',
+        'processed_on' => '\DateTime',
+        'state' => '\Wallee\Sdk\Model\PaymentInitiationAdviceFileState'
     ];
 
     /**
@@ -59,8 +64,13 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'new_line_items' => null,
-        'transaction_id' => 'int64'
+        'created_on' => 'date-time',
+        'file_generated_on' => 'date-time',
+        'id' => 'int64',
+        'linked_space_id' => 'int64',
+        'name' => null,
+        'processed_on' => 'date-time',
+        'state' => null
     ];
 
     /**
@@ -70,8 +80,13 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'new_line_items' => 'newLineItems',
-        'transaction_id' => 'transactionId'
+        'created_on' => 'createdOn',
+        'file_generated_on' => 'fileGeneratedOn',
+        'id' => 'id',
+        'linked_space_id' => 'linkedSpaceId',
+        'name' => 'name',
+        'processed_on' => 'processedOn',
+        'state' => 'state'
     ];
 
     /**
@@ -80,8 +95,13 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'new_line_items' => 'setNewLineItems',
-        'transaction_id' => 'setTransactionId'
+        'created_on' => 'setCreatedOn',
+        'file_generated_on' => 'setFileGeneratedOn',
+        'id' => 'setId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'name' => 'setName',
+        'processed_on' => 'setProcessedOn',
+        'state' => 'setState'
     ];
 
     /**
@@ -90,8 +110,13 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'new_line_items' => 'getNewLineItems',
-        'transaction_id' => 'getTransactionId'
+        'created_on' => 'getCreatedOn',
+        'file_generated_on' => 'getFileGeneratedOn',
+        'id' => 'getId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'name' => 'getName',
+        'processed_on' => 'getProcessedOn',
+        'state' => 'getState'
     ];
 
     
@@ -112,9 +137,19 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['new_line_items'] = isset($data['new_line_items']) ? $data['new_line_items'] : null;
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
-        $this->container['transaction_id'] = isset($data['transaction_id']) ? $data['transaction_id'] : null;
+        $this->container['file_generated_on'] = isset($data['file_generated_on']) ? $data['file_generated_on'] : null;
+        
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        
+        $this->container['processed_on'] = isset($data['processed_on']) ? $data['processed_on'] : null;
+        
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
     }
 
@@ -127,9 +162,6 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['transaction_id'] === null) {
-            $invalidProperties[] = "'transaction_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -211,50 +243,175 @@ class TransactionLineItemUpdateRequest implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets new_line_items
+     * Gets created_on
      *
-     * @return \Wallee\Sdk\Model\LineItemCreate[]
+     * @return \DateTime
      */
-    public function getNewLineItems()
+    public function getCreatedOn()
     {
-        return $this->container['new_line_items'];
+        return $this->container['created_on'];
     }
 
     /**
-     * Sets new_line_items
+     * Sets created_on
      *
-     * @param \Wallee\Sdk\Model\LineItemCreate[] $new_line_items 
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
      *
      * @return $this
      */
-    public function setNewLineItems($new_line_items)
+    public function setCreatedOn($created_on)
     {
-        $this->container['new_line_items'] = $new_line_items;
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }
     
 
     /**
-     * Gets transaction_id
+     * Gets file_generated_on
      *
-     * @return int
+     * @return \DateTime
      */
-    public function getTransactionId()
+    public function getFileGeneratedOn()
     {
-        return $this->container['transaction_id'];
+        return $this->container['file_generated_on'];
     }
 
     /**
-     * Sets transaction_id
+     * Sets file_generated_on
      *
-     * @param int $transaction_id 
+     * @param \DateTime $file_generated_on 
      *
      * @return $this
      */
-    public function setTransactionId($transaction_id)
+    public function setFileGeneratedOn($file_generated_on)
     {
-        $this->container['transaction_id'] = $transaction_id;
+        $this->container['file_generated_on'] = $file_generated_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name 
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets processed_on
+     *
+     * @return \DateTime
+     */
+    public function getProcessedOn()
+    {
+        return $this->container['processed_on'];
+    }
+
+    /**
+     * Sets processed_on
+     *
+     * @param \DateTime $processed_on 
+     *
+     * @return $this
+     */
+    public function setProcessedOn($processed_on)
+    {
+        $this->container['processed_on'] = $processed_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\PaymentInitiationAdviceFileState
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\PaymentInitiationAdviceFileState $state 
+     *
+     * @return $this
+     */
+    public function setState($state)
+    {
+        $this->container['state'] = $state;
 
         return $this;
     }

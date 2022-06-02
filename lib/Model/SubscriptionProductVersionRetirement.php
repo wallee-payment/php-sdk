@@ -380,7 +380,7 @@ class SubscriptionProductVersionRetirement implements ModelInterface, ArrayAcces
     /**
      * Sets target_product
      *
-     * @param \Wallee\Sdk\Model\SubscriptionProduct $target_product 
+     * @param \Wallee\Sdk\Model\SubscriptionProduct $target_product When a target product is not chosen, all customers with the retired product will be terminated.
      *
      * @return $this
      */

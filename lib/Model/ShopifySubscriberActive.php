@@ -154,6 +154,14 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
         if ($this->container['version'] === null) {
             $invalidProperties[] = "'version' can't be null";
         }
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 254)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 254.";
+        }
+
         return $invalidProperties;
     }
 
@@ -303,6 +311,10 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
      */
     public function setEmailAddress($email_address)
     {
+        if (!is_null($email_address) && (mb_strlen($email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $email_address when calling ShopifySubscriberActive., must be smaller than or equal to 254.');
+        }
+
         $this->container['email_address'] = $email_address;
 
         return $this;
@@ -353,6 +365,10 @@ class ShopifySubscriberActive implements ModelInterface, ArrayAccess
      */
     public function setPhoneNumber($phone_number)
     {
+        if (!is_null($phone_number) && (mb_strlen($phone_number) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $phone_number when calling ShopifySubscriberActive., must be smaller than or equal to 254.');
+        }
+
         $this->container['phone_number'] = $phone_number;
 
         return $this;
