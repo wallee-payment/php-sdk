@@ -27,14 +27,14 @@ use Wallee\Sdk\Http\HttpRequest;
 use Wallee\Sdk\ObjectSerializer;
 
 /**
- * InvoiceReconciliationRecordService service
+ * InvoiceReconciliationRecordInvoiceLinkService service
  *
  * @category Class
  * @package  Wallee\Sdk
  * @author   customweb GmbH
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class InvoiceReconciliationRecordService {
+class InvoiceReconciliationRecordInvoiceLinkService {
 
 	/**
 	 * The API client instance.
@@ -114,7 +114,7 @@ class InvoiceReconciliationRecordService {
 		}
 
 		// path params
-		$resourcePath = '/invoice-reconciliation-record-service/count';
+		$resourcePath = '/invoice-reconciliation-record-invoice-link-service/count';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -143,7 +143,7 @@ class InvoiceReconciliationRecordService {
 				$httpBody,
 				$headerParams,
 				'int',
-				'/invoice-reconciliation-record-service/count'
+				'/invoice-reconciliation-record-invoice-link-service/count'
 			);
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'int', $response->getHeaders()));
 		} catch (ApiException $e) {
@@ -178,41 +178,49 @@ class InvoiceReconciliationRecordService {
 	}
 
 	/**
-	 * Operation discard
+	 * Operation link
 	 *
-	 * Discard
+	 * Link Invoice
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The ID of the invoice reconciliation record which should be discarded. (required)
+	 * @param int $record_id The ID of the invoice reconciliation record which should be linked. (required)
+	 * @param int $completion_id The ID of the completion which should be linked. (required)
+	 * @param float $amount The amount of the invoice reconciliation record linked completion which should be changed. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return void
+	 * @return \Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink
 	 */
-	public function discard($space_id, $id) {
-		return $this->discardWithHttpInfo($space_id, $id)->getData();
+	public function link($space_id, $record_id, $completion_id, $amount = null) {
+		return $this->linkWithHttpInfo($space_id, $record_id, $completion_id, $amount)->getData();
 	}
 
 	/**
-	 * Operation discardWithHttpInfo
+	 * Operation linkWithHttpInfo
 	 *
-	 * Discard
+	 * Link Invoice
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The ID of the invoice reconciliation record which should be discarded. (required)
+	 * @param int $record_id The ID of the invoice reconciliation record which should be linked. (required)
+	 * @param int $completion_id The ID of the completion which should be linked. (required)
+	 * @param float $amount The amount of the invoice reconciliation record linked completion which should be changed. (optional)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function discardWithHttpInfo($space_id, $id) {
+	public function linkWithHttpInfo($space_id, $record_id, $completion_id, $amount = null) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling discard');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling link');
 		}
-		// verify the required parameter 'id' is set
-		if (is_null($id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling discard');
+		// verify the required parameter 'record_id' is set
+		if (is_null($record_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $record_id when calling link');
+		}
+		// verify the required parameter 'completion_id' is set
+		if (is_null($completion_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $completion_id when calling link');
 		}
 		// header params
 		$headerParams = [];
@@ -227,12 +235,18 @@ class InvoiceReconciliationRecordService {
 		if (!is_null($space_id)) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if (!is_null($id)) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
+		if (!is_null($record_id)) {
+			$queryParams['recordId'] = $this->apiClient->getSerializer()->toQueryValue($record_id);
+		}
+		if (!is_null($completion_id)) {
+			$queryParams['completionId'] = $this->apiClient->getSerializer()->toQueryValue($completion_id);
+		}
+		if (!is_null($amount)) {
+			$queryParams['amount'] = $this->apiClient->getSerializer()->toQueryValue($amount);
 		}
 
 		// path params
-		$resourcePath = '/invoice-reconciliation-record-service/discard';
+		$resourcePath = '/invoice-reconciliation-record-invoice-link-service/link';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -255,12 +269,20 @@ class InvoiceReconciliationRecordService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				null,
-				'/invoice-reconciliation-record-service/discard'
+				'\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
+				'/invoice-reconciliation-record-invoice-link-service/link'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -296,11 +318,11 @@ class InvoiceReconciliationRecordService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The ID of the invoice reconciliation record which should be returned. (required)
+	 * @param int $id The ID of the invoice reconciliation record invoice link which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\InvoiceReconciliationRecord
+	 * @return \Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink
 	 */
 	public function read($space_id, $id) {
 		return $this->readWithHttpInfo($space_id, $id)->getData();
@@ -312,7 +334,7 @@ class InvoiceReconciliationRecordService {
 	 * Read
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $id The ID of the invoice reconciliation record which should be returned. (required)
+	 * @param int $id The ID of the invoice reconciliation record invoice link which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -345,7 +367,7 @@ class InvoiceReconciliationRecordService {
 		}
 
 		// path params
-		$resourcePath = '/invoice-reconciliation-record-service/read';
+		$resourcePath = '/invoice-reconciliation-record-invoice-link-service/read';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -368,129 +390,16 @@ class InvoiceReconciliationRecordService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\InvoiceReconciliationRecord',
-				'/invoice-reconciliation-record-service/read'
+				'\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
+				'/invoice-reconciliation-record-invoice-link-service/read'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReconciliationRecord', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\InvoiceReconciliationRecord',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 442:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ClientError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-                case 542:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ServerError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
-			}
-			throw $e;
-		}
-	}
-
-	/**
-	 * Operation resolve
-	 *
-	 * Resolve
-	 *
-	 * @param int $space_id  (required)
-	 * @param int $id The ID of the invoice reconciliation record which should be resolved. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @throws \Wallee\Sdk\VersioningException
-	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return void
-	 */
-	public function resolve($space_id, $id) {
-		return $this->resolveWithHttpInfo($space_id, $id)->getData();
-	}
-
-	/**
-	 * Operation resolveWithHttpInfo
-	 *
-	 * Resolve
-	 *
-	 * @param int $space_id  (required)
-	 * @param int $id The ID of the invoice reconciliation record which should be resolved. (required)
-	 * @throws \Wallee\Sdk\ApiException
-	 * @throws \Wallee\Sdk\VersioningException
-	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return ApiResponse
-	 */
-	public function resolveWithHttpInfo($space_id, $id) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling resolve');
-		}
-		// verify the required parameter 'id' is set
-		if (is_null($id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $id when calling resolve');
-		}
-		// header params
-		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept([]);
-		if (!is_null($headerAccept)) {
-			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
-		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
-
-		// query params
-		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
-		if (!is_null($id)) {
-			$queryParams['id'] = $this->apiClient->getSerializer()->toQueryValue($id);
-		}
-
-		// path params
-		$resourcePath = '/invoice-reconciliation-record-service/resolve';
-		// default format to json
-		$resourcePath = str_replace('{format}', 'json', $resourcePath);
-
-		// form params
-		$formParams = [];
-		
-		// for model (json/xml)
-		$httpBody = '';
-		if (isset($tempBody)) {
-			$httpBody = $tempBody; // $tempBody is the method argument, if present
-		} elseif (!empty($formParams)) {
-			$httpBody = $formParams; // for HTTP post (form)
-		}
-		// make the API Call
-		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
-			$response = $this->apiClient->callApi(
-				$resourcePath,
-				'POST',
-				$queryParams,
-				$httpBody,
-				$headerParams,
-				null,
-				'/invoice-reconciliation-record-service/resolve'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
-		} catch (ApiException $e) {
-			switch ($e->getCode()) {
-                case 409:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ClientError',
+                        '\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -522,11 +431,11 @@ class InvoiceReconciliationRecordService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the invoice reconciliation records which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the invoice reconciliation record invoice link which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\InvoiceReconciliationRecord[]
+	 * @return \Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -538,7 +447,7 @@ class InvoiceReconciliationRecordService {
 	 * Search
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the invoice reconciliation records which are returned by the search. (required)
+	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the invoice reconciliation record invoice link which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -568,7 +477,7 @@ class InvoiceReconciliationRecordService {
 		}
 
 		// path params
-		$resourcePath = '/invoice-reconciliation-record-service/search';
+		$resourcePath = '/invoice-reconciliation-record-invoice-link-service/search';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
@@ -596,16 +505,16 @@ class InvoiceReconciliationRecordService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\InvoiceReconciliationRecord[]',
-				'/invoice-reconciliation-record-service/search'
+				'\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink[]',
+				'/invoice-reconciliation-record-invoice-link-service/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReconciliationRecord[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\InvoiceReconciliationRecord[]',
+                        '\Wallee\Sdk\Model\InvoiceReconciliationRecordInvoiceLink[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -632,69 +541,76 @@ class InvoiceReconciliationRecordService {
 	}
 
 	/**
-	 * Operation searchForInvoicesByQuery
+	 * Operation unlinkTransaction
 	 *
-	 * Search for matchable invoices by query
+	 * Unlink Invoice
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the invoices which are returned by the search. (required)
+	 * @param int $record_id The ID of the invoice reconciliation record which should be unlinked. (required)
+	 * @param int $completion_id The ID of the completion which should be unlinked. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\TransactionInvoice[]
+	 * @return void
 	 */
-	public function searchForInvoicesByQuery($space_id, $query) {
-		return $this->searchForInvoicesByQueryWithHttpInfo($space_id, $query)->getData();
+	public function unlinkTransaction($space_id, $record_id, $completion_id) {
+		return $this->unlinkTransactionWithHttpInfo($space_id, $record_id, $completion_id)->getData();
 	}
 
 	/**
-	 * Operation searchForInvoicesByQueryWithHttpInfo
+	 * Operation unlinkTransactionWithHttpInfo
 	 *
-	 * Search for matchable invoices by query
+	 * Unlink Invoice
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the invoices which are returned by the search. (required)
+	 * @param int $record_id The ID of the invoice reconciliation record which should be unlinked. (required)
+	 * @param int $completion_id The ID of the completion which should be unlinked. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function searchForInvoicesByQueryWithHttpInfo($space_id, $query) {
+	public function unlinkTransactionWithHttpInfo($space_id, $record_id, $completion_id) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling searchForInvoicesByQuery');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling unlinkTransaction');
 		}
-		// verify the required parameter 'query' is set
-		if (is_null($query)) {
-			throw new \InvalidArgumentException('Missing the required parameter $query when calling searchForInvoicesByQuery');
+		// verify the required parameter 'record_id' is set
+		if (is_null($record_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $record_id when calling unlinkTransaction');
+		}
+		// verify the required parameter 'completion_id' is set
+		if (is_null($completion_id)) {
+			throw new \InvalidArgumentException('Missing the required parameter $completion_id when calling unlinkTransaction');
 		}
 		// header params
 		$headerParams = [];
-		$headerAccept = $this->apiClient->selectHeaderAccept(['application/json;charset=utf-8']);
+		$headerAccept = $this->apiClient->selectHeaderAccept([]);
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType([]);
 
 		// query params
 		$queryParams = [];
 		if (!is_null($space_id)) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
+		if (!is_null($record_id)) {
+			$queryParams['recordId'] = $this->apiClient->getSerializer()->toQueryValue($record_id);
+		}
+		if (!is_null($completion_id)) {
+			$queryParams['completionId'] = $this->apiClient->getSerializer()->toQueryValue($completion_id);
+		}
 
 		// path params
-		$resourcePath = '/invoice-reconciliation-record-service/search-for-invoices-by-query';
+		$resourcePath = '/invoice-reconciliation-record-invoice-link-service/unlink-transaction';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
 		$formParams = [];
-		// body params
-		$tempBody = null;
-		if (isset($query)) {
-			$tempBody = $query;
-		}
-
+		
 		// for model (json/xml)
 		$httpBody = '';
 		if (isset($tempBody)) {
@@ -711,20 +627,12 @@ class InvoiceReconciliationRecordService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\TransactionInvoice[]',
-				'/invoice-reconciliation-record-service/search-for-invoices-by-query'
+				null,
+				'/invoice-reconciliation-record-invoice-link-service/unlink-transaction'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\TransactionInvoice[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\TransactionInvoice[]',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),

@@ -375,6 +375,7 @@ class PaymentAppChargeAttemptUpdateRequest implements ModelInterface, ArrayAcces
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -387,6 +388,7 @@ class PaymentAppChargeAttemptUpdateRequest implements ModelInterface, ArrayAcces
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -400,6 +402,7 @@ class PaymentAppChargeAttemptUpdateRequest implements ModelInterface, ArrayAcces
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -416,6 +419,7 @@ class PaymentAppChargeAttemptUpdateRequest implements ModelInterface, ArrayAcces
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

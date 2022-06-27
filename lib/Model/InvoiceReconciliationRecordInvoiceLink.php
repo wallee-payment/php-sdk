@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * DeliveryIndicationDecisionReason model
+ * InvoiceReconciliationRecordInvoiceLink model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
+class InvoiceReconciliationRecordInvoiceLink implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'DeliveryIndicationDecisionReason';
+    protected static $swaggerModelName = 'InvoiceReconciliationRecordInvoiceLink';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,9 +49,12 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'description' => 'map[string,string]',
+        'amount' => 'float',
+        'created_on' => '\DateTime',
         'id' => 'int',
-        'name' => 'map[string,string]'
+        'invoice' => '\Wallee\Sdk\Model\TransactionInvoice',
+        'linked_space_id' => 'int',
+        'record' => '\Wallee\Sdk\Model\InvoiceReconciliationRecord'
     ];
 
     /**
@@ -60,9 +63,12 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'description' => null,
+        'amount' => null,
+        'created_on' => 'date-time',
         'id' => 'int64',
-        'name' => null
+        'invoice' => null,
+        'linked_space_id' => 'int64',
+        'record' => null
     ];
 
     /**
@@ -72,9 +78,12 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
+        'amount' => 'amount',
+        'created_on' => 'createdOn',
         'id' => 'id',
-        'name' => 'name'
+        'invoice' => 'invoice',
+        'linked_space_id' => 'linkedSpaceId',
+        'record' => 'record'
     ];
 
     /**
@@ -83,9 +92,12 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
+        'amount' => 'setAmount',
+        'created_on' => 'setCreatedOn',
         'id' => 'setId',
-        'name' => 'setName'
+        'invoice' => 'setInvoice',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'record' => 'setRecord'
     ];
 
     /**
@@ -94,9 +106,12 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
+        'amount' => 'getAmount',
+        'created_on' => 'getCreatedOn',
         'id' => 'getId',
-        'name' => 'getName'
+        'invoice' => 'getInvoice',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'record' => 'getRecord'
     ];
 
     
@@ -117,11 +132,17 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        
+        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['invoice'] = isset($data['invoice']) ? $data['invoice'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['record'] = isset($data['record']) ? $data['record'] : null;
         
     }
 
@@ -215,25 +236,50 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets description
+     * Gets amount
      *
-     * @return map[string,string]
+     * @return float
      */
-    public function getDescription()
+    public function getAmount()
     {
-        return $this->container['description'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets description
+     * Sets amount
      *
-     * @param map[string,string] $description 
+     * @param float $amount 
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setAmount($amount)
     {
-        $this->container['description'] = $description;
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     *
+     * @return $this
+     */
+    public function setCreatedOn($created_on)
+    {
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }
@@ -265,25 +311,75 @@ class DeliveryIndicationDecisionReason implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets name
+     * Gets invoice
      *
-     * @return map[string,string]
+     * @return \Wallee\Sdk\Model\TransactionInvoice
      */
-    public function getName()
+    public function getInvoice()
     {
-        return $this->container['name'];
+        return $this->container['invoice'];
     }
 
     /**
-     * Sets name
+     * Sets invoice
      *
-     * @param map[string,string] $name 
+     * @param \Wallee\Sdk\Model\TransactionInvoice $invoice 
      *
      * @return $this
      */
-    public function setName($name)
+    public function setInvoice($invoice)
     {
-        $this->container['name'] = $name;
+        $this->container['invoice'] = $invoice;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets record
+     *
+     * @return \Wallee\Sdk\Model\InvoiceReconciliationRecord
+     */
+    public function getRecord()
+    {
+        return $this->container['record'];
+    }
+
+    /**
+     * Sets record
+     *
+     * @param \Wallee\Sdk\Model\InvoiceReconciliationRecord $record 
+     *
+     * @return $this
+     */
+    public function setRecord($record)
+    {
+        $this->container['record'] = $record;
 
         return $this;
     }

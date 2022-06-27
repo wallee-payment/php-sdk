@@ -54,7 +54,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/3.0.2/php';
+	private $userAgent = 'PHP-Client/3.0.3/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -942,6 +942,18 @@ final class ApiClient {
             $this->internalTransferBankTransactionService = new \Wallee\Sdk\Service\InternalTransferBankTransactionService($this);
         }
         return $this->internalTransferBankTransactionService;
+    }
+    
+    protected $invoiceReconciliationRecordInvoiceLinkService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService
+     */
+    public function getInvoiceReconciliationRecordInvoiceLinkService() {
+        if(is_null($this->invoiceReconciliationRecordInvoiceLinkService)){
+            $this->invoiceReconciliationRecordInvoiceLinkService = new \Wallee\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService($this);
+        }
+        return $this->invoiceReconciliationRecordInvoiceLinkService;
     }
     
     protected $invoiceReconciliationRecordService;

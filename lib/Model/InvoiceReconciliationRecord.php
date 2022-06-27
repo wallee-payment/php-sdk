@@ -63,6 +63,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
         'participant_number' => 'string',
         'payment_fee_amount' => 'float',
         'payment_fee_currency' => 'string',
+        'payment_reason' => 'string',
         'planned_purge_date' => '\DateTime',
         'post_code' => 'string',
         'reference_number' => 'string',
@@ -100,6 +101,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
         'participant_number' => null,
         'payment_fee_amount' => null,
         'payment_fee_currency' => null,
+        'payment_reason' => null,
         'planned_purge_date' => 'date-time',
         'post_code' => null,
         'reference_number' => null,
@@ -138,6 +140,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
         'participant_number' => 'participantNumber',
         'payment_fee_amount' => 'paymentFeeAmount',
         'payment_fee_currency' => 'paymentFeeCurrency',
+        'payment_reason' => 'paymentReason',
         'planned_purge_date' => 'plannedPurgeDate',
         'post_code' => 'postCode',
         'reference_number' => 'referenceNumber',
@@ -175,6 +178,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
         'participant_number' => 'setParticipantNumber',
         'payment_fee_amount' => 'setPaymentFeeAmount',
         'payment_fee_currency' => 'setPaymentFeeCurrency',
+        'payment_reason' => 'setPaymentReason',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'post_code' => 'setPostCode',
         'reference_number' => 'setReferenceNumber',
@@ -212,6 +216,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
         'participant_number' => 'getParticipantNumber',
         'payment_fee_amount' => 'getPaymentFeeAmount',
         'payment_fee_currency' => 'getPaymentFeeCurrency',
+        'payment_reason' => 'getPaymentReason',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'post_code' => 'getPostCode',
         'reference_number' => 'getReferenceNumber',
@@ -272,6 +277,8 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
         $this->container['payment_fee_amount'] = isset($data['payment_fee_amount']) ? $data['payment_fee_amount'] : null;
         
         $this->container['payment_fee_currency'] = isset($data['payment_fee_currency']) ? $data['payment_fee_currency'] : null;
+        
+        $this->container['payment_reason'] = isset($data['payment_reason']) ? $data['payment_reason'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -815,6 +822,31 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
     
 
     /**
+     * Gets payment_reason
+     *
+     * @return string
+     */
+    public function getPaymentReason()
+    {
+        return $this->container['payment_reason'];
+    }
+
+    /**
+     * Sets payment_reason
+     *
+     * @param string $payment_reason 
+     *
+     * @return $this
+     */
+    public function setPaymentReason($payment_reason)
+    {
+        $this->container['payment_reason'] = $payment_reason;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets planned_purge_date
      *
      * @return \DateTime
@@ -1153,6 +1185,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -1165,6 +1198,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -1178,6 +1212,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -1194,6 +1229,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
