@@ -300,7 +300,7 @@ class InvoiceReimbursementService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\InvoiceReimbursement[]
+	 * @return \Wallee\Sdk\Model\InvoiceReimbursementWithRefundReference[]
 	 */
 	public function search($space_id, $query) {
 		return $this->searchWithHttpInfo($space_id, $query)->getData();
@@ -370,16 +370,16 @@ class InvoiceReimbursementService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\InvoiceReimbursement[]',
+				'\Wallee\Sdk\Model\InvoiceReimbursementWithRefundReference[]',
 				'/invoice-reimbursement-service/search'
 			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReimbursement[]', $response->getHeaders()));
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InvoiceReimbursementWithRefundReference[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\InvoiceReimbursement[]',
+                        '\Wallee\Sdk\Model\InvoiceReimbursementWithRefundReference[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
