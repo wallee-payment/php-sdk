@@ -86,7 +86,8 @@ class ChargeAttemptService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -135,13 +136,14 @@ class ChargeAttemptService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/charge-attempt/count'
 			);
@@ -197,7 +199,8 @@ class ChargeAttemptService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the charge attempt which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -248,13 +251,14 @@ class ChargeAttemptService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ChargeAttempt',
 				'/charge-attempt/read'
 			);
@@ -310,7 +314,8 @@ class ChargeAttemptService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the charge attempts which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -363,13 +368,14 @@ class ChargeAttemptService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ChargeAttempt[]',
 				'/charge-attempt/search'
 			);

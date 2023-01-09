@@ -86,7 +86,8 @@ class ChargeFlowLevelService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -135,13 +136,14 @@ class ChargeFlowLevelService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/charge-flow-level/count'
 			);
@@ -197,7 +199,8 @@ class ChargeFlowLevelService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the payment flow level which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -248,13 +251,14 @@ class ChargeFlowLevelService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ChargeFlowLevel',
 				'/charge-flow-level/read'
 			);
@@ -310,7 +314,8 @@ class ChargeFlowLevelService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the payment flow levels which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -363,13 +368,14 @@ class ChargeFlowLevelService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ChargeFlowLevel[]',
 				'/charge-flow-level/search'
 			);
@@ -425,7 +431,8 @@ class ChargeFlowLevelService {
 	 * Operation sendMessageWithHttpInfo
 	 *
 	 * Send Payment Link
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the charge flow level whose payment link should be sent. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -476,13 +483,14 @@ class ChargeFlowLevelService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ChargeFlowLevel',
 				'/charge-flow-level/sendMessage'
 			);

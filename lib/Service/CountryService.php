@@ -84,7 +84,8 @@ class CountryService {
 	 * Operation allWithHttpInfo
 	 *
 	 * All
-	 *
+     
+     *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -119,13 +120,14 @@ class CountryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\RestCountry[]',
 				'/country/all'
 			);

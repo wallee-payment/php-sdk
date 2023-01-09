@@ -86,7 +86,8 @@ class SubscriptionProductVersionService {
 	 * Operation activateWithHttpInfo
 	 *
 	 * activate
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $product_version_id The product version id identifies the product version which should be activated. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -137,13 +138,14 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductVersion',
 				'/subscription-product-version/activate'
 			);
@@ -199,7 +201,8 @@ class SubscriptionProductVersionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -248,13 +251,14 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/subscription-product-version/count'
 			);
@@ -310,7 +314,8 @@ class SubscriptionProductVersionService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionProductVersionPending $entity The product version object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -363,13 +368,14 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductVersion',
 				'/subscription-product-version/create'
 			);
@@ -425,7 +431,8 @@ class SubscriptionProductVersionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the product version which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -476,13 +483,14 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductVersion',
 				'/subscription-product-version/read'
 			);
@@ -538,7 +546,8 @@ class SubscriptionProductVersionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the product versions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -591,13 +600,14 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductVersion[]',
 				'/subscription-product-version/search'
 			);
@@ -653,7 +663,8 @@ class SubscriptionProductVersionService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionProductVersionPending $entity The product version object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -706,13 +717,14 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductVersion',
 				'/subscription-product-version/update'
 			);

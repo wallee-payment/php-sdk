@@ -86,7 +86,8 @@ class PaymentWebAppService {
 	 * Operation activateProcessorForProductionWithHttpInfo
 	 *
 	 * Activate Processor for Production
-	 *
+     
+     *
 	 * @param int $space_id The space ID identifies the space in which the processor is installed in. (required)
 	 * @param string $external_id The external ID identifies the processor. The external ID corresponds to the ID provided during inserting of the processor. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -137,13 +138,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\PaymentAppProcessor',
 				'/payment-web-app/activate-processor-for-production'
 			);
@@ -199,7 +201,8 @@ class PaymentWebAppService {
 	 * Operation deleteConnectorWithHttpInfo
 	 *
 	 * Delete Connector
-	 *
+     
+     *
 	 * @param int $space_id The space ID identifies the space in which the connector is installed in. (required)
 	 * @param string $external_id The external ID identifies the connector. The external ID corresponds to the ID provided during inserting of the connector. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -250,13 +253,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/payment-web-app/delete-connector'
 			);
@@ -304,7 +308,8 @@ class PaymentWebAppService {
 	 * Operation deleteProcessorWithHttpInfo
 	 *
 	 * Delete Processor
-	 *
+     
+     *
 	 * @param int $space_id The space ID identifies the space in which the processor is installed in. (required)
 	 * @param string $external_id The external ID identifies the processor. The external ID corresponds to the ID provided during inserting of the processor. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -355,13 +360,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/payment-web-app/delete-processor'
 			);
@@ -409,7 +415,8 @@ class PaymentWebAppService {
 	 * Operation insertOrUpdateConnectorWithHttpInfo
 	 *
 	 * Insert or Update Connector
-	 *
+     
+     *
 	 * @param int $space_id The space ID identifies the space into which the connector should be inserted into. (required)
 	 * @param \Wallee\Sdk\Model\PaymentAppConnectorCreationRequest $request The connector object contains all the details required to create or update a web app connector. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -462,13 +469,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\PaymentAppConnector',
 				'/payment-web-app/insert-or-update-connector'
 			);
@@ -524,7 +532,8 @@ class PaymentWebAppService {
 	 * Operation insertOrUpdateProcessorWithHttpInfo
 	 *
 	 * Insert or Update Processor
-	 *
+     
+     *
 	 * @param int $space_id The space ID identifies the space into which the processor should be inserted into. (required)
 	 * @param \Wallee\Sdk\Model\PaymentAppProcessorCreationRequest $request The processor object contains all the details required to create or update a web app processor. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -577,13 +586,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\PaymentAppProcessor',
 				'/payment-web-app/insert-or-update-processor'
 			);
@@ -639,7 +649,8 @@ class PaymentWebAppService {
 	 * Operation updateChargeAttemptWithHttpInfo
 	 *
 	 * Update Charge Attempt
-	 *
+     
+     *
 	 * @param int $space_id This is the ID of the space in which the charge attempt is located in. (required)
 	 * @param \Wallee\Sdk\Model\PaymentAppChargeAttemptUpdateRequest $request The charge attempt update request allows to update the state of a charge attempt. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -692,13 +703,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ChargeAttempt',
 				'/payment-web-app/update-charge-attempt'
 			);
@@ -754,7 +766,8 @@ class PaymentWebAppService {
 	 * Operation updateCompletionWithHttpInfo
 	 *
 	 * Update Completion
-	 *
+     
+     *
 	 * @param int $space_id This is the ID of the space in which the completion is located in. (required)
 	 * @param \Wallee\Sdk\Model\PaymentAppCompletionUpdateRequest $request The completion update request allows to update the state of a completion. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -807,13 +820,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\TransactionCompletion',
 				'/payment-web-app/update-completion'
 			);
@@ -869,7 +883,8 @@ class PaymentWebAppService {
 	 * Operation updateRefundWithHttpInfo
 	 *
 	 * Update Refund
-	 *
+     
+     *
 	 * @param int $space_id This is the ID of the space in which the refund is located in. (required)
 	 * @param \Wallee\Sdk\Model\PaymentAppRefundUpdateRequest $request The refund update request allows to update the state of a refund. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -922,13 +937,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\Refund',
 				'/payment-web-app/update-refund'
 			);
@@ -984,7 +1000,8 @@ class PaymentWebAppService {
 	 * Operation updateVoidWithHttpInfo
 	 *
 	 * Update Void
-	 *
+     
+     *
 	 * @param int $space_id This is the ID of the space in which the void is located in. (required)
 	 * @param \Wallee\Sdk\Model\PaymentAppVoidUpdateRequest $request The void update request allows to update the state of a void. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -1037,13 +1054,14 @@ class PaymentWebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\TransactionVoid',
 				'/payment-web-app/update-void'
 			);

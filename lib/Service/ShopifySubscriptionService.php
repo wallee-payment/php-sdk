@@ -86,7 +86,8 @@ class ShopifySubscriptionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -135,13 +136,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/shopify-subscription/count'
 			);
@@ -197,7 +199,8 @@ class ShopifySubscriptionService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\ShopifySubscriptionCreationRequest $creation_request  (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -250,13 +253,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ShopifySubscriptionVersion',
 				'/shopify-subscription/create'
 			);
@@ -312,7 +316,8 @@ class ShopifySubscriptionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the Shopify subscription which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -363,13 +368,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ShopifySubscription',
 				'/shopify-subscription/read'
 			);
@@ -425,7 +431,8 @@ class ShopifySubscriptionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the Shopify subscriptions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -478,13 +485,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ShopifySubscription[]',
 				'/shopify-subscription/search'
 			);
@@ -541,7 +549,8 @@ class ShopifySubscriptionService {
 	 * Operation terminateWithHttpInfo
 	 *
 	 * Terminate
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $subscription_id The ID identifies the Shopify subscription which should be terminated. (required)
 	 * @param bool $respect_termination_period The respect termination period controls whether the termination period configured on the product version should be respected or if the operation should take effect immediately. (required)
@@ -600,13 +609,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/shopify-subscription/terminate'
 			);
@@ -654,7 +664,8 @@ class ShopifySubscriptionService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\ShopifySubscriptionUpdateRequest $subscription  (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -707,13 +718,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ShopifySubscriptionVersion',
 				'/shopify-subscription/update'
 			);
@@ -769,7 +781,8 @@ class ShopifySubscriptionService {
 	 * Operation updateAddressesWithHttpInfo
 	 *
 	 * Update Addresses
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\ShopifySubscriptionUpdateAddressesRequest $update_request  (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -822,13 +835,14 @@ class ShopifySubscriptionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\ShopifySubscriptionVersion',
 				'/shopify-subscription/update-addresses'
 			);

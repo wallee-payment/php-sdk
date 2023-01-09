@@ -84,7 +84,8 @@ class CountryStateService {
 	 * Operation allWithHttpInfo
 	 *
 	 * All
-	 *
+     
+     *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -119,13 +120,14 @@ class CountryStateService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\RestCountryState[]',
 				'/country-state/all'
 			);
@@ -180,7 +182,8 @@ class CountryStateService {
 	 * Operation countryWithHttpInfo
 	 *
 	 * Find by Country
-	 *
+     
+     *
 	 * @param string $code The country code in ISO code two letter format for which all states should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -223,13 +226,14 @@ class CountryStateService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\RestCountryState[]',
 				'/country-state/country'
 			);

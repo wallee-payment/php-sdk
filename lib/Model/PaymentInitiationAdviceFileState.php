@@ -35,7 +35,12 @@ class PaymentInitiationAdviceFileState
     /**
      * Possible values of this enum
      */
-    const PENDING = 'PENDING';
+    const CREATING = 'CREATING';
+    const FAILED = 'FAILED';
+    const CREATED = 'CREATED';
+    const OVERDUE = 'OVERDUE';
+    const UPLOADED = 'UPLOADED';
+    const DOWNLOADED = 'DOWNLOADED';
     const PROCESSED = 'PROCESSED';
     
     /**
@@ -45,7 +50,12 @@ class PaymentInitiationAdviceFileState
     public static function getAllowableEnumValues()
     {
         return [
-            self::PENDING,
+            self::CREATING,
+            self::FAILED,
+            self::CREATED,
+            self::OVERDUE,
+            self::UPLOADED,
+            self::DOWNLOADED,
             self::PROCESSED,
         ];
     }

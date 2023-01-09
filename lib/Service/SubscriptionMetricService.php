@@ -86,7 +86,8 @@ class SubscriptionMetricService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -135,13 +136,14 @@ class SubscriptionMetricService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/subscription-metric/count'
 			);
@@ -197,7 +199,8 @@ class SubscriptionMetricService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionMetricCreate $entity The metric object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -250,13 +253,14 @@ class SubscriptionMetricService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionMetric',
 				'/subscription-metric/create'
 			);
@@ -312,7 +316,8 @@ class SubscriptionMetricService {
 	 * Operation deleteWithHttpInfo
 	 *
 	 * Delete
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the metric which should be deleted. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -365,13 +370,14 @@ class SubscriptionMetricService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/subscription-metric/delete'
 			);
@@ -427,7 +433,8 @@ class SubscriptionMetricService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the metric which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -478,13 +485,14 @@ class SubscriptionMetricService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionMetric',
 				'/subscription-metric/read'
 			);
@@ -540,7 +548,8 @@ class SubscriptionMetricService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the metric which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -593,13 +602,14 @@ class SubscriptionMetricService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionMetric[]',
 				'/subscription-metric/search'
 			);
@@ -655,7 +665,8 @@ class SubscriptionMetricService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionMetricActive $entity The products metric with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -708,13 +719,14 @@ class SubscriptionMetricService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionMetric',
 				'/subscription-metric/update'
 			);

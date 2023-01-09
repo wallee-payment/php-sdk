@@ -86,7 +86,8 @@ class InstallmentPaymentService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment payment which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -139,13 +140,14 @@ class InstallmentPaymentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/installment-payment/count'
 			);
@@ -202,7 +204,8 @@ class InstallmentPaymentService {
 	 * Operation createInstallmentPaymentWithHttpInfo
 	 *
 	 * Create Installment Payment
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The transaction which should be converted into an installment payment. (required)
 	 * @param int $installment_plan_configuration The installment plan configuration ID which should be applied on the transaction. (required)
@@ -261,13 +264,14 @@ class InstallmentPaymentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPayment',
 				'/installment-payment/createInstallmentPayment'
 			);
@@ -323,7 +327,8 @@ class InstallmentPaymentService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the installment payment which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -374,13 +379,14 @@ class InstallmentPaymentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPayment',
 				'/installment-payment/read'
 			);
@@ -436,7 +442,8 @@ class InstallmentPaymentService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment payments which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -489,13 +496,14 @@ class InstallmentPaymentService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPayment[]',
 				'/installment-payment/search'
 			);

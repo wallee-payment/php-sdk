@@ -86,7 +86,8 @@ class SubscriptionSuspensionService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -135,13 +136,14 @@ class SubscriptionSuspensionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/subscription-suspension/count'
 			);
@@ -197,7 +199,8 @@ class SubscriptionSuspensionService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionCreate $suspension  (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -250,13 +253,14 @@ class SubscriptionSuspensionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionSuspension',
 				'/subscription-suspension/create'
 			);
@@ -312,7 +316,8 @@ class SubscriptionSuspensionService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the suspension which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -363,13 +368,14 @@ class SubscriptionSuspensionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionSuspension',
 				'/subscription-suspension/read'
 			);
@@ -425,7 +431,8 @@ class SubscriptionSuspensionService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the subscription suspensions which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -478,13 +485,14 @@ class SubscriptionSuspensionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionSuspension[]',
 				'/subscription-suspension/search'
 			);
@@ -540,7 +548,8 @@ class SubscriptionSuspensionService {
 	 * Operation terminateWithHttpInfo
 	 *
 	 * terminate
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $suspension_id  (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -591,13 +600,14 @@ class SubscriptionSuspensionService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionSuspension',
 				'/subscription-suspension/terminate'
 			);

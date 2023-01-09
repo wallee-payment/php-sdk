@@ -22,7 +22,7 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * PaymentTerminalConfigurationVersionState model
+ * WalletType model
  *
  * @category    Class
  * @description 
@@ -30,17 +30,12 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class PaymentTerminalConfigurationVersionState
+class WalletType
 {
     /**
      * Possible values of this enum
      */
-    const PENDING = 'PENDING';
-    const SCHEDULING = 'SCHEDULING';
-    const ACTIVE = 'ACTIVE';
-    const OBSOLETE = 'OBSOLETE';
-    const DELETING = 'DELETING';
-    const DELETED = 'DELETED';
+    const APPLE_PAY = 'APPLE_PAY';
     
     /**
      * Gets allowable values of the enum
@@ -49,12 +44,7 @@ class PaymentTerminalConfigurationVersionState
     public static function getAllowableEnumValues()
     {
         return [
-            self::PENDING,
-            self::SCHEDULING,
-            self::ACTIVE,
-            self::OBSOLETE,
-            self::DELETING,
-            self::DELETED,
+            self::APPLE_PAY,
         ];
     }
 }

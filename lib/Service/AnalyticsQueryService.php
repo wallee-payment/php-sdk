@@ -85,7 +85,8 @@ class AnalyticsQueryService {
 	 * Operation cancelExecutionWithHttpInfo
 	 *
 	 * Cancel Execution
-	 *
+     
+     *
 	 * @param int $id The ID of the query execution to cancel. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -128,13 +129,14 @@ class AnalyticsQueryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/analytics-query/cancel-execution'
 			);
@@ -184,7 +186,8 @@ class AnalyticsQueryService {
 	 * Operation fetchResultWithHttpInfo
 	 *
 	 * Fetch Result
-	 *
+     
+     *
 	 * @param int $id The ID of the query execution for which to fetch the result. (required)
 	 * @param int $timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting. (optional)
 	 * @param int $max_rows The maximum number of rows to return per batch. (Between 1 and 999. The default is 999.) (optional)
@@ -239,13 +242,14 @@ class AnalyticsQueryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\AnalyticsQueryResultBatch',
 				'/analytics-query/fetch-result'
 			);
@@ -301,7 +305,8 @@ class AnalyticsQueryService {
 	 * Operation generateDownloadUrlWithHttpInfo
 	 *
 	 * Generate Download URL
-	 *
+     
+     *
 	 * @param int $id The ID of the query execution for which to generate the download URL. (required)
 	 * @param int $timeout The maximal time in seconds to wait for the result if it is not yet available. Use 0 (the default) to return immediately without waiting. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -348,13 +353,14 @@ class AnalyticsQueryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/analytics-query/generate-download-url'
 			);
@@ -408,7 +414,8 @@ class AnalyticsQueryService {
 	 * Operation schemaWithHttpInfo
 	 *
 	 * Get Schemas
-	 *
+     
+     *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -443,13 +450,14 @@ class AnalyticsQueryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\AnalyticsSchemaTable[]',
 				'/analytics-query/schema'
 			);
@@ -504,7 +512,8 @@ class AnalyticsQueryService {
 	 * Operation statusWithHttpInfo
 	 *
 	 * Execution Status
-	 *
+     
+     *
 	 * @param int $id The ID of the query execution for which to get the status. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -547,13 +556,14 @@ class AnalyticsQueryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\AnalyticsQueryExecution',
 				'/analytics-query/status'
 			);
@@ -608,7 +618,8 @@ class AnalyticsQueryService {
 	 * Operation submitQueryWithHttpInfo
 	 *
 	 * Submit Query
-	 *
+     
+     *
 	 * @param \Wallee\Sdk\Model\AnalyticsQuery $query The query to submit. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -653,13 +664,14 @@ class AnalyticsQueryService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\AnalyticsQueryExecution',
 				'/analytics-query/submit-query'
 			);

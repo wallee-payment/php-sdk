@@ -86,7 +86,8 @@ class SubscriptionProductComponentGroupService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the entities which are used to calculate the count. (optional)
 	 * @throws \Wallee\Sdk\ApiException
@@ -135,13 +136,14 @@ class SubscriptionProductComponentGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/subscription-product-component-group/count'
 			);
@@ -197,7 +199,8 @@ class SubscriptionProductComponentGroupService {
 	 * Operation createWithHttpInfo
 	 *
 	 * Create
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroupUpdate $entity The product component group object with the properties which should be created. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -250,13 +253,14 @@ class SubscriptionProductComponentGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductComponentGroup',
 				'/subscription-product-component-group/create'
 			);
@@ -312,7 +316,8 @@ class SubscriptionProductComponentGroupService {
 	 * Operation deleteWithHttpInfo
 	 *
 	 * Delete
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id  (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -365,13 +370,14 @@ class SubscriptionProductComponentGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/subscription-product-component-group/delete'
 			);
@@ -427,7 +433,8 @@ class SubscriptionProductComponentGroupService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the product component group which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -478,13 +485,14 @@ class SubscriptionProductComponentGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductComponentGroup',
 				'/subscription-product-component-group/read'
 			);
@@ -540,7 +548,8 @@ class SubscriptionProductComponentGroupService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the product component groups which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -593,13 +602,14 @@ class SubscriptionProductComponentGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductComponentGroup[]',
 				'/subscription-product-component-group/search'
 			);
@@ -655,7 +665,8 @@ class SubscriptionProductComponentGroupService {
 	 * Operation updateWithHttpInfo
 	 *
 	 * Update
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionProductComponentGroupUpdate $entity The product component group object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -708,13 +719,14 @@ class SubscriptionProductComponentGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\SubscriptionProductComponentGroup',
 				'/subscription-product-component-group/update'
 			);

@@ -84,7 +84,8 @@ class LabelDescriptionGroupService {
 	 * Operation allWithHttpInfo
 	 *
 	 * All
-	 *
+     
+     *
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -119,13 +120,14 @@ class LabelDescriptionGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\LabelDescriptorGroup[]',
 				'/label-description-group-service/all'
 			);
@@ -180,7 +182,8 @@ class LabelDescriptionGroupService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $id The id of the label descriptor group which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -223,13 +226,14 @@ class LabelDescriptionGroupService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\LabelDescriptorGroup',
 				'/label-description-group-service/read'
 			);

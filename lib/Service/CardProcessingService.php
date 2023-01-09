@@ -88,7 +88,8 @@ class CardProcessingService {
 	 * Operation processWithHttpInfo
 	 *
 	 * Process
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which should be processed. (required)
 	 * @param int $payment_method_configuration_id The payment method configuration ID which is applied to the transaction. (required)
@@ -157,13 +158,14 @@ class CardProcessingService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\Transaction',
 				'/card-processing/process'
 			);
@@ -229,7 +231,8 @@ class CardProcessingService {
 	 * Operation processWith3DSecureWithHttpInfo
 	 *
 	 * Process With 3-D Secure
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which should be processed. (required)
 	 * @param int $payment_method_configuration_id The payment method configuration ID which is applied to the transaction. (required)
@@ -298,13 +301,14 @@ class CardProcessingService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'string',
 				'/card-processing/processWith3DSecure'
 			);

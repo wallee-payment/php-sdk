@@ -86,7 +86,8 @@ class InstallmentPlanConfigurationService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment plan configurations which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -139,13 +140,14 @@ class InstallmentPlanConfigurationService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/installment-plan-configuration/count'
 			);
@@ -201,7 +203,8 @@ class InstallmentPlanConfigurationService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the installment plan configuration which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -252,13 +255,14 @@ class InstallmentPlanConfigurationService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPlanConfiguration',
 				'/installment-plan-configuration/read'
 			);
@@ -314,7 +318,8 @@ class InstallmentPlanConfigurationService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment plan configurations which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -367,13 +372,14 @@ class InstallmentPlanConfigurationService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPlanConfiguration[]',
 				'/installment-plan-configuration/search'
 			);

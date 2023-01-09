@@ -86,7 +86,8 @@ class InstallmentPaymentSliceService {
 	 * Operation countWithHttpInfo
 	 *
 	 * Count
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQueryFilter $filter The filter which restricts the installment payment slices which are used to calculate the count. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -139,13 +140,14 @@ class InstallmentPaymentSliceService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'int',
 				'/installment-payment-slice/count'
 			);
@@ -201,7 +203,8 @@ class InstallmentPaymentSliceService {
 	 * Operation readWithHttpInfo
 	 *
 	 * Read
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $id The id of the installment payment slice which should be returned. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -252,13 +255,14 @@ class InstallmentPaymentSliceService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPaymentSlice',
 				'/installment-payment-slice/read'
 			);
@@ -314,7 +318,8 @@ class InstallmentPaymentSliceService {
 	 * Operation searchWithHttpInfo
 	 *
 	 * Search
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\EntityQuery $query The query restricts the installment payment slices which are returned by the search. (required)
 	 * @throws \Wallee\Sdk\ApiException
@@ -367,13 +372,14 @@ class InstallmentPaymentSliceService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentPaymentSlice[]',
 				'/installment-payment-slice/search'
 			);

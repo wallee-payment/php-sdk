@@ -50,11 +50,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'created_on' => '\DateTime',
+        'failure_message' => 'string',
         'file_generated_on' => '\DateTime',
+        'forwarded_on' => '\DateTime',
         'id' => 'int',
         'linked_space_id' => 'int',
         'name' => 'string',
         'processed_on' => '\DateTime',
+        'processor' => '\Wallee\Sdk\Model\PaymentProcessor',
         'state' => '\Wallee\Sdk\Model\PaymentInitiationAdviceFileState'
     ];
 
@@ -65,11 +68,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'created_on' => 'date-time',
+        'failure_message' => null,
         'file_generated_on' => 'date-time',
+        'forwarded_on' => 'date-time',
         'id' => 'int64',
         'linked_space_id' => 'int64',
         'name' => null,
         'processed_on' => 'date-time',
+        'processor' => null,
         'state' => null
     ];
 
@@ -81,11 +87,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'created_on' => 'createdOn',
+        'failure_message' => 'failureMessage',
         'file_generated_on' => 'fileGeneratedOn',
+        'forwarded_on' => 'forwardedOn',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
         'processed_on' => 'processedOn',
+        'processor' => 'processor',
         'state' => 'state'
     ];
 
@@ -96,11 +105,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'created_on' => 'setCreatedOn',
+        'failure_message' => 'setFailureMessage',
         'file_generated_on' => 'setFileGeneratedOn',
+        'forwarded_on' => 'setForwardedOn',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
         'processed_on' => 'setProcessedOn',
+        'processor' => 'setProcessor',
         'state' => 'setState'
     ];
 
@@ -111,11 +123,14 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'created_on' => 'getCreatedOn',
+        'failure_message' => 'getFailureMessage',
         'file_generated_on' => 'getFileGeneratedOn',
+        'forwarded_on' => 'getForwardedOn',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
         'processed_on' => 'getProcessedOn',
+        'processor' => 'getProcessor',
         'state' => 'getState'
     ];
 
@@ -139,7 +154,11 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['failure_message'] = isset($data['failure_message']) ? $data['failure_message'] : null;
+        
         $this->container['file_generated_on'] = isset($data['file_generated_on']) ? $data['file_generated_on'] : null;
+        
+        $this->container['forwarded_on'] = isset($data['forwarded_on']) ? $data['forwarded_on'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -148,6 +167,8 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
         $this->container['processed_on'] = isset($data['processed_on']) ? $data['processed_on'] : null;
+        
+        $this->container['processor'] = isset($data['processor']) ? $data['processor'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
@@ -268,6 +289,31 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets failure_message
+     *
+     * @return string
+     */
+    public function getFailureMessage()
+    {
+        return $this->container['failure_message'];
+    }
+
+    /**
+     * Sets failure_message
+     *
+     * @param string $failure_message 
+     *
+     * @return $this
+     */
+    public function setFailureMessage($failure_message)
+    {
+        $this->container['failure_message'] = $failure_message;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets file_generated_on
      *
      * @return \DateTime
@@ -287,6 +333,31 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     public function setFileGeneratedOn($file_generated_on)
     {
         $this->container['file_generated_on'] = $file_generated_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets forwarded_on
+     *
+     * @return \DateTime
+     */
+    public function getForwardedOn()
+    {
+        return $this->container['forwarded_on'];
+    }
+
+    /**
+     * Sets forwarded_on
+     *
+     * @param \DateTime $forwarded_on The shipping date indicates the date on which the pain file was transferred to an external processing system.
+     *
+     * @return $this
+     */
+    public function setForwardedOn($forwarded_on)
+    {
+        $this->container['forwarded_on'] = $forwarded_on;
 
         return $this;
     }
@@ -387,6 +458,31 @@ class PaymentInitiationAdviceFile implements ModelInterface, ArrayAccess
     public function setProcessedOn($processed_on)
     {
         $this->container['processed_on'] = $processed_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets processor
+     *
+     * @return \Wallee\Sdk\Model\PaymentProcessor
+     */
+    public function getProcessor()
+    {
+        return $this->container['processor'];
+    }
+
+    /**
+     * Sets processor
+     *
+     * @param \Wallee\Sdk\Model\PaymentProcessor $processor 
+     *
+     * @return $this
+     */
+    public function setProcessor($processor)
+    {
+        $this->container['processor'] = $processor;
 
         return $this;
     }

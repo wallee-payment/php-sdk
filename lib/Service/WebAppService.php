@@ -85,7 +85,8 @@ class WebAppService {
 	 * Operation checkInstallationWithHttpInfo
 	 *
 	 * Check Installation
-	 *
+     
+     *
 	 * @param int $space_id This parameter identifies the space which should be checked if the web app is installed. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -128,13 +129,14 @@ class WebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'bool',
 				'/web-app/check-installation'
 			);
@@ -189,7 +191,8 @@ class WebAppService {
 	 * Operation confirmWithHttpInfo
 	 *
 	 * Confirm
-	 *
+     
+     *
 	 * @param \Wallee\Sdk\Model\WebAppConfirmationRequest $request  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -234,13 +237,14 @@ class WebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				'\Wallee\Sdk\Model\WebAppConfirmationResponse',
 				'/web-app/confirm'
 			);
@@ -295,7 +299,8 @@ class WebAppService {
 	 * Operation uninstallWithHttpInfo
 	 *
 	 * Uninstall
-	 *
+     
+     *
 	 * @param int $space_id This parameter identifies the space within which the web app should be uninstalled. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
@@ -338,13 +343,14 @@ class WebAppService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
+            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
+                $timeOut,
 				null,
 				'/web-app/uninstall'
 			);
