@@ -138,17 +138,15 @@ class InstallmentPlanCalculationService {
 		}
 		// make the API Call
 		try {
-            $timeOut = $this->apiClient->getConnectionTimeout();
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-                $timeOut,
 				'\Wallee\Sdk\Model\InstallmentCalculatedPlan[]',
 				'/installment-plan-calculation/calculatePlans'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\InstallmentCalculatedPlan[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

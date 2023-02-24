@@ -250,7 +250,7 @@ class TokenCreate extends AbstractTokenUpdate
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state 
+     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */

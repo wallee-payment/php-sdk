@@ -380,7 +380,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\SubscriptionProductState $state 
+     * @param \Wallee\Sdk\Model\SubscriptionProductState $state The object's current state.
      *
      * @return $this
      */

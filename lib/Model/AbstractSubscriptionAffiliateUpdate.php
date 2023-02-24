@@ -241,7 +241,7 @@ class AbstractSubscriptionAffiliateUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
@@ -323,7 +323,7 @@ class AbstractSubscriptionAffiliateUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state 
+     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */
