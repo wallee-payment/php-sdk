@@ -52,9 +52,9 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess
         'id' => 'int',
         'version' => 'int',
         'component' => 'int',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+        'description' => 'map[string,string]',
         'metric' => 'int',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+        'name' => 'map[string,string]',
         'tier_pricing' => '\Wallee\Sdk\Model\ProductMeteredTierPricing'
     ];
 
@@ -326,7 +326,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -336,7 +336,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+     * @param map[string,string] $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
      *
      * @return $this
      */
@@ -376,7 +376,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -386,7 +386,7 @@ class ProductMeteredFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name The name of the fee should describe for the subscriber in few words for what the fee is for.
+     * @param map[string,string] $name The name of the fee should describe for the subscriber in few words for what the fee is for.
      *
      * @return $this
      */

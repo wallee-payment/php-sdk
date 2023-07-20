@@ -49,10 +49,10 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'description' => 'map[string,string]',
         'id' => 'int',
         'linked_space_id' => 'int',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'name' => 'map[string,string]',
         'planned_purge_date' => '\DateTime',
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
         'type' => '\Wallee\Sdk\Model\SubscriptionMetricType',
@@ -252,7 +252,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -262,7 +262,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description 
+     * @param map[string,string] $description 
      *
      * @return $this
      */
@@ -327,7 +327,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -337,7 +337,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name 
+     * @param map[string,string] $name 
      *
      * @return $this
      */

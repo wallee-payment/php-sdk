@@ -51,7 +51,7 @@ class SubscriptionProductComponentGroup implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'id' => 'int',
         'linked_space_id' => 'int',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'name' => 'map[string,string]',
         'optional' => 'bool',
         'product_version' => '\Wallee\Sdk\Model\SubscriptionProductVersion',
         'sort_order' => 'int',
@@ -295,7 +295,7 @@ class SubscriptionProductComponentGroup implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -305,7 +305,7 @@ class SubscriptionProductComponentGroup implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name The component group name will be shown when the components are selected. This can be visible to the subscriber.
+     * @param map[string,string] $name The component group name will be shown when the components are selected. This can be visible to the subscriber.
      *
      * @return $this
      */

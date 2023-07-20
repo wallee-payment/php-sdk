@@ -50,7 +50,7 @@ class InstallmentPlanSliceConfiguration implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'id' => 'int',
-        'line_item_title' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'line_item_title' => 'map[string,string]',
         'linked_space_id' => 'int',
         'period' => 'string',
         'plan' => '\Wallee\Sdk\Model\InstallmentPlanConfiguration',
@@ -291,7 +291,7 @@ class InstallmentPlanSliceConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets line_item_title
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getLineItemTitle()
     {
@@ -301,7 +301,7 @@ class InstallmentPlanSliceConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets line_item_title
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $line_item_title The title of this slices line items. The title is visible to the buyer.
+     * @param map[string,string] $line_item_title The title of this slices line items. The title is visible to the buyer.
      *
      * @return $this
      */

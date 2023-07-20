@@ -337,7 +337,7 @@ class SubscriptionAffiliateUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets meta_data
      *
-     * @param map[string,string] $meta_data Meta data allow to store additional data along the object.
+     * @param map[string,string] $meta_data Allow to store additional information about the object.
      *
      * @return $this
      */

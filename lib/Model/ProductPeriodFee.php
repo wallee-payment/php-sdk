@@ -50,11 +50,11 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'component' => '\Wallee\Sdk\Model\SubscriptionProductComponent',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'description' => 'map[string,string]',
         'id' => 'int',
-        'ledger_entry_title' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'ledger_entry_title' => 'map[string,string]',
         'linked_space_id' => 'int',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'name' => 'map[string,string]',
         'number_of_free_trial_periods' => 'int',
         'period_fee' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
         'type' => '\Wallee\Sdk\Model\ProductFeeType',
@@ -291,7 +291,7 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -301,7 +301,7 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+     * @param map[string,string] $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
      *
      * @return $this
      */
@@ -341,7 +341,7 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
     /**
      * Gets ledger_entry_title
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getLedgerEntryTitle()
     {
@@ -351,7 +351,7 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
     /**
      * Sets ledger_entry_title
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $ledger_entry_title The ledger entry title will be used for the title in the ledger entry and in the invoice.
+     * @param map[string,string] $ledger_entry_title The ledger entry title will be used for the title in the ledger entry and in the invoice.
      *
      * @return $this
      */
@@ -391,7 +391,7 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -401,7 +401,7 @@ class ProductPeriodFee implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name The name of the fee should describe for the subscriber in few words for what the fee is for.
+     * @param map[string,string] $name The name of the fee should describe for the subscriber in few words for what the fee is for.
      *
      * @return $this
      */

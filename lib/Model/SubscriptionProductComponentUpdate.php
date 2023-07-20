@@ -54,10 +54,10 @@ class SubscriptionProductComponentUpdate implements ModelInterface, ArrayAccess
         'component_change_weight' => 'int',
         'component_group' => 'int',
         'default_component' => 'bool',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+        'description' => 'map[string,string]',
         'maximal_quantity' => 'float',
         'minimal_quantity' => 'float',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
+        'name' => 'map[string,string]',
         'quantity_step' => 'float',
         'reference' => 'int',
         'sort_order' => 'int',
@@ -418,7 +418,7 @@ class SubscriptionProductComponentUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -428,7 +428,7 @@ class SubscriptionProductComponentUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+     * @param map[string,string] $description The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
      *
      * @return $this
      */
@@ -493,7 +493,7 @@ class SubscriptionProductComponentUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -503,7 +503,7 @@ class SubscriptionProductComponentUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name The component name is shown to the subscriber. It should describe in few words what the component does contain.
+     * @param map[string,string] $name The component name is shown to the subscriber. It should describe in few words what the component does contain.
      *
      * @return $this
      */

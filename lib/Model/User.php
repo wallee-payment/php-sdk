@@ -51,7 +51,7 @@ class User implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'id' => 'int',
         'planned_purge_date' => '\DateTime',
-        'scope' => '\Wallee\Sdk\Model\Scope',
+        'scope' => 'int',
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
         'user_type' => '\Wallee\Sdk\Model\UserType',
         'version' => 'int'
@@ -65,7 +65,7 @@ class User implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'id' => 'int64',
         'planned_purge_date' => 'date-time',
-        'scope' => null,
+        'scope' => 'int64',
         'state' => null,
         'user_type' => null,
         'version' => 'int32'
@@ -288,7 +288,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Gets scope
      *
-     * @return \Wallee\Sdk\Model\Scope
+     * @return int
      */
     public function getScope()
     {
@@ -298,7 +298,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets scope
      *
-     * @param \Wallee\Sdk\Model\Scope $scope 
+     * @param int $scope The scope that the user belongs to.
      *
      * @return $this
      */
@@ -348,7 +348,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets user_type
      *
-     * @param \Wallee\Sdk\Model\UserType $user_type 
+     * @param \Wallee\Sdk\Model\UserType $user_type The user's type which defines its role and capabilities.
      *
      * @return $this
      */

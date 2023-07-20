@@ -64,7 +64,7 @@ class InstallmentPlanConfiguration implements ModelInterface, ArrayAccess
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
         'tax_class' => '\Wallee\Sdk\Model\TaxClass',
         'terms_and_conditions' => '\Wallee\Sdk\Model\ModelResourcePath',
-        'title' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'title' => 'map[string,string]',
         'version' => 'int'
     ];
 
@@ -698,7 +698,7 @@ class InstallmentPlanConfiguration implements ModelInterface, ArrayAccess
     /**
      * Gets title
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getTitle()
     {
@@ -708,7 +708,7 @@ class InstallmentPlanConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $title The title of the installment plan is used within the payment process. The title is visible to the buyer.
+     * @param map[string,string] $title The title of the installment plan is used within the payment process. The title is visible to the buyer.
      *
      * @return $this
      */

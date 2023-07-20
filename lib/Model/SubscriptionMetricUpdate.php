@@ -51,8 +51,8 @@ class SubscriptionMetricUpdate implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'id' => 'int',
         'version' => 'int',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate'
+        'description' => 'map[string,string]',
+        'name' => 'map[string,string]'
     ];
 
     /**
@@ -280,7 +280,7 @@ class SubscriptionMetricUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -290,7 +290,7 @@ class SubscriptionMetricUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description 
+     * @param map[string,string] $description 
      *
      * @return $this
      */
@@ -305,7 +305,7 @@ class SubscriptionMetricUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -315,7 +315,7 @@ class SubscriptionMetricUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name 
+     * @param map[string,string] $name 
      *
      * @return $this
      */

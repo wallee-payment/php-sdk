@@ -59,7 +59,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
         'increment_number' => 'int',
         'linked_space_id' => 'int',
         'minimal_number_of_periods' => 'int',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'name' => 'map[string,string]',
         'number_of_notice_periods' => 'int',
         'obsoleted_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
@@ -597,7 +597,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -607,7 +607,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
+     * @param map[string,string] $name The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
      *
      * @return $this
      */

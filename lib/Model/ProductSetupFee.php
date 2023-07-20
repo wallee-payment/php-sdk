@@ -50,10 +50,10 @@ class ProductSetupFee implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'component' => '\Wallee\Sdk\Model\SubscriptionProductComponent',
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'description' => 'map[string,string]',
         'id' => 'int',
         'linked_space_id' => 'int',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedString',
+        'name' => 'map[string,string]',
         'on_downgrade_credited_amount' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
         'on_upgrade_credited_amount' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
         'setup_fee' => '\Wallee\Sdk\Model\PersistableCurrencyAmount[]',
@@ -291,7 +291,7 @@ class ProductSetupFee implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getDescription()
     {
@@ -301,7 +301,7 @@ class ProductSetupFee implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+     * @param map[string,string] $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
      *
      * @return $this
      */
@@ -366,7 +366,7 @@ class ProductSetupFee implements ModelInterface, ArrayAccess
     /**
      * Gets name
      *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedString
+     * @return map[string,string]
      */
     public function getName()
     {
@@ -376,7 +376,7 @@ class ProductSetupFee implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedString $name The name of the fee should describe for the subscriber in few words for what the fee is for.
+     * @param map[string,string] $name The name of the fee should describe for the subscriber in few words for what the fee is for.
      *
      * @return $this
      */
