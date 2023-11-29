@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.0.0",
+        'x-meta-sdk-version' => "4.0.1",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "wallee",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.0.0/php';
+	private $userAgent = 'PHP-Client/4.0.1/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -1831,6 +1831,18 @@ final class ApiClient {
             $this->webAppService = new \Wallee\Sdk\Service\WebAppService($this);
         }
         return $this->webAppService;
+    }
+    
+    protected $webhookEncryptionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\WebhookEncryptionService
+     */
+    public function getWebhookEncryptionService() {
+        if(is_null($this->webhookEncryptionService)){
+            $this->webhookEncryptionService = new \Wallee\Sdk\Service\WebhookEncryptionService($this);
+        }
+        return $this->webhookEncryptionService;
     }
     
     protected $webhookListenerService;

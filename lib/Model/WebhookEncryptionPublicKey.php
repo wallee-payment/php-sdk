@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * SubscriptionComponentConfiguration model
+ * WebhookEncryptionPublicKey model
  *
  * @category    Class
- * @description 
+ * @description The webhook encryption public key is used to verify the webhook content signature.
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
+class WebhookEncryptionPublicKey implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SubscriptionComponentConfiguration';
+    protected static $swaggerModelName = 'WebhookEncryptionPublicKey';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,11 +49,8 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'component' => 'int',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'quantity' => 'float',
-        'version' => 'int'
+        'id' => 'string',
+        'public_key' => 'string'
     ];
 
     /**
@@ -62,11 +59,8 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'component' => 'int64',
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'quantity' => null,
-        'version' => 'int32'
+        'id' => null,
+        'public_key' => null
     ];
 
     /**
@@ -76,11 +70,8 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'component' => 'component',
         'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'quantity' => 'quantity',
-        'version' => 'version'
+        'public_key' => 'publicKey'
     ];
 
     /**
@@ -89,11 +80,8 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'component' => 'setComponent',
         'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'quantity' => 'setQuantity',
-        'version' => 'setVersion'
+        'public_key' => 'setPublicKey'
     ];
 
     /**
@@ -102,11 +90,8 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'component' => 'getComponent',
         'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'quantity' => 'getQuantity',
-        'version' => 'getVersion'
+        'public_key' => 'getPublicKey'
     ];
 
     
@@ -127,15 +112,9 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['component'] = isset($data['component']) ? $data['component'] : null;
-        
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        $this->container['public_key'] = isset($data['public_key']) ? $data['public_key'] : null;
         
     }
 
@@ -229,34 +208,9 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets component
-     *
-     * @return int
-     */
-    public function getComponent()
-    {
-        return $this->container['component'];
-    }
-
-    /**
-     * Sets component
-     *
-     * @param int $component 
-     *
-     * @return $this
-     */
-    public function setComponent($component)
-    {
-        $this->container['component'] = $component;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets id
      *
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -266,7 +220,7 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id A unique identifier for the object.
+     * @param string $id The ID of encryption key
      *
      * @return $this
      */
@@ -279,75 +233,25 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets linked_space_id
+     * Gets public_key
      *
-     * @return int
+     * @return string
      */
-    public function getLinkedSpaceId()
+    public function getPublicKey()
     {
-        return $this->container['linked_space_id'];
+        return $this->container['public_key'];
     }
 
     /**
-     * Sets linked_space_id
+     * Sets public_key
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param string $public_key The BASE64 encoded public key
      *
      * @return $this
      */
-    public function setLinkedSpaceId($linked_space_id)
+    public function setPublicKey($public_key)
     {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets quantity
-     *
-     * @return float
-     */
-    public function getQuantity()
-    {
-        return $this->container['quantity'];
-    }
-
-    /**
-     * Sets quantity
-     *
-     * @param float $quantity 
-     *
-     * @return $this
-     */
-    public function setQuantity($quantity)
-    {
-        $this->container['quantity'] = $quantity;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version
-     *
-     * @return int
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
+        $this->container['public_key'] = $public_key;
 
         return $this;
     }
