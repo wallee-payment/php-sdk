@@ -29,7 +29,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @category    Class
  * @description This model holds the cardholder authentication data (e.g. 3-D Secure authentication).
  * @package     Wallee\Sdk
- * @author      customweb GmbH
+ * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess

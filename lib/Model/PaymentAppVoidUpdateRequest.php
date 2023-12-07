@@ -29,7 +29,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @category    Class
  * @description The void update request allows to change the state of a void. The void must be linked with a processor that was created by the payment Web App that invokes the operation.
  * @package     Wallee\Sdk
- * @author      customweb GmbH
+ * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class PaymentAppVoidUpdateRequest implements ModelInterface, ArrayAccess

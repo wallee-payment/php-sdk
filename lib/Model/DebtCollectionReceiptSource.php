@@ -29,7 +29,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @category    Class
  * @description The debt collection receipt source represents the origin of a particular part of the collected amount. It allows to understand from where the amount is coming from, e.g. if it was added manually or in some other way.
  * @package     Wallee\Sdk
- * @author      customweb GmbH
+ * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class DebtCollectionReceiptSource implements ModelInterface, ArrayAccess

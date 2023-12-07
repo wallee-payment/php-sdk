@@ -35,7 +35,7 @@ use Wallee\Sdk\Model\TransactionState;
  *
  * @category Class
  * @package  Wallee\Sdk
- * @author   customweb GmbH
+ * @author   wallee AG
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class TransactionCompletionServiceTest extends TestCase

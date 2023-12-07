@@ -27,7 +27,7 @@ use Wallee\Sdk\ApiClient;
  *
  * @category Interface
  * @package  Wallee\Sdk\Http
- * @author   customweb GmbH
+ * @author   wallee AG
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 interface IHttpClient {

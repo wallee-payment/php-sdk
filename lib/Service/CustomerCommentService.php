@@ -31,7 +31,7 @@ use Wallee\Sdk\ObjectSerializer;
  *
  * @category Class
  * @package  Wallee\Sdk
- * @author   customweb GmbH
+ * @author   wallee AG
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class CustomerCommentService {
@@ -983,5 +983,6 @@ class CustomerCommentService {
 			throw $e;
 		}
 	}
+
 
 }
