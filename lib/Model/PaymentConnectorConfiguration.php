@@ -63,7 +63,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'priority' => 'int',
         'processor_configuration' => '\Wallee\Sdk\Model\PaymentProcessorConfiguration',
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
-        'version' => 'int'
+        'version' => 'int',
+        'image_path' => 'string'
     ];
 
     /**
@@ -86,7 +87,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'priority' => 'int32',
         'processor_configuration' => null,
         'state' => null,
-        'version' => 'int32'
+        'version' => 'int32',
+        'image_path' => null
     ];
 
     /**
@@ -110,7 +112,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'priority' => 'priority',
         'processor_configuration' => 'processorConfiguration',
         'state' => 'state',
-        'version' => 'version'
+        'version' => 'version',
+        'image_path' => 'imagePath'
     ];
 
     /**
@@ -133,7 +136,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'priority' => 'setPriority',
         'processor_configuration' => 'setProcessorConfiguration',
         'state' => 'setState',
-        'version' => 'setVersion'
+        'version' => 'setVersion',
+        'image_path' => 'setImagePath'
     ];
 
     /**
@@ -156,7 +160,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         'priority' => 'getPriority',
         'processor_configuration' => 'getProcessorConfiguration',
         'state' => 'getState',
-        'version' => 'getVersion'
+        'version' => 'getVersion',
+        'image_path' => 'getImagePath'
     ];
 
     
@@ -207,6 +212,8 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
         
+        $this->container['image_path'] = isset($data['image_path']) ? $data['image_path'] : null;
+
     }
 
     /**
@@ -676,6 +683,31 @@ class PaymentConnectorConfiguration implements ModelInterface, ArrayAccess
     public function setVersion($version)
     {
         $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    
+    /**
+     * Gets imagePath
+     *
+     * @return int
+     */
+    public function getImagePath()
+    {
+        return $this->container['image_path'];
+    }
+
+    /**
+     * Sets Image Path
+     *
+     * @param int The image_path will define the order of choice of the connector configurations.
+     *
+     * @return $this
+     */
+    public function setImagePath($image_path)
+    {
+        $this->container['image_path'] = $image_path;
 
         return $this;
     }
