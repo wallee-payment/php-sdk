@@ -287,7 +287,7 @@ class DebtCollectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets collector
      *
-     * @param int $collector The collector handles the debt collection case based on the settings of this configuration.
+     * @param int $collector The debt collector that the configuration is for.
      *
      * @return $this
      */
@@ -312,7 +312,7 @@ class DebtCollectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets conditions
      *
-     * @param int[] $conditions The conditions applied to the collector configuration restricts the application of this configuration onto a particular debt collection case.
+     * @param int[] $conditions Conditions allow to define criteria that a debt collection case must fulfill in order for the debt collector configuration to be considered for processing the case.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class DebtCollectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets enabled_space_views
      *
-     * @param int[] $enabled_space_views The collector configuration is only enabled for the selected space views. In case the set is empty the collector configuration is enabled for all space views.
+     * @param int[] $enabled_space_views The space views for which the debt collector configuration is enabled. If empty, it is enabled for all space views.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class DebtCollectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The collector configuration name is used internally to identify a specific collector configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the debt collector configuration.
      *
      * @return $this
      */
@@ -466,7 +466,7 @@ class DebtCollectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets priority
      *
-     * @param int $priority The priority defines the order in which the collector configuration is tried to be applied onto a debt collection case. The higher the value the less likely the configuration is applied on a case.
+     * @param int $priority The priority that determines the order in which debt collector configurations are taken into account when processing a case. Low values are considered first.
      *
      * @return $this
      */
@@ -491,7 +491,7 @@ class DebtCollectorConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets skip_review_enabled
      *
-     * @param bool $skip_review_enabled When the review is skipped there will be no review for cases which use this configuration.
+     * @param bool $skip_review_enabled Whether the review of debt collection cases is skipped.
      *
      * @return $this
      */

@@ -227,7 +227,7 @@ class DebtCollectionCaseCreate extends AbstractDebtCollectionCaseUpdate
     /**
      * Sets collector_configuration
      *
-     * @param int $collector_configuration The collector configuration determines how the debt collection case is processed.
+     * @param int $collector_configuration The configuration that the case is processed with.
      *
      * @return $this
      */
@@ -277,7 +277,7 @@ class DebtCollectionCaseCreate extends AbstractDebtCollectionCaseUpdate
     /**
      * Sets reference
      *
-     * @param string $reference The case reference is used in the communication with the debtor. It should be unique and it should be linkable with the source of the debt collection case.
+     * @param string $reference A unique reference to identify the debt collection case in communication with the debtor.
      *
      * @return $this
      */

@@ -423,7 +423,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount The amount is the total amount of the not paid items. The amount cannot be change once the case is reviewed.
+     * @param float $amount The sum of all unpaid item prices in the case's currency. The amount can no longer be changed once the case has been reviewed.
      *
      * @return $this
      */
@@ -448,7 +448,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \Wallee\Sdk\Model\Address $billing_address The billing address of the case identifies the debtor.
+     * @param \Wallee\Sdk\Model\Address $billing_address The billing address that identifies the debtor.
      *
      * @return $this
      */
@@ -473,7 +473,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets closed_on
      *
-     * @param \DateTime $closed_on The closed on date indicates when the case is closed on.
+     * @param \DateTime $closed_on The date and time when the case was closed.
      *
      * @return $this
      */
@@ -498,7 +498,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets collector_configuration
      *
-     * @param \Wallee\Sdk\Model\DebtCollectorConfiguration $collector_configuration The collector configuration determines how the debt collection case is processed.
+     * @param \Wallee\Sdk\Model\DebtCollectorConfiguration $collector_configuration The configuration that the case is processed with.
      *
      * @return $this
      */
@@ -523,7 +523,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets contract_date
      *
-     * @param \DateTime $contract_date The contract date is the date on which the contract with the debtor was signed on.
+     * @param \DateTime $contract_date The date and time when the contract with the debtor was signed.
      *
      * @return $this
      */
@@ -573,7 +573,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets creator
      *
-     * @param int $creator The creator references the user which has created the debt collection case.
+     * @param int $creator The ID of the user the case was created by.
      *
      * @return $this
      */
@@ -598,7 +598,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency The currency defines the billing currency of the debt collection case.
+     * @param string $currency The three-letter code (ISO 4217 format) of the case's currency.
      *
      * @return $this
      */
@@ -623,7 +623,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets due_date
      *
-     * @param \DateTime $due_date The due date indicates the date on which the amount receivable was due. This date has to be always in the past.
+     * @param \DateTime $due_date The date and time when the claim was due.
      *
      * @return $this
      */
@@ -648,7 +648,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \Wallee\Sdk\Model\DebtCollectionEnvironment $environment The environment in which this case will be processed. There must be a debt collector configuration present which supports the chosen environment.
+     * @param \Wallee\Sdk\Model\DebtCollectionEnvironment $environment The environment in which the case is processed.
      *
      * @return $this
      */
@@ -698,7 +698,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets failed_on
      *
-     * @param \DateTime $failed_on The failed on date indicates when the case is failed on.
+     * @param \DateTime $failed_on The date and time when the case failed.
      *
      * @return $this
      */
@@ -723,7 +723,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets failure_reason
      *
-     * @param \Wallee\Sdk\Model\FailureReason $failure_reason 
+     * @param \Wallee\Sdk\Model\FailureReason $failure_reason The reason for the failure of the case.
      *
      * @return $this
      */
@@ -773,7 +773,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets labels
      *
-     * @param \Wallee\Sdk\Model\Label[] $labels 
+     * @param \Wallee\Sdk\Model\Label[] $labels The labels providing additional information about the object.
      *
      * @return $this
      */
@@ -798,7 +798,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The language indicates the language to be used in the communication with the debtor.
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
@@ -823,7 +823,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \Wallee\Sdk\Model\LineItem[] $line_items The line items of the debt collection case will be shown on documents sent to the debtor and the total of them makes up total amount to collect.
+     * @param \Wallee\Sdk\Model\LineItem[] $line_items The line items that are subject of this debt collection case.
      *
      * @return $this
      */
@@ -873,7 +873,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets next_attempt_on
      *
-     * @param \DateTime $next_attempt_on 
+     * @param \DateTime $next_attempt_on The date and time when the next attempt at processing the case will be made.
      *
      * @return $this
      */
@@ -923,7 +923,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets processing_started_on
      *
-     * @param \DateTime $processing_started_on The processing started on date indicates the date on which the processing of the case started on.
+     * @param \DateTime $processing_started_on The date and time when the processing of the case was started.
      *
      * @return $this
      */
@@ -948,7 +948,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets processing_timeout_on
      *
-     * @param \DateTime $processing_timeout_on 
+     * @param \DateTime $processing_timeout_on The date and time when the processing of the case times out.
      *
      * @return $this
      */
@@ -973,7 +973,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference The case reference is used in the communication with the debtor. It should be unique and it should be linkable with the source of the debt collection case.
+     * @param string $reference A unique reference to identify the debt collection case in communication with the debtor.
      *
      * @return $this
      */
@@ -998,7 +998,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets review_started_on
      *
-     * @param \DateTime $review_started_on 
+     * @param \DateTime $review_started_on The date and time when the review of the case was started.
      *
      * @return $this
      */
@@ -1023,7 +1023,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets reviewed_on
      *
-     * @param \DateTime $reviewed_on The reviewed on date indicates when the review of the case was conducted on.
+     * @param \DateTime $reviewed_on The date and time when the case was reviewed.
      *
      * @return $this
      */
@@ -1048,7 +1048,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets reviewer
      *
-     * @param int $reviewer The reviewer references the user which has reviewed the case.
+     * @param int $reviewer The ID of the user the case was reviewed by.
      *
      * @return $this
      */
@@ -1073,7 +1073,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets source
      *
-     * @param \Wallee\Sdk\Model\DebtCollectionCaseSource $source The source of the debt collection case indicates the origin of the amount receivable.
+     * @param \Wallee\Sdk\Model\DebtCollectionCaseSource $source The source of the case stating the origin of the claim.
      *
      * @return $this
      */
@@ -1098,7 +1098,7 @@ class DebtCollectionCase implements ModelInterface, ArrayAccess
     /**
      * Sets source_entity_id
      *
-     * @param int $source_entity_id The source entity ID points to the object which is the origin of the debt collection case. This ID is only set when the case was triggered by an internal process.
+     * @param int $source_entity_id The ID of the object that is the source of the case. Only defined if the case was created by an internal process.
      *
      * @return $this
      */

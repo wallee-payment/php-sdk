@@ -261,7 +261,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \Wallee\Sdk\Model\AddressCreate $billing_address The billing address of the case identifies the debtor.
+     * @param \Wallee\Sdk\Model\AddressCreate $billing_address The billing address that identifies the debtor.
      *
      * @return $this
      */
@@ -286,7 +286,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets contract_date
      *
-     * @param \DateTime $contract_date The contract date is the date on which the contract with the debtor was signed on.
+     * @param \DateTime $contract_date The date and time when the contract with the debtor was signed.
      *
      * @return $this
      */
@@ -311,7 +311,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency The currency defines the billing currency of the debt collection case.
+     * @param string $currency The three-letter code (ISO 4217 format) of the case's currency.
      *
      * @return $this
      */
@@ -336,7 +336,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets due_date
      *
-     * @param \DateTime $due_date The due date indicates the date on which the amount receivable was due. This date has to be always in the past.
+     * @param \DateTime $due_date The date and time when the claim was due.
      *
      * @return $this
      */
@@ -361,7 +361,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \Wallee\Sdk\Model\DebtCollectionEnvironment $environment The environment in which this case will be processed. There must be a debt collector configuration present which supports the chosen environment.
+     * @param \Wallee\Sdk\Model\DebtCollectionEnvironment $environment The environment in which the case is processed.
      *
      * @return $this
      */
@@ -386,7 +386,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The language indicates the language to be used in the communication with the debtor.
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
@@ -411,7 +411,7 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \Wallee\Sdk\Model\LineItemCreate[] $line_items The line items of the debt collection case will be shown on documents sent to the debtor and the total of them makes up total amount to collect.
+     * @param \Wallee\Sdk\Model\LineItemCreate[] $line_items The line items that are subject of this debt collection case.
      *
      * @return $this
      */

@@ -284,7 +284,7 @@ class DebtCollectionReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount 
+     * @param float $amount The amount that was collected.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class DebtCollectionReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by The created by field indicates the user which has created the receipt.
+     * @param int $created_by The ID of the user the receipt was created by.
      *
      * @return $this
      */
@@ -359,7 +359,7 @@ class DebtCollectionReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets debt_collection_case
      *
-     * @param int $debt_collection_case 
+     * @param int $debt_collection_case The debt collection case that this document belongs to.
      *
      * @return $this
      */
@@ -384,7 +384,7 @@ class DebtCollectionReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external id is a unique identifier for the receipt. The external id has to be unique in combination with the debt collection case. When a receipt is sent with an existing external id the existing one is returned rather than a new one is created.
+     * @param string $external_id A client-generated nonce which uniquely identifies the receipt.Subsequent requests with the same external ID do not lead to the creation of another receipt, but return the original one.
      *
      * @return $this
      */
@@ -491,7 +491,7 @@ class DebtCollectionReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets source
      *
-     * @param int $source 
+     * @param int $source The source stating where the receipt is coming from.
      *
      * @return $this
      */

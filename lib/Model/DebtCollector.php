@@ -27,7 +27,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * DebtCollector model
  *
  * @category    Class
- * @description The debt collector connects to an external service to process the debt collection case and as such directs the debt collection process.
+ * @description The debt collector connects to an external service to process debt collection cases and directs the debt collection process.
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2

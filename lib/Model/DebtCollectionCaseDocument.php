@@ -57,7 +57,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int',
         'mime_type' => 'string',
         'planned_purge_date' => '\DateTime',
-        'storage_id' => 'string',
         'unique_id' => 'string',
         'version' => 'int'
     ];
@@ -76,7 +75,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int64',
         'mime_type' => null,
         'planned_purge_date' => 'date-time',
-        'storage_id' => null,
         'unique_id' => null,
         'version' => 'int32'
     ];
@@ -96,7 +94,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
         'linked_space_id' => 'linkedSpaceId',
         'mime_type' => 'mimeType',
         'planned_purge_date' => 'plannedPurgeDate',
-        'storage_id' => 'storageId',
         'unique_id' => 'uniqueId',
         'version' => 'version'
     ];
@@ -115,7 +112,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
         'linked_space_id' => 'setLinkedSpaceId',
         'mime_type' => 'setMimeType',
         'planned_purge_date' => 'setPlannedPurgeDate',
-        'storage_id' => 'setStorageId',
         'unique_id' => 'setUniqueId',
         'version' => 'setVersion'
     ];
@@ -134,7 +130,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
         'linked_space_id' => 'getLinkedSpaceId',
         'mime_type' => 'getMimeType',
         'planned_purge_date' => 'getPlannedPurgeDate',
-        'storage_id' => 'getStorageId',
         'unique_id' => 'getUniqueId',
         'version' => 'getVersion'
     ];
@@ -173,8 +168,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
-        $this->container['storage_id'] = isset($data['storage_id']) ? $data['storage_id'] : null;
-        
         $this->container['unique_id'] = isset($data['unique_id']) ? $data['unique_id'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
@@ -192,10 +185,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
 
         if (!is_null($this->container['file_name']) && (mb_strlen($this->container['file_name']) > 100)) {
             $invalidProperties[] = "invalid value for 'file_name', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['storage_id']) && (mb_strlen($this->container['storage_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'storage_id', the character length must be smaller than or equal to 100.";
         }
 
         if (!is_null($this->container['unique_id']) && (mb_strlen($this->container['unique_id']) > 500)) {
@@ -320,7 +309,7 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     /**
      * Sets debt_collection_case
      *
-     * @param int $debt_collection_case 
+     * @param int $debt_collection_case The debt collection case that this document belongs to.
      *
      * @return $this
      */
@@ -345,7 +334,7 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     /**
      * Sets file_name
      *
-     * @param string $file_name 
+     * @param string $file_name The file name of the document.
      *
      * @return $this
      */
@@ -399,7 +388,7 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     /**
      * Sets labels
      *
-     * @param \Wallee\Sdk\Model\Label[] $labels 
+     * @param \Wallee\Sdk\Model\Label[] $labels The labels providing additional information about the object.
      *
      * @return $this
      */
@@ -449,7 +438,7 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     /**
      * Sets mime_type
      *
-     * @param string $mime_type 
+     * @param string $mime_type The MIME type of the document's content.
      *
      * @return $this
      */
@@ -487,35 +476,6 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets storage_id
-     *
-     * @return string
-     */
-    public function getStorageId()
-    {
-        return $this->container['storage_id'];
-    }
-
-    /**
-     * Sets storage_id
-     *
-     * @param string $storage_id 
-     *
-     * @return $this
-     */
-    public function setStorageId($storage_id)
-    {
-        if (!is_null($storage_id) && (mb_strlen($storage_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $storage_id when calling DebtCollectionCaseDocument., must be smaller than or equal to 100.');
-        }
-
-        $this->container['storage_id'] = $storage_id;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets unique_id
      *
      * @return string
@@ -528,7 +488,7 @@ class DebtCollectionCaseDocument implements ModelInterface, ArrayAccess
     /**
      * Sets unique_id
      *
-     * @param string $unique_id 
+     * @param string $unique_id A unique identifier of the document.
      *
      * @return $this
      */

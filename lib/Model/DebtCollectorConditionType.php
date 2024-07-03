@@ -27,7 +27,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * DebtCollectorConditionType model
  *
  * @category    Class
- * @description The debt collection condition type controls how a condition is applied to a case.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
