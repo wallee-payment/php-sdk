@@ -309,7 +309,7 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
     /**
      * Sets failed_url
      *
-     * @param string $failed_url The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+     * @param string $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
      *
      * @return $this
      */
@@ -341,7 +341,7 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
     /**
      * Sets planned_execution_date
      *
-     * @param \DateTime $planned_execution_date 
+     * @param \DateTime $planned_execution_date The date and time when the execution of the charge is planned.
      *
      * @return $this
      */
@@ -366,7 +366,7 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
     /**
      * Sets processing_type
      *
-     * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processing_type 
+     * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processing_type The processing type specifies how the charge is to be processed.
      *
      * @return $this
      */
@@ -391,7 +391,7 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference 
+     * @param string $reference The merchant's reference used to identify the charge.
      *
      * @return $this
      */
@@ -420,7 +420,7 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
     /**
      * Sets subscription
      *
-     * @param int $subscription The field subscription indicates the subscription to which the charge belongs to.
+     * @param int $subscription The subscription that the charge belongs to.
      *
      * @return $this
      */
@@ -445,7 +445,7 @@ class SubscriptionChargeCreate implements ModelInterface, ArrayAccess
     /**
      * Sets success_url
      *
-     * @param string $success_url The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+     * @param string $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
      *
      * @return $this
      */

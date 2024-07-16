@@ -297,7 +297,7 @@ class ProductMeteredTierFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets fee
      *
-     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $fee The fee determines the amount which is charged. The consumed metric is multiplied by the defined fee. The resulting amount is charged at the end of the period.
+     * @param \Wallee\Sdk\Model\PersistableCurrencyAmountUpdate[] $fee The amount charged to the customer for each consumed unit at the end of a billing cycle.
      *
      * @return $this
      */
@@ -322,7 +322,7 @@ class ProductMeteredTierFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets metered_fee
      *
-     * @param int $metered_fee 
+     * @param int $metered_fee The metered fee that this tier belongs to.
      *
      * @return $this
      */
@@ -347,7 +347,7 @@ class ProductMeteredTierFeeUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets start_range
      *
-     * @param float $start_range The start range defines the metered consumption of the metric from which on the defined fee gets applied. This means when a subscription consumes a value of 10 or more and the start range is set to 10 the fee defined on the tier will be applied.
+     * @param float $start_range Starting from and including this quantity is contained in the tier.
      *
      * @return $this
      */

@@ -323,7 +323,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets additional_allowed_payment_method_configurations
      *
-     * @param int[] $additional_allowed_payment_method_configurations Those payment methods which are allowed additionally will be available even when the product does not allow those methods.
+     * @param int[] $additional_allowed_payment_method_configurations Allow the subscriber to use these payment methods even if subscription products do not accept them.
      *
      * @return $this
      */
@@ -348,7 +348,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \Wallee\Sdk\Model\Address $billing_address 
+     * @param \Wallee\Sdk\Model\Address $billing_address The address associated with the subscriber for invoicing and transaction processing purposes.
      *
      * @return $this
      */
@@ -373,7 +373,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string $description The subscriber description can be used to add a description to the subscriber. This is used in the back office to identify the subscriber.
+     * @param string $description The description used to identify the subscriber.
      *
      * @return $this
      */
@@ -402,7 +402,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets disallowed_payment_method_configurations
      *
-     * @param int[] $disallowed_payment_method_configurations Those payment methods which are disallowed will not be available to the subscriber even if the product allows those methods.
+     * @param int[] $disallowed_payment_method_configurations Prevent the subscriber from using these payment methods even if subscription products do accept them.
      *
      * @return $this
      */
@@ -427,7 +427,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets email_address
      *
-     * @param string $email_address The email address is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
+     * @param string $email_address The email address that is used to communicate with the subscriber. There can be only one subscriber per space with the same email address.
      *
      * @return $this
      */
@@ -506,7 +506,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The subscriber language determines the language which is used to communicate with the subscriber in emails and documents (e.g. invoices).
+     * @param string $language The language that is used when communicating with the subscriber via emails and documents.
      *
      * @return $this
      */
@@ -606,7 +606,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference The subscriber reference identifies the subscriber in administrative interfaces (e.g. customer id).
+     * @param string $reference The merchant's reference used to identify the subscriber.
      *
      * @return $this
      */
@@ -635,7 +635,7 @@ class Subscriber implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \Wallee\Sdk\Model\Address $shipping_address 
+     * @param \Wallee\Sdk\Model\Address $shipping_address The address to where orders will be shipped.
      *
      * @return $this
      */

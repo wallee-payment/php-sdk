@@ -49,7 +49,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     protected static $swaggerTypes = [
         'checkout_id' => 'string',
         'created_on' => '\DateTime',
-        'integration' => '\Wallee\Sdk\Model\ShopifyIntegration',
+        'integration' => '\Wallee\Sdk\Model\ShopifyV1Integration',
         'order_id' => 'string',
         'order_name' => 'string',
         'planned_purge_date' => '\DateTime',
@@ -303,7 +303,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Gets integration
      *
-     * @return \Wallee\Sdk\Model\ShopifyIntegration
+     * @return \Wallee\Sdk\Model\ShopifyV1Integration
      */
     public function getIntegration()
     {
@@ -313,7 +313,7 @@ class ShopifyTransaction extends TransactionAwareEntity
     /**
      * Sets integration
      *
-     * @param \Wallee\Sdk\Model\ShopifyIntegration $integration 
+     * @param \Wallee\Sdk\Model\ShopifyV1Integration $integration 
      *
      * @return $this
      */

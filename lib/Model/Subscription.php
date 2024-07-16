@@ -354,7 +354,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets activated_on
      *
-     * @param \DateTime $activated_on 
+     * @param \DateTime $activated_on The date and time when the subscription was activate.
      *
      * @return $this
      */
@@ -379,7 +379,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets affiliate
      *
-     * @param \Wallee\Sdk\Model\SubscriptionAffiliate $affiliate 
+     * @param \Wallee\Sdk\Model\SubscriptionAffiliate $affiliate The affiliate that led to the creation of the subscription.
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on 
+     * @param \DateTime $created_on The date and time when the subscription was created.
      *
      * @return $this
      */
@@ -429,7 +429,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets current_product_version
      *
-     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $current_product_version 
+     * @param \Wallee\Sdk\Model\SubscriptionProductVersion $current_product_version The version of the product that the subscription is currently linked to.
      *
      * @return $this
      */
@@ -454,7 +454,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string $description 
+     * @param string $description A description used to identify the subscription.
      *
      * @return $this
      */
@@ -508,7 +508,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets initialized_on
      *
-     * @param \DateTime $initialized_on 
+     * @param \DateTime $initialized_on The date and time when the subscription was initialized.
      *
      * @return $this
      */
@@ -608,7 +608,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets planned_termination_date
      *
-     * @param \DateTime $planned_termination_date 
+     * @param \DateTime $planned_termination_date The date and time when the subscription is planned to be terminated.
      *
      * @return $this
      */
@@ -633,7 +633,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference 
+     * @param string $reference The merchant's reference used to identify the subscription.
      *
      * @return $this
      */
@@ -687,7 +687,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets subscriber
      *
-     * @param \Wallee\Sdk\Model\Subscriber $subscriber 
+     * @param \Wallee\Sdk\Model\Subscriber $subscriber The subscriber that the subscription belongs to.
      *
      * @return $this
      */
@@ -712,7 +712,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets terminated_by
      *
-     * @param int $terminated_by 
+     * @param int $terminated_by The ID of the user the subscription was terminated by.
      *
      * @return $this
      */
@@ -737,7 +737,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets terminated_on
      *
-     * @param \DateTime $terminated_on 
+     * @param \DateTime $terminated_on The date and time when the subscription was terminated.
      *
      * @return $this
      */
@@ -762,7 +762,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets terminating_on
      *
-     * @param \DateTime $terminating_on 
+     * @param \DateTime $terminating_on The date and time when the termination of the subscription started.
      *
      * @return $this
      */
@@ -787,7 +787,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets termination_scheduled_on
      *
-     * @param \DateTime $termination_scheduled_on 
+     * @param \DateTime $termination_scheduled_on The date and time when the subscription was scheduled to be terminated.
      *
      * @return $this
      */
@@ -812,7 +812,7 @@ class Subscription implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param \Wallee\Sdk\Model\Token $token 
+     * @param \Wallee\Sdk\Model\Token $token The payment token that is used to charge the customer.
      *
      * @return $this
      */

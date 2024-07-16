@@ -218,7 +218,7 @@ class SubscriptionProductCreate extends AbstractSubscriptionProductActive
     /**
      * Sets reference
      *
-     * @param string $reference The product reference identifies the product for external systems. This field may contain the product's SKU.
+     * @param string $reference The merchant's reference used to identify the product, e.g. the SKU.
      *
      * @return $this
      */

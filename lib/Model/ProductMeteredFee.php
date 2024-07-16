@@ -269,7 +269,7 @@ class ProductMeteredFee implements ModelInterface, ArrayAccess
     /**
      * Sets component
      *
-     * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component 
+     * @param \Wallee\Sdk\Model\SubscriptionProductComponent $component The product component that the fee belongs to.
      *
      * @return $this
      */
@@ -294,7 +294,7 @@ class ProductMeteredFee implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+     * @param map[string,string] $description The localized description of the fee that is displayed to the customer.
      *
      * @return $this
      */
@@ -369,7 +369,7 @@ class ProductMeteredFee implements ModelInterface, ArrayAccess
     /**
      * Sets metric
      *
-     * @param \Wallee\Sdk\Model\SubscriptionMetric $metric 
+     * @param \Wallee\Sdk\Model\SubscriptionMetric $metric The metric used to determine the resource consumption billed to the customer.
      *
      * @return $this
      */
@@ -394,7 +394,7 @@ class ProductMeteredFee implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The name of the fee should describe for the subscriber in few words for what the fee is for.
+     * @param map[string,string] $name The localized name of the fee that is displayed to the customer.
      *
      * @return $this
      */
@@ -419,7 +419,7 @@ class ProductMeteredFee implements ModelInterface, ArrayAccess
     /**
      * Sets tier_pricing
      *
-     * @param \Wallee\Sdk\Model\ProductMeteredTierPricing $tier_pricing The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
+     * @param \Wallee\Sdk\Model\ProductMeteredTierPricing $tier_pricing The method used to calculate the tier price.
      *
      * @return $this
      */
@@ -444,7 +444,7 @@ class ProductMeteredFee implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\ProductFeeType $type 
+     * @param \Wallee\Sdk\Model\ProductFeeType $type The type of the fee.
      *
      * @return $this
      */

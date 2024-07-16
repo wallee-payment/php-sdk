@@ -291,7 +291,7 @@ class AbstractSubscriptionAffiliateUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name 
+     * @param string $name The name used to identify the affiliate.
      *
      * @return $this
      */

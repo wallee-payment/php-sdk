@@ -346,7 +346,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets billing_cycle
      *
-     * @param string $billing_cycle The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
+     * @param string $billing_cycle The recurring period of time, typically monthly or annually, for which a subscriber is charged.
      *
      * @return $this
      */
@@ -371,7 +371,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets comment
      *
-     * @param string $comment The comment allows to provide a internal comment for the version. It helps to document why a product was changed. The comment is not disclosed to the subscriber.
+     * @param string $comment A comment that describes the product version and why it was created. It is not disclosed to the subscriber.
      *
      * @return $this
      */
@@ -396,7 +396,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets default_currency
      *
-     * @param string $default_currency The default currency has to be used in all fees.
+     * @param string $default_currency The three-letter code (ISO 4217 format) of the product version's default currency.
      *
      * @return $this
      */
@@ -421,7 +421,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets enabled_currencies
      *
-     * @param string[] $enabled_currencies The currencies which are enabled can be selected to define component fees. Currencies which are not enabled cannot be used to define fees.
+     * @param string[] $enabled_currencies The three-letter codes (ISO 4217 format) of the currencies that the product version supports.
      *
      * @return $this
      */
@@ -446,7 +446,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets minimal_number_of_periods
      *
-     * @param int $minimal_number_of_periods The minimal number of periods determines how long the subscription has to run before the subscription can be terminated.
+     * @param int $minimal_number_of_periods The minimum number of periods the subscription will run before it can be terminated.
      *
      * @return $this
      */
@@ -471,7 +471,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
+     * @param map[string,string] $name The localized name of the product that is displayed to the customer.
      *
      * @return $this
      */
@@ -496,7 +496,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets number_of_notice_periods
      *
-     * @param int $number_of_notice_periods The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
+     * @param int $number_of_notice_periods The number of periods the subscription will keep running after its termination was requested.
      *
      * @return $this
      */
@@ -521,7 +521,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets product
      *
-     * @param int $product Each product version is linked to a product.
+     * @param int $product The product that the version belongs to.
      *
      * @return $this
      */
@@ -571,7 +571,7 @@ class SubscriptionProductVersionPending implements ModelInterface, ArrayAccess
     /**
      * Sets tax_calculation
      *
-     * @param \Wallee\Sdk\Model\TaxCalculation $tax_calculation Strategy that is used for tax calculation in fees.
+     * @param \Wallee\Sdk\Model\TaxCalculation $tax_calculation The way taxes are calculated for fees.
      *
      * @return $this
      */

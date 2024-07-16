@@ -298,7 +298,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_configurations
      *
-     * @param int[] $allowed_payment_method_configurations The allowed payment method configurations control which payment methods can be used with this product. When none is selected all methods will be allowed.
+     * @param int[] $allowed_payment_method_configurations The payment methods that can be used to subscribe to this product. If none are selected, no restriction is applied.
      *
      * @return $this
      */
@@ -323,7 +323,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets failed_payment_suspension_period
      *
-     * @param string $failed_payment_suspension_period When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
+     * @param string $failed_payment_suspension_period The period after which a subscription that has been suspended due to a failed payment is terminated.
      *
      * @return $this
      */
@@ -398,7 +398,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the product.
      *
      * @return $this
      */
@@ -452,7 +452,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets product_locked
      *
-     * @param bool $product_locked Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+     * @param bool $product_locked Whether subscriptions can be switched to or from this product, or whether they are locked in.
      *
      * @return $this
      */
@@ -477,7 +477,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference The product reference identifies the product for external systems. This field may contain the product's SKU.
+     * @param string $reference The merchant's reference used to identify the product, e.g. the SKU.
      *
      * @return $this
      */
@@ -506,7 +506,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets sort_order
      *
-     * @param int $sort_order The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
+     * @param int $sort_order When listing products, they can be sorted by this number.
      *
      * @return $this
      */
@@ -531,7 +531,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets space_id
      *
-     * @param int $space_id 
+     * @param int $space_id The ID of the space this object belongs to.
      *
      * @return $this
      */

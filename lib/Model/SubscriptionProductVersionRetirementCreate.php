@@ -50,7 +50,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
       */
     protected static $swaggerTypes = [
         'product_version' => 'int',
-        'respect_terminiation_periods_enabled' => 'bool',
+        'respect_termination_periods' => 'bool',
         'target_product' => 'int'
     ];
 
@@ -61,7 +61,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
       */
     protected static $swaggerFormats = [
         'product_version' => 'int64',
-        'respect_terminiation_periods_enabled' => null,
+        'respect_termination_periods' => null,
         'target_product' => 'int64'
     ];
 
@@ -73,7 +73,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
      */
     protected static $attributeMap = [
         'product_version' => 'productVersion',
-        'respect_terminiation_periods_enabled' => 'respectTerminiationPeriodsEnabled',
+        'respect_termination_periods' => 'respectTerminationPeriods',
         'target_product' => 'targetProduct'
     ];
 
@@ -84,7 +84,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
      */
     protected static $setters = [
         'product_version' => 'setProductVersion',
-        'respect_terminiation_periods_enabled' => 'setRespectTerminiationPeriodsEnabled',
+        'respect_termination_periods' => 'setRespectTerminationPeriods',
         'target_product' => 'setTargetProduct'
     ];
 
@@ -95,7 +95,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
      */
     protected static $getters = [
         'product_version' => 'getProductVersion',
-        'respect_terminiation_periods_enabled' => 'getRespectTerminiationPeriodsEnabled',
+        'respect_termination_periods' => 'getRespectTerminationPeriods',
         'target_product' => 'getTargetProduct'
     ];
 
@@ -119,7 +119,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
         
         $this->container['product_version'] = isset($data['product_version']) ? $data['product_version'] : null;
         
-        $this->container['respect_terminiation_periods_enabled'] = isset($data['respect_terminiation_periods_enabled']) ? $data['respect_terminiation_periods_enabled'] : null;
+        $this->container['respect_termination_periods'] = isset($data['respect_termination_periods']) ? $data['respect_termination_periods'] : null;
         
         $this->container['target_product'] = isset($data['target_product']) ? $data['target_product'] : null;
         
@@ -230,7 +230,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
     /**
      * Sets product_version
      *
-     * @param int $product_version 
+     * @param int $product_version The product version that is to be retired.
      *
      * @return $this
      */
@@ -243,25 +243,25 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
     
 
     /**
-     * Gets respect_terminiation_periods_enabled
+     * Gets respect_termination_periods
      *
      * @return bool
      */
-    public function getRespectTerminiationPeriodsEnabled()
+    public function getRespectTerminationPeriods()
     {
-        return $this->container['respect_terminiation_periods_enabled'];
+        return $this->container['respect_termination_periods'];
     }
 
     /**
-     * Sets respect_terminiation_periods_enabled
+     * Sets respect_termination_periods
      *
-     * @param bool $respect_terminiation_periods_enabled 
+     * @param bool $respect_termination_periods Whether the subscriptions' termination periods should be respected.
      *
      * @return $this
      */
-    public function setRespectTerminiationPeriodsEnabled($respect_terminiation_periods_enabled)
+    public function setRespectTerminationPeriods($respect_termination_periods)
     {
-        $this->container['respect_terminiation_periods_enabled'] = $respect_terminiation_periods_enabled;
+        $this->container['respect_termination_periods'] = $respect_termination_periods;
 
         return $this;
     }
@@ -280,7 +280,7 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
     /**
      * Sets target_product
      *
-     * @param int $target_product When a target product is not chosen, all customers with the retired product will be terminated.
+     * @param int $target_product The product to which the subscriptions with the retiring product version are to be migrated. If none is defined, the subscriptions are terminated.
      *
      * @return $this
      */

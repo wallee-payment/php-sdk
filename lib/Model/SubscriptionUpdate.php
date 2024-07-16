@@ -301,7 +301,7 @@ class SubscriptionUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets affiliate
      *
-     * @param int $affiliate 
+     * @param int $affiliate The affiliate that led to the creation of the subscription.
      *
      * @return $this
      */
@@ -326,7 +326,7 @@ class SubscriptionUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string $description 
+     * @param string $description A description used to identify the subscription.
      *
      * @return $this
      */
@@ -355,7 +355,7 @@ class SubscriptionUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets planned_termination_date
      *
-     * @param \DateTime $planned_termination_date 
+     * @param \DateTime $planned_termination_date The date and time when the subscription is planned to be terminated.
      *
      * @return $this
      */

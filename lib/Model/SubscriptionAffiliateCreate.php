@@ -261,7 +261,7 @@ class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate
     /**
      * Sets reference
      *
-     * @param string $reference 
+     * @param string $reference The reference used to identify the affiliate.
      *
      * @return $this
      */

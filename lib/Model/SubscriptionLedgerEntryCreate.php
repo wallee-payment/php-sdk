@@ -271,7 +271,7 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     /**
      * Sets amount_including_tax
      *
-     * @param float $amount_including_tax 
+     * @param float $amount_including_tax The leger entry's amount with discounts applied, including taxes.
      *
      * @return $this
      */
@@ -321,7 +321,7 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity 
+     * @param float $quantity The number of items that were consumed.
      *
      * @return $this
      */
@@ -346,7 +346,7 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     /**
      * Sets subscription_version
      *
-     * @param int $subscription_version 
+     * @param int $subscription_version The subscription version that the ledger entry belongs to.
      *
      * @return $this
      */
@@ -371,7 +371,7 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     /**
      * Sets taxes
      *
-     * @param \Wallee\Sdk\Model\TaxCreate[] $taxes 
+     * @param \Wallee\Sdk\Model\TaxCreate[] $taxes A set of tax lines, each of which specifies a tax applied to the ledger entry.
      *
      * @return $this
      */
@@ -396,7 +396,7 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param string $title 
+     * @param string $title The title that indicates what the ledger entry is about.
      *
      * @return $this
      */

@@ -283,7 +283,7 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on 
+     * @param \DateTime $created_on The date and time when the period bill was created.
      *
      * @return $this
      */
@@ -308,7 +308,7 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets effective_period_end_date
      *
-     * @param \DateTime $effective_period_end_date 
+     * @param \DateTime $effective_period_end_date The date and time when the period actually ended.
      *
      * @return $this
      */
@@ -408,7 +408,7 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets period_start_date
      *
-     * @param \DateTime $period_start_date 
+     * @param \DateTime $period_start_date The date and time when the period started.
      *
      * @return $this
      */
@@ -433,7 +433,7 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets planned_period_end_date
      *
-     * @param \DateTime $planned_period_end_date 
+     * @param \DateTime $planned_period_end_date The date and time when the period is planned to end.
      *
      * @return $this
      */
@@ -508,7 +508,7 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets subscription_version
      *
-     * @param \Wallee\Sdk\Model\SubscriptionVersion $subscription_version 
+     * @param \Wallee\Sdk\Model\SubscriptionVersion $subscription_version The subscription version that the period bill belongs to.
      *
      * @return $this
      */

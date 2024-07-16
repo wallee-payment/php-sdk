@@ -27,7 +27,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * SubscriptionUpdateRequest model
  *
  * @category    Class
- * @description The subscription update request allows to change a subscription properites.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -217,7 +217,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string $description 
+     * @param string $description A description used to identify the subscription.
      *
      * @return $this
      */

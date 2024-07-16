@@ -53,7 +53,6 @@ class TaxClass implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
-        'space_id' => 'int',
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
         'version' => 'int'
     ];
@@ -68,7 +67,6 @@ class TaxClass implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int64',
         'name' => null,
         'planned_purge_date' => 'date-time',
-        'space_id' => 'int64',
         'state' => null,
         'version' => 'int32'
     ];
@@ -84,7 +82,6 @@ class TaxClass implements ModelInterface, ArrayAccess
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
-        'space_id' => 'spaceId',
         'state' => 'state',
         'version' => 'version'
     ];
@@ -99,7 +96,6 @@ class TaxClass implements ModelInterface, ArrayAccess
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
-        'space_id' => 'setSpaceId',
         'state' => 'setState',
         'version' => 'setVersion'
     ];
@@ -114,7 +110,6 @@ class TaxClass implements ModelInterface, ArrayAccess
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
-        'space_id' => 'getSpaceId',
         'state' => 'getState',
         'version' => 'getVersion'
     ];
@@ -144,8 +139,6 @@ class TaxClass implements ModelInterface, ArrayAccess
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['space_id'] = isset($data['space_id']) ? $data['space_id'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
@@ -309,7 +302,7 @@ class TaxClass implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The tax class name is used internally to identify the tax class in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the tax class.
      *
      * @return $this
      */
@@ -345,31 +338,6 @@ class TaxClass implements ModelInterface, ArrayAccess
     public function setPlannedPurgeDate($planned_purge_date)
     {
         $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets space_id
-     *
-     * @return int
-     */
-    public function getSpaceId()
-    {
-        return $this->container['space_id'];
-    }
-
-    /**
-     * Sets space_id
-     *
-     * @param int $space_id 
-     *
-     * @return $this
-     */
-    public function setSpaceId($space_id)
-    {
-        $this->container['space_id'] = $space_id;
 
         return $this;
     }

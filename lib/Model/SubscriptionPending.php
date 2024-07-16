@@ -235,7 +235,7 @@ class SubscriptionPending extends SubscriptionUpdate
     /**
      * Sets reference
      *
-     * @param string $reference 
+     * @param string $reference The merchant's reference used to identify the subscription.
      *
      * @return $this
      */
@@ -264,7 +264,7 @@ class SubscriptionPending extends SubscriptionUpdate
     /**
      * Sets subscriber
      *
-     * @param int $subscriber 
+     * @param int $subscriber The subscriber that the subscription belongs to.
      *
      * @return $this
      */
@@ -289,7 +289,7 @@ class SubscriptionPending extends SubscriptionUpdate
     /**
      * Sets token
      *
-     * @param int $token 
+     * @param int $token The payment token that is used to charge the customer.
      *
      * @return $this
      */

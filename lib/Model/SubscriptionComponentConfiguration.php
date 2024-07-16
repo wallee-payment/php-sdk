@@ -241,7 +241,7 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets component
      *
-     * @param int $component 
+     * @param int $component The component that is being configured.
      *
      * @return $this
      */
@@ -316,7 +316,7 @@ class SubscriptionComponentConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity 
+     * @param float $quantity The quantity that should be applied to the component.
      *
      * @return $this
      */

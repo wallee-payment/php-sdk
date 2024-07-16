@@ -417,7 +417,7 @@ class SubscriptionAffiliate implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name 
+     * @param string $name The name used to identify the affiliate.
      *
      * @return $this
      */
@@ -474,7 +474,7 @@ class SubscriptionAffiliate implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference 
+     * @param string $reference The reference used to identify the affiliate.
      *
      * @return $this
      */

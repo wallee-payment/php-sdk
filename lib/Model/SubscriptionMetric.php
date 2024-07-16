@@ -262,7 +262,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param map[string,string] $description 
+     * @param map[string,string] $description The localized description of the metric that is displayed to the customer.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name 
+     * @param map[string,string] $name The localized name of the metric that is displayed to the customer.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class SubscriptionMetric implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\SubscriptionMetricType $type 
+     * @param \Wallee\Sdk\Model\SubscriptionMetricType $type The type of the metric.
      *
      * @return $this
      */

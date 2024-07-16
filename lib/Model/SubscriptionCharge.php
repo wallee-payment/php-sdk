@@ -373,7 +373,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on 
+     * @param \DateTime $created_on The date and time when the charge was created.
      *
      * @return $this
      */
@@ -398,7 +398,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets discarded_by
      *
-     * @param int $discarded_by 
+     * @param int $discarded_by The ID of the user the charge was discarded by.
      *
      * @return $this
      */
@@ -423,7 +423,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets discarded_on
      *
-     * @param \DateTime $discarded_on 
+     * @param \DateTime $discarded_on The date and time when the charge was discarded.
      *
      * @return $this
      */
@@ -473,7 +473,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets failed_on
      *
-     * @param \DateTime $failed_on 
+     * @param \DateTime $failed_on The date and time when the charge failed.
      *
      * @return $this
      */
@@ -498,7 +498,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets failed_url
      *
-     * @param string $failed_url The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+     * @param string $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
      *
      * @return $this
      */
@@ -580,7 +580,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets ledger_entries
      *
-     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntry[] $ledger_entries 
+     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntry[] $ledger_entries The ledger entries that belong to the charge.
      *
      * @return $this
      */
@@ -630,7 +630,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets planned_execution_date
      *
-     * @param \DateTime $planned_execution_date 
+     * @param \DateTime $planned_execution_date The date and time when the execution of the charge is planned.
      *
      * @return $this
      */
@@ -680,7 +680,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets processing_type
      *
-     * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processing_type 
+     * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processing_type The processing type specifies how the charge is to be processed.
      *
      * @return $this
      */
@@ -705,7 +705,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets reference
      *
-     * @param string $reference 
+     * @param string $reference The merchant's reference used to identify the charge.
      *
      * @return $this
      */
@@ -759,7 +759,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets subscription
      *
-     * @param \Wallee\Sdk\Model\Subscription $subscription The field subscription indicates the subscription to which the charge belongs to.
+     * @param \Wallee\Sdk\Model\Subscription $subscription The subscription that the charge belongs to.
      *
      * @return $this
      */
@@ -784,7 +784,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets succeed_on
      *
-     * @param \DateTime $succeed_on 
+     * @param \DateTime $succeed_on The date and time when the charge succeeded.
      *
      * @return $this
      */
@@ -809,7 +809,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets success_url
      *
-     * @param string $success_url The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+     * @param string $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
      *
      * @return $this
      */
@@ -841,7 +841,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets transaction
      *
-     * @param \Wallee\Sdk\Model\Transaction $transaction 
+     * @param \Wallee\Sdk\Model\Transaction $transaction The transaction used to process the charge.
      *
      * @return $this
      */
@@ -866,7 +866,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\SubscriptionChargeType $type 
+     * @param \Wallee\Sdk\Model\SubscriptionChargeType $type The type specified how the charge was initiated.
      *
      * @return $this
      */

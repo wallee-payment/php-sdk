@@ -213,7 +213,7 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
     /**
      * Sets type
      *
-     * @param int $type 
+     * @param int $type The type of the metric.
      *
      * @return $this
      */
