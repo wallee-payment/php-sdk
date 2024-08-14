@@ -59,6 +59,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'id' => 'int',
         'linked_space_id' => 'int',
         'planned_purge_date' => '\DateTime',
+        'pro_rata_calculated' => 'bool',
         'quantity' => 'float',
         'state' => '\Wallee\Sdk\Model\SubscriptionLedgerEntryState',
         'subscription_version' => 'int',
@@ -84,6 +85,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'id' => 'int64',
         'linked_space_id' => 'int64',
         'planned_purge_date' => 'date-time',
+        'pro_rata_calculated' => null,
         'quantity' => null,
         'state' => null,
         'subscription_version' => 'int64',
@@ -110,6 +112,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
         'planned_purge_date' => 'plannedPurgeDate',
+        'pro_rata_calculated' => 'proRataCalculated',
         'quantity' => 'quantity',
         'state' => 'state',
         'subscription_version' => 'subscriptionVersion',
@@ -135,6 +138,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'pro_rata_calculated' => 'setProRataCalculated',
         'quantity' => 'setQuantity',
         'state' => 'setState',
         'subscription_version' => 'setSubscriptionVersion',
@@ -160,6 +164,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'pro_rata_calculated' => 'getProRataCalculated',
         'quantity' => 'getQuantity',
         'state' => 'getState',
         'subscription_version' => 'getSubscriptionVersion',
@@ -206,6 +211,8 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['pro_rata_calculated'] = isset($data['pro_rata_calculated']) ? $data['pro_rata_calculated'] : null;
         
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         
@@ -565,6 +572,31 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     public function setPlannedPurgeDate($planned_purge_date)
     {
         $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets pro_rata_calculated
+     *
+     * @return bool
+     */
+    public function getProRataCalculated()
+    {
+        return $this->container['pro_rata_calculated'];
+    }
+
+    /**
+     * Sets pro_rata_calculated
+     *
+     * @param bool $pro_rata_calculated 
+     *
+     * @return $this
+     */
+    public function setProRataCalculated($pro_rata_calculated)
+    {
+        $this->container['pro_rata_calculated'] = $pro_rata_calculated;
 
         return $this;
     }
