@@ -257,7 +257,7 @@ class SubscriptionMetricUsageReportCreate implements ModelInterface, ArrayAccess
     /**
      * Sets consumed_units
      *
-     * @param float $consumed_units The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
+     * @param float $consumed_units The number of resources consumed, will be charged in the next billing cycle.
      *
      * @return $this
      */
@@ -282,7 +282,7 @@ class SubscriptionMetricUsageReportCreate implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string $description The metric usage report description describe the reported usage. This description may be shown to the end user.
+     * @param string $description A description used to identify the usage report.
      *
      * @return $this
      */
@@ -311,7 +311,7 @@ class SubscriptionMetricUsageReportCreate implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external id identifies the metric usage uniquely.
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
@@ -336,7 +336,7 @@ class SubscriptionMetricUsageReportCreate implements ModelInterface, ArrayAccess
     /**
      * Sets metric
      *
-     * @param int $metric The metric usage report is linked to the metric for which the usage should be recorded.
+     * @param int $metric The metric that the usage report is recorded for.
      *
      * @return $this
      */
@@ -361,7 +361,7 @@ class SubscriptionMetricUsageReportCreate implements ModelInterface, ArrayAccess
     /**
      * Sets subscription
      *
-     * @param int $subscription The subscription to which the usage is added to.
+     * @param int $subscription The subscription that the usage report is recorded for.
      *
      * @return $this
      */

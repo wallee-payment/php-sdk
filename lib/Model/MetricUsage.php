@@ -234,7 +234,7 @@ class MetricUsage implements ModelInterface, ArrayAccess
     /**
      * Sets consumed_units
      *
-     * @param float $consumed_units The consumed units provide the value of how much has been consumed of the particular metric.
+     * @param float $consumed_units The number of consumed units.
      *
      * @return $this
      */
@@ -259,7 +259,7 @@ class MetricUsage implements ModelInterface, ArrayAccess
     /**
      * Sets metric_description
      *
-     * @param map[string,string] $metric_description The metric description describes the metric.
+     * @param map[string,string] $metric_description The description of the consumed unit's metric.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class MetricUsage implements ModelInterface, ArrayAccess
     /**
      * Sets metric_id
      *
-     * @param int $metric_id The metric ID identifies the metric for consumed units.
+     * @param int $metric_id The ID of the consumed units' metric.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class MetricUsage implements ModelInterface, ArrayAccess
     /**
      * Sets metric_name
      *
-     * @param map[string,string] $metric_name The metric name defines the name of the consumed units.
+     * @param map[string,string] $metric_name The name of the consumed units' metric.
      *
      * @return $this
      */
