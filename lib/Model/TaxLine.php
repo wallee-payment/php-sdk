@@ -24,7 +24,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ShopifySubscriptionModelTaxLine model
+ * TaxLine model
  *
  * @category    Class
  * @description 
@@ -32,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
+class TaxLine implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class ShopifySubscriptionModelTaxLine implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ShopifySubscriptionModel.TaxLine';
+    protected static $swaggerModelName = 'TaxLine';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

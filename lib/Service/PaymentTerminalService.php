@@ -537,7 +537,7 @@ class PaymentTerminalService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return void
+	 * @return \Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference
 	 */
 	public function triggerFinalBalance($space_id, $terminal_id) {
 		return $this->triggerFinalBalanceWithHttpInfo($space_id, $terminal_id)->getData();
@@ -605,12 +605,20 @@ class PaymentTerminalService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				null,
+				'\Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference',
 				'/payment-terminal/trigger-final-balance'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -650,7 +658,7 @@ class PaymentTerminalService {
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return void
+	 * @return \Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference
 	 */
 	public function triggerFinalBalanceByIdentifier($space_id, $terminal_identifier) {
 		return $this->triggerFinalBalanceByIdentifierWithHttpInfo($space_id, $terminal_identifier)->getData();
@@ -718,12 +726,20 @@ class PaymentTerminalService {
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				null,
+				'\Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference',
 				'/payment-terminal/trigger-final-balance-by-identifier'
             );
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders());
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\PaymentTerminalTransactionSummaryReference',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),

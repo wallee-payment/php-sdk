@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * AnalyticsSchemaColumn model
+ * PaymentTerminalTransactionSummaryReference model
  *
  * @category    Class
- * @description Meta information about a column within a table.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
+class PaymentTerminalTransactionSummaryReference implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AnalyticsSchemaColumn';
+    protected static $swaggerModelName = 'PaymentTerminalTransactionSummaryReference';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,14 +49,10 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'alias_name' => 'string',
-        'column_name' => 'string',
-        'description' => 'map[string,string]',
-        'precision' => 'int',
-        'referenced_table' => 'string',
-        'scale' => 'int',
-        'table_name' => 'string',
-        'type' => 'string'
+        'id' => 'int',
+        'linked_space_id' => 'int',
+        'terminal_id' => 'int',
+        'terminal_identifier' => 'string'
     ];
 
     /**
@@ -65,14 +61,10 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'alias_name' => null,
-        'column_name' => null,
-        'description' => null,
-        'precision' => 'int32',
-        'referenced_table' => null,
-        'scale' => 'int32',
-        'table_name' => null,
-        'type' => null
+        'id' => 'int64',
+        'linked_space_id' => 'int64',
+        'terminal_id' => 'int64',
+        'terminal_identifier' => null
     ];
 
     /**
@@ -82,14 +74,10 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'alias_name' => 'aliasName',
-        'column_name' => 'columnName',
-        'description' => 'description',
-        'precision' => 'precision',
-        'referenced_table' => 'referencedTable',
-        'scale' => 'scale',
-        'table_name' => 'tableName',
-        'type' => 'type'
+        'id' => 'id',
+        'linked_space_id' => 'linkedSpaceId',
+        'terminal_id' => 'terminalId',
+        'terminal_identifier' => 'terminalIdentifier'
     ];
 
     /**
@@ -98,14 +86,10 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'alias_name' => 'setAliasName',
-        'column_name' => 'setColumnName',
-        'description' => 'setDescription',
-        'precision' => 'setPrecision',
-        'referenced_table' => 'setReferencedTable',
-        'scale' => 'setScale',
-        'table_name' => 'setTableName',
-        'type' => 'setType'
+        'id' => 'setId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'terminal_id' => 'setTerminalId',
+        'terminal_identifier' => 'setTerminalIdentifier'
     ];
 
     /**
@@ -114,14 +98,10 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'alias_name' => 'getAliasName',
-        'column_name' => 'getColumnName',
-        'description' => 'getDescription',
-        'precision' => 'getPrecision',
-        'referenced_table' => 'getReferencedTable',
-        'scale' => 'getScale',
-        'table_name' => 'getTableName',
-        'type' => 'getType'
+        'id' => 'getId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'terminal_id' => 'getTerminalId',
+        'terminal_identifier' => 'getTerminalIdentifier'
     ];
 
     
@@ -142,21 +122,13 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['alias_name'] = isset($data['alias_name']) ? $data['alias_name'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
-        $this->container['column_name'] = isset($data['column_name']) ? $data['column_name'] : null;
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['terminal_id'] = isset($data['terminal_id']) ? $data['terminal_id'] : null;
         
-        $this->container['precision'] = isset($data['precision']) ? $data['precision'] : null;
-        
-        $this->container['referenced_table'] = isset($data['referenced_table']) ? $data['referenced_table'] : null;
-        
-        $this->container['scale'] = isset($data['scale']) ? $data['scale'] : null;
-        
-        $this->container['table_name'] = isset($data['table_name']) ? $data['table_name'] : null;
-        
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['terminal_identifier'] = isset($data['terminal_identifier']) ? $data['terminal_identifier'] : null;
         
     }
 
@@ -250,200 +222,100 @@ class AnalyticsSchemaColumn implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets alias_name
-     *
-     * @return string
-     */
-    public function getAliasName()
-    {
-        return $this->container['alias_name'];
-    }
-
-    /**
-     * Sets alias_name
-     *
-     * @param string $alias_name The name of the alias defined for the column in the query or null if none is defined.
-     *
-     * @return $this
-     */
-    public function setAliasName($alias_name)
-    {
-        $this->container['alias_name'] = $alias_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets column_name
-     *
-     * @return string
-     */
-    public function getColumnName()
-    {
-        return $this->container['column_name'];
-    }
-
-    /**
-     * Sets column_name
-     *
-     * @param string $column_name The name of the column in the table or null if this is a synthetic column which is the result of some SQL expression.
-     *
-     * @return $this
-     */
-    public function setColumnName($column_name)
-    {
-        $this->container['column_name'] = $column_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets description
-     *
-     * @return map[string,string]
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param map[string,string] $description The localized description of the property contained in this column or null if this is a synthetic column which is the result of some SQL expression.
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets precision
+     * Gets id
      *
      * @return int
      */
-    public function getPrecision()
+    public function getId()
     {
-        return $this->container['precision'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets precision
+     * Sets id
      *
-     * @param int $precision The precision (maximal number of digits) for decimal data types, otherwise 0.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
-    public function setPrecision($precision)
+    public function setId($id)
     {
-        $this->container['precision'] = $precision;
+        $this->container['id'] = $id;
 
         return $this;
     }
     
 
     /**
-     * Gets referenced_table
-     *
-     * @return string
-     */
-    public function getReferencedTable()
-    {
-        return $this->container['referenced_table'];
-    }
-
-    /**
-     * Sets referenced_table
-     *
-     * @param string $referenced_table The name of the referenced table if this column represents a foreign-key relation to another table, otherwise null.
-     *
-     * @return $this
-     */
-    public function setReferencedTable($referenced_table)
-    {
-        $this->container['referenced_table'] = $referenced_table;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets scale
+     * Gets linked_space_id
      *
      * @return int
      */
-    public function getScale()
+    public function getLinkedSpaceId()
     {
-        return $this->container['scale'];
+        return $this->container['linked_space_id'];
     }
 
     /**
-     * Sets scale
+     * Sets linked_space_id
      *
-     * @param int $scale The scale (maximal number of digits in the fractional part) in case of a decimal data type, otherwise 0.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
-    public function setScale($scale)
+    public function setLinkedSpaceId($linked_space_id)
     {
-        $this->container['scale'] = $scale;
+        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
     
 
     /**
-     * Gets table_name
+     * Gets terminal_id
      *
-     * @return string
+     * @return int
      */
-    public function getTableName()
+    public function getTerminalId()
     {
-        return $this->container['table_name'];
+        return $this->container['terminal_id'];
     }
 
     /**
-     * Sets table_name
+     * Sets terminal_id
      *
-     * @param string $table_name The name of the table that the column belongs to.
+     * @param int $terminal_id 
      *
      * @return $this
      */
-    public function setTableName($table_name)
+    public function setTerminalId($terminal_id)
     {
-        $this->container['table_name'] = $table_name;
+        $this->container['terminal_id'] = $terminal_id;
 
         return $this;
     }
     
 
     /**
-     * Gets type
+     * Gets terminal_identifier
      *
      * @return string
      */
-    public function getType()
+    public function getTerminalIdentifier()
     {
-        return $this->container['type'];
+        return $this->container['terminal_identifier'];
     }
 
     /**
-     * Sets type
+     * Sets terminal_identifier
      *
-     * @param string $type The ORC data type of the column value.
+     * @param string $terminal_identifier 
      *
      * @return $this
      */
-    public function setType($type)
+    public function setTerminalIdentifier($terminal_identifier)
     {
-        $this->container['type'] = $type;
+        $this->container['terminal_identifier'] = $terminal_identifier;
 
         return $this;
     }

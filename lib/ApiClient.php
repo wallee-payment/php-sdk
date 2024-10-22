@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.6.0",
+        'x-meta-sdk-version' => "4.7.0",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "wallee",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.6.0/php';
+	private $userAgent = 'PHP-Client/4.7.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -583,18 +583,6 @@ final class ApiClient {
             $this->accountService = new \Wallee\Sdk\Service\AccountService($this);
         }
         return $this->accountService;
-    }
-    
-    protected $analyticsQueryService;
-
-    /**
-     * @return \Wallee\Sdk\Service\AnalyticsQueryService
-     */
-    public function getAnalyticsQueryService() {
-        if(is_null($this->analyticsQueryService)){
-            $this->analyticsQueryService = new \Wallee\Sdk\Service\AnalyticsQueryService($this);
-        }
-        return $this->analyticsQueryService;
     }
     
     protected $applicationUserService;

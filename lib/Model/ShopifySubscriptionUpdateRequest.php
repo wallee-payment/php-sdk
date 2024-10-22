@@ -49,9 +49,9 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'billing_configuration' => '\Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration',
+        'billing_configuration' => '\Wallee\Sdk\Model\BillingConfiguration',
         'id' => 'int',
-        'items' => '\Wallee\Sdk\Model\ShopifySubscriptionModelItem[]',
+        'items' => '\Wallee\Sdk\Model\Item[]',
         'store_order_confirmation_email_enabled' => 'bool',
         'subscriber_suspension_allowed' => 'bool'
     ];
@@ -231,7 +231,7 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets billing_configuration
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration
+     * @return \Wallee\Sdk\Model\BillingConfiguration
      */
     public function getBillingConfiguration()
     {
@@ -241,7 +241,7 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets billing_configuration
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration $billing_configuration 
+     * @param \Wallee\Sdk\Model\BillingConfiguration $billing_configuration 
      *
      * @return $this
      */
@@ -281,7 +281,7 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets items
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionModelItem[]
+     * @return \Wallee\Sdk\Model\Item[]
      */
     public function getItems()
     {
@@ -291,7 +291,7 @@ class ShopifySubscriptionUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets items
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionModelItem[] $items 
+     * @param \Wallee\Sdk\Model\Item[] $items 
      *
      * @return $this
      */

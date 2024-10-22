@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * AnalyticsSchemaTable model
+ * Item model
  *
  * @category    Class
- * @description The schema of a single table in Analytics.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
+class Item implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AnalyticsSchemaTable';
+    protected static $swaggerModelName = 'Item';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,9 +49,11 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'columns' => '\Wallee\Sdk\Model\AnalyticsSchemaColumn[]',
-        'description' => 'map[string,string]',
-        'table_name' => 'string'
+        'price_including_tax' => 'float',
+        'product_id' => 'int',
+        'quantity' => 'float',
+        'recalculate_price' => 'bool',
+        'tax_lines' => '\Wallee\Sdk\Model\TaxLine[]'
     ];
 
     /**
@@ -60,9 +62,11 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'columns' => null,
-        'description' => null,
-        'table_name' => null
+        'price_including_tax' => null,
+        'product_id' => 'int64',
+        'quantity' => null,
+        'recalculate_price' => null,
+        'tax_lines' => null
     ];
 
     /**
@@ -72,9 +76,11 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'columns' => 'columns',
-        'description' => 'description',
-        'table_name' => 'tableName'
+        'price_including_tax' => 'priceIncludingTax',
+        'product_id' => 'productId',
+        'quantity' => 'quantity',
+        'recalculate_price' => 'recalculatePrice',
+        'tax_lines' => 'taxLines'
     ];
 
     /**
@@ -83,9 +89,11 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'columns' => 'setColumns',
-        'description' => 'setDescription',
-        'table_name' => 'setTableName'
+        'price_including_tax' => 'setPriceIncludingTax',
+        'product_id' => 'setProductId',
+        'quantity' => 'setQuantity',
+        'recalculate_price' => 'setRecalculatePrice',
+        'tax_lines' => 'setTaxLines'
     ];
 
     /**
@@ -94,9 +102,11 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'columns' => 'getColumns',
-        'description' => 'getDescription',
-        'table_name' => 'getTableName'
+        'price_including_tax' => 'getPriceIncludingTax',
+        'product_id' => 'getProductId',
+        'quantity' => 'getQuantity',
+        'recalculate_price' => 'getRecalculatePrice',
+        'tax_lines' => 'getTaxLines'
     ];
 
     
@@ -117,11 +127,15 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['columns'] = isset($data['columns']) ? $data['columns'] : null;
+        $this->container['price_including_tax'] = isset($data['price_including_tax']) ? $data['price_including_tax'] : null;
         
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['product_id'] = isset($data['product_id']) ? $data['product_id'] : null;
         
-        $this->container['table_name'] = isset($data['table_name']) ? $data['table_name'] : null;
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        
+        $this->container['recalculate_price'] = isset($data['recalculate_price']) ? $data['recalculate_price'] : null;
+        
+        $this->container['tax_lines'] = isset($data['tax_lines']) ? $data['tax_lines'] : null;
         
     }
 
@@ -215,75 +229,125 @@ class AnalyticsSchemaTable implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets columns
+     * Gets price_including_tax
      *
-     * @return \Wallee\Sdk\Model\AnalyticsSchemaColumn[]
+     * @return float
      */
-    public function getColumns()
+    public function getPriceIncludingTax()
     {
-        return $this->container['columns'];
+        return $this->container['price_including_tax'];
     }
 
     /**
-     * Sets columns
+     * Sets price_including_tax
      *
-     * @param \Wallee\Sdk\Model\AnalyticsSchemaColumn[] $columns The schemas of all columns of the table.
+     * @param float $price_including_tax 
      *
      * @return $this
      */
-    public function setColumns($columns)
+    public function setPriceIncludingTax($price_including_tax)
     {
-        $this->container['columns'] = $columns;
+        $this->container['price_including_tax'] = $price_including_tax;
 
         return $this;
     }
     
 
     /**
-     * Gets description
+     * Gets product_id
      *
-     * @return map[string,string]
+     * @return int
      */
-    public function getDescription()
+    public function getProductId()
     {
-        return $this->container['description'];
+        return $this->container['product_id'];
     }
 
     /**
-     * Sets description
+     * Sets product_id
      *
-     * @param map[string,string] $description The localized description of the table.
+     * @param int $product_id 
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setProductId($product_id)
     {
-        $this->container['description'] = $description;
+        $this->container['product_id'] = $product_id;
 
         return $this;
     }
     
 
     /**
-     * Gets table_name
+     * Gets quantity
      *
-     * @return string
+     * @return float
      */
-    public function getTableName()
+    public function getQuantity()
     {
-        return $this->container['table_name'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets table_name
+     * Sets quantity
      *
-     * @param string $table_name The name of the table.
+     * @param float $quantity 
      *
      * @return $this
      */
-    public function setTableName($table_name)
+    public function setQuantity($quantity)
     {
-        $this->container['table_name'] = $table_name;
+        $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets recalculate_price
+     *
+     * @return bool
+     */
+    public function getRecalculatePrice()
+    {
+        return $this->container['recalculate_price'];
+    }
+
+    /**
+     * Sets recalculate_price
+     *
+     * @param bool $recalculate_price 
+     *
+     * @return $this
+     */
+    public function setRecalculatePrice($recalculate_price)
+    {
+        $this->container['recalculate_price'] = $recalculate_price;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets tax_lines
+     *
+     * @return \Wallee\Sdk\Model\TaxLine[]
+     */
+    public function getTaxLines()
+    {
+        return $this->container['tax_lines'];
+    }
+
+    /**
+     * Sets tax_lines
+     *
+     * @param \Wallee\Sdk\Model\TaxLine[] $tax_lines 
+     *
+     * @return $this
+     */
+    public function setTaxLines($tax_lines)
+    {
+        $this->container['tax_lines'] = $tax_lines;
 
         return $this;
     }

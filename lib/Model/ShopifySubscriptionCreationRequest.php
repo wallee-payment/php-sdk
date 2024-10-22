@@ -50,12 +50,12 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'billing_address' => '\Wallee\Sdk\Model\ShopifySubscriptionAddressCreate',
-        'billing_configuration' => '\Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration',
+        'billing_configuration' => '\Wallee\Sdk\Model\BillingConfiguration',
         'currency' => 'string',
         'external_id' => 'string',
         'initial_execution_date' => '\DateTime',
         'integration' => 'int',
-        'items' => '\Wallee\Sdk\Model\ShopifySubscriptionModelItem[]',
+        'items' => '\Wallee\Sdk\Model\Item[]',
         'language' => 'string',
         'shipping_address' => '\Wallee\Sdk\Model\ShopifySubscriptionAddressCreate',
         'shipping_method_name' => 'string',
@@ -343,7 +343,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Gets billing_configuration
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration
+     * @return \Wallee\Sdk\Model\BillingConfiguration
      */
     public function getBillingConfiguration()
     {
@@ -353,7 +353,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets billing_configuration
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionModelBillingConfiguration $billing_configuration 
+     * @param \Wallee\Sdk\Model\BillingConfiguration $billing_configuration 
      *
      * @return $this
      */
@@ -468,7 +468,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Gets items
      *
-     * @return \Wallee\Sdk\Model\ShopifySubscriptionModelItem[]
+     * @return \Wallee\Sdk\Model\Item[]
      */
     public function getItems()
     {
@@ -478,7 +478,7 @@ class ShopifySubscriptionCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets items
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionModelItem[] $items 
+     * @param \Wallee\Sdk\Model\Item[] $items 
      *
      * @return $this
      */
