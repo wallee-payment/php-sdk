@@ -22,20 +22,26 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * CardCryptogramType model
+ * PanType model
  *
  * @category    Class
- * @description This model defines the card cryptogram types.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class CardCryptogramType
+class PanType
 {
     /**
      * Possible values of this enum
      */
+    const PLAIN = 'PLAIN';
     const SCHEME_TOKEN = 'SCHEME_TOKEN';
+    const SCHEME_TOKEN_CLICK_TO_PAY = 'SCHEME_TOKEN_CLICK_TO_PAY';
+    const DEVICE_TOKEN_APPLE_PAY = 'DEVICE_TOKEN_APPLE_PAY';
+    const DEVICE_TOKEN_GOOGLE_PAY = 'DEVICE_TOKEN_GOOGLE_PAY';
+    const DEVICE_TOKEN_SAMSUNG_PAY = 'DEVICE_TOKEN_SAMSUNG_PAY';
+    const DEVICE_TOKEN_ANDROID_PAY = 'DEVICE_TOKEN_ANDROID_PAY';
     
     /**
      * Gets allowable values of the enum
@@ -44,7 +50,13 @@ class CardCryptogramType
     public static function getAllowableEnumValues()
     {
         return [
+            self::PLAIN,
             self::SCHEME_TOKEN,
+            self::SCHEME_TOKEN_CLICK_TO_PAY,
+            self::DEVICE_TOKEN_APPLE_PAY,
+            self::DEVICE_TOKEN_GOOGLE_PAY,
+            self::DEVICE_TOKEN_SAMSUNG_PAY,
+            self::DEVICE_TOKEN_ANDROID_PAY,
         ];
     }
 }

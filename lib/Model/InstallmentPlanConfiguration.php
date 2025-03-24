@@ -479,7 +479,7 @@ class InstallmentPlanConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets minimal_amount
      *
-     * @param float $minimal_amount The installment plan can only be applied if the orders total is at least the defined minimal amount.
+     * @param float $minimal_amount The installment plan can only be applied if the order's total is at least the defined minimal amount.
      *
      * @return $this
      */

@@ -51,6 +51,7 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'activated_on' => '\DateTime',
         'billing_currency' => 'string',
+        'billing_cycle_model' => '\Wallee\Sdk\Model\BillingCycleModel',
         'component_configurations' => '\Wallee\Sdk\Model\SubscriptionComponentConfiguration[]',
         'created_on' => '\DateTime',
         'expected_last_period_end' => '\DateTime',
@@ -77,6 +78,7 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'activated_on' => 'date-time',
         'billing_currency' => null,
+        'billing_cycle_model' => null,
         'component_configurations' => null,
         'created_on' => 'date-time',
         'expected_last_period_end' => 'date-time',
@@ -104,6 +106,7 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'activated_on' => 'activatedOn',
         'billing_currency' => 'billingCurrency',
+        'billing_cycle_model' => 'billingCycleModel',
         'component_configurations' => 'componentConfigurations',
         'created_on' => 'createdOn',
         'expected_last_period_end' => 'expectedLastPeriodEnd',
@@ -130,6 +133,7 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
     protected static $setters = [
         'activated_on' => 'setActivatedOn',
         'billing_currency' => 'setBillingCurrency',
+        'billing_cycle_model' => 'setBillingCycleModel',
         'component_configurations' => 'setComponentConfigurations',
         'created_on' => 'setCreatedOn',
         'expected_last_period_end' => 'setExpectedLastPeriodEnd',
@@ -156,6 +160,7 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
     protected static $getters = [
         'activated_on' => 'getActivatedOn',
         'billing_currency' => 'getBillingCurrency',
+        'billing_cycle_model' => 'getBillingCycleModel',
         'component_configurations' => 'getComponentConfigurations',
         'created_on' => 'getCreatedOn',
         'expected_last_period_end' => 'getExpectedLastPeriodEnd',
@@ -195,6 +200,8 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
         $this->container['activated_on'] = isset($data['activated_on']) ? $data['activated_on'] : null;
         
         $this->container['billing_currency'] = isset($data['billing_currency']) ? $data['billing_currency'] : null;
+        
+        $this->container['billing_cycle_model'] = isset($data['billing_cycle_model']) ? $data['billing_cycle_model'] : null;
         
         $this->container['component_configurations'] = isset($data['component_configurations']) ? $data['component_configurations'] : null;
         
@@ -364,6 +371,31 @@ class SubscriptionVersion implements ModelInterface, ArrayAccess
     public function setBillingCurrency($billing_currency)
     {
         $this->container['billing_currency'] = $billing_currency;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_cycle_model
+     *
+     * @return \Wallee\Sdk\Model\BillingCycleModel
+     */
+    public function getBillingCycleModel()
+    {
+        return $this->container['billing_cycle_model'];
+    }
+
+    /**
+     * Sets billing_cycle_model
+     *
+     * @param \Wallee\Sdk\Model\BillingCycleModel $billing_cycle_model 
+     *
+     * @return $this
+     */
+    public function setBillingCycleModel($billing_cycle_model)
+    {
+        $this->container['billing_cycle_model'] = $billing_cycle_model;
 
         return $this;
     }

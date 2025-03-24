@@ -53,6 +53,7 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
         'linked_space_id' => 'int',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
+        'sku' => 'string',
         'state' => '\Wallee\Sdk\Model\SubscriptionProductComponentReferenceState',
         'version' => 'int'
     ];
@@ -67,6 +68,7 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
         'linked_space_id' => 'int64',
         'name' => null,
         'planned_purge_date' => 'date-time',
+        'sku' => null,
         'state' => null,
         'version' => 'int32'
     ];
@@ -82,6 +84,7 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
+        'sku' => 'sku',
         'state' => 'state',
         'version' => 'version'
     ];
@@ -96,6 +99,7 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'sku' => 'setSku',
         'state' => 'setState',
         'version' => 'setVersion'
     ];
@@ -110,6 +114,7 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'sku' => 'getSku',
         'state' => 'getState',
         'version' => 'getVersion'
     ];
@@ -140,6 +145,8 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
+        $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
@@ -157,6 +164,10 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
 
         if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
             $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -338,6 +349,35 @@ class SubscriptionProductComponentReference implements ModelInterface, ArrayAcce
     public function setPlannedPurgeDate($planned_purge_date)
     {
         $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets sku
+     *
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->container['sku'];
+    }
+
+    /**
+     * Sets sku
+     *
+     * @param string $sku The component reference sku as a unique identifier.
+     *
+     * @return $this
+     */
+    public function setSku($sku)
+    {
+        if (!is_null($sku) && (mb_strlen($sku) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SubscriptionProductComponentReference., must be smaller than or equal to 100.');
+        }
+
+        $this->container['sku'] = $sku;
 
         return $this;
     }

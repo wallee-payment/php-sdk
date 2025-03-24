@@ -51,6 +51,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'activated_on' => '\DateTime',
         'billing_cycle' => 'string',
+        'billing_cycle_model' => '\Wallee\Sdk\Model\BillingCycleModel',
         'comment' => 'string',
         'created_on' => '\DateTime',
         'default_currency' => 'string',
@@ -80,6 +81,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'activated_on' => 'date-time',
         'billing_cycle' => null,
+        'billing_cycle_model' => null,
         'comment' => null,
         'created_on' => 'date-time',
         'default_currency' => null,
@@ -110,6 +112,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'activated_on' => 'activatedOn',
         'billing_cycle' => 'billingCycle',
+        'billing_cycle_model' => 'billingCycleModel',
         'comment' => 'comment',
         'created_on' => 'createdOn',
         'default_currency' => 'defaultCurrency',
@@ -139,6 +142,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     protected static $setters = [
         'activated_on' => 'setActivatedOn',
         'billing_cycle' => 'setBillingCycle',
+        'billing_cycle_model' => 'setBillingCycleModel',
         'comment' => 'setComment',
         'created_on' => 'setCreatedOn',
         'default_currency' => 'setDefaultCurrency',
@@ -168,6 +172,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     protected static $getters = [
         'activated_on' => 'getActivatedOn',
         'billing_cycle' => 'getBillingCycle',
+        'billing_cycle_model' => 'getBillingCycleModel',
         'comment' => 'getComment',
         'created_on' => 'getCreatedOn',
         'default_currency' => 'getDefaultCurrency',
@@ -210,6 +215,8 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
         $this->container['activated_on'] = isset($data['activated_on']) ? $data['activated_on'] : null;
         
         $this->container['billing_cycle'] = isset($data['billing_cycle']) ? $data['billing_cycle'] : null;
+        
+        $this->container['billing_cycle_model'] = isset($data['billing_cycle_model']) ? $data['billing_cycle_model'] : null;
         
         $this->container['comment'] = isset($data['comment']) ? $data['comment'] : null;
         
@@ -389,6 +396,31 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess
     public function setBillingCycle($billing_cycle)
     {
         $this->container['billing_cycle'] = $billing_cycle;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets billing_cycle_model
+     *
+     * @return \Wallee\Sdk\Model\BillingCycleModel
+     */
+    public function getBillingCycleModel()
+    {
+        return $this->container['billing_cycle_model'];
+    }
+
+    /**
+     * Sets billing_cycle_model
+     *
+     * @param \Wallee\Sdk\Model\BillingCycleModel $billing_cycle_model 
+     *
+     * @return $this
+     */
+    public function setBillingCycleModel($billing_cycle_model)
+    {
+        $this->container['billing_cycle_model'] = $billing_cycle_model;
 
         return $this;
     }

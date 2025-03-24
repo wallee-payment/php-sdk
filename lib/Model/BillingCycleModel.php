@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * TokenizedCardData model
+ * BillingCycleModel model
  *
  * @category    Class
- * @description This model holds the card data in plain.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TokenizedCardData implements ModelInterface, ArrayAccess
+class BillingCycleModel implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TokenizedCardData';
+    protected static $swaggerModelName = 'BillingCycleModel';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,12 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'cryptogram' => '\Wallee\Sdk\Model\CardCryptogram',
-        'initial_recurring_transaction' => 'bool',
-        'recurring_indicator' => '\Wallee\Sdk\Model\RecurringIndicator',
-        'token_requestor_id' => 'string'
+        'billing_cycle_type' => '\Wallee\Sdk\Model\BillingCycleType',
+        'customization' => '\Wallee\Sdk\Model\BillingDayCustomization',
+        'day_of_month' => 'int',
+        'month' => '\Wallee\Sdk\Model\DisplayableMonth',
+        'number_of_periods' => 'int',
+        'weekly_day' => '\Wallee\Sdk\Model\DisplayableDayOfWeek'
     ];
 
     /**
@@ -61,10 +63,12 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'cryptogram' => null,
-        'initial_recurring_transaction' => null,
-        'recurring_indicator' => null,
-        'token_requestor_id' => null
+        'billing_cycle_type' => null,
+        'customization' => null,
+        'day_of_month' => 'int32',
+        'month' => null,
+        'number_of_periods' => 'int32',
+        'weekly_day' => null
     ];
 
     /**
@@ -74,10 +78,12 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'cryptogram' => 'cryptogram',
-        'initial_recurring_transaction' => 'initialRecurringTransaction',
-        'recurring_indicator' => 'recurringIndicator',
-        'token_requestor_id' => 'tokenRequestorId'
+        'billing_cycle_type' => 'billingCycleType',
+        'customization' => 'customization',
+        'day_of_month' => 'dayOfMonth',
+        'month' => 'month',
+        'number_of_periods' => 'numberOfPeriods',
+        'weekly_day' => 'weeklyDay'
     ];
 
     /**
@@ -86,10 +92,12 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'cryptogram' => 'setCryptogram',
-        'initial_recurring_transaction' => 'setInitialRecurringTransaction',
-        'recurring_indicator' => 'setRecurringIndicator',
-        'token_requestor_id' => 'setTokenRequestorId'
+        'billing_cycle_type' => 'setBillingCycleType',
+        'customization' => 'setCustomization',
+        'day_of_month' => 'setDayOfMonth',
+        'month' => 'setMonth',
+        'number_of_periods' => 'setNumberOfPeriods',
+        'weekly_day' => 'setWeeklyDay'
     ];
 
     /**
@@ -98,10 +106,12 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'cryptogram' => 'getCryptogram',
-        'initial_recurring_transaction' => 'getInitialRecurringTransaction',
-        'recurring_indicator' => 'getRecurringIndicator',
-        'token_requestor_id' => 'getTokenRequestorId'
+        'billing_cycle_type' => 'getBillingCycleType',
+        'customization' => 'getCustomization',
+        'day_of_month' => 'getDayOfMonth',
+        'month' => 'getMonth',
+        'number_of_periods' => 'getNumberOfPeriods',
+        'weekly_day' => 'getWeeklyDay'
     ];
 
     
@@ -122,13 +132,17 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
+        $this->container['billing_cycle_type'] = isset($data['billing_cycle_type']) ? $data['billing_cycle_type'] : null;
         
-        $this->container['initial_recurring_transaction'] = isset($data['initial_recurring_transaction']) ? $data['initial_recurring_transaction'] : null;
+        $this->container['customization'] = isset($data['customization']) ? $data['customization'] : null;
         
-        $this->container['recurring_indicator'] = isset($data['recurring_indicator']) ? $data['recurring_indicator'] : null;
+        $this->container['day_of_month'] = isset($data['day_of_month']) ? $data['day_of_month'] : null;
         
-        $this->container['token_requestor_id'] = isset($data['token_requestor_id']) ? $data['token_requestor_id'] : null;
+        $this->container['month'] = isset($data['month']) ? $data['month'] : null;
+        
+        $this->container['number_of_periods'] = isset($data['number_of_periods']) ? $data['number_of_periods'] : null;
+        
+        $this->container['weekly_day'] = isset($data['weekly_day']) ? $data['weekly_day'] : null;
         
     }
 
@@ -141,6 +155,12 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['billing_cycle_type'] === null) {
+            $invalidProperties[] = "'billing_cycle_type' can't be null";
+        }
+        if ($this->container['number_of_periods'] === null) {
+            $invalidProperties[] = "'number_of_periods' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -222,100 +242,150 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets cryptogram
+     * Gets billing_cycle_type
      *
-     * @return \Wallee\Sdk\Model\CardCryptogram
+     * @return \Wallee\Sdk\Model\BillingCycleType
      */
-    public function getCryptogram()
+    public function getBillingCycleType()
     {
-        return $this->container['cryptogram'];
+        return $this->container['billing_cycle_type'];
     }
 
     /**
-     * Sets cryptogram
+     * Sets billing_cycle_type
      *
-     * @param \Wallee\Sdk\Model\CardCryptogram $cryptogram The additional authentication value used to secure the tokenized card transactions.
+     * @param \Wallee\Sdk\Model\BillingCycleType $billing_cycle_type 
      *
      * @return $this
      */
-    public function setCryptogram($cryptogram)
+    public function setBillingCycleType($billing_cycle_type)
     {
-        $this->container['cryptogram'] = $cryptogram;
+        $this->container['billing_cycle_type'] = $billing_cycle_type;
 
         return $this;
     }
     
 
     /**
-     * Gets initial_recurring_transaction
+     * Gets customization
      *
-     * @return bool
+     * @return \Wallee\Sdk\Model\BillingDayCustomization
      */
-    public function getInitialRecurringTransaction()
+    public function getCustomization()
     {
-        return $this->container['initial_recurring_transaction'];
+        return $this->container['customization'];
     }
 
     /**
-     * Sets initial_recurring_transaction
+     * Sets customization
      *
-     * @param bool $initial_recurring_transaction 
+     * @param \Wallee\Sdk\Model\BillingDayCustomization $customization 
      *
      * @return $this
      */
-    public function setInitialRecurringTransaction($initial_recurring_transaction)
+    public function setCustomization($customization)
     {
-        $this->container['initial_recurring_transaction'] = $initial_recurring_transaction;
+        $this->container['customization'] = $customization;
 
         return $this;
     }
     
 
     /**
-     * Gets recurring_indicator
+     * Gets day_of_month
      *
-     * @return \Wallee\Sdk\Model\RecurringIndicator
+     * @return int
      */
-    public function getRecurringIndicator()
+    public function getDayOfMonth()
     {
-        return $this->container['recurring_indicator'];
+        return $this->container['day_of_month'];
     }
 
     /**
-     * Sets recurring_indicator
+     * Sets day_of_month
      *
-     * @param \Wallee\Sdk\Model\RecurringIndicator $recurring_indicator 
+     * @param int $day_of_month 
      *
      * @return $this
      */
-    public function setRecurringIndicator($recurring_indicator)
+    public function setDayOfMonth($day_of_month)
     {
-        $this->container['recurring_indicator'] = $recurring_indicator;
+        $this->container['day_of_month'] = $day_of_month;
 
         return $this;
     }
     
 
     /**
-     * Gets token_requestor_id
+     * Gets month
      *
-     * @return string
+     * @return \Wallee\Sdk\Model\DisplayableMonth
      */
-    public function getTokenRequestorId()
+    public function getMonth()
     {
-        return $this->container['token_requestor_id'];
+        return $this->container['month'];
     }
 
     /**
-     * Sets token_requestor_id
+     * Sets month
      *
-     * @param string $token_requestor_id 
+     * @param \Wallee\Sdk\Model\DisplayableMonth $month 
      *
      * @return $this
      */
-    public function setTokenRequestorId($token_requestor_id)
+    public function setMonth($month)
     {
-        $this->container['token_requestor_id'] = $token_requestor_id;
+        $this->container['month'] = $month;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets number_of_periods
+     *
+     * @return int
+     */
+    public function getNumberOfPeriods()
+    {
+        return $this->container['number_of_periods'];
+    }
+
+    /**
+     * Sets number_of_periods
+     *
+     * @param int $number_of_periods Billing Cycle type multiplied by Number of Periods defines billing cycle duration, e.g. 3 months. Monthly types require 1-12; weekly and yearly types require 1-9 periods; and daily types require 1-30.
+     *
+     * @return $this
+     */
+    public function setNumberOfPeriods($number_of_periods)
+    {
+        $this->container['number_of_periods'] = $number_of_periods;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets weekly_day
+     *
+     * @return \Wallee\Sdk\Model\DisplayableDayOfWeek
+     */
+    public function getWeeklyDay()
+    {
+        return $this->container['weekly_day'];
+    }
+
+    /**
+     * Sets weekly_day
+     *
+     * @param \Wallee\Sdk\Model\DisplayableDayOfWeek $weekly_day 
+     *
+     * @return $this
+     */
+    public function setWeeklyDay($weekly_day)
+    {
+        $this->container['weekly_day'] = $weekly_day;
 
         return $this;
     }

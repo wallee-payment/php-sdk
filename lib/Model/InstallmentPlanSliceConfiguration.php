@@ -301,7 +301,7 @@ class InstallmentPlanSliceConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets line_item_title
      *
-     * @param map[string,string] $line_item_title The title of this slices line items. The title is visible to the buyer.
+     * @param map[string,string] $line_item_title The title of this slice's line items. The title is visible to the buyer.
      *
      * @return $this
      */

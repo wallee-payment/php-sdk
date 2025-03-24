@@ -52,16 +52,20 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'aggregated_tax_rate' => 'float',
         'amount_excluding_tax' => 'float',
         'amount_including_tax' => 'float',
+        'component_reference_name' => 'string',
+        'component_reference_sku' => 'string',
         'created_by' => 'int',
         'created_on' => '\DateTime',
         'discount_including_tax' => 'float',
         'external_id' => 'string',
+        'fee_type' => '\Wallee\Sdk\Model\ProductFeeType',
         'id' => 'int',
         'linked_space_id' => 'int',
         'planned_purge_date' => '\DateTime',
         'pro_rata_calculated' => 'bool',
         'quantity' => 'float',
         'state' => '\Wallee\Sdk\Model\SubscriptionLedgerEntryState',
+        'subscription_metric_id' => 'int',
         'subscription_version' => 'int',
         'tax_amount' => 'float',
         'taxes' => '\Wallee\Sdk\Model\Tax[]',
@@ -78,16 +82,20 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'aggregated_tax_rate' => null,
         'amount_excluding_tax' => null,
         'amount_including_tax' => null,
+        'component_reference_name' => null,
+        'component_reference_sku' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
         'discount_including_tax' => null,
         'external_id' => null,
+        'fee_type' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
         'planned_purge_date' => 'date-time',
         'pro_rata_calculated' => null,
         'quantity' => null,
         'state' => null,
+        'subscription_metric_id' => 'int64',
         'subscription_version' => 'int64',
         'tax_amount' => null,
         'taxes' => null,
@@ -105,16 +113,20 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'aggregated_tax_rate' => 'aggregatedTaxRate',
         'amount_excluding_tax' => 'amountExcludingTax',
         'amount_including_tax' => 'amountIncludingTax',
+        'component_reference_name' => 'componentReferenceName',
+        'component_reference_sku' => 'componentReferenceSku',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
         'discount_including_tax' => 'discountIncludingTax',
         'external_id' => 'externalId',
+        'fee_type' => 'feeType',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
         'planned_purge_date' => 'plannedPurgeDate',
         'pro_rata_calculated' => 'proRataCalculated',
         'quantity' => 'quantity',
         'state' => 'state',
+        'subscription_metric_id' => 'subscriptionMetricId',
         'subscription_version' => 'subscriptionVersion',
         'tax_amount' => 'taxAmount',
         'taxes' => 'taxes',
@@ -131,16 +143,20 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'aggregated_tax_rate' => 'setAggregatedTaxRate',
         'amount_excluding_tax' => 'setAmountExcludingTax',
         'amount_including_tax' => 'setAmountIncludingTax',
+        'component_reference_name' => 'setComponentReferenceName',
+        'component_reference_sku' => 'setComponentReferenceSku',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
         'discount_including_tax' => 'setDiscountIncludingTax',
         'external_id' => 'setExternalId',
+        'fee_type' => 'setFeeType',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'pro_rata_calculated' => 'setProRataCalculated',
         'quantity' => 'setQuantity',
         'state' => 'setState',
+        'subscription_metric_id' => 'setSubscriptionMetricId',
         'subscription_version' => 'setSubscriptionVersion',
         'tax_amount' => 'setTaxAmount',
         'taxes' => 'setTaxes',
@@ -157,16 +173,20 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'aggregated_tax_rate' => 'getAggregatedTaxRate',
         'amount_excluding_tax' => 'getAmountExcludingTax',
         'amount_including_tax' => 'getAmountIncludingTax',
+        'component_reference_name' => 'getComponentReferenceName',
+        'component_reference_sku' => 'getComponentReferenceSku',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
         'discount_including_tax' => 'getDiscountIncludingTax',
         'external_id' => 'getExternalId',
+        'fee_type' => 'getFeeType',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'pro_rata_calculated' => 'getProRataCalculated',
         'quantity' => 'getQuantity',
         'state' => 'getState',
+        'subscription_metric_id' => 'getSubscriptionMetricId',
         'subscription_version' => 'getSubscriptionVersion',
         'tax_amount' => 'getTaxAmount',
         'taxes' => 'getTaxes',
@@ -198,6 +218,10 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         
         $this->container['amount_including_tax'] = isset($data['amount_including_tax']) ? $data['amount_including_tax'] : null;
         
+        $this->container['component_reference_name'] = isset($data['component_reference_name']) ? $data['component_reference_name'] : null;
+        
+        $this->container['component_reference_sku'] = isset($data['component_reference_sku']) ? $data['component_reference_sku'] : null;
+        
         $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
@@ -205,6 +229,8 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         $this->container['discount_including_tax'] = isset($data['discount_including_tax']) ? $data['discount_including_tax'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        
+        $this->container['fee_type'] = isset($data['fee_type']) ? $data['fee_type'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -217,6 +243,8 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        
+        $this->container['subscription_metric_id'] = isset($data['subscription_metric_id']) ? $data['subscription_metric_id'] : null;
         
         $this->container['subscription_version'] = isset($data['subscription_version']) ? $data['subscription_version'] : null;
         
@@ -238,6 +266,10 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['component_reference_sku']) && (mb_strlen($this->container['component_reference_sku']) > 100)) {
+            $invalidProperties[] = "invalid value for 'component_reference_sku', the character length must be smaller than or equal to 100.";
+        }
 
         if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 150)) {
             $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 150.";
@@ -403,6 +435,60 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets component_reference_name
+     *
+     * @return string
+     */
+    public function getComponentReferenceName()
+    {
+        return $this->container['component_reference_name'];
+    }
+
+    /**
+     * Sets component_reference_name
+     *
+     * @param string $component_reference_name 
+     *
+     * @return $this
+     */
+    public function setComponentReferenceName($component_reference_name)
+    {
+        $this->container['component_reference_name'] = $component_reference_name;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets component_reference_sku
+     *
+     * @return string
+     */
+    public function getComponentReferenceSku()
+    {
+        return $this->container['component_reference_sku'];
+    }
+
+    /**
+     * Sets component_reference_sku
+     *
+     * @param string $component_reference_sku 
+     *
+     * @return $this
+     */
+    public function setComponentReferenceSku($component_reference_sku)
+    {
+        if (!is_null($component_reference_sku) && (mb_strlen($component_reference_sku) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $component_reference_sku when calling SubscriptionLedgerEntry., must be smaller than or equal to 100.');
+        }
+
+        $this->container['component_reference_sku'] = $component_reference_sku;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets created_by
      *
      * @return int
@@ -497,6 +583,31 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     public function setExternalId($external_id)
     {
         $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets fee_type
+     *
+     * @return \Wallee\Sdk\Model\ProductFeeType
+     */
+    public function getFeeType()
+    {
+        return $this->container['fee_type'];
+    }
+
+    /**
+     * Sets fee_type
+     *
+     * @param \Wallee\Sdk\Model\ProductFeeType $fee_type 
+     *
+     * @return $this
+     */
+    public function setFeeType($fee_type)
+    {
+        $this->container['fee_type'] = $fee_type;
 
         return $this;
     }
@@ -647,6 +758,31 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscription_metric_id
+     *
+     * @return int
+     */
+    public function getSubscriptionMetricId()
+    {
+        return $this->container['subscription_metric_id'];
+    }
+
+    /**
+     * Sets subscription_metric_id
+     *
+     * @param int $subscription_metric_id 
+     *
+     * @return $this
+     */
+    public function setSubscriptionMetricId($subscription_metric_id)
+    {
+        $this->container['subscription_metric_id'] = $subscription_metric_id;
 
         return $this;
     }

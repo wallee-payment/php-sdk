@@ -50,8 +50,10 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'amount_including_tax' => 'float',
+        'component_reference_name' => 'string',
         'external_id' => 'string',
         'quantity' => 'float',
+        'subscription_metric_id' => 'int',
         'subscription_version' => 'int',
         'taxes' => '\Wallee\Sdk\Model\TaxCreate[]',
         'title' => 'string'
@@ -64,8 +66,10 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'amount_including_tax' => null,
+        'component_reference_name' => null,
         'external_id' => null,
         'quantity' => null,
+        'subscription_metric_id' => 'int64',
         'subscription_version' => 'int64',
         'taxes' => null,
         'title' => null
@@ -79,8 +83,10 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'amount_including_tax' => 'amountIncludingTax',
+        'component_reference_name' => 'componentReferenceName',
         'external_id' => 'externalId',
         'quantity' => 'quantity',
+        'subscription_metric_id' => 'subscriptionMetricId',
         'subscription_version' => 'subscriptionVersion',
         'taxes' => 'taxes',
         'title' => 'title'
@@ -93,8 +99,10 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'amount_including_tax' => 'setAmountIncludingTax',
+        'component_reference_name' => 'setComponentReferenceName',
         'external_id' => 'setExternalId',
         'quantity' => 'setQuantity',
+        'subscription_metric_id' => 'setSubscriptionMetricId',
         'subscription_version' => 'setSubscriptionVersion',
         'taxes' => 'setTaxes',
         'title' => 'setTitle'
@@ -107,8 +115,10 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'amount_including_tax' => 'getAmountIncludingTax',
+        'component_reference_name' => 'getComponentReferenceName',
         'external_id' => 'getExternalId',
         'quantity' => 'getQuantity',
+        'subscription_metric_id' => 'getSubscriptionMetricId',
         'subscription_version' => 'getSubscriptionVersion',
         'taxes' => 'getTaxes',
         'title' => 'getTitle'
@@ -134,9 +144,13 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
         
         $this->container['amount_including_tax'] = isset($data['amount_including_tax']) ? $data['amount_including_tax'] : null;
         
+        $this->container['component_reference_name'] = isset($data['component_reference_name']) ? $data['component_reference_name'] : null;
+        
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        
+        $this->container['subscription_metric_id'] = isset($data['subscription_metric_id']) ? $data['subscription_metric_id'] : null;
         
         $this->container['subscription_version'] = isset($data['subscription_version']) ? $data['subscription_version'] : null;
         
@@ -284,6 +298,31 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets component_reference_name
+     *
+     * @return string
+     */
+    public function getComponentReferenceName()
+    {
+        return $this->container['component_reference_name'];
+    }
+
+    /**
+     * Sets component_reference_name
+     *
+     * @param string $component_reference_name 
+     *
+     * @return $this
+     */
+    public function setComponentReferenceName($component_reference_name)
+    {
+        $this->container['component_reference_name'] = $component_reference_name;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets external_id
      *
      * @return string
@@ -328,6 +367,31 @@ class SubscriptionLedgerEntryCreate implements ModelInterface, ArrayAccess
     public function setQuantity($quantity)
     {
         $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets subscription_metric_id
+     *
+     * @return int
+     */
+    public function getSubscriptionMetricId()
+    {
+        return $this->container['subscription_metric_id'];
+    }
+
+    /**
+     * Sets subscription_metric_id
+     *
+     * @param int $subscription_metric_id 
+     *
+     * @return $this
+     */
+    public function setSubscriptionMetricId($subscription_metric_id)
+    {
+        $this->container['subscription_metric_id'] = $subscription_metric_id;
 
         return $this;
     }
