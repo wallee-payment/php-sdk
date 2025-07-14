@@ -135,10 +135,10 @@ class AbstractDebtCollectionCaseUpdate implements ModelInterface, ArrayAccess
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;

@@ -111,10 +111,10 @@ class SubscriptionProductVersionRetirementCreate implements ModelInterface, Arra
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['product_version'] = isset($data['product_version']) ? $data['product_version'] : null;
