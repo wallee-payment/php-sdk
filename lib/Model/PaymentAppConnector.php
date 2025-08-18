@@ -312,7 +312,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets authorization_timeout
      *
-     * @param string $authorization_timeout 
+     * @param string $authorization_timeout The duration within which the authorization process for a payment should complete.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets completion_configuration
      *
-     * @param \Wallee\Sdk\Model\PaymentAppCompletionConfiguration $completion_configuration The completion configuration defines how the deferred completion is processed. If it is not present it means that deferred completion is not supported by this connector.
+     * @param \Wallee\Sdk\Model\PaymentAppCompletionConfiguration $completion_configuration The completion configuration controlling how deferred completion is processed. If not present, deferred completion is not supported for this connector.
      *
      * @return $this
      */
@@ -362,7 +362,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets connector_configuration
      *
-     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $connector_configuration The connector configuration references the configuration that was created as part of this connector within the space. The connector configuration is referenced within transactions created with this connector.
+     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $connector_configuration The connector configuration created alongside the connector within its designated space. This configuration is used in transactions created using this connector.
      *
      * @return $this
      */
@@ -387,7 +387,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates when the connector was added.
+     * @param \DateTime $created_on The date and time when the connector was created.
      *
      * @return $this
      */
@@ -412,7 +412,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external ID corresponds to the ID provided during inserting of the processor.
+     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
      * @return $this
      */
@@ -491,7 +491,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name of the connector will be displayed within the user interfaces that the merchant is interacting with.
+     * @param string $name The name used to identify the connector.
      *
      * @return $this
      */
@@ -520,7 +520,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets payment_page_endpoint
      *
-     * @param string $payment_page_endpoint The payment page endpoint is invoked to process the transaction. The endpoint is defined by the external service provider.
+     * @param string $payment_page_endpoint The URL where the user is redirected to process a payment. This endpoint is provided by the external service provider.
      *
      * @return $this
      */
@@ -545,7 +545,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets processor
      *
-     * @param \Wallee\Sdk\Model\PaymentAppProcessor $processor The processor references the app processor to which this connector belongs to. The relationship is established during the creation of the connector.
+     * @param \Wallee\Sdk\Model\PaymentAppProcessor $processor The payment app processor that the connector belongs to. This relationship is defined when the connector is created.
      *
      * @return $this
      */
@@ -570,7 +570,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets refund_configuration
      *
-     * @param \Wallee\Sdk\Model\PaymentAppRefundConfiguration $refund_configuration The refund configuration defines how refunds are processed. If it is not present it means that refunds are not supported by this connector.
+     * @param \Wallee\Sdk\Model\PaymentAppRefundConfiguration $refund_configuration The refund configuration controlling the behavior for processing refunds. If not present, refunds are not supported for this connector.
      *
      * @return $this
      */
@@ -620,7 +620,7 @@ class PaymentAppConnector implements ModelInterface, ArrayAccess
     /**
      * Sets updated_on
      *
-     * @param \DateTime $updated_on The updated on date indicates when the last time the connector was updated on.
+     * @param \DateTime $updated_on The date and time when the connector was last updated.
      *
      * @return $this
      */

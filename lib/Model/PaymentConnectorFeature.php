@@ -220,7 +220,7 @@ class PaymentConnectorFeature implements ModelInterface, ArrayAccess
     /**
      * Sets display_name
      *
-     * @param string $display_name The name of the feature.
+     * @param string $display_name The localized name of the feature.
      *
      * @return $this
      */

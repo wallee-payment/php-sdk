@@ -291,7 +291,7 @@ class InternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets source_bank_transaction
      *
-     * @param \Wallee\Sdk\Model\BankTransaction $source_bank_transaction 
+     * @param \Wallee\Sdk\Model\BankTransaction $source_bank_transaction The bank transaction from which funds are being transferred out.
      *
      * @return $this
      */
@@ -316,7 +316,7 @@ class InternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets target_bank_transaction
      *
-     * @param \Wallee\Sdk\Model\BankTransaction $target_bank_transaction 
+     * @param \Wallee\Sdk\Model\BankTransaction $target_bank_transaction The bank transaction to which funds are being transferred in.
      *
      * @return $this
      */

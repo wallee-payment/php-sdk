@@ -261,7 +261,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets mime_type
      *
-     * @param string $mime_type The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
+     * @param string $mime_type The MIME type specifies the format of the receipt document and is determined by the requested format.
      *
      * @return $this
      */
@@ -286,7 +286,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets printed
      *
-     * @param bool $printed The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
+     * @param bool $printed Whether the terminal's configuration mandates printing and the device has receipt printing capabilities.
      *
      * @return $this
      */
@@ -311,7 +311,7 @@ class RenderedTerminalReceipt implements ModelInterface, ArrayAccess
     /**
      * Sets receipt_type
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalReceiptType $receipt_type Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
+     * @param \Wallee\Sdk\Model\PaymentTerminalReceiptType $receipt_type The receipt type specifies the intended use and the target audience of the document.
      *
      * @return $this
      */

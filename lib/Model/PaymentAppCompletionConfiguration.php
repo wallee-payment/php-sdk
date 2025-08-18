@@ -241,7 +241,7 @@ class PaymentAppCompletionConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets completion_endpoint
      *
-     * @param string $completion_endpoint The completion endpoint is invoked to request the payment service provider to execute a completion.
+     * @param string $completion_endpoint The URL that the payment service provider will invoke to process a completion request. This endpoint handles communication with the provider for initiating and managing completions.
      *
      * @return $this
      */
@@ -266,7 +266,7 @@ class PaymentAppCompletionConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets completion_timeout_in_minutes
      *
-     * @param int $completion_timeout_in_minutes When the completion or the void is triggered we expect a feedback about the state of it. This timeout defines after how long we consider the void resp. completion as failed without receiving a final state update.
+     * @param int $completion_timeout_in_minutes The maximum time (in minutes) to wait for a response from the payment service provider after a completion request is triggered. If no feedback or final status is received within this period, the completion is considered failed.
      *
      * @return $this
      */
@@ -291,7 +291,7 @@ class PaymentAppCompletionConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets maximal_completion_delay_in_days
      *
-     * @param int $maximal_completion_delay_in_days The completion resp. the void can be triggered a while after the authorization of the transaction has been executed. This delay defines how many days after the authorization the void resp. completion must be triggered at the latest.
+     * @param int $maximal_completion_delay_in_days The maximum number of days after a transaction's authorization during which a completion or void action can be triggered. Once this period has passed, neither action can be executed.
      *
      * @return $this
      */
@@ -316,7 +316,7 @@ class PaymentAppCompletionConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets multiple_completions_supported
      *
-     * @param bool $multiple_completions_supported This flag indicates whether the connector supports multiple completions for a single transaction or not.
+     * @param bool $multiple_completions_supported Whether the payment connector can process multiple completions for a single transaction.
      *
      * @return $this
      */
@@ -341,7 +341,7 @@ class PaymentAppCompletionConfiguration implements ModelInterface, ArrayAccess
     /**
      * Sets void_endpoint
      *
-     * @param string $void_endpoint The void endpoint is invoked to request the payment service provider to execute a void.
+     * @param string $void_endpoint The URL that the payment service provider will invoke to process a void request. This endpoint handles communication with the provider for initiating and managing voids.
      *
      * @return $this
      */

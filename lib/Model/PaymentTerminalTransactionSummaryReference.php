@@ -284,7 +284,7 @@ class PaymentTerminalTransactionSummaryReference implements ModelInterface, Arra
     /**
      * Sets terminal_id
      *
-     * @param int $terminal_id 
+     * @param int $terminal_id The unique identifier of the terminal.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class PaymentTerminalTransactionSummaryReference implements ModelInterface, Arra
     /**
      * Sets terminal_identifier
      *
-     * @param string $terminal_identifier 
+     * @param string $terminal_identifier The unique identifier of the terminal, that is displayed on the device.
      *
      * @return $this
      */

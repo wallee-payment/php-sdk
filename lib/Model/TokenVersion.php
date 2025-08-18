@@ -375,7 +375,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets activated_on
      *
-     * @param \DateTime $activated_on 
+     * @param \DateTime $activated_on The date and time when the token version was activated.
      *
      * @return $this
      */
@@ -400,7 +400,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \Wallee\Sdk\Model\Address $billing_address 
+     * @param \Wallee\Sdk\Model\Address $billing_address The billing address to be used for the transaction if no explicit billing address is provided during payment processing.
      *
      * @return $this
      */
@@ -450,7 +450,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $environment 
+     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $environment The environment in which the token version was created.
      *
      * @return $this
      */
@@ -475,7 +475,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets expires_on
      *
-     * @param \DateTime $expires_on The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+     * @param \DateTime $expires_on The date and time when the token version is set to expire, after which it will be marked as obsolete.
      *
      * @return $this
      */
@@ -500,7 +500,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets icon_url
      *
-     * @param string $icon_url 
+     * @param string $icon_url The URL to the token's icon displayed to the customer.
      *
      * @return $this
      */
@@ -625,7 +625,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name 
+     * @param string $name The name used to identify the token.
      *
      * @return $this
      */
@@ -654,7 +654,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets obsoleted_on
      *
-     * @param \DateTime $obsoleted_on 
+     * @param \DateTime $obsoleted_on The date and time when the token version was marked obsolete.
      *
      * @return $this
      */
@@ -679,7 +679,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_connector_configuration
      *
-     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration 
+     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration The payment connector configuration that initialized the token version.
      *
      * @return $this
      */
@@ -704,7 +704,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_information_hashes
      *
-     * @param \Wallee\Sdk\Model\PaymentInformationHash[] $payment_information_hashes The payment information hash set contains hashes of the payment information represented by this token version.
+     * @param \Wallee\Sdk\Model\PaymentInformationHash[] $payment_information_hashes The hashed payment information that the token version represents.
      *
      * @return $this
      */
@@ -729,7 +729,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method
      *
-     * @param int $payment_method 
+     * @param int $payment_method The payment method that initialized the token version.
      *
      * @return $this
      */
@@ -754,7 +754,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_method_brand
      *
-     * @param int $payment_method_brand 
+     * @param int $payment_method_brand The payment method brand that initialized the token version.
      *
      * @return $this
      */
@@ -804,7 +804,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets processor_token
      *
-     * @param string $processor_token 
+     * @param string $processor_token The token name as specified by the processor.
      *
      * @return $this
      */
@@ -833,7 +833,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address
      *
-     * @param \Wallee\Sdk\Model\Address $shipping_address 
+     * @param \Wallee\Sdk\Model\Address $shipping_address The shipping address to be used for the transaction if no explicit shipping address is provided during payment processing.
      *
      * @return $this
      */
@@ -883,7 +883,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param \Wallee\Sdk\Model\Token $token 
+     * @param \Wallee\Sdk\Model\Token $token The token that the token version belongs to.
      *
      * @return $this
      */
@@ -908,7 +908,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\TokenVersionType $type The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+     * @param \Wallee\Sdk\Model\TokenVersionType $type The type specifies the nature of the token and identifies the payment connector capable of processing it.
      *
      * @return $this
      */

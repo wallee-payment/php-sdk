@@ -19,6 +19,8 @@
 
 
 namespace Wallee\Sdk\Model;
+
+use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
@@ -30,7 +32,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class InstallmentPaymentSlice extends TransactionAwareEntity 
+class InstallmentPaymentSlice implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,8 +51,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     protected static $swaggerTypes = [
         'charge_on' => '\DateTime',
         'created_on' => '\DateTime',
+        'id' => 'int',
         'installment_payment' => '\Wallee\Sdk\Model\InstallmentPayment',
         'line_items' => '\Wallee\Sdk\Model\LineItem[]',
+        'linked_space_id' => 'int',
+        'linked_transaction' => 'int',
         'planned_purge_date' => '\DateTime',
         'state' => '\Wallee\Sdk\Model\InstallmentPaymentSliceState',
         'transaction' => '\Wallee\Sdk\Model\Transaction',
@@ -65,8 +70,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     protected static $swaggerFormats = [
         'charge_on' => 'date-time',
         'created_on' => 'date-time',
+        'id' => 'int64',
         'installment_payment' => null,
         'line_items' => null,
+        'linked_space_id' => 'int64',
+        'linked_transaction' => 'int64',
         'planned_purge_date' => 'date-time',
         'state' => null,
         'transaction' => null,
@@ -82,8 +90,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     protected static $attributeMap = [
         'charge_on' => 'chargeOn',
         'created_on' => 'createdOn',
+        'id' => 'id',
         'installment_payment' => 'installmentPayment',
         'line_items' => 'lineItems',
+        'linked_space_id' => 'linkedSpaceId',
+        'linked_transaction' => 'linkedTransaction',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
         'transaction' => 'transaction',
@@ -98,8 +109,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     protected static $setters = [
         'charge_on' => 'setChargeOn',
         'created_on' => 'setCreatedOn',
+        'id' => 'setId',
         'installment_payment' => 'setInstallmentPayment',
         'line_items' => 'setLineItems',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'linked_transaction' => 'setLinkedTransaction',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
         'transaction' => 'setTransaction',
@@ -114,8 +128,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     protected static $getters = [
         'charge_on' => 'getChargeOn',
         'created_on' => 'getCreatedOn',
+        'id' => 'getId',
         'installment_payment' => 'getInstallmentPayment',
         'line_items' => 'getLineItems',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'linked_transaction' => 'getLinkedTransaction',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
         'transaction' => 'getTransaction',
@@ -124,6 +141,12 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -133,16 +156,20 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
         
         $this->container['charge_on'] = isset($data['charge_on']) ? $data['charge_on'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
         $this->container['installment_payment'] = isset($data['installment_payment']) ? $data['installment_payment'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
+        
+        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
+        
+        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -161,7 +188,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -173,7 +200,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -183,7 +210,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
 
@@ -195,7 +222,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -205,7 +232,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -215,7 +242,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -294,6 +321,31 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     
 
     /**
+     * Gets id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int $id A unique identifier for the object.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets installment_payment
      *
      * @return \Wallee\Sdk\Model\InstallmentPayment
@@ -338,6 +390,56 @@ class InstallmentPaymentSlice extends TransactionAwareEntity
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return $this
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets linked_transaction
+     *
+     * @return int
+     */
+    public function getLinkedTransaction()
+    {
+        return $this->container['linked_transaction'];
+    }
+
+    /**
+     * Sets linked_transaction
+     *
+     * @param int $linked_transaction The payment transaction this object is linked to.
+     *
+     * @return $this
+     */
+    public function setLinkedTransaction($linked_transaction)
+    {
+        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }

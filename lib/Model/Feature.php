@@ -469,7 +469,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets visible
      *
-     * @param bool $visible 
+     * @param bool $visible Whether the feature is visible to the user.
      *
      * @return $this
      */

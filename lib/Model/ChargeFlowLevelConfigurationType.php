@@ -284,7 +284,7 @@ class ChargeFlowLevelConfigurationType implements ModelInterface, ArrayAccess
     /**
      * Sets label
      *
-     * @param map[string,string] $label 
+     * @param map[string,string] $label The localized label that describes the action triggered by the configuration type.
      *
      * @return $this
      */

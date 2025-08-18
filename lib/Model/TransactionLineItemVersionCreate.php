@@ -236,7 +236,7 @@ class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
      * @return $this
      */
@@ -261,7 +261,7 @@ class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \Wallee\Sdk\Model\LineItemCreate[] $line_items 
+     * @param \Wallee\Sdk\Model\LineItemCreate[] $line_items The line items that replace the original line items in the transaction.
      *
      * @return $this
      */
@@ -286,7 +286,7 @@ class TransactionLineItemVersionCreate implements ModelInterface, ArrayAccess
     /**
      * Sets transaction
      *
-     * @param int $transaction 
+     * @param int $transaction The transaction that the line item version belongs to.
      *
      * @return $this
      */

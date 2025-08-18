@@ -27,7 +27,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * TokenizedCardData model
  *
  * @category    Class
- * @description This model holds the card data in plain.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -234,7 +234,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets cryptogram
      *
-     * @param \Wallee\Sdk\Model\CardCryptogram $cryptogram The additional authentication value used to secure the tokenized card transactions.
+     * @param \Wallee\Sdk\Model\CardCryptogram $cryptogram An additional authentication value that enhances the security of tokenized card transactions.
      *
      * @return $this
      */
@@ -259,7 +259,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets initial_recurring_transaction
      *
-     * @param bool $initial_recurring_transaction 
+     * @param bool $initial_recurring_transaction Whether the transaction is an initial recurring transaction, based on the recurring indicator. This is used to identify the first transaction in a recurring payment setup.
      *
      * @return $this
      */
@@ -284,7 +284,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets recurring_indicator
      *
-     * @param \Wallee\Sdk\Model\RecurringIndicator $recurring_indicator 
+     * @param \Wallee\Sdk\Model\RecurringIndicator $recurring_indicator The indicator used to distinguish between recurring and one-time transactions. If omitted, it will be automatically determined based on the transaction's properties.
      *
      * @return $this
      */
@@ -309,7 +309,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets token_requestor_id
      *
-     * @param string $token_requestor_id 
+     * @param string $token_requestor_id The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
      *
      * @return $this
      */

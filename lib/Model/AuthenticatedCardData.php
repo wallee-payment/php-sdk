@@ -25,7 +25,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * AuthenticatedCardData model
  *
  * @category    Class
- * @description This model holds the card data and optional cardholder authentication details.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -207,7 +207,7 @@ class AuthenticatedCardData extends TokenizedCardData
     /**
      * Sets cardholder_authentication
      *
-     * @param \Wallee\Sdk\Model\CardholderAuthentication $cardholder_authentication The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+     * @param \Wallee\Sdk\Model\CardholderAuthentication $cardholder_authentication Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
      *
      * @return $this
      */

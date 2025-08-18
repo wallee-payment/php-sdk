@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.8.0",
+        'x-meta-sdk-version' => "4.8.1",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "wallee",
     ];
@@ -58,7 +58,7 @@ final class ApiClient {
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/4.8.0/php';
+	private $userAgent = 'PHP-Client/4.8.1/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -859,6 +859,54 @@ final class ApiClient {
             $this->documentTemplateTypeService = new \Wallee\Sdk\Service\DocumentTemplateTypeService($this);
         }
         return $this->documentTemplateTypeService;
+    }
+    
+    protected $dunningCaseLevelService;
+
+    /**
+     * @return \Wallee\Sdk\Service\DunningCaseLevelService
+     */
+    public function getDunningCaseLevelService() {
+        if(is_null($this->dunningCaseLevelService)){
+            $this->dunningCaseLevelService = new \Wallee\Sdk\Service\DunningCaseLevelService($this);
+        }
+        return $this->dunningCaseLevelService;
+    }
+    
+    protected $dunningCaseService;
+
+    /**
+     * @return \Wallee\Sdk\Service\DunningCaseService
+     */
+    public function getDunningCaseService() {
+        if(is_null($this->dunningCaseService)){
+            $this->dunningCaseService = new \Wallee\Sdk\Service\DunningCaseService($this);
+        }
+        return $this->dunningCaseService;
+    }
+    
+    protected $dunningFlowLevelService;
+
+    /**
+     * @return \Wallee\Sdk\Service\DunningFlowLevelService
+     */
+    public function getDunningFlowLevelService() {
+        if(is_null($this->dunningFlowLevelService)){
+            $this->dunningFlowLevelService = new \Wallee\Sdk\Service\DunningFlowLevelService($this);
+        }
+        return $this->dunningFlowLevelService;
+    }
+    
+    protected $dunningFlowService;
+
+    /**
+     * @return \Wallee\Sdk\Service\DunningFlowService
+     */
+    public function getDunningFlowService() {
+        if(is_null($this->dunningFlowService)){
+            $this->dunningFlowService = new \Wallee\Sdk\Service\DunningFlowService($this);
+        }
+        return $this->dunningFlowService;
     }
     
     protected $externalTransferBankTransactionService;

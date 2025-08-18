@@ -330,7 +330,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets configured_environment
      *
-     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $configured_environment 
+     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $configured_environment The environment (e.g., test or production) currently configured for the processor.
      *
      * @return $this
      */
@@ -355,7 +355,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date is the date when this processor has been added.
+     * @param \DateTime $created_on The date and time when the processor was created.
      *
      * @return $this
      */
@@ -380,7 +380,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets documentation_url
      *
-     * @param string $documentation_url The documentation URL points to a web site that describes how to configure and use the processor.
+     * @param string $documentation_url A URL pointing to the documentation that explains how to configure and use the processor.
      *
      * @return $this
      */
@@ -405,7 +405,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external ID corresponds to the ID that was provided during creation of the processor.
+     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
      * @return $this
      */
@@ -509,7 +509,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name of the processor will be displayed within the user interfaces that the merchant is interacting with.
+     * @param string $name The name used to identify the processor.
      *
      * @return $this
      */
@@ -538,7 +538,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets processor_configuration
      *
-     * @param \Wallee\Sdk\Model\PaymentProcessorConfiguration $processor_configuration This processor configuration is created as part of the app processor. Any transaction created with the processor is linked with this processor configuration.
+     * @param \Wallee\Sdk\Model\PaymentProcessorConfiguration $processor_configuration The processor configuration created alongside the process within its designated space. This configuration is used in transactions created using this processor.
      *
      * @return $this
      */
@@ -563,7 +563,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets production_mode_url
      *
-     * @param string $production_mode_url When the user sets the processor into the production mode the user will be forwarded to this URL to configure the production environment. When no URL is provided no redirection will happen.
+     * @param string $production_mode_url A URL pointing to the site where merchants can set up production mode for the processor.
      *
      * @return $this
      */
@@ -613,7 +613,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets svg_icon
      *
-     * @param string $svg_icon 
+     * @param string $svg_icon An SVG icon representing the processor, displayed to the user in the interface.
      *
      * @return $this
      */
@@ -642,7 +642,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets updated_on
      *
-     * @param \DateTime $updated_on The updated on date indicates when the last update on the processor occurred.
+     * @param \DateTime $updated_on The date and time when the processor was last updated.
      *
      * @return $this
      */
@@ -667,7 +667,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets usable_in_production
      *
-     * @param bool $usable_in_production When the processor is ready to be used for transactions in the production environment this flag is set to true.
+     * @param bool $usable_in_production Whether the processor is fully prepared and available for handling transactions in a production environment.
      *
      * @return $this
      */
@@ -692,7 +692,7 @@ class PaymentAppProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets usable_in_production_since
      *
-     * @param \DateTime $usable_in_production_since 
+     * @param \DateTime $usable_in_production_since the date and time when the processor became fully usable and available for handling transactions in a production environment.
      *
      * @return $this
      */
