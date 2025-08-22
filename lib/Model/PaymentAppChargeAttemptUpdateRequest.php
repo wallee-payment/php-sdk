@@ -121,10 +121,10 @@ class PaymentAppChargeAttemptUpdateRequest implements ModelInterface, ArrayAcces
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['charge_attempt_id'] = isset($data['charge_attempt_id']) ? $data['charge_attempt_id'] : null;
