@@ -27,7 +27,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * PaymentLink model
  *
  * @category    Class
- * @description The payment link defines an URL to automatically create transactions.
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -343,7 +343,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets allowed_payment_method_configurations
      *
-     * @param \Wallee\Sdk\Model\PaymentMethodConfiguration[] $allowed_payment_method_configurations The allowed payment method configurations restrict the payment methods which can be used with this payment link.
+     * @param \Wallee\Sdk\Model\PaymentMethodConfiguration[] $allowed_payment_method_configurations The payment method configurations that customers can use for making payments.
      *
      * @return $this
      */
@@ -368,7 +368,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets applied_space_view
      *
-     * @param int $applied_space_view The payment link can be conducted in a specific space view. The space view may apply a specific design to the payment page.
+     * @param int $applied_space_view The payment link can be used within a specific space view, which may apply a customized design to the payment page.
      *
      * @return $this
      */
@@ -393,7 +393,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets available_from
      *
-     * @param \DateTime $available_from The available from date defines the earliest date on which the payment link can be used. When no date is specified there will be no restriction.
+     * @param \DateTime $available_from The earliest date the payment link can be used to initiate a transaction. If no date is provided, the link will be available immediately.
      *
      * @return $this
      */
@@ -418,7 +418,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets available_until
      *
-     * @param \DateTime $available_until The available from date defines the latest date on which the payment link can be used to initialize a transaction. When no date is specified there will be no restriction.
+     * @param \DateTime $available_until The latest date the payment link can be used to initiate a transaction. If no date is provided, the link will remain available indefinitely.
      *
      * @return $this
      */
@@ -443,7 +443,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address_handling_mode
      *
-     * @param \Wallee\Sdk\Model\PaymentLinkAddressHandlingMode $billing_address_handling_mode The billing address handling mode controls if the address is collected or not and how it is collected.
+     * @param \Wallee\Sdk\Model\PaymentLinkAddressHandlingMode $billing_address_handling_mode The handling mode defines whether a billing address is required and specifies how it should be provided.
      *
      * @return $this
      */
@@ -468,7 +468,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency The currency defines in which currency the payment is executed in. If no currency is defined it has to be specified within the request parameter 'currency'.
+     * @param string $currency The three-letter currency code (ISO 4217). If not specified, it must be provided in the 'currency' request parameter.
      *
      * @return $this
      */
@@ -493,7 +493,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
      * @return $this
      */
@@ -543,7 +543,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The language defines the language of the payment page. If no language is provided it can be provided through the request parameter.
+     * @param string $language The language for displaying the payment page. If not specified, it can be supplied via the 'language' request parameter.
      *
      * @return $this
      */
@@ -568,7 +568,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \Wallee\Sdk\Model\LineItem[] $line_items The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters. If no amount for the payment link is defined, the additional checkout page to enter the amount is shown to the consumer.
+     * @param \Wallee\Sdk\Model\LineItem[] $line_items The line items representing what is being sold. If not specified, they can be supplied via request parameters.
      *
      * @return $this
      */
@@ -618,7 +618,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets maximal_number_of_transactions
      *
-     * @param int $maximal_number_of_transactions The maximal number of transactions limits the number of transactions which can be created with this payment link.
+     * @param int $maximal_number_of_transactions The maximum number of transactions that can be initiated using the payment link.
      *
      * @return $this
      */
@@ -643,7 +643,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The payment link name is used internally to identify the payment link. For example the name is used within search fields and hence it should be distinct and descriptive.
+     * @param string $name The name used to identify the payment link.
      *
      * @return $this
      */
@@ -697,7 +697,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets protection_mode
      *
-     * @param \Wallee\Sdk\Model\PaymentLinkProtectionMode $protection_mode The protection mode determines if the payment link is protected against tampering and in what way.
+     * @param \Wallee\Sdk\Model\PaymentLinkProtectionMode $protection_mode The protection mode defines whether the payment link is protected against tampering and specifies the protection method.
      *
      * @return $this
      */
@@ -722,7 +722,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_address_handling_mode
      *
-     * @param \Wallee\Sdk\Model\PaymentLinkAddressHandlingMode $shipping_address_handling_mode The shipping address handling mode controls if the address is collected or not and how it is collected.
+     * @param \Wallee\Sdk\Model\PaymentLinkAddressHandlingMode $shipping_address_handling_mode The handling mode defines whether a shipping address is required and specifies how it should be provided.
      *
      * @return $this
      */
@@ -772,7 +772,7 @@ class PaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets url
      *
-     * @param string $url The URL defines the URL to which the user has to be forwarded to initialize the payment.
+     * @param string $url The public URL to share with customers for making payments.
      *
      * @return $this
      */

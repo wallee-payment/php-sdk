@@ -27,7 +27,7 @@ use \Wallee\Sdk\ObjectSerializer;
  * CardholderAuthenticationCreate model
  *
  * @category    Class
- * @description This model holds the cardholder authentication data (e.g. 3-D Secure authentication).
+ * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -247,7 +247,7 @@ class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess
     /**
      * Sets authentication_identifier
      *
-     * @param string $authentication_identifier The authentication identifier as assigned by authentication system (e.g. XID or DSTransactionID).
+     * @param string $authentication_identifier The identifier (e.g., XID or DSTransactionID) assigned by the authentication system for tracking and verification.
      *
      * @return $this
      */
@@ -272,7 +272,7 @@ class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess
     /**
      * Sets authentication_response
      *
-     * @param \Wallee\Sdk\Model\CardAuthenticationResponse $authentication_response 
+     * @param \Wallee\Sdk\Model\CardAuthenticationResponse $authentication_response The result of the authentication process.
      *
      * @return $this
      */
@@ -297,7 +297,7 @@ class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess
     /**
      * Sets authentication_value
      *
-     * @param string $authentication_value The cardholder authentication value. Also known as Cardholder Authentication Verification Value (CAVV).
+     * @param string $authentication_value The cryptographic token (CAVV/AAV) generated during the authentication process to validate the cardholder's identity.
      *
      * @return $this
      */
@@ -322,7 +322,7 @@ class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess
     /**
      * Sets electronic_commerce_indicator
      *
-     * @param string $electronic_commerce_indicator The Electronic Commerce Indicator (ECI) value. The ECI is returned by authentication system and indicates the outcome/status of authentication.
+     * @param string $electronic_commerce_indicator The Electronic Commerce Indicator (ECI) represents the authentication level and indicates liability shift during online or card-not-present transactions.
      *
      * @return $this
      */
@@ -347,7 +347,7 @@ class CardholderAuthenticationCreate implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param \Wallee\Sdk\Model\CardAuthenticationVersion $version 
+     * @param \Wallee\Sdk\Model\CardAuthenticationVersion $version The version of the authentication protocol (e.g., 3D Secure 1.0 or 2.0) used for the transaction.
      *
      * @return $this
      */

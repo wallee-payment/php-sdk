@@ -214,7 +214,7 @@ class TransactionInvoiceCommentCreate extends AbstractTransactionInvoiceCommentA
     /**
      * Sets transaction_invoice
      *
-     * @param int $transaction_invoice 
+     * @param int $transaction_invoice The transaction invoice that the comment belongs to.
      *
      * @return $this
      */

@@ -214,7 +214,7 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
     /**
      * Sets transaction
      *
-     * @param int $transaction 
+     * @param int $transaction The transaction that the comment belongs to.
      *
      * @return $this
      */

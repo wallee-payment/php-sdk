@@ -384,7 +384,7 @@ class TransactionCompletionRequest implements ModelInterface, ArrayAccess
     /**
      * Sets statement_descriptor
      *
-     * @param string $statement_descriptor The statement descriptor explain charges or payments on bank statements.
+     * @param string $statement_descriptor The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
      *
      * @return $this
      */

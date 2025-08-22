@@ -255,7 +255,7 @@ class ExternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets bank_transaction
      *
-     * @param \Wallee\Sdk\Model\BankTransaction $bank_transaction 
+     * @param \Wallee\Sdk\Model\BankTransaction $bank_transaction Provides general information about the bank transaction.
      *
      * @return $this
      */
@@ -280,7 +280,7 @@ class ExternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets external_account_identifier
      *
-     * @param string $external_account_identifier 
+     * @param string $external_account_identifier The identifier is used to uniquely identify the external bank account.
      *
      * @return $this
      */
@@ -305,7 +305,7 @@ class ExternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets external_account_type
      *
-     * @param string $external_account_type 
+     * @param string $external_account_type The external bank account's type.
      *
      * @return $this
      */
@@ -330,7 +330,7 @@ class ExternalTransferBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets external_bank_name
      *
-     * @param string $external_bank_name 
+     * @param string $external_bank_name The external bank account's name.
      *
      * @return $this
      */

@@ -248,7 +248,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets bank_account
      *
-     * @param \Wallee\Sdk\Model\BankAccount $bank_account 
+     * @param \Wallee\Sdk\Model\BankAccount $bank_account The bank account this currency bank account belongs to.
      *
      * @return $this
      */
@@ -273,7 +273,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency 
+     * @param string $currency The currency associated with the bank account.
      *
      * @return $this
      */
@@ -298,7 +298,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \Wallee\Sdk\Model\BankAccountEnvironment $environment 
+     * @param \Wallee\Sdk\Model\BankAccountEnvironment $environment Whether the bank account operates in a test or production environment.
      *
      * @return $this
      */

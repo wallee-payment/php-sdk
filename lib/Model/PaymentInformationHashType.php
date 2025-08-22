@@ -245,7 +245,7 @@ class PaymentInformationHashType implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name 
+     * @param map[string,string] $name The name that describes the hash type.
      *
      * @return $this
      */

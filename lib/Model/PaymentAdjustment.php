@@ -248,7 +248,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     /**
      * Sets amount_excluding_tax
      *
-     * @param float $amount_excluding_tax 
+     * @param float $amount_excluding_tax The adjustment's amount, excluding taxes.
      *
      * @return $this
      */
@@ -273,7 +273,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     /**
      * Sets amount_including_tax
      *
-     * @param float $amount_including_tax The total amount of this adjustment including taxes.
+     * @param float $amount_including_tax The adjustment's amount, including taxes.
      *
      * @return $this
      */
@@ -323,7 +323,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     /**
      * Sets rate_in_percentage
      *
-     * @param float $rate_in_percentage The rate in percentage is the rate on which the adjustment amount was calculated with.
+     * @param float $rate_in_percentage The percentage rate used to calculate the adjustment amount.
      *
      * @return $this
      */
@@ -348,7 +348,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     /**
      * Sets tax
      *
-     * @param \Wallee\Sdk\Model\Tax $tax 
+     * @param \Wallee\Sdk\Model\Tax $tax The tax applied to the adjustment.
      *
      * @return $this
      */
@@ -373,7 +373,7 @@ class PaymentAdjustment implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param int $type 
+     * @param int $type The type of the adjustment.
      *
      * @return $this
      */

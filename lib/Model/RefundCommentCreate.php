@@ -214,7 +214,7 @@ class RefundCommentCreate extends AbstractRefundCommentActive
     /**
      * Sets refund
      *
-     * @param int $refund 
+     * @param int $refund The refund that the comment belongs to.
      *
      * @return $this
      */

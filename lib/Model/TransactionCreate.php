@@ -431,7 +431,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets environment
      *
-     * @param \Wallee\Sdk\Model\Environment $environment 
+     * @param \Wallee\Sdk\Model\Environment $environment The environment used when rendering resources.
      *
      * @return $this
      */

@@ -284,7 +284,7 @@ class BankAccountType implements ModelInterface, ArrayAccess
     /**
      * Sets identifier_name
      *
-     * @param map[string,string] $identifier_name 
+     * @param map[string,string] $identifier_name The identifier name specifies how the bank account type's identifier is called.
      *
      * @return $this
      */
