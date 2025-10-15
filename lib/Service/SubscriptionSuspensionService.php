@@ -182,15 +182,14 @@ class SubscriptionSuspensionService {
 	 *
 	 * Create
 	 *
-	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionCreate $suspension  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionSuspension
 	 */
-	public function create($space_id, $suspension) {
-		return $this->createWithHttpInfo($space_id, $suspension)->getData();
+	public function create($suspension) {
+		return $this->createWithHttpInfo($suspension)->getData();
 	}
 
 	/**
@@ -199,18 +198,13 @@ class SubscriptionSuspensionService {
 	 * Create
      
      *
-	 * @param int $space_id  (required)
 	 * @param \Wallee\Sdk\Model\SubscriptionSuspensionCreate $suspension  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function createWithHttpInfo($space_id, $suspension) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling create');
-		}
+	public function createWithHttpInfo($suspension) {
 		// verify the required parameter 'suspension' is set
 		if (is_null($suspension)) {
 			throw new \InvalidArgumentException('Missing the required parameter $suspension when calling create');
@@ -225,9 +219,6 @@ class SubscriptionSuspensionService {
 
 		// query params
 		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
 
 		// path params
 		$resourcePath = '/subscription-suspension/create';
@@ -525,15 +516,14 @@ class SubscriptionSuspensionService {
 	 *
 	 * terminate
 	 *
-	 * @param int $space_id  (required)
 	 * @param int $suspension_id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return \Wallee\Sdk\Model\SubscriptionSuspension
 	 */
-	public function terminate($space_id, $suspension_id) {
-		return $this->terminateWithHttpInfo($space_id, $suspension_id)->getData();
+	public function terminate($suspension_id) {
+		return $this->terminateWithHttpInfo($suspension_id)->getData();
 	}
 
 	/**
@@ -542,18 +532,13 @@ class SubscriptionSuspensionService {
 	 * terminate
      
      *
-	 * @param int $space_id  (required)
 	 * @param int $suspension_id  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function terminateWithHttpInfo($space_id, $suspension_id) {
-		// verify the required parameter 'space_id' is set
-		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling terminate');
-		}
+	public function terminateWithHttpInfo($suspension_id) {
 		// verify the required parameter 'suspension_id' is set
 		if (is_null($suspension_id)) {
 			throw new \InvalidArgumentException('Missing the required parameter $suspension_id when calling terminate');
@@ -568,9 +553,6 @@ class SubscriptionSuspensionService {
 
 		// query params
 		$queryParams = [];
-		if (!is_null($space_id)) {
-			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
-		}
 		if (!is_null($suspension_id)) {
 			$queryParams['suspensionId'] = $this->apiClient->getSerializer()->toQueryValue($suspension_id);
 		}

@@ -47,9 +47,9 @@ class LanguageService {
 	/**
 	 * Constructor.
 	 *
-	 * @param ApiClient $apiClient|null the api client
+	 * @param ApiClient|null $apiClient the api client
 	 */
-	public function __construct(ApiClient $apiClient = null) {
+	public function __construct(?ApiClient $apiClient = null) {
 		if (is_null($apiClient)) {
 			throw new \InvalidArgumentException('The api client is required.');
 		}

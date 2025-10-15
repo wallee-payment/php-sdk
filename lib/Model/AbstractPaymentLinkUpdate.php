@@ -49,6 +49,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'allowed_payment_method_configurations' => '\Wallee\Sdk\Model\PaymentMethodConfiguration[]',
+        'allowed_redirection_domains' => 'string[]',
         'applied_space_view' => 'int',
         'available_from' => '\DateTime',
         'available_until' => '\DateTime',
@@ -68,6 +69,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'allowed_payment_method_configurations' => null,
+        'allowed_redirection_domains' => null,
         'applied_space_view' => 'int64',
         'available_from' => 'date-time',
         'available_until' => 'date-time',
@@ -88,6 +90,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
+        'allowed_redirection_domains' => 'allowedRedirectionDomains',
         'applied_space_view' => 'appliedSpaceView',
         'available_from' => 'availableFrom',
         'available_until' => 'availableUntil',
@@ -107,6 +110,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
+        'allowed_redirection_domains' => 'setAllowedRedirectionDomains',
         'applied_space_view' => 'setAppliedSpaceView',
         'available_from' => 'setAvailableFrom',
         'available_until' => 'setAvailableUntil',
@@ -126,6 +130,7 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
+        'allowed_redirection_domains' => 'getAllowedRedirectionDomains',
         'applied_space_view' => 'getAppliedSpaceView',
         'available_from' => 'getAvailableFrom',
         'available_until' => 'getAvailableUntil',
@@ -150,13 +155,15 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['allowed_payment_method_configurations'] = isset($data['allowed_payment_method_configurations']) ? $data['allowed_payment_method_configurations'] : null;
+        
+        $this->container['allowed_redirection_domains'] = isset($data['allowed_redirection_domains']) ? $data['allowed_redirection_domains'] : null;
         
         $this->container['applied_space_view'] = isset($data['applied_space_view']) ? $data['applied_space_view'] : null;
         
@@ -293,6 +300,31 @@ class AbstractPaymentLinkUpdate implements ModelInterface, ArrayAccess
     public function setAllowedPaymentMethodConfigurations($allowed_payment_method_configurations)
     {
         $this->container['allowed_payment_method_configurations'] = $allowed_payment_method_configurations;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets allowed_redirection_domains
+     *
+     * @return string[]
+     */
+    public function getAllowedRedirectionDomains()
+    {
+        return $this->container['allowed_redirection_domains'];
+    }
+
+    /**
+     * Sets allowed_redirection_domains
+     *
+     * @param string[] $allowed_redirection_domains The domains to which the user is allowed to be redirected after the payment is completed. The following options can be configured: Exact domain: enter a full domain, e.g. (https://example.com). Wildcard domain: use to allow subdomains, e.g. (https://_*.example.com). All domains: use (ALL) to allow redirection to any domain (not recommended for security reasons). No domains : use (NONE) to disallow any redirection. Only one option per line is allowed. Invalid entries will be rejected.
+     *
+     * @return $this
+     */
+    public function setAllowedRedirectionDomains($allowed_redirection_domains)
+    {
+        $this->container['allowed_redirection_domains'] = $allowed_redirection_domains;
 
         return $this;
     }
