@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -29,46 +32,145 @@ use \Wallee\Sdk\ObjectSerializer;
  * @category    Class
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
+class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Abstract.SubscriptionProduct.Active';
+    protected static $openAPIModelName = 'Abstract.SubscriptionProduct.Active';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'allowed_payment_method_configurations' => 'int[]',
-        'failed_payment_suspension_period' => 'string',
+    protected static $openAPITypes = [
+        'sort_order' => 'int',
         'name' => 'string',
         'product_locked' => 'bool',
-        'sort_order' => 'int',
-        'state' => '\Wallee\Sdk\Model\SubscriptionProductState'
+        'state' => '\Wallee\Sdk\Model\SubscriptionProductState',
+        'failed_payment_suspension_period' => 'string',
+        'allowed_payment_method_configurations' => 'int[]'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'allowed_payment_method_configurations' => 'int64',
-        'failed_payment_suspension_period' => null,
+    protected static $openAPIFormats = [
+        'sort_order' => 'int32',
         'name' => null,
         'product_locked' => null,
-        'sort_order' => 'int32',
-        'state' => null
+        'state' => null,
+        'failed_payment_suspension_period' => null,
+        'allowed_payment_method_configurations' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'sort_order' => false,
+        'name' => false,
+        'product_locked' => false,
+        'state' => false,
+        'failed_payment_suspension_period' => false,
+        'allowed_payment_method_configurations' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -77,12 +179,12 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
-        'failed_payment_suspension_period' => 'failedPaymentSuspensionPeriod',
+        'sort_order' => 'sortOrder',
         'name' => 'name',
         'product_locked' => 'productLocked',
-        'sort_order' => 'sortOrder',
-        'state' => 'state'
+        'state' => 'state',
+        'failed_payment_suspension_period' => 'failedPaymentSuspensionPeriod',
+        'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations'
     ];
 
     /**
@@ -91,12 +193,12 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
-        'failed_payment_suspension_period' => 'setFailedPaymentSuspensionPeriod',
+        'sort_order' => 'setSortOrder',
         'name' => 'setName',
         'product_locked' => 'setProductLocked',
-        'sort_order' => 'setSortOrder',
-        'state' => 'setState'
+        'state' => 'setState',
+        'failed_payment_suspension_period' => 'setFailedPaymentSuspensionPeriod',
+        'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations'
     ];
 
     /**
@@ -105,44 +207,95 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
-        'failed_payment_suspension_period' => 'getFailedPaymentSuspensionPeriod',
+        'sort_order' => 'getSortOrder',
         'name' => 'getName',
         'product_locked' => 'getProductLocked',
-        'sort_order' => 'getSortOrder',
-        'state' => 'getState'
+        'state' => 'getState',
+        'failed_payment_suspension_period' => 'getFailedPaymentSuspensionPeriod',
+        'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['allowed_payment_method_configurations'] = isset($data['allowed_payment_method_configurations']) ? $data['allowed_payment_method_configurations'] : null;
-        
-        $this->container['failed_payment_suspension_period'] = isset($data['failed_payment_suspension_period']) ? $data['failed_payment_suspension_period'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['product_locked'] = isset($data['product_locked']) ? $data['product_locked'] : null;
-        
-        $this->container['sort_order'] = isset($data['sort_order']) ? $data['sort_order'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
+        $this->setIfExists('sort_order', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('product_locked', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('failed_payment_suspension_period', $data ?? [], null);
+        $this->setIfExists('allowed_payment_method_configurations', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -162,190 +315,21 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets allowed_payment_method_configurations
-     *
-     * @return int[]
-     */
-    public function getAllowedPaymentMethodConfigurations()
-    {
-        return $this->container['allowed_payment_method_configurations'];
-    }
-
-    /**
-     * Sets allowed_payment_method_configurations
-     *
-     * @param int[] $allowed_payment_method_configurations The payment methods that can be used to subscribe to this product. If none are selected, no restriction is applied.
-     *
-     * @return $this
-     */
-    public function setAllowedPaymentMethodConfigurations($allowed_payment_method_configurations)
-    {
-        $this->container['allowed_payment_method_configurations'] = $allowed_payment_method_configurations;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_payment_suspension_period
-     *
-     * @return string
-     */
-    public function getFailedPaymentSuspensionPeriod()
-    {
-        return $this->container['failed_payment_suspension_period'];
-    }
-
-    /**
-     * Sets failed_payment_suspension_period
-     *
-     * @param string $failed_payment_suspension_period The period after which a subscription that has been suspended due to a failed payment is terminated.
-     *
-     * @return $this
-     */
-    public function setFailedPaymentSuspensionPeriod($failed_payment_suspension_period)
-    {
-        $this->container['failed_payment_suspension_period'] = $failed_payment_suspension_period;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The name used to identify the product.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling AbstractSubscriptionProductActive., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets product_locked
-     *
-     * @return bool
-     */
-    public function getProductLocked()
-    {
-        return $this->container['product_locked'];
-    }
-
-    /**
-     * Sets product_locked
-     *
-     * @param bool $product_locked Whether subscriptions can be switched to or from this product, or whether they are locked in.
-     *
-     * @return $this
-     */
-    public function setProductLocked($product_locked)
-    {
-        $this->container['product_locked'] = $product_locked;
-
-        return $this;
-    }
-    
 
     /**
      * Gets sort_order
      *
-     * @return int
+     * @return int|null
      */
     public function getSortOrder()
     {
@@ -355,22 +339,82 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
     /**
      * Sets sort_order
      *
-     * @param int $sort_order When listing products, they can be sorted by this number.
+     * @param int|null $sort_order When listing products, they can be sorted by this number.
      *
-     * @return $this
+     * @return self
      */
     public function setSortOrder($sort_order)
     {
+        if (is_null($sort_order)) {
+            throw new \InvalidArgumentException('non-nullable sort_order cannot be null');
+        }
         $this->container['sort_order'] = $sort_order;
 
         return $this;
     }
-    
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name The name used to identify the product.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling AbstractSubscriptionProductActive., must be smaller than or equal to 100.');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets product_locked
+     *
+     * @return bool|null
+     */
+    public function getProductLocked()
+    {
+        return $this->container['product_locked'];
+    }
+
+    /**
+     * Sets product_locked
+     *
+     * @param bool|null $product_locked Whether subscriptions can be switched to or from this product, or whether they are locked in.
+     *
+     * @return self
+     */
+    public function setProductLocked($product_locked)
+    {
+        if (is_null($product_locked)) {
+            throw new \InvalidArgumentException('non-nullable product_locked cannot be null');
+        }
+        $this->container['product_locked'] = $product_locked;
+
+        return $this;
+    }
 
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\SubscriptionProductState
+     * @return \Wallee\Sdk\Model\SubscriptionProductState|null
      */
     public function getState()
     {
@@ -380,17 +424,73 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\SubscriptionProductState $state The object's current state.
+     * @param \Wallee\Sdk\Model\SubscriptionProductState|null $state state
      *
-     * @return $this
+     * @return self
      */
     public function setState($state)
     {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
         $this->container['state'] = $state;
 
         return $this;
     }
-    
+
+    /**
+     * Gets failed_payment_suspension_period
+     *
+     * @return string|null
+     */
+    public function getFailedPaymentSuspensionPeriod()
+    {
+        return $this->container['failed_payment_suspension_period'];
+    }
+
+    /**
+     * Sets failed_payment_suspension_period
+     *
+     * @param string|null $failed_payment_suspension_period The period after which a subscription that has been suspended due to a failed payment is terminated.
+     *
+     * @return self
+     */
+    public function setFailedPaymentSuspensionPeriod($failed_payment_suspension_period)
+    {
+        if (is_null($failed_payment_suspension_period)) {
+            throw new \InvalidArgumentException('non-nullable failed_payment_suspension_period cannot be null');
+        }
+        $this->container['failed_payment_suspension_period'] = $failed_payment_suspension_period;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowed_payment_method_configurations
+     *
+     * @return int[]|null
+     */
+    public function getAllowedPaymentMethodConfigurations()
+    {
+        return $this->container['allowed_payment_method_configurations'];
+    }
+
+    /**
+     * Sets allowed_payment_method_configurations
+     *
+     * @param int[]|null $allowed_payment_method_configurations The payment methods that can be used to subscribe to this product. If none are selected, no restriction is applied.
+     *
+     * @return self
+     */
+    public function setAllowedPaymentMethodConfigurations($allowed_payment_method_configurations)
+    {
+        if (is_null($allowed_payment_method_configurations)) {
+            throw new \InvalidArgumentException('non-nullable allowed_payment_method_configurations cannot be null');
+        }
+        $this->container['allowed_payment_method_configurations'] = $allowed_payment_method_configurations;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -398,8 +498,7 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -409,24 +508,23 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -442,10 +540,22 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -455,13 +565,19 @@ class AbstractSubscriptionProductActive implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

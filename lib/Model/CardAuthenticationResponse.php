@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
@@ -25,22 +28,28 @@ use \Wallee\Sdk\ObjectSerializer;
  * CardAuthenticationResponse model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class CardAuthenticationResponse
 {
     /**
      * Possible values of this enum
      */
-    const FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED';
-    const AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED';
-    const NOT_ENROLLED = 'NOT_ENROLLED';
-    const ENROLLMENT_ERROR = 'ENROLLMENT_ERROR';
-    const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
-    
+    public const FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED';
+
+    public const AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED';
+
+    public const NOT_ENROLLED = 'NOT_ENROLLED';
+
+    public const ENROLLMENT_ERROR = 'ENROLLMENT_ERROR';
+
+    public const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -52,7 +61,7 @@ class CardAuthenticationResponse
             self::AUTHENTICATION_NOT_REQUIRED,
             self::NOT_ENROLLED,
             self::ENROLLMENT_ERROR,
-            self::AUTHENTICATION_ERROR,
+            self::AUTHENTICATION_ERROR
         ];
     }
 }

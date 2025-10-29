@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
@@ -25,22 +28,30 @@ use \Wallee\Sdk\ObjectSerializer;
  * TransactionUserInterfaceType model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class TransactionUserInterfaceType
 {
     /**
      * Possible values of this enum
      */
-    const IFRAME = 'IFRAME';
-    const LIGHTBOX = 'LIGHTBOX';
-    const PAYMENT_PAGE = 'PAYMENT_PAGE';
-    const MOBILE_SDK = 'MOBILE_SDK';
-    const TERMINAL = 'TERMINAL';
-    
+    public const IFRAME = 'IFRAME';
+
+    public const LIGHTBOX = 'LIGHTBOX';
+
+    public const PAYMENT_PAGE = 'PAYMENT_PAGE';
+
+    public const MOBILE_SDK = 'MOBILE_SDK';
+
+    public const TERMINAL = 'TERMINAL';
+
+    public const EXPRESS_CHECKOUT = 'EXPRESS_CHECKOUT';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -53,6 +64,7 @@ class TransactionUserInterfaceType
             self::PAYMENT_PAGE,
             self::MOBILE_SDK,
             self::TERMINAL,
+            self::EXPRESS_CHECKOUT
         ];
     }
 }

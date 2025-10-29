@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -30,78 +33,193 @@ use \Wallee\Sdk\ObjectSerializer;
  * @description The subscription ledger entry represents a single change on the subscription balance.
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
+class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SubscriptionLedgerEntry';
+    protected static $openAPIModelName = 'SubscriptionLedgerEntry';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'aggregated_tax_rate' => 'float',
-        'amount_excluding_tax' => 'float',
-        'amount_including_tax' => 'float',
-        'component_reference_name' => 'string',
-        'component_reference_sku' => 'string',
-        'created_by' => 'int',
-        'created_on' => '\DateTime',
-        'discount_including_tax' => 'float',
-        'external_id' => 'string',
-        'fee_type' => '\Wallee\Sdk\Model\ProductFeeType',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'planned_purge_date' => '\DateTime',
-        'pro_rata_calculated' => 'bool',
+    protected static $openAPITypes = [
         'quantity' => 'float',
-        'state' => '\Wallee\Sdk\Model\SubscriptionLedgerEntryState',
-        'subscription_metric_id' => 'int',
+        'amount_excluding_tax' => 'float',
+        'planned_purge_date' => '\DateTime',
         'subscription_version' => 'int',
-        'tax_amount' => 'float',
+        'external_id' => 'string',
         'taxes' => '\Wallee\Sdk\Model\Tax[]',
+        'fee_type' => '\Wallee\Sdk\Model\ProductFeeType',
         'title' => 'string',
-        'version' => 'int'
+        'created_on' => '\DateTime',
+        'version' => 'int',
+        'component_reference_name' => 'string',
+        'subscription_metric_id' => 'int',
+        'linked_space_id' => 'int',
+        'pro_rata_calculated' => 'bool',
+        'created_by' => 'int',
+        'component_reference_sku' => 'string',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\SubscriptionLedgerEntryState',
+        'amount_including_tax' => 'float',
+        'discount_including_tax' => 'float',
+        'tax_amount' => 'float',
+        'aggregated_tax_rate' => 'float'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'aggregated_tax_rate' => null,
-        'amount_excluding_tax' => null,
-        'amount_including_tax' => null,
-        'component_reference_name' => null,
-        'component_reference_sku' => null,
-        'created_by' => 'int64',
-        'created_on' => 'date-time',
-        'discount_including_tax' => null,
-        'external_id' => null,
-        'fee_type' => null,
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'planned_purge_date' => 'date-time',
-        'pro_rata_calculated' => null,
+    protected static $openAPIFormats = [
         'quantity' => null,
-        'state' => null,
-        'subscription_metric_id' => 'int64',
+        'amount_excluding_tax' => null,
+        'planned_purge_date' => 'date-time',
         'subscription_version' => 'int64',
-        'tax_amount' => null,
+        'external_id' => null,
         'taxes' => null,
+        'fee_type' => null,
         'title' => null,
-        'version' => 'int32'
+        'created_on' => 'date-time',
+        'version' => 'int32',
+        'component_reference_name' => null,
+        'subscription_metric_id' => 'int64',
+        'linked_space_id' => 'int64',
+        'pro_rata_calculated' => null,
+        'created_by' => 'int64',
+        'component_reference_sku' => null,
+        'id' => 'int64',
+        'state' => null,
+        'amount_including_tax' => null,
+        'discount_including_tax' => null,
+        'tax_amount' => null,
+        'aggregated_tax_rate' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'quantity' => false,
+        'amount_excluding_tax' => false,
+        'planned_purge_date' => false,
+        'subscription_version' => false,
+        'external_id' => false,
+        'taxes' => false,
+        'fee_type' => false,
+        'title' => false,
+        'created_on' => false,
+        'version' => false,
+        'component_reference_name' => false,
+        'subscription_metric_id' => false,
+        'linked_space_id' => false,
+        'pro_rata_calculated' => false,
+        'created_by' => false,
+        'component_reference_sku' => false,
+        'id' => false,
+        'state' => false,
+        'amount_including_tax' => false,
+        'discount_including_tax' => false,
+        'tax_amount' => false,
+        'aggregated_tax_rate' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -110,28 +228,28 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'aggregated_tax_rate' => 'aggregatedTaxRate',
-        'amount_excluding_tax' => 'amountExcludingTax',
-        'amount_including_tax' => 'amountIncludingTax',
-        'component_reference_name' => 'componentReferenceName',
-        'component_reference_sku' => 'componentReferenceSku',
-        'created_by' => 'createdBy',
-        'created_on' => 'createdOn',
-        'discount_including_tax' => 'discountIncludingTax',
-        'external_id' => 'externalId',
-        'fee_type' => 'feeType',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'pro_rata_calculated' => 'proRataCalculated',
         'quantity' => 'quantity',
-        'state' => 'state',
-        'subscription_metric_id' => 'subscriptionMetricId',
+        'amount_excluding_tax' => 'amountExcludingTax',
+        'planned_purge_date' => 'plannedPurgeDate',
         'subscription_version' => 'subscriptionVersion',
-        'tax_amount' => 'taxAmount',
+        'external_id' => 'externalId',
         'taxes' => 'taxes',
+        'fee_type' => 'feeType',
         'title' => 'title',
-        'version' => 'version'
+        'created_on' => 'createdOn',
+        'version' => 'version',
+        'component_reference_name' => 'componentReferenceName',
+        'subscription_metric_id' => 'subscriptionMetricId',
+        'linked_space_id' => 'linkedSpaceId',
+        'pro_rata_calculated' => 'proRataCalculated',
+        'created_by' => 'createdBy',
+        'component_reference_sku' => 'componentReferenceSku',
+        'id' => 'id',
+        'state' => 'state',
+        'amount_including_tax' => 'amountIncludingTax',
+        'discount_including_tax' => 'discountIncludingTax',
+        'tax_amount' => 'taxAmount',
+        'aggregated_tax_rate' => 'aggregatedTaxRate'
     ];
 
     /**
@@ -140,28 +258,28 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'aggregated_tax_rate' => 'setAggregatedTaxRate',
-        'amount_excluding_tax' => 'setAmountExcludingTax',
-        'amount_including_tax' => 'setAmountIncludingTax',
-        'component_reference_name' => 'setComponentReferenceName',
-        'component_reference_sku' => 'setComponentReferenceSku',
-        'created_by' => 'setCreatedBy',
-        'created_on' => 'setCreatedOn',
-        'discount_including_tax' => 'setDiscountIncludingTax',
-        'external_id' => 'setExternalId',
-        'fee_type' => 'setFeeType',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'pro_rata_calculated' => 'setProRataCalculated',
         'quantity' => 'setQuantity',
-        'state' => 'setState',
-        'subscription_metric_id' => 'setSubscriptionMetricId',
+        'amount_excluding_tax' => 'setAmountExcludingTax',
+        'planned_purge_date' => 'setPlannedPurgeDate',
         'subscription_version' => 'setSubscriptionVersion',
-        'tax_amount' => 'setTaxAmount',
+        'external_id' => 'setExternalId',
         'taxes' => 'setTaxes',
+        'fee_type' => 'setFeeType',
         'title' => 'setTitle',
-        'version' => 'setVersion'
+        'created_on' => 'setCreatedOn',
+        'version' => 'setVersion',
+        'component_reference_name' => 'setComponentReferenceName',
+        'subscription_metric_id' => 'setSubscriptionMetricId',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'pro_rata_calculated' => 'setProRataCalculated',
+        'created_by' => 'setCreatedBy',
+        'component_reference_sku' => 'setComponentReferenceSku',
+        'id' => 'setId',
+        'state' => 'setState',
+        'amount_including_tax' => 'setAmountIncludingTax',
+        'discount_including_tax' => 'setDiscountIncludingTax',
+        'tax_amount' => 'setTaxAmount',
+        'aggregated_tax_rate' => 'setAggregatedTaxRate'
     ];
 
     /**
@@ -170,92 +288,127 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'aggregated_tax_rate' => 'getAggregatedTaxRate',
-        'amount_excluding_tax' => 'getAmountExcludingTax',
-        'amount_including_tax' => 'getAmountIncludingTax',
-        'component_reference_name' => 'getComponentReferenceName',
-        'component_reference_sku' => 'getComponentReferenceSku',
-        'created_by' => 'getCreatedBy',
-        'created_on' => 'getCreatedOn',
-        'discount_including_tax' => 'getDiscountIncludingTax',
-        'external_id' => 'getExternalId',
-        'fee_type' => 'getFeeType',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'pro_rata_calculated' => 'getProRataCalculated',
         'quantity' => 'getQuantity',
-        'state' => 'getState',
-        'subscription_metric_id' => 'getSubscriptionMetricId',
+        'amount_excluding_tax' => 'getAmountExcludingTax',
+        'planned_purge_date' => 'getPlannedPurgeDate',
         'subscription_version' => 'getSubscriptionVersion',
-        'tax_amount' => 'getTaxAmount',
+        'external_id' => 'getExternalId',
         'taxes' => 'getTaxes',
+        'fee_type' => 'getFeeType',
         'title' => 'getTitle',
-        'version' => 'getVersion'
+        'created_on' => 'getCreatedOn',
+        'version' => 'getVersion',
+        'component_reference_name' => 'getComponentReferenceName',
+        'subscription_metric_id' => 'getSubscriptionMetricId',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'pro_rata_calculated' => 'getProRataCalculated',
+        'created_by' => 'getCreatedBy',
+        'component_reference_sku' => 'getComponentReferenceSku',
+        'id' => 'getId',
+        'state' => 'getState',
+        'amount_including_tax' => 'getAmountIncludingTax',
+        'discount_including_tax' => 'getDiscountIncludingTax',
+        'tax_amount' => 'getTaxAmount',
+        'aggregated_tax_rate' => 'getAggregatedTaxRate'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['aggregated_tax_rate'] = isset($data['aggregated_tax_rate']) ? $data['aggregated_tax_rate'] : null;
-        
-        $this->container['amount_excluding_tax'] = isset($data['amount_excluding_tax']) ? $data['amount_excluding_tax'] : null;
-        
-        $this->container['amount_including_tax'] = isset($data['amount_including_tax']) ? $data['amount_including_tax'] : null;
-        
-        $this->container['component_reference_name'] = isset($data['component_reference_name']) ? $data['component_reference_name'] : null;
-        
-        $this->container['component_reference_sku'] = isset($data['component_reference_sku']) ? $data['component_reference_sku'] : null;
-        
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['discount_including_tax'] = isset($data['discount_including_tax']) ? $data['discount_including_tax'] : null;
-        
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        
-        $this->container['fee_type'] = isset($data['fee_type']) ? $data['fee_type'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['pro_rata_calculated'] = isset($data['pro_rata_calculated']) ? $data['pro_rata_calculated'] : null;
-        
-        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['subscription_metric_id'] = isset($data['subscription_metric_id']) ? $data['subscription_metric_id'] : null;
-        
-        $this->container['subscription_version'] = isset($data['subscription_version']) ? $data['subscription_version'] : null;
-        
-        $this->container['tax_amount'] = isset($data['tax_amount']) ? $data['tax_amount'] : null;
-        
-        $this->container['taxes'] = isset($data['taxes']) ? $data['taxes'] : null;
-        
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('quantity', $data ?? [], null);
+        $this->setIfExists('amount_excluding_tax', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('subscription_version', $data ?? [], null);
+        $this->setIfExists('external_id', $data ?? [], null);
+        $this->setIfExists('taxes', $data ?? [], null);
+        $this->setIfExists('fee_type', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('component_reference_name', $data ?? [], null);
+        $this->setIfExists('subscription_metric_id', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('pro_rata_calculated', $data ?? [], null);
+        $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('component_reference_sku', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('amount_including_tax', $data ?? [], null);
+        $this->setIfExists('discount_including_tax', $data ?? [], null);
+        $this->setIfExists('tax_amount', $data ?? [], null);
+        $this->setIfExists('aggregated_tax_rate', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -267,10 +420,6 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['component_reference_sku']) && (mb_strlen($this->container['component_reference_sku']) > 100)) {
-            $invalidProperties[] = "invalid value for 'component_reference_sku', the character length must be smaller than or equal to 100.";
-        }
-
         if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 150)) {
             $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 150.";
         }
@@ -279,72 +428,16 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'title', the character length must be bigger than or equal to 1.";
         }
 
+        if (!is_null($this->container['component_reference_sku']) && (mb_strlen($this->container['component_reference_sku']) > 100)) {
+            $invalidProperties[] = "invalid value for 'component_reference_sku', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['component_reference_sku']) && !preg_match("/([0-9a-zA-Z\\-_]+)/", $this->container['component_reference_sku'])) {
+            $invalidProperties[] = "invalid value for 'component_reference_sku', must be conform to the pattern /([0-9a-zA-Z\\-_]+)/.";
+        }
+
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -352,371 +445,16 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets aggregated_tax_rate
-     *
-     * @return float
-     */
-    public function getAggregatedTaxRate()
-    {
-        return $this->container['aggregated_tax_rate'];
-    }
-
-    /**
-     * Sets aggregated_tax_rate
-     *
-     * @param float $aggregated_tax_rate The total tax rate applied to the ledger entry, calculated from the rates of all tax lines.
-     *
-     * @return $this
-     */
-    public function setAggregatedTaxRate($aggregated_tax_rate)
-    {
-        $this->container['aggregated_tax_rate'] = $aggregated_tax_rate;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets amount_excluding_tax
-     *
-     * @return float
-     */
-    public function getAmountExcludingTax()
-    {
-        return $this->container['amount_excluding_tax'];
-    }
-
-    /**
-     * Sets amount_excluding_tax
-     *
-     * @param float $amount_excluding_tax The leger entry's amount with discounts applied, excluding taxes.
-     *
-     * @return $this
-     */
-    public function setAmountExcludingTax($amount_excluding_tax)
-    {
-        $this->container['amount_excluding_tax'] = $amount_excluding_tax;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets amount_including_tax
-     *
-     * @return float
-     */
-    public function getAmountIncludingTax()
-    {
-        return $this->container['amount_including_tax'];
-    }
-
-    /**
-     * Sets amount_including_tax
-     *
-     * @param float $amount_including_tax The leger entry's amount with discounts applied, including taxes.
-     *
-     * @return $this
-     */
-    public function setAmountIncludingTax($amount_including_tax)
-    {
-        $this->container['amount_including_tax'] = $amount_including_tax;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets component_reference_name
-     *
-     * @return string
-     */
-    public function getComponentReferenceName()
-    {
-        return $this->container['component_reference_name'];
-    }
-
-    /**
-     * Sets component_reference_name
-     *
-     * @param string $component_reference_name 
-     *
-     * @return $this
-     */
-    public function setComponentReferenceName($component_reference_name)
-    {
-        $this->container['component_reference_name'] = $component_reference_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets component_reference_sku
-     *
-     * @return string
-     */
-    public function getComponentReferenceSku()
-    {
-        return $this->container['component_reference_sku'];
-    }
-
-    /**
-     * Sets component_reference_sku
-     *
-     * @param string $component_reference_sku 
-     *
-     * @return $this
-     */
-    public function setComponentReferenceSku($component_reference_sku)
-    {
-        if (!is_null($component_reference_sku) && (mb_strlen($component_reference_sku) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $component_reference_sku when calling SubscriptionLedgerEntry., must be smaller than or equal to 100.');
-        }
-
-        $this->container['component_reference_sku'] = $component_reference_sku;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_by
-     *
-     * @return int
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param int $created_by The ID of the user the ledger entry was created by.
-     *
-     * @return $this
-     */
-    public function setCreatedBy($created_by)
-    {
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets discount_including_tax
-     *
-     * @return float
-     */
-    public function getDiscountIncludingTax()
-    {
-        return $this->container['discount_including_tax'];
-    }
-
-    /**
-     * Sets discount_including_tax
-     *
-     * @param float $discount_including_tax The discount allocated to the ledger entry, including taxes.
-     *
-     * @return $this
-     */
-    public function setDiscountIncludingTax($discount_including_tax)
-    {
-        $this->container['discount_including_tax'] = $discount_including_tax;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets external_id
-     *
-     * @return string
-     */
-    public function getExternalId()
-    {
-        return $this->container['external_id'];
-    }
-
-    /**
-     * Sets external_id
-     *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-     *
-     * @return $this
-     */
-    public function setExternalId($external_id)
-    {
-        $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets fee_type
-     *
-     * @return \Wallee\Sdk\Model\ProductFeeType
-     */
-    public function getFeeType()
-    {
-        return $this->container['fee_type'];
-    }
-
-    /**
-     * Sets fee_type
-     *
-     * @param \Wallee\Sdk\Model\ProductFeeType $fee_type 
-     *
-     * @return $this
-     */
-    public function setFeeType($fee_type)
-    {
-        $this->container['fee_type'] = $fee_type;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets pro_rata_calculated
-     *
-     * @return bool
-     */
-    public function getProRataCalculated()
-    {
-        return $this->container['pro_rata_calculated'];
-    }
-
-    /**
-     * Sets pro_rata_calculated
-     *
-     * @param bool $pro_rata_calculated 
-     *
-     * @return $this
-     */
-    public function setProRataCalculated($pro_rata_calculated)
-    {
-        $this->container['pro_rata_calculated'] = $pro_rata_calculated;
-
-        return $this;
-    }
-    
 
     /**
      * Gets quantity
      *
-     * @return float
+     * @return float|null
      */
     public function getQuantity()
     {
@@ -726,72 +464,78 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity The number of items that were consumed.
+     * @param float|null $quantity The number of items that were consumed.
      *
-     * @return $this
+     * @return self
      */
     public function setQuantity($quantity)
     {
+        if (is_null($quantity)) {
+            throw new \InvalidArgumentException('non-nullable quantity cannot be null');
+        }
         $this->container['quantity'] = $quantity;
 
         return $this;
     }
-    
 
     /**
-     * Gets state
+     * Gets amount_excluding_tax
      *
-     * @return \Wallee\Sdk\Model\SubscriptionLedgerEntryState
+     * @return float|null
      */
-    public function getState()
+    public function getAmountExcludingTax()
     {
-        return $this->container['state'];
+        return $this->container['amount_excluding_tax'];
     }
 
     /**
-     * Sets state
+     * Sets amount_excluding_tax
      *
-     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntryState $state The object's current state.
+     * @param float|null $amount_excluding_tax The leger entry's amount with discounts applied, excluding taxes.
      *
-     * @return $this
+     * @return self
      */
-    public function setState($state)
+    public function setAmountExcludingTax($amount_excluding_tax)
     {
-        $this->container['state'] = $state;
+        if (is_null($amount_excluding_tax)) {
+            throw new \InvalidArgumentException('non-nullable amount_excluding_tax cannot be null');
+        }
+        $this->container['amount_excluding_tax'] = $amount_excluding_tax;
 
         return $this;
     }
-    
 
     /**
-     * Gets subscription_metric_id
+     * Gets planned_purge_date
      *
-     * @return int
+     * @return \DateTime|null
      */
-    public function getSubscriptionMetricId()
+    public function getPlannedPurgeDate()
     {
-        return $this->container['subscription_metric_id'];
+        return $this->container['planned_purge_date'];
     }
 
     /**
-     * Sets subscription_metric_id
+     * Sets planned_purge_date
      *
-     * @param int $subscription_metric_id 
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
-    public function setSubscriptionMetricId($subscription_metric_id)
+    public function setPlannedPurgeDate($planned_purge_date)
     {
-        $this->container['subscription_metric_id'] = $subscription_metric_id;
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
 
     /**
      * Gets subscription_version
      *
-     * @return int
+     * @return int|null
      */
     public function getSubscriptionVersion()
     {
@@ -801,47 +545,51 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets subscription_version
      *
-     * @param int $subscription_version The subscription version that the ledger entry belongs to.
+     * @param int|null $subscription_version The subscription version that the ledger entry belongs to.
      *
-     * @return $this
+     * @return self
      */
     public function setSubscriptionVersion($subscription_version)
     {
+        if (is_null($subscription_version)) {
+            throw new \InvalidArgumentException('non-nullable subscription_version cannot be null');
+        }
         $this->container['subscription_version'] = $subscription_version;
 
         return $this;
     }
-    
 
     /**
-     * Gets tax_amount
+     * Gets external_id
      *
-     * @return float
+     * @return string|null
      */
-    public function getTaxAmount()
+    public function getExternalId()
     {
-        return $this->container['tax_amount'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets tax_amount
+     * Sets external_id
      *
-     * @param float $tax_amount The sum of all taxes applied to the ledger entry.
+     * @param string|null $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
-     * @return $this
+     * @return self
      */
-    public function setTaxAmount($tax_amount)
+    public function setExternalId($external_id)
     {
-        $this->container['tax_amount'] = $tax_amount;
+        if (is_null($external_id)) {
+            throw new \InvalidArgumentException('non-nullable external_id cannot be null');
+        }
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
-    
 
     /**
      * Gets taxes
      *
-     * @return \Wallee\Sdk\Model\Tax[]
+     * @return \Wallee\Sdk\Model\Tax[]|null
      */
     public function getTaxes()
     {
@@ -851,22 +599,53 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets taxes
      *
-     * @param \Wallee\Sdk\Model\Tax[] $taxes A set of tax lines, each of which specifies a tax applied to the ledger entry.
+     * @param \Wallee\Sdk\Model\Tax[]|null $taxes A set of tax lines, each of which specifies a tax applied to the ledger entry.
      *
-     * @return $this
+     * @return self
      */
     public function setTaxes($taxes)
     {
+        if (is_null($taxes)) {
+            throw new \InvalidArgumentException('non-nullable taxes cannot be null');
+        }
+
+
         $this->container['taxes'] = $taxes;
 
         return $this;
     }
-    
+
+    /**
+     * Gets fee_type
+     *
+     * @return \Wallee\Sdk\Model\ProductFeeType|null
+     */
+    public function getFeeType()
+    {
+        return $this->container['fee_type'];
+    }
+
+    /**
+     * Sets fee_type
+     *
+     * @param \Wallee\Sdk\Model\ProductFeeType|null $fee_type fee_type
+     *
+     * @return self
+     */
+    public function setFeeType($fee_type)
+    {
+        if (is_null($fee_type)) {
+            throw new \InvalidArgumentException('non-nullable fee_type cannot be null');
+        }
+        $this->container['fee_type'] = $fee_type;
+
+        return $this;
+    }
 
     /**
      * Gets title
      *
-     * @return string
+     * @return string|null
      */
     public function getTitle()
     {
@@ -876,16 +655,19 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param string $title The title that indicates what the ledger entry is about.
+     * @param string|null $title The title that indicates what the ledger entry is about.
      *
-     * @return $this
+     * @return self
      */
     public function setTitle($title)
     {
-        if (!is_null($title) && (mb_strlen($title) > 150)) {
+        if (is_null($title)) {
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        }
+        if ((mb_strlen($title) > 150)) {
             throw new \InvalidArgumentException('invalid length for $title when calling SubscriptionLedgerEntry., must be smaller than or equal to 150.');
         }
-        if (!is_null($title) && (mb_strlen($title) < 1)) {
+        if ((mb_strlen($title) < 1)) {
             throw new \InvalidArgumentException('invalid length for $title when calling SubscriptionLedgerEntry., must be bigger than or equal to 1.');
         }
 
@@ -893,12 +675,38 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
 
         return $this;
     }
-    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the object was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -908,17 +716,350 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets component_reference_name
+     *
+     * @return string|null
+     */
+    public function getComponentReferenceName()
+    {
+        return $this->container['component_reference_name'];
+    }
+
+    /**
+     * Sets component_reference_name
+     *
+     * @param string|null $component_reference_name component_reference_name
+     *
+     * @return self
+     */
+    public function setComponentReferenceName($component_reference_name)
+    {
+        if (is_null($component_reference_name)) {
+            throw new \InvalidArgumentException('non-nullable component_reference_name cannot be null');
+        }
+        $this->container['component_reference_name'] = $component_reference_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_metric_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionMetricId()
+    {
+        return $this->container['subscription_metric_id'];
+    }
+
+    /**
+     * Sets subscription_metric_id
+     *
+     * @param int|null $subscription_metric_id subscription_metric_id
+     *
+     * @return self
+     */
+    public function setSubscriptionMetricId($subscription_metric_id)
+    {
+        if (is_null($subscription_metric_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_metric_id cannot be null');
+        }
+        $this->container['subscription_metric_id'] = $subscription_metric_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets pro_rata_calculated
+     *
+     * @return bool|null
+     */
+    public function getProRataCalculated()
+    {
+        return $this->container['pro_rata_calculated'];
+    }
+
+    /**
+     * Sets pro_rata_calculated
+     *
+     * @param bool|null $pro_rata_calculated pro_rata_calculated
+     *
+     * @return self
+     */
+    public function setProRataCalculated($pro_rata_calculated)
+    {
+        if (is_null($pro_rata_calculated)) {
+            throw new \InvalidArgumentException('non-nullable pro_rata_calculated cannot be null');
+        }
+        $this->container['pro_rata_calculated'] = $pro_rata_calculated;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_by
+     *
+     * @return int|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int|null $created_by The ID of the user the ledger entry was created by.
+     *
+     * @return self
+     */
+    public function setCreatedBy($created_by)
+    {
+        if (is_null($created_by)) {
+            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
+        }
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets component_reference_sku
+     *
+     * @return string|null
+     */
+    public function getComponentReferenceSku()
+    {
+        return $this->container['component_reference_sku'];
+    }
+
+    /**
+     * Sets component_reference_sku
+     *
+     * @param string|null $component_reference_sku component_reference_sku
+     *
+     * @return self
+     */
+    public function setComponentReferenceSku($component_reference_sku)
+    {
+        if (is_null($component_reference_sku)) {
+            throw new \InvalidArgumentException('non-nullable component_reference_sku cannot be null');
+        }
+        if ((mb_strlen($component_reference_sku) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $component_reference_sku when calling SubscriptionLedgerEntry., must be smaller than or equal to 100.');
+        }
+        if ((!preg_match("/([0-9a-zA-Z\\-_]+)/", ObjectSerializer::toString($component_reference_sku)))) {
+            throw new \InvalidArgumentException("invalid value for \$component_reference_sku when calling SubscriptionLedgerEntry., must conform to the pattern /([0-9a-zA-Z\\-_]+)/.");
+        }
+
+        $this->container['component_reference_sku'] = $component_reference_sku;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\SubscriptionLedgerEntryState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntryState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount_including_tax
+     *
+     * @return float|null
+     */
+    public function getAmountIncludingTax()
+    {
+        return $this->container['amount_including_tax'];
+    }
+
+    /**
+     * Sets amount_including_tax
+     *
+     * @param float|null $amount_including_tax The leger entry's amount with discounts applied, including taxes.
+     *
+     * @return self
+     */
+    public function setAmountIncludingTax($amount_including_tax)
+    {
+        if (is_null($amount_including_tax)) {
+            throw new \InvalidArgumentException('non-nullable amount_including_tax cannot be null');
+        }
+        $this->container['amount_including_tax'] = $amount_including_tax;
+
+        return $this;
+    }
+
+    /**
+     * Gets discount_including_tax
+     *
+     * @return float|null
+     */
+    public function getDiscountIncludingTax()
+    {
+        return $this->container['discount_including_tax'];
+    }
+
+    /**
+     * Sets discount_including_tax
+     *
+     * @param float|null $discount_including_tax The discount allocated to the ledger entry, including taxes.
+     *
+     * @return self
+     */
+    public function setDiscountIncludingTax($discount_including_tax)
+    {
+        if (is_null($discount_including_tax)) {
+            throw new \InvalidArgumentException('non-nullable discount_including_tax cannot be null');
+        }
+        $this->container['discount_including_tax'] = $discount_including_tax;
+
+        return $this;
+    }
+
+    /**
+     * Gets tax_amount
+     *
+     * @return float|null
+     */
+    public function getTaxAmount()
+    {
+        return $this->container['tax_amount'];
+    }
+
+    /**
+     * Sets tax_amount
+     *
+     * @param float|null $tax_amount The sum of all taxes applied to the ledger entry.
+     *
+     * @return self
+     */
+    public function setTaxAmount($tax_amount)
+    {
+        if (is_null($tax_amount)) {
+            throw new \InvalidArgumentException('non-nullable tax_amount cannot be null');
+        }
+        $this->container['tax_amount'] = $tax_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets aggregated_tax_rate
+     *
+     * @return float|null
+     */
+    public function getAggregatedTaxRate()
+    {
+        return $this->container['aggregated_tax_rate'];
+    }
+
+    /**
+     * Sets aggregated_tax_rate
+     *
+     * @param float|null $aggregated_tax_rate The total tax rate applied to the ledger entry, calculated from the rates of all tax lines.
+     *
+     * @return self
+     */
+    public function setAggregatedTaxRate($aggregated_tax_rate)
+    {
+        if (is_null($aggregated_tax_rate)) {
+            throw new \InvalidArgumentException('non-nullable aggregated_tax_rate cannot be null');
+        }
+        $this->container['aggregated_tax_rate'] = $aggregated_tax_rate;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -926,8 +1067,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -937,24 +1077,23 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -970,10 +1109,22 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -983,13 +1134,19 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

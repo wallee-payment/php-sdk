@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,45 +30,141 @@ use \Wallee\Sdk\ObjectSerializer;
  * TokenizedCardData model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class TokenizedCardData implements ModelInterface, ArrayAccess
+class TokenizedCardData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TokenizedCardData';
+    protected static $openAPIModelName = 'TokenizedCardData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'cryptogram' => '\Wallee\Sdk\Model\CardCryptogram',
+    protected static $openAPITypes = [
         'initial_recurring_transaction' => 'bool',
         'recurring_indicator' => '\Wallee\Sdk\Model\RecurringIndicator',
-        'token_requestor_id' => 'string'
+        'token_requestor_id' => 'string',
+        'cryptogram' => '\Wallee\Sdk\Model\CardCryptogram'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'cryptogram' => null,
+    protected static $openAPIFormats = [
         'initial_recurring_transaction' => null,
         'recurring_indicator' => null,
-        'token_requestor_id' => null
+        'token_requestor_id' => null,
+        'cryptogram' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'initial_recurring_transaction' => false,
+        'recurring_indicator' => false,
+        'token_requestor_id' => false,
+        'cryptogram' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -74,10 +173,10 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'cryptogram' => 'cryptogram',
         'initial_recurring_transaction' => 'initialRecurringTransaction',
         'recurring_indicator' => 'recurringIndicator',
-        'token_requestor_id' => 'tokenRequestorId'
+        'token_requestor_id' => 'tokenRequestorId',
+        'cryptogram' => 'cryptogram'
     ];
 
     /**
@@ -86,10 +185,10 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'cryptogram' => 'setCryptogram',
         'initial_recurring_transaction' => 'setInitialRecurringTransaction',
         'recurring_indicator' => 'setRecurringIndicator',
-        'token_requestor_id' => 'setTokenRequestorId'
+        'token_requestor_id' => 'setTokenRequestorId',
+        'cryptogram' => 'setCryptogram'
     ];
 
     /**
@@ -98,38 +197,91 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'cryptogram' => 'getCryptogram',
         'initial_recurring_transaction' => 'getInitialRecurringTransaction',
         'recurring_indicator' => 'getRecurringIndicator',
-        'token_requestor_id' => 'getTokenRequestorId'
+        'token_requestor_id' => 'getTokenRequestorId',
+        'cryptogram' => 'getCryptogram'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['cryptogram'] = isset($data['cryptogram']) ? $data['cryptogram'] : null;
-        
-        $this->container['initial_recurring_transaction'] = isset($data['initial_recurring_transaction']) ? $data['initial_recurring_transaction'] : null;
-        
-        $this->container['recurring_indicator'] = isset($data['recurring_indicator']) ? $data['recurring_indicator'] : null;
-        
-        $this->container['token_requestor_id'] = isset($data['token_requestor_id']) ? $data['token_requestor_id'] : null;
-        
+        $this->setIfExists('initial_recurring_transaction', $data ?? [], null);
+        $this->setIfExists('recurring_indicator', $data ?? [], null);
+        $this->setIfExists('token_requestor_id', $data ?? [], null);
+        $this->setIfExists('cryptogram', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -145,111 +297,21 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets cryptogram
-     *
-     * @return \Wallee\Sdk\Model\CardCryptogram
-     */
-    public function getCryptogram()
-    {
-        return $this->container['cryptogram'];
-    }
-
-    /**
-     * Sets cryptogram
-     *
-     * @param \Wallee\Sdk\Model\CardCryptogram $cryptogram An additional authentication value that enhances the security of tokenized card transactions.
-     *
-     * @return $this
-     */
-    public function setCryptogram($cryptogram)
-    {
-        $this->container['cryptogram'] = $cryptogram;
-
-        return $this;
-    }
-    
 
     /**
      * Gets initial_recurring_transaction
      *
-     * @return bool
+     * @return bool|null
      */
     public function getInitialRecurringTransaction()
     {
@@ -259,22 +321,24 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets initial_recurring_transaction
      *
-     * @param bool $initial_recurring_transaction Whether the transaction is an initial recurring transaction, based on the recurring indicator. This is used to identify the first transaction in a recurring payment setup.
+     * @param bool|null $initial_recurring_transaction Whether the transaction is an initial recurring transaction, based on the recurring indicator. This is used to identify the first transaction in a recurring payment setup.
      *
-     * @return $this
+     * @return self
      */
     public function setInitialRecurringTransaction($initial_recurring_transaction)
     {
+        if (is_null($initial_recurring_transaction)) {
+            throw new \InvalidArgumentException('non-nullable initial_recurring_transaction cannot be null');
+        }
         $this->container['initial_recurring_transaction'] = $initial_recurring_transaction;
 
         return $this;
     }
-    
 
     /**
      * Gets recurring_indicator
      *
-     * @return \Wallee\Sdk\Model\RecurringIndicator
+     * @return \Wallee\Sdk\Model\RecurringIndicator|null
      */
     public function getRecurringIndicator()
     {
@@ -284,22 +348,24 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets recurring_indicator
      *
-     * @param \Wallee\Sdk\Model\RecurringIndicator $recurring_indicator The indicator used to distinguish between recurring and one-time transactions. If omitted, it will be automatically determined based on the transaction's properties.
+     * @param \Wallee\Sdk\Model\RecurringIndicator|null $recurring_indicator recurring_indicator
      *
-     * @return $this
+     * @return self
      */
     public function setRecurringIndicator($recurring_indicator)
     {
+        if (is_null($recurring_indicator)) {
+            throw new \InvalidArgumentException('non-nullable recurring_indicator cannot be null');
+        }
         $this->container['recurring_indicator'] = $recurring_indicator;
 
         return $this;
     }
-    
 
     /**
      * Gets token_requestor_id
      *
-     * @return string
+     * @return string|null
      */
     public function getTokenRequestorId()
     {
@@ -309,17 +375,46 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
     /**
      * Sets token_requestor_id
      *
-     * @param string $token_requestor_id The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
+     * @param string|null $token_requestor_id The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
      *
-     * @return $this
+     * @return self
      */
     public function setTokenRequestorId($token_requestor_id)
     {
+        if (is_null($token_requestor_id)) {
+            throw new \InvalidArgumentException('non-nullable token_requestor_id cannot be null');
+        }
         $this->container['token_requestor_id'] = $token_requestor_id;
 
         return $this;
     }
-    
+
+    /**
+     * Gets cryptogram
+     *
+     * @return \Wallee\Sdk\Model\CardCryptogram|null
+     */
+    public function getCryptogram()
+    {
+        return $this->container['cryptogram'];
+    }
+
+    /**
+     * Sets cryptogram
+     *
+     * @param \Wallee\Sdk\Model\CardCryptogram|null $cryptogram cryptogram
+     *
+     * @return self
+     */
+    public function setCryptogram($cryptogram)
+    {
+        if (is_null($cryptogram)) {
+            throw new \InvalidArgumentException('non-nullable cryptogram cannot be null');
+        }
+        $this->container['cryptogram'] = $cryptogram;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -327,8 +422,7 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -338,24 +432,23 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -371,10 +464,22 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -384,13 +489,19 @@ class TokenizedCardData implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

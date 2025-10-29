@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
@@ -25,20 +28,24 @@ use \Wallee\Sdk\ObjectSerializer;
  * TransactionEnvironmentSelectionStrategy model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class TransactionEnvironmentSelectionStrategy
 {
     /**
      * Possible values of this enum
      */
-    const FORCE_TEST_ENVIRONMENT = 'FORCE_TEST_ENVIRONMENT';
-    const FORCE_PRODUCTION_ENVIRONMENT = 'FORCE_PRODUCTION_ENVIRONMENT';
-    const USE_CONFIGURATION = 'USE_CONFIGURATION';
-    
+    public const FORCE_TEST_ENVIRONMENT = 'FORCE_TEST_ENVIRONMENT';
+
+    public const FORCE_PRODUCTION_ENVIRONMENT = 'FORCE_PRODUCTION_ENVIRONMENT';
+
+    public const USE_CONFIGURATION = 'USE_CONFIGURATION';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -48,7 +55,7 @@ class TransactionEnvironmentSelectionStrategy
         return [
             self::FORCE_TEST_ENVIRONMENT,
             self::FORCE_PRODUCTION_ENVIRONMENT,
-            self::USE_CONFIGURATION,
+            self::USE_CONFIGURATION
         ];
     }
 }

@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
@@ -25,23 +28,30 @@ use \Wallee\Sdk\ObjectSerializer;
  * PaymentTerminalState model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class PaymentTerminalState
 {
     /**
      * Possible values of this enum
      */
-    const CREATE = 'CREATE';
-    const PREPARING = 'PREPARING';
-    const ACTIVE = 'ACTIVE';
-    const INACTIVE = 'INACTIVE';
-    const DECOMMISSIONING = 'DECOMMISSIONING';
-    const DECOMMISSIONED = 'DECOMMISSIONED';
-    
+    public const CREATE = 'CREATE';
+
+    public const PREPARING = 'PREPARING';
+
+    public const ACTIVE = 'ACTIVE';
+
+    public const INACTIVE = 'INACTIVE';
+
+    public const DECOMMISSIONING = 'DECOMMISSIONING';
+
+    public const DECOMMISSIONED = 'DECOMMISSIONED';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -54,7 +64,7 @@ class PaymentTerminalState
             self::ACTIVE,
             self::INACTIVE,
             self::DECOMMISSIONING,
-            self::DECOMMISSIONED,
+            self::DECOMMISSIONED
         ];
     }
 }

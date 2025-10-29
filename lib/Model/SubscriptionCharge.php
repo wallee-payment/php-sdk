@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -30,76 +33,190 @@ use \Wallee\Sdk\ObjectSerializer;
  * @description The subscription charge represents a single charge carried out for a particular subscription.
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class SubscriptionCharge implements ModelInterface, ArrayAccess
+class SubscriptionCharge implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SubscriptionCharge';
+    protected static $openAPIModelName = 'SubscriptionCharge';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'created_on' => '\DateTime',
-        'discarded_by' => 'int',
+    protected static $openAPITypes = [
         'discarded_on' => '\DateTime',
-        'external_id' => 'string',
-        'failed_on' => '\DateTime',
-        'failed_url' => 'string',
-        'id' => 'int',
-        'language' => 'string',
-        'ledger_entries' => '\Wallee\Sdk\Model\SubscriptionLedgerEntry[]',
-        'linked_space_id' => 'int',
         'planned_execution_date' => '\DateTime',
-        'planned_purge_date' => '\DateTime',
         'processing_type' => '\Wallee\Sdk\Model\SubscriptionChargeProcessingType',
-        'reference' => 'string',
-        'state' => '\Wallee\Sdk\Model\SubscriptionChargeState',
-        'subscription' => '\Wallee\Sdk\Model\Subscription',
-        'succeed_on' => '\DateTime',
+        'ledger_entries' => '\Wallee\Sdk\Model\SubscriptionLedgerEntry[]',
+        'discarded_by' => 'int',
+        'planned_purge_date' => '\DateTime',
+        'external_id' => 'string',
         'success_url' => 'string',
-        'transaction' => '\Wallee\Sdk\Model\Transaction',
+        'language' => 'string',
+        'subscription' => '\Wallee\Sdk\Model\Subscription',
         'type' => '\Wallee\Sdk\Model\SubscriptionChargeType',
-        'version' => 'int'
+        'created_on' => '\DateTime',
+        'version' => 'int',
+        'reference' => 'string',
+        'linked_space_id' => 'int',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\SubscriptionChargeState',
+        'failed_on' => '\DateTime',
+        'transaction' => '\Wallee\Sdk\Model\Transaction',
+        'failed_url' => 'string',
+        'succeed_on' => '\DateTime'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'created_on' => 'date-time',
-        'discarded_by' => 'int64',
+    protected static $openAPIFormats = [
         'discarded_on' => 'date-time',
-        'external_id' => null,
-        'failed_on' => 'date-time',
-        'failed_url' => null,
-        'id' => 'int64',
-        'language' => null,
-        'ledger_entries' => null,
-        'linked_space_id' => 'int64',
         'planned_execution_date' => 'date-time',
-        'planned_purge_date' => 'date-time',
         'processing_type' => null,
-        'reference' => null,
-        'state' => null,
-        'subscription' => null,
-        'succeed_on' => 'date-time',
+        'ledger_entries' => null,
+        'discarded_by' => 'int64',
+        'planned_purge_date' => 'date-time',
+        'external_id' => null,
         'success_url' => null,
-        'transaction' => null,
+        'language' => null,
+        'subscription' => null,
         'type' => null,
-        'version' => 'int32'
+        'created_on' => 'date-time',
+        'version' => 'int32',
+        'reference' => null,
+        'linked_space_id' => 'int64',
+        'id' => 'int64',
+        'state' => null,
+        'failed_on' => 'date-time',
+        'transaction' => null,
+        'failed_url' => null,
+        'succeed_on' => 'date-time'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'discarded_on' => false,
+        'planned_execution_date' => false,
+        'processing_type' => false,
+        'ledger_entries' => false,
+        'discarded_by' => false,
+        'planned_purge_date' => false,
+        'external_id' => false,
+        'success_url' => false,
+        'language' => false,
+        'subscription' => false,
+        'type' => false,
+        'created_on' => false,
+        'version' => false,
+        'reference' => false,
+        'linked_space_id' => false,
+        'id' => false,
+        'state' => false,
+        'failed_on' => false,
+        'transaction' => false,
+        'failed_url' => false,
+        'succeed_on' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -108,27 +225,27 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'created_on' => 'createdOn',
-        'discarded_by' => 'discardedBy',
         'discarded_on' => 'discardedOn',
-        'external_id' => 'externalId',
-        'failed_on' => 'failedOn',
-        'failed_url' => 'failedUrl',
-        'id' => 'id',
-        'language' => 'language',
-        'ledger_entries' => 'ledgerEntries',
-        'linked_space_id' => 'linkedSpaceId',
         'planned_execution_date' => 'plannedExecutionDate',
-        'planned_purge_date' => 'plannedPurgeDate',
         'processing_type' => 'processingType',
-        'reference' => 'reference',
-        'state' => 'state',
-        'subscription' => 'subscription',
-        'succeed_on' => 'succeedOn',
+        'ledger_entries' => 'ledgerEntries',
+        'discarded_by' => 'discardedBy',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'external_id' => 'externalId',
         'success_url' => 'successUrl',
-        'transaction' => 'transaction',
+        'language' => 'language',
+        'subscription' => 'subscription',
         'type' => 'type',
-        'version' => 'version'
+        'created_on' => 'createdOn',
+        'version' => 'version',
+        'reference' => 'reference',
+        'linked_space_id' => 'linkedSpaceId',
+        'id' => 'id',
+        'state' => 'state',
+        'failed_on' => 'failedOn',
+        'transaction' => 'transaction',
+        'failed_url' => 'failedUrl',
+        'succeed_on' => 'succeedOn'
     ];
 
     /**
@@ -137,27 +254,27 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'created_on' => 'setCreatedOn',
-        'discarded_by' => 'setDiscardedBy',
         'discarded_on' => 'setDiscardedOn',
-        'external_id' => 'setExternalId',
-        'failed_on' => 'setFailedOn',
-        'failed_url' => 'setFailedUrl',
-        'id' => 'setId',
-        'language' => 'setLanguage',
-        'ledger_entries' => 'setLedgerEntries',
-        'linked_space_id' => 'setLinkedSpaceId',
         'planned_execution_date' => 'setPlannedExecutionDate',
-        'planned_purge_date' => 'setPlannedPurgeDate',
         'processing_type' => 'setProcessingType',
-        'reference' => 'setReference',
-        'state' => 'setState',
-        'subscription' => 'setSubscription',
-        'succeed_on' => 'setSucceedOn',
+        'ledger_entries' => 'setLedgerEntries',
+        'discarded_by' => 'setDiscardedBy',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'external_id' => 'setExternalId',
         'success_url' => 'setSuccessUrl',
-        'transaction' => 'setTransaction',
+        'language' => 'setLanguage',
+        'subscription' => 'setSubscription',
         'type' => 'setType',
-        'version' => 'setVersion'
+        'created_on' => 'setCreatedOn',
+        'version' => 'setVersion',
+        'reference' => 'setReference',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'id' => 'setId',
+        'state' => 'setState',
+        'failed_on' => 'setFailedOn',
+        'transaction' => 'setTransaction',
+        'failed_url' => 'setFailedUrl',
+        'succeed_on' => 'setSucceedOn'
     ];
 
     /**
@@ -166,89 +283,125 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'created_on' => 'getCreatedOn',
-        'discarded_by' => 'getDiscardedBy',
         'discarded_on' => 'getDiscardedOn',
-        'external_id' => 'getExternalId',
-        'failed_on' => 'getFailedOn',
-        'failed_url' => 'getFailedUrl',
-        'id' => 'getId',
-        'language' => 'getLanguage',
-        'ledger_entries' => 'getLedgerEntries',
-        'linked_space_id' => 'getLinkedSpaceId',
         'planned_execution_date' => 'getPlannedExecutionDate',
-        'planned_purge_date' => 'getPlannedPurgeDate',
         'processing_type' => 'getProcessingType',
-        'reference' => 'getReference',
-        'state' => 'getState',
-        'subscription' => 'getSubscription',
-        'succeed_on' => 'getSucceedOn',
+        'ledger_entries' => 'getLedgerEntries',
+        'discarded_by' => 'getDiscardedBy',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'external_id' => 'getExternalId',
         'success_url' => 'getSuccessUrl',
-        'transaction' => 'getTransaction',
+        'language' => 'getLanguage',
+        'subscription' => 'getSubscription',
         'type' => 'getType',
-        'version' => 'getVersion'
+        'created_on' => 'getCreatedOn',
+        'version' => 'getVersion',
+        'reference' => 'getReference',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'id' => 'getId',
+        'state' => 'getState',
+        'failed_on' => 'getFailedOn',
+        'transaction' => 'getTransaction',
+        'failed_url' => 'getFailedUrl',
+        'succeed_on' => 'getSucceedOn'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['discarded_by'] = isset($data['discarded_by']) ? $data['discarded_by'] : null;
-        
-        $this->container['discarded_on'] = isset($data['discarded_on']) ? $data['discarded_on'] : null;
-        
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        
-        $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
-        
-        $this->container['failed_url'] = isset($data['failed_url']) ? $data['failed_url'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['ledger_entries'] = isset($data['ledger_entries']) ? $data['ledger_entries'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['planned_execution_date'] = isset($data['planned_execution_date']) ? $data['planned_execution_date'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['processing_type'] = isset($data['processing_type']) ? $data['processing_type'] : null;
-        
-        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['subscription'] = isset($data['subscription']) ? $data['subscription'] : null;
-        
-        $this->container['succeed_on'] = isset($data['succeed_on']) ? $data['succeed_on'] : null;
-        
-        $this->container['success_url'] = isset($data['success_url']) ? $data['success_url'] : null;
-        
-        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
-        
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('discarded_on', $data ?? [], null);
+        $this->setIfExists('planned_execution_date', $data ?? [], null);
+        $this->setIfExists('processing_type', $data ?? [], null);
+        $this->setIfExists('ledger_entries', $data ?? [], null);
+        $this->setIfExists('discarded_by', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('external_id', $data ?? [], null);
+        $this->setIfExists('success_url', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('subscription', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('reference', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('failed_on', $data ?? [], null);
+        $this->setIfExists('transaction', $data ?? [], null);
+        $this->setIfExists('failed_url', $data ?? [], null);
+        $this->setIfExists('succeed_on', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -260,18 +413,6 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 500)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 500.";
-        }
-
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
-        }
-
-        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
-        }
-
         if (!is_null($this->container['success_url']) && (mb_strlen($this->container['success_url']) > 500)) {
             $invalidProperties[] = "invalid value for 'success_url', the character length must be smaller than or equal to 500.";
         }
@@ -280,72 +421,24 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'success_url', the character length must be bigger than or equal to 9.";
         }
 
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['reference']) && !preg_match("/[ \\x20-\\x7e]*/", $this->container['reference'])) {
+            $invalidProperties[] = "invalid value for 'reference', must be conform to the pattern /[ \\x20-\\x7e]*/.";
+        }
+
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 500)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 500.";
+        }
+
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
+        }
+
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -353,67 +446,16 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the charge was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets discarded_by
-     *
-     * @return int
-     */
-    public function getDiscardedBy()
-    {
-        return $this->container['discarded_by'];
-    }
-
-    /**
-     * Sets discarded_by
-     *
-     * @param int $discarded_by The ID of the user the charge was discarded by.
-     *
-     * @return $this
-     */
-    public function setDiscardedBy($discarded_by)
-    {
-        $this->container['discarded_by'] = $discarded_by;
-
-        return $this;
-    }
-    
 
     /**
      * Gets discarded_on
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDiscardedOn()
     {
@@ -423,204 +465,24 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets discarded_on
      *
-     * @param \DateTime $discarded_on The date and time when the charge was discarded.
+     * @param \DateTime|null $discarded_on The date and time when the charge was discarded.
      *
-     * @return $this
+     * @return self
      */
     public function setDiscardedOn($discarded_on)
     {
+        if (is_null($discarded_on)) {
+            throw new \InvalidArgumentException('non-nullable discarded_on cannot be null');
+        }
         $this->container['discarded_on'] = $discarded_on;
 
         return $this;
     }
-    
-
-    /**
-     * Gets external_id
-     *
-     * @return string
-     */
-    public function getExternalId()
-    {
-        return $this->container['external_id'];
-    }
-
-    /**
-     * Sets external_id
-     *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-     *
-     * @return $this
-     */
-    public function setExternalId($external_id)
-    {
-        $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_on
-     *
-     * @return \DateTime
-     */
-    public function getFailedOn()
-    {
-        return $this->container['failed_on'];
-    }
-
-    /**
-     * Sets failed_on
-     *
-     * @param \DateTime $failed_on The date and time when the charge failed.
-     *
-     * @return $this
-     */
-    public function setFailedOn($failed_on)
-    {
-        $this->container['failed_on'] = $failed_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_url
-     *
-     * @return string
-     */
-    public function getFailedUrl()
-    {
-        return $this->container['failed_url'];
-    }
-
-    /**
-     * Sets failed_url
-     *
-     * @param string $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
-     *
-     * @return $this
-     */
-    public function setFailedUrl($failed_url)
-    {
-        if (!is_null($failed_url) && (mb_strlen($failed_url) > 500)) {
-            throw new \InvalidArgumentException('invalid length for $failed_url when calling SubscriptionCharge., must be smaller than or equal to 500.');
-        }
-        if (!is_null($failed_url) && (mb_strlen($failed_url) < 9)) {
-            throw new \InvalidArgumentException('invalid length for $failed_url when calling SubscriptionCharge., must be bigger than or equal to 9.');
-        }
-
-        $this->container['failed_url'] = $failed_url;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string $language The language that is linked to the object.
-     *
-     * @return $this
-     */
-    public function setLanguage($language)
-    {
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets ledger_entries
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionLedgerEntry[]
-     */
-    public function getLedgerEntries()
-    {
-        return $this->container['ledger_entries'];
-    }
-
-    /**
-     * Sets ledger_entries
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntry[] $ledger_entries The ledger entries that belong to the charge.
-     *
-     * @return $this
-     */
-    public function setLedgerEntries($ledger_entries)
-    {
-        $this->container['ledger_entries'] = $ledger_entries;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
 
     /**
      * Gets planned_execution_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedExecutionDate()
     {
@@ -630,47 +492,24 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets planned_execution_date
      *
-     * @param \DateTime $planned_execution_date The date and time when the execution of the charge is planned.
+     * @param \DateTime|null $planned_execution_date The date and time when the execution of the charge is planned.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedExecutionDate($planned_execution_date)
     {
+        if (is_null($planned_execution_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_execution_date cannot be null');
+        }
         $this->container['planned_execution_date'] = $planned_execution_date;
 
         return $this;
     }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
 
     /**
      * Gets processing_type
      *
-     * @return \Wallee\Sdk\Model\SubscriptionChargeProcessingType
+     * @return \Wallee\Sdk\Model\SubscriptionChargeProcessingType|null
      */
     public function getProcessingType()
     {
@@ -680,126 +519,134 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets processing_type
      *
-     * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType $processing_type The processing type specifies how the charge is to be processed.
+     * @param \Wallee\Sdk\Model\SubscriptionChargeProcessingType|null $processing_type processing_type
      *
-     * @return $this
+     * @return self
      */
     public function setProcessingType($processing_type)
     {
+        if (is_null($processing_type)) {
+            throw new \InvalidArgumentException('non-nullable processing_type cannot be null');
+        }
         $this->container['processing_type'] = $processing_type;
 
         return $this;
     }
-    
 
     /**
-     * Gets reference
+     * Gets ledger_entries
      *
-     * @return string
+     * @return \Wallee\Sdk\Model\SubscriptionLedgerEntry[]|null
      */
-    public function getReference()
+    public function getLedgerEntries()
     {
-        return $this->container['reference'];
+        return $this->container['ledger_entries'];
     }
 
     /**
-     * Sets reference
+     * Sets ledger_entries
      *
-     * @param string $reference The merchant's reference used to identify the charge.
+     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntry[]|null $ledger_entries The ledger entries that belong to the charge.
      *
-     * @return $this
+     * @return self
      */
-    public function setReference($reference)
+    public function setLedgerEntries($ledger_entries)
     {
-        if (!is_null($reference) && (mb_strlen($reference) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionCharge., must be smaller than or equal to 100.');
+        if (is_null($ledger_entries)) {
+            throw new \InvalidArgumentException('non-nullable ledger_entries cannot be null');
         }
 
-        $this->container['reference'] = $reference;
+
+        $this->container['ledger_entries'] = $ledger_entries;
 
         return $this;
     }
-    
 
     /**
-     * Gets state
+     * Gets discarded_by
      *
-     * @return \Wallee\Sdk\Model\SubscriptionChargeState
+     * @return int|null
      */
-    public function getState()
+    public function getDiscardedBy()
     {
-        return $this->container['state'];
+        return $this->container['discarded_by'];
     }
 
     /**
-     * Sets state
+     * Sets discarded_by
      *
-     * @param \Wallee\Sdk\Model\SubscriptionChargeState $state The object's current state.
+     * @param int|null $discarded_by The ID of the user the charge was discarded by.
      *
-     * @return $this
+     * @return self
      */
-    public function setState($state)
+    public function setDiscardedBy($discarded_by)
     {
-        $this->container['state'] = $state;
+        if (is_null($discarded_by)) {
+            throw new \InvalidArgumentException('non-nullable discarded_by cannot be null');
+        }
+        $this->container['discarded_by'] = $discarded_by;
 
         return $this;
     }
-    
 
     /**
-     * Gets subscription
+     * Gets planned_purge_date
      *
-     * @return \Wallee\Sdk\Model\Subscription
+     * @return \DateTime|null
      */
-    public function getSubscription()
+    public function getPlannedPurgeDate()
     {
-        return $this->container['subscription'];
+        return $this->container['planned_purge_date'];
     }
 
     /**
-     * Sets subscription
+     * Sets planned_purge_date
      *
-     * @param \Wallee\Sdk\Model\Subscription $subscription The subscription that the charge belongs to.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
-    public function setSubscription($subscription)
+    public function setPlannedPurgeDate($planned_purge_date)
     {
-        $this->container['subscription'] = $subscription;
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
 
     /**
-     * Gets succeed_on
+     * Gets external_id
      *
-     * @return \DateTime
+     * @return string|null
      */
-    public function getSucceedOn()
+    public function getExternalId()
     {
-        return $this->container['succeed_on'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets succeed_on
+     * Sets external_id
      *
-     * @param \DateTime $succeed_on The date and time when the charge succeeded.
+     * @param string|null $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
      *
-     * @return $this
+     * @return self
      */
-    public function setSucceedOn($succeed_on)
+    public function setExternalId($external_id)
     {
-        $this->container['succeed_on'] = $succeed_on;
+        if (is_null($external_id)) {
+            throw new \InvalidArgumentException('non-nullable external_id cannot be null');
+        }
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
-    
 
     /**
      * Gets success_url
      *
-     * @return string
+     * @return string|null
      */
     public function getSuccessUrl()
     {
@@ -809,16 +656,19 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets success_url
      *
-     * @param string $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
+     * @param string|null $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
      *
-     * @return $this
+     * @return self
      */
     public function setSuccessUrl($success_url)
     {
-        if (!is_null($success_url) && (mb_strlen($success_url) > 500)) {
+        if (is_null($success_url)) {
+            throw new \InvalidArgumentException('non-nullable success_url cannot be null');
+        }
+        if ((mb_strlen($success_url) > 500)) {
             throw new \InvalidArgumentException('invalid length for $success_url when calling SubscriptionCharge., must be smaller than or equal to 500.');
         }
-        if (!is_null($success_url) && (mb_strlen($success_url) < 9)) {
+        if ((mb_strlen($success_url) < 9)) {
             throw new \InvalidArgumentException('invalid length for $success_url when calling SubscriptionCharge., must be bigger than or equal to 9.');
         }
 
@@ -826,37 +676,65 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
 
         return $this;
     }
-    
 
     /**
-     * Gets transaction
+     * Gets language
      *
-     * @return \Wallee\Sdk\Model\Transaction
+     * @return string|null
      */
-    public function getTransaction()
+    public function getLanguage()
     {
-        return $this->container['transaction'];
+        return $this->container['language'];
     }
 
     /**
-     * Sets transaction
+     * Sets language
      *
-     * @param \Wallee\Sdk\Model\Transaction $transaction The transaction used to process the charge.
+     * @param string|null $language The language that is linked to the object.
      *
-     * @return $this
+     * @return self
      */
-    public function setTransaction($transaction)
+    public function setLanguage($language)
     {
-        $this->container['transaction'] = $transaction;
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+        $this->container['language'] = $language;
 
         return $this;
     }
-    
+
+    /**
+     * Gets subscription
+     *
+     * @return \Wallee\Sdk\Model\Subscription|null
+     */
+    public function getSubscription()
+    {
+        return $this->container['subscription'];
+    }
+
+    /**
+     * Sets subscription
+     *
+     * @param \Wallee\Sdk\Model\Subscription|null $subscription subscription
+     *
+     * @return self
+     */
+    public function setSubscription($subscription)
+    {
+        if (is_null($subscription)) {
+            throw new \InvalidArgumentException('non-nullable subscription cannot be null');
+        }
+        $this->container['subscription'] = $subscription;
+
+        return $this;
+    }
 
     /**
      * Gets type
      *
-     * @return \Wallee\Sdk\Model\SubscriptionChargeType
+     * @return \Wallee\Sdk\Model\SubscriptionChargeType|null
      */
     public function getType()
     {
@@ -866,22 +744,51 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\SubscriptionChargeType $type The type specified how the charge was initiated.
+     * @param \Wallee\Sdk\Model\SubscriptionChargeType|null $type type
      *
-     * @return $this
+     * @return self
      */
     public function setType($type)
     {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
         $this->container['type'] = $type;
 
         return $this;
     }
-    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the charge was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -891,17 +798,249 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets reference
+     *
+     * @return string|null
+     */
+    public function getReference()
+    {
+        return $this->container['reference'];
+    }
+
+    /**
+     * Sets reference
+     *
+     * @param string|null $reference The merchant's reference used to identify the charge.
+     *
+     * @return self
+     */
+    public function setReference($reference)
+    {
+        if (is_null($reference)) {
+            throw new \InvalidArgumentException('non-nullable reference cannot be null');
+        }
+        if ((mb_strlen($reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling SubscriptionCharge., must be smaller than or equal to 100.');
+        }
+        if ((!preg_match("/[ \\x20-\\x7e]*/", ObjectSerializer::toString($reference)))) {
+            throw new \InvalidArgumentException("invalid value for \$reference when calling SubscriptionCharge., must conform to the pattern /[ \\x20-\\x7e]*/.");
+        }
+
+        $this->container['reference'] = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\SubscriptionChargeState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\SubscriptionChargeState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_on
+     *
+     * @return \DateTime|null
+     */
+    public function getFailedOn()
+    {
+        return $this->container['failed_on'];
+    }
+
+    /**
+     * Sets failed_on
+     *
+     * @param \DateTime|null $failed_on The date and time when the charge failed.
+     *
+     * @return self
+     */
+    public function setFailedOn($failed_on)
+    {
+        if (is_null($failed_on)) {
+            throw new \InvalidArgumentException('non-nullable failed_on cannot be null');
+        }
+        $this->container['failed_on'] = $failed_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets transaction
+     *
+     * @return \Wallee\Sdk\Model\Transaction|null
+     */
+    public function getTransaction()
+    {
+        return $this->container['transaction'];
+    }
+
+    /**
+     * Sets transaction
+     *
+     * @param \Wallee\Sdk\Model\Transaction|null $transaction transaction
+     *
+     * @return self
+     */
+    public function setTransaction($transaction)
+    {
+        if (is_null($transaction)) {
+            throw new \InvalidArgumentException('non-nullable transaction cannot be null');
+        }
+        $this->container['transaction'] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_url
+     *
+     * @return string|null
+     */
+    public function getFailedUrl()
+    {
+        return $this->container['failed_url'];
+    }
+
+    /**
+     * Sets failed_url
+     *
+     * @param string|null $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
+     *
+     * @return self
+     */
+    public function setFailedUrl($failed_url)
+    {
+        if (is_null($failed_url)) {
+            throw new \InvalidArgumentException('non-nullable failed_url cannot be null');
+        }
+        if ((mb_strlen($failed_url) > 500)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling SubscriptionCharge., must be smaller than or equal to 500.');
+        }
+        if ((mb_strlen($failed_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling SubscriptionCharge., must be bigger than or equal to 9.');
+        }
+
+        $this->container['failed_url'] = $failed_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets succeed_on
+     *
+     * @return \DateTime|null
+     */
+    public function getSucceedOn()
+    {
+        return $this->container['succeed_on'];
+    }
+
+    /**
+     * Sets succeed_on
+     *
+     * @param \DateTime|null $succeed_on The date and time when the charge succeeded.
+     *
+     * @return self
+     */
+    public function setSucceedOn($succeed_on)
+    {
+        if (is_null($succeed_on)) {
+            throw new \InvalidArgumentException('non-nullable succeed_on cannot be null');
+        }
+        $this->container['succeed_on'] = $succeed_on;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -909,8 +1048,7 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -920,24 +1058,23 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -953,10 +1090,22 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -966,13 +1115,19 @@ class SubscriptionCharge implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

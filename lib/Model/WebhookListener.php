@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,61 +30,165 @@ use \Wallee\Sdk\ObjectSerializer;
  * WebhookListener model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class WebhookListener implements ModelInterface, ArrayAccess
+class WebhookListener implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WebhookListener';
+    protected static $openAPIModelName = 'WebhookListener';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
+    protected static $openAPITypes = [
+        'linked_space_id' => 'int',
+        'entity_states' => 'string[]',
+        'identity' => '\Wallee\Sdk\Model\WebhookIdentity',
+        'name' => 'string',
+        'planned_purge_date' => '\DateTime',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\CreationEntityState',
+        'notify_every_change' => 'bool',
+        'version' => 'int',
         'enable_payload_signature_and_state' => 'bool',
         'entity' => 'int',
-        'entity_states' => 'string[]',
-        'id' => 'int',
-        'identity' => '\Wallee\Sdk\Model\WebhookIdentity',
-        'linked_space_id' => 'int',
-        'name' => 'string',
-        'notify_every_change' => 'bool',
-        'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\CreationEntityState',
-        'url' => '\Wallee\Sdk\Model\WebhookUrl',
-        'version' => 'int'
+        'url' => '\Wallee\Sdk\Model\WebhookUrl'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
+    protected static $openAPIFormats = [
+        'linked_space_id' => 'int64',
+        'entity_states' => null,
+        'identity' => null,
+        'name' => null,
+        'planned_purge_date' => 'date-time',
+        'id' => 'int64',
+        'state' => null,
+        'notify_every_change' => null,
+        'version' => 'int32',
         'enable_payload_signature_and_state' => null,
         'entity' => 'int64',
-        'entity_states' => null,
-        'id' => 'int64',
-        'identity' => null,
-        'linked_space_id' => 'int64',
-        'name' => null,
-        'notify_every_change' => null,
-        'planned_purge_date' => 'date-time',
-        'state' => null,
-        'url' => null,
-        'version' => 'int32'
+        'url' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'linked_space_id' => false,
+        'entity_states' => false,
+        'identity' => false,
+        'name' => false,
+        'planned_purge_date' => false,
+        'id' => false,
+        'state' => false,
+        'notify_every_change' => false,
+        'version' => false,
+        'enable_payload_signature_and_state' => false,
+        'entity' => false,
+        'url' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -90,18 +197,18 @@ class WebhookListener implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'linked_space_id' => 'linkedSpaceId',
+        'entity_states' => 'entityStates',
+        'identity' => 'identity',
+        'name' => 'name',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'id' => 'id',
+        'state' => 'state',
+        'notify_every_change' => 'notifyEveryChange',
+        'version' => 'version',
         'enable_payload_signature_and_state' => 'enablePayloadSignatureAndState',
         'entity' => 'entity',
-        'entity_states' => 'entityStates',
-        'id' => 'id',
-        'identity' => 'identity',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'notify_every_change' => 'notifyEveryChange',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
-        'url' => 'url',
-        'version' => 'version'
+        'url' => 'url'
     ];
 
     /**
@@ -110,18 +217,18 @@ class WebhookListener implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'linked_space_id' => 'setLinkedSpaceId',
+        'entity_states' => 'setEntityStates',
+        'identity' => 'setIdentity',
+        'name' => 'setName',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'id' => 'setId',
+        'state' => 'setState',
+        'notify_every_change' => 'setNotifyEveryChange',
+        'version' => 'setVersion',
         'enable_payload_signature_and_state' => 'setEnablePayloadSignatureAndState',
         'entity' => 'setEntity',
-        'entity_states' => 'setEntityStates',
-        'id' => 'setId',
-        'identity' => 'setIdentity',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'notify_every_change' => 'setNotifyEveryChange',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
-        'url' => 'setUrl',
-        'version' => 'setVersion'
+        'url' => 'setUrl'
     ];
 
     /**
@@ -130,62 +237,107 @@ class WebhookListener implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'linked_space_id' => 'getLinkedSpaceId',
+        'entity_states' => 'getEntityStates',
+        'identity' => 'getIdentity',
+        'name' => 'getName',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'id' => 'getId',
+        'state' => 'getState',
+        'notify_every_change' => 'getNotifyEveryChange',
+        'version' => 'getVersion',
         'enable_payload_signature_and_state' => 'getEnablePayloadSignatureAndState',
         'entity' => 'getEntity',
-        'entity_states' => 'getEntityStates',
-        'id' => 'getId',
-        'identity' => 'getIdentity',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'notify_every_change' => 'getNotifyEveryChange',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
-        'url' => 'getUrl',
-        'version' => 'getVersion'
+        'url' => 'getUrl'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['enable_payload_signature_and_state'] = isset($data['enable_payload_signature_and_state']) ? $data['enable_payload_signature_and_state'] : null;
-        
-        $this->container['entity'] = isset($data['entity']) ? $data['entity'] : null;
-        
-        $this->container['entity_states'] = isset($data['entity_states']) ? $data['entity_states'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['identity'] = isset($data['identity']) ? $data['identity'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['notify_every_change'] = isset($data['notify_every_change']) ? $data['notify_every_change'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('entity_states', $data ?? [], null);
+        $this->setIfExists('identity', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('notify_every_change', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('enable_payload_signature_and_state', $data ?? [], null);
+        $this->setIfExists('entity', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -205,211 +357,21 @@ class WebhookListener implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets enable_payload_signature_and_state
-     *
-     * @return bool
-     */
-    public function getEnablePayloadSignatureAndState()
-    {
-        return $this->container['enable_payload_signature_and_state'];
-    }
-
-    /**
-     * Sets enable_payload_signature_and_state
-     *
-     * @param bool $enable_payload_signature_and_state Whether signature header and 'state' property are enabled in webhook payload.
-     *
-     * @return $this
-     */
-    public function setEnablePayloadSignatureAndState($enable_payload_signature_and_state)
-    {
-        $this->container['enable_payload_signature_and_state'] = $enable_payload_signature_and_state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets entity
-     *
-     * @return int
-     */
-    public function getEntity()
-    {
-        return $this->container['entity'];
-    }
-
-    /**
-     * Sets entity
-     *
-     * @param int $entity The entity that is to be monitored.
-     *
-     * @return $this
-     */
-    public function setEntity($entity)
-    {
-        $this->container['entity'] = $entity;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets entity_states
-     *
-     * @return string[]
-     */
-    public function getEntityStates()
-    {
-        return $this->container['entity_states'];
-    }
-
-    /**
-     * Sets entity_states
-     *
-     * @param string[] $entity_states The entity's target states that are to be monitored.
-     *
-     * @return $this
-     */
-    public function setEntityStates($entity_states)
-    {
-        $this->container['entity_states'] = $entity_states;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets identity
-     *
-     * @return \Wallee\Sdk\Model\WebhookIdentity
-     */
-    public function getIdentity()
-    {
-        return $this->container['identity'];
-    }
-
-    /**
-     * Sets identity
-     *
-     * @param \Wallee\Sdk\Model\WebhookIdentity $identity The identity used to sign messages.
-     *
-     * @return $this
-     */
-    public function setIdentity($identity)
-    {
-        $this->container['identity'] = $identity;
-
-        return $this;
-    }
-    
 
     /**
      * Gets linked_space_id
      *
-     * @return int
+     * @return int|null
      */
     public function getLinkedSpaceId()
     {
@@ -419,22 +381,80 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
      *
-     * @return $this
+     * @return self
      */
     public function setLinkedSpaceId($linked_space_id)
     {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
         $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
-    
+
+    /**
+     * Gets entity_states
+     *
+     * @return string[]|null
+     */
+    public function getEntityStates()
+    {
+        return $this->container['entity_states'];
+    }
+
+    /**
+     * Sets entity_states
+     *
+     * @param string[]|null $entity_states The entity's target states that are to be monitored.
+     *
+     * @return self
+     */
+    public function setEntityStates($entity_states)
+    {
+        if (is_null($entity_states)) {
+            throw new \InvalidArgumentException('non-nullable entity_states cannot be null');
+        }
+
+
+        $this->container['entity_states'] = $entity_states;
+
+        return $this;
+    }
+
+    /**
+     * Gets identity
+     *
+     * @return \Wallee\Sdk\Model\WebhookIdentity|null
+     */
+    public function getIdentity()
+    {
+        return $this->container['identity'];
+    }
+
+    /**
+     * Sets identity
+     *
+     * @param \Wallee\Sdk\Model\WebhookIdentity|null $identity identity
+     *
+     * @return self
+     */
+    public function setIdentity($identity)
+    {
+        if (is_null($identity)) {
+            throw new \InvalidArgumentException('non-nullable identity cannot be null');
+        }
+        $this->container['identity'] = $identity;
+
+        return $this;
+    }
 
     /**
      * Gets name
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -444,13 +464,16 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name used to identify the webhook listener.
+     * @param string|null $name The name used to identify the webhook listener.
      *
-     * @return $this
+     * @return self
      */
     public function setName($name)
     {
-        if (!is_null($name) && (mb_strlen($name) > 50)) {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 50)) {
             throw new \InvalidArgumentException('invalid length for $name when calling WebhookListener., must be smaller than or equal to 50.');
         }
 
@@ -458,37 +481,11 @@ class WebhookListener implements ModelInterface, ArrayAccess
 
         return $this;
     }
-    
-
-    /**
-     * Gets notify_every_change
-     *
-     * @return bool
-     */
-    public function getNotifyEveryChange()
-    {
-        return $this->container['notify_every_change'];
-    }
-
-    /**
-     * Sets notify_every_change
-     *
-     * @param bool $notify_every_change Whether every update of the entity or only state changes are to be monitored.
-     *
-     * @return $this
-     */
-    public function setNotifyEveryChange($notify_every_change)
-    {
-        $this->container['notify_every_change'] = $notify_every_change;
-
-        return $this;
-    }
-    
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -498,22 +495,51 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
 
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\CreationEntityState
+     * @return \Wallee\Sdk\Model\CreationEntityState|null
      */
     public function getState()
     {
@@ -523,47 +549,51 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param \Wallee\Sdk\Model\CreationEntityState|null $state state
      *
-     * @return $this
+     * @return self
      */
     public function setState($state)
     {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
         $this->container['state'] = $state;
 
         return $this;
     }
-    
 
     /**
-     * Gets url
+     * Gets notify_every_change
      *
-     * @return \Wallee\Sdk\Model\WebhookUrl
+     * @return bool|null
      */
-    public function getUrl()
+    public function getNotifyEveryChange()
     {
-        return $this->container['url'];
+        return $this->container['notify_every_change'];
     }
 
     /**
-     * Sets url
+     * Sets notify_every_change
      *
-     * @param \Wallee\Sdk\Model\WebhookUrl $url The URL where notifications about entity changes are sent to.
+     * @param bool|null $notify_every_change Whether every update of the entity or only state changes are to be monitored.
      *
-     * @return $this
+     * @return self
      */
-    public function setUrl($url)
+    public function setNotifyEveryChange($notify_every_change)
     {
-        $this->container['url'] = $url;
+        if (is_null($notify_every_change)) {
+            throw new \InvalidArgumentException('non-nullable notify_every_change cannot be null');
+        }
+        $this->container['notify_every_change'] = $notify_every_change;
 
         return $this;
     }
-    
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -573,17 +603,100 @@ class WebhookListener implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets enable_payload_signature_and_state
+     *
+     * @return bool|null
+     */
+    public function getEnablePayloadSignatureAndState()
+    {
+        return $this->container['enable_payload_signature_and_state'];
+    }
+
+    /**
+     * Sets enable_payload_signature_and_state
+     *
+     * @param bool|null $enable_payload_signature_and_state Whether signature header and 'state' property are enabled in webhook payload.
+     *
+     * @return self
+     */
+    public function setEnablePayloadSignatureAndState($enable_payload_signature_and_state)
+    {
+        if (is_null($enable_payload_signature_and_state)) {
+            throw new \InvalidArgumentException('non-nullable enable_payload_signature_and_state cannot be null');
+        }
+        $this->container['enable_payload_signature_and_state'] = $enable_payload_signature_and_state;
+
+        return $this;
+    }
+
+    /**
+     * Gets entity
+     *
+     * @return int|null
+     */
+    public function getEntity()
+    {
+        return $this->container['entity'];
+    }
+
+    /**
+     * Sets entity
+     *
+     * @param int|null $entity The entity that is to be monitored.
+     *
+     * @return self
+     */
+    public function setEntity($entity)
+    {
+        if (is_null($entity)) {
+            throw new \InvalidArgumentException('non-nullable entity cannot be null');
+        }
+        $this->container['entity'] = $entity;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return \Wallee\Sdk\Model\WebhookUrl|null
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param \Wallee\Sdk\Model\WebhookUrl|null $url url
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        }
+        $this->container['url'] = $url;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -591,8 +704,7 @@ class WebhookListener implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -602,24 +714,23 @@ class WebhookListener implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -635,10 +746,22 @@ class WebhookListener implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -648,13 +771,19 @@ class WebhookListener implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

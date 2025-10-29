@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,51 +30,150 @@ use \Wallee\Sdk\ObjectSerializer;
  * PaymentMethod model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class PaymentMethod implements ModelInterface, ArrayAccess
+class PaymentMethod implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentMethod';
+    protected static $openAPIModelName = 'PaymentMethod';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
+    protected static $openAPITypes = [
+        'supported_currencies' => 'string[]',
         'data_collection_types' => '\Wallee\Sdk\Model\DataCollectionType[]',
-        'description' => 'map[string,string]',
-        'id' => 'int',
         'image_path' => 'string',
-        'merchant_description' => 'map[string,string]',
-        'name' => 'map[string,string]',
-        'supported_currencies' => 'string[]'
+        'name' => 'array<string,string>',
+        'description' => 'array<string,string>',
+        'merchant_description' => 'array<string,string>',
+        'id' => 'int'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
+    protected static $openAPIFormats = [
+        'supported_currencies' => null,
         'data_collection_types' => null,
-        'description' => null,
-        'id' => 'int64',
         'image_path' => null,
-        'merchant_description' => null,
         'name' => null,
-        'supported_currencies' => null
+        'description' => null,
+        'merchant_description' => null,
+        'id' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'supported_currencies' => false,
+        'data_collection_types' => false,
+        'image_path' => false,
+        'name' => false,
+        'description' => false,
+        'merchant_description' => false,
+        'id' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -80,13 +182,13 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'supported_currencies' => 'supportedCurrencies',
         'data_collection_types' => 'dataCollectionTypes',
-        'description' => 'description',
-        'id' => 'id',
         'image_path' => 'imagePath',
-        'merchant_description' => 'merchantDescription',
         'name' => 'name',
-        'supported_currencies' => 'supportedCurrencies'
+        'description' => 'description',
+        'merchant_description' => 'merchantDescription',
+        'id' => 'id'
     ];
 
     /**
@@ -95,13 +197,13 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'supported_currencies' => 'setSupportedCurrencies',
         'data_collection_types' => 'setDataCollectionTypes',
-        'description' => 'setDescription',
-        'id' => 'setId',
         'image_path' => 'setImagePath',
-        'merchant_description' => 'setMerchantDescription',
         'name' => 'setName',
-        'supported_currencies' => 'setSupportedCurrencies'
+        'description' => 'setDescription',
+        'merchant_description' => 'setMerchantDescription',
+        'id' => 'setId'
     ];
 
     /**
@@ -110,47 +212,97 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'supported_currencies' => 'getSupportedCurrencies',
         'data_collection_types' => 'getDataCollectionTypes',
-        'description' => 'getDescription',
-        'id' => 'getId',
         'image_path' => 'getImagePath',
-        'merchant_description' => 'getMerchantDescription',
         'name' => 'getName',
-        'supported_currencies' => 'getSupportedCurrencies'
+        'description' => 'getDescription',
+        'merchant_description' => 'getMerchantDescription',
+        'id' => 'getId'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['data_collection_types'] = isset($data['data_collection_types']) ? $data['data_collection_types'] : null;
-        
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['image_path'] = isset($data['image_path']) ? $data['image_path'] : null;
-        
-        $this->container['merchant_description'] = isset($data['merchant_description']) ? $data['merchant_description'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['supported_currencies'] = isset($data['supported_currencies']) ? $data['supported_currencies'] : null;
-        
+        $this->setIfExists('supported_currencies', $data ?? [], null);
+        $this->setIfExists('data_collection_types', $data ?? [], null);
+        $this->setIfExists('image_path', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('merchant_description', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -166,236 +318,21 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets data_collection_types
-     *
-     * @return \Wallee\Sdk\Model\DataCollectionType[]
-     */
-    public function getDataCollectionTypes()
-    {
-        return $this->container['data_collection_types'];
-    }
-
-    /**
-     * Sets data_collection_types
-     *
-     * @param \Wallee\Sdk\Model\DataCollectionType[] $data_collection_types The data collection types that payment method supports.
-     *
-     * @return $this
-     */
-    public function setDataCollectionTypes($data_collection_types)
-    {
-        $this->container['data_collection_types'] = $data_collection_types;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets description
-     *
-     * @return map[string,string]
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param map[string,string] $description The localized description of the object.
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets image_path
-     *
-     * @return string
-     */
-    public function getImagePath()
-    {
-        return $this->container['image_path'];
-    }
-
-    /**
-     * Sets image_path
-     *
-     * @param string $image_path The path to the payment method's image.
-     *
-     * @return $this
-     */
-    public function setImagePath($image_path)
-    {
-        $this->container['image_path'] = $image_path;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets merchant_description
-     *
-     * @return map[string,string]
-     */
-    public function getMerchantDescription()
-    {
-        return $this->container['merchant_description'];
-    }
-
-    /**
-     * Sets merchant_description
-     *
-     * @param map[string,string] $merchant_description A merchant-focused, localized description of the payment method, providing its purpose and details.
-     *
-     * @return $this
-     */
-    public function setMerchantDescription($merchant_description)
-    {
-        $this->container['merchant_description'] = $merchant_description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return map[string,string]
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param map[string,string] $name The localized name of the object.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
 
     /**
      * Gets supported_currencies
      *
-     * @return string[]
+     * @return string[]|null
      */
     public function getSupportedCurrencies()
     {
@@ -405,17 +342,185 @@ class PaymentMethod implements ModelInterface, ArrayAccess
     /**
      * Sets supported_currencies
      *
-     * @param string[] $supported_currencies The currencies that the payment method supports.
+     * @param string[]|null $supported_currencies The currencies that the payment method supports.
      *
-     * @return $this
+     * @return self
      */
     public function setSupportedCurrencies($supported_currencies)
     {
+        if (is_null($supported_currencies)) {
+            throw new \InvalidArgumentException('non-nullable supported_currencies cannot be null');
+        }
+
+
         $this->container['supported_currencies'] = $supported_currencies;
 
         return $this;
     }
-    
+
+    /**
+     * Gets data_collection_types
+     *
+     * @return \Wallee\Sdk\Model\DataCollectionType[]|null
+     */
+    public function getDataCollectionTypes()
+    {
+        return $this->container['data_collection_types'];
+    }
+
+    /**
+     * Sets data_collection_types
+     *
+     * @param \Wallee\Sdk\Model\DataCollectionType[]|null $data_collection_types The data collection types that payment method supports.
+     *
+     * @return self
+     */
+    public function setDataCollectionTypes($data_collection_types)
+    {
+        if (is_null($data_collection_types)) {
+            throw new \InvalidArgumentException('non-nullable data_collection_types cannot be null');
+        }
+
+
+        $this->container['data_collection_types'] = $data_collection_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_path
+     *
+     * @return string|null
+     */
+    public function getImagePath()
+    {
+        return $this->container['image_path'];
+    }
+
+    /**
+     * Sets image_path
+     *
+     * @param string|null $image_path The path to the payment method's image.
+     *
+     * @return self
+     */
+    public function setImagePath($image_path)
+    {
+        if (is_null($image_path)) {
+            throw new \InvalidArgumentException('non-nullable image_path cannot be null');
+        }
+        $this->container['image_path'] = $image_path;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return array<string,string>|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param array<string,string>|null $name The localized name of the object.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return array<string,string>|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param array<string,string>|null $description The localized description of the object.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_description
+     *
+     * @return array<string,string>|null
+     */
+    public function getMerchantDescription()
+    {
+        return $this->container['merchant_description'];
+    }
+
+    /**
+     * Sets merchant_description
+     *
+     * @param array<string,string>|null $merchant_description A merchant-focused, localized description of the payment method, providing its purpose and details.
+     *
+     * @return self
+     */
+    public function setMerchantDescription($merchant_description)
+    {
+        if (is_null($merchant_description)) {
+            throw new \InvalidArgumentException('non-nullable merchant_description cannot be null');
+        }
+        $this->container['merchant_description'] = $merchant_description;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -423,8 +528,7 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -434,24 +538,23 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -467,10 +570,22 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -480,13 +595,19 @@ class PaymentMethod implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

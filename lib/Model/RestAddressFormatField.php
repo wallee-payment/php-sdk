@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
@@ -25,27 +28,38 @@ use \Wallee\Sdk\ObjectSerializer;
  * RestAddressFormatField model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class RestAddressFormatField
 {
     /**
      * Possible values of this enum
      */
-    const GIVEN_NAME = 'GIVEN_NAME';
-    const FAMILY_NAME = 'FAMILY_NAME';
-    const ORGANIZATION_NAME = 'ORGANIZATION_NAME';
-    const STREET = 'STREET';
-    const DEPENDENT_LOCALITY = 'DEPENDENT_LOCALITY';
-    const CITY = 'CITY';
-    const POSTAL_STATE = 'POSTAL_STATE';
-    const POST_CODE = 'POST_CODE';
-    const SORTING_CODE = 'SORTING_CODE';
-    const COUNTRY = 'COUNTRY';
-    
+    public const GIVEN_NAME = 'GIVEN_NAME';
+
+    public const FAMILY_NAME = 'FAMILY_NAME';
+
+    public const ORGANIZATION_NAME = 'ORGANIZATION_NAME';
+
+    public const STREET = 'STREET';
+
+    public const DEPENDENT_LOCALITY = 'DEPENDENT_LOCALITY';
+
+    public const CITY = 'CITY';
+
+    public const POSTAL_STATE = 'POSTAL_STATE';
+
+    public const POST_CODE = 'POST_CODE';
+
+    public const SORTING_CODE = 'SORTING_CODE';
+
+    public const COUNTRY = 'COUNTRY';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -62,7 +76,7 @@ class RestAddressFormatField
             self::POSTAL_STATE,
             self::POST_CODE,
             self::SORTING_CODE,
-            self::COUNTRY,
+            self::COUNTRY
         ];
     }
 }

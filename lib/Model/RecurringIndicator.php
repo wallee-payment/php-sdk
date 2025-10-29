@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
@@ -25,21 +28,26 @@ use \Wallee\Sdk\ObjectSerializer;
  * RecurringIndicator model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class RecurringIndicator
 {
     /**
      * Possible values of this enum
      */
-    const REGULAR_TRANSACTION = 'REGULAR_TRANSACTION';
-    const INITIAL_RECURRING_TRANSACTION = 'INITIAL_RECURRING_TRANSACTION';
-    const MERCHANT_INITIATED_RECURRING_TRANSACTION = 'MERCHANT_INITIATED_RECURRING_TRANSACTION';
-    const CUSTOMER_INITIATED_RECURRING_TRANSACTION = 'CUSTOMER_INITIATED_RECURRING_TRANSACTION';
-    
+    public const REGULAR_TRANSACTION = 'REGULAR_TRANSACTION';
+
+    public const INITIAL_RECURRING_TRANSACTION = 'INITIAL_RECURRING_TRANSACTION';
+
+    public const MERCHANT_INITIATED_RECURRING_TRANSACTION = 'MERCHANT_INITIATED_RECURRING_TRANSACTION';
+
+    public const CUSTOMER_INITIATED_RECURRING_TRANSACTION = 'CUSTOMER_INITIATED_RECURRING_TRANSACTION';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -50,7 +58,7 @@ class RecurringIndicator
             self::REGULAR_TRANSACTION,
             self::INITIAL_RECURRING_TRANSACTION,
             self::MERCHANT_INITIATED_RECURRING_TRANSACTION,
-            self::CUSTOMER_INITIATED_RECURRING_TRANSACTION,
+            self::CUSTOMER_INITIATED_RECURRING_TRANSACTION
         ];
     }
 }

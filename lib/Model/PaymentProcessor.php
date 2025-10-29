@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -30,48 +33,148 @@ use \Wallee\Sdk\ObjectSerializer;
  * @description Payment processors serve as intermediaries that establish connections with third-party companies, known as payment service providers. These providers are responsible for managing the technical aspects of payment transactions, ensuring seamless and secure payment processing.
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class PaymentProcessor implements ModelInterface, ArrayAccess
+class PaymentProcessor implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentProcessor';
+    protected static $openAPIModelName = 'PaymentProcessor';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'company_name' => 'map[string,string]',
-        'description' => 'map[string,string]',
-        'headquarters_location' => 'map[string,string]',
-        'id' => 'int',
+    protected static $openAPITypes = [
+        'company_name' => 'array<string,string>',
+        'headquarters_location' => 'array<string,string>',
         'logo_path' => 'string',
-        'name' => 'map[string,string]',
-        'product_name' => 'map[string,string]'
+        'name' => 'array<string,string>',
+        'description' => 'array<string,string>',
+        'id' => 'int',
+        'product_name' => 'array<string,string>'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
+    protected static $openAPIFormats = [
         'company_name' => null,
-        'description' => null,
         'headquarters_location' => null,
-        'id' => 'int64',
         'logo_path' => null,
         'name' => null,
+        'description' => null,
+        'id' => 'int64',
         'product_name' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'company_name' => false,
+        'headquarters_location' => false,
+        'logo_path' => false,
+        'name' => false,
+        'description' => false,
+        'id' => false,
+        'product_name' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -81,11 +184,11 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'company_name' => 'companyName',
-        'description' => 'description',
         'headquarters_location' => 'headquartersLocation',
-        'id' => 'id',
         'logo_path' => 'logoPath',
         'name' => 'name',
+        'description' => 'description',
+        'id' => 'id',
         'product_name' => 'productName'
     ];
 
@@ -96,11 +199,11 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'company_name' => 'setCompanyName',
-        'description' => 'setDescription',
         'headquarters_location' => 'setHeadquartersLocation',
-        'id' => 'setId',
         'logo_path' => 'setLogoPath',
         'name' => 'setName',
+        'description' => 'setDescription',
+        'id' => 'setId',
         'product_name' => 'setProductName'
     ];
 
@@ -111,46 +214,96 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'company_name' => 'getCompanyName',
-        'description' => 'getDescription',
         'headquarters_location' => 'getHeadquartersLocation',
-        'id' => 'getId',
         'logo_path' => 'getLogoPath',
         'name' => 'getName',
+        'description' => 'getDescription',
+        'id' => 'getId',
         'product_name' => 'getProductName'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['company_name'] = isset($data['company_name']) ? $data['company_name'] : null;
-        
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['headquarters_location'] = isset($data['headquarters_location']) ? $data['headquarters_location'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['logo_path'] = isset($data['logo_path']) ? $data['logo_path'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['product_name'] = isset($data['product_name']) ? $data['product_name'] : null;
-        
+        $this->setIfExists('company_name', $data ?? [], null);
+        $this->setIfExists('headquarters_location', $data ?? [], null);
+        $this->setIfExists('logo_path', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('product_name', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -166,86 +319,21 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
 
     /**
      * Gets company_name
      *
-     * @return map[string,string]
+     * @return array<string,string>|null
      */
     public function getCompanyName()
     {
@@ -255,47 +343,24 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets company_name
      *
-     * @param map[string,string] $company_name The name of the company to which the processor belongs.
+     * @param array<string,string>|null $company_name The name of the company to which the processor belongs.
      *
-     * @return $this
+     * @return self
      */
     public function setCompanyName($company_name)
     {
+        if (is_null($company_name)) {
+            throw new \InvalidArgumentException('non-nullable company_name cannot be null');
+        }
         $this->container['company_name'] = $company_name;
 
         return $this;
     }
-    
-
-    /**
-     * Gets description
-     *
-     * @return map[string,string]
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param map[string,string] $description The localized description of the object.
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-    
 
     /**
      * Gets headquarters_location
      *
-     * @return map[string,string]
+     * @return array<string,string>|null
      */
     public function getHeadquartersLocation()
     {
@@ -305,47 +370,24 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets headquarters_location
      *
-     * @param map[string,string] $headquarters_location Where the processor's headquarters are located.
+     * @param array<string,string>|null $headquarters_location Where the processor's headquarters are located.
      *
-     * @return $this
+     * @return self
      */
     public function setHeadquartersLocation($headquarters_location)
     {
+        if (is_null($headquarters_location)) {
+            throw new \InvalidArgumentException('non-nullable headquarters_location cannot be null');
+        }
         $this->container['headquarters_location'] = $headquarters_location;
 
         return $this;
     }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
 
     /**
      * Gets logo_path
      *
-     * @return string
+     * @return string|null
      */
     public function getLogoPath()
     {
@@ -355,22 +397,24 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets logo_path
      *
-     * @param string $logo_path The path to the logo image of the processor.
+     * @param string|null $logo_path The path to the logo image of the processor.
      *
-     * @return $this
+     * @return self
      */
     public function setLogoPath($logo_path)
     {
+        if (is_null($logo_path)) {
+            throw new \InvalidArgumentException('non-nullable logo_path cannot be null');
+        }
         $this->container['logo_path'] = $logo_path;
 
         return $this;
     }
-    
 
     /**
      * Gets name
      *
-     * @return map[string,string]
+     * @return array<string,string>|null
      */
     public function getName()
     {
@@ -380,22 +424,78 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param map[string,string] $name The localized name of the object.
+     * @param array<string,string>|null $name The localized name of the object.
      *
-     * @return $this
+     * @return self
      */
     public function setName($name)
     {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
         $this->container['name'] = $name;
 
         return $this;
     }
-    
+
+    /**
+     * Gets description
+     *
+     * @return array<string,string>|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param array<string,string>|null $description The localized description of the object.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
 
     /**
      * Gets product_name
      *
-     * @return map[string,string]
+     * @return array<string,string>|null
      */
     public function getProductName()
     {
@@ -405,17 +505,19 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
     /**
      * Sets product_name
      *
-     * @param map[string,string] $product_name The name of the processor's product.
+     * @param array<string,string>|null $product_name The name of the processor's product.
      *
-     * @return $this
+     * @return self
      */
     public function setProductName($product_name)
     {
+        if (is_null($product_name)) {
+            throw new \InvalidArgumentException('non-nullable product_name cannot be null');
+        }
         $this->container['product_name'] = $product_name;
 
         return $this;
     }
-    
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -423,8 +525,7 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -434,24 +535,23 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -467,10 +567,22 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -480,13 +592,19 @@ class PaymentProcessor implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

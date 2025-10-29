@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,177 +30,339 @@ use \Wallee\Sdk\ObjectSerializer;
  * Transaction model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class Transaction implements ModelInterface, ArrayAccess
+class Transaction implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Transaction';
+    protected static $openAPIModelName = 'Transaction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'accept_header' => 'string',
-        'accept_language_header' => 'string',
-        'allowed_payment_method_brands' => 'int[]',
-        'allowed_payment_method_configurations' => 'int[]',
-        'authorization_amount' => 'float',
-        'authorization_environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
-        'authorization_sales_channel' => 'int',
-        'authorization_timeout_on' => '\DateTime',
-        'authorized_on' => '\DateTime',
-        'auto_confirmation_enabled' => 'bool',
-        'billing_address' => '\Wallee\Sdk\Model\Address',
-        'charge_retry_enabled' => 'bool',
-        'completed_amount' => 'float',
-        'completed_on' => '\DateTime',
-        'completion_behavior' => '\Wallee\Sdk\Model\TransactionCompletionBehavior',
-        'completion_timeout_on' => '\DateTime',
-        'confirmed_by' => 'int',
-        'confirmed_on' => '\DateTime',
-        'created_by' => 'int',
-        'created_on' => '\DateTime',
-        'currency' => 'string',
-        'customer_email_address' => 'string',
-        'customer_id' => 'string',
-        'customers_presence' => '\Wallee\Sdk\Model\CustomersPresence',
-        'delivery_decision_made_on' => '\DateTime',
-        'device_session_identifier' => 'string',
-        'emails_disabled' => 'bool',
-        'end_of_life' => '\DateTime',
-        'environment' => '\Wallee\Sdk\Model\Environment',
-        'environment_selection_strategy' => '\Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy',
-        'failed_on' => '\DateTime',
-        'failed_url' => 'string',
-        'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
-        'group' => '\Wallee\Sdk\Model\TransactionGroup',
-        'id' => 'int',
-        'internet_protocol_address' => 'string',
-        'internet_protocol_address_country' => 'string',
-        'invoice_merchant_reference' => 'string',
-        'java_enabled' => 'bool',
-        'language' => 'string',
-        'line_items' => '\Wallee\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
-        'merchant_reference' => 'string',
-        'meta_data' => 'map[string,string]',
-        'parent' => 'int',
-        'payment_connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
-        'planned_purge_date' => '\DateTime',
-        'processing_on' => '\DateTime',
-        'refunded_amount' => 'float',
-        'screen_color_depth' => 'string',
-        'screen_height' => 'string',
-        'screen_width' => 'string',
-        'shipping_address' => '\Wallee\Sdk\Model\Address',
-        'shipping_method' => 'string',
-        'space_view_id' => 'int',
-        'state' => '\Wallee\Sdk\Model\TransactionState',
-        'success_url' => 'string',
-        'terminal' => '\Wallee\Sdk\Model\PaymentTerminal',
-        'time_zone' => 'string',
-        'token' => '\Wallee\Sdk\Model\Token',
-        'tokenization_mode' => '\Wallee\Sdk\Model\TokenizationMode',
-        'total_applied_fees' => 'float',
+    protected static $openAPITypes = [
+        'parent' => '\Wallee\Sdk\Model\Transaction',
         'total_settled_amount' => 'float',
-        'user_agent_header' => 'string',
-        'user_failure_message' => 'string',
-        'user_interface_type' => '\Wallee\Sdk\Model\TransactionUserInterfaceType',
-        'version' => 'int',
-        'window_height' => 'string',
+        'device_session_identifier' => 'string',
+        'processing_on' => '\DateTime',
+        'invoice_merchant_reference' => 'string',
+        'language' => 'string',
+        'confirmed_on' => '\DateTime',
+        'line_items' => '\Wallee\Sdk\Model\LineItem[]',
+        'accept_language_header' => 'string',
+        'java_enabled' => 'bool',
+        'confirmed_by' => 'int',
+        'payment_connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\TransactionState',
         'window_width' => 'string',
-        'years_to_keep' => 'int'
+        'allowed_payment_method_configurations' => 'int[]',
+        'group' => '\Wallee\Sdk\Model\TransactionGroup',
+        'charge_retry_enabled' => 'bool',
+        'accept_header' => 'string',
+        'user_agent_header' => 'string',
+        'shipping_method' => 'string',
+        'planned_purge_date' => '\DateTime',
+        'success_url' => 'string',
+        'time_zone' => 'string',
+        'space_view_id' => 'int',
+        'user_failure_message' => 'string',
+        'completion_behavior' => '\Wallee\Sdk\Model\TransactionCompletionBehavior',
+        'version' => 'int',
+        'internet_protocol_address_country' => 'string',
+        'linked_space_id' => 'int',
+        'delivery_decision_made_on' => '\DateTime',
+        'authorization_environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
+        'auto_confirmation_enabled' => 'bool',
+        'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
+        'total_applied_fees' => 'float',
+        'customers_presence' => '\Wallee\Sdk\Model\CustomersPresence',
+        'failed_on' => '\DateTime',
+        'refunded_amount' => 'float',
+        'authorization_amount' => 'float',
+        'screen_width' => 'string',
+        'environment_selection_strategy' => '\Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy',
+        'customer_email_address' => 'string',
+        'window_height' => 'string',
+        'tokenization_mode' => '\Wallee\Sdk\Model\TokenizationMode',
+        'authorization_timeout_on' => '\DateTime',
+        'allowed_payment_method_brands' => 'int[]',
+        'created_on' => '\DateTime',
+        'meta_data' => 'array<string,string>',
+        'emails_disabled' => 'bool',
+        'user_interface_type' => '\Wallee\Sdk\Model\TransactionUserInterfaceType',
+        'customer_id' => 'string',
+        'currency' => 'string',
+        'merchant_reference' => 'string',
+        'authorization_sales_channel' => 'int',
+        'years_to_keep' => 'int',
+        'completed_amount' => 'float',
+        'screen_height' => 'string',
+        'internet_protocol_address' => 'string',
+        'terminal' => '\Wallee\Sdk\Model\PaymentTerminal',
+        'end_of_life' => '\DateTime',
+        'token' => '\Wallee\Sdk\Model\Token',
+        'environment' => '\Wallee\Sdk\Model\Environment',
+        'screen_color_depth' => 'string',
+        'created_by' => 'int',
+        'completed_on' => '\DateTime',
+        'completion_timeout_on' => '\DateTime',
+        'shipping_address' => '\Wallee\Sdk\Model\Address',
+        'billing_address' => '\Wallee\Sdk\Model\Address',
+        'authorized_on' => '\DateTime',
+        'failed_url' => 'string'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'accept_header' => null,
-        'accept_language_header' => null,
-        'allowed_payment_method_brands' => 'int64',
-        'allowed_payment_method_configurations' => 'int64',
-        'authorization_amount' => null,
-        'authorization_environment' => null,
-        'authorization_sales_channel' => 'int64',
-        'authorization_timeout_on' => 'date-time',
-        'authorized_on' => 'date-time',
-        'auto_confirmation_enabled' => null,
-        'billing_address' => null,
-        'charge_retry_enabled' => null,
-        'completed_amount' => null,
-        'completed_on' => 'date-time',
-        'completion_behavior' => null,
-        'completion_timeout_on' => 'date-time',
-        'confirmed_by' => 'int64',
-        'confirmed_on' => 'date-time',
-        'created_by' => 'int64',
-        'created_on' => 'date-time',
-        'currency' => null,
-        'customer_email_address' => null,
-        'customer_id' => null,
-        'customers_presence' => null,
-        'delivery_decision_made_on' => 'date-time',
-        'device_session_identifier' => null,
-        'emails_disabled' => null,
-        'end_of_life' => 'date-time',
-        'environment' => null,
-        'environment_selection_strategy' => null,
-        'failed_on' => 'date-time',
-        'failed_url' => null,
-        'failure_reason' => null,
-        'group' => null,
-        'id' => 'int64',
-        'internet_protocol_address' => null,
-        'internet_protocol_address_country' => null,
-        'invoice_merchant_reference' => null,
-        'java_enabled' => null,
-        'language' => null,
-        'line_items' => null,
-        'linked_space_id' => 'int64',
-        'merchant_reference' => null,
-        'meta_data' => null,
-        'parent' => 'int64',
-        'payment_connector_configuration' => null,
-        'planned_purge_date' => 'date-time',
-        'processing_on' => 'date-time',
-        'refunded_amount' => null,
-        'screen_color_depth' => null,
-        'screen_height' => null,
-        'screen_width' => null,
-        'shipping_address' => null,
-        'shipping_method' => null,
-        'space_view_id' => 'int64',
-        'state' => null,
-        'success_url' => null,
-        'terminal' => null,
-        'time_zone' => null,
-        'token' => null,
-        'tokenization_mode' => null,
-        'total_applied_fees' => null,
+    protected static $openAPIFormats = [
+        'parent' => null,
         'total_settled_amount' => null,
-        'user_agent_header' => null,
-        'user_failure_message' => null,
-        'user_interface_type' => null,
-        'version' => 'int32',
-        'window_height' => null,
+        'device_session_identifier' => null,
+        'processing_on' => 'date-time',
+        'invoice_merchant_reference' => null,
+        'language' => null,
+        'confirmed_on' => 'date-time',
+        'line_items' => null,
+        'accept_language_header' => null,
+        'java_enabled' => null,
+        'confirmed_by' => 'int64',
+        'payment_connector_configuration' => null,
+        'id' => 'int64',
+        'state' => null,
         'window_width' => null,
-        'years_to_keep' => 'int32'
+        'allowed_payment_method_configurations' => 'int64',
+        'group' => null,
+        'charge_retry_enabled' => null,
+        'accept_header' => null,
+        'user_agent_header' => null,
+        'shipping_method' => null,
+        'planned_purge_date' => 'date-time',
+        'success_url' => null,
+        'time_zone' => null,
+        'space_view_id' => 'int64',
+        'user_failure_message' => null,
+        'completion_behavior' => null,
+        'version' => 'int32',
+        'internet_protocol_address_country' => null,
+        'linked_space_id' => 'int64',
+        'delivery_decision_made_on' => 'date-time',
+        'authorization_environment' => null,
+        'auto_confirmation_enabled' => null,
+        'failure_reason' => null,
+        'total_applied_fees' => null,
+        'customers_presence' => null,
+        'failed_on' => 'date-time',
+        'refunded_amount' => null,
+        'authorization_amount' => null,
+        'screen_width' => null,
+        'environment_selection_strategy' => null,
+        'customer_email_address' => null,
+        'window_height' => null,
+        'tokenization_mode' => null,
+        'authorization_timeout_on' => 'date-time',
+        'allowed_payment_method_brands' => 'int64',
+        'created_on' => 'date-time',
+        'meta_data' => null,
+        'emails_disabled' => null,
+        'user_interface_type' => null,
+        'customer_id' => null,
+        'currency' => null,
+        'merchant_reference' => null,
+        'authorization_sales_channel' => 'int64',
+        'years_to_keep' => 'int32',
+        'completed_amount' => null,
+        'screen_height' => null,
+        'internet_protocol_address' => null,
+        'terminal' => null,
+        'end_of_life' => 'date-time',
+        'token' => null,
+        'environment' => null,
+        'screen_color_depth' => null,
+        'created_by' => 'int64',
+        'completed_on' => 'date-time',
+        'completion_timeout_on' => 'date-time',
+        'shipping_address' => null,
+        'billing_address' => null,
+        'authorized_on' => 'date-time',
+        'failed_url' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'parent' => false,
+        'total_settled_amount' => false,
+        'device_session_identifier' => false,
+        'processing_on' => false,
+        'invoice_merchant_reference' => false,
+        'language' => false,
+        'confirmed_on' => false,
+        'line_items' => false,
+        'accept_language_header' => false,
+        'java_enabled' => false,
+        'confirmed_by' => false,
+        'payment_connector_configuration' => false,
+        'id' => false,
+        'state' => false,
+        'window_width' => false,
+        'allowed_payment_method_configurations' => false,
+        'group' => false,
+        'charge_retry_enabled' => false,
+        'accept_header' => false,
+        'user_agent_header' => false,
+        'shipping_method' => false,
+        'planned_purge_date' => false,
+        'success_url' => false,
+        'time_zone' => false,
+        'space_view_id' => false,
+        'user_failure_message' => false,
+        'completion_behavior' => false,
+        'version' => false,
+        'internet_protocol_address_country' => false,
+        'linked_space_id' => false,
+        'delivery_decision_made_on' => false,
+        'authorization_environment' => false,
+        'auto_confirmation_enabled' => false,
+        'failure_reason' => false,
+        'total_applied_fees' => false,
+        'customers_presence' => false,
+        'failed_on' => false,
+        'refunded_amount' => false,
+        'authorization_amount' => false,
+        'screen_width' => false,
+        'environment_selection_strategy' => false,
+        'customer_email_address' => false,
+        'window_height' => false,
+        'tokenization_mode' => false,
+        'authorization_timeout_on' => false,
+        'allowed_payment_method_brands' => false,
+        'created_on' => false,
+        'meta_data' => false,
+        'emails_disabled' => false,
+        'user_interface_type' => false,
+        'customer_id' => false,
+        'currency' => false,
+        'merchant_reference' => false,
+        'authorization_sales_channel' => false,
+        'years_to_keep' => false,
+        'completed_amount' => false,
+        'screen_height' => false,
+        'internet_protocol_address' => false,
+        'terminal' => false,
+        'end_of_life' => false,
+        'token' => false,
+        'environment' => false,
+        'screen_color_depth' => false,
+        'created_by' => false,
+        'completed_on' => false,
+        'completion_timeout_on' => false,
+        'shipping_address' => false,
+        'billing_address' => false,
+        'authorized_on' => false,
+        'failed_url' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -206,76 +371,76 @@ class Transaction implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'accept_header' => 'acceptHeader',
-        'accept_language_header' => 'acceptLanguageHeader',
-        'allowed_payment_method_brands' => 'allowedPaymentMethodBrands',
-        'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
-        'authorization_amount' => 'authorizationAmount',
-        'authorization_environment' => 'authorizationEnvironment',
-        'authorization_sales_channel' => 'authorizationSalesChannel',
-        'authorization_timeout_on' => 'authorizationTimeoutOn',
-        'authorized_on' => 'authorizedOn',
-        'auto_confirmation_enabled' => 'autoConfirmationEnabled',
-        'billing_address' => 'billingAddress',
-        'charge_retry_enabled' => 'chargeRetryEnabled',
-        'completed_amount' => 'completedAmount',
-        'completed_on' => 'completedOn',
-        'completion_behavior' => 'completionBehavior',
-        'completion_timeout_on' => 'completionTimeoutOn',
-        'confirmed_by' => 'confirmedBy',
-        'confirmed_on' => 'confirmedOn',
-        'created_by' => 'createdBy',
-        'created_on' => 'createdOn',
-        'currency' => 'currency',
-        'customer_email_address' => 'customerEmailAddress',
-        'customer_id' => 'customerId',
-        'customers_presence' => 'customersPresence',
-        'delivery_decision_made_on' => 'deliveryDecisionMadeOn',
-        'device_session_identifier' => 'deviceSessionIdentifier',
-        'emails_disabled' => 'emailsDisabled',
-        'end_of_life' => 'endOfLife',
-        'environment' => 'environment',
-        'environment_selection_strategy' => 'environmentSelectionStrategy',
-        'failed_on' => 'failedOn',
-        'failed_url' => 'failedUrl',
-        'failure_reason' => 'failureReason',
-        'group' => 'group',
-        'id' => 'id',
-        'internet_protocol_address' => 'internetProtocolAddress',
-        'internet_protocol_address_country' => 'internetProtocolAddressCountry',
-        'invoice_merchant_reference' => 'invoiceMerchantReference',
-        'java_enabled' => 'javaEnabled',
-        'language' => 'language',
-        'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
-        'merchant_reference' => 'merchantReference',
-        'meta_data' => 'metaData',
         'parent' => 'parent',
-        'payment_connector_configuration' => 'paymentConnectorConfiguration',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'processing_on' => 'processingOn',
-        'refunded_amount' => 'refundedAmount',
-        'screen_color_depth' => 'screenColorDepth',
-        'screen_height' => 'screenHeight',
-        'screen_width' => 'screenWidth',
-        'shipping_address' => 'shippingAddress',
-        'shipping_method' => 'shippingMethod',
-        'space_view_id' => 'spaceViewId',
-        'state' => 'state',
-        'success_url' => 'successUrl',
-        'terminal' => 'terminal',
-        'time_zone' => 'timeZone',
-        'token' => 'token',
-        'tokenization_mode' => 'tokenizationMode',
-        'total_applied_fees' => 'totalAppliedFees',
         'total_settled_amount' => 'totalSettledAmount',
-        'user_agent_header' => 'userAgentHeader',
-        'user_failure_message' => 'userFailureMessage',
-        'user_interface_type' => 'userInterfaceType',
-        'version' => 'version',
-        'window_height' => 'windowHeight',
+        'device_session_identifier' => 'deviceSessionIdentifier',
+        'processing_on' => 'processingOn',
+        'invoice_merchant_reference' => 'invoiceMerchantReference',
+        'language' => 'language',
+        'confirmed_on' => 'confirmedOn',
+        'line_items' => 'lineItems',
+        'accept_language_header' => 'acceptLanguageHeader',
+        'java_enabled' => 'javaEnabled',
+        'confirmed_by' => 'confirmedBy',
+        'payment_connector_configuration' => 'paymentConnectorConfiguration',
+        'id' => 'id',
+        'state' => 'state',
         'window_width' => 'windowWidth',
-        'years_to_keep' => 'yearsToKeep'
+        'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
+        'group' => 'group',
+        'charge_retry_enabled' => 'chargeRetryEnabled',
+        'accept_header' => 'acceptHeader',
+        'user_agent_header' => 'userAgentHeader',
+        'shipping_method' => 'shippingMethod',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'success_url' => 'successUrl',
+        'time_zone' => 'timeZone',
+        'space_view_id' => 'spaceViewId',
+        'user_failure_message' => 'userFailureMessage',
+        'completion_behavior' => 'completionBehavior',
+        'version' => 'version',
+        'internet_protocol_address_country' => 'internetProtocolAddressCountry',
+        'linked_space_id' => 'linkedSpaceId',
+        'delivery_decision_made_on' => 'deliveryDecisionMadeOn',
+        'authorization_environment' => 'authorizationEnvironment',
+        'auto_confirmation_enabled' => 'autoConfirmationEnabled',
+        'failure_reason' => 'failureReason',
+        'total_applied_fees' => 'totalAppliedFees',
+        'customers_presence' => 'customersPresence',
+        'failed_on' => 'failedOn',
+        'refunded_amount' => 'refundedAmount',
+        'authorization_amount' => 'authorizationAmount',
+        'screen_width' => 'screenWidth',
+        'environment_selection_strategy' => 'environmentSelectionStrategy',
+        'customer_email_address' => 'customerEmailAddress',
+        'window_height' => 'windowHeight',
+        'tokenization_mode' => 'tokenizationMode',
+        'authorization_timeout_on' => 'authorizationTimeoutOn',
+        'allowed_payment_method_brands' => 'allowedPaymentMethodBrands',
+        'created_on' => 'createdOn',
+        'meta_data' => 'metaData',
+        'emails_disabled' => 'emailsDisabled',
+        'user_interface_type' => 'userInterfaceType',
+        'customer_id' => 'customerId',
+        'currency' => 'currency',
+        'merchant_reference' => 'merchantReference',
+        'authorization_sales_channel' => 'authorizationSalesChannel',
+        'years_to_keep' => 'yearsToKeep',
+        'completed_amount' => 'completedAmount',
+        'screen_height' => 'screenHeight',
+        'internet_protocol_address' => 'internetProtocolAddress',
+        'terminal' => 'terminal',
+        'end_of_life' => 'endOfLife',
+        'token' => 'token',
+        'environment' => 'environment',
+        'screen_color_depth' => 'screenColorDepth',
+        'created_by' => 'createdBy',
+        'completed_on' => 'completedOn',
+        'completion_timeout_on' => 'completionTimeoutOn',
+        'shipping_address' => 'shippingAddress',
+        'billing_address' => 'billingAddress',
+        'authorized_on' => 'authorizedOn',
+        'failed_url' => 'failedUrl'
     ];
 
     /**
@@ -284,76 +449,76 @@ class Transaction implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'accept_header' => 'setAcceptHeader',
-        'accept_language_header' => 'setAcceptLanguageHeader',
-        'allowed_payment_method_brands' => 'setAllowedPaymentMethodBrands',
-        'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
-        'authorization_amount' => 'setAuthorizationAmount',
-        'authorization_environment' => 'setAuthorizationEnvironment',
-        'authorization_sales_channel' => 'setAuthorizationSalesChannel',
-        'authorization_timeout_on' => 'setAuthorizationTimeoutOn',
-        'authorized_on' => 'setAuthorizedOn',
-        'auto_confirmation_enabled' => 'setAutoConfirmationEnabled',
-        'billing_address' => 'setBillingAddress',
-        'charge_retry_enabled' => 'setChargeRetryEnabled',
-        'completed_amount' => 'setCompletedAmount',
-        'completed_on' => 'setCompletedOn',
-        'completion_behavior' => 'setCompletionBehavior',
-        'completion_timeout_on' => 'setCompletionTimeoutOn',
-        'confirmed_by' => 'setConfirmedBy',
-        'confirmed_on' => 'setConfirmedOn',
-        'created_by' => 'setCreatedBy',
-        'created_on' => 'setCreatedOn',
-        'currency' => 'setCurrency',
-        'customer_email_address' => 'setCustomerEmailAddress',
-        'customer_id' => 'setCustomerId',
-        'customers_presence' => 'setCustomersPresence',
-        'delivery_decision_made_on' => 'setDeliveryDecisionMadeOn',
-        'device_session_identifier' => 'setDeviceSessionIdentifier',
-        'emails_disabled' => 'setEmailsDisabled',
-        'end_of_life' => 'setEndOfLife',
-        'environment' => 'setEnvironment',
-        'environment_selection_strategy' => 'setEnvironmentSelectionStrategy',
-        'failed_on' => 'setFailedOn',
-        'failed_url' => 'setFailedUrl',
-        'failure_reason' => 'setFailureReason',
-        'group' => 'setGroup',
-        'id' => 'setId',
-        'internet_protocol_address' => 'setInternetProtocolAddress',
-        'internet_protocol_address_country' => 'setInternetProtocolAddressCountry',
-        'invoice_merchant_reference' => 'setInvoiceMerchantReference',
-        'java_enabled' => 'setJavaEnabled',
-        'language' => 'setLanguage',
-        'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'merchant_reference' => 'setMerchantReference',
-        'meta_data' => 'setMetaData',
         'parent' => 'setParent',
-        'payment_connector_configuration' => 'setPaymentConnectorConfiguration',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'processing_on' => 'setProcessingOn',
-        'refunded_amount' => 'setRefundedAmount',
-        'screen_color_depth' => 'setScreenColorDepth',
-        'screen_height' => 'setScreenHeight',
-        'screen_width' => 'setScreenWidth',
-        'shipping_address' => 'setShippingAddress',
-        'shipping_method' => 'setShippingMethod',
-        'space_view_id' => 'setSpaceViewId',
-        'state' => 'setState',
-        'success_url' => 'setSuccessUrl',
-        'terminal' => 'setTerminal',
-        'time_zone' => 'setTimeZone',
-        'token' => 'setToken',
-        'tokenization_mode' => 'setTokenizationMode',
-        'total_applied_fees' => 'setTotalAppliedFees',
         'total_settled_amount' => 'setTotalSettledAmount',
-        'user_agent_header' => 'setUserAgentHeader',
-        'user_failure_message' => 'setUserFailureMessage',
-        'user_interface_type' => 'setUserInterfaceType',
-        'version' => 'setVersion',
-        'window_height' => 'setWindowHeight',
+        'device_session_identifier' => 'setDeviceSessionIdentifier',
+        'processing_on' => 'setProcessingOn',
+        'invoice_merchant_reference' => 'setInvoiceMerchantReference',
+        'language' => 'setLanguage',
+        'confirmed_on' => 'setConfirmedOn',
+        'line_items' => 'setLineItems',
+        'accept_language_header' => 'setAcceptLanguageHeader',
+        'java_enabled' => 'setJavaEnabled',
+        'confirmed_by' => 'setConfirmedBy',
+        'payment_connector_configuration' => 'setPaymentConnectorConfiguration',
+        'id' => 'setId',
+        'state' => 'setState',
         'window_width' => 'setWindowWidth',
-        'years_to_keep' => 'setYearsToKeep'
+        'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
+        'group' => 'setGroup',
+        'charge_retry_enabled' => 'setChargeRetryEnabled',
+        'accept_header' => 'setAcceptHeader',
+        'user_agent_header' => 'setUserAgentHeader',
+        'shipping_method' => 'setShippingMethod',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'success_url' => 'setSuccessUrl',
+        'time_zone' => 'setTimeZone',
+        'space_view_id' => 'setSpaceViewId',
+        'user_failure_message' => 'setUserFailureMessage',
+        'completion_behavior' => 'setCompletionBehavior',
+        'version' => 'setVersion',
+        'internet_protocol_address_country' => 'setInternetProtocolAddressCountry',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'delivery_decision_made_on' => 'setDeliveryDecisionMadeOn',
+        'authorization_environment' => 'setAuthorizationEnvironment',
+        'auto_confirmation_enabled' => 'setAutoConfirmationEnabled',
+        'failure_reason' => 'setFailureReason',
+        'total_applied_fees' => 'setTotalAppliedFees',
+        'customers_presence' => 'setCustomersPresence',
+        'failed_on' => 'setFailedOn',
+        'refunded_amount' => 'setRefundedAmount',
+        'authorization_amount' => 'setAuthorizationAmount',
+        'screen_width' => 'setScreenWidth',
+        'environment_selection_strategy' => 'setEnvironmentSelectionStrategy',
+        'customer_email_address' => 'setCustomerEmailAddress',
+        'window_height' => 'setWindowHeight',
+        'tokenization_mode' => 'setTokenizationMode',
+        'authorization_timeout_on' => 'setAuthorizationTimeoutOn',
+        'allowed_payment_method_brands' => 'setAllowedPaymentMethodBrands',
+        'created_on' => 'setCreatedOn',
+        'meta_data' => 'setMetaData',
+        'emails_disabled' => 'setEmailsDisabled',
+        'user_interface_type' => 'setUserInterfaceType',
+        'customer_id' => 'setCustomerId',
+        'currency' => 'setCurrency',
+        'merchant_reference' => 'setMerchantReference',
+        'authorization_sales_channel' => 'setAuthorizationSalesChannel',
+        'years_to_keep' => 'setYearsToKeep',
+        'completed_amount' => 'setCompletedAmount',
+        'screen_height' => 'setScreenHeight',
+        'internet_protocol_address' => 'setInternetProtocolAddress',
+        'terminal' => 'setTerminal',
+        'end_of_life' => 'setEndOfLife',
+        'token' => 'setToken',
+        'environment' => 'setEnvironment',
+        'screen_color_depth' => 'setScreenColorDepth',
+        'created_by' => 'setCreatedBy',
+        'completed_on' => 'setCompletedOn',
+        'completion_timeout_on' => 'setCompletionTimeoutOn',
+        'shipping_address' => 'setShippingAddress',
+        'billing_address' => 'setBillingAddress',
+        'authorized_on' => 'setAuthorizedOn',
+        'failed_url' => 'setFailedUrl'
     ];
 
     /**
@@ -362,236 +527,223 @@ class Transaction implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'accept_header' => 'getAcceptHeader',
-        'accept_language_header' => 'getAcceptLanguageHeader',
-        'allowed_payment_method_brands' => 'getAllowedPaymentMethodBrands',
-        'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
-        'authorization_amount' => 'getAuthorizationAmount',
-        'authorization_environment' => 'getAuthorizationEnvironment',
-        'authorization_sales_channel' => 'getAuthorizationSalesChannel',
-        'authorization_timeout_on' => 'getAuthorizationTimeoutOn',
-        'authorized_on' => 'getAuthorizedOn',
-        'auto_confirmation_enabled' => 'getAutoConfirmationEnabled',
-        'billing_address' => 'getBillingAddress',
-        'charge_retry_enabled' => 'getChargeRetryEnabled',
-        'completed_amount' => 'getCompletedAmount',
-        'completed_on' => 'getCompletedOn',
-        'completion_behavior' => 'getCompletionBehavior',
-        'completion_timeout_on' => 'getCompletionTimeoutOn',
-        'confirmed_by' => 'getConfirmedBy',
-        'confirmed_on' => 'getConfirmedOn',
-        'created_by' => 'getCreatedBy',
-        'created_on' => 'getCreatedOn',
-        'currency' => 'getCurrency',
-        'customer_email_address' => 'getCustomerEmailAddress',
-        'customer_id' => 'getCustomerId',
-        'customers_presence' => 'getCustomersPresence',
-        'delivery_decision_made_on' => 'getDeliveryDecisionMadeOn',
-        'device_session_identifier' => 'getDeviceSessionIdentifier',
-        'emails_disabled' => 'getEmailsDisabled',
-        'end_of_life' => 'getEndOfLife',
-        'environment' => 'getEnvironment',
-        'environment_selection_strategy' => 'getEnvironmentSelectionStrategy',
-        'failed_on' => 'getFailedOn',
-        'failed_url' => 'getFailedUrl',
-        'failure_reason' => 'getFailureReason',
-        'group' => 'getGroup',
-        'id' => 'getId',
-        'internet_protocol_address' => 'getInternetProtocolAddress',
-        'internet_protocol_address_country' => 'getInternetProtocolAddressCountry',
-        'invoice_merchant_reference' => 'getInvoiceMerchantReference',
-        'java_enabled' => 'getJavaEnabled',
-        'language' => 'getLanguage',
-        'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'merchant_reference' => 'getMerchantReference',
-        'meta_data' => 'getMetaData',
         'parent' => 'getParent',
-        'payment_connector_configuration' => 'getPaymentConnectorConfiguration',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'processing_on' => 'getProcessingOn',
-        'refunded_amount' => 'getRefundedAmount',
-        'screen_color_depth' => 'getScreenColorDepth',
-        'screen_height' => 'getScreenHeight',
-        'screen_width' => 'getScreenWidth',
-        'shipping_address' => 'getShippingAddress',
-        'shipping_method' => 'getShippingMethod',
-        'space_view_id' => 'getSpaceViewId',
-        'state' => 'getState',
-        'success_url' => 'getSuccessUrl',
-        'terminal' => 'getTerminal',
-        'time_zone' => 'getTimeZone',
-        'token' => 'getToken',
-        'tokenization_mode' => 'getTokenizationMode',
-        'total_applied_fees' => 'getTotalAppliedFees',
         'total_settled_amount' => 'getTotalSettledAmount',
-        'user_agent_header' => 'getUserAgentHeader',
-        'user_failure_message' => 'getUserFailureMessage',
-        'user_interface_type' => 'getUserInterfaceType',
-        'version' => 'getVersion',
-        'window_height' => 'getWindowHeight',
+        'device_session_identifier' => 'getDeviceSessionIdentifier',
+        'processing_on' => 'getProcessingOn',
+        'invoice_merchant_reference' => 'getInvoiceMerchantReference',
+        'language' => 'getLanguage',
+        'confirmed_on' => 'getConfirmedOn',
+        'line_items' => 'getLineItems',
+        'accept_language_header' => 'getAcceptLanguageHeader',
+        'java_enabled' => 'getJavaEnabled',
+        'confirmed_by' => 'getConfirmedBy',
+        'payment_connector_configuration' => 'getPaymentConnectorConfiguration',
+        'id' => 'getId',
+        'state' => 'getState',
         'window_width' => 'getWindowWidth',
-        'years_to_keep' => 'getYearsToKeep'
+        'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
+        'group' => 'getGroup',
+        'charge_retry_enabled' => 'getChargeRetryEnabled',
+        'accept_header' => 'getAcceptHeader',
+        'user_agent_header' => 'getUserAgentHeader',
+        'shipping_method' => 'getShippingMethod',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'success_url' => 'getSuccessUrl',
+        'time_zone' => 'getTimeZone',
+        'space_view_id' => 'getSpaceViewId',
+        'user_failure_message' => 'getUserFailureMessage',
+        'completion_behavior' => 'getCompletionBehavior',
+        'version' => 'getVersion',
+        'internet_protocol_address_country' => 'getInternetProtocolAddressCountry',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'delivery_decision_made_on' => 'getDeliveryDecisionMadeOn',
+        'authorization_environment' => 'getAuthorizationEnvironment',
+        'auto_confirmation_enabled' => 'getAutoConfirmationEnabled',
+        'failure_reason' => 'getFailureReason',
+        'total_applied_fees' => 'getTotalAppliedFees',
+        'customers_presence' => 'getCustomersPresence',
+        'failed_on' => 'getFailedOn',
+        'refunded_amount' => 'getRefundedAmount',
+        'authorization_amount' => 'getAuthorizationAmount',
+        'screen_width' => 'getScreenWidth',
+        'environment_selection_strategy' => 'getEnvironmentSelectionStrategy',
+        'customer_email_address' => 'getCustomerEmailAddress',
+        'window_height' => 'getWindowHeight',
+        'tokenization_mode' => 'getTokenizationMode',
+        'authorization_timeout_on' => 'getAuthorizationTimeoutOn',
+        'allowed_payment_method_brands' => 'getAllowedPaymentMethodBrands',
+        'created_on' => 'getCreatedOn',
+        'meta_data' => 'getMetaData',
+        'emails_disabled' => 'getEmailsDisabled',
+        'user_interface_type' => 'getUserInterfaceType',
+        'customer_id' => 'getCustomerId',
+        'currency' => 'getCurrency',
+        'merchant_reference' => 'getMerchantReference',
+        'authorization_sales_channel' => 'getAuthorizationSalesChannel',
+        'years_to_keep' => 'getYearsToKeep',
+        'completed_amount' => 'getCompletedAmount',
+        'screen_height' => 'getScreenHeight',
+        'internet_protocol_address' => 'getInternetProtocolAddress',
+        'terminal' => 'getTerminal',
+        'end_of_life' => 'getEndOfLife',
+        'token' => 'getToken',
+        'environment' => 'getEnvironment',
+        'screen_color_depth' => 'getScreenColorDepth',
+        'created_by' => 'getCreatedBy',
+        'completed_on' => 'getCompletedOn',
+        'completion_timeout_on' => 'getCompletionTimeoutOn',
+        'shipping_address' => 'getShippingAddress',
+        'billing_address' => 'getBillingAddress',
+        'authorized_on' => 'getAuthorizedOn',
+        'failed_url' => 'getFailedUrl'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['accept_header'] = isset($data['accept_header']) ? $data['accept_header'] : null;
-        
-        $this->container['accept_language_header'] = isset($data['accept_language_header']) ? $data['accept_language_header'] : null;
-        
-        $this->container['allowed_payment_method_brands'] = isset($data['allowed_payment_method_brands']) ? $data['allowed_payment_method_brands'] : null;
-        
-        $this->container['allowed_payment_method_configurations'] = isset($data['allowed_payment_method_configurations']) ? $data['allowed_payment_method_configurations'] : null;
-        
-        $this->container['authorization_amount'] = isset($data['authorization_amount']) ? $data['authorization_amount'] : null;
-        
-        $this->container['authorization_environment'] = isset($data['authorization_environment']) ? $data['authorization_environment'] : null;
-        
-        $this->container['authorization_sales_channel'] = isset($data['authorization_sales_channel']) ? $data['authorization_sales_channel'] : null;
-        
-        $this->container['authorization_timeout_on'] = isset($data['authorization_timeout_on']) ? $data['authorization_timeout_on'] : null;
-        
-        $this->container['authorized_on'] = isset($data['authorized_on']) ? $data['authorized_on'] : null;
-        
-        $this->container['auto_confirmation_enabled'] = isset($data['auto_confirmation_enabled']) ? $data['auto_confirmation_enabled'] : null;
-        
-        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
-        
-        $this->container['charge_retry_enabled'] = isset($data['charge_retry_enabled']) ? $data['charge_retry_enabled'] : null;
-        
-        $this->container['completed_amount'] = isset($data['completed_amount']) ? $data['completed_amount'] : null;
-        
-        $this->container['completed_on'] = isset($data['completed_on']) ? $data['completed_on'] : null;
-        
-        $this->container['completion_behavior'] = isset($data['completion_behavior']) ? $data['completion_behavior'] : null;
-        
-        $this->container['completion_timeout_on'] = isset($data['completion_timeout_on']) ? $data['completion_timeout_on'] : null;
-        
-        $this->container['confirmed_by'] = isset($data['confirmed_by']) ? $data['confirmed_by'] : null;
-        
-        $this->container['confirmed_on'] = isset($data['confirmed_on']) ? $data['confirmed_on'] : null;
-        
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
-        
-        $this->container['customer_email_address'] = isset($data['customer_email_address']) ? $data['customer_email_address'] : null;
-        
-        $this->container['customer_id'] = isset($data['customer_id']) ? $data['customer_id'] : null;
-        
-        $this->container['customers_presence'] = isset($data['customers_presence']) ? $data['customers_presence'] : null;
-        
-        $this->container['delivery_decision_made_on'] = isset($data['delivery_decision_made_on']) ? $data['delivery_decision_made_on'] : null;
-        
-        $this->container['device_session_identifier'] = isset($data['device_session_identifier']) ? $data['device_session_identifier'] : null;
-        
-        $this->container['emails_disabled'] = isset($data['emails_disabled']) ? $data['emails_disabled'] : null;
-        
-        $this->container['end_of_life'] = isset($data['end_of_life']) ? $data['end_of_life'] : null;
-        
-        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
-        
-        $this->container['environment_selection_strategy'] = isset($data['environment_selection_strategy']) ? $data['environment_selection_strategy'] : null;
-        
-        $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
-        
-        $this->container['failed_url'] = isset($data['failed_url']) ? $data['failed_url'] : null;
-        
-        $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
-        
-        $this->container['group'] = isset($data['group']) ? $data['group'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['internet_protocol_address'] = isset($data['internet_protocol_address']) ? $data['internet_protocol_address'] : null;
-        
-        $this->container['internet_protocol_address_country'] = isset($data['internet_protocol_address_country']) ? $data['internet_protocol_address_country'] : null;
-        
-        $this->container['invoice_merchant_reference'] = isset($data['invoice_merchant_reference']) ? $data['invoice_merchant_reference'] : null;
-        
-        $this->container['java_enabled'] = isset($data['java_enabled']) ? $data['java_enabled'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['merchant_reference'] = isset($data['merchant_reference']) ? $data['merchant_reference'] : null;
-        
-        $this->container['meta_data'] = isset($data['meta_data']) ? $data['meta_data'] : null;
-        
-        $this->container['parent'] = isset($data['parent']) ? $data['parent'] : null;
-        
-        $this->container['payment_connector_configuration'] = isset($data['payment_connector_configuration']) ? $data['payment_connector_configuration'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['processing_on'] = isset($data['processing_on']) ? $data['processing_on'] : null;
-        
-        $this->container['refunded_amount'] = isset($data['refunded_amount']) ? $data['refunded_amount'] : null;
-        
-        $this->container['screen_color_depth'] = isset($data['screen_color_depth']) ? $data['screen_color_depth'] : null;
-        
-        $this->container['screen_height'] = isset($data['screen_height']) ? $data['screen_height'] : null;
-        
-        $this->container['screen_width'] = isset($data['screen_width']) ? $data['screen_width'] : null;
-        
-        $this->container['shipping_address'] = isset($data['shipping_address']) ? $data['shipping_address'] : null;
-        
-        $this->container['shipping_method'] = isset($data['shipping_method']) ? $data['shipping_method'] : null;
-        
-        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['success_url'] = isset($data['success_url']) ? $data['success_url'] : null;
-        
-        $this->container['terminal'] = isset($data['terminal']) ? $data['terminal'] : null;
-        
-        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
-        
-        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
-        
-        $this->container['tokenization_mode'] = isset($data['tokenization_mode']) ? $data['tokenization_mode'] : null;
-        
-        $this->container['total_applied_fees'] = isset($data['total_applied_fees']) ? $data['total_applied_fees'] : null;
-        
-        $this->container['total_settled_amount'] = isset($data['total_settled_amount']) ? $data['total_settled_amount'] : null;
-        
-        $this->container['user_agent_header'] = isset($data['user_agent_header']) ? $data['user_agent_header'] : null;
-        
-        $this->container['user_failure_message'] = isset($data['user_failure_message']) ? $data['user_failure_message'] : null;
-        
-        $this->container['user_interface_type'] = isset($data['user_interface_type']) ? $data['user_interface_type'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
-        $this->container['window_height'] = isset($data['window_height']) ? $data['window_height'] : null;
-        
-        $this->container['window_width'] = isset($data['window_width']) ? $data['window_width'] : null;
-        
-        $this->container['years_to_keep'] = isset($data['years_to_keep']) ? $data['years_to_keep'] : null;
-        
+        $this->setIfExists('parent', $data ?? [], null);
+        $this->setIfExists('total_settled_amount', $data ?? [], null);
+        $this->setIfExists('device_session_identifier', $data ?? [], null);
+        $this->setIfExists('processing_on', $data ?? [], null);
+        $this->setIfExists('invoice_merchant_reference', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('confirmed_on', $data ?? [], null);
+        $this->setIfExists('line_items', $data ?? [], null);
+        $this->setIfExists('accept_language_header', $data ?? [], null);
+        $this->setIfExists('java_enabled', $data ?? [], null);
+        $this->setIfExists('confirmed_by', $data ?? [], null);
+        $this->setIfExists('payment_connector_configuration', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('window_width', $data ?? [], null);
+        $this->setIfExists('allowed_payment_method_configurations', $data ?? [], null);
+        $this->setIfExists('group', $data ?? [], null);
+        $this->setIfExists('charge_retry_enabled', $data ?? [], null);
+        $this->setIfExists('accept_header', $data ?? [], null);
+        $this->setIfExists('user_agent_header', $data ?? [], null);
+        $this->setIfExists('shipping_method', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('success_url', $data ?? [], null);
+        $this->setIfExists('time_zone', $data ?? [], null);
+        $this->setIfExists('space_view_id', $data ?? [], null);
+        $this->setIfExists('user_failure_message', $data ?? [], null);
+        $this->setIfExists('completion_behavior', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('internet_protocol_address_country', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('delivery_decision_made_on', $data ?? [], null);
+        $this->setIfExists('authorization_environment', $data ?? [], null);
+        $this->setIfExists('auto_confirmation_enabled', $data ?? [], null);
+        $this->setIfExists('failure_reason', $data ?? [], null);
+        $this->setIfExists('total_applied_fees', $data ?? [], null);
+        $this->setIfExists('customers_presence', $data ?? [], null);
+        $this->setIfExists('failed_on', $data ?? [], null);
+        $this->setIfExists('refunded_amount', $data ?? [], null);
+        $this->setIfExists('authorization_amount', $data ?? [], null);
+        $this->setIfExists('screen_width', $data ?? [], null);
+        $this->setIfExists('environment_selection_strategy', $data ?? [], null);
+        $this->setIfExists('customer_email_address', $data ?? [], null);
+        $this->setIfExists('window_height', $data ?? [], null);
+        $this->setIfExists('tokenization_mode', $data ?? [], null);
+        $this->setIfExists('authorization_timeout_on', $data ?? [], null);
+        $this->setIfExists('allowed_payment_method_brands', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('meta_data', $data ?? [], null);
+        $this->setIfExists('emails_disabled', $data ?? [], null);
+        $this->setIfExists('user_interface_type', $data ?? [], null);
+        $this->setIfExists('customer_id', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('merchant_reference', $data ?? [], null);
+        $this->setIfExists('authorization_sales_channel', $data ?? [], null);
+        $this->setIfExists('years_to_keep', $data ?? [], null);
+        $this->setIfExists('completed_amount', $data ?? [], null);
+        $this->setIfExists('screen_height', $data ?? [], null);
+        $this->setIfExists('internet_protocol_address', $data ?? [], null);
+        $this->setIfExists('terminal', $data ?? [], null);
+        $this->setIfExists('end_of_life', $data ?? [], null);
+        $this->setIfExists('token', $data ?? [], null);
+        $this->setIfExists('environment', $data ?? [], null);
+        $this->setIfExists('screen_color_depth', $data ?? [], null);
+        $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('completed_on', $data ?? [], null);
+        $this->setIfExists('completion_timeout_on', $data ?? [], null);
+        $this->setIfExists('shipping_address', $data ?? [], null);
+        $this->setIfExists('billing_address', $data ?? [], null);
+        $this->setIfExists('authorized_on', $data ?? [], null);
+        $this->setIfExists('failed_url', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -603,10 +755,6 @@ class Transaction implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
-        }
-
         if (!is_null($this->container['device_session_identifier']) && (mb_strlen($this->container['device_session_identifier']) > 40)) {
             $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be smaller than or equal to 40.";
         }
@@ -615,20 +763,16 @@ class Transaction implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'device_session_identifier', the character length must be bigger than or equal to 10.";
         }
 
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 2000)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 2000.";
-        }
-
-        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
-            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
+        if (!is_null($this->container['device_session_identifier']) && !preg_match("/([a-zA-Z0-9_-])*/", $this->container['device_session_identifier'])) {
+            $invalidProperties[] = "invalid value for 'device_session_identifier', must be conform to the pattern /([a-zA-Z0-9_-])*/.";
         }
 
         if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
             $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
         }
 
-        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['invoice_merchant_reference']) && !preg_match("/[ \\x20-\\x7e]*/", $this->container['invoice_merchant_reference'])) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', must be conform to the pattern /[ \\x20-\\x7e]*/.";
         }
 
         if (!is_null($this->container['shipping_method']) && (mb_strlen($this->container['shipping_method']) > 200)) {
@@ -643,72 +787,28 @@ class Transaction implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'success_url', the character length must be bigger than or equal to 9.";
         }
 
+        if (!is_null($this->container['customer_email_address']) && (mb_strlen($this->container['customer_email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'customer_email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && (mb_strlen($this->container['merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['merchant_reference']) && !preg_match("/[ \\x20-\\x7e]*/", $this->container['merchant_reference'])) {
+            $invalidProperties[] = "invalid value for 'merchant_reference', must be conform to the pattern /[ \\x20-\\x7e]*/.";
+        }
+
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be smaller than or equal to 2000.";
+        }
+
+        if (!is_null($this->container['failed_url']) && (mb_strlen($this->container['failed_url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'failed_url', the character length must be bigger than or equal to 9.";
+        }
+
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -716,1143 +816,16 @@ class Transaction implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets accept_header
-     *
-     * @return string
-     */
-    public function getAcceptHeader()
-    {
-        return $this->container['accept_header'];
-    }
-
-    /**
-     * Sets accept_header
-     *
-     * @param string $accept_header The 'Accept' header of the customer's web browser.
-     *
-     * @return $this
-     */
-    public function setAcceptHeader($accept_header)
-    {
-        $this->container['accept_header'] = $accept_header;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets accept_language_header
-     *
-     * @return string
-     */
-    public function getAcceptLanguageHeader()
-    {
-        return $this->container['accept_language_header'];
-    }
-
-    /**
-     * Sets accept_language_header
-     *
-     * @param string $accept_language_header The 'Accept Language' header of the customer's web browser.
-     *
-     * @return $this
-     */
-    public function setAcceptLanguageHeader($accept_language_header)
-    {
-        $this->container['accept_language_header'] = $accept_language_header;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets allowed_payment_method_brands
-     *
-     * @return int[]
-     */
-    public function getAllowedPaymentMethodBrands()
-    {
-        return $this->container['allowed_payment_method_brands'];
-    }
-
-    /**
-     * Sets allowed_payment_method_brands
-     *
-     * @param int[] $allowed_payment_method_brands The payment method brands that can be used to authorize the transaction.
-     *
-     * @return $this
-     */
-    public function setAllowedPaymentMethodBrands($allowed_payment_method_brands)
-    {
-        $this->container['allowed_payment_method_brands'] = $allowed_payment_method_brands;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets allowed_payment_method_configurations
-     *
-     * @return int[]
-     */
-    public function getAllowedPaymentMethodConfigurations()
-    {
-        return $this->container['allowed_payment_method_configurations'];
-    }
-
-    /**
-     * Sets allowed_payment_method_configurations
-     *
-     * @param int[] $allowed_payment_method_configurations The payment method configurations that can be used to authorize the transaction.
-     *
-     * @return $this
-     */
-    public function setAllowedPaymentMethodConfigurations($allowed_payment_method_configurations)
-    {
-        $this->container['allowed_payment_method_configurations'] = $allowed_payment_method_configurations;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets authorization_amount
-     *
-     * @return float
-     */
-    public function getAuthorizationAmount()
-    {
-        return $this->container['authorization_amount'];
-    }
-
-    /**
-     * Sets authorization_amount
-     *
-     * @param float $authorization_amount The sum of all line item prices including taxes in the transaction's currency.
-     *
-     * @return $this
-     */
-    public function setAuthorizationAmount($authorization_amount)
-    {
-        $this->container['authorization_amount'] = $authorization_amount;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets authorization_environment
-     *
-     * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment
-     */
-    public function getAuthorizationEnvironment()
-    {
-        return $this->container['authorization_environment'];
-    }
-
-    /**
-     * Sets authorization_environment
-     *
-     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $authorization_environment The environment in which the transaction was authorized.
-     *
-     * @return $this
-     */
-    public function setAuthorizationEnvironment($authorization_environment)
-    {
-        $this->container['authorization_environment'] = $authorization_environment;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets authorization_sales_channel
-     *
-     * @return int
-     */
-    public function getAuthorizationSalesChannel()
-    {
-        return $this->container['authorization_sales_channel'];
-    }
-
-    /**
-     * Sets authorization_sales_channel
-     *
-     * @param int $authorization_sales_channel The sales channel through which the transaction was placed.
-     *
-     * @return $this
-     */
-    public function setAuthorizationSalesChannel($authorization_sales_channel)
-    {
-        $this->container['authorization_sales_channel'] = $authorization_sales_channel;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets authorization_timeout_on
-     *
-     * @return \DateTime
-     */
-    public function getAuthorizationTimeoutOn()
-    {
-        return $this->container['authorization_timeout_on'];
-    }
-
-    /**
-     * Sets authorization_timeout_on
-     *
-     * @param \DateTime $authorization_timeout_on The date and time when the transaction must be authorized, otherwise it will canceled.
-     *
-     * @return $this
-     */
-    public function setAuthorizationTimeoutOn($authorization_timeout_on)
-    {
-        $this->container['authorization_timeout_on'] = $authorization_timeout_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets authorized_on
-     *
-     * @return \DateTime
-     */
-    public function getAuthorizedOn()
-    {
-        return $this->container['authorized_on'];
-    }
-
-    /**
-     * Sets authorized_on
-     *
-     * @param \DateTime $authorized_on The date and time when the transaction was authorized.
-     *
-     * @return $this
-     */
-    public function setAuthorizedOn($authorized_on)
-    {
-        $this->container['authorized_on'] = $authorized_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets auto_confirmation_enabled
-     *
-     * @return bool
-     */
-    public function getAutoConfirmationEnabled()
-    {
-        return $this->container['auto_confirmation_enabled'];
-    }
-
-    /**
-     * Sets auto_confirmation_enabled
-     *
-     * @param bool $auto_confirmation_enabled Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
-     *
-     * @return $this
-     */
-    public function setAutoConfirmationEnabled($auto_confirmation_enabled)
-    {
-        $this->container['auto_confirmation_enabled'] = $auto_confirmation_enabled;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets billing_address
-     *
-     * @return \Wallee\Sdk\Model\Address
-     */
-    public function getBillingAddress()
-    {
-        return $this->container['billing_address'];
-    }
-
-    /**
-     * Sets billing_address
-     *
-     * @param \Wallee\Sdk\Model\Address $billing_address The address associated with the payment method for invoicing and transaction processing purposes.
-     *
-     * @return $this
-     */
-    public function setBillingAddress($billing_address)
-    {
-        $this->container['billing_address'] = $billing_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets charge_retry_enabled
-     *
-     * @return bool
-     */
-    public function getChargeRetryEnabled()
-    {
-        return $this->container['charge_retry_enabled'];
-    }
-
-    /**
-     * Sets charge_retry_enabled
-     *
-     * @param bool $charge_retry_enabled Whether the customer can make further payment attempts if the first one has failed. Default is true.
-     *
-     * @return $this
-     */
-    public function setChargeRetryEnabled($charge_retry_enabled)
-    {
-        $this->container['charge_retry_enabled'] = $charge_retry_enabled;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets completed_amount
-     *
-     * @return float
-     */
-    public function getCompletedAmount()
-    {
-        return $this->container['completed_amount'];
-    }
-
-    /**
-     * Sets completed_amount
-     *
-     * @param float $completed_amount The total amount that was completed, in the transaction's currency.
-     *
-     * @return $this
-     */
-    public function setCompletedAmount($completed_amount)
-    {
-        $this->container['completed_amount'] = $completed_amount;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets completed_on
-     *
-     * @return \DateTime
-     */
-    public function getCompletedOn()
-    {
-        return $this->container['completed_on'];
-    }
-
-    /**
-     * Sets completed_on
-     *
-     * @param \DateTime $completed_on The date and time when the transaction was completed.
-     *
-     * @return $this
-     */
-    public function setCompletedOn($completed_on)
-    {
-        $this->container['completed_on'] = $completed_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets completion_behavior
-     *
-     * @return \Wallee\Sdk\Model\TransactionCompletionBehavior
-     */
-    public function getCompletionBehavior()
-    {
-        return $this->container['completion_behavior'];
-    }
-
-    /**
-     * Sets completion_behavior
-     *
-     * @param \Wallee\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
-     *
-     * @return $this
-     */
-    public function setCompletionBehavior($completion_behavior)
-    {
-        $this->container['completion_behavior'] = $completion_behavior;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets completion_timeout_on
-     *
-     * @return \DateTime
-     */
-    public function getCompletionTimeoutOn()
-    {
-        return $this->container['completion_timeout_on'];
-    }
-
-    /**
-     * Sets completion_timeout_on
-     *
-     * @param \DateTime $completion_timeout_on The date and time when the transaction is completed automatically.
-     *
-     * @return $this
-     */
-    public function setCompletionTimeoutOn($completion_timeout_on)
-    {
-        $this->container['completion_timeout_on'] = $completion_timeout_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets confirmed_by
-     *
-     * @return int
-     */
-    public function getConfirmedBy()
-    {
-        return $this->container['confirmed_by'];
-    }
-
-    /**
-     * Sets confirmed_by
-     *
-     * @param int $confirmed_by The ID of the user the transaction was confirmed by.
-     *
-     * @return $this
-     */
-    public function setConfirmedBy($confirmed_by)
-    {
-        $this->container['confirmed_by'] = $confirmed_by;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets confirmed_on
-     *
-     * @return \DateTime
-     */
-    public function getConfirmedOn()
-    {
-        return $this->container['confirmed_on'];
-    }
-
-    /**
-     * Sets confirmed_on
-     *
-     * @param \DateTime $confirmed_on The date and time when the transaction was created.
-     *
-     * @return $this
-     */
-    public function setConfirmedOn($confirmed_on)
-    {
-        $this->container['confirmed_on'] = $confirmed_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_by
-     *
-     * @return int
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param int $created_by The ID of the user the transaction was created by.
-     *
-     * @return $this
-     */
-    public function setCreatedBy($created_by)
-    {
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets currency
-     *
-     * @return string
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param string $currency The three-letter code (ISO 4217 format) of the transaction's currency.
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
-    {
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets customer_email_address
-     *
-     * @return string
-     */
-    public function getCustomerEmailAddress()
-    {
-        return $this->container['customer_email_address'];
-    }
-
-    /**
-     * Sets customer_email_address
-     *
-     * @param string $customer_email_address The customer's email address.
-     *
-     * @return $this
-     */
-    public function setCustomerEmailAddress($customer_email_address)
-    {
-        if (!is_null($customer_email_address) && (mb_strlen($customer_email_address) > 254)) {
-            throw new \InvalidArgumentException('invalid length for $customer_email_address when calling Transaction., must be smaller than or equal to 254.');
-        }
-
-        $this->container['customer_email_address'] = $customer_email_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets customer_id
-     *
-     * @return string
-     */
-    public function getCustomerId()
-    {
-        return $this->container['customer_id'];
-    }
-
-    /**
-     * Sets customer_id
-     *
-     * @param string $customer_id The unique identifier of the customer in the external system.
-     *
-     * @return $this
-     */
-    public function setCustomerId($customer_id)
-    {
-        $this->container['customer_id'] = $customer_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets customers_presence
-     *
-     * @return \Wallee\Sdk\Model\CustomersPresence
-     */
-    public function getCustomersPresence()
-    {
-        return $this->container['customers_presence'];
-    }
-
-    /**
-     * Sets customers_presence
-     *
-     * @param \Wallee\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
-     *
-     * @return $this
-     */
-    public function setCustomersPresence($customers_presence)
-    {
-        $this->container['customers_presence'] = $customers_presence;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets delivery_decision_made_on
-     *
-     * @return \DateTime
-     */
-    public function getDeliveryDecisionMadeOn()
-    {
-        return $this->container['delivery_decision_made_on'];
-    }
-
-    /**
-     * Sets delivery_decision_made_on
-     *
-     * @param \DateTime $delivery_decision_made_on This date and time when the decision was made as to whether the order should be shipped.
-     *
-     * @return $this
-     */
-    public function setDeliveryDecisionMadeOn($delivery_decision_made_on)
-    {
-        $this->container['delivery_decision_made_on'] = $delivery_decision_made_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets device_session_identifier
-     *
-     * @return string
-     */
-    public function getDeviceSessionIdentifier()
-    {
-        return $this->container['device_session_identifier'];
-    }
-
-    /**
-     * Sets device_session_identifier
-     *
-     * @param string $device_session_identifier Allows to link the transaction to the data collected from the customer's device.
-     *
-     * @return $this
-     */
-    public function setDeviceSessionIdentifier($device_session_identifier)
-    {
-        if (!is_null($device_session_identifier) && (mb_strlen($device_session_identifier) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling Transaction., must be smaller than or equal to 40.');
-        }
-        if (!is_null($device_session_identifier) && (mb_strlen($device_session_identifier) < 10)) {
-            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling Transaction., must be bigger than or equal to 10.');
-        }
-
-        $this->container['device_session_identifier'] = $device_session_identifier;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets emails_disabled
-     *
-     * @return bool
-     */
-    public function getEmailsDisabled()
-    {
-        return $this->container['emails_disabled'];
-    }
-
-    /**
-     * Sets emails_disabled
-     *
-     * @param bool $emails_disabled Whether email sending is deactivated for the transaction. Default is false.
-     *
-     * @return $this
-     */
-    public function setEmailsDisabled($emails_disabled)
-    {
-        $this->container['emails_disabled'] = $emails_disabled;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets end_of_life
-     *
-     * @return \DateTime
-     */
-    public function getEndOfLife()
-    {
-        return $this->container['end_of_life'];
-    }
-
-    /**
-     * Sets end_of_life
-     *
-     * @param \DateTime $end_of_life The date and time when the transaction reaches its end of live. No further actions can be carried out at this time.
-     *
-     * @return $this
-     */
-    public function setEndOfLife($end_of_life)
-    {
-        $this->container['end_of_life'] = $end_of_life;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets environment
-     *
-     * @return \Wallee\Sdk\Model\Environment
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param \Wallee\Sdk\Model\Environment $environment The environment used when rendering resources.
-     *
-     * @return $this
-     */
-    public function setEnvironment($environment)
-    {
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets environment_selection_strategy
-     *
-     * @return \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy
-     */
-    public function getEnvironmentSelectionStrategy()
-    {
-        return $this->container['environment_selection_strategy'];
-    }
-
-    /**
-     * Sets environment_selection_strategy
-     *
-     * @param \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy $environment_selection_strategy The strategy for determining whether the transaction is to be processed in the test or production environment.
-     *
-     * @return $this
-     */
-    public function setEnvironmentSelectionStrategy($environment_selection_strategy)
-    {
-        $this->container['environment_selection_strategy'] = $environment_selection_strategy;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_on
-     *
-     * @return \DateTime
-     */
-    public function getFailedOn()
-    {
-        return $this->container['failed_on'];
-    }
-
-    /**
-     * Sets failed_on
-     *
-     * @param \DateTime $failed_on The date and time when the transaction failed.
-     *
-     * @return $this
-     */
-    public function setFailedOn($failed_on)
-    {
-        $this->container['failed_on'] = $failed_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_url
-     *
-     * @return string
-     */
-    public function getFailedUrl()
-    {
-        return $this->container['failed_url'];
-    }
-
-    /**
-     * Sets failed_url
-     *
-     * @param string $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
-     *
-     * @return $this
-     */
-    public function setFailedUrl($failed_url)
-    {
-        if (!is_null($failed_url) && (mb_strlen($failed_url) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be smaller than or equal to 2000.');
-        }
-        if (!is_null($failed_url) && (mb_strlen($failed_url) < 9)) {
-            throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be bigger than or equal to 9.');
-        }
-
-        $this->container['failed_url'] = $failed_url;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failure_reason
-     *
-     * @return \Wallee\Sdk\Model\FailureReason
-     */
-    public function getFailureReason()
-    {
-        return $this->container['failure_reason'];
-    }
-
-    /**
-     * Sets failure_reason
-     *
-     * @param \Wallee\Sdk\Model\FailureReason $failure_reason The reason for the failure of the transaction.
-     *
-     * @return $this
-     */
-    public function setFailureReason($failure_reason)
-    {
-        $this->container['failure_reason'] = $failure_reason;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets group
-     *
-     * @return \Wallee\Sdk\Model\TransactionGroup
-     */
-    public function getGroup()
-    {
-        return $this->container['group'];
-    }
-
-    /**
-     * Sets group
-     *
-     * @param \Wallee\Sdk\Model\TransactionGroup $group The group that the transaction belongs to.
-     *
-     * @return $this
-     */
-    public function setGroup($group)
-    {
-        $this->container['group'] = $group;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets internet_protocol_address
-     *
-     * @return string
-     */
-    public function getInternetProtocolAddress()
-    {
-        return $this->container['internet_protocol_address'];
-    }
-
-    /**
-     * Sets internet_protocol_address
-     *
-     * @param string $internet_protocol_address The IP address of the customer's device.
-     *
-     * @return $this
-     */
-    public function setInternetProtocolAddress($internet_protocol_address)
-    {
-        $this->container['internet_protocol_address'] = $internet_protocol_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets internet_protocol_address_country
-     *
-     * @return string
-     */
-    public function getInternetProtocolAddressCountry()
-    {
-        return $this->container['internet_protocol_address_country'];
-    }
-
-    /**
-     * Sets internet_protocol_address_country
-     *
-     * @param string $internet_protocol_address_country The country determined from the IP address of the customer's device.
-     *
-     * @return $this
-     */
-    public function setInternetProtocolAddressCountry($internet_protocol_address_country)
-    {
-        $this->container['internet_protocol_address_country'] = $internet_protocol_address_country;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets invoice_merchant_reference
-     *
-     * @return string
-     */
-    public function getInvoiceMerchantReference()
-    {
-        return $this->container['invoice_merchant_reference'];
-    }
-
-    /**
-     * Sets invoice_merchant_reference
-     *
-     * @param string $invoice_merchant_reference The merchant's reference used to identify the invoice.
-     *
-     * @return $this
-     */
-    public function setInvoiceMerchantReference($invoice_merchant_reference)
-    {
-        if (!is_null($invoice_merchant_reference) && (mb_strlen($invoice_merchant_reference) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling Transaction., must be smaller than or equal to 100.');
-        }
-
-        $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets java_enabled
-     *
-     * @return bool
-     */
-    public function getJavaEnabled()
-    {
-        return $this->container['java_enabled'];
-    }
-
-    /**
-     * Sets java_enabled
-     *
-     * @param bool $java_enabled Whether Java is enabled on the customer's web browser.
-     *
-     * @return $this
-     */
-    public function setJavaEnabled($java_enabled)
-    {
-        $this->container['java_enabled'] = $java_enabled;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string $language The language that is linked to the object.
-     *
-     * @return $this
-     */
-    public function setLanguage($language)
-    {
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets line_items
-     *
-     * @return \Wallee\Sdk\Model\LineItem[]
-     */
-    public function getLineItems()
-    {
-        return $this->container['line_items'];
-    }
-
-    /**
-     * Sets line_items
-     *
-     * @param \Wallee\Sdk\Model\LineItem[] $line_items The line items purchased by the customer.
-     *
-     * @return $this
-     */
-    public function setLineItems($line_items)
-    {
-        $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets merchant_reference
-     *
-     * @return string
-     */
-    public function getMerchantReference()
-    {
-        return $this->container['merchant_reference'];
-    }
-
-    /**
-     * Sets merchant_reference
-     *
-     * @param string $merchant_reference The merchant's reference used to identify the transaction.
-     *
-     * @return $this
-     */
-    public function setMerchantReference($merchant_reference)
-    {
-        if (!is_null($merchant_reference) && (mb_strlen($merchant_reference) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling Transaction., must be smaller than or equal to 100.');
-        }
-
-        $this->container['merchant_reference'] = $merchant_reference;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets meta_data
-     *
-     * @return map[string,string]
-     */
-    public function getMetaData()
-    {
-        return $this->container['meta_data'];
-    }
-
-    /**
-     * Sets meta_data
-     *
-     * @param map[string,string] $meta_data Allow to store additional information about the object.
-     *
-     * @return $this
-     */
-    public function setMetaData($meta_data)
-    {
-        $this->container['meta_data'] = $meta_data;
-
-        return $this;
-    }
-    
 
     /**
      * Gets parent
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\Transaction|null
      */
     public function getParent()
     {
@@ -1862,458 +835,24 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets parent
      *
-     * @param int $parent The parent transaction which was (partially) replaced by this transaction.
+     * @param \Wallee\Sdk\Model\Transaction|null $parent parent
      *
-     * @return $this
+     * @return self
      */
     public function setParent($parent)
     {
+        if (is_null($parent)) {
+            throw new \InvalidArgumentException('non-nullable parent cannot be null');
+        }
         $this->container['parent'] = $parent;
 
         return $this;
     }
-    
-
-    /**
-     * Gets payment_connector_configuration
-     *
-     * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
-     */
-    public function getPaymentConnectorConfiguration()
-    {
-        return $this->container['payment_connector_configuration'];
-    }
-
-    /**
-     * Sets payment_connector_configuration
-     *
-     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration The payment connector configuration that was used to authorize the transaction.
-     *
-     * @return $this
-     */
-    public function setPaymentConnectorConfiguration($payment_connector_configuration)
-    {
-        $this->container['payment_connector_configuration'] = $payment_connector_configuration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets processing_on
-     *
-     * @return \DateTime
-     */
-    public function getProcessingOn()
-    {
-        return $this->container['processing_on'];
-    }
-
-    /**
-     * Sets processing_on
-     *
-     * @param \DateTime $processing_on The date and time when the processing of the transaction was started.
-     *
-     * @return $this
-     */
-    public function setProcessingOn($processing_on)
-    {
-        $this->container['processing_on'] = $processing_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets refunded_amount
-     *
-     * @return float
-     */
-    public function getRefundedAmount()
-    {
-        return $this->container['refunded_amount'];
-    }
-
-    /**
-     * Sets refunded_amount
-     *
-     * @param float $refunded_amount The total amount that was refunded, in the transaction's currency.
-     *
-     * @return $this
-     */
-    public function setRefundedAmount($refunded_amount)
-    {
-        $this->container['refunded_amount'] = $refunded_amount;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets screen_color_depth
-     *
-     * @return string
-     */
-    public function getScreenColorDepth()
-    {
-        return $this->container['screen_color_depth'];
-    }
-
-    /**
-     * Sets screen_color_depth
-     *
-     * @param string $screen_color_depth The screen color depth of the customer's web browser.
-     *
-     * @return $this
-     */
-    public function setScreenColorDepth($screen_color_depth)
-    {
-        $this->container['screen_color_depth'] = $screen_color_depth;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets screen_height
-     *
-     * @return string
-     */
-    public function getScreenHeight()
-    {
-        return $this->container['screen_height'];
-    }
-
-    /**
-     * Sets screen_height
-     *
-     * @param string $screen_height The screen height of the customer's web browser.
-     *
-     * @return $this
-     */
-    public function setScreenHeight($screen_height)
-    {
-        $this->container['screen_height'] = $screen_height;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets screen_width
-     *
-     * @return string
-     */
-    public function getScreenWidth()
-    {
-        return $this->container['screen_width'];
-    }
-
-    /**
-     * Sets screen_width
-     *
-     * @param string $screen_width The screen width of the customer's web browser.
-     *
-     * @return $this
-     */
-    public function setScreenWidth($screen_width)
-    {
-        $this->container['screen_width'] = $screen_width;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets shipping_address
-     *
-     * @return \Wallee\Sdk\Model\Address
-     */
-    public function getShippingAddress()
-    {
-        return $this->container['shipping_address'];
-    }
-
-    /**
-     * Sets shipping_address
-     *
-     * @param \Wallee\Sdk\Model\Address $shipping_address The address to where the order will be shipped.
-     *
-     * @return $this
-     */
-    public function setShippingAddress($shipping_address)
-    {
-        $this->container['shipping_address'] = $shipping_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets shipping_method
-     *
-     * @return string
-     */
-    public function getShippingMethod()
-    {
-        return $this->container['shipping_method'];
-    }
-
-    /**
-     * Sets shipping_method
-     *
-     * @param string $shipping_method The name of the shipping method used to ship the products.
-     *
-     * @return $this
-     */
-    public function setShippingMethod($shipping_method)
-    {
-        if (!is_null($shipping_method) && (mb_strlen($shipping_method) > 200)) {
-            throw new \InvalidArgumentException('invalid length for $shipping_method when calling Transaction., must be smaller than or equal to 200.');
-        }
-
-        $this->container['shipping_method'] = $shipping_method;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets space_view_id
-     *
-     * @return int
-     */
-    public function getSpaceViewId()
-    {
-        return $this->container['space_view_id'];
-    }
-
-    /**
-     * Sets space_view_id
-     *
-     * @param int $space_view_id The ID of the space view this object is linked to.
-     *
-     * @return $this
-     */
-    public function setSpaceViewId($space_view_id)
-    {
-        $this->container['space_view_id'] = $space_view_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\TransactionState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\TransactionState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets success_url
-     *
-     * @return string
-     */
-    public function getSuccessUrl()
-    {
-        return $this->container['success_url'];
-    }
-
-    /**
-     * Sets success_url
-     *
-     * @param string $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
-     *
-     * @return $this
-     */
-    public function setSuccessUrl($success_url)
-    {
-        if (!is_null($success_url) && (mb_strlen($success_url) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be smaller than or equal to 2000.');
-        }
-        if (!is_null($success_url) && (mb_strlen($success_url) < 9)) {
-            throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be bigger than or equal to 9.');
-        }
-
-        $this->container['success_url'] = $success_url;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets terminal
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminal
-     */
-    public function getTerminal()
-    {
-        return $this->container['terminal'];
-    }
-
-    /**
-     * Sets terminal
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminal $terminal The payment terminal through which the payment was processed.
-     *
-     * @return $this
-     */
-    public function setTerminal($terminal)
-    {
-        $this->container['terminal'] = $terminal;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets time_zone
-     *
-     * @return string
-     */
-    public function getTimeZone()
-    {
-        return $this->container['time_zone'];
-    }
-
-    /**
-     * Sets time_zone
-     *
-     * @param string $time_zone The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
-     *
-     * @return $this
-     */
-    public function setTimeZone($time_zone)
-    {
-        $this->container['time_zone'] = $time_zone;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets token
-     *
-     * @return \Wallee\Sdk\Model\Token
-     */
-    public function getToken()
-    {
-        return $this->container['token'];
-    }
-
-    /**
-     * Sets token
-     *
-     * @param \Wallee\Sdk\Model\Token $token The payment token that should be used to charge the customer.
-     *
-     * @return $this
-     */
-    public function setToken($token)
-    {
-        $this->container['token'] = $token;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets tokenization_mode
-     *
-     * @return \Wallee\Sdk\Model\TokenizationMode
-     */
-    public function getTokenizationMode()
-    {
-        return $this->container['tokenization_mode'];
-    }
-
-    /**
-     * Sets tokenization_mode
-     *
-     * @param \Wallee\Sdk\Model\TokenizationMode $tokenization_mode The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
-     *
-     * @return $this
-     */
-    public function setTokenizationMode($tokenization_mode)
-    {
-        $this->container['tokenization_mode'] = $tokenization_mode;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets total_applied_fees
-     *
-     * @return float
-     */
-    public function getTotalAppliedFees()
-    {
-        return $this->container['total_applied_fees'];
-    }
-
-    /**
-     * Sets total_applied_fees
-     *
-     * @param float $total_applied_fees The total of all fees charged, in the transaction's currency.
-     *
-     * @return $this
-     */
-    public function setTotalAppliedFees($total_applied_fees)
-    {
-        $this->container['total_applied_fees'] = $total_applied_fees;
-
-        return $this;
-    }
-    
 
     /**
      * Gets total_settled_amount
      *
-     * @return float
+     * @return float|null
      */
     public function getTotalSettledAmount()
     {
@@ -2323,147 +862,365 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets total_settled_amount
      *
-     * @param float $total_settled_amount The total amount that was settled, in the transaction's currency.
+     * @param float|null $total_settled_amount The total amount that was settled, in the transaction's currency.
      *
-     * @return $this
+     * @return self
      */
     public function setTotalSettledAmount($total_settled_amount)
     {
+        if (is_null($total_settled_amount)) {
+            throw new \InvalidArgumentException('non-nullable total_settled_amount cannot be null');
+        }
         $this->container['total_settled_amount'] = $total_settled_amount;
 
         return $this;
     }
-    
 
     /**
-     * Gets user_agent_header
+     * Gets device_session_identifier
      *
-     * @return string
+     * @return string|null
      */
-    public function getUserAgentHeader()
+    public function getDeviceSessionIdentifier()
     {
-        return $this->container['user_agent_header'];
+        return $this->container['device_session_identifier'];
     }
 
     /**
-     * Sets user_agent_header
+     * Sets device_session_identifier
      *
-     * @param string $user_agent_header The 'User Agent' header of the customer's web browser.
+     * @param string|null $device_session_identifier Allows to link the transaction to the data collected from the customer's device.
      *
-     * @return $this
+     * @return self
      */
-    public function setUserAgentHeader($user_agent_header)
+    public function setDeviceSessionIdentifier($device_session_identifier)
     {
-        $this->container['user_agent_header'] = $user_agent_header;
+        if (is_null($device_session_identifier)) {
+            throw new \InvalidArgumentException('non-nullable device_session_identifier cannot be null');
+        }
+        if ((mb_strlen($device_session_identifier) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling Transaction., must be smaller than or equal to 40.');
+        }
+        if ((mb_strlen($device_session_identifier) < 10)) {
+            throw new \InvalidArgumentException('invalid length for $device_session_identifier when calling Transaction., must be bigger than or equal to 10.');
+        }
+        if ((!preg_match("/([a-zA-Z0-9_-])*/", ObjectSerializer::toString($device_session_identifier)))) {
+            throw new \InvalidArgumentException("invalid value for \$device_session_identifier when calling Transaction., must conform to the pattern /([a-zA-Z0-9_-])*/.");
+        }
+
+        $this->container['device_session_identifier'] = $device_session_identifier;
 
         return $this;
     }
-    
 
     /**
-     * Gets user_failure_message
+     * Gets processing_on
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getUserFailureMessage()
+    public function getProcessingOn()
     {
-        return $this->container['user_failure_message'];
+        return $this->container['processing_on'];
     }
 
     /**
-     * Sets user_failure_message
+     * Sets processing_on
      *
-     * @param string $user_failure_message The message that can be displayed to the customer explaining why the transaction failed, in the customer's language.
+     * @param \DateTime|null $processing_on The date and time when the processing of the transaction was started.
      *
-     * @return $this
+     * @return self
      */
-    public function setUserFailureMessage($user_failure_message)
+    public function setProcessingOn($processing_on)
     {
-        $this->container['user_failure_message'] = $user_failure_message;
+        if (is_null($processing_on)) {
+            throw new \InvalidArgumentException('non-nullable processing_on cannot be null');
+        }
+        $this->container['processing_on'] = $processing_on;
 
         return $this;
     }
-    
 
     /**
-     * Gets user_interface_type
+     * Gets invoice_merchant_reference
      *
-     * @return \Wallee\Sdk\Model\TransactionUserInterfaceType
+     * @return string|null
      */
-    public function getUserInterfaceType()
+    public function getInvoiceMerchantReference()
     {
-        return $this->container['user_interface_type'];
+        return $this->container['invoice_merchant_reference'];
     }
 
     /**
-     * Sets user_interface_type
+     * Sets invoice_merchant_reference
      *
-     * @param \Wallee\Sdk\Model\TransactionUserInterfaceType $user_interface_type The type of user interface the customer used to provide the payment information.
+     * @param string|null $invoice_merchant_reference The merchant's reference used to identify the invoice.
      *
-     * @return $this
+     * @return self
      */
-    public function setUserInterfaceType($user_interface_type)
+    public function setInvoiceMerchantReference($invoice_merchant_reference)
     {
-        $this->container['user_interface_type'] = $user_interface_type;
+        if (is_null($invoice_merchant_reference)) {
+            throw new \InvalidArgumentException('non-nullable invoice_merchant_reference cannot be null');
+        }
+        if ((mb_strlen($invoice_merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling Transaction., must be smaller than or equal to 100.');
+        }
+        if ((!preg_match("/[ \\x20-\\x7e]*/", ObjectSerializer::toString($invoice_merchant_reference)))) {
+            throw new \InvalidArgumentException("invalid value for \$invoice_merchant_reference when calling Transaction., must conform to the pattern /[ \\x20-\\x7e]*/.");
+        }
+
+        $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
 
         return $this;
     }
-    
 
     /**
-     * Gets version
+     * Gets language
      *
-     * @return int
+     * @return string|null
      */
-    public function getVersion()
+    public function getLanguage()
     {
-        return $this->container['version'];
+        return $this->container['language'];
     }
 
     /**
-     * Sets version
+     * Sets language
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param string|null $language The language that is linked to the object.
      *
-     * @return $this
+     * @return self
      */
-    public function setVersion($version)
+    public function setLanguage($language)
     {
-        $this->container['version'] = $version;
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+        $this->container['language'] = $language;
 
         return $this;
     }
-    
 
     /**
-     * Gets window_height
+     * Gets confirmed_on
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getWindowHeight()
+    public function getConfirmedOn()
     {
-        return $this->container['window_height'];
+        return $this->container['confirmed_on'];
     }
 
     /**
-     * Sets window_height
+     * Sets confirmed_on
      *
-     * @param string $window_height The window height of the customer's web browser.
+     * @param \DateTime|null $confirmed_on The date and time when the transaction was created.
      *
-     * @return $this
+     * @return self
      */
-    public function setWindowHeight($window_height)
+    public function setConfirmedOn($confirmed_on)
     {
-        $this->container['window_height'] = $window_height;
+        if (is_null($confirmed_on)) {
+            throw new \InvalidArgumentException('non-nullable confirmed_on cannot be null');
+        }
+        $this->container['confirmed_on'] = $confirmed_on;
 
         return $this;
     }
-    
+
+    /**
+     * Gets line_items
+     *
+     * @return \Wallee\Sdk\Model\LineItem[]|null
+     */
+    public function getLineItems()
+    {
+        return $this->container['line_items'];
+    }
+
+    /**
+     * Sets line_items
+     *
+     * @param \Wallee\Sdk\Model\LineItem[]|null $line_items The line items purchased by the customer.
+     *
+     * @return self
+     */
+    public function setLineItems($line_items)
+    {
+        if (is_null($line_items)) {
+            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        }
+        $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets accept_language_header
+     *
+     * @return string|null
+     */
+    public function getAcceptLanguageHeader()
+    {
+        return $this->container['accept_language_header'];
+    }
+
+    /**
+     * Sets accept_language_header
+     *
+     * @param string|null $accept_language_header The 'Accept Language' header of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setAcceptLanguageHeader($accept_language_header)
+    {
+        if (is_null($accept_language_header)) {
+            throw new \InvalidArgumentException('non-nullable accept_language_header cannot be null');
+        }
+        $this->container['accept_language_header'] = $accept_language_header;
+
+        return $this;
+    }
+
+    /**
+     * Gets java_enabled
+     *
+     * @return bool|null
+     */
+    public function getJavaEnabled()
+    {
+        return $this->container['java_enabled'];
+    }
+
+    /**
+     * Sets java_enabled
+     *
+     * @param bool|null $java_enabled Whether Java is enabled on the customer's web browser.
+     *
+     * @return self
+     */
+    public function setJavaEnabled($java_enabled)
+    {
+        if (is_null($java_enabled)) {
+            throw new \InvalidArgumentException('non-nullable java_enabled cannot be null');
+        }
+        $this->container['java_enabled'] = $java_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets confirmed_by
+     *
+     * @return int|null
+     */
+    public function getConfirmedBy()
+    {
+        return $this->container['confirmed_by'];
+    }
+
+    /**
+     * Sets confirmed_by
+     *
+     * @param int|null $confirmed_by The ID of the user the transaction was confirmed by.
+     *
+     * @return self
+     */
+    public function setConfirmedBy($confirmed_by)
+    {
+        if (is_null($confirmed_by)) {
+            throw new \InvalidArgumentException('non-nullable confirmed_by cannot be null');
+        }
+        $this->container['confirmed_by'] = $confirmed_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_connector_configuration
+     *
+     * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration|null
+     */
+    public function getPaymentConnectorConfiguration()
+    {
+        return $this->container['payment_connector_configuration'];
+    }
+
+    /**
+     * Sets payment_connector_configuration
+     *
+     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration|null $payment_connector_configuration payment_connector_configuration
+     *
+     * @return self
+     */
+    public function setPaymentConnectorConfiguration($payment_connector_configuration)
+    {
+        if (is_null($payment_connector_configuration)) {
+            throw new \InvalidArgumentException('non-nullable payment_connector_configuration cannot be null');
+        }
+        $this->container['payment_connector_configuration'] = $payment_connector_configuration;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\TransactionState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\TransactionState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
 
     /**
      * Gets window_width
      *
-     * @return string
+     * @return string|null
      */
     public function getWindowWidth()
     {
@@ -2473,22 +1230,1099 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets window_width
      *
-     * @param string $window_width The window width of the customer's web browser.
+     * @param string|null $window_width The window width of the customer's web browser.
      *
-     * @return $this
+     * @return self
      */
     public function setWindowWidth($window_width)
     {
+        if (is_null($window_width)) {
+            throw new \InvalidArgumentException('non-nullable window_width cannot be null');
+        }
         $this->container['window_width'] = $window_width;
 
         return $this;
     }
-    
+
+    /**
+     * Gets allowed_payment_method_configurations
+     *
+     * @return int[]|null
+     */
+    public function getAllowedPaymentMethodConfigurations()
+    {
+        return $this->container['allowed_payment_method_configurations'];
+    }
+
+    /**
+     * Sets allowed_payment_method_configurations
+     *
+     * @param int[]|null $allowed_payment_method_configurations The payment method configurations that can be used to authorize the transaction.
+     *
+     * @return self
+     */
+    public function setAllowedPaymentMethodConfigurations($allowed_payment_method_configurations)
+    {
+        if (is_null($allowed_payment_method_configurations)) {
+            throw new \InvalidArgumentException('non-nullable allowed_payment_method_configurations cannot be null');
+        }
+        $this->container['allowed_payment_method_configurations'] = $allowed_payment_method_configurations;
+
+        return $this;
+    }
+
+    /**
+     * Gets group
+     *
+     * @return \Wallee\Sdk\Model\TransactionGroup|null
+     */
+    public function getGroup()
+    {
+        return $this->container['group'];
+    }
+
+    /**
+     * Sets group
+     *
+     * @param \Wallee\Sdk\Model\TransactionGroup|null $group group
+     *
+     * @return self
+     */
+    public function setGroup($group)
+    {
+        if (is_null($group)) {
+            throw new \InvalidArgumentException('non-nullable group cannot be null');
+        }
+        $this->container['group'] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Gets charge_retry_enabled
+     *
+     * @return bool|null
+     */
+    public function getChargeRetryEnabled()
+    {
+        return $this->container['charge_retry_enabled'];
+    }
+
+    /**
+     * Sets charge_retry_enabled
+     *
+     * @param bool|null $charge_retry_enabled Whether the customer can make further payment attempts if the first one has failed. Default is true.
+     *
+     * @return self
+     */
+    public function setChargeRetryEnabled($charge_retry_enabled)
+    {
+        if (is_null($charge_retry_enabled)) {
+            throw new \InvalidArgumentException('non-nullable charge_retry_enabled cannot be null');
+        }
+        $this->container['charge_retry_enabled'] = $charge_retry_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets accept_header
+     *
+     * @return string|null
+     */
+    public function getAcceptHeader()
+    {
+        return $this->container['accept_header'];
+    }
+
+    /**
+     * Sets accept_header
+     *
+     * @param string|null $accept_header The 'Accept' header of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setAcceptHeader($accept_header)
+    {
+        if (is_null($accept_header)) {
+            throw new \InvalidArgumentException('non-nullable accept_header cannot be null');
+        }
+        $this->container['accept_header'] = $accept_header;
+
+        return $this;
+    }
+
+    /**
+     * Gets user_agent_header
+     *
+     * @return string|null
+     */
+    public function getUserAgentHeader()
+    {
+        return $this->container['user_agent_header'];
+    }
+
+    /**
+     * Sets user_agent_header
+     *
+     * @param string|null $user_agent_header The 'User Agent' header of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setUserAgentHeader($user_agent_header)
+    {
+        if (is_null($user_agent_header)) {
+            throw new \InvalidArgumentException('non-nullable user_agent_header cannot be null');
+        }
+        $this->container['user_agent_header'] = $user_agent_header;
+
+        return $this;
+    }
+
+    /**
+     * Gets shipping_method
+     *
+     * @return string|null
+     */
+    public function getShippingMethod()
+    {
+        return $this->container['shipping_method'];
+    }
+
+    /**
+     * Sets shipping_method
+     *
+     * @param string|null $shipping_method The name of the shipping method used to ship the products.
+     *
+     * @return self
+     */
+    public function setShippingMethod($shipping_method)
+    {
+        if (is_null($shipping_method)) {
+            throw new \InvalidArgumentException('non-nullable shipping_method cannot be null');
+        }
+        if ((mb_strlen($shipping_method) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $shipping_method when calling Transaction., must be smaller than or equal to 200.');
+        }
+
+        $this->container['shipping_method'] = $shipping_method;
+
+        return $this;
+    }
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime|null
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     *
+     * @return self
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets success_url
+     *
+     * @return string|null
+     */
+    public function getSuccessUrl()
+    {
+        return $this->container['success_url'];
+    }
+
+    /**
+     * Sets success_url
+     *
+     * @param string|null $success_url The URL to redirect the customer back to after they successfully authenticated their payment.
+     *
+     * @return self
+     */
+    public function setSuccessUrl($success_url)
+    {
+        if (is_null($success_url)) {
+            throw new \InvalidArgumentException('non-nullable success_url cannot be null');
+        }
+        if ((mb_strlen($success_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be smaller than or equal to 2000.');
+        }
+        if ((mb_strlen($success_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $success_url when calling Transaction., must be bigger than or equal to 9.');
+        }
+
+        $this->container['success_url'] = $success_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_zone
+     *
+     * @return string|null
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
+
+    /**
+     * Sets time_zone
+     *
+     * @param string|null $time_zone The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
+     *
+     * @return self
+     */
+    public function setTimeZone($time_zone)
+    {
+        if (is_null($time_zone)) {
+            throw new \InvalidArgumentException('non-nullable time_zone cannot be null');
+        }
+        $this->container['time_zone'] = $time_zone;
+
+        return $this;
+    }
+
+    /**
+     * Gets space_view_id
+     *
+     * @return int|null
+     */
+    public function getSpaceViewId()
+    {
+        return $this->container['space_view_id'];
+    }
+
+    /**
+     * Sets space_view_id
+     *
+     * @param int|null $space_view_id The ID of the space view this object is linked to.
+     *
+     * @return self
+     */
+    public function setSpaceViewId($space_view_id)
+    {
+        if (is_null($space_view_id)) {
+            throw new \InvalidArgumentException('non-nullable space_view_id cannot be null');
+        }
+        $this->container['space_view_id'] = $space_view_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets user_failure_message
+     *
+     * @return string|null
+     */
+    public function getUserFailureMessage()
+    {
+        return $this->container['user_failure_message'];
+    }
+
+    /**
+     * Sets user_failure_message
+     *
+     * @param string|null $user_failure_message The message that can be displayed to the customer explaining why the transaction failed, in the customer's language.
+     *
+     * @return self
+     */
+    public function setUserFailureMessage($user_failure_message)
+    {
+        if (is_null($user_failure_message)) {
+            throw new \InvalidArgumentException('non-nullable user_failure_message cannot be null');
+        }
+        $this->container['user_failure_message'] = $user_failure_message;
+
+        return $this;
+    }
+
+    /**
+     * Gets completion_behavior
+     *
+     * @return \Wallee\Sdk\Model\TransactionCompletionBehavior|null
+     */
+    public function getCompletionBehavior()
+    {
+        return $this->container['completion_behavior'];
+    }
+
+    /**
+     * Sets completion_behavior
+     *
+     * @param \Wallee\Sdk\Model\TransactionCompletionBehavior|null $completion_behavior completion_behavior
+     *
+     * @return self
+     */
+    public function setCompletionBehavior($completion_behavior)
+    {
+        if (is_null($completion_behavior)) {
+            throw new \InvalidArgumentException('non-nullable completion_behavior cannot be null');
+        }
+        $this->container['completion_behavior'] = $completion_behavior;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return int|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets internet_protocol_address_country
+     *
+     * @return string|null
+     */
+    public function getInternetProtocolAddressCountry()
+    {
+        return $this->container['internet_protocol_address_country'];
+    }
+
+    /**
+     * Sets internet_protocol_address_country
+     *
+     * @param string|null $internet_protocol_address_country The country determined from the IP address of the customer's device.
+     *
+     * @return self
+     */
+    public function setInternetProtocolAddressCountry($internet_protocol_address_country)
+    {
+        if (is_null($internet_protocol_address_country)) {
+            throw new \InvalidArgumentException('non-nullable internet_protocol_address_country cannot be null');
+        }
+        $this->container['internet_protocol_address_country'] = $internet_protocol_address_country;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets delivery_decision_made_on
+     *
+     * @return \DateTime|null
+     */
+    public function getDeliveryDecisionMadeOn()
+    {
+        return $this->container['delivery_decision_made_on'];
+    }
+
+    /**
+     * Sets delivery_decision_made_on
+     *
+     * @param \DateTime|null $delivery_decision_made_on This date and time when the decision was made as to whether the order should be shipped.
+     *
+     * @return self
+     */
+    public function setDeliveryDecisionMadeOn($delivery_decision_made_on)
+    {
+        if (is_null($delivery_decision_made_on)) {
+            throw new \InvalidArgumentException('non-nullable delivery_decision_made_on cannot be null');
+        }
+        $this->container['delivery_decision_made_on'] = $delivery_decision_made_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorization_environment
+     *
+     * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment|null
+     */
+    public function getAuthorizationEnvironment()
+    {
+        return $this->container['authorization_environment'];
+    }
+
+    /**
+     * Sets authorization_environment
+     *
+     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment|null $authorization_environment authorization_environment
+     *
+     * @return self
+     */
+    public function setAuthorizationEnvironment($authorization_environment)
+    {
+        if (is_null($authorization_environment)) {
+            throw new \InvalidArgumentException('non-nullable authorization_environment cannot be null');
+        }
+        $this->container['authorization_environment'] = $authorization_environment;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_confirmation_enabled
+     *
+     * @return bool|null
+     */
+    public function getAutoConfirmationEnabled()
+    {
+        return $this->container['auto_confirmation_enabled'];
+    }
+
+    /**
+     * Sets auto_confirmation_enabled
+     *
+     * @param bool|null $auto_confirmation_enabled Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
+     *
+     * @return self
+     */
+    public function setAutoConfirmationEnabled($auto_confirmation_enabled)
+    {
+        if (is_null($auto_confirmation_enabled)) {
+            throw new \InvalidArgumentException('non-nullable auto_confirmation_enabled cannot be null');
+        }
+        $this->container['auto_confirmation_enabled'] = $auto_confirmation_enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets failure_reason
+     *
+     * @return \Wallee\Sdk\Model\FailureReason|null
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
+
+    /**
+     * Sets failure_reason
+     *
+     * @param \Wallee\Sdk\Model\FailureReason|null $failure_reason failure_reason
+     *
+     * @return self
+     */
+    public function setFailureReason($failure_reason)
+    {
+        if (is_null($failure_reason)) {
+            throw new \InvalidArgumentException('non-nullable failure_reason cannot be null');
+        }
+        $this->container['failure_reason'] = $failure_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets total_applied_fees
+     *
+     * @return float|null
+     */
+    public function getTotalAppliedFees()
+    {
+        return $this->container['total_applied_fees'];
+    }
+
+    /**
+     * Sets total_applied_fees
+     *
+     * @param float|null $total_applied_fees The total of all fees charged, in the transaction's currency.
+     *
+     * @return self
+     */
+    public function setTotalAppliedFees($total_applied_fees)
+    {
+        if (is_null($total_applied_fees)) {
+            throw new \InvalidArgumentException('non-nullable total_applied_fees cannot be null');
+        }
+        $this->container['total_applied_fees'] = $total_applied_fees;
+
+        return $this;
+    }
+
+    /**
+     * Gets customers_presence
+     *
+     * @return \Wallee\Sdk\Model\CustomersPresence|null
+     */
+    public function getCustomersPresence()
+    {
+        return $this->container['customers_presence'];
+    }
+
+    /**
+     * Sets customers_presence
+     *
+     * @param \Wallee\Sdk\Model\CustomersPresence|null $customers_presence customers_presence
+     *
+     * @return self
+     */
+    public function setCustomersPresence($customers_presence)
+    {
+        if (is_null($customers_presence)) {
+            throw new \InvalidArgumentException('non-nullable customers_presence cannot be null');
+        }
+        $this->container['customers_presence'] = $customers_presence;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_on
+     *
+     * @return \DateTime|null
+     */
+    public function getFailedOn()
+    {
+        return $this->container['failed_on'];
+    }
+
+    /**
+     * Sets failed_on
+     *
+     * @param \DateTime|null $failed_on The date and time when the transaction failed.
+     *
+     * @return self
+     */
+    public function setFailedOn($failed_on)
+    {
+        if (is_null($failed_on)) {
+            throw new \InvalidArgumentException('non-nullable failed_on cannot be null');
+        }
+        $this->container['failed_on'] = $failed_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets refunded_amount
+     *
+     * @return float|null
+     */
+    public function getRefundedAmount()
+    {
+        return $this->container['refunded_amount'];
+    }
+
+    /**
+     * Sets refunded_amount
+     *
+     * @param float|null $refunded_amount The total amount that was refunded, in the transaction's currency.
+     *
+     * @return self
+     */
+    public function setRefundedAmount($refunded_amount)
+    {
+        if (is_null($refunded_amount)) {
+            throw new \InvalidArgumentException('non-nullable refunded_amount cannot be null');
+        }
+        $this->container['refunded_amount'] = $refunded_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorization_amount
+     *
+     * @return float|null
+     */
+    public function getAuthorizationAmount()
+    {
+        return $this->container['authorization_amount'];
+    }
+
+    /**
+     * Sets authorization_amount
+     *
+     * @param float|null $authorization_amount The sum of all line item prices including taxes in the transaction's currency.
+     *
+     * @return self
+     */
+    public function setAuthorizationAmount($authorization_amount)
+    {
+        if (is_null($authorization_amount)) {
+            throw new \InvalidArgumentException('non-nullable authorization_amount cannot be null');
+        }
+        $this->container['authorization_amount'] = $authorization_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets screen_width
+     *
+     * @return string|null
+     */
+    public function getScreenWidth()
+    {
+        return $this->container['screen_width'];
+    }
+
+    /**
+     * Sets screen_width
+     *
+     * @param string|null $screen_width The screen width of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setScreenWidth($screen_width)
+    {
+        if (is_null($screen_width)) {
+            throw new \InvalidArgumentException('non-nullable screen_width cannot be null');
+        }
+        $this->container['screen_width'] = $screen_width;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment_selection_strategy
+     *
+     * @return \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy|null
+     */
+    public function getEnvironmentSelectionStrategy()
+    {
+        return $this->container['environment_selection_strategy'];
+    }
+
+    /**
+     * Sets environment_selection_strategy
+     *
+     * @param \Wallee\Sdk\Model\TransactionEnvironmentSelectionStrategy|null $environment_selection_strategy environment_selection_strategy
+     *
+     * @return self
+     */
+    public function setEnvironmentSelectionStrategy($environment_selection_strategy)
+    {
+        if (is_null($environment_selection_strategy)) {
+            throw new \InvalidArgumentException('non-nullable environment_selection_strategy cannot be null');
+        }
+        $this->container['environment_selection_strategy'] = $environment_selection_strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_email_address
+     *
+     * @return string|null
+     */
+    public function getCustomerEmailAddress()
+    {
+        return $this->container['customer_email_address'];
+    }
+
+    /**
+     * Sets customer_email_address
+     *
+     * @param string|null $customer_email_address The customer's email address.
+     *
+     * @return self
+     */
+    public function setCustomerEmailAddress($customer_email_address)
+    {
+        if (is_null($customer_email_address)) {
+            throw new \InvalidArgumentException('non-nullable customer_email_address cannot be null');
+        }
+        if ((mb_strlen($customer_email_address) > 254)) {
+            throw new \InvalidArgumentException('invalid length for $customer_email_address when calling Transaction., must be smaller than or equal to 254.');
+        }
+
+        $this->container['customer_email_address'] = $customer_email_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets window_height
+     *
+     * @return string|null
+     */
+    public function getWindowHeight()
+    {
+        return $this->container['window_height'];
+    }
+
+    /**
+     * Sets window_height
+     *
+     * @param string|null $window_height The window height of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setWindowHeight($window_height)
+    {
+        if (is_null($window_height)) {
+            throw new \InvalidArgumentException('non-nullable window_height cannot be null');
+        }
+        $this->container['window_height'] = $window_height;
+
+        return $this;
+    }
+
+    /**
+     * Gets tokenization_mode
+     *
+     * @return \Wallee\Sdk\Model\TokenizationMode|null
+     */
+    public function getTokenizationMode()
+    {
+        return $this->container['tokenization_mode'];
+    }
+
+    /**
+     * Sets tokenization_mode
+     *
+     * @param \Wallee\Sdk\Model\TokenizationMode|null $tokenization_mode tokenization_mode
+     *
+     * @return self
+     */
+    public function setTokenizationMode($tokenization_mode)
+    {
+        if (is_null($tokenization_mode)) {
+            throw new \InvalidArgumentException('non-nullable tokenization_mode cannot be null');
+        }
+        $this->container['tokenization_mode'] = $tokenization_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorization_timeout_on
+     *
+     * @return \DateTime|null
+     */
+    public function getAuthorizationTimeoutOn()
+    {
+        return $this->container['authorization_timeout_on'];
+    }
+
+    /**
+     * Sets authorization_timeout_on
+     *
+     * @param \DateTime|null $authorization_timeout_on The date and time when the transaction must be authorized, otherwise it will canceled.
+     *
+     * @return self
+     */
+    public function setAuthorizationTimeoutOn($authorization_timeout_on)
+    {
+        if (is_null($authorization_timeout_on)) {
+            throw new \InvalidArgumentException('non-nullable authorization_timeout_on cannot be null');
+        }
+        $this->container['authorization_timeout_on'] = $authorization_timeout_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowed_payment_method_brands
+     *
+     * @return int[]|null
+     */
+    public function getAllowedPaymentMethodBrands()
+    {
+        return $this->container['allowed_payment_method_brands'];
+    }
+
+    /**
+     * Sets allowed_payment_method_brands
+     *
+     * @param int[]|null $allowed_payment_method_brands The payment method brands that can be used to authorize the transaction.
+     *
+     * @return self
+     */
+    public function setAllowedPaymentMethodBrands($allowed_payment_method_brands)
+    {
+        if (is_null($allowed_payment_method_brands)) {
+            throw new \InvalidArgumentException('non-nullable allowed_payment_method_brands cannot be null');
+        }
+        $this->container['allowed_payment_method_brands'] = $allowed_payment_method_brands;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the object was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta_data
+     *
+     * @return array<string,string>|null
+     */
+    public function getMetaData()
+    {
+        return $this->container['meta_data'];
+    }
+
+    /**
+     * Sets meta_data
+     *
+     * @param array<string,string>|null $meta_data Allow to store additional information about the object.
+     *
+     * @return self
+     */
+    public function setMetaData($meta_data)
+    {
+        if (is_null($meta_data)) {
+            throw new \InvalidArgumentException('non-nullable meta_data cannot be null');
+        }
+        $this->container['meta_data'] = $meta_data;
+
+        return $this;
+    }
+
+    /**
+     * Gets emails_disabled
+     *
+     * @return bool|null
+     */
+    public function getEmailsDisabled()
+    {
+        return $this->container['emails_disabled'];
+    }
+
+    /**
+     * Sets emails_disabled
+     *
+     * @param bool|null $emails_disabled Whether email sending is deactivated for the transaction. Default is false.
+     *
+     * @return self
+     */
+    public function setEmailsDisabled($emails_disabled)
+    {
+        if (is_null($emails_disabled)) {
+            throw new \InvalidArgumentException('non-nullable emails_disabled cannot be null');
+        }
+        $this->container['emails_disabled'] = $emails_disabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets user_interface_type
+     *
+     * @return \Wallee\Sdk\Model\TransactionUserInterfaceType|null
+     */
+    public function getUserInterfaceType()
+    {
+        return $this->container['user_interface_type'];
+    }
+
+    /**
+     * Sets user_interface_type
+     *
+     * @param \Wallee\Sdk\Model\TransactionUserInterfaceType|null $user_interface_type user_interface_type
+     *
+     * @return self
+     */
+    public function setUserInterfaceType($user_interface_type)
+    {
+        if (is_null($user_interface_type)) {
+            throw new \InvalidArgumentException('non-nullable user_interface_type cannot be null');
+        }
+        $this->container['user_interface_type'] = $user_interface_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_id
+     *
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->container['customer_id'];
+    }
+
+    /**
+     * Sets customer_id
+     *
+     * @param string|null $customer_id The unique identifier of the customer in the external system.
+     *
+     * @return self
+     */
+    public function setCustomerId($customer_id)
+    {
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        }
+        $this->container['customer_id'] = $customer_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency The three-letter code (ISO 4217 format) of the transaction's currency.
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_reference
+     *
+     * @return string|null
+     */
+    public function getMerchantReference()
+    {
+        return $this->container['merchant_reference'];
+    }
+
+    /**
+     * Sets merchant_reference
+     *
+     * @param string|null $merchant_reference The merchant's reference used to identify the transaction.
+     *
+     * @return self
+     */
+    public function setMerchantReference($merchant_reference)
+    {
+        if (is_null($merchant_reference)) {
+            throw new \InvalidArgumentException('non-nullable merchant_reference cannot be null');
+        }
+        if ((mb_strlen($merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $merchant_reference when calling Transaction., must be smaller than or equal to 100.');
+        }
+        if ((!preg_match("/[ \\x20-\\x7e]*/", ObjectSerializer::toString($merchant_reference)))) {
+            throw new \InvalidArgumentException("invalid value for \$merchant_reference when calling Transaction., must conform to the pattern /[ \\x20-\\x7e]*/.");
+        }
+
+        $this->container['merchant_reference'] = $merchant_reference;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorization_sales_channel
+     *
+     * @return int|null
+     */
+    public function getAuthorizationSalesChannel()
+    {
+        return $this->container['authorization_sales_channel'];
+    }
+
+    /**
+     * Sets authorization_sales_channel
+     *
+     * @param int|null $authorization_sales_channel The sales channel through which the transaction was placed.
+     *
+     * @return self
+     */
+    public function setAuthorizationSalesChannel($authorization_sales_channel)
+    {
+        if (is_null($authorization_sales_channel)) {
+            throw new \InvalidArgumentException('non-nullable authorization_sales_channel cannot be null');
+        }
+        $this->container['authorization_sales_channel'] = $authorization_sales_channel;
+
+        return $this;
+    }
 
     /**
      * Gets years_to_keep
      *
-     * @return int
+     * @return int|null
      */
     public function getYearsToKeep()
     {
@@ -2498,17 +2332,431 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets years_to_keep
      *
-     * @param int $years_to_keep The number of years the transaction is kept after its authorization.
+     * @param int|null $years_to_keep The number of years the transaction is kept after its authorization.
      *
-     * @return $this
+     * @return self
      */
     public function setYearsToKeep($years_to_keep)
     {
+        if (is_null($years_to_keep)) {
+            throw new \InvalidArgumentException('non-nullable years_to_keep cannot be null');
+        }
         $this->container['years_to_keep'] = $years_to_keep;
 
         return $this;
     }
-    
+
+    /**
+     * Gets completed_amount
+     *
+     * @return float|null
+     */
+    public function getCompletedAmount()
+    {
+        return $this->container['completed_amount'];
+    }
+
+    /**
+     * Sets completed_amount
+     *
+     * @param float|null $completed_amount The total amount that was completed, in the transaction's currency.
+     *
+     * @return self
+     */
+    public function setCompletedAmount($completed_amount)
+    {
+        if (is_null($completed_amount)) {
+            throw new \InvalidArgumentException('non-nullable completed_amount cannot be null');
+        }
+        $this->container['completed_amount'] = $completed_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets screen_height
+     *
+     * @return string|null
+     */
+    public function getScreenHeight()
+    {
+        return $this->container['screen_height'];
+    }
+
+    /**
+     * Sets screen_height
+     *
+     * @param string|null $screen_height The screen height of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setScreenHeight($screen_height)
+    {
+        if (is_null($screen_height)) {
+            throw new \InvalidArgumentException('non-nullable screen_height cannot be null');
+        }
+        $this->container['screen_height'] = $screen_height;
+
+        return $this;
+    }
+
+    /**
+     * Gets internet_protocol_address
+     *
+     * @return string|null
+     */
+    public function getInternetProtocolAddress()
+    {
+        return $this->container['internet_protocol_address'];
+    }
+
+    /**
+     * Sets internet_protocol_address
+     *
+     * @param string|null $internet_protocol_address The IP address of the customer's device.
+     *
+     * @return self
+     */
+    public function setInternetProtocolAddress($internet_protocol_address)
+    {
+        if (is_null($internet_protocol_address)) {
+            throw new \InvalidArgumentException('non-nullable internet_protocol_address cannot be null');
+        }
+        $this->container['internet_protocol_address'] = $internet_protocol_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets terminal
+     *
+     * @return \Wallee\Sdk\Model\PaymentTerminal|null
+     */
+    public function getTerminal()
+    {
+        return $this->container['terminal'];
+    }
+
+    /**
+     * Sets terminal
+     *
+     * @param \Wallee\Sdk\Model\PaymentTerminal|null $terminal terminal
+     *
+     * @return self
+     */
+    public function setTerminal($terminal)
+    {
+        if (is_null($terminal)) {
+            throw new \InvalidArgumentException('non-nullable terminal cannot be null');
+        }
+        $this->container['terminal'] = $terminal;
+
+        return $this;
+    }
+
+    /**
+     * Gets end_of_life
+     *
+     * @return \DateTime|null
+     */
+    public function getEndOfLife()
+    {
+        return $this->container['end_of_life'];
+    }
+
+    /**
+     * Sets end_of_life
+     *
+     * @param \DateTime|null $end_of_life The date and time when the transaction reaches its end of live. No further actions can be carried out at this time.
+     *
+     * @return self
+     */
+    public function setEndOfLife($end_of_life)
+    {
+        if (is_null($end_of_life)) {
+            throw new \InvalidArgumentException('non-nullable end_of_life cannot be null');
+        }
+        $this->container['end_of_life'] = $end_of_life;
+
+        return $this;
+    }
+
+    /**
+     * Gets token
+     *
+     * @return \Wallee\Sdk\Model\Token|null
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param \Wallee\Sdk\Model\Token|null $token token
+     *
+     * @return self
+     */
+    public function setToken($token)
+    {
+        if (is_null($token)) {
+            throw new \InvalidArgumentException('non-nullable token cannot be null');
+        }
+        $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment
+     *
+     * @return \Wallee\Sdk\Model\Environment|null
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \Wallee\Sdk\Model\Environment|null $environment environment
+     *
+     * @return self
+     */
+    public function setEnvironment($environment)
+    {
+        if (is_null($environment)) {
+            throw new \InvalidArgumentException('non-nullable environment cannot be null');
+        }
+        $this->container['environment'] = $environment;
+
+        return $this;
+    }
+
+    /**
+     * Gets screen_color_depth
+     *
+     * @return string|null
+     */
+    public function getScreenColorDepth()
+    {
+        return $this->container['screen_color_depth'];
+    }
+
+    /**
+     * Sets screen_color_depth
+     *
+     * @param string|null $screen_color_depth The screen color depth of the customer's web browser.
+     *
+     * @return self
+     */
+    public function setScreenColorDepth($screen_color_depth)
+    {
+        if (is_null($screen_color_depth)) {
+            throw new \InvalidArgumentException('non-nullable screen_color_depth cannot be null');
+        }
+        $this->container['screen_color_depth'] = $screen_color_depth;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_by
+     *
+     * @return int|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int|null $created_by The ID of the user the transaction was created by.
+     *
+     * @return self
+     */
+    public function setCreatedBy($created_by)
+    {
+        if (is_null($created_by)) {
+            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
+        }
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets completed_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCompletedOn()
+    {
+        return $this->container['completed_on'];
+    }
+
+    /**
+     * Sets completed_on
+     *
+     * @param \DateTime|null $completed_on The date and time when the transaction was completed.
+     *
+     * @return self
+     */
+    public function setCompletedOn($completed_on)
+    {
+        if (is_null($completed_on)) {
+            throw new \InvalidArgumentException('non-nullable completed_on cannot be null');
+        }
+        $this->container['completed_on'] = $completed_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets completion_timeout_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCompletionTimeoutOn()
+    {
+        return $this->container['completion_timeout_on'];
+    }
+
+    /**
+     * Sets completion_timeout_on
+     *
+     * @param \DateTime|null $completion_timeout_on The date and time when the transaction is completed automatically.
+     *
+     * @return self
+     */
+    public function setCompletionTimeoutOn($completion_timeout_on)
+    {
+        if (is_null($completion_timeout_on)) {
+            throw new \InvalidArgumentException('non-nullable completion_timeout_on cannot be null');
+        }
+        $this->container['completion_timeout_on'] = $completion_timeout_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets shipping_address
+     *
+     * @return \Wallee\Sdk\Model\Address|null
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shipping_address'];
+    }
+
+    /**
+     * Sets shipping_address
+     *
+     * @param \Wallee\Sdk\Model\Address|null $shipping_address shipping_address
+     *
+     * @return self
+     */
+    public function setShippingAddress($shipping_address)
+    {
+        if (is_null($shipping_address)) {
+            throw new \InvalidArgumentException('non-nullable shipping_address cannot be null');
+        }
+        $this->container['shipping_address'] = $shipping_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets billing_address
+     *
+     * @return \Wallee\Sdk\Model\Address|null
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
+
+    /**
+     * Sets billing_address
+     *
+     * @param \Wallee\Sdk\Model\Address|null $billing_address billing_address
+     *
+     * @return self
+     */
+    public function setBillingAddress($billing_address)
+    {
+        if (is_null($billing_address)) {
+            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
+        }
+        $this->container['billing_address'] = $billing_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets authorized_on
+     *
+     * @return \DateTime|null
+     */
+    public function getAuthorizedOn()
+    {
+        return $this->container['authorized_on'];
+    }
+
+    /**
+     * Sets authorized_on
+     *
+     * @param \DateTime|null $authorized_on The date and time when the transaction was authorized.
+     *
+     * @return self
+     */
+    public function setAuthorizedOn($authorized_on)
+    {
+        if (is_null($authorized_on)) {
+            throw new \InvalidArgumentException('non-nullable authorized_on cannot be null');
+        }
+        $this->container['authorized_on'] = $authorized_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_url
+     *
+     * @return string|null
+     */
+    public function getFailedUrl()
+    {
+        return $this->container['failed_url'];
+    }
+
+    /**
+     * Sets failed_url
+     *
+     * @param string|null $failed_url The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
+     *
+     * @return self
+     */
+    public function setFailedUrl($failed_url)
+    {
+        if (is_null($failed_url)) {
+            throw new \InvalidArgumentException('non-nullable failed_url cannot be null');
+        }
+        if ((mb_strlen($failed_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be smaller than or equal to 2000.');
+        }
+        if ((mb_strlen($failed_url) < 9)) {
+            throw new \InvalidArgumentException('invalid length for $failed_url when calling Transaction., must be bigger than or equal to 9.');
+        }
+
+        $this->container['failed_url'] = $failed_url;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -2516,8 +2764,7 @@ class Transaction implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -2527,24 +2774,23 @@ class Transaction implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -2560,10 +2806,22 @@ class Transaction implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -2573,13 +2831,19 @@ class Transaction implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

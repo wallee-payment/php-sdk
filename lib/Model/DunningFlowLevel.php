@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,63 +30,168 @@ use \Wallee\Sdk\ObjectSerializer;
  * DunningFlowLevel model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class DunningFlowLevel implements ModelInterface, ArrayAccess
+class DunningFlowLevel implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'DunningFlowLevel';
+    protected static $openAPIModelName = 'DunningFlowLevel';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'document_text' => 'map[string,string]',
-        'flow' => '\Wallee\Sdk\Model\DunningFlow',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'name' => 'string',
+    protected static $openAPITypes = [
         'period' => 'string',
         'planned_purge_date' => '\DateTime',
-        'priority' => 'int',
-        'processor' => 'int',
         'reminder_template' => '\Wallee\Sdk\Model\DocumentTemplate',
+        'priority' => 'int',
+        'title' => 'array<string,string>',
+        'processor' => 'int',
+        'version' => 'int',
+        'linked_space_id' => 'int',
+        'document_text' => 'array<string,string>',
+        'name' => 'string',
+        'id' => 'int',
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
-        'title' => 'map[string,string]',
-        'version' => 'int'
+        'flow' => '\Wallee\Sdk\Model\DunningFlow'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'document_text' => null,
-        'flow' => null,
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'name' => null,
+    protected static $openAPIFormats = [
         'period' => null,
         'planned_purge_date' => 'date-time',
-        'priority' => 'int32',
-        'processor' => 'int64',
         'reminder_template' => null,
-        'state' => null,
+        'priority' => 'int32',
         'title' => null,
-        'version' => 'int32'
+        'processor' => 'int64',
+        'version' => 'int32',
+        'linked_space_id' => 'int64',
+        'document_text' => null,
+        'name' => null,
+        'id' => 'int64',
+        'state' => null,
+        'flow' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'period' => false,
+        'planned_purge_date' => false,
+        'reminder_template' => false,
+        'priority' => false,
+        'title' => false,
+        'processor' => false,
+        'version' => false,
+        'linked_space_id' => false,
+        'document_text' => false,
+        'name' => false,
+        'id' => false,
+        'state' => false,
+        'flow' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -92,19 +200,19 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'document_text' => 'documentText',
-        'flow' => 'flow',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
         'period' => 'period',
         'planned_purge_date' => 'plannedPurgeDate',
-        'priority' => 'priority',
-        'processor' => 'processor',
         'reminder_template' => 'reminderTemplate',
-        'state' => 'state',
+        'priority' => 'priority',
         'title' => 'title',
-        'version' => 'version'
+        'processor' => 'processor',
+        'version' => 'version',
+        'linked_space_id' => 'linkedSpaceId',
+        'document_text' => 'documentText',
+        'name' => 'name',
+        'id' => 'id',
+        'state' => 'state',
+        'flow' => 'flow'
     ];
 
     /**
@@ -113,19 +221,19 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'document_text' => 'setDocumentText',
-        'flow' => 'setFlow',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
         'period' => 'setPeriod',
         'planned_purge_date' => 'setPlannedPurgeDate',
-        'priority' => 'setPriority',
-        'processor' => 'setProcessor',
         'reminder_template' => 'setReminderTemplate',
-        'state' => 'setState',
+        'priority' => 'setPriority',
         'title' => 'setTitle',
-        'version' => 'setVersion'
+        'processor' => 'setProcessor',
+        'version' => 'setVersion',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'document_text' => 'setDocumentText',
+        'name' => 'setName',
+        'id' => 'setId',
+        'state' => 'setState',
+        'flow' => 'setFlow'
     ];
 
     /**
@@ -134,65 +242,109 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'document_text' => 'getDocumentText',
-        'flow' => 'getFlow',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
         'period' => 'getPeriod',
         'planned_purge_date' => 'getPlannedPurgeDate',
-        'priority' => 'getPriority',
-        'processor' => 'getProcessor',
         'reminder_template' => 'getReminderTemplate',
-        'state' => 'getState',
+        'priority' => 'getPriority',
         'title' => 'getTitle',
-        'version' => 'getVersion'
+        'processor' => 'getProcessor',
+        'version' => 'getVersion',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'document_text' => 'getDocumentText',
+        'name' => 'getName',
+        'id' => 'getId',
+        'state' => 'getState',
+        'flow' => 'getFlow'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['document_text'] = isset($data['document_text']) ? $data['document_text'] : null;
-        
-        $this->container['flow'] = isset($data['flow']) ? $data['flow'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['period'] = isset($data['period']) ? $data['period'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['priority'] = isset($data['priority']) ? $data['priority'] : null;
-        
-        $this->container['processor'] = isset($data['processor']) ? $data['processor'] : null;
-        
-        $this->container['reminder_template'] = isset($data['reminder_template']) ? $data['reminder_template'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('period', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('reminder_template', $data ?? [], null);
+        $this->setIfExists('priority', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('processor', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('document_text', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('flow', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -212,215 +364,21 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets document_text
-     *
-     * @return map[string,string]
-     */
-    public function getDocumentText()
-    {
-        return $this->container['document_text'];
-    }
-
-    /**
-     * Sets document_text
-     *
-     * @param map[string,string] $document_text This text is put in the reminder document of this dunning flow level.
-     *
-     * @return $this
-     */
-    public function setDocumentText($document_text)
-    {
-        $this->container['document_text'] = $document_text;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets flow
-     *
-     * @return \Wallee\Sdk\Model\DunningFlow
-     */
-    public function getFlow()
-    {
-        return $this->container['flow'];
-    }
-
-    /**
-     * Sets flow
-     *
-     * @param \Wallee\Sdk\Model\DunningFlow $flow 
-     *
-     * @return $this
-     */
-    public function setFlow($flow)
-    {
-        $this->container['flow'] = $flow;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The dunning flow level name is used internally to identify the dunning flow level. For example the name is used within search fields and hence it should be distinct and descriptive.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling DunningFlowLevel., must be smaller than or equal to 100.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
 
     /**
      * Gets period
      *
-     * @return string
+     * @return string|null
      */
     public function getPeriod()
     {
@@ -430,22 +388,24 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets period
      *
-     * @param string $period The duration of the level before switching to the next one.
+     * @param string|null $period The duration of the level before switching to the next one.
      *
-     * @return $this
+     * @return self
      */
     public function setPeriod($period)
     {
+        if (is_null($period)) {
+            throw new \InvalidArgumentException('non-nullable period cannot be null');
+        }
         $this->container['period'] = $period;
 
         return $this;
     }
-    
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -455,72 +415,24 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
-
-    /**
-     * Gets priority
-     *
-     * @return int
-     */
-    public function getPriority()
-    {
-        return $this->container['priority'];
-    }
-
-    /**
-     * Sets priority
-     *
-     * @param int $priority The priority indicates the sort order of the level. A low value indicates that the level is executed before any level with a higher value. Any change to this value affects future level selections. The value has to pe unique per dunning flow.
-     *
-     * @return $this
-     */
-    public function setPriority($priority)
-    {
-        $this->container['priority'] = $priority;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets processor
-     *
-     * @return int
-     */
-    public function getProcessor()
-    {
-        return $this->container['processor'];
-    }
-
-    /**
-     * Sets processor
-     *
-     * @param int $processor 
-     *
-     * @return $this
-     */
-    public function setProcessor($processor)
-    {
-        $this->container['processor'] = $processor;
-
-        return $this;
-    }
-    
 
     /**
      * Gets reminder_template
      *
-     * @return \Wallee\Sdk\Model\DocumentTemplate
+     * @return \Wallee\Sdk\Model\DocumentTemplate|null
      */
     public function getReminderTemplate()
     {
@@ -530,47 +442,51 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets reminder_template
      *
-     * @param \Wallee\Sdk\Model\DocumentTemplate $reminder_template 
+     * @param \Wallee\Sdk\Model\DocumentTemplate|null $reminder_template reminder_template
      *
-     * @return $this
+     * @return self
      */
     public function setReminderTemplate($reminder_template)
     {
+        if (is_null($reminder_template)) {
+            throw new \InvalidArgumentException('non-nullable reminder_template cannot be null');
+        }
         $this->container['reminder_template'] = $reminder_template;
 
         return $this;
     }
-    
 
     /**
-     * Gets state
+     * Gets priority
      *
-     * @return \Wallee\Sdk\Model\CreationEntityState
+     * @return int|null
      */
-    public function getState()
+    public function getPriority()
     {
-        return $this->container['state'];
+        return $this->container['priority'];
     }
 
     /**
-     * Sets state
+     * Sets priority
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
+     * @param int|null $priority The priority indicates the sort order of the level. A low value indicates that the level is executed before any level with a higher value. Any change to this value affects future level selections. The value has to pe unique per dunning flow.
      *
-     * @return $this
+     * @return self
      */
-    public function setState($state)
+    public function setPriority($priority)
     {
-        $this->container['state'] = $state;
+        if (is_null($priority)) {
+            throw new \InvalidArgumentException('non-nullable priority cannot be null');
+        }
+        $this->container['priority'] = $priority;
 
         return $this;
     }
-    
 
     /**
      * Gets title
      *
-     * @return map[string,string]
+     * @return array<string,string>|null
      */
     public function getTitle()
     {
@@ -580,22 +496,51 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param map[string,string] $title The title is used to communicate the dunning level to the customer within the reminder.
+     * @param array<string,string>|null $title The title is used to communicate the dunning level to the customer within the reminder.
      *
-     * @return $this
+     * @return self
      */
     public function setTitle($title)
     {
+        if (is_null($title)) {
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        }
         $this->container['title'] = $title;
 
         return $this;
     }
-    
+
+    /**
+     * Gets processor
+     *
+     * @return int|null
+     */
+    public function getProcessor()
+    {
+        return $this->container['processor'];
+    }
+
+    /**
+     * Sets processor
+     *
+     * @param int|null $processor processor
+     *
+     * @return self
+     */
+    public function setProcessor($processor)
+    {
+        if (is_null($processor)) {
+            throw new \InvalidArgumentException('non-nullable processor cannot be null');
+        }
+        $this->container['processor'] = $processor;
+
+        return $this;
+    }
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -605,17 +550,185 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets document_text
+     *
+     * @return array<string,string>|null
+     */
+    public function getDocumentText()
+    {
+        return $this->container['document_text'];
+    }
+
+    /**
+     * Sets document_text
+     *
+     * @param array<string,string>|null $document_text This text is put in the reminder document of this dunning flow level.
+     *
+     * @return self
+     */
+    public function setDocumentText($document_text)
+    {
+        if (is_null($document_text)) {
+            throw new \InvalidArgumentException('non-nullable document_text cannot be null');
+        }
+        $this->container['document_text'] = $document_text;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name The dunning flow level name is used internally to identify the dunning flow level. For example the name is used within search fields and hence it should be distinct and descriptive.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling DunningFlowLevel., must be smaller than or equal to 100.');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\CreationEntityState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\CreationEntityState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets flow
+     *
+     * @return \Wallee\Sdk\Model\DunningFlow|null
+     */
+    public function getFlow()
+    {
+        return $this->container['flow'];
+    }
+
+    /**
+     * Sets flow
+     *
+     * @param \Wallee\Sdk\Model\DunningFlow|null $flow flow
+     *
+     * @return self
+     */
+    public function setFlow($flow)
+    {
+        if (is_null($flow)) {
+            throw new \InvalidArgumentException('non-nullable flow cannot be null');
+        }
+        $this->container['flow'] = $flow;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -623,8 +736,7 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -634,24 +746,23 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -667,10 +778,22 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -680,13 +803,19 @@ class DunningFlowLevel implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

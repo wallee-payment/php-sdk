@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,59 +30,162 @@ use \Wallee\Sdk\ObjectSerializer;
  * PaymentTerminalLocationVersion model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
+class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PaymentTerminalLocationVersion';
+    protected static $openAPIModelName = 'PaymentTerminalLocationVersion';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'address' => '\Wallee\Sdk\Model\PaymentTerminalAddress',
-        'contact_address' => '\Wallee\Sdk\Model\PaymentTerminalAddress',
-        'created_by' => 'int',
-        'created_on' => '\DateTime',
-        'id' => 'int',
+    protected static $openAPITypes = [
         'linked_space_id' => 'int',
-        'location' => '\Wallee\Sdk\Model\PaymentTerminalLocation',
+        'address' => '\Wallee\Sdk\Model\PaymentTerminalAddress',
+        'created_by' => 'int',
         'planned_purge_date' => '\DateTime',
+        'contact_address' => '\Wallee\Sdk\Model\PaymentTerminalAddress',
+        'location' => '\Wallee\Sdk\Model\PaymentTerminalLocation',
+        'version_applied_immediately' => 'bool',
+        'id' => 'int',
         'state' => '\Wallee\Sdk\Model\PaymentTerminalLocationVersionState',
-        'version' => 'int',
-        'version_applied_immediately' => 'bool'
+        'created_on' => '\DateTime',
+        'version' => 'int'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'address' => null,
-        'contact_address' => null,
-        'created_by' => 'int64',
-        'created_on' => 'date-time',
-        'id' => 'int64',
+    protected static $openAPIFormats = [
         'linked_space_id' => 'int64',
-        'location' => null,
+        'address' => null,
+        'created_by' => 'int64',
         'planned_purge_date' => 'date-time',
+        'contact_address' => null,
+        'location' => null,
+        'version_applied_immediately' => null,
+        'id' => 'int64',
         'state' => null,
-        'version' => 'int32',
-        'version_applied_immediately' => null
+        'created_on' => 'date-time',
+        'version' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'linked_space_id' => false,
+        'address' => false,
+        'created_by' => false,
+        'planned_purge_date' => false,
+        'contact_address' => false,
+        'location' => false,
+        'version_applied_immediately' => false,
+        'id' => false,
+        'state' => false,
+        'created_on' => false,
+        'version' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -88,17 +194,17 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'address' => 'address',
-        'contact_address' => 'contactAddress',
-        'created_by' => 'createdBy',
-        'created_on' => 'createdOn',
-        'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
-        'location' => 'location',
+        'address' => 'address',
+        'created_by' => 'createdBy',
         'planned_purge_date' => 'plannedPurgeDate',
+        'contact_address' => 'contactAddress',
+        'location' => 'location',
+        'version_applied_immediately' => 'versionAppliedImmediately',
+        'id' => 'id',
         'state' => 'state',
-        'version' => 'version',
-        'version_applied_immediately' => 'versionAppliedImmediately'
+        'created_on' => 'createdOn',
+        'version' => 'version'
     ];
 
     /**
@@ -107,17 +213,17 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'address' => 'setAddress',
-        'contact_address' => 'setContactAddress',
-        'created_by' => 'setCreatedBy',
-        'created_on' => 'setCreatedOn',
-        'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
-        'location' => 'setLocation',
+        'address' => 'setAddress',
+        'created_by' => 'setCreatedBy',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'contact_address' => 'setContactAddress',
+        'location' => 'setLocation',
+        'version_applied_immediately' => 'setVersionAppliedImmediately',
+        'id' => 'setId',
         'state' => 'setState',
-        'version' => 'setVersion',
-        'version_applied_immediately' => 'setVersionAppliedImmediately'
+        'created_on' => 'setCreatedOn',
+        'version' => 'setVersion'
     ];
 
     /**
@@ -126,59 +232,105 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'address' => 'getAddress',
-        'contact_address' => 'getContactAddress',
-        'created_by' => 'getCreatedBy',
-        'created_on' => 'getCreatedOn',
-        'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
-        'location' => 'getLocation',
+        'address' => 'getAddress',
+        'created_by' => 'getCreatedBy',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'contact_address' => 'getContactAddress',
+        'location' => 'getLocation',
+        'version_applied_immediately' => 'getVersionAppliedImmediately',
+        'id' => 'getId',
         'state' => 'getState',
-        'version' => 'getVersion',
-        'version_applied_immediately' => 'getVersionAppliedImmediately'
+        'created_on' => 'getCreatedOn',
+        'version' => 'getVersion'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
-        
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['location'] = isset($data['location']) ? $data['location'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
-        $this->container['version_applied_immediately'] = isset($data['version_applied_immediately']) ? $data['version_applied_immediately'] : null;
-        
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('contact_address', $data ?? [], null);
+        $this->setIfExists('location', $data ?? [], null);
+        $this->setIfExists('version_applied_immediately', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -194,211 +346,21 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets address
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getAddress()
-    {
-        return $this->container['address'];
-    }
-
-    /**
-     * Sets address
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalAddress $address The postal address of the location where the payment terminals are used.
-     *
-     * @return $this
-     */
-    public function setAddress($address)
-    {
-        $this->container['address'] = $address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets contact_address
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getContactAddress()
-    {
-        return $this->container['contact_address'];
-    }
-
-    /**
-     * Sets contact_address
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalAddress $contact_address The contact details if the person responsible for the payment terminals at this location.
-     *
-     * @return $this
-     */
-    public function setContactAddress($contact_address)
-    {
-        $this->container['contact_address'] = $contact_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_by
-     *
-     * @return int
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param int $created_by The ID of the user the payment terminal location version was created by.
-     *
-     * @return $this
-     */
-    public function setCreatedBy($created_by)
-    {
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
 
     /**
      * Gets linked_space_id
      *
-     * @return int
+     * @return int|null
      */
     public function getLinkedSpaceId()
     {
@@ -408,47 +370,78 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
      *
-     * @return $this
+     * @return self
      */
     public function setLinkedSpaceId($linked_space_id)
     {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
         $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
-    
 
     /**
-     * Gets location
+     * Gets address
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalLocation
+     * @return \Wallee\Sdk\Model\PaymentTerminalAddress|null
      */
-    public function getLocation()
+    public function getAddress()
     {
-        return $this->container['location'];
+        return $this->container['address'];
     }
 
     /**
-     * Sets location
+     * Sets address
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalLocation $location The payment terminal location that the version belongs to.
+     * @param \Wallee\Sdk\Model\PaymentTerminalAddress|null $address address
      *
-     * @return $this
+     * @return self
      */
-    public function setLocation($location)
+    public function setAddress($address)
     {
-        $this->container['location'] = $location;
+        if (is_null($address)) {
+            throw new \InvalidArgumentException('non-nullable address cannot be null');
+        }
+        $this->container['address'] = $address;
 
         return $this;
     }
-    
+
+    /**
+     * Gets created_by
+     *
+     * @return int|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int|null $created_by The ID of the user the payment terminal location version was created by.
+     *
+     * @return self
+     */
+    public function setCreatedBy($created_by)
+    {
+        if (is_null($created_by)) {
+            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
+        }
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -458,72 +451,78 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
 
     /**
-     * Gets state
+     * Gets contact_address
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalLocationVersionState
+     * @return \Wallee\Sdk\Model\PaymentTerminalAddress|null
      */
-    public function getState()
+    public function getContactAddress()
     {
-        return $this->container['state'];
+        return $this->container['contact_address'];
     }
 
     /**
-     * Sets state
+     * Sets contact_address
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalLocationVersionState $state The object's current state.
+     * @param \Wallee\Sdk\Model\PaymentTerminalAddress|null $contact_address contact_address
      *
-     * @return $this
+     * @return self
      */
-    public function setState($state)
+    public function setContactAddress($contact_address)
     {
-        $this->container['state'] = $state;
+        if (is_null($contact_address)) {
+            throw new \InvalidArgumentException('non-nullable contact_address cannot be null');
+        }
+        $this->container['contact_address'] = $contact_address;
 
         return $this;
     }
-    
 
     /**
-     * Gets version
+     * Gets location
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\PaymentTerminalLocation|null
      */
-    public function getVersion()
+    public function getLocation()
     {
-        return $this->container['version'];
+        return $this->container['location'];
     }
 
     /**
-     * Sets version
+     * Sets location
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param \Wallee\Sdk\Model\PaymentTerminalLocation|null $location location
      *
-     * @return $this
+     * @return self
      */
-    public function setVersion($version)
+    public function setLocation($location)
     {
-        $this->container['version'] = $version;
+        if (is_null($location)) {
+            throw new \InvalidArgumentException('non-nullable location cannot be null');
+        }
+        $this->container['location'] = $location;
 
         return $this;
     }
-    
 
     /**
      * Gets version_applied_immediately
      *
-     * @return bool
+     * @return bool|null
      */
     public function getVersionAppliedImmediately()
     {
@@ -533,17 +532,127 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
     /**
      * Sets version_applied_immediately
      *
-     * @param bool $version_applied_immediately Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
+     * @param bool|null $version_applied_immediately Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
      *
-     * @return $this
+     * @return self
      */
     public function setVersionAppliedImmediately($version_applied_immediately)
     {
+        if (is_null($version_applied_immediately)) {
+            throw new \InvalidArgumentException('non-nullable version_applied_immediately cannot be null');
+        }
         $this->container['version_applied_immediately'] = $version_applied_immediately;
 
         return $this;
     }
-    
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\PaymentTerminalLocationVersionState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\PaymentTerminalLocationVersionState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the object was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return int|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -551,8 +660,7 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -562,24 +670,23 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -595,10 +702,22 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -608,13 +727,19 @@ class PaymentTerminalLocationVersion implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

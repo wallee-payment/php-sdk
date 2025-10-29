@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,71 +30,177 @@ use \Wallee\Sdk\ObjectSerializer;
  * Account model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class Account implements ModelInterface, ArrayAccess
+class Account implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Account';
+    protected static $openAPIModelName = 'Account';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'active' => 'bool',
+    protected static $openAPITypes = [
         'active_or_restricted_active' => 'bool',
-        'created_by' => 'int',
-        'created_on' => '\DateTime',
-        'deleted_by' => 'int',
         'deleted_on' => '\DateTime',
-        'id' => 'int',
-        'last_modified_date' => '\DateTime',
-        'name' => 'string',
-        'parent_account' => '\Wallee\Sdk\Model\Account',
         'planned_purge_date' => '\DateTime',
-        'restricted_active' => 'bool',
-        'scope' => 'int',
-        'state' => '\Wallee\Sdk\Model\AccountState',
-        'subaccount_limit' => 'int',
+        'active' => 'bool',
+        'parent_account' => '\Wallee\Sdk\Model\Account',
         'type' => '\Wallee\Sdk\Model\AccountType',
-        'version' => 'int'
+        'created_on' => '\DateTime',
+        'version' => 'int',
+        'deleted_by' => 'int',
+        'restricted_active' => 'bool',
+        'created_by' => 'int',
+        'scope' => '\Wallee\Sdk\Model\Scope',
+        'name' => 'string',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\AccountState',
+        'subaccount_limit' => 'int'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'active' => null,
+    protected static $openAPIFormats = [
         'active_or_restricted_active' => null,
-        'created_by' => 'int64',
-        'created_on' => 'date-time',
-        'deleted_by' => 'int64',
         'deleted_on' => 'date-time',
-        'id' => 'int64',
-        'last_modified_date' => 'date-time',
-        'name' => null,
-        'parent_account' => null,
         'planned_purge_date' => 'date-time',
-        'restricted_active' => null,
-        'scope' => 'int64',
-        'state' => null,
-        'subaccount_limit' => 'int64',
+        'active' => null,
+        'parent_account' => null,
         'type' => null,
-        'version' => 'int32'
+        'created_on' => 'date-time',
+        'version' => 'int32',
+        'deleted_by' => 'int64',
+        'restricted_active' => null,
+        'created_by' => 'int64',
+        'scope' => null,
+        'name' => null,
+        'id' => 'int64',
+        'state' => null,
+        'subaccount_limit' => 'int64'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'active_or_restricted_active' => false,
+        'deleted_on' => false,
+        'planned_purge_date' => false,
+        'active' => false,
+        'parent_account' => false,
+        'type' => false,
+        'created_on' => false,
+        'version' => false,
+        'deleted_by' => false,
+        'restricted_active' => false,
+        'created_by' => false,
+        'scope' => false,
+        'name' => false,
+        'id' => false,
+        'state' => false,
+        'subaccount_limit' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -100,23 +209,22 @@ class Account implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'active' => 'active',
         'active_or_restricted_active' => 'activeOrRestrictedActive',
-        'created_by' => 'createdBy',
-        'created_on' => 'createdOn',
-        'deleted_by' => 'deletedBy',
         'deleted_on' => 'deletedOn',
-        'id' => 'id',
-        'last_modified_date' => 'lastModifiedDate',
-        'name' => 'name',
-        'parent_account' => 'parentAccount',
         'planned_purge_date' => 'plannedPurgeDate',
-        'restricted_active' => 'restrictedActive',
-        'scope' => 'scope',
-        'state' => 'state',
-        'subaccount_limit' => 'subaccountLimit',
+        'active' => 'active',
+        'parent_account' => 'parentAccount',
         'type' => 'type',
-        'version' => 'version'
+        'created_on' => 'createdOn',
+        'version' => 'version',
+        'deleted_by' => 'deletedBy',
+        'restricted_active' => 'restrictedActive',
+        'created_by' => 'createdBy',
+        'scope' => 'scope',
+        'name' => 'name',
+        'id' => 'id',
+        'state' => 'state',
+        'subaccount_limit' => 'subaccountLimit'
     ];
 
     /**
@@ -125,23 +233,22 @@ class Account implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'active' => 'setActive',
         'active_or_restricted_active' => 'setActiveOrRestrictedActive',
-        'created_by' => 'setCreatedBy',
-        'created_on' => 'setCreatedOn',
-        'deleted_by' => 'setDeletedBy',
         'deleted_on' => 'setDeletedOn',
-        'id' => 'setId',
-        'last_modified_date' => 'setLastModifiedDate',
-        'name' => 'setName',
-        'parent_account' => 'setParentAccount',
         'planned_purge_date' => 'setPlannedPurgeDate',
-        'restricted_active' => 'setRestrictedActive',
-        'scope' => 'setScope',
-        'state' => 'setState',
-        'subaccount_limit' => 'setSubaccountLimit',
+        'active' => 'setActive',
+        'parent_account' => 'setParentAccount',
         'type' => 'setType',
-        'version' => 'setVersion'
+        'created_on' => 'setCreatedOn',
+        'version' => 'setVersion',
+        'deleted_by' => 'setDeletedBy',
+        'restricted_active' => 'setRestrictedActive',
+        'created_by' => 'setCreatedBy',
+        'scope' => 'setScope',
+        'name' => 'setName',
+        'id' => 'setId',
+        'state' => 'setState',
+        'subaccount_limit' => 'setSubaccountLimit'
     ];
 
     /**
@@ -150,77 +257,115 @@ class Account implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'active' => 'getActive',
         'active_or_restricted_active' => 'getActiveOrRestrictedActive',
-        'created_by' => 'getCreatedBy',
-        'created_on' => 'getCreatedOn',
-        'deleted_by' => 'getDeletedBy',
         'deleted_on' => 'getDeletedOn',
-        'id' => 'getId',
-        'last_modified_date' => 'getLastModifiedDate',
-        'name' => 'getName',
-        'parent_account' => 'getParentAccount',
         'planned_purge_date' => 'getPlannedPurgeDate',
-        'restricted_active' => 'getRestrictedActive',
-        'scope' => 'getScope',
-        'state' => 'getState',
-        'subaccount_limit' => 'getSubaccountLimit',
+        'active' => 'getActive',
+        'parent_account' => 'getParentAccount',
         'type' => 'getType',
-        'version' => 'getVersion'
+        'created_on' => 'getCreatedOn',
+        'version' => 'getVersion',
+        'deleted_by' => 'getDeletedBy',
+        'restricted_active' => 'getRestrictedActive',
+        'created_by' => 'getCreatedBy',
+        'scope' => 'getScope',
+        'name' => 'getName',
+        'id' => 'getId',
+        'state' => 'getState',
+        'subaccount_limit' => 'getSubaccountLimit'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['active'] = isset($data['active']) ? $data['active'] : null;
-        
-        $this->container['active_or_restricted_active'] = isset($data['active_or_restricted_active']) ? $data['active_or_restricted_active'] : null;
-        
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['deleted_by'] = isset($data['deleted_by']) ? $data['deleted_by'] : null;
-        
-        $this->container['deleted_on'] = isset($data['deleted_on']) ? $data['deleted_on'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['last_modified_date'] = isset($data['last_modified_date']) ? $data['last_modified_date'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['parent_account'] = isset($data['parent_account']) ? $data['parent_account'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['restricted_active'] = isset($data['restricted_active']) ? $data['restricted_active'] : null;
-        
-        $this->container['scope'] = isset($data['scope']) ? $data['scope'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['subaccount_limit'] = isset($data['subaccount_limit']) ? $data['subaccount_limit'] : null;
-        
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('active_or_restricted_active', $data ?? [], null);
+        $this->setIfExists('deleted_on', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('active', $data ?? [], null);
+        $this->setIfExists('parent_account', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('deleted_by', $data ?? [], null);
+        $this->setIfExists('restricted_active', $data ?? [], null);
+        $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('subaccount_limit', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -244,111 +389,21 @@ class Account implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets active
-     *
-     * @return bool
-     */
-    public function getActive()
-    {
-        return $this->container['active'];
-    }
-
-    /**
-     * Sets active
-     *
-     * @param bool $active Whether this account and all its parent accounts are active.
-     *
-     * @return $this
-     */
-    public function setActive($active)
-    {
-        $this->container['active'] = $active;
-
-        return $this;
-    }
-    
 
     /**
      * Gets active_or_restricted_active
      *
-     * @return bool
+     * @return bool|null
      */
     public function getActiveOrRestrictedActive()
     {
@@ -358,97 +413,24 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets active_or_restricted_active
      *
-     * @param bool $active_or_restricted_active Whether this account and all its parent accounts are active or restricted active.
+     * @param bool|null $active_or_restricted_active Whether this account and all its parent accounts are active or restricted active.
      *
-     * @return $this
+     * @return self
      */
     public function setActiveOrRestrictedActive($active_or_restricted_active)
     {
+        if (is_null($active_or_restricted_active)) {
+            throw new \InvalidArgumentException('non-nullable active_or_restricted_active cannot be null');
+        }
         $this->container['active_or_restricted_active'] = $active_or_restricted_active;
 
         return $this;
     }
-    
-
-    /**
-     * Gets created_by
-     *
-     * @return int
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param int $created_by The ID of the user the account was created by.
-     *
-     * @return $this
-     */
-    public function setCreatedBy($created_by)
-    {
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the account was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets deleted_by
-     *
-     * @return int
-     */
-    public function getDeletedBy()
-    {
-        return $this->container['deleted_by'];
-    }
-
-    /**
-     * Sets deleted_by
-     *
-     * @param int $deleted_by The ID of a user the account was deleted by.
-     *
-     * @return $this
-     */
-    public function setDeletedBy($deleted_by)
-    {
-        $this->container['deleted_by'] = $deleted_by;
-
-        return $this;
-    }
-    
 
     /**
      * Gets deleted_on
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDeletedOn()
     {
@@ -458,129 +440,24 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets deleted_on
      *
-     * @param \DateTime $deleted_on The date and time when the account was deleted.
+     * @param \DateTime|null $deleted_on The date and time when the account was deleted.
      *
-     * @return $this
+     * @return self
      */
     public function setDeletedOn($deleted_on)
     {
+        if (is_null($deleted_on)) {
+            throw new \InvalidArgumentException('non-nullable deleted_on cannot be null');
+        }
         $this->container['deleted_on'] = $deleted_on;
 
         return $this;
     }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets last_modified_date
-     *
-     * @return \DateTime
-     */
-    public function getLastModifiedDate()
-    {
-        return $this->container['last_modified_date'];
-    }
-
-    /**
-     * Sets last_modified_date
-     *
-     * @param \DateTime $last_modified_date The date and time when the object was last modified.
-     *
-     * @return $this
-     */
-    public function setLastModifiedDate($last_modified_date)
-    {
-        $this->container['last_modified_date'] = $last_modified_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The name used to identify the account.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 200)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling Account., must be smaller than or equal to 200.');
-        }
-        if (!is_null($name) && (mb_strlen($name) < 3)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling Account., must be bigger than or equal to 3.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets parent_account
-     *
-     * @return \Wallee\Sdk\Model\Account
-     */
-    public function getParentAccount()
-    {
-        return $this->container['parent_account'];
-    }
-
-    /**
-     * Sets parent_account
-     *
-     * @param \Wallee\Sdk\Model\Account $parent_account The parent account responsible for administering this account.
-     *
-     * @return $this
-     */
-    public function setParentAccount($parent_account)
-    {
-        $this->container['parent_account'] = $parent_account;
-
-        return $this;
-    }
-    
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -590,122 +467,78 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
 
     /**
-     * Gets restricted_active
+     * Gets active
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getRestrictedActive()
+    public function getActive()
     {
-        return $this->container['restricted_active'];
+        return $this->container['active'];
     }
 
     /**
-     * Sets restricted_active
+     * Sets active
      *
-     * @param bool $restricted_active Whether this account and all its parent accounts are active or restricted active. There is at least one account that is restricted active.
+     * @param bool|null $active Whether this account and all its parent accounts are active.
      *
-     * @return $this
+     * @return self
      */
-    public function setRestrictedActive($restricted_active)
+    public function setActive($active)
     {
-        $this->container['restricted_active'] = $restricted_active;
+        if (is_null($active)) {
+            throw new \InvalidArgumentException('non-nullable active cannot be null');
+        }
+        $this->container['active'] = $active;
 
         return $this;
     }
-    
 
     /**
-     * Gets scope
+     * Gets parent_account
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\Account|null
      */
-    public function getScope()
+    public function getParentAccount()
     {
-        return $this->container['scope'];
+        return $this->container['parent_account'];
     }
 
     /**
-     * Sets scope
+     * Sets parent_account
      *
-     * @param int $scope The scope that the account belongs to.
+     * @param \Wallee\Sdk\Model\Account|null $parent_account parent_account
      *
-     * @return $this
+     * @return self
      */
-    public function setScope($scope)
+    public function setParentAccount($parent_account)
     {
-        $this->container['scope'] = $scope;
+        if (is_null($parent_account)) {
+            throw new \InvalidArgumentException('non-nullable parent_account cannot be null');
+        }
+        $this->container['parent_account'] = $parent_account;
 
         return $this;
     }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\AccountState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\AccountState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets subaccount_limit
-     *
-     * @return int
-     */
-    public function getSubaccountLimit()
-    {
-        return $this->container['subaccount_limit'];
-    }
-
-    /**
-     * Sets subaccount_limit
-     *
-     * @param int $subaccount_limit The number of sub-accounts that can be created within this account.
-     *
-     * @return $this
-     */
-    public function setSubaccountLimit($subaccount_limit)
-    {
-        $this->container['subaccount_limit'] = $subaccount_limit;
-
-        return $this;
-    }
-    
 
     /**
      * Gets type
      *
-     * @return \Wallee\Sdk\Model\AccountType
+     * @return \Wallee\Sdk\Model\AccountType|null
      */
     public function getType()
     {
@@ -715,22 +548,51 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\AccountType $type The account's type which defines its role and capabilities.
+     * @param \Wallee\Sdk\Model\AccountType|null $type type
      *
-     * @return $this
+     * @return self
      */
     public function setType($type)
     {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
         $this->container['type'] = $type;
 
         return $this;
     }
-    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the account was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -740,17 +602,242 @@ class Account implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets deleted_by
+     *
+     * @return int|null
+     */
+    public function getDeletedBy()
+    {
+        return $this->container['deleted_by'];
+    }
+
+    /**
+     * Sets deleted_by
+     *
+     * @param int|null $deleted_by The ID of a user the account was deleted by.
+     *
+     * @return self
+     */
+    public function setDeletedBy($deleted_by)
+    {
+        if (is_null($deleted_by)) {
+            throw new \InvalidArgumentException('non-nullable deleted_by cannot be null');
+        }
+        $this->container['deleted_by'] = $deleted_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets restricted_active
+     *
+     * @return bool|null
+     */
+    public function getRestrictedActive()
+    {
+        return $this->container['restricted_active'];
+    }
+
+    /**
+     * Sets restricted_active
+     *
+     * @param bool|null $restricted_active Whether this account and all its parent accounts are active or restricted active. There is at least one account that is restricted active.
+     *
+     * @return self
+     */
+    public function setRestrictedActive($restricted_active)
+    {
+        if (is_null($restricted_active)) {
+            throw new \InvalidArgumentException('non-nullable restricted_active cannot be null');
+        }
+        $this->container['restricted_active'] = $restricted_active;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_by
+     *
+     * @return int|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int|null $created_by The ID of the user the account was created by.
+     *
+     * @return self
+     */
+    public function setCreatedBy($created_by)
+    {
+        if (is_null($created_by)) {
+            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
+        }
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope
+     *
+     * @return \Wallee\Sdk\Model\Scope|null
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
+
+    /**
+     * Sets scope
+     *
+     * @param \Wallee\Sdk\Model\Scope|null $scope scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        if (is_null($scope)) {
+            throw new \InvalidArgumentException('non-nullable scope cannot be null');
+        }
+        $this->container['scope'] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name The name used to identify the account.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling Account., must be smaller than or equal to 200.');
+        }
+        if ((mb_strlen($name) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling Account., must be bigger than or equal to 3.');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\AccountState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\AccountState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets subaccount_limit
+     *
+     * @return int|null
+     */
+    public function getSubaccountLimit()
+    {
+        return $this->container['subaccount_limit'];
+    }
+
+    /**
+     * Sets subaccount_limit
+     *
+     * @param int|null $subaccount_limit The number of sub-accounts that can be created within this account.
+     *
+     * @return self
+     */
+    public function setSubaccountLimit($subaccount_limit)
+    {
+        if (is_null($subaccount_limit)) {
+            throw new \InvalidArgumentException('non-nullable subaccount_limit cannot be null');
+        }
+        $this->container['subaccount_limit'] = $subaccount_limit;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -758,8 +845,7 @@ class Account implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -769,24 +855,23 @@ class Account implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -802,10 +887,22 @@ class Account implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -815,13 +912,19 @@ class Account implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

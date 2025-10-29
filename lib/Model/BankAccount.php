@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,33 +30,36 @@ use \Wallee\Sdk\ObjectSerializer;
  * BankAccount model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class BankAccount implements ModelInterface, ArrayAccess
+class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'BankAccount';
+    protected static $openAPIModelName = 'BankAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'description' => 'string',
-        'id' => 'int',
+    protected static $openAPITypes = [
         'identifier' => 'string',
         'linked_space_id' => 'int',
         'planned_purge_date' => '\DateTime',
+        'description' => 'string',
+        'id' => 'int',
         'state' => '\Wallee\Sdk\Model\BankAccountState',
         'type' => 'int',
         'version' => 'int'
@@ -63,17 +69,114 @@ class BankAccount implements ModelInterface, ArrayAccess
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'description' => null,
-        'id' => 'int64',
+    protected static $openAPIFormats = [
         'identifier' => null,
         'linked_space_id' => 'int64',
         'planned_purge_date' => 'date-time',
+        'description' => null,
+        'id' => 'int64',
         'state' => null,
         'type' => 'int64',
         'version' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'identifier' => false,
+        'linked_space_id' => false,
+        'planned_purge_date' => false,
+        'description' => false,
+        'id' => false,
+        'state' => false,
+        'type' => false,
+        'version' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -82,11 +185,11 @@ class BankAccount implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'id' => 'id',
         'identifier' => 'identifier',
         'linked_space_id' => 'linkedSpaceId',
         'planned_purge_date' => 'plannedPurgeDate',
+        'description' => 'description',
+        'id' => 'id',
         'state' => 'state',
         'type' => 'type',
         'version' => 'version'
@@ -98,11 +201,11 @@ class BankAccount implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'id' => 'setId',
         'identifier' => 'setIdentifier',
         'linked_space_id' => 'setLinkedSpaceId',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'description' => 'setDescription',
+        'id' => 'setId',
         'state' => 'setState',
         'type' => 'setType',
         'version' => 'setVersion'
@@ -114,50 +217,99 @@ class BankAccount implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'id' => 'getId',
         'identifier' => 'getIdentifier',
         'linked_space_id' => 'getLinkedSpaceId',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'description' => 'getDescription',
+        'id' => 'getId',
         'state' => 'getState',
         'type' => 'getType',
         'version' => 'getVersion'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['identifier'] = isset($data['identifier']) ? $data['identifier'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('identifier', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -169,80 +321,16 @@ class BankAccount implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 100)) {
-            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 100.";
-        }
-
         if (!is_null($this->container['identifier']) && (mb_strlen($this->container['identifier']) > 100)) {
             $invalidProperties[] = "invalid value for 'identifier', the character length must be smaller than or equal to 100.";
         }
 
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 100)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -250,71 +338,16 @@ class BankAccount implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string $description The description serves as an alternative name for the bank account.
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        if (!is_null($description) && (mb_strlen($description) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $description when calling BankAccount., must be smaller than or equal to 100.');
-        }
-
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
 
     /**
      * Gets identifier
      *
-     * @return string
+     * @return string|null
      */
     public function getIdentifier()
     {
@@ -324,13 +357,16 @@ class BankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets identifier
      *
-     * @param string $identifier The identifier is used to uniquely identify the bank account.
+     * @param string|null $identifier The identifier is used to uniquely identify the bank account.
      *
-     * @return $this
+     * @return self
      */
     public function setIdentifier($identifier)
     {
-        if (!is_null($identifier) && (mb_strlen($identifier) > 100)) {
+        if (is_null($identifier)) {
+            throw new \InvalidArgumentException('non-nullable identifier cannot be null');
+        }
+        if ((mb_strlen($identifier) > 100)) {
             throw new \InvalidArgumentException('invalid length for $identifier when calling BankAccount., must be smaller than or equal to 100.');
         }
 
@@ -338,12 +374,11 @@ class BankAccount implements ModelInterface, ArrayAccess
 
         return $this;
     }
-    
 
     /**
      * Gets linked_space_id
      *
-     * @return int
+     * @return int|null
      */
     public function getLinkedSpaceId()
     {
@@ -353,22 +388,24 @@ class BankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
      *
-     * @return $this
+     * @return self
      */
     public function setLinkedSpaceId($linked_space_id)
     {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
         $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
-    
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -378,22 +415,82 @@ class BankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description The description serves as an alternative name for the bank account.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        }
+        if ((mb_strlen($description) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling BankAccount., must be smaller than or equal to 100.');
+        }
+
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
 
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\BankAccountState
+     * @return \Wallee\Sdk\Model\BankAccountState|null
      */
     public function getState()
     {
@@ -403,22 +500,24 @@ class BankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\BankAccountState $state The object's current state.
+     * @param \Wallee\Sdk\Model\BankAccountState|null $state state
      *
-     * @return $this
+     * @return self
      */
     public function setState($state)
     {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
         $this->container['state'] = $state;
 
         return $this;
     }
-    
 
     /**
      * Gets type
      *
-     * @return int
+     * @return int|null
      */
     public function getType()
     {
@@ -428,22 +527,24 @@ class BankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param int $type The bank account's type
+     * @param int|null $type The bank account's type
      *
-     * @return $this
+     * @return self
      */
     public function setType($type)
     {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
         $this->container['type'] = $type;
 
         return $this;
     }
-    
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -453,17 +554,19 @@ class BankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -471,8 +574,7 @@ class BankAccount implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -482,24 +584,23 @@ class BankAccount implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -515,10 +616,22 @@ class BankAccount implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -528,13 +641,19 @@ class BankAccount implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,65 +30,171 @@ use \Wallee\Sdk\ObjectSerializer;
  * Scope model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class Scope implements ModelInterface, ArrayAccess
+class Scope implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Scope';
+    protected static $openAPIModelName = 'Scope';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'domain_name' => 'string',
-        'features' => '\Wallee\Sdk\Model\Feature[]',
-        'id' => 'int',
-        'machine_name' => 'string',
-        'name' => 'string',
+    protected static $openAPITypes = [
         'planned_purge_date' => '\DateTime',
+        'ssl_active' => 'bool',
+        'version' => 'int',
+        'machine_name' => 'string',
+        'url' => 'string',
+        'features' => '\Wallee\Sdk\Model\Feature[]',
+        'themes' => 'string[]',
         'port' => 'int',
         'preprod_domain_name' => 'string',
-        'sandbox_domain_name' => 'string',
-        'ssl_active' => 'bool',
+        'domain_name' => 'string',
+        'name' => 'string',
+        'id' => 'int',
         'state' => '\Wallee\Sdk\Model\CreationEntityState',
-        'themes' => 'string[]',
-        'url' => 'string',
-        'version' => 'int'
+        'sandbox_domain_name' => 'string'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'domain_name' => null,
-        'features' => null,
-        'id' => 'int64',
-        'machine_name' => null,
-        'name' => null,
+    protected static $openAPIFormats = [
         'planned_purge_date' => 'date-time',
+        'ssl_active' => null,
+        'version' => 'int32',
+        'machine_name' => null,
+        'url' => null,
+        'features' => null,
+        'themes' => null,
         'port' => 'int32',
         'preprod_domain_name' => null,
-        'sandbox_domain_name' => null,
-        'ssl_active' => null,
+        'domain_name' => null,
+        'name' => null,
+        'id' => 'int64',
         'state' => null,
-        'themes' => null,
-        'url' => null,
-        'version' => 'int32'
+        'sandbox_domain_name' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'planned_purge_date' => false,
+        'ssl_active' => false,
+        'version' => false,
+        'machine_name' => false,
+        'url' => false,
+        'features' => false,
+        'themes' => false,
+        'port' => false,
+        'preprod_domain_name' => false,
+        'domain_name' => false,
+        'name' => false,
+        'id' => false,
+        'state' => false,
+        'sandbox_domain_name' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -94,20 +203,20 @@ class Scope implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'domain_name' => 'domainName',
-        'features' => 'features',
-        'id' => 'id',
-        'machine_name' => 'machineName',
-        'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
+        'ssl_active' => 'sslActive',
+        'version' => 'version',
+        'machine_name' => 'machineName',
+        'url' => 'url',
+        'features' => 'features',
+        'themes' => 'themes',
         'port' => 'port',
         'preprod_domain_name' => 'preprodDomainName',
-        'sandbox_domain_name' => 'sandboxDomainName',
-        'ssl_active' => 'sslActive',
+        'domain_name' => 'domainName',
+        'name' => 'name',
+        'id' => 'id',
         'state' => 'state',
-        'themes' => 'themes',
-        'url' => 'url',
-        'version' => 'version'
+        'sandbox_domain_name' => 'sandboxDomainName'
     ];
 
     /**
@@ -116,20 +225,20 @@ class Scope implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'domain_name' => 'setDomainName',
-        'features' => 'setFeatures',
-        'id' => 'setId',
-        'machine_name' => 'setMachineName',
-        'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'ssl_active' => 'setSslActive',
+        'version' => 'setVersion',
+        'machine_name' => 'setMachineName',
+        'url' => 'setUrl',
+        'features' => 'setFeatures',
+        'themes' => 'setThemes',
         'port' => 'setPort',
         'preprod_domain_name' => 'setPreprodDomainName',
-        'sandbox_domain_name' => 'setSandboxDomainName',
-        'ssl_active' => 'setSslActive',
+        'domain_name' => 'setDomainName',
+        'name' => 'setName',
+        'id' => 'setId',
         'state' => 'setState',
-        'themes' => 'setThemes',
-        'url' => 'setUrl',
-        'version' => 'setVersion'
+        'sandbox_domain_name' => 'setSandboxDomainName'
     ];
 
     /**
@@ -138,68 +247,111 @@ class Scope implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'domain_name' => 'getDomainName',
-        'features' => 'getFeatures',
-        'id' => 'getId',
-        'machine_name' => 'getMachineName',
-        'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'ssl_active' => 'getSslActive',
+        'version' => 'getVersion',
+        'machine_name' => 'getMachineName',
+        'url' => 'getUrl',
+        'features' => 'getFeatures',
+        'themes' => 'getThemes',
         'port' => 'getPort',
         'preprod_domain_name' => 'getPreprodDomainName',
-        'sandbox_domain_name' => 'getSandboxDomainName',
-        'ssl_active' => 'getSslActive',
+        'domain_name' => 'getDomainName',
+        'name' => 'getName',
+        'id' => 'getId',
         'state' => 'getState',
-        'themes' => 'getThemes',
-        'url' => 'getUrl',
-        'version' => 'getVersion'
+        'sandbox_domain_name' => 'getSandboxDomainName'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['domain_name'] = isset($data['domain_name']) ? $data['domain_name'] : null;
-        
-        $this->container['features'] = isset($data['features']) ? $data['features'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['machine_name'] = isset($data['machine_name']) ? $data['machine_name'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['port'] = isset($data['port']) ? $data['port'] : null;
-        
-        $this->container['preprod_domain_name'] = isset($data['preprod_domain_name']) ? $data['preprod_domain_name'] : null;
-        
-        $this->container['sandbox_domain_name'] = isset($data['sandbox_domain_name']) ? $data['sandbox_domain_name'] : null;
-        
-        $this->container['ssl_active'] = isset($data['ssl_active']) ? $data['ssl_active'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['themes'] = isset($data['themes']) ? $data['themes'] : null;
-        
-        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('ssl_active', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('machine_name', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
+        $this->setIfExists('features', $data ?? [], null);
+        $this->setIfExists('themes', $data ?? [], null);
+        $this->setIfExists('port', $data ?? [], null);
+        $this->setIfExists('preprod_domain_name', $data ?? [], null);
+        $this->setIfExists('domain_name', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('sandbox_domain_name', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -211,20 +363,28 @@ class Scope implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['domain_name']) && (mb_strlen($this->container['domain_name']) > 40)) {
-            $invalidProperties[] = "invalid value for 'domain_name', the character length must be smaller than or equal to 40.";
-        }
-
         if (!is_null($this->container['machine_name']) && (mb_strlen($this->container['machine_name']) > 50)) {
             $invalidProperties[] = "invalid value for 'machine_name', the character length must be smaller than or equal to 50.";
         }
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        if (!is_null($this->container['machine_name']) && !preg_match("/([A-Z][A-Za-z0-9]+)(_([A-Z][A-Za-z0-9]+))*/", $this->container['machine_name'])) {
+            $invalidProperties[] = "invalid value for 'machine_name', must be conform to the pattern /([A-Z][A-Za-z0-9]+)(_([A-Z][A-Za-z0-9]+))*/.";
+        }
+
+        if (!is_null($this->container['port']) && ($this->container['port'] < 1)) {
+            $invalidProperties[] = "invalid value for 'port', must be bigger than or equal to 1.";
         }
 
         if (!is_null($this->container['preprod_domain_name']) && (mb_strlen($this->container['preprod_domain_name']) > 40)) {
             $invalidProperties[] = "invalid value for 'preprod_domain_name', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['domain_name']) && (mb_strlen($this->container['domain_name']) > 40)) {
+            $invalidProperties[] = "invalid value for 'domain_name', the character length must be smaller than or equal to 40.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
         }
 
         if (!is_null($this->container['sandbox_domain_name']) && (mb_strlen($this->container['sandbox_domain_name']) > 40)) {
@@ -235,223 +395,21 @@ class Scope implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets domain_name
-     *
-     * @return string
-     */
-    public function getDomainName()
-    {
-        return $this->container['domain_name'];
-    }
-
-    /**
-     * Sets domain_name
-     *
-     * @param string $domain_name The domain name that belongs to the scope.
-     *
-     * @return $this
-     */
-    public function setDomainName($domain_name)
-    {
-        if (!is_null($domain_name) && (mb_strlen($domain_name) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $domain_name when calling Scope., must be smaller than or equal to 40.');
-        }
-
-        $this->container['domain_name'] = $domain_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets features
-     *
-     * @return \Wallee\Sdk\Model\Feature[]
-     */
-    public function getFeatures()
-    {
-        return $this->container['features'];
-    }
-
-    /**
-     * Sets features
-     *
-     * @param \Wallee\Sdk\Model\Feature[] $features The list of features that are active in the scope.
-     *
-     * @return $this
-     */
-    public function setFeatures($features)
-    {
-        $this->container['features'] = $features;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets machine_name
-     *
-     * @return string
-     */
-    public function getMachineName()
-    {
-        return $this->container['machine_name'];
-    }
-
-    /**
-     * Sets machine_name
-     *
-     * @param string $machine_name The name identifying the scope in e.g. URLs.
-     *
-     * @return $this
-     */
-    public function setMachineName($machine_name)
-    {
-        if (!is_null($machine_name) && (mb_strlen($machine_name) > 50)) {
-            throw new \InvalidArgumentException('invalid length for $machine_name when calling Scope., must be smaller than or equal to 50.');
-        }
-
-        $this->container['machine_name'] = $machine_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The name used to identify the scope.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 50)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling Scope., must be smaller than or equal to 50.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -461,105 +419,24 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
-
-    /**
-     * Gets port
-     *
-     * @return int
-     */
-    public function getPort()
-    {
-        return $this->container['port'];
-    }
-
-    /**
-     * Sets port
-     *
-     * @param int $port The port where the scope can be accessed.
-     *
-     * @return $this
-     */
-    public function setPort($port)
-    {
-        $this->container['port'] = $port;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets preprod_domain_name
-     *
-     * @return string
-     */
-    public function getPreprodDomainName()
-    {
-        return $this->container['preprod_domain_name'];
-    }
-
-    /**
-     * Sets preprod_domain_name
-     *
-     * @param string $preprod_domain_name The preprod domain name that belongs to the scope.
-     *
-     * @return $this
-     */
-    public function setPreprodDomainName($preprod_domain_name)
-    {
-        if (!is_null($preprod_domain_name) && (mb_strlen($preprod_domain_name) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $preprod_domain_name when calling Scope., must be smaller than or equal to 40.');
-        }
-
-        $this->container['preprod_domain_name'] = $preprod_domain_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets sandbox_domain_name
-     *
-     * @return string
-     */
-    public function getSandboxDomainName()
-    {
-        return $this->container['sandbox_domain_name'];
-    }
-
-    /**
-     * Sets sandbox_domain_name
-     *
-     * @param string $sandbox_domain_name The sandbox domain name that belongs to the scope.
-     *
-     * @return $this
-     */
-    public function setSandboxDomainName($sandbox_domain_name)
-    {
-        if (!is_null($sandbox_domain_name) && (mb_strlen($sandbox_domain_name) > 40)) {
-            throw new \InvalidArgumentException('invalid length for $sandbox_domain_name when calling Scope., must be smaller than or equal to 40.');
-        }
-
-        $this->container['sandbox_domain_name'] = $sandbox_domain_name;
-
-        return $this;
-    }
-    
 
     /**
      * Gets ssl_active
      *
-     * @return bool
+     * @return bool|null
      */
     public function getSslActive()
     {
@@ -569,97 +446,24 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets ssl_active
      *
-     * @param bool $ssl_active Whether the scope supports SSL.
+     * @param bool|null $ssl_active Whether the scope supports SSL.
      *
-     * @return $this
+     * @return self
      */
     public function setSslActive($ssl_active)
     {
+        if (is_null($ssl_active)) {
+            throw new \InvalidArgumentException('non-nullable ssl_active cannot be null');
+        }
         $this->container['ssl_active'] = $ssl_active;
 
         return $this;
     }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\CreationEntityState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets themes
-     *
-     * @return string[]
-     */
-    public function getThemes()
-    {
-        return $this->container['themes'];
-    }
-
-    /**
-     * Sets themes
-     *
-     * @param string[] $themes The themes that determine the look and feel of the scope's user interface. A fall-through strategy is applied when building the actual theme.
-     *
-     * @return $this
-     */
-    public function setThemes($themes)
-    {
-        $this->container['themes'] = $themes;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string $url The URL where the scope can be accessed.
-     *
-     * @return $this
-     */
-    public function setUrl($url)
-    {
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-    
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -669,17 +473,346 @@ class Scope implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets machine_name
+     *
+     * @return string|null
+     */
+    public function getMachineName()
+    {
+        return $this->container['machine_name'];
+    }
+
+    /**
+     * Sets machine_name
+     *
+     * @param string|null $machine_name The name identifying the scope in e.g. URLs.
+     *
+     * @return self
+     */
+    public function setMachineName($machine_name)
+    {
+        if (is_null($machine_name)) {
+            throw new \InvalidArgumentException('non-nullable machine_name cannot be null');
+        }
+        if ((mb_strlen($machine_name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $machine_name when calling Scope., must be smaller than or equal to 50.');
+        }
+        if ((!preg_match("/([A-Z][A-Za-z0-9]+)(_([A-Z][A-Za-z0-9]+))*/", ObjectSerializer::toString($machine_name)))) {
+            throw new \InvalidArgumentException("invalid value for \$machine_name when calling Scope., must conform to the pattern /([A-Z][A-Za-z0-9]+)(_([A-Z][A-Za-z0-9]+))*/.");
+        }
+
+        $this->container['machine_name'] = $machine_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return string|null
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param string|null $url The URL where the scope can be accessed.
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            throw new \InvalidArgumentException('non-nullable url cannot be null');
+        }
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets features
+     *
+     * @return \Wallee\Sdk\Model\Feature[]|null
+     */
+    public function getFeatures()
+    {
+        return $this->container['features'];
+    }
+
+    /**
+     * Sets features
+     *
+     * @param \Wallee\Sdk\Model\Feature[]|null $features The list of features that are active in the scope.
+     *
+     * @return self
+     */
+    public function setFeatures($features)
+    {
+        if (is_null($features)) {
+            throw new \InvalidArgumentException('non-nullable features cannot be null');
+        }
+
+
+        $this->container['features'] = $features;
+
+        return $this;
+    }
+
+    /**
+     * Gets themes
+     *
+     * @return string[]|null
+     */
+    public function getThemes()
+    {
+        return $this->container['themes'];
+    }
+
+    /**
+     * Sets themes
+     *
+     * @param string[]|null $themes The themes that determine the look and feel of the scope's user interface. A fall-through strategy is applied when building the actual theme.
+     *
+     * @return self
+     */
+    public function setThemes($themes)
+    {
+        if (is_null($themes)) {
+            throw new \InvalidArgumentException('non-nullable themes cannot be null');
+        }
+        $this->container['themes'] = $themes;
+
+        return $this;
+    }
+
+    /**
+     * Gets port
+     *
+     * @return int|null
+     */
+    public function getPort()
+    {
+        return $this->container['port'];
+    }
+
+    /**
+     * Sets port
+     *
+     * @param int|null $port The port where the scope can be accessed.
+     *
+     * @return self
+     */
+    public function setPort($port)
+    {
+        if (is_null($port)) {
+            throw new \InvalidArgumentException('non-nullable port cannot be null');
+        }
+
+        if (($port < 1)) {
+            throw new \InvalidArgumentException('invalid value for $port when calling Scope., must be bigger than or equal to 1.');
+        }
+
+        $this->container['port'] = $port;
+
+        return $this;
+    }
+
+    /**
+     * Gets preprod_domain_name
+     *
+     * @return string|null
+     */
+    public function getPreprodDomainName()
+    {
+        return $this->container['preprod_domain_name'];
+    }
+
+    /**
+     * Sets preprod_domain_name
+     *
+     * @param string|null $preprod_domain_name The preprod domain name that belongs to the scope.
+     *
+     * @return self
+     */
+    public function setPreprodDomainName($preprod_domain_name)
+    {
+        if (is_null($preprod_domain_name)) {
+            throw new \InvalidArgumentException('non-nullable preprod_domain_name cannot be null');
+        }
+        if ((mb_strlen($preprod_domain_name) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $preprod_domain_name when calling Scope., must be smaller than or equal to 40.');
+        }
+
+        $this->container['preprod_domain_name'] = $preprod_domain_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets domain_name
+     *
+     * @return string|null
+     */
+    public function getDomainName()
+    {
+        return $this->container['domain_name'];
+    }
+
+    /**
+     * Sets domain_name
+     *
+     * @param string|null $domain_name The domain name that belongs to the scope.
+     *
+     * @return self
+     */
+    public function setDomainName($domain_name)
+    {
+        if (is_null($domain_name)) {
+            throw new \InvalidArgumentException('non-nullable domain_name cannot be null');
+        }
+        if ((mb_strlen($domain_name) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $domain_name when calling Scope., must be smaller than or equal to 40.');
+        }
+
+        $this->container['domain_name'] = $domain_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name The name used to identify the scope.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling Scope., must be smaller than or equal to 50.');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\CreationEntityState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\CreationEntityState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets sandbox_domain_name
+     *
+     * @return string|null
+     */
+    public function getSandboxDomainName()
+    {
+        return $this->container['sandbox_domain_name'];
+    }
+
+    /**
+     * Sets sandbox_domain_name
+     *
+     * @param string|null $sandbox_domain_name The sandbox domain name that belongs to the scope.
+     *
+     * @return self
+     */
+    public function setSandboxDomainName($sandbox_domain_name)
+    {
+        if (is_null($sandbox_domain_name)) {
+            throw new \InvalidArgumentException('non-nullable sandbox_domain_name cannot be null');
+        }
+        if ((mb_strlen($sandbox_domain_name) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $sandbox_domain_name when calling Scope., must be smaller than or equal to 40.');
+        }
+
+        $this->container['sandbox_domain_name'] = $sandbox_domain_name;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -687,8 +820,7 @@ class Scope implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -698,24 +830,23 @@ class Scope implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -731,10 +862,22 @@ class Scope implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -744,13 +887,19 @@ class Scope implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +21,27 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk;
 
 use \Exception;
 
 /**
- * ApiException Class Doc Comment
+ * ApiException
  *
- * @category Class
- * @package  Wallee\Sdk
- * @author   wallee AG
- * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @category    Class
+ * @package     Wallee\Sdk
+ * @author      wallee AG
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class ApiException extends Exception
 {
-
     /**
      * The HTTP body of the server response either as Json or string.
      *
-     * @var mixed
+     * @var \stdClass|string|null
      */
     protected $responseBody;
 
@@ -50,19 +55,19 @@ class ApiException extends Exception
     /**
      * The deserialized response object
      *
-     * @var $responseObject;
+     * @var \stdClass|string|null
      */
     protected $responseObject;
 
     /**
      * Constructor
      *
-     * @param string        $message         Error message
-     * @param int           $code            HTTP status code
-     * @param string[]|null $responseHeaders HTTP response header
-     * @param mixed         $responseBody    HTTP decoded body of the server response either as \stdClass or string
+     * @param string                $message         Error message
+     * @param int                   $code            HTTP status code
+     * @param string[]|null         $responseHeaders HTTP response header
+     * @param \stdClass|string|null $responseBody    HTTP decoded body of the server response either as \stdClass or string
      */
-    public function __construct($message = '', $code = 0, $responseHeaders = [], $responseBody = null)
+    public function __construct($message = "", $code = 0, $responseHeaders = [], $responseBody = null)
     {
         parent::__construct($message, $code);
         $this->responseHeaders = $responseHeaders;
@@ -82,7 +87,7 @@ class ApiException extends Exception
     /**
      * Gets the HTTP body of the server response either as Json or string
      *
-     * @return mixed HTTP body of the server response either as \stdClass or string
+     * @return \stdClass|string|null HTTP body of the server response either as \stdClass or string
      */
     public function getResponseBody()
     {
@@ -90,7 +95,7 @@ class ApiException extends Exception
     }
 
     /**
-     * Sets the deseralized response object (during deserialization)
+     * Sets the deserialized response object (during deserialization)
      *
      * @param mixed $obj Deserialized response object
      *
@@ -102,7 +107,7 @@ class ApiException extends Exception
     }
 
     /**
-     * Gets the deseralized response object (during deserialization)
+     * Gets the deserialized response object (during deserialization)
      *
      * @return mixed the deserialized response object
      */

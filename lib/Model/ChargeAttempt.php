@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,95 +30,216 @@ use \Wallee\Sdk\ObjectSerializer;
  * ChargeAttempt model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class ChargeAttempt implements ModelInterface, ArrayAccess
+class ChargeAttempt implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ChargeAttempt';
+    protected static $openAPIModelName = 'ChargeAttempt';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'charge' => '\Wallee\Sdk\Model\Charge',
-        'completion_behavior' => '\Wallee\Sdk\Model\TransactionCompletionBehavior',
-        'connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
-        'created_on' => '\DateTime',
-        'customers_presence' => '\Wallee\Sdk\Model\CustomersPresence',
-        'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
-        'failed_on' => '\DateTime',
-        'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
-        'id' => 'int',
-        'initializing_token_version' => 'bool',
-        'invocation' => '\Wallee\Sdk\Model\ConnectorInvocation',
-        'labels' => '\Wallee\Sdk\Model\Label[]',
+    protected static $openAPITypes = [
         'language' => 'string',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
-        'next_update_on' => '\DateTime',
-        'planned_purge_date' => '\DateTime',
-        'redirection_url' => 'string',
         'sales_channel' => 'int',
-        'space_view_id' => 'int',
-        'state' => '\Wallee\Sdk\Model\ChargeAttemptState',
-        'succeeded_on' => '\DateTime',
-        'terminal' => '\Wallee\Sdk\Model\PaymentTerminal',
-        'time_zone' => 'string',
-        'timeout_on' => '\DateTime',
+        'created_on' => '\DateTime',
+        'initializing_token_version' => 'bool',
         'token_version' => '\Wallee\Sdk\Model\TokenVersion',
+        'succeeded_on' => '\DateTime',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\ChargeAttemptState',
+        'linked_transaction' => 'int',
+        'redirection_url' => 'string',
+        'charge' => '\Wallee\Sdk\Model\Charge',
+        'wallet' => '\Wallee\Sdk\Model\WalletType',
+        'planned_purge_date' => '\DateTime',
+        'time_zone' => 'string',
+        'space_view_id' => 'int',
+        'terminal' => '\Wallee\Sdk\Model\PaymentTerminal',
         'user_failure_message' => 'string',
+        'completion_behavior' => '\Wallee\Sdk\Model\TransactionCompletionBehavior',
         'version' => 'int',
-        'wallet' => '\Wallee\Sdk\Model\WalletType'
+        'labels' => '\Wallee\Sdk\Model\Label[]',
+        'linked_space_id' => 'int',
+        'timeout_on' => '\DateTime',
+        'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
+        'invocation' => '\Wallee\Sdk\Model\ConnectorInvocation',
+        'connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
+        'next_update_on' => '\DateTime',
+        'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
+        'customers_presence' => '\Wallee\Sdk\Model\CustomersPresence',
+        'failed_on' => '\DateTime'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'charge' => null,
-        'completion_behavior' => null,
-        'connector_configuration' => null,
-        'created_on' => 'date-time',
-        'customers_presence' => null,
-        'environment' => null,
-        'failed_on' => 'date-time',
-        'failure_reason' => null,
-        'id' => 'int64',
-        'initializing_token_version' => null,
-        'invocation' => null,
-        'labels' => null,
+    protected static $openAPIFormats = [
         'language' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
-        'next_update_on' => 'date-time',
-        'planned_purge_date' => 'date-time',
-        'redirection_url' => null,
         'sales_channel' => 'int64',
-        'space_view_id' => 'int64',
-        'state' => null,
-        'succeeded_on' => 'date-time',
-        'terminal' => null,
-        'time_zone' => null,
-        'timeout_on' => 'date-time',
+        'created_on' => 'date-time',
+        'initializing_token_version' => null,
         'token_version' => null,
+        'succeeded_on' => 'date-time',
+        'id' => 'int64',
+        'state' => null,
+        'linked_transaction' => 'int64',
+        'redirection_url' => null,
+        'charge' => null,
+        'wallet' => null,
+        'planned_purge_date' => 'date-time',
+        'time_zone' => null,
+        'space_view_id' => 'int64',
+        'terminal' => null,
         'user_failure_message' => null,
+        'completion_behavior' => null,
         'version' => 'int32',
-        'wallet' => null
+        'labels' => null,
+        'linked_space_id' => 'int64',
+        'timeout_on' => 'date-time',
+        'environment' => null,
+        'invocation' => null,
+        'connector_configuration' => null,
+        'next_update_on' => 'date-time',
+        'failure_reason' => null,
+        'customers_presence' => null,
+        'failed_on' => 'date-time'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'language' => false,
+        'sales_channel' => false,
+        'created_on' => false,
+        'initializing_token_version' => false,
+        'token_version' => false,
+        'succeeded_on' => false,
+        'id' => false,
+        'state' => false,
+        'linked_transaction' => false,
+        'redirection_url' => false,
+        'charge' => false,
+        'wallet' => false,
+        'planned_purge_date' => false,
+        'time_zone' => false,
+        'space_view_id' => false,
+        'terminal' => false,
+        'user_failure_message' => false,
+        'completion_behavior' => false,
+        'version' => false,
+        'labels' => false,
+        'linked_space_id' => false,
+        'timeout_on' => false,
+        'environment' => false,
+        'invocation' => false,
+        'connector_configuration' => false,
+        'next_update_on' => false,
+        'failure_reason' => false,
+        'customers_presence' => false,
+        'failed_on' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -124,35 +248,35 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'charge' => 'charge',
-        'completion_behavior' => 'completionBehavior',
-        'connector_configuration' => 'connectorConfiguration',
-        'created_on' => 'createdOn',
-        'customers_presence' => 'customersPresence',
-        'environment' => 'environment',
-        'failed_on' => 'failedOn',
-        'failure_reason' => 'failureReason',
-        'id' => 'id',
-        'initializing_token_version' => 'initializingTokenVersion',
-        'invocation' => 'invocation',
-        'labels' => 'labels',
         'language' => 'language',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
-        'next_update_on' => 'nextUpdateOn',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'redirection_url' => 'redirectionUrl',
         'sales_channel' => 'salesChannel',
-        'space_view_id' => 'spaceViewId',
-        'state' => 'state',
-        'succeeded_on' => 'succeededOn',
-        'terminal' => 'terminal',
-        'time_zone' => 'timeZone',
-        'timeout_on' => 'timeoutOn',
+        'created_on' => 'createdOn',
+        'initializing_token_version' => 'initializingTokenVersion',
         'token_version' => 'tokenVersion',
+        'succeeded_on' => 'succeededOn',
+        'id' => 'id',
+        'state' => 'state',
+        'linked_transaction' => 'linkedTransaction',
+        'redirection_url' => 'redirectionUrl',
+        'charge' => 'charge',
+        'wallet' => 'wallet',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'time_zone' => 'timeZone',
+        'space_view_id' => 'spaceViewId',
+        'terminal' => 'terminal',
         'user_failure_message' => 'userFailureMessage',
+        'completion_behavior' => 'completionBehavior',
         'version' => 'version',
-        'wallet' => 'wallet'
+        'labels' => 'labels',
+        'linked_space_id' => 'linkedSpaceId',
+        'timeout_on' => 'timeoutOn',
+        'environment' => 'environment',
+        'invocation' => 'invocation',
+        'connector_configuration' => 'connectorConfiguration',
+        'next_update_on' => 'nextUpdateOn',
+        'failure_reason' => 'failureReason',
+        'customers_presence' => 'customersPresence',
+        'failed_on' => 'failedOn'
     ];
 
     /**
@@ -161,35 +285,35 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'charge' => 'setCharge',
-        'completion_behavior' => 'setCompletionBehavior',
-        'connector_configuration' => 'setConnectorConfiguration',
-        'created_on' => 'setCreatedOn',
-        'customers_presence' => 'setCustomersPresence',
-        'environment' => 'setEnvironment',
-        'failed_on' => 'setFailedOn',
-        'failure_reason' => 'setFailureReason',
-        'id' => 'setId',
-        'initializing_token_version' => 'setInitializingTokenVersion',
-        'invocation' => 'setInvocation',
-        'labels' => 'setLabels',
         'language' => 'setLanguage',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
-        'next_update_on' => 'setNextUpdateOn',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'redirection_url' => 'setRedirectionUrl',
         'sales_channel' => 'setSalesChannel',
-        'space_view_id' => 'setSpaceViewId',
-        'state' => 'setState',
-        'succeeded_on' => 'setSucceededOn',
-        'terminal' => 'setTerminal',
-        'time_zone' => 'setTimeZone',
-        'timeout_on' => 'setTimeoutOn',
+        'created_on' => 'setCreatedOn',
+        'initializing_token_version' => 'setInitializingTokenVersion',
         'token_version' => 'setTokenVersion',
+        'succeeded_on' => 'setSucceededOn',
+        'id' => 'setId',
+        'state' => 'setState',
+        'linked_transaction' => 'setLinkedTransaction',
+        'redirection_url' => 'setRedirectionUrl',
+        'charge' => 'setCharge',
+        'wallet' => 'setWallet',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'time_zone' => 'setTimeZone',
+        'space_view_id' => 'setSpaceViewId',
+        'terminal' => 'setTerminal',
         'user_failure_message' => 'setUserFailureMessage',
+        'completion_behavior' => 'setCompletionBehavior',
         'version' => 'setVersion',
-        'wallet' => 'setWallet'
+        'labels' => 'setLabels',
+        'linked_space_id' => 'setLinkedSpaceId',
+        'timeout_on' => 'setTimeoutOn',
+        'environment' => 'setEnvironment',
+        'invocation' => 'setInvocation',
+        'connector_configuration' => 'setConnectorConfiguration',
+        'next_update_on' => 'setNextUpdateOn',
+        'failure_reason' => 'setFailureReason',
+        'customers_presence' => 'setCustomersPresence',
+        'failed_on' => 'setFailedOn'
     ];
 
     /**
@@ -198,113 +322,141 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'charge' => 'getCharge',
-        'completion_behavior' => 'getCompletionBehavior',
-        'connector_configuration' => 'getConnectorConfiguration',
-        'created_on' => 'getCreatedOn',
-        'customers_presence' => 'getCustomersPresence',
-        'environment' => 'getEnvironment',
-        'failed_on' => 'getFailedOn',
-        'failure_reason' => 'getFailureReason',
-        'id' => 'getId',
-        'initializing_token_version' => 'getInitializingTokenVersion',
-        'invocation' => 'getInvocation',
-        'labels' => 'getLabels',
         'language' => 'getLanguage',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
-        'next_update_on' => 'getNextUpdateOn',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'redirection_url' => 'getRedirectionUrl',
         'sales_channel' => 'getSalesChannel',
-        'space_view_id' => 'getSpaceViewId',
-        'state' => 'getState',
-        'succeeded_on' => 'getSucceededOn',
-        'terminal' => 'getTerminal',
-        'time_zone' => 'getTimeZone',
-        'timeout_on' => 'getTimeoutOn',
+        'created_on' => 'getCreatedOn',
+        'initializing_token_version' => 'getInitializingTokenVersion',
         'token_version' => 'getTokenVersion',
+        'succeeded_on' => 'getSucceededOn',
+        'id' => 'getId',
+        'state' => 'getState',
+        'linked_transaction' => 'getLinkedTransaction',
+        'redirection_url' => 'getRedirectionUrl',
+        'charge' => 'getCharge',
+        'wallet' => 'getWallet',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'time_zone' => 'getTimeZone',
+        'space_view_id' => 'getSpaceViewId',
+        'terminal' => 'getTerminal',
         'user_failure_message' => 'getUserFailureMessage',
+        'completion_behavior' => 'getCompletionBehavior',
         'version' => 'getVersion',
-        'wallet' => 'getWallet'
+        'labels' => 'getLabels',
+        'linked_space_id' => 'getLinkedSpaceId',
+        'timeout_on' => 'getTimeoutOn',
+        'environment' => 'getEnvironment',
+        'invocation' => 'getInvocation',
+        'connector_configuration' => 'getConnectorConfiguration',
+        'next_update_on' => 'getNextUpdateOn',
+        'failure_reason' => 'getFailureReason',
+        'customers_presence' => 'getCustomersPresence',
+        'failed_on' => 'getFailedOn'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['charge'] = isset($data['charge']) ? $data['charge'] : null;
-        
-        $this->container['completion_behavior'] = isset($data['completion_behavior']) ? $data['completion_behavior'] : null;
-        
-        $this->container['connector_configuration'] = isset($data['connector_configuration']) ? $data['connector_configuration'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['customers_presence'] = isset($data['customers_presence']) ? $data['customers_presence'] : null;
-        
-        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
-        
-        $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
-        
-        $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['initializing_token_version'] = isset($data['initializing_token_version']) ? $data['initializing_token_version'] : null;
-        
-        $this->container['invocation'] = isset($data['invocation']) ? $data['invocation'] : null;
-        
-        $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
-        
-        $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['redirection_url'] = isset($data['redirection_url']) ? $data['redirection_url'] : null;
-        
-        $this->container['sales_channel'] = isset($data['sales_channel']) ? $data['sales_channel'] : null;
-        
-        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['succeeded_on'] = isset($data['succeeded_on']) ? $data['succeeded_on'] : null;
-        
-        $this->container['terminal'] = isset($data['terminal']) ? $data['terminal'] : null;
-        
-        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
-        
-        $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
-        
-        $this->container['token_version'] = isset($data['token_version']) ? $data['token_version'] : null;
-        
-        $this->container['user_failure_message'] = isset($data['user_failure_message']) ? $data['user_failure_message'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
-        $this->container['wallet'] = isset($data['wallet']) ? $data['wallet'] : null;
-        
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('sales_channel', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('initializing_token_version', $data ?? [], null);
+        $this->setIfExists('token_version', $data ?? [], null);
+        $this->setIfExists('succeeded_on', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('linked_transaction', $data ?? [], null);
+        $this->setIfExists('redirection_url', $data ?? [], null);
+        $this->setIfExists('charge', $data ?? [], null);
+        $this->setIfExists('wallet', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('time_zone', $data ?? [], null);
+        $this->setIfExists('space_view_id', $data ?? [], null);
+        $this->setIfExists('terminal', $data ?? [], null);
+        $this->setIfExists('user_failure_message', $data ?? [], null);
+        $this->setIfExists('completion_behavior', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('labels', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('timeout_on', $data ?? [], null);
+        $this->setIfExists('environment', $data ?? [], null);
+        $this->setIfExists('invocation', $data ?? [], null);
+        $this->setIfExists('connector_configuration', $data ?? [], null);
+        $this->setIfExists('next_update_on', $data ?? [], null);
+        $this->setIfExists('failure_reason', $data ?? [], null);
+        $this->setIfExists('customers_presence', $data ?? [], null);
+        $this->setIfExists('failed_on', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -324,386 +476,21 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets charge
-     *
-     * @return \Wallee\Sdk\Model\Charge
-     */
-    public function getCharge()
-    {
-        return $this->container['charge'];
-    }
-
-    /**
-     * Sets charge
-     *
-     * @param \Wallee\Sdk\Model\Charge $charge The charge that the charge attempt belongs to.
-     *
-     * @return $this
-     */
-    public function setCharge($charge)
-    {
-        $this->container['charge'] = $charge;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets completion_behavior
-     *
-     * @return \Wallee\Sdk\Model\TransactionCompletionBehavior
-     */
-    public function getCompletionBehavior()
-    {
-        return $this->container['completion_behavior'];
-    }
-
-    /**
-     * Sets completion_behavior
-     *
-     * @param \Wallee\Sdk\Model\TransactionCompletionBehavior $completion_behavior The behavior that controls when the transaction is completed.
-     *
-     * @return $this
-     */
-    public function setCompletionBehavior($completion_behavior)
-    {
-        $this->container['completion_behavior'] = $completion_behavior;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets connector_configuration
-     *
-     * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
-     */
-    public function getConnectorConfiguration()
-    {
-        return $this->container['connector_configuration'];
-    }
-
-    /**
-     * Sets connector_configuration
-     *
-     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $connector_configuration The payment connector configuration that was used for the charge attempt.
-     *
-     * @return $this
-     */
-    public function setConnectorConfiguration($connector_configuration)
-    {
-        $this->container['connector_configuration'] = $connector_configuration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets customers_presence
-     *
-     * @return \Wallee\Sdk\Model\CustomersPresence
-     */
-    public function getCustomersPresence()
-    {
-        return $this->container['customers_presence'];
-    }
-
-    /**
-     * Sets customers_presence
-     *
-     * @param \Wallee\Sdk\Model\CustomersPresence $customers_presence The customer's presence indicates whether and in what way the charge attempt's customer is present.
-     *
-     * @return $this
-     */
-    public function setCustomersPresence($customers_presence)
-    {
-        $this->container['customers_presence'] = $customers_presence;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets environment
-     *
-     * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $environment The environment in which the charge attempt is executed.
-     *
-     * @return $this
-     */
-    public function setEnvironment($environment)
-    {
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_on
-     *
-     * @return \DateTime
-     */
-    public function getFailedOn()
-    {
-        return $this->container['failed_on'];
-    }
-
-    /**
-     * Sets failed_on
-     *
-     * @param \DateTime $failed_on The date and time when the charge attempt failed.
-     *
-     * @return $this
-     */
-    public function setFailedOn($failed_on)
-    {
-        $this->container['failed_on'] = $failed_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failure_reason
-     *
-     * @return \Wallee\Sdk\Model\FailureReason
-     */
-    public function getFailureReason()
-    {
-        return $this->container['failure_reason'];
-    }
-
-    /**
-     * Sets failure_reason
-     *
-     * @param \Wallee\Sdk\Model\FailureReason $failure_reason The reason for the failure of the charge attempt.
-     *
-     * @return $this
-     */
-    public function setFailureReason($failure_reason)
-    {
-        $this->container['failure_reason'] = $failure_reason;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets initializing_token_version
-     *
-     * @return bool
-     */
-    public function getInitializingTokenVersion()
-    {
-        return $this->container['initializing_token_version'];
-    }
-
-    /**
-     * Sets initializing_token_version
-     *
-     * @param bool $initializing_token_version Whether a new token version is being initialized.
-     *
-     * @return $this
-     */
-    public function setInitializingTokenVersion($initializing_token_version)
-    {
-        $this->container['initializing_token_version'] = $initializing_token_version;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets invocation
-     *
-     * @return \Wallee\Sdk\Model\ConnectorInvocation
-     */
-    public function getInvocation()
-    {
-        return $this->container['invocation'];
-    }
-
-    /**
-     * Sets invocation
-     *
-     * @param \Wallee\Sdk\Model\ConnectorInvocation $invocation The connector invocation that the charge attempt belongs to.
-     *
-     * @return $this
-     */
-    public function setInvocation($invocation)
-    {
-        $this->container['invocation'] = $invocation;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets labels
-     *
-     * @return \Wallee\Sdk\Model\Label[]
-     */
-    public function getLabels()
-    {
-        return $this->container['labels'];
-    }
-
-    /**
-     * Sets labels
-     *
-     * @param \Wallee\Sdk\Model\Label[] $labels The labels providing additional information about the object.
-     *
-     * @return $this
-     */
-    public function setLabels($labels)
-    {
-        $this->container['labels'] = $labels;
-
-        return $this;
-    }
-    
 
     /**
      * Gets language
      *
-     * @return string
+     * @return string|null
      */
     public function getLanguage()
     {
@@ -713,147 +500,24 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language The language that is linked to the object.
+     * @param string|null $language The language that is linked to the object.
      *
-     * @return $this
+     * @return self
      */
     public function setLanguage($language)
     {
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
         $this->container['language'] = $language;
 
         return $this;
     }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets next_update_on
-     *
-     * @return \DateTime
-     */
-    public function getNextUpdateOn()
-    {
-        return $this->container['next_update_on'];
-    }
-
-    /**
-     * Sets next_update_on
-     *
-     * @param \DateTime $next_update_on The date and time when the next update of the object's state is planned.
-     *
-     * @return $this
-     */
-    public function setNextUpdateOn($next_update_on)
-    {
-        $this->container['next_update_on'] = $next_update_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets redirection_url
-     *
-     * @return string
-     */
-    public function getRedirectionUrl()
-    {
-        return $this->container['redirection_url'];
-    }
-
-    /**
-     * Sets redirection_url
-     *
-     * @param string $redirection_url The URL to redirect the customer to after payment processing.
-     *
-     * @return $this
-     */
-    public function setRedirectionUrl($redirection_url)
-    {
-        $this->container['redirection_url'] = $redirection_url;
-
-        return $this;
-    }
-    
 
     /**
      * Gets sales_channel
      *
-     * @return int
+     * @return int|null
      */
     public function getSalesChannel()
     {
@@ -863,172 +527,78 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
     /**
      * Sets sales_channel
      *
-     * @param int $sales_channel The sales channel through which the charge attempt was made.
+     * @param int|null $sales_channel The sales channel through which the charge attempt was made.
      *
-     * @return $this
+     * @return self
      */
     public function setSalesChannel($sales_channel)
     {
+        if (is_null($sales_channel)) {
+            throw new \InvalidArgumentException('non-nullable sales_channel cannot be null');
+        }
         $this->container['sales_channel'] = $sales_channel;
 
         return $this;
     }
-    
 
     /**
-     * Gets space_view_id
+     * Gets created_on
      *
-     * @return int
+     * @return \DateTime|null
      */
-    public function getSpaceViewId()
+    public function getCreatedOn()
     {
-        return $this->container['space_view_id'];
+        return $this->container['created_on'];
     }
 
     /**
-     * Sets space_view_id
+     * Sets created_on
      *
-     * @param int $space_view_id The ID of the space view this object is linked to.
+     * @param \DateTime|null $created_on The date and time when the object was created.
      *
-     * @return $this
+     * @return self
      */
-    public function setSpaceViewId($space_view_id)
+    public function setCreatedOn($created_on)
     {
-        $this->container['space_view_id'] = $space_view_id;
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }
-    
 
     /**
-     * Gets state
+     * Gets initializing_token_version
      *
-     * @return \Wallee\Sdk\Model\ChargeAttemptState
+     * @return bool|null
      */
-    public function getState()
+    public function getInitializingTokenVersion()
     {
-        return $this->container['state'];
+        return $this->container['initializing_token_version'];
     }
 
     /**
-     * Sets state
+     * Sets initializing_token_version
      *
-     * @param \Wallee\Sdk\Model\ChargeAttemptState $state The object's current state.
+     * @param bool|null $initializing_token_version Whether a new token version is being initialized.
      *
-     * @return $this
+     * @return self
      */
-    public function setState($state)
+    public function setInitializingTokenVersion($initializing_token_version)
     {
-        $this->container['state'] = $state;
+        if (is_null($initializing_token_version)) {
+            throw new \InvalidArgumentException('non-nullable initializing_token_version cannot be null');
+        }
+        $this->container['initializing_token_version'] = $initializing_token_version;
 
         return $this;
     }
-    
-
-    /**
-     * Gets succeeded_on
-     *
-     * @return \DateTime
-     */
-    public function getSucceededOn()
-    {
-        return $this->container['succeeded_on'];
-    }
-
-    /**
-     * Sets succeeded_on
-     *
-     * @param \DateTime $succeeded_on The date and time when the charge attempt succeeded.
-     *
-     * @return $this
-     */
-    public function setSucceededOn($succeeded_on)
-    {
-        $this->container['succeeded_on'] = $succeeded_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets terminal
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminal
-     */
-    public function getTerminal()
-    {
-        return $this->container['terminal'];
-    }
-
-    /**
-     * Sets terminal
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminal $terminal The payment terminal through which the charge attempt was made.
-     *
-     * @return $this
-     */
-    public function setTerminal($terminal)
-    {
-        $this->container['terminal'] = $terminal;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets time_zone
-     *
-     * @return string
-     */
-    public function getTimeZone()
-    {
-        return $this->container['time_zone'];
-    }
-
-    /**
-     * Sets time_zone
-     *
-     * @param string $time_zone The time zone that this object is associated with.
-     *
-     * @return $this
-     */
-    public function setTimeZone($time_zone)
-    {
-        $this->container['time_zone'] = $time_zone;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets timeout_on
-     *
-     * @return \DateTime
-     */
-    public function getTimeoutOn()
-    {
-        return $this->container['timeout_on'];
-    }
-
-    /**
-     * Sets timeout_on
-     *
-     * @param \DateTime $timeout_on The date and time when the object will expire.
-     *
-     * @return $this
-     */
-    public function setTimeoutOn($timeout_on)
-    {
-        $this->container['timeout_on'] = $timeout_on;
-
-        return $this;
-    }
-    
 
     /**
      * Gets token_version
      *
-     * @return \Wallee\Sdk\Model\TokenVersion
+     * @return \Wallee\Sdk\Model\TokenVersion|null
      */
     public function getTokenVersion()
     {
@@ -1038,76 +608,186 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
     /**
      * Sets token_version
      *
-     * @param \Wallee\Sdk\Model\TokenVersion $token_version The token version used for the charge attempt.
+     * @param \Wallee\Sdk\Model\TokenVersion|null $token_version token_version
      *
-     * @return $this
+     * @return self
      */
     public function setTokenVersion($token_version)
     {
+        if (is_null($token_version)) {
+            throw new \InvalidArgumentException('non-nullable token_version cannot be null');
+        }
         $this->container['token_version'] = $token_version;
 
         return $this;
     }
-    
 
     /**
-     * Gets user_failure_message
+     * Gets succeeded_on
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getUserFailureMessage()
+    public function getSucceededOn()
     {
-        return $this->container['user_failure_message'];
+        return $this->container['succeeded_on'];
     }
 
     /**
-     * Sets user_failure_message
+     * Sets succeeded_on
      *
-     * @param string $user_failure_message The message that can be displayed to the customer explaining why the charge attempt failed, in the customer's language.
+     * @param \DateTime|null $succeeded_on The date and time when the charge attempt succeeded.
      *
-     * @return $this
+     * @return self
      */
-    public function setUserFailureMessage($user_failure_message)
+    public function setSucceededOn($succeeded_on)
     {
-        if (!is_null($user_failure_message) && (mb_strlen($user_failure_message) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $user_failure_message when calling ChargeAttempt., must be smaller than or equal to 2000.');
+        if (is_null($succeeded_on)) {
+            throw new \InvalidArgumentException('non-nullable succeeded_on cannot be null');
         }
-
-        $this->container['user_failure_message'] = $user_failure_message;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets version
-     *
-     * @return int
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
-     *
-     * @return $this
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
+        $this->container['succeeded_on'] = $succeeded_on;
 
         return $this;
     }
-    
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\ChargeAttemptState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\ChargeAttemptState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_transaction
+     *
+     * @return int|null
+     */
+    public function getLinkedTransaction()
+    {
+        return $this->container['linked_transaction'];
+    }
+
+    /**
+     * Sets linked_transaction
+     *
+     * @param int|null $linked_transaction The payment transaction this object is linked to.
+     *
+     * @return self
+     */
+    public function setLinkedTransaction($linked_transaction)
+    {
+        if (is_null($linked_transaction)) {
+            throw new \InvalidArgumentException('non-nullable linked_transaction cannot be null');
+        }
+        $this->container['linked_transaction'] = $linked_transaction;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirection_url
+     *
+     * @return string|null
+     */
+    public function getRedirectionUrl()
+    {
+        return $this->container['redirection_url'];
+    }
+
+    /**
+     * Sets redirection_url
+     *
+     * @param string|null $redirection_url The URL to redirect the customer to after payment processing.
+     *
+     * @return self
+     */
+    public function setRedirectionUrl($redirection_url)
+    {
+        if (is_null($redirection_url)) {
+            throw new \InvalidArgumentException('non-nullable redirection_url cannot be null');
+        }
+        $this->container['redirection_url'] = $redirection_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets charge
+     *
+     * @return \Wallee\Sdk\Model\Charge|null
+     */
+    public function getCharge()
+    {
+        return $this->container['charge'];
+    }
+
+    /**
+     * Sets charge
+     *
+     * @param \Wallee\Sdk\Model\Charge|null $charge charge
+     *
+     * @return self
+     */
+    public function setCharge($charge)
+    {
+        if (is_null($charge)) {
+            throw new \InvalidArgumentException('non-nullable charge cannot be null');
+        }
+        $this->container['charge'] = $charge;
+
+        return $this;
+    }
 
     /**
      * Gets wallet
      *
-     * @return \Wallee\Sdk\Model\WalletType
+     * @return \Wallee\Sdk\Model\WalletType|null
      */
     public function getWallet()
     {
@@ -1117,17 +797,484 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
     /**
      * Sets wallet
      *
-     * @param \Wallee\Sdk\Model\WalletType $wallet The type of wallet used to make the charge attempt.
+     * @param \Wallee\Sdk\Model\WalletType|null $wallet wallet
      *
-     * @return $this
+     * @return self
      */
     public function setWallet($wallet)
     {
+        if (is_null($wallet)) {
+            throw new \InvalidArgumentException('non-nullable wallet cannot be null');
+        }
         $this->container['wallet'] = $wallet;
 
         return $this;
     }
-    
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime|null
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     *
+     * @return self
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_zone
+     *
+     * @return string|null
+     */
+    public function getTimeZone()
+    {
+        return $this->container['time_zone'];
+    }
+
+    /**
+     * Sets time_zone
+     *
+     * @param string|null $time_zone The time zone that this object is associated with.
+     *
+     * @return self
+     */
+    public function setTimeZone($time_zone)
+    {
+        if (is_null($time_zone)) {
+            throw new \InvalidArgumentException('non-nullable time_zone cannot be null');
+        }
+        $this->container['time_zone'] = $time_zone;
+
+        return $this;
+    }
+
+    /**
+     * Gets space_view_id
+     *
+     * @return int|null
+     */
+    public function getSpaceViewId()
+    {
+        return $this->container['space_view_id'];
+    }
+
+    /**
+     * Sets space_view_id
+     *
+     * @param int|null $space_view_id The ID of the space view this object is linked to.
+     *
+     * @return self
+     */
+    public function setSpaceViewId($space_view_id)
+    {
+        if (is_null($space_view_id)) {
+            throw new \InvalidArgumentException('non-nullable space_view_id cannot be null');
+        }
+        $this->container['space_view_id'] = $space_view_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets terminal
+     *
+     * @return \Wallee\Sdk\Model\PaymentTerminal|null
+     */
+    public function getTerminal()
+    {
+        return $this->container['terminal'];
+    }
+
+    /**
+     * Sets terminal
+     *
+     * @param \Wallee\Sdk\Model\PaymentTerminal|null $terminal terminal
+     *
+     * @return self
+     */
+    public function setTerminal($terminal)
+    {
+        if (is_null($terminal)) {
+            throw new \InvalidArgumentException('non-nullable terminal cannot be null');
+        }
+        $this->container['terminal'] = $terminal;
+
+        return $this;
+    }
+
+    /**
+     * Gets user_failure_message
+     *
+     * @return string|null
+     */
+    public function getUserFailureMessage()
+    {
+        return $this->container['user_failure_message'];
+    }
+
+    /**
+     * Sets user_failure_message
+     *
+     * @param string|null $user_failure_message The message that can be displayed to the customer explaining why the charge attempt failed, in the customer's language.
+     *
+     * @return self
+     */
+    public function setUserFailureMessage($user_failure_message)
+    {
+        if (is_null($user_failure_message)) {
+            throw new \InvalidArgumentException('non-nullable user_failure_message cannot be null');
+        }
+        if ((mb_strlen($user_failure_message) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $user_failure_message when calling ChargeAttempt., must be smaller than or equal to 2000.');
+        }
+
+        $this->container['user_failure_message'] = $user_failure_message;
+
+        return $this;
+    }
+
+    /**
+     * Gets completion_behavior
+     *
+     * @return \Wallee\Sdk\Model\TransactionCompletionBehavior|null
+     */
+    public function getCompletionBehavior()
+    {
+        return $this->container['completion_behavior'];
+    }
+
+    /**
+     * Sets completion_behavior
+     *
+     * @param \Wallee\Sdk\Model\TransactionCompletionBehavior|null $completion_behavior completion_behavior
+     *
+     * @return self
+     */
+    public function setCompletionBehavior($completion_behavior)
+    {
+        if (is_null($completion_behavior)) {
+            throw new \InvalidArgumentException('non-nullable completion_behavior cannot be null');
+        }
+        $this->container['completion_behavior'] = $completion_behavior;
+
+        return $this;
+    }
+
+    /**
+     * Gets version
+     *
+     * @return int|null
+     */
+    public function getVersion()
+    {
+        return $this->container['version'];
+    }
+
+    /**
+     * Sets version
+     *
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
+        $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets labels
+     *
+     * @return \Wallee\Sdk\Model\Label[]|null
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param \Wallee\Sdk\Model\Label[]|null $labels The labels providing additional information about the object.
+     *
+     * @return self
+     */
+    public function setLabels($labels)
+    {
+        if (is_null($labels)) {
+            throw new \InvalidArgumentException('non-nullable labels cannot be null');
+        }
+
+
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets timeout_on
+     *
+     * @return \DateTime|null
+     */
+    public function getTimeoutOn()
+    {
+        return $this->container['timeout_on'];
+    }
+
+    /**
+     * Sets timeout_on
+     *
+     * @param \DateTime|null $timeout_on The date and time when the object will expire.
+     *
+     * @return self
+     */
+    public function setTimeoutOn($timeout_on)
+    {
+        if (is_null($timeout_on)) {
+            throw new \InvalidArgumentException('non-nullable timeout_on cannot be null');
+        }
+        $this->container['timeout_on'] = $timeout_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment
+     *
+     * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment|null
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment|null $environment environment
+     *
+     * @return self
+     */
+    public function setEnvironment($environment)
+    {
+        if (is_null($environment)) {
+            throw new \InvalidArgumentException('non-nullable environment cannot be null');
+        }
+        $this->container['environment'] = $environment;
+
+        return $this;
+    }
+
+    /**
+     * Gets invocation
+     *
+     * @return \Wallee\Sdk\Model\ConnectorInvocation|null
+     */
+    public function getInvocation()
+    {
+        return $this->container['invocation'];
+    }
+
+    /**
+     * Sets invocation
+     *
+     * @param \Wallee\Sdk\Model\ConnectorInvocation|null $invocation invocation
+     *
+     * @return self
+     */
+    public function setInvocation($invocation)
+    {
+        if (is_null($invocation)) {
+            throw new \InvalidArgumentException('non-nullable invocation cannot be null');
+        }
+        $this->container['invocation'] = $invocation;
+
+        return $this;
+    }
+
+    /**
+     * Gets connector_configuration
+     *
+     * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration|null
+     */
+    public function getConnectorConfiguration()
+    {
+        return $this->container['connector_configuration'];
+    }
+
+    /**
+     * Sets connector_configuration
+     *
+     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration|null $connector_configuration connector_configuration
+     *
+     * @return self
+     */
+    public function setConnectorConfiguration($connector_configuration)
+    {
+        if (is_null($connector_configuration)) {
+            throw new \InvalidArgumentException('non-nullable connector_configuration cannot be null');
+        }
+        $this->container['connector_configuration'] = $connector_configuration;
+
+        return $this;
+    }
+
+    /**
+     * Gets next_update_on
+     *
+     * @return \DateTime|null
+     */
+    public function getNextUpdateOn()
+    {
+        return $this->container['next_update_on'];
+    }
+
+    /**
+     * Sets next_update_on
+     *
+     * @param \DateTime|null $next_update_on The date and time when the next update of the object's state is planned.
+     *
+     * @return self
+     */
+    public function setNextUpdateOn($next_update_on)
+    {
+        if (is_null($next_update_on)) {
+            throw new \InvalidArgumentException('non-nullable next_update_on cannot be null');
+        }
+        $this->container['next_update_on'] = $next_update_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets failure_reason
+     *
+     * @return \Wallee\Sdk\Model\FailureReason|null
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
+
+    /**
+     * Sets failure_reason
+     *
+     * @param \Wallee\Sdk\Model\FailureReason|null $failure_reason failure_reason
+     *
+     * @return self
+     */
+    public function setFailureReason($failure_reason)
+    {
+        if (is_null($failure_reason)) {
+            throw new \InvalidArgumentException('non-nullable failure_reason cannot be null');
+        }
+        $this->container['failure_reason'] = $failure_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets customers_presence
+     *
+     * @return \Wallee\Sdk\Model\CustomersPresence|null
+     */
+    public function getCustomersPresence()
+    {
+        return $this->container['customers_presence'];
+    }
+
+    /**
+     * Sets customers_presence
+     *
+     * @param \Wallee\Sdk\Model\CustomersPresence|null $customers_presence customers_presence
+     *
+     * @return self
+     */
+    public function setCustomersPresence($customers_presence)
+    {
+        if (is_null($customers_presence)) {
+            throw new \InvalidArgumentException('non-nullable customers_presence cannot be null');
+        }
+        $this->container['customers_presence'] = $customers_presence;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_on
+     *
+     * @return \DateTime|null
+     */
+    public function getFailedOn()
+    {
+        return $this->container['failed_on'];
+    }
+
+    /**
+     * Sets failed_on
+     *
+     * @param \DateTime|null $failed_on The date and time when the charge attempt failed.
+     *
+     * @return self
+     */
+    public function setFailedOn($failed_on)
+    {
+        if (is_null($failed_on)) {
+            throw new \InvalidArgumentException('non-nullable failed_on cannot be null');
+        }
+        $this->container['failed_on'] = $failed_on;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -1135,8 +1282,7 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -1146,24 +1292,23 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -1179,10 +1324,22 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1192,13 +1349,19 @@ class ChargeAttempt implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

@@ -1,9 +1,12 @@
 <?php
-
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,69 +21,63 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk;
 
 /**
- * Configuration Class Doc Comment
+ * Configuration class contains various settings of the API client.
  *
- * @category    Class
+ * @category Class
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class Configuration
 {
+    public const BOOLEAN_FORMAT_INT = 'int';
+    public const BOOLEAN_FORMAT_STRING = 'string';
+
+    /**
+     * @var Configuration
+     */
     private static $defaultConfiguration;
 
     /**
-     * Associate array to store API key(s)
+     * API application user ID
      *
-     * @var string[]
+     * @var int
      */
-    protected $apiKeys = [];
+    protected $userId;
 
     /**
-     * Associate array to store API prefix (e.g. Bearer)
-     *
-     * @var string[]
-     */
-    protected $apiKeyPrefixes = [];
-
-    /**
-     * Access token for OAuth
+     * API Application user's Authentication key
      *
      * @var string
      */
-    protected $accessToken = '';
+    protected $authenticationKey = '';
 
     /**
-     * Username for HTTP basic authentication
+     * Boolean format for query string
      *
      * @var string
      */
-    protected $username = '';
-
-    /**
-     * Password for HTTP basic authentication
-     *
-     * @var string
-     */
-    protected $password = '';
+    protected $booleanFormatForQueryString = Configuration::BOOLEAN_FORMAT_INT;
 
     /**
      * The host
      *
      * @var string
      */
-    protected $host = 'https://app-wallee.com:443/api';
+    protected $host = 'https://app-wallee.com/api/v2.0';
 
     /**
-     * User agent of the HTTP request, set to "Wallee\Sdk" by default
+     * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
      *
      * @var string
      */
-    protected $userAgent = 'Wallee\Sdk/4.9.0/php';
+    protected $userAgent = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36';
 
     /**
      * Debug switch (default set to false)
@@ -104,132 +101,120 @@ class Configuration
     protected $tempFolderPath;
 
     /**
-     * Constructor
+     * Default headers for all API requests.
+     *
+     * @var array
      */
-    public function __construct()
+    private array $defaultHeaders;
+
+    /**
+     * The constant for the default request timeout.
+     * Default: 25 seconds.
+     *
+     * @var int
+     */
+    public const DEFAULT_REQUEST_TIMEOUT = 25;
+
+    /**
+	 * The request timeout in seconds.
+	 *
+	 * Total time allowed for the entire request,
+	 * including connection establishment, request transmission, and response reading.
+	 *
+	 * @var int
+	 */
+	private $requestTimeout;
+
+    /**
+     * Constructor
+     * @param int $userId the API application user ID
+     * @param string $authenticationKey the API authentication key
+     *
+     * Set the request timeout to the default: 25 seconds.
+     * Set the default headers to the default constants.
+     */
+    public function __construct(int $userId, string $authenticationKey)
     {
         $this->tempFolderPath = sys_get_temp_dir();
+        $this->userId = $userId;
+        $this->authenticationKey = $authenticationKey;
+        $this->defaultHeaders = [
+            'x-meta-sdk-version' => "5.0.0",
+            'x-meta-sdk-language' => 'php',
+            'x-meta-sdk-provider' => "wallee",
+            'x-meta-sdk-language-version' => phpversion()
+        ];
+        $this->requestTimeout = Configuration::DEFAULT_REQUEST_TIMEOUT;
     }
 
     /**
-     * Sets API key
+     * Sets the API application user ID
      *
-     * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     * @param string $key              API key or token
+     * @param int $userId User ID
      *
      * @return $this
      */
-    public function setApiKey($apiKeyIdentifier, $key)
+    public function setUserId(int $userId): self
     {
-        $this->apiKeys[$apiKeyIdentifier] = $key;
+        $this->userId = $userId;
         return $this;
     }
 
     /**
-     * Gets API key
+     * Gets the API application user ID
      *
-     * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     *
-     * @return string API key or token
+     * @return int User ID
      */
-    public function getApiKey($apiKeyIdentifier)
+    public function getUserId(): int
     {
-        return isset($this->apiKeys[$apiKeyIdentifier]) ? $this->apiKeys[$apiKeyIdentifier] : null;
+        return $this->userId;
     }
 
     /**
-     * Sets the prefix for API key (e.g. Bearer)
+     * Sets the API Application user's Authentication key
      *
-     * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     * @param string $prefix           API key prefix, e.g. Bearer
+     * @param string $authenticationKey Authentication key
      *
      * @return $this
      */
-    public function setApiKeyPrefix($apiKeyIdentifier, $prefix)
+    public function setAuthenticationKey(string $authenticationKey): self
     {
-        $this->apiKeyPrefixes[$apiKeyIdentifier] = $prefix;
+        $this->authenticationKey = $authenticationKey;
         return $this;
     }
 
     /**
-     * Gets API key prefix
+     * Gets the API Application user's Authentication key
      *
-     * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     *
-     * @return string
+     * @return string Authentication key
      */
-    public function getApiKeyPrefix($apiKeyIdentifier)
+    public function getAuthenticationKey(): string
     {
-        return isset($this->apiKeyPrefixes[$apiKeyIdentifier]) ? $this->apiKeyPrefixes[$apiKeyIdentifier] : null;
+        return $this->authenticationKey;
     }
 
     /**
-     * Sets the access token for OAuth
+     * Sets boolean format for query string.
      *
-     * @param string $accessToken Token for OAuth
+     * @param string $booleanFormat Boolean format for query string
      *
      * @return $this
      */
-    public function setAccessToken($accessToken)
+    public function setBooleanFormatForQueryString(string $booleanFormat): self
     {
-        $this->accessToken = $accessToken;
+        $this->booleanFormatForQueryString = $booleanFormat;
+
         return $this;
     }
 
     /**
-     * Gets the access token for OAuth
+     * Gets boolean format for query string.
      *
-     * @return string Access token for OAuth
+     * @return string Boolean format for query string
      */
-    public function getAccessToken()
+    public function getBooleanFormatForQueryString(): string
     {
-        return $this->accessToken;
-    }
-
-    /**
-     * Sets the username for HTTP basic authentication
-     *
-     * @param string $username Username for HTTP basic authentication
-     *
-     * @return $this
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
-
-    /**
-     * Gets the username for HTTP basic authentication
-     *
-     * @return string Username for HTTP basic authentication
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Sets the password for HTTP basic authentication
-     *
-     * @param string $password Password for HTTP basic authentication
-     *
-     * @return $this
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-        return $this;
-    }
-
-    /**
-     * Gets the password for HTTP basic authentication
-     *
-     * @return string Password for HTTP basic authentication
-     */
-    public function getPassword()
-    {
-        return $this->password;
+        return $this->booleanFormatForQueryString;
     }
 
     /**
@@ -239,7 +224,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setHost($host)
+    public function setHost(string $host): self
     {
         $this->host = $host;
         return $this;
@@ -250,7 +235,7 @@ class Configuration
      *
      * @return string Host
      */
-    public function getHost()
+    public function getHost(): string
     {
         return $this->host;
     }
@@ -260,10 +245,10 @@ class Configuration
      *
      * @param string $userAgent the user agent of the api client
      *
-     * @throws \InvalidArgumentException
      * @return $this
+     * @throws \InvalidArgumentException
      */
-    public function setUserAgent($userAgent)
+    public function setUserAgent(string $userAgent): self
     {
         if (!is_string($userAgent)) {
             throw new \InvalidArgumentException('User-agent must be a string.');
@@ -278,7 +263,7 @@ class Configuration
      *
      * @return string user agent
      */
-    public function getUserAgent()
+    public function getUserAgent(): string
     {
         return $this->userAgent;
     }
@@ -290,7 +275,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setDebug($debug)
+    public function setDebug(bool $debug): self
     {
         $this->debug = $debug;
         return $this;
@@ -301,7 +286,7 @@ class Configuration
      *
      * @return bool
      */
-    public function getDebug()
+    public function getDebug(): bool
     {
         return $this->debug;
     }
@@ -313,7 +298,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setDebugFile($debugFile)
+    public function setDebugFile(string $debugFile): self
     {
         $this->debugFile = $debugFile;
         return $this;
@@ -324,7 +309,7 @@ class Configuration
      *
      * @return string
      */
-    public function getDebugFile()
+    public function getDebugFile(): string
     {
         return $this->debugFile;
     }
@@ -336,7 +321,7 @@ class Configuration
      *
      * @return $this
      */
-    public function setTempFolderPath($tempFolderPath)
+    public function setTempFolderPath(string $tempFolderPath): self
     {
         $this->tempFolderPath = $tempFolderPath;
         return $this;
@@ -347,33 +332,88 @@ class Configuration
      *
      * @return string Temp folder path
      */
-    public function getTempFolderPath()
+    public function getTempFolderPath(): string
     {
         return $this->tempFolderPath;
     }
 
     /**
+     * Gets the default headers that are applied to every API request.
+     *
+     * @return array Associative array of default headers.
+     */
+    public function getDefaultHeaders(): array
+    {
+        return $this->defaultHeaders;
+    }
+
+    /**
+     * Sets the default headers that will be included in all API requests.
+     *
+     * @param array $headers Associative array of headers.
+     * @return $this
+     */
+    public function setDefaultHeaders(array $headers)
+    {
+        $this->defaultHeaders = $headers;
+        return $this;
+    }
+
+    /**
+     * Sets the request timeout in seconds
+     *
+     * @param int $requestTimeout Request timeout
+     *
+     * @return $this
+     */
+    public function setRequestTimeout(int $requestTimeout): self
+    {
+        $this->requestTimeout = $requestTimeout;
+        return $this;
+    }
+
+    /**
+     * Gets the request timeout in seconds
+     *
+     * @return int Request timeout
+     */
+    public function getRequestTimeout(): int
+    {
+        return $this->requestTimeout;
+    }
+
+    /**
      * Gets the default configuration instance
      *
+     * @param int|null $userId The application user ID
+     * @param string|null $authenticationKey The application user's authentication key.
      * @return Configuration
      */
-    public static function getDefaultConfiguration()
+    public static function getDefaultConfiguration(?int $userId = null, ?string $authenticationKey = null): Configuration
     {
         if (self::$defaultConfiguration === null) {
-            self::$defaultConfiguration = new Configuration();
+            self::$defaultConfiguration = new Configuration($userId, $authenticationKey);
         }
 
         return self::$defaultConfiguration;
     }
 
     /**
-     * Sets the detault configuration instance
+     * Static method to reset default configuration
+     */
+    public static function resetDefaultConfiguration(): void
+    {
+        self::$defaultConfiguration = null;
+    }
+
+    /**
+     * Sets the default configuration instance
      *
      * @param Configuration $config An instance of the Configuration Object
      *
      * @return void
      */
-    public static function setDefaultConfiguration(Configuration $config)
+    public static function setDefaultConfiguration(Configuration $config): void
     {
         self::$defaultConfiguration = $config;
     }
@@ -383,40 +423,91 @@ class Configuration
      *
      * @return string The report for debugging
      */
-    public static function toDebugReport()
+    public static function toDebugReport(): string
     {
         $report  = 'PHP SDK (Wallee\Sdk) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    OpenAPI Spec Version: 4.9.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 4.9.0' . PHP_EOL;
+        $report .= '    OpenAPI Spec Version: 2.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 5.0.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
     }
 
     /**
-     * Get API key (with prefix if set)
+     * Returns an array of host settings
      *
-     * @param  string $apiKeyIdentifier name of apikey
-     *
-     * @return string API key with the prefix
+     * @return array an array of host settings
      */
-    public function getApiKeyWithPrefix($apiKeyIdentifier)
+    public function getHostSettings(): array
     {
-        $prefix = $this->getApiKeyPrefix($apiKeyIdentifier);
-        $apiKey = $this->getApiKey($apiKeyIdentifier);
+        return [
+            [
+                "url" => "https://app-wallee.com/api/v2.0",
+                "description" => "No description provided",
+            ]
+        ];
+    }
 
-        if ($apiKey === null) {
-            return null;
+    /**
+     * Returns URL based on host settings, index and variables
+     *
+     * @param array $hostSettings array of host settings, generated from getHostSettings() or equivalent from the API clients
+     * @param int $hostIndex index of the host settings
+     * @param array|null $variables hash of variable and the corresponding value (optional)
+     * @return string URL based on host settings
+     */
+    public static function getHostString(array $hostSettings, int $hostIndex, ?array $variables = null): string
+    {
+        if (null === $variables) {
+            $variables = [];
         }
 
-        if ($prefix === null) {
-            $keyWithPrefix = $apiKey;
-        } else {
-            $keyWithPrefix = $prefix . ' ' . $apiKey;
+        // check array index out of bound
+        if ($hostIndex < 0 || $hostIndex >= count($hostSettings)) {
+            throw new \InvalidArgumentException("Invalid index $hostIndex when selecting the host. Must be less than " . count($hostSettings));
         }
 
-        return $keyWithPrefix;
+        $host = $hostSettings[$hostIndex];
+        $url = $host["url"];
+
+        // go through variable and assign a value
+        foreach ($host["variables"] ?? [] as $name => $variable) {
+            if (array_key_exists($name, $variables)) { // check to see if it's in the variables provided by the user
+                if (!isset($variable['enum_values']) || in_array($variables[$name], $variable["enum_values"], true)) { // check to see if the value is in the enum
+                    $url = str_replace("{" . $name . "}", $variables[$name], $url);
+                } else {
+                    throw new \InvalidArgumentException("The variable `$name` in the host URL has invalid value " . $variables[$name] . ". Must be " . join(',', $variable["enum_values"]) . ".");
+                }
+            } else {
+                // use default value
+                $url = str_replace("{" . $name . "}", $variable["default_value"], $url);
+            }
+        }
+
+        return $url;
+    }
+
+    /**
+     * Returns URL based on the index and variables
+     *
+     * @param int $index index of the host settings
+     * @param array|null $variables hash of variable and the corresponding value (optional)
+     * @return string URL based on host settings
+     */
+    public function getHostFromSettings(int $index, ?array $variables = null): string
+    {
+        return self::getHostString($this->getHostSettings(), $index, $variables);
+    }
+
+     /**
+     * Resets the request timeout to default: 25 seconds.
+     *
+     * @return Configuration
+     */
+    public function resetRequestTimeout() {
+        $this->requestTimeout = Configuration::DEFAULT_REQUEST_TIMEOUT;
+        return $this;
     }
 }

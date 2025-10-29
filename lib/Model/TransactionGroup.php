@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,34 +30,37 @@ use \Wallee\Sdk\ObjectSerializer;
  * TransactionGroup model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class TransactionGroup implements ModelInterface, ArrayAccess
+class TransactionGroup implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TransactionGroup';
+    protected static $openAPIModelName = 'TransactionGroup';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
+    protected static $openAPITypes = [
         'begin_date' => '\DateTime',
-        'customer_id' => 'string',
-        'end_date' => '\DateTime',
-        'id' => 'int',
         'linked_space_id' => 'int',
+        'end_date' => '\DateTime',
+        'customer_id' => 'string',
         'planned_purge_date' => '\DateTime',
+        'id' => 'int',
         'state' => '\Wallee\Sdk\Model\TransactionGroupState',
         'version' => 'int'
     ];
@@ -63,17 +69,114 @@ class TransactionGroup implements ModelInterface, ArrayAccess
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
+    protected static $openAPIFormats = [
         'begin_date' => 'date-time',
-        'customer_id' => null,
-        'end_date' => 'date-time',
-        'id' => 'int64',
         'linked_space_id' => 'int64',
+        'end_date' => 'date-time',
+        'customer_id' => null,
         'planned_purge_date' => 'date-time',
+        'id' => 'int64',
         'state' => null,
         'version' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'begin_date' => false,
+        'linked_space_id' => false,
+        'end_date' => false,
+        'customer_id' => false,
+        'planned_purge_date' => false,
+        'id' => false,
+        'state' => false,
+        'version' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -83,11 +186,11 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'begin_date' => 'beginDate',
-        'customer_id' => 'customerId',
-        'end_date' => 'endDate',
-        'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
+        'end_date' => 'endDate',
+        'customer_id' => 'customerId',
         'planned_purge_date' => 'plannedPurgeDate',
+        'id' => 'id',
         'state' => 'state',
         'version' => 'version'
     ];
@@ -99,11 +202,11 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'begin_date' => 'setBeginDate',
-        'customer_id' => 'setCustomerId',
-        'end_date' => 'setEndDate',
-        'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
+        'end_date' => 'setEndDate',
+        'customer_id' => 'setCustomerId',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'id' => 'setId',
         'state' => 'setState',
         'version' => 'setVersion'
     ];
@@ -115,49 +218,98 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'begin_date' => 'getBeginDate',
-        'customer_id' => 'getCustomerId',
-        'end_date' => 'getEndDate',
-        'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
+        'end_date' => 'getEndDate',
+        'customer_id' => 'getCustomerId',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'id' => 'getId',
         'state' => 'getState',
         'version' => 'getVersion'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['begin_date'] = isset($data['begin_date']) ? $data['begin_date'] : null;
-        
-        $this->container['customer_id'] = isset($data['customer_id']) ? $data['customer_id'] : null;
-        
-        $this->container['end_date'] = isset($data['end_date']) ? $data['end_date'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('begin_date', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('end_date', $data ?? [], null);
+        $this->setIfExists('customer_id', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -173,72 +325,12 @@ class TransactionGroup implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'customer_id', the character length must be smaller than or equal to 100.";
         }
 
+        if (!is_null($this->container['customer_id']) && !preg_match("/[ \\x20-\\x7e]*/", $this->container['customer_id'])) {
+            $invalidProperties[] = "invalid value for 'customer_id', must be conform to the pattern /[ \\x20-\\x7e]*/.";
+        }
+
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -246,17 +338,16 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
 
     /**
      * Gets begin_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getBeginDate()
     {
@@ -266,101 +357,24 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets begin_date
      *
-     * @param \DateTime $begin_date The date and time when the initial transaction in the group was created.
+     * @param \DateTime|null $begin_date The date and time when the initial transaction in the group was created.
      *
-     * @return $this
+     * @return self
      */
     public function setBeginDate($begin_date)
     {
+        if (is_null($begin_date)) {
+            throw new \InvalidArgumentException('non-nullable begin_date cannot be null');
+        }
         $this->container['begin_date'] = $begin_date;
 
         return $this;
     }
-    
-
-    /**
-     * Gets customer_id
-     *
-     * @return string
-     */
-    public function getCustomerId()
-    {
-        return $this->container['customer_id'];
-    }
-
-    /**
-     * Sets customer_id
-     *
-     * @param string $customer_id The unique identifier of the customer in the external system.
-     *
-     * @return $this
-     */
-    public function setCustomerId($customer_id)
-    {
-        if (!is_null($customer_id) && (mb_strlen($customer_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $customer_id when calling TransactionGroup., must be smaller than or equal to 100.');
-        }
-
-        $this->container['customer_id'] = $customer_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets end_date
-     *
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->container['end_date'];
-    }
-
-    /**
-     * Sets end_date
-     *
-     * @param \DateTime $end_date The date and time when the final transaction in the group was last updated.
-     *
-     * @return $this
-     */
-    public function setEndDate($end_date)
-    {
-        $this->container['end_date'] = $end_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
 
     /**
      * Gets linked_space_id
      *
-     * @return int
+     * @return int|null
      */
     public function getLinkedSpaceId()
     {
@@ -370,22 +384,85 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
      *
-     * @return $this
+     * @return self
      */
     public function setLinkedSpaceId($linked_space_id)
     {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
         $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
-    
+
+    /**
+     * Gets end_date
+     *
+     * @return \DateTime|null
+     */
+    public function getEndDate()
+    {
+        return $this->container['end_date'];
+    }
+
+    /**
+     * Sets end_date
+     *
+     * @param \DateTime|null $end_date The date and time when the final transaction in the group was last updated.
+     *
+     * @return self
+     */
+    public function setEndDate($end_date)
+    {
+        if (is_null($end_date)) {
+            throw new \InvalidArgumentException('non-nullable end_date cannot be null');
+        }
+        $this->container['end_date'] = $end_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_id
+     *
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->container['customer_id'];
+    }
+
+    /**
+     * Sets customer_id
+     *
+     * @param string|null $customer_id The unique identifier of the customer in the external system.
+     *
+     * @return self
+     */
+    public function setCustomerId($customer_id)
+    {
+        if (is_null($customer_id)) {
+            throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
+        }
+        if ((mb_strlen($customer_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $customer_id when calling TransactionGroup., must be smaller than or equal to 100.');
+        }
+        if ((!preg_match("/[ \\x20-\\x7e]*/", ObjectSerializer::toString($customer_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$customer_id when calling TransactionGroup., must conform to the pattern /[ \\x20-\\x7e]*/.");
+        }
+
+        $this->container['customer_id'] = $customer_id;
+
+        return $this;
+    }
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -395,22 +472,51 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
 
     /**
      * Gets state
      *
-     * @return \Wallee\Sdk\Model\TransactionGroupState
+     * @return \Wallee\Sdk\Model\TransactionGroupState|null
      */
     public function getState()
     {
@@ -420,22 +526,24 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\TransactionGroupState $state The object's current state.
+     * @param \Wallee\Sdk\Model\TransactionGroupState|null $state state
      *
-     * @return $this
+     * @return self
      */
     public function setState($state)
     {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
         $this->container['state'] = $state;
 
         return $this;
     }
-    
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -445,17 +553,19 @@ class TransactionGroup implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -463,8 +573,7 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -474,24 +583,23 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -507,10 +615,22 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -520,13 +640,19 @@ class TransactionGroup implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

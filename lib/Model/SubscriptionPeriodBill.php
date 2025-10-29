@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,38 +30,41 @@ use \Wallee\Sdk\ObjectSerializer;
  * SubscriptionPeriodBill model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
+class SubscriptionPeriodBill implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SubscriptionPeriodBill';
+    protected static $openAPIModelName = 'SubscriptionPeriodBill';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'created_on' => '\DateTime',
-        'effective_period_end_date' => '\DateTime',
-        'id' => 'int',
-        'language' => 'string',
+    protected static $openAPITypes = [
         'linked_space_id' => 'int',
         'period_start_date' => '\DateTime',
-        'planned_period_end_date' => '\DateTime',
         'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\SubscriptionPeriodBillState',
         'subscription_version' => '\Wallee\Sdk\Model\SubscriptionVersion',
+        'effective_period_end_date' => '\DateTime',
+        'language' => 'string',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\SubscriptionPeriodBillState',
+        'created_on' => '\DateTime',
+        'planned_period_end_date' => '\DateTime',
         'version' => 'int'
     ];
 
@@ -66,20 +72,120 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'created_on' => 'date-time',
-        'effective_period_end_date' => 'date-time',
-        'id' => 'int64',
-        'language' => null,
+    protected static $openAPIFormats = [
         'linked_space_id' => 'int64',
         'period_start_date' => 'date-time',
-        'planned_period_end_date' => 'date-time',
         'planned_purge_date' => 'date-time',
-        'state' => null,
         'subscription_version' => null,
+        'effective_period_end_date' => 'date-time',
+        'language' => null,
+        'id' => 'int64',
+        'state' => null,
+        'created_on' => 'date-time',
+        'planned_period_end_date' => 'date-time',
         'version' => 'int32'
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'linked_space_id' => false,
+        'period_start_date' => false,
+        'planned_purge_date' => false,
+        'subscription_version' => false,
+        'effective_period_end_date' => false,
+        'language' => false,
+        'id' => false,
+        'state' => false,
+        'created_on' => false,
+        'planned_period_end_date' => false,
+        'version' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -88,16 +194,16 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'created_on' => 'createdOn',
-        'effective_period_end_date' => 'effectivePeriodEndDate',
-        'id' => 'id',
-        'language' => 'language',
         'linked_space_id' => 'linkedSpaceId',
         'period_start_date' => 'periodStartDate',
-        'planned_period_end_date' => 'plannedPeriodEndDate',
         'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
         'subscription_version' => 'subscriptionVersion',
+        'effective_period_end_date' => 'effectivePeriodEndDate',
+        'language' => 'language',
+        'id' => 'id',
+        'state' => 'state',
+        'created_on' => 'createdOn',
+        'planned_period_end_date' => 'plannedPeriodEndDate',
         'version' => 'version'
     ];
 
@@ -107,16 +213,16 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'created_on' => 'setCreatedOn',
-        'effective_period_end_date' => 'setEffectivePeriodEndDate',
-        'id' => 'setId',
-        'language' => 'setLanguage',
         'linked_space_id' => 'setLinkedSpaceId',
         'period_start_date' => 'setPeriodStartDate',
-        'planned_period_end_date' => 'setPlannedPeriodEndDate',
         'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
         'subscription_version' => 'setSubscriptionVersion',
+        'effective_period_end_date' => 'setEffectivePeriodEndDate',
+        'language' => 'setLanguage',
+        'id' => 'setId',
+        'state' => 'setState',
+        'created_on' => 'setCreatedOn',
+        'planned_period_end_date' => 'setPlannedPeriodEndDate',
         'version' => 'setVersion'
     ];
 
@@ -126,59 +232,105 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'created_on' => 'getCreatedOn',
-        'effective_period_end_date' => 'getEffectivePeriodEndDate',
-        'id' => 'getId',
-        'language' => 'getLanguage',
         'linked_space_id' => 'getLinkedSpaceId',
         'period_start_date' => 'getPeriodStartDate',
-        'planned_period_end_date' => 'getPlannedPeriodEndDate',
         'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
         'subscription_version' => 'getSubscriptionVersion',
+        'effective_period_end_date' => 'getEffectivePeriodEndDate',
+        'language' => 'getLanguage',
+        'id' => 'getId',
+        'state' => 'getState',
+        'created_on' => 'getCreatedOn',
+        'planned_period_end_date' => 'getPlannedPeriodEndDate',
         'version' => 'getVersion'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['effective_period_end_date'] = isset($data['effective_period_end_date']) ? $data['effective_period_end_date'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['period_start_date'] = isset($data['period_start_date']) ? $data['period_start_date'] : null;
-        
-        $this->container['planned_period_end_date'] = isset($data['planned_period_end_date']) ? $data['planned_period_end_date'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['subscription_version'] = isset($data['subscription_version']) ? $data['subscription_version'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('period_start_date', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('subscription_version', $data ?? [], null);
+        $this->setIfExists('effective_period_end_date', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('planned_period_end_date', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -194,186 +346,21 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the period bill was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets effective_period_end_date
-     *
-     * @return \DateTime
-     */
-    public function getEffectivePeriodEndDate()
-    {
-        return $this->container['effective_period_end_date'];
-    }
-
-    /**
-     * Sets effective_period_end_date
-     *
-     * @param \DateTime $effective_period_end_date The date and time when the period actually ended.
-     *
-     * @return $this
-     */
-    public function setEffectivePeriodEndDate($effective_period_end_date)
-    {
-        $this->container['effective_period_end_date'] = $effective_period_end_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string $language The language that is linked to the object.
-     *
-     * @return $this
-     */
-    public function setLanguage($language)
-    {
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-    
 
     /**
      * Gets linked_space_id
      *
-     * @return int
+     * @return int|null
      */
     public function getLinkedSpaceId()
     {
@@ -383,22 +370,24 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The ID of the space this object belongs to.
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
      *
-     * @return $this
+     * @return self
      */
     public function setLinkedSpaceId($linked_space_id)
     {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
         $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
-    
 
     /**
      * Gets period_start_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPeriodStartDate()
     {
@@ -408,47 +397,24 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets period_start_date
      *
-     * @param \DateTime $period_start_date The date and time when the period started.
+     * @param \DateTime|null $period_start_date The date and time when the period started.
      *
-     * @return $this
+     * @return self
      */
     public function setPeriodStartDate($period_start_date)
     {
+        if (is_null($period_start_date)) {
+            throw new \InvalidArgumentException('non-nullable period_start_date cannot be null');
+        }
         $this->container['period_start_date'] = $period_start_date;
 
         return $this;
     }
-    
-
-    /**
-     * Gets planned_period_end_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPeriodEndDate()
-    {
-        return $this->container['planned_period_end_date'];
-    }
-
-    /**
-     * Sets planned_period_end_date
-     *
-     * @param \DateTime $planned_period_end_date The date and time when the period is planned to end.
-     *
-     * @return $this
-     */
-    public function setPlannedPeriodEndDate($planned_period_end_date)
-    {
-        $this->container['planned_period_end_date'] = $planned_period_end_date;
-
-        return $this;
-    }
-    
 
     /**
      * Gets planned_purge_date
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getPlannedPurgeDate()
     {
@@ -458,47 +424,24 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
         $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionPeriodBillState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionPeriodBillState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
 
     /**
      * Gets subscription_version
      *
-     * @return \Wallee\Sdk\Model\SubscriptionVersion
+     * @return \Wallee\Sdk\Model\SubscriptionVersion|null
      */
     public function getSubscriptionVersion()
     {
@@ -508,22 +451,186 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets subscription_version
      *
-     * @param \Wallee\Sdk\Model\SubscriptionVersion $subscription_version The subscription version that the period bill belongs to.
+     * @param \Wallee\Sdk\Model\SubscriptionVersion|null $subscription_version subscription_version
      *
-     * @return $this
+     * @return self
      */
     public function setSubscriptionVersion($subscription_version)
     {
+        if (is_null($subscription_version)) {
+            throw new \InvalidArgumentException('non-nullable subscription_version cannot be null');
+        }
         $this->container['subscription_version'] = $subscription_version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets effective_period_end_date
+     *
+     * @return \DateTime|null
+     */
+    public function getEffectivePeriodEndDate()
+    {
+        return $this->container['effective_period_end_date'];
+    }
+
+    /**
+     * Sets effective_period_end_date
+     *
+     * @param \DateTime|null $effective_period_end_date The date and time when the period actually ended.
+     *
+     * @return self
+     */
+    public function setEffectivePeriodEndDate($effective_period_end_date)
+    {
+        if (is_null($effective_period_end_date)) {
+            throw new \InvalidArgumentException('non-nullable effective_period_end_date cannot be null');
+        }
+        $this->container['effective_period_end_date'] = $effective_period_end_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     *
+     * @return string|null
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string|null $language The language that is linked to the object.
+     *
+     * @return self
+     */
+    public function setLanguage($language)
+    {
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\SubscriptionPeriodBillState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\SubscriptionPeriodBillState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the period bill was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets planned_period_end_date
+     *
+     * @return \DateTime|null
+     */
+    public function getPlannedPeriodEndDate()
+    {
+        return $this->container['planned_period_end_date'];
+    }
+
+    /**
+     * Sets planned_period_end_date
+     *
+     * @param \DateTime|null $planned_period_end_date The date and time when the period is planned to end.
+     *
+     * @return self
+     */
+    public function setPlannedPeriodEndDate($planned_period_end_date)
+    {
+        if (is_null($planned_period_end_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_period_end_date cannot be null');
+        }
+        $this->container['planned_period_end_date'] = $planned_period_end_date;
+
+        return $this;
+    }
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -533,17 +640,19 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -551,8 +660,7 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -562,24 +670,23 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -595,10 +702,22 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -608,13 +727,19 @@ class SubscriptionPeriodBill implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

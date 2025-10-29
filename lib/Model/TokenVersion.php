@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,83 +30,207 @@ use \Wallee\Sdk\ObjectSerializer;
  * TokenVersion model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class TokenVersion implements ModelInterface, ArrayAccess
+class TokenVersion implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TokenVersion';
+    protected static $openAPIModelName = 'TokenVersion';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'activated_on' => '\DateTime',
-        'billing_address' => '\Wallee\Sdk\Model\Address',
+    protected static $openAPITypes = [
+        'payment_information_hashes' => '\Wallee\Sdk\Model\PaymentInformationHash[]',
+        'language' => 'string',
+        'type' => '\Wallee\Sdk\Model\TokenVersionType',
         'created_on' => '\DateTime',
-        'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
+        'retry_in' => 'string',
+        'payment_connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
+        'obsoleted_on' => '\DateTime',
         'expires_on' => '\DateTime',
         'icon_url' => 'string',
         'id' => 'int',
-        'labels' => '\Wallee\Sdk\Model\Label[]',
-        'language' => 'string',
-        'linked_space_id' => 'int',
-        'name' => 'string',
-        'obsoleted_on' => '\DateTime',
-        'payment_connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
-        'payment_information_hashes' => '\Wallee\Sdk\Model\PaymentInformationHash[]',
-        'payment_method' => 'int',
-        'payment_method_brand' => 'int',
-        'planned_purge_date' => '\DateTime',
-        'processor_token' => 'string',
-        'shipping_address' => '\Wallee\Sdk\Model\Address',
         'state' => '\Wallee\Sdk\Model\TokenVersionState',
+        'processor_token' => 'string',
+        'planned_purge_date' => '\DateTime',
+        'payment_method_brand' => '\Wallee\Sdk\Model\PaymentMethodBrand',
+        'version' => 'int',
+        'last_retried_on' => '\DateTime',
+        'labels' => '\Wallee\Sdk\Model\Label[]',
         'token' => '\Wallee\Sdk\Model\Token',
-        'type' => '\Wallee\Sdk\Model\TokenVersionType',
-        'version' => 'int'
+        'linked_space_id' => 'int',
+        'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
+        'activated_on' => '\DateTime',
+        'name' => 'string',
+        'payment_method' => '\Wallee\Sdk\Model\PaymentMethod',
+        'shipping_address' => '\Wallee\Sdk\Model\Address',
+        'billing_address' => '\Wallee\Sdk\Model\Address',
+        'retry_strategy' => '\Wallee\Sdk\Model\TokenVersionRetryStrategy'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'activated_on' => 'date-time',
-        'billing_address' => null,
+    protected static $openAPIFormats = [
+        'payment_information_hashes' => null,
+        'language' => null,
+        'type' => null,
         'created_on' => 'date-time',
-        'environment' => null,
+        'retry_in' => null,
+        'payment_connector_configuration' => null,
+        'obsoleted_on' => 'date-time',
         'expires_on' => 'date-time',
         'icon_url' => null,
         'id' => 'int64',
-        'labels' => null,
-        'language' => null,
-        'linked_space_id' => 'int64',
-        'name' => null,
-        'obsoleted_on' => 'date-time',
-        'payment_connector_configuration' => null,
-        'payment_information_hashes' => null,
-        'payment_method' => 'int64',
-        'payment_method_brand' => 'int64',
-        'planned_purge_date' => 'date-time',
-        'processor_token' => null,
-        'shipping_address' => null,
         'state' => null,
+        'processor_token' => null,
+        'planned_purge_date' => 'date-time',
+        'payment_method_brand' => null,
+        'version' => 'int32',
+        'last_retried_on' => 'date-time',
+        'labels' => null,
         'token' => null,
-        'type' => null,
-        'version' => 'int32'
+        'linked_space_id' => 'int64',
+        'environment' => null,
+        'activated_on' => 'date-time',
+        'name' => null,
+        'payment_method' => null,
+        'shipping_address' => null,
+        'billing_address' => null,
+        'retry_strategy' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'payment_information_hashes' => false,
+        'language' => false,
+        'type' => false,
+        'created_on' => false,
+        'retry_in' => false,
+        'payment_connector_configuration' => false,
+        'obsoleted_on' => false,
+        'expires_on' => false,
+        'icon_url' => false,
+        'id' => false,
+        'state' => false,
+        'processor_token' => false,
+        'planned_purge_date' => false,
+        'payment_method_brand' => false,
+        'version' => false,
+        'last_retried_on' => false,
+        'labels' => false,
+        'token' => false,
+        'linked_space_id' => false,
+        'environment' => false,
+        'activated_on' => false,
+        'name' => false,
+        'payment_method' => false,
+        'shipping_address' => false,
+        'billing_address' => false,
+        'retry_strategy' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -112,29 +239,32 @@ class TokenVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'activated_on' => 'activatedOn',
-        'billing_address' => 'billingAddress',
+        'payment_information_hashes' => 'paymentInformationHashes',
+        'language' => 'language',
+        'type' => 'type',
         'created_on' => 'createdOn',
-        'environment' => 'environment',
+        'retry_in' => 'retryIn',
+        'payment_connector_configuration' => 'paymentConnectorConfiguration',
+        'obsoleted_on' => 'obsoletedOn',
         'expires_on' => 'expiresOn',
         'icon_url' => 'iconUrl',
         'id' => 'id',
-        'labels' => 'labels',
-        'language' => 'language',
-        'linked_space_id' => 'linkedSpaceId',
-        'name' => 'name',
-        'obsoleted_on' => 'obsoletedOn',
-        'payment_connector_configuration' => 'paymentConnectorConfiguration',
-        'payment_information_hashes' => 'paymentInformationHashes',
-        'payment_method' => 'paymentMethod',
-        'payment_method_brand' => 'paymentMethodBrand',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'processor_token' => 'processorToken',
-        'shipping_address' => 'shippingAddress',
         'state' => 'state',
+        'processor_token' => 'processorToken',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'payment_method_brand' => 'paymentMethodBrand',
+        'version' => 'version',
+        'last_retried_on' => 'lastRetriedOn',
+        'labels' => 'labels',
         'token' => 'token',
-        'type' => 'type',
-        'version' => 'version'
+        'linked_space_id' => 'linkedSpaceId',
+        'environment' => 'environment',
+        'activated_on' => 'activatedOn',
+        'name' => 'name',
+        'payment_method' => 'paymentMethod',
+        'shipping_address' => 'shippingAddress',
+        'billing_address' => 'billingAddress',
+        'retry_strategy' => 'retryStrategy'
     ];
 
     /**
@@ -143,29 +273,32 @@ class TokenVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'activated_on' => 'setActivatedOn',
-        'billing_address' => 'setBillingAddress',
+        'payment_information_hashes' => 'setPaymentInformationHashes',
+        'language' => 'setLanguage',
+        'type' => 'setType',
         'created_on' => 'setCreatedOn',
-        'environment' => 'setEnvironment',
+        'retry_in' => 'setRetryIn',
+        'payment_connector_configuration' => 'setPaymentConnectorConfiguration',
+        'obsoleted_on' => 'setObsoletedOn',
         'expires_on' => 'setExpiresOn',
         'icon_url' => 'setIconUrl',
         'id' => 'setId',
-        'labels' => 'setLabels',
-        'language' => 'setLanguage',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'name' => 'setName',
-        'obsoleted_on' => 'setObsoletedOn',
-        'payment_connector_configuration' => 'setPaymentConnectorConfiguration',
-        'payment_information_hashes' => 'setPaymentInformationHashes',
-        'payment_method' => 'setPaymentMethod',
-        'payment_method_brand' => 'setPaymentMethodBrand',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'processor_token' => 'setProcessorToken',
-        'shipping_address' => 'setShippingAddress',
         'state' => 'setState',
+        'processor_token' => 'setProcessorToken',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'payment_method_brand' => 'setPaymentMethodBrand',
+        'version' => 'setVersion',
+        'last_retried_on' => 'setLastRetriedOn',
+        'labels' => 'setLabels',
         'token' => 'setToken',
-        'type' => 'setType',
-        'version' => 'setVersion'
+        'linked_space_id' => 'setLinkedSpaceId',
+        'environment' => 'setEnvironment',
+        'activated_on' => 'setActivatedOn',
+        'name' => 'setName',
+        'payment_method' => 'setPaymentMethod',
+        'shipping_address' => 'setShippingAddress',
+        'billing_address' => 'setBillingAddress',
+        'retry_strategy' => 'setRetryStrategy'
     ];
 
     /**
@@ -174,95 +307,135 @@ class TokenVersion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'activated_on' => 'getActivatedOn',
-        'billing_address' => 'getBillingAddress',
+        'payment_information_hashes' => 'getPaymentInformationHashes',
+        'language' => 'getLanguage',
+        'type' => 'getType',
         'created_on' => 'getCreatedOn',
-        'environment' => 'getEnvironment',
+        'retry_in' => 'getRetryIn',
+        'payment_connector_configuration' => 'getPaymentConnectorConfiguration',
+        'obsoleted_on' => 'getObsoletedOn',
         'expires_on' => 'getExpiresOn',
         'icon_url' => 'getIconUrl',
         'id' => 'getId',
-        'labels' => 'getLabels',
-        'language' => 'getLanguage',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'name' => 'getName',
-        'obsoleted_on' => 'getObsoletedOn',
-        'payment_connector_configuration' => 'getPaymentConnectorConfiguration',
-        'payment_information_hashes' => 'getPaymentInformationHashes',
-        'payment_method' => 'getPaymentMethod',
-        'payment_method_brand' => 'getPaymentMethodBrand',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'processor_token' => 'getProcessorToken',
-        'shipping_address' => 'getShippingAddress',
         'state' => 'getState',
+        'processor_token' => 'getProcessorToken',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'payment_method_brand' => 'getPaymentMethodBrand',
+        'version' => 'getVersion',
+        'last_retried_on' => 'getLastRetriedOn',
+        'labels' => 'getLabels',
         'token' => 'getToken',
-        'type' => 'getType',
-        'version' => 'getVersion'
+        'linked_space_id' => 'getLinkedSpaceId',
+        'environment' => 'getEnvironment',
+        'activated_on' => 'getActivatedOn',
+        'name' => 'getName',
+        'payment_method' => 'getPaymentMethod',
+        'shipping_address' => 'getShippingAddress',
+        'billing_address' => 'getBillingAddress',
+        'retry_strategy' => 'getRetryStrategy'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['activated_on'] = isset($data['activated_on']) ? $data['activated_on'] : null;
-        
-        $this->container['billing_address'] = isset($data['billing_address']) ? $data['billing_address'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
-        
-        $this->container['expires_on'] = isset($data['expires_on']) ? $data['expires_on'] : null;
-        
-        $this->container['icon_url'] = isset($data['icon_url']) ? $data['icon_url'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        
-        $this->container['obsoleted_on'] = isset($data['obsoleted_on']) ? $data['obsoleted_on'] : null;
-        
-        $this->container['payment_connector_configuration'] = isset($data['payment_connector_configuration']) ? $data['payment_connector_configuration'] : null;
-        
-        $this->container['payment_information_hashes'] = isset($data['payment_information_hashes']) ? $data['payment_information_hashes'] : null;
-        
-        $this->container['payment_method'] = isset($data['payment_method']) ? $data['payment_method'] : null;
-        
-        $this->container['payment_method_brand'] = isset($data['payment_method_brand']) ? $data['payment_method_brand'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['processor_token'] = isset($data['processor_token']) ? $data['processor_token'] : null;
-        
-        $this->container['shipping_address'] = isset($data['shipping_address']) ? $data['shipping_address'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['token'] = isset($data['token']) ? $data['token'] : null;
-        
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('payment_information_hashes', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('retry_in', $data ?? [], null);
+        $this->setIfExists('payment_connector_configuration', $data ?? [], null);
+        $this->setIfExists('obsoleted_on', $data ?? [], null);
+        $this->setIfExists('expires_on', $data ?? [], null);
+        $this->setIfExists('icon_url', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('processor_token', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('payment_method_brand', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('last_retried_on', $data ?? [], null);
+        $this->setIfExists('labels', $data ?? [], null);
+        $this->setIfExists('token', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('environment', $data ?? [], null);
+        $this->setIfExists('activated_on', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('payment_method', $data ?? [], null);
+        $this->setIfExists('shipping_address', $data ?? [], null);
+        $this->setIfExists('billing_address', $data ?? [], null);
+        $this->setIfExists('retry_strategy', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -274,80 +447,16 @@ class TokenVersion implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 150)) {
-            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 150.";
-        }
-
         if (!is_null($this->container['processor_token']) && (mb_strlen($this->container['processor_token']) > 150)) {
             $invalidProperties[] = "invalid value for 'processor_token', the character length must be smaller than or equal to 150.";
         }
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 150)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 150.";
+        }
+
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -355,346 +464,16 @@ class TokenVersion implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets activated_on
-     *
-     * @return \DateTime
-     */
-    public function getActivatedOn()
-    {
-        return $this->container['activated_on'];
-    }
-
-    /**
-     * Sets activated_on
-     *
-     * @param \DateTime $activated_on The date and time when the token version was activated.
-     *
-     * @return $this
-     */
-    public function setActivatedOn($activated_on)
-    {
-        $this->container['activated_on'] = $activated_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets billing_address
-     *
-     * @return \Wallee\Sdk\Model\Address
-     */
-    public function getBillingAddress()
-    {
-        return $this->container['billing_address'];
-    }
-
-    /**
-     * Sets billing_address
-     *
-     * @param \Wallee\Sdk\Model\Address $billing_address The billing address to be used for the transaction if no explicit billing address is provided during payment processing.
-     *
-     * @return $this
-     */
-    public function setBillingAddress($billing_address)
-    {
-        $this->container['billing_address'] = $billing_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets environment
-     *
-     * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment
-     */
-    public function getEnvironment()
-    {
-        return $this->container['environment'];
-    }
-
-    /**
-     * Sets environment
-     *
-     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment $environment The environment in which the token version was created.
-     *
-     * @return $this
-     */
-    public function setEnvironment($environment)
-    {
-        $this->container['environment'] = $environment;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets expires_on
-     *
-     * @return \DateTime
-     */
-    public function getExpiresOn()
-    {
-        return $this->container['expires_on'];
-    }
-
-    /**
-     * Sets expires_on
-     *
-     * @param \DateTime $expires_on The date and time when the token version is set to expire, after which it will be marked as obsolete.
-     *
-     * @return $this
-     */
-    public function setExpiresOn($expires_on)
-    {
-        $this->container['expires_on'] = $expires_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets icon_url
-     *
-     * @return string
-     */
-    public function getIconUrl()
-    {
-        return $this->container['icon_url'];
-    }
-
-    /**
-     * Sets icon_url
-     *
-     * @param string $icon_url The URL to the token's icon displayed to the customer.
-     *
-     * @return $this
-     */
-    public function setIconUrl($icon_url)
-    {
-        $this->container['icon_url'] = $icon_url;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets labels
-     *
-     * @return \Wallee\Sdk\Model\Label[]
-     */
-    public function getLabels()
-    {
-        return $this->container['labels'];
-    }
-
-    /**
-     * Sets labels
-     *
-     * @param \Wallee\Sdk\Model\Label[] $labels The labels providing additional information about the object.
-     *
-     * @return $this
-     */
-    public function setLabels($labels)
-    {
-        $this->container['labels'] = $labels;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string $language The language that is linked to the object.
-     *
-     * @return $this
-     */
-    public function setLanguage($language)
-    {
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name The name used to identify the token.
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        if (!is_null($name) && (mb_strlen($name) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $name when calling TokenVersion., must be smaller than or equal to 150.');
-        }
-
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets obsoleted_on
-     *
-     * @return \DateTime
-     */
-    public function getObsoletedOn()
-    {
-        return $this->container['obsoleted_on'];
-    }
-
-    /**
-     * Sets obsoleted_on
-     *
-     * @param \DateTime $obsoleted_on The date and time when the token version was marked obsolete.
-     *
-     * @return $this
-     */
-    public function setObsoletedOn($obsoleted_on)
-    {
-        $this->container['obsoleted_on'] = $obsoleted_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets payment_connector_configuration
-     *
-     * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration
-     */
-    public function getPaymentConnectorConfiguration()
-    {
-        return $this->container['payment_connector_configuration'];
-    }
-
-    /**
-     * Sets payment_connector_configuration
-     *
-     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration $payment_connector_configuration The payment connector configuration that initialized the token version.
-     *
-     * @return $this
-     */
-    public function setPaymentConnectorConfiguration($payment_connector_configuration)
-    {
-        $this->container['payment_connector_configuration'] = $payment_connector_configuration;
-
-        return $this;
-    }
-    
 
     /**
      * Gets payment_information_hashes
      *
-     * @return \Wallee\Sdk\Model\PaymentInformationHash[]
+     * @return \Wallee\Sdk\Model\PaymentInformationHash[]|null
      */
     public function getPaymentInformationHashes()
     {
@@ -704,201 +483,53 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_information_hashes
      *
-     * @param \Wallee\Sdk\Model\PaymentInformationHash[] $payment_information_hashes The hashed payment information that the token version represents.
+     * @param \Wallee\Sdk\Model\PaymentInformationHash[]|null $payment_information_hashes The hashed payment information that the token version represents.
      *
-     * @return $this
+     * @return self
      */
     public function setPaymentInformationHashes($payment_information_hashes)
     {
+        if (is_null($payment_information_hashes)) {
+            throw new \InvalidArgumentException('non-nullable payment_information_hashes cannot be null');
+        }
+
+
         $this->container['payment_information_hashes'] = $payment_information_hashes;
 
         return $this;
     }
-    
 
     /**
-     * Gets payment_method
+     * Gets language
      *
-     * @return int
+     * @return string|null
      */
-    public function getPaymentMethod()
+    public function getLanguage()
     {
-        return $this->container['payment_method'];
+        return $this->container['language'];
     }
 
     /**
-     * Sets payment_method
+     * Sets language
      *
-     * @param int $payment_method The payment method that initialized the token version.
+     * @param string|null $language The language that is linked to the object.
      *
-     * @return $this
+     * @return self
      */
-    public function setPaymentMethod($payment_method)
+    public function setLanguage($language)
     {
-        $this->container['payment_method'] = $payment_method;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets payment_method_brand
-     *
-     * @return int
-     */
-    public function getPaymentMethodBrand()
-    {
-        return $this->container['payment_method_brand'];
-    }
-
-    /**
-     * Sets payment_method_brand
-     *
-     * @param int $payment_method_brand The payment method brand that initialized the token version.
-     *
-     * @return $this
-     */
-    public function setPaymentMethodBrand($payment_method_brand)
-    {
-        $this->container['payment_method_brand'] = $payment_method_brand;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets processor_token
-     *
-     * @return string
-     */
-    public function getProcessorToken()
-    {
-        return $this->container['processor_token'];
-    }
-
-    /**
-     * Sets processor_token
-     *
-     * @param string $processor_token The token name as specified by the processor.
-     *
-     * @return $this
-     */
-    public function setProcessorToken($processor_token)
-    {
-        if (!is_null($processor_token) && (mb_strlen($processor_token) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $processor_token when calling TokenVersion., must be smaller than or equal to 150.');
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
         }
-
-        $this->container['processor_token'] = $processor_token;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets shipping_address
-     *
-     * @return \Wallee\Sdk\Model\Address
-     */
-    public function getShippingAddress()
-    {
-        return $this->container['shipping_address'];
-    }
-
-    /**
-     * Sets shipping_address
-     *
-     * @param \Wallee\Sdk\Model\Address $shipping_address The shipping address to be used for the transaction if no explicit shipping address is provided during payment processing.
-     *
-     * @return $this
-     */
-    public function setShippingAddress($shipping_address)
-    {
-        $this->container['shipping_address'] = $shipping_address;
+        $this->container['language'] = $language;
 
         return $this;
     }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\TokenVersionState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\TokenVersionState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets token
-     *
-     * @return \Wallee\Sdk\Model\Token
-     */
-    public function getToken()
-    {
-        return $this->container['token'];
-    }
-
-    /**
-     * Sets token
-     *
-     * @param \Wallee\Sdk\Model\Token $token The token that the token version belongs to.
-     *
-     * @return $this
-     */
-    public function setToken($token)
-    {
-        $this->container['token'] = $token;
-
-        return $this;
-    }
-    
 
     /**
      * Gets type
      *
-     * @return \Wallee\Sdk\Model\TokenVersionType
+     * @return \Wallee\Sdk\Model\TokenVersionType|null
      */
     public function getType()
     {
@@ -908,22 +539,325 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Wallee\Sdk\Model\TokenVersionType $type The type specifies the nature of the token and identifies the payment connector capable of processing it.
+     * @param \Wallee\Sdk\Model\TokenVersionType|null $type type
      *
-     * @return $this
+     * @return self
      */
     public function setType($type)
     {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
         $this->container['type'] = $type;
 
         return $this;
     }
-    
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the object was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets retry_in
+     *
+     * @return string|null
+     */
+    public function getRetryIn()
+    {
+        return $this->container['retry_in'];
+    }
+
+    /**
+     * Sets retry_in
+     *
+     * @param string|null $retry_in Retry interval when the strategy advises retrying later.
+     *
+     * @return self
+     */
+    public function setRetryIn($retry_in)
+    {
+        if (is_null($retry_in)) {
+            throw new \InvalidArgumentException('non-nullable retry_in cannot be null');
+        }
+        $this->container['retry_in'] = $retry_in;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_connector_configuration
+     *
+     * @return \Wallee\Sdk\Model\PaymentConnectorConfiguration|null
+     */
+    public function getPaymentConnectorConfiguration()
+    {
+        return $this->container['payment_connector_configuration'];
+    }
+
+    /**
+     * Sets payment_connector_configuration
+     *
+     * @param \Wallee\Sdk\Model\PaymentConnectorConfiguration|null $payment_connector_configuration payment_connector_configuration
+     *
+     * @return self
+     */
+    public function setPaymentConnectorConfiguration($payment_connector_configuration)
+    {
+        if (is_null($payment_connector_configuration)) {
+            throw new \InvalidArgumentException('non-nullable payment_connector_configuration cannot be null');
+        }
+        $this->container['payment_connector_configuration'] = $payment_connector_configuration;
+
+        return $this;
+    }
+
+    /**
+     * Gets obsoleted_on
+     *
+     * @return \DateTime|null
+     */
+    public function getObsoletedOn()
+    {
+        return $this->container['obsoleted_on'];
+    }
+
+    /**
+     * Sets obsoleted_on
+     *
+     * @param \DateTime|null $obsoleted_on The date and time when the token version was marked obsolete.
+     *
+     * @return self
+     */
+    public function setObsoletedOn($obsoleted_on)
+    {
+        if (is_null($obsoleted_on)) {
+            throw new \InvalidArgumentException('non-nullable obsoleted_on cannot be null');
+        }
+        $this->container['obsoleted_on'] = $obsoleted_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets expires_on
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiresOn()
+    {
+        return $this->container['expires_on'];
+    }
+
+    /**
+     * Sets expires_on
+     *
+     * @param \DateTime|null $expires_on The date and time when the token version is set to expire, after which it will be marked as obsolete.
+     *
+     * @return self
+     */
+    public function setExpiresOn($expires_on)
+    {
+        if (is_null($expires_on)) {
+            throw new \InvalidArgumentException('non-nullable expires_on cannot be null');
+        }
+        $this->container['expires_on'] = $expires_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets icon_url
+     *
+     * @return string|null
+     */
+    public function getIconUrl()
+    {
+        return $this->container['icon_url'];
+    }
+
+    /**
+     * Sets icon_url
+     *
+     * @param string|null $icon_url The URL to the token's icon displayed to the customer.
+     *
+     * @return self
+     */
+    public function setIconUrl($icon_url)
+    {
+        if (is_null($icon_url)) {
+            throw new \InvalidArgumentException('non-nullable icon_url cannot be null');
+        }
+        $this->container['icon_url'] = $icon_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\TokenVersionState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\TokenVersionState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets processor_token
+     *
+     * @return string|null
+     */
+    public function getProcessorToken()
+    {
+        return $this->container['processor_token'];
+    }
+
+    /**
+     * Sets processor_token
+     *
+     * @param string|null $processor_token The token name as specified by the processor.
+     *
+     * @return self
+     */
+    public function setProcessorToken($processor_token)
+    {
+        if (is_null($processor_token)) {
+            throw new \InvalidArgumentException('non-nullable processor_token cannot be null');
+        }
+        if ((mb_strlen($processor_token) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $processor_token when calling TokenVersion., must be smaller than or equal to 150.');
+        }
+
+        $this->container['processor_token'] = $processor_token;
+
+        return $this;
+    }
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime|null
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     *
+     * @return self
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_method_brand
+     *
+     * @return \Wallee\Sdk\Model\PaymentMethodBrand|null
+     */
+    public function getPaymentMethodBrand()
+    {
+        return $this->container['payment_method_brand'];
+    }
+
+    /**
+     * Sets payment_method_brand
+     *
+     * @param \Wallee\Sdk\Model\PaymentMethodBrand|null $payment_method_brand payment_method_brand
+     *
+     * @return self
+     */
+    public function setPaymentMethodBrand($payment_method_brand)
+    {
+        if (is_null($payment_method_brand)) {
+            throw new \InvalidArgumentException('non-nullable payment_method_brand cannot be null');
+        }
+        $this->container['payment_method_brand'] = $payment_method_brand;
+
+        return $this;
+    }
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -933,17 +867,322 @@ class TokenVersion implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets last_retried_on
+     *
+     * @return \DateTime|null
+     */
+    public function getLastRetriedOn()
+    {
+        return $this->container['last_retried_on'];
+    }
+
+    /**
+     * Sets last_retried_on
+     *
+     * @param \DateTime|null $last_retried_on The date and time when the system last attempted a retry for this token version.
+     *
+     * @return self
+     */
+    public function setLastRetriedOn($last_retried_on)
+    {
+        if (is_null($last_retried_on)) {
+            throw new \InvalidArgumentException('non-nullable last_retried_on cannot be null');
+        }
+        $this->container['last_retried_on'] = $last_retried_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets labels
+     *
+     * @return \Wallee\Sdk\Model\Label[]|null
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param \Wallee\Sdk\Model\Label[]|null $labels The labels providing additional information about the object.
+     *
+     * @return self
+     */
+    public function setLabels($labels)
+    {
+        if (is_null($labels)) {
+            throw new \InvalidArgumentException('non-nullable labels cannot be null');
+        }
+
+
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+
+    /**
+     * Gets token
+     *
+     * @return \Wallee\Sdk\Model\Token|null
+     */
+    public function getToken()
+    {
+        return $this->container['token'];
+    }
+
+    /**
+     * Sets token
+     *
+     * @param \Wallee\Sdk\Model\Token|null $token token
+     *
+     * @return self
+     */
+    public function setToken($token)
+    {
+        if (is_null($token)) {
+            throw new \InvalidArgumentException('non-nullable token cannot be null');
+        }
+        $this->container['token'] = $token;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment
+     *
+     * @return \Wallee\Sdk\Model\ChargeAttemptEnvironment|null
+     */
+    public function getEnvironment()
+    {
+        return $this->container['environment'];
+    }
+
+    /**
+     * Sets environment
+     *
+     * @param \Wallee\Sdk\Model\ChargeAttemptEnvironment|null $environment environment
+     *
+     * @return self
+     */
+    public function setEnvironment($environment)
+    {
+        if (is_null($environment)) {
+            throw new \InvalidArgumentException('non-nullable environment cannot be null');
+        }
+        $this->container['environment'] = $environment;
+
+        return $this;
+    }
+
+    /**
+     * Gets activated_on
+     *
+     * @return \DateTime|null
+     */
+    public function getActivatedOn()
+    {
+        return $this->container['activated_on'];
+    }
+
+    /**
+     * Sets activated_on
+     *
+     * @param \DateTime|null $activated_on The date and time when the token version was activated.
+     *
+     * @return self
+     */
+    public function setActivatedOn($activated_on)
+    {
+        if (is_null($activated_on)) {
+            throw new \InvalidArgumentException('non-nullable activated_on cannot be null');
+        }
+        $this->container['activated_on'] = $activated_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name The name used to identify the token.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling TokenVersion., must be smaller than or equal to 150.');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_method
+     *
+     * @return \Wallee\Sdk\Model\PaymentMethod|null
+     */
+    public function getPaymentMethod()
+    {
+        return $this->container['payment_method'];
+    }
+
+    /**
+     * Sets payment_method
+     *
+     * @param \Wallee\Sdk\Model\PaymentMethod|null $payment_method payment_method
+     *
+     * @return self
+     */
+    public function setPaymentMethod($payment_method)
+    {
+        if (is_null($payment_method)) {
+            throw new \InvalidArgumentException('non-nullable payment_method cannot be null');
+        }
+        $this->container['payment_method'] = $payment_method;
+
+        return $this;
+    }
+
+    /**
+     * Gets shipping_address
+     *
+     * @return \Wallee\Sdk\Model\Address|null
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shipping_address'];
+    }
+
+    /**
+     * Sets shipping_address
+     *
+     * @param \Wallee\Sdk\Model\Address|null $shipping_address shipping_address
+     *
+     * @return self
+     */
+    public function setShippingAddress($shipping_address)
+    {
+        if (is_null($shipping_address)) {
+            throw new \InvalidArgumentException('non-nullable shipping_address cannot be null');
+        }
+        $this->container['shipping_address'] = $shipping_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets billing_address
+     *
+     * @return \Wallee\Sdk\Model\Address|null
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
+
+    /**
+     * Sets billing_address
+     *
+     * @param \Wallee\Sdk\Model\Address|null $billing_address billing_address
+     *
+     * @return self
+     */
+    public function setBillingAddress($billing_address)
+    {
+        if (is_null($billing_address)) {
+            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
+        }
+        $this->container['billing_address'] = $billing_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets retry_strategy
+     *
+     * @return \Wallee\Sdk\Model\TokenVersionRetryStrategy|null
+     */
+    public function getRetryStrategy()
+    {
+        return $this->container['retry_strategy'];
+    }
+
+    /**
+     * Sets retry_strategy
+     *
+     * @param \Wallee\Sdk\Model\TokenVersionRetryStrategy|null $retry_strategy retry_strategy
+     *
+     * @return self
+     */
+    public function setRetryStrategy($retry_strategy)
+    {
+        if (is_null($retry_strategy)) {
+            throw new \InvalidArgumentException('non-nullable retry_strategy cannot be null');
+        }
+        $this->container['retry_strategy'] = $retry_strategy;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -951,8 +1190,7 @@ class TokenVersion implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -962,24 +1200,23 @@ class TokenVersion implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -995,10 +1232,22 @@ class TokenVersion implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1008,13 +1257,19 @@ class TokenVersion implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

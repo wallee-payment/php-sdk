@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,99 +30,222 @@ use \Wallee\Sdk\ObjectSerializer;
  * TransactionCompletion model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class TransactionCompletion implements ModelInterface, ArrayAccess
+class TransactionCompletion implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TransactionCompletion';
+    protected static $openAPIModelName = 'TransactionCompletion';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'amount' => 'float',
-        'base_line_items' => '\Wallee\Sdk\Model\LineItem[]',
-        'created_by' => 'int',
-        'created_on' => '\DateTime',
-        'external_id' => 'string',
-        'failed_on' => '\DateTime',
-        'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
-        'id' => 'int',
-        'invoice_merchant_reference' => 'string',
-        'labels' => '\Wallee\Sdk\Model\Label[]',
-        'language' => 'string',
-        'last_completion' => 'bool',
+    protected static $openAPITypes = [
         'line_item_version' => '\Wallee\Sdk\Model\TransactionLineItemVersion',
-        'line_items' => '\Wallee\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
-        'mode' => '\Wallee\Sdk\Model\TransactionCompletionMode',
-        'next_update_on' => '\DateTime',
-        'payment_information' => 'string',
-        'planned_purge_date' => '\DateTime',
-        'processing_on' => '\DateTime',
-        'processor_reference' => 'string',
-        'remaining_line_items' => '\Wallee\Sdk\Model\LineItem[]',
-        'space_view_id' => 'int',
-        'state' => '\Wallee\Sdk\Model\TransactionCompletionState',
         'statement_descriptor' => 'string',
+        'base_line_items' => '\Wallee\Sdk\Model\LineItem[]',
+        'processing_on' => '\DateTime',
+        'invoice_merchant_reference' => 'string',
+        'language' => 'string',
+        'remaining_line_items' => '\Wallee\Sdk\Model\LineItem[]',
+        'created_on' => '\DateTime',
+        'line_items' => '\Wallee\Sdk\Model\LineItem[]',
+        'mode' => '\Wallee\Sdk\Model\TransactionCompletionMode',
         'succeeded_on' => '\DateTime',
-        'tax_amount' => 'float',
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\TransactionCompletionState',
+        'linked_transaction' => 'int',
+        'payment_information' => 'string',
+        'amount' => 'float',
+        'last_completion' => 'bool',
+        'planned_purge_date' => '\DateTime',
+        'external_id' => 'string',
         'time_zone' => 'string',
+        'space_view_id' => 'int',
+        'version' => 'int',
+        'labels' => '\Wallee\Sdk\Model\Label[]',
+        'linked_space_id' => 'int',
         'timeout_on' => '\DateTime',
-        'version' => 'int'
+        'created_by' => 'int',
+        'next_update_on' => '\DateTime',
+        'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
+        'tax_amount' => 'float',
+        'failed_on' => '\DateTime',
+        'processor_reference' => 'string'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'amount' => null,
-        'base_line_items' => null,
-        'created_by' => 'int64',
-        'created_on' => 'date-time',
-        'external_id' => null,
-        'failed_on' => 'date-time',
-        'failure_reason' => null,
-        'id' => 'int64',
-        'invoice_merchant_reference' => null,
-        'labels' => null,
-        'language' => null,
-        'last_completion' => null,
+    protected static $openAPIFormats = [
         'line_item_version' => null,
-        'line_items' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
-        'mode' => null,
-        'next_update_on' => 'date-time',
-        'payment_information' => null,
-        'planned_purge_date' => 'date-time',
-        'processing_on' => 'date-time',
-        'processor_reference' => null,
-        'remaining_line_items' => null,
-        'space_view_id' => 'int64',
-        'state' => null,
         'statement_descriptor' => null,
+        'base_line_items' => null,
+        'processing_on' => 'date-time',
+        'invoice_merchant_reference' => null,
+        'language' => null,
+        'remaining_line_items' => null,
+        'created_on' => 'date-time',
+        'line_items' => null,
+        'mode' => null,
         'succeeded_on' => 'date-time',
-        'tax_amount' => null,
+        'id' => 'int64',
+        'state' => null,
+        'linked_transaction' => 'int64',
+        'payment_information' => null,
+        'amount' => null,
+        'last_completion' => null,
+        'planned_purge_date' => 'date-time',
+        'external_id' => null,
         'time_zone' => null,
+        'space_view_id' => 'int64',
+        'version' => 'int32',
+        'labels' => null,
+        'linked_space_id' => 'int64',
         'timeout_on' => 'date-time',
-        'version' => 'int32'
+        'created_by' => 'int64',
+        'next_update_on' => 'date-time',
+        'failure_reason' => null,
+        'tax_amount' => null,
+        'failed_on' => 'date-time',
+        'processor_reference' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'line_item_version' => false,
+        'statement_descriptor' => false,
+        'base_line_items' => false,
+        'processing_on' => false,
+        'invoice_merchant_reference' => false,
+        'language' => false,
+        'remaining_line_items' => false,
+        'created_on' => false,
+        'line_items' => false,
+        'mode' => false,
+        'succeeded_on' => false,
+        'id' => false,
+        'state' => false,
+        'linked_transaction' => false,
+        'payment_information' => false,
+        'amount' => false,
+        'last_completion' => false,
+        'planned_purge_date' => false,
+        'external_id' => false,
+        'time_zone' => false,
+        'space_view_id' => false,
+        'version' => false,
+        'labels' => false,
+        'linked_space_id' => false,
+        'timeout_on' => false,
+        'created_by' => false,
+        'next_update_on' => false,
+        'failure_reason' => false,
+        'tax_amount' => false,
+        'failed_on' => false,
+        'processor_reference' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -128,37 +254,37 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'base_line_items' => 'baseLineItems',
-        'created_by' => 'createdBy',
-        'created_on' => 'createdOn',
-        'external_id' => 'externalId',
-        'failed_on' => 'failedOn',
-        'failure_reason' => 'failureReason',
-        'id' => 'id',
-        'invoice_merchant_reference' => 'invoiceMerchantReference',
-        'labels' => 'labels',
-        'language' => 'language',
-        'last_completion' => 'lastCompletion',
         'line_item_version' => 'lineItemVersion',
-        'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
-        'mode' => 'mode',
-        'next_update_on' => 'nextUpdateOn',
-        'payment_information' => 'paymentInformation',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'processing_on' => 'processingOn',
-        'processor_reference' => 'processorReference',
-        'remaining_line_items' => 'remainingLineItems',
-        'space_view_id' => 'spaceViewId',
-        'state' => 'state',
         'statement_descriptor' => 'statementDescriptor',
+        'base_line_items' => 'baseLineItems',
+        'processing_on' => 'processingOn',
+        'invoice_merchant_reference' => 'invoiceMerchantReference',
+        'language' => 'language',
+        'remaining_line_items' => 'remainingLineItems',
+        'created_on' => 'createdOn',
+        'line_items' => 'lineItems',
+        'mode' => 'mode',
         'succeeded_on' => 'succeededOn',
-        'tax_amount' => 'taxAmount',
+        'id' => 'id',
+        'state' => 'state',
+        'linked_transaction' => 'linkedTransaction',
+        'payment_information' => 'paymentInformation',
+        'amount' => 'amount',
+        'last_completion' => 'lastCompletion',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'external_id' => 'externalId',
         'time_zone' => 'timeZone',
+        'space_view_id' => 'spaceViewId',
+        'version' => 'version',
+        'labels' => 'labels',
+        'linked_space_id' => 'linkedSpaceId',
         'timeout_on' => 'timeoutOn',
-        'version' => 'version'
+        'created_by' => 'createdBy',
+        'next_update_on' => 'nextUpdateOn',
+        'failure_reason' => 'failureReason',
+        'tax_amount' => 'taxAmount',
+        'failed_on' => 'failedOn',
+        'processor_reference' => 'processorReference'
     ];
 
     /**
@@ -167,37 +293,37 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'base_line_items' => 'setBaseLineItems',
-        'created_by' => 'setCreatedBy',
-        'created_on' => 'setCreatedOn',
-        'external_id' => 'setExternalId',
-        'failed_on' => 'setFailedOn',
-        'failure_reason' => 'setFailureReason',
-        'id' => 'setId',
-        'invoice_merchant_reference' => 'setInvoiceMerchantReference',
-        'labels' => 'setLabels',
-        'language' => 'setLanguage',
-        'last_completion' => 'setLastCompletion',
         'line_item_version' => 'setLineItemVersion',
-        'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
-        'mode' => 'setMode',
-        'next_update_on' => 'setNextUpdateOn',
-        'payment_information' => 'setPaymentInformation',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'processing_on' => 'setProcessingOn',
-        'processor_reference' => 'setProcessorReference',
-        'remaining_line_items' => 'setRemainingLineItems',
-        'space_view_id' => 'setSpaceViewId',
-        'state' => 'setState',
         'statement_descriptor' => 'setStatementDescriptor',
+        'base_line_items' => 'setBaseLineItems',
+        'processing_on' => 'setProcessingOn',
+        'invoice_merchant_reference' => 'setInvoiceMerchantReference',
+        'language' => 'setLanguage',
+        'remaining_line_items' => 'setRemainingLineItems',
+        'created_on' => 'setCreatedOn',
+        'line_items' => 'setLineItems',
+        'mode' => 'setMode',
         'succeeded_on' => 'setSucceededOn',
-        'tax_amount' => 'setTaxAmount',
+        'id' => 'setId',
+        'state' => 'setState',
+        'linked_transaction' => 'setLinkedTransaction',
+        'payment_information' => 'setPaymentInformation',
+        'amount' => 'setAmount',
+        'last_completion' => 'setLastCompletion',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'external_id' => 'setExternalId',
         'time_zone' => 'setTimeZone',
+        'space_view_id' => 'setSpaceViewId',
+        'version' => 'setVersion',
+        'labels' => 'setLabels',
+        'linked_space_id' => 'setLinkedSpaceId',
         'timeout_on' => 'setTimeoutOn',
-        'version' => 'setVersion'
+        'created_by' => 'setCreatedBy',
+        'next_update_on' => 'setNextUpdateOn',
+        'failure_reason' => 'setFailureReason',
+        'tax_amount' => 'setTaxAmount',
+        'failed_on' => 'setFailedOn',
+        'processor_reference' => 'setProcessorReference'
     ];
 
     /**
@@ -206,119 +332,145 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'base_line_items' => 'getBaseLineItems',
-        'created_by' => 'getCreatedBy',
-        'created_on' => 'getCreatedOn',
-        'external_id' => 'getExternalId',
-        'failed_on' => 'getFailedOn',
-        'failure_reason' => 'getFailureReason',
-        'id' => 'getId',
-        'invoice_merchant_reference' => 'getInvoiceMerchantReference',
-        'labels' => 'getLabels',
-        'language' => 'getLanguage',
-        'last_completion' => 'getLastCompletion',
         'line_item_version' => 'getLineItemVersion',
-        'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
-        'mode' => 'getMode',
-        'next_update_on' => 'getNextUpdateOn',
-        'payment_information' => 'getPaymentInformation',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'processing_on' => 'getProcessingOn',
-        'processor_reference' => 'getProcessorReference',
-        'remaining_line_items' => 'getRemainingLineItems',
-        'space_view_id' => 'getSpaceViewId',
-        'state' => 'getState',
         'statement_descriptor' => 'getStatementDescriptor',
+        'base_line_items' => 'getBaseLineItems',
+        'processing_on' => 'getProcessingOn',
+        'invoice_merchant_reference' => 'getInvoiceMerchantReference',
+        'language' => 'getLanguage',
+        'remaining_line_items' => 'getRemainingLineItems',
+        'created_on' => 'getCreatedOn',
+        'line_items' => 'getLineItems',
+        'mode' => 'getMode',
         'succeeded_on' => 'getSucceededOn',
-        'tax_amount' => 'getTaxAmount',
+        'id' => 'getId',
+        'state' => 'getState',
+        'linked_transaction' => 'getLinkedTransaction',
+        'payment_information' => 'getPaymentInformation',
+        'amount' => 'getAmount',
+        'last_completion' => 'getLastCompletion',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'external_id' => 'getExternalId',
         'time_zone' => 'getTimeZone',
+        'space_view_id' => 'getSpaceViewId',
+        'version' => 'getVersion',
+        'labels' => 'getLabels',
+        'linked_space_id' => 'getLinkedSpaceId',
         'timeout_on' => 'getTimeoutOn',
-        'version' => 'getVersion'
+        'created_by' => 'getCreatedBy',
+        'next_update_on' => 'getNextUpdateOn',
+        'failure_reason' => 'getFailureReason',
+        'tax_amount' => 'getTaxAmount',
+        'failed_on' => 'getFailedOn',
+        'processor_reference' => 'getProcessorReference'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
-        
-        $this->container['base_line_items'] = isset($data['base_line_items']) ? $data['base_line_items'] : null;
-        
-        $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        
-        $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
-        
-        $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['invoice_merchant_reference'] = isset($data['invoice_merchant_reference']) ? $data['invoice_merchant_reference'] : null;
-        
-        $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
-        
-        $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['last_completion'] = isset($data['last_completion']) ? $data['last_completion'] : null;
-        
-        $this->container['line_item_version'] = isset($data['line_item_version']) ? $data['line_item_version'] : null;
-        
-        $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
-        
-        $this->container['mode'] = isset($data['mode']) ? $data['mode'] : null;
-        
-        $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
-        
-        $this->container['payment_information'] = isset($data['payment_information']) ? $data['payment_information'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['processing_on'] = isset($data['processing_on']) ? $data['processing_on'] : null;
-        
-        $this->container['processor_reference'] = isset($data['processor_reference']) ? $data['processor_reference'] : null;
-        
-        $this->container['remaining_line_items'] = isset($data['remaining_line_items']) ? $data['remaining_line_items'] : null;
-        
-        $this->container['space_view_id'] = isset($data['space_view_id']) ? $data['space_view_id'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['statement_descriptor'] = isset($data['statement_descriptor']) ? $data['statement_descriptor'] : null;
-        
-        $this->container['succeeded_on'] = isset($data['succeeded_on']) ? $data['succeeded_on'] : null;
-        
-        $this->container['tax_amount'] = isset($data['tax_amount']) ? $data['tax_amount'] : null;
-        
-        $this->container['time_zone'] = isset($data['time_zone']) ? $data['time_zone'] : null;
-        
-        $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('line_item_version', $data ?? [], null);
+        $this->setIfExists('statement_descriptor', $data ?? [], null);
+        $this->setIfExists('base_line_items', $data ?? [], null);
+        $this->setIfExists('processing_on', $data ?? [], null);
+        $this->setIfExists('invoice_merchant_reference', $data ?? [], null);
+        $this->setIfExists('language', $data ?? [], null);
+        $this->setIfExists('remaining_line_items', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('line_items', $data ?? [], null);
+        $this->setIfExists('mode', $data ?? [], null);
+        $this->setIfExists('succeeded_on', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('linked_transaction', $data ?? [], null);
+        $this->setIfExists('payment_information', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('last_completion', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('external_id', $data ?? [], null);
+        $this->setIfExists('time_zone', $data ?? [], null);
+        $this->setIfExists('space_view_id', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('labels', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('timeout_on', $data ?? [], null);
+        $this->setIfExists('created_by', $data ?? [], null);
+        $this->setIfExists('next_update_on', $data ?? [], null);
+        $this->setIfExists('failure_reason', $data ?? [], null);
+        $this->setIfExists('tax_amount', $data ?? [], null);
+        $this->setIfExists('failed_on', $data ?? [], null);
+        $this->setIfExists('processor_reference', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -330,6 +482,22 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['statement_descriptor']) && (mb_strlen($this->container['statement_descriptor']) > 80)) {
+            $invalidProperties[] = "invalid value for 'statement_descriptor', the character length must be smaller than or equal to 80.";
+        }
+
+        if (!is_null($this->container['statement_descriptor']) && !preg_match("/[a-zA-Z0-9\\s.,_?+\/-]*/", $this->container['statement_descriptor'])) {
+            $invalidProperties[] = "invalid value for 'statement_descriptor', must be conform to the pattern /[a-zA-Z0-9\\s.,_?+\/-]*/.";
+        }
+
+        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['invoice_merchant_reference']) && !preg_match("/[ \\x20-\\x7e]*/", $this->container['invoice_merchant_reference'])) {
+            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', must be conform to the pattern /[ \\x20-\\x7e]*/.";
+        }
+
         if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
             $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
         }
@@ -338,80 +506,12 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['invoice_merchant_reference']) && (mb_strlen($this->container['invoice_merchant_reference']) > 100)) {
-            $invalidProperties[] = "invalid value for 'invoice_merchant_reference', the character length must be smaller than or equal to 100.";
-        }
-
-        if (!is_null($this->container['statement_descriptor']) && (mb_strlen($this->container['statement_descriptor']) > 80)) {
-            $invalidProperties[] = "invalid value for 'statement_descriptor', the character length must be smaller than or equal to 80.";
+        if (!is_null($this->container['external_id']) && !preg_match("/[ \\x20-\\x7e]*/", $this->container['external_id'])) {
+            $invalidProperties[] = "invalid value for 'external_id', must be conform to the pattern /[ \\x20-\\x7e]*/.";
         }
 
         return $invalidProperties;
     }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
 
     /**
      * Validate all the properties in the model
@@ -419,328 +519,16 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets amount
-     *
-     * @return float
-     */
-    public function getAmount()
-    {
-        return $this->container['amount'];
-    }
-
-    /**
-     * Sets amount
-     *
-     * @param float $amount The total amount to be captured in this completion, including taxes.
-     *
-     * @return $this
-     */
-    public function setAmount($amount)
-    {
-        $this->container['amount'] = $amount;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets base_line_items
-     *
-     * @return \Wallee\Sdk\Model\LineItem[]
-     */
-    public function getBaseLineItems()
-    {
-        return $this->container['base_line_items'];
-    }
-
-    /**
-     * Sets base_line_items
-     *
-     * @param \Wallee\Sdk\Model\LineItem[] $base_line_items The original line items from the transaction that serve as the baseline for this completion.
-     *
-     * @return $this
-     */
-    public function setBaseLineItems($base_line_items)
-    {
-        $this->container['base_line_items'] = $base_line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_by
-     *
-     * @return int
-     */
-    public function getCreatedBy()
-    {
-        return $this->container['created_by'];
-    }
-
-    /**
-     * Sets created_by
-     *
-     * @param int $created_by The ID of the user the transaction completion was created by.
-     *
-     * @return $this
-     */
-    public function setCreatedBy($created_by)
-    {
-        $this->container['created_by'] = $created_by;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets external_id
-     *
-     * @return string
-     */
-    public function getExternalId()
-    {
-        return $this->container['external_id'];
-    }
-
-    /**
-     * Sets external_id
-     *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
-     *
-     * @return $this
-     */
-    public function setExternalId($external_id)
-    {
-        if (!is_null($external_id) && (mb_strlen($external_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling TransactionCompletion., must be smaller than or equal to 100.');
-        }
-        if (!is_null($external_id) && (mb_strlen($external_id) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling TransactionCompletion., must be bigger than or equal to 1.');
-        }
-
-        $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failed_on
-     *
-     * @return \DateTime
-     */
-    public function getFailedOn()
-    {
-        return $this->container['failed_on'];
-    }
-
-    /**
-     * Sets failed_on
-     *
-     * @param \DateTime $failed_on The date and time when the transaction completion failed.
-     *
-     * @return $this
-     */
-    public function setFailedOn($failed_on)
-    {
-        $this->container['failed_on'] = $failed_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets failure_reason
-     *
-     * @return \Wallee\Sdk\Model\FailureReason
-     */
-    public function getFailureReason()
-    {
-        return $this->container['failure_reason'];
-    }
-
-    /**
-     * Sets failure_reason
-     *
-     * @param \Wallee\Sdk\Model\FailureReason $failure_reason The reason for the failure of the transaction completion.
-     *
-     * @return $this
-     */
-    public function setFailureReason($failure_reason)
-    {
-        $this->container['failure_reason'] = $failure_reason;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets invoice_merchant_reference
-     *
-     * @return string
-     */
-    public function getInvoiceMerchantReference()
-    {
-        return $this->container['invoice_merchant_reference'];
-    }
-
-    /**
-     * Sets invoice_merchant_reference
-     *
-     * @param string $invoice_merchant_reference The merchant's reference used to identify the invoice.
-     *
-     * @return $this
-     */
-    public function setInvoiceMerchantReference($invoice_merchant_reference)
-    {
-        if (!is_null($invoice_merchant_reference) && (mb_strlen($invoice_merchant_reference) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling TransactionCompletion., must be smaller than or equal to 100.');
-        }
-
-        $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets labels
-     *
-     * @return \Wallee\Sdk\Model\Label[]
-     */
-    public function getLabels()
-    {
-        return $this->container['labels'];
-    }
-
-    /**
-     * Sets labels
-     *
-     * @param \Wallee\Sdk\Model\Label[] $labels The labels providing additional information about the object.
-     *
-     * @return $this
-     */
-    public function setLabels($labels)
-    {
-        $this->container['labels'] = $labels;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->container['language'];
-    }
-
-    /**
-     * Sets language
-     *
-     * @param string $language The language that is linked to the object.
-     *
-     * @return $this
-     */
-    public function setLanguage($language)
-    {
-        $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets last_completion
-     *
-     * @return bool
-     */
-    public function getLastCompletion()
-    {
-        return $this->container['last_completion'];
-    }
-
-    /**
-     * Sets last_completion
-     *
-     * @param bool $last_completion Whether this is the final completion for the transaction. After the last completion is successfully created, the transaction enters its final state, and no further completions can occur.
-     *
-     * @return $this
-     */
-    public function setLastCompletion($last_completion)
-    {
-        $this->container['last_completion'] = $last_completion;
-
-        return $this;
-    }
-    
 
     /**
      * Gets line_item_version
      *
-     * @return \Wallee\Sdk\Model\TransactionLineItemVersion
+     * @return \Wallee\Sdk\Model\TransactionLineItemVersion|null
      */
     public function getLineItemVersion()
     {
@@ -750,322 +538,24 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets line_item_version
      *
-     * @param \Wallee\Sdk\Model\TransactionLineItemVersion $line_item_version The specific version of the line items that are being used for this completion.
+     * @param \Wallee\Sdk\Model\TransactionLineItemVersion|null $line_item_version line_item_version
      *
-     * @return $this
+     * @return self
      */
     public function setLineItemVersion($line_item_version)
     {
+        if (is_null($line_item_version)) {
+            throw new \InvalidArgumentException('non-nullable line_item_version cannot be null');
+        }
         $this->container['line_item_version'] = $line_item_version;
 
         return $this;
     }
-    
-
-    /**
-     * Gets line_items
-     *
-     * @return \Wallee\Sdk\Model\LineItem[]
-     */
-    public function getLineItems()
-    {
-        return $this->container['line_items'];
-    }
-
-    /**
-     * Sets line_items
-     *
-     * @param \Wallee\Sdk\Model\LineItem[] $line_items The line items captured in this transaction completion.
-     *
-     * @return $this
-     */
-    public function setLineItems($line_items)
-    {
-        $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets mode
-     *
-     * @return \Wallee\Sdk\Model\TransactionCompletionMode
-     */
-    public function getMode()
-    {
-        return $this->container['mode'];
-    }
-
-    /**
-     * Sets mode
-     *
-     * @param \Wallee\Sdk\Model\TransactionCompletionMode $mode The mode of transaction completion, such as online or offline, determining how the completion process is executed.
-     *
-     * @return $this
-     */
-    public function setMode($mode)
-    {
-        $this->container['mode'] = $mode;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets next_update_on
-     *
-     * @return \DateTime
-     */
-    public function getNextUpdateOn()
-    {
-        return $this->container['next_update_on'];
-    }
-
-    /**
-     * Sets next_update_on
-     *
-     * @param \DateTime $next_update_on The date and time when the next update of the object's state is planned.
-     *
-     * @return $this
-     */
-    public function setNextUpdateOn($next_update_on)
-    {
-        $this->container['next_update_on'] = $next_update_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets payment_information
-     *
-     * @return string
-     */
-    public function getPaymentInformation()
-    {
-        return $this->container['payment_information'];
-    }
-
-    /**
-     * Sets payment_information
-     *
-     * @param string $payment_information Payment-specific details related to this transaction completion such as payment instructions or references needed for processing.
-     *
-     * @return $this
-     */
-    public function setPaymentInformation($payment_information)
-    {
-        $this->container['payment_information'] = $payment_information;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets processing_on
-     *
-     * @return \DateTime
-     */
-    public function getProcessingOn()
-    {
-        return $this->container['processing_on'];
-    }
-
-    /**
-     * Sets processing_on
-     *
-     * @param \DateTime $processing_on The date and time when the processing of the transaction completion was started.
-     *
-     * @return $this
-     */
-    public function setProcessingOn($processing_on)
-    {
-        $this->container['processing_on'] = $processing_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets processor_reference
-     *
-     * @return string
-     */
-    public function getProcessorReference()
-    {
-        return $this->container['processor_reference'];
-    }
-
-    /**
-     * Sets processor_reference
-     *
-     * @param string $processor_reference The reference ID provided by the payment processor, used to trace the completion through the external payment system.
-     *
-     * @return $this
-     */
-    public function setProcessorReference($processor_reference)
-    {
-        $this->container['processor_reference'] = $processor_reference;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets remaining_line_items
-     *
-     * @return \Wallee\Sdk\Model\LineItem[]
-     */
-    public function getRemainingLineItems()
-    {
-        return $this->container['remaining_line_items'];
-    }
-
-    /**
-     * Sets remaining_line_items
-     *
-     * @param \Wallee\Sdk\Model\LineItem[] $remaining_line_items The line items yet to be captured in the transaction.
-     *
-     * @return $this
-     */
-    public function setRemainingLineItems($remaining_line_items)
-    {
-        $this->container['remaining_line_items'] = $remaining_line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets space_view_id
-     *
-     * @return int
-     */
-    public function getSpaceViewId()
-    {
-        return $this->container['space_view_id'];
-    }
-
-    /**
-     * Sets space_view_id
-     *
-     * @param int $space_view_id The ID of the space view this object is linked to.
-     *
-     * @return $this
-     */
-    public function setSpaceViewId($space_view_id)
-    {
-        $this->container['space_view_id'] = $space_view_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\TransactionCompletionState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\TransactionCompletionState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
 
     /**
      * Gets statement_descriptor
      *
-     * @return string
+     * @return string|null
      */
     public function getStatementDescriptor()
     {
@@ -1075,26 +565,254 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets statement_descriptor
      *
-     * @param string $statement_descriptor The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
+     * @param string|null $statement_descriptor The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
      *
-     * @return $this
+     * @return self
      */
     public function setStatementDescriptor($statement_descriptor)
     {
-        if (!is_null($statement_descriptor) && (mb_strlen($statement_descriptor) > 80)) {
+        if (is_null($statement_descriptor)) {
+            throw new \InvalidArgumentException('non-nullable statement_descriptor cannot be null');
+        }
+        if ((mb_strlen($statement_descriptor) > 80)) {
             throw new \InvalidArgumentException('invalid length for $statement_descriptor when calling TransactionCompletion., must be smaller than or equal to 80.');
+        }
+        if ((!preg_match("/[a-zA-Z0-9\\s.,_?+\/-]*/", ObjectSerializer::toString($statement_descriptor)))) {
+            throw new \InvalidArgumentException("invalid value for \$statement_descriptor when calling TransactionCompletion., must conform to the pattern /[a-zA-Z0-9\\s.,_?+\/-]*/.");
         }
 
         $this->container['statement_descriptor'] = $statement_descriptor;
 
         return $this;
     }
-    
+
+    /**
+     * Gets base_line_items
+     *
+     * @return \Wallee\Sdk\Model\LineItem[]|null
+     */
+    public function getBaseLineItems()
+    {
+        return $this->container['base_line_items'];
+    }
+
+    /**
+     * Sets base_line_items
+     *
+     * @param \Wallee\Sdk\Model\LineItem[]|null $base_line_items The original line items from the transaction that serve as the baseline for this completion.
+     *
+     * @return self
+     */
+    public function setBaseLineItems($base_line_items)
+    {
+        if (is_null($base_line_items)) {
+            throw new \InvalidArgumentException('non-nullable base_line_items cannot be null');
+        }
+        $this->container['base_line_items'] = $base_line_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets processing_on
+     *
+     * @return \DateTime|null
+     */
+    public function getProcessingOn()
+    {
+        return $this->container['processing_on'];
+    }
+
+    /**
+     * Sets processing_on
+     *
+     * @param \DateTime|null $processing_on The date and time when the processing of the transaction completion was started.
+     *
+     * @return self
+     */
+    public function setProcessingOn($processing_on)
+    {
+        if (is_null($processing_on)) {
+            throw new \InvalidArgumentException('non-nullable processing_on cannot be null');
+        }
+        $this->container['processing_on'] = $processing_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets invoice_merchant_reference
+     *
+     * @return string|null
+     */
+    public function getInvoiceMerchantReference()
+    {
+        return $this->container['invoice_merchant_reference'];
+    }
+
+    /**
+     * Sets invoice_merchant_reference
+     *
+     * @param string|null $invoice_merchant_reference The merchant's reference used to identify the invoice.
+     *
+     * @return self
+     */
+    public function setInvoiceMerchantReference($invoice_merchant_reference)
+    {
+        if (is_null($invoice_merchant_reference)) {
+            throw new \InvalidArgumentException('non-nullable invoice_merchant_reference cannot be null');
+        }
+        if ((mb_strlen($invoice_merchant_reference) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $invoice_merchant_reference when calling TransactionCompletion., must be smaller than or equal to 100.');
+        }
+        if ((!preg_match("/[ \\x20-\\x7e]*/", ObjectSerializer::toString($invoice_merchant_reference)))) {
+            throw new \InvalidArgumentException("invalid value for \$invoice_merchant_reference when calling TransactionCompletion., must conform to the pattern /[ \\x20-\\x7e]*/.");
+        }
+
+        $this->container['invoice_merchant_reference'] = $invoice_merchant_reference;
+
+        return $this;
+    }
+
+    /**
+     * Gets language
+     *
+     * @return string|null
+     */
+    public function getLanguage()
+    {
+        return $this->container['language'];
+    }
+
+    /**
+     * Sets language
+     *
+     * @param string|null $language The language that is linked to the object.
+     *
+     * @return self
+     */
+    public function setLanguage($language)
+    {
+        if (is_null($language)) {
+            throw new \InvalidArgumentException('non-nullable language cannot be null');
+        }
+        $this->container['language'] = $language;
+
+        return $this;
+    }
+
+    /**
+     * Gets remaining_line_items
+     *
+     * @return \Wallee\Sdk\Model\LineItem[]|null
+     */
+    public function getRemainingLineItems()
+    {
+        return $this->container['remaining_line_items'];
+    }
+
+    /**
+     * Sets remaining_line_items
+     *
+     * @param \Wallee\Sdk\Model\LineItem[]|null $remaining_line_items The line items yet to be captured in the transaction.
+     *
+     * @return self
+     */
+    public function setRemainingLineItems($remaining_line_items)
+    {
+        if (is_null($remaining_line_items)) {
+            throw new \InvalidArgumentException('non-nullable remaining_line_items cannot be null');
+        }
+        $this->container['remaining_line_items'] = $remaining_line_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_on
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedOn()
+    {
+        return $this->container['created_on'];
+    }
+
+    /**
+     * Sets created_on
+     *
+     * @param \DateTime|null $created_on The date and time when the object was created.
+     *
+     * @return self
+     */
+    public function setCreatedOn($created_on)
+    {
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets line_items
+     *
+     * @return \Wallee\Sdk\Model\LineItem[]|null
+     */
+    public function getLineItems()
+    {
+        return $this->container['line_items'];
+    }
+
+    /**
+     * Sets line_items
+     *
+     * @param \Wallee\Sdk\Model\LineItem[]|null $line_items The line items captured in this transaction completion.
+     *
+     * @return self
+     */
+    public function setLineItems($line_items)
+    {
+        if (is_null($line_items)) {
+            throw new \InvalidArgumentException('non-nullable line_items cannot be null');
+        }
+        $this->container['line_items'] = $line_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets mode
+     *
+     * @return \Wallee\Sdk\Model\TransactionCompletionMode|null
+     */
+    public function getMode()
+    {
+        return $this->container['mode'];
+    }
+
+    /**
+     * Sets mode
+     *
+     * @param \Wallee\Sdk\Model\TransactionCompletionMode|null $mode mode
+     *
+     * @return self
+     */
+    public function setMode($mode)
+    {
+        if (is_null($mode)) {
+            throw new \InvalidArgumentException('non-nullable mode cannot be null');
+        }
+        $this->container['mode'] = $mode;
+
+        return $this;
+    }
 
     /**
      * Gets succeeded_on
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getSucceededOn()
     {
@@ -1104,47 +822,250 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets succeeded_on
      *
-     * @param \DateTime $succeeded_on The date and time when the transaction completion succeeded.
+     * @param \DateTime|null $succeeded_on The date and time when the transaction completion succeeded.
      *
-     * @return $this
+     * @return self
      */
     public function setSucceededOn($succeeded_on)
     {
+        if (is_null($succeeded_on)) {
+            throw new \InvalidArgumentException('non-nullable succeeded_on cannot be null');
+        }
         $this->container['succeeded_on'] = $succeeded_on;
 
         return $this;
     }
-    
 
     /**
-     * Gets tax_amount
+     * Gets id
      *
-     * @return float
+     * @return int|null
      */
-    public function getTaxAmount()
+    public function getId()
     {
-        return $this->container['tax_amount'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets tax_amount
+     * Sets id
      *
-     * @param float $tax_amount The portion of the captured amount that corresponds to taxes.
+     * @param int|null $id A unique identifier for the object.
      *
-     * @return $this
+     * @return self
      */
-    public function setTaxAmount($tax_amount)
+    public function setId($id)
     {
-        $this->container['tax_amount'] = $tax_amount;
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
 
         return $this;
     }
-    
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\TransactionCompletionState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\TransactionCompletionState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_transaction
+     *
+     * @return int|null
+     */
+    public function getLinkedTransaction()
+    {
+        return $this->container['linked_transaction'];
+    }
+
+    /**
+     * Sets linked_transaction
+     *
+     * @param int|null $linked_transaction The payment transaction this object is linked to.
+     *
+     * @return self
+     */
+    public function setLinkedTransaction($linked_transaction)
+    {
+        if (is_null($linked_transaction)) {
+            throw new \InvalidArgumentException('non-nullable linked_transaction cannot be null');
+        }
+        $this->container['linked_transaction'] = $linked_transaction;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_information
+     *
+     * @return string|null
+     */
+    public function getPaymentInformation()
+    {
+        return $this->container['payment_information'];
+    }
+
+    /**
+     * Sets payment_information
+     *
+     * @param string|null $payment_information Payment-specific details related to this transaction completion such as payment instructions or references needed for processing.
+     *
+     * @return self
+     */
+    public function setPaymentInformation($payment_information)
+    {
+        if (is_null($payment_information)) {
+            throw new \InvalidArgumentException('non-nullable payment_information cannot be null');
+        }
+        $this->container['payment_information'] = $payment_information;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount
+     *
+     * @return float|null
+     */
+    public function getAmount()
+    {
+        return $this->container['amount'];
+    }
+
+    /**
+     * Sets amount
+     *
+     * @param float|null $amount The total amount to be captured in this completion, including taxes.
+     *
+     * @return self
+     */
+    public function setAmount($amount)
+    {
+        if (is_null($amount)) {
+            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+        }
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_completion
+     *
+     * @return bool|null
+     */
+    public function getLastCompletion()
+    {
+        return $this->container['last_completion'];
+    }
+
+    /**
+     * Sets last_completion
+     *
+     * @param bool|null $last_completion Whether this is the final completion for the transaction. After the last completion is successfully created, the transaction enters its final state, and no further completions can occur.
+     *
+     * @return self
+     */
+    public function setLastCompletion($last_completion)
+    {
+        if (is_null($last_completion)) {
+            throw new \InvalidArgumentException('non-nullable last_completion cannot be null');
+        }
+        $this->container['last_completion'] = $last_completion;
+
+        return $this;
+    }
+
+    /**
+     * Gets planned_purge_date
+     *
+     * @return \DateTime|null
+     */
+    public function getPlannedPurgeDate()
+    {
+        return $this->container['planned_purge_date'];
+    }
+
+    /**
+     * Sets planned_purge_date
+     *
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     *
+     * @return self
+     */
+    public function setPlannedPurgeDate($planned_purge_date)
+    {
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_id
+     *
+     * @return string|null
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string|null $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+     *
+     * @return self
+     */
+    public function setExternalId($external_id)
+    {
+        if (is_null($external_id)) {
+            throw new \InvalidArgumentException('non-nullable external_id cannot be null');
+        }
+        if ((mb_strlen($external_id) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling TransactionCompletion., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling TransactionCompletion., must be bigger than or equal to 1.');
+        }
+        if ((!preg_match("/[ \\x20-\\x7e]*/", ObjectSerializer::toString($external_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$external_id when calling TransactionCompletion., must conform to the pattern /[ \\x20-\\x7e]*/.");
+        }
+
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
 
     /**
      * Gets time_zone
      *
-     * @return string
+     * @return string|null
      */
     public function getTimeZone()
     {
@@ -1154,47 +1075,51 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone that this object is associated with.
+     * @param string|null $time_zone The time zone that this object is associated with.
      *
-     * @return $this
+     * @return self
      */
     public function setTimeZone($time_zone)
     {
+        if (is_null($time_zone)) {
+            throw new \InvalidArgumentException('non-nullable time_zone cannot be null');
+        }
         $this->container['time_zone'] = $time_zone;
 
         return $this;
     }
-    
 
     /**
-     * Gets timeout_on
+     * Gets space_view_id
      *
-     * @return \DateTime
+     * @return int|null
      */
-    public function getTimeoutOn()
+    public function getSpaceViewId()
     {
-        return $this->container['timeout_on'];
+        return $this->container['space_view_id'];
     }
 
     /**
-     * Sets timeout_on
+     * Sets space_view_id
      *
-     * @param \DateTime $timeout_on The date and time when the object will expire.
+     * @param int|null $space_view_id The ID of the space view this object is linked to.
      *
-     * @return $this
+     * @return self
      */
-    public function setTimeoutOn($timeout_on)
+    public function setSpaceViewId($space_view_id)
     {
-        $this->container['timeout_on'] = $timeout_on;
+        if (is_null($space_view_id)) {
+            throw new \InvalidArgumentException('non-nullable space_view_id cannot be null');
+        }
+        $this->container['space_view_id'] = $space_view_id;
 
         return $this;
     }
-    
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -1204,17 +1129,264 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets labels
+     *
+     * @return \Wallee\Sdk\Model\Label[]|null
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param \Wallee\Sdk\Model\Label[]|null $labels The labels providing additional information about the object.
+     *
+     * @return self
+     */
+    public function setLabels($labels)
+    {
+        if (is_null($labels)) {
+            throw new \InvalidArgumentException('non-nullable labels cannot be null');
+        }
+
+
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets timeout_on
+     *
+     * @return \DateTime|null
+     */
+    public function getTimeoutOn()
+    {
+        return $this->container['timeout_on'];
+    }
+
+    /**
+     * Sets timeout_on
+     *
+     * @param \DateTime|null $timeout_on The date and time when the object will expire.
+     *
+     * @return self
+     */
+    public function setTimeoutOn($timeout_on)
+    {
+        if (is_null($timeout_on)) {
+            throw new \InvalidArgumentException('non-nullable timeout_on cannot be null');
+        }
+        $this->container['timeout_on'] = $timeout_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_by
+     *
+     * @return int|null
+     */
+    public function getCreatedBy()
+    {
+        return $this->container['created_by'];
+    }
+
+    /**
+     * Sets created_by
+     *
+     * @param int|null $created_by The ID of the user the transaction completion was created by.
+     *
+     * @return self
+     */
+    public function setCreatedBy($created_by)
+    {
+        if (is_null($created_by)) {
+            throw new \InvalidArgumentException('non-nullable created_by cannot be null');
+        }
+        $this->container['created_by'] = $created_by;
+
+        return $this;
+    }
+
+    /**
+     * Gets next_update_on
+     *
+     * @return \DateTime|null
+     */
+    public function getNextUpdateOn()
+    {
+        return $this->container['next_update_on'];
+    }
+
+    /**
+     * Sets next_update_on
+     *
+     * @param \DateTime|null $next_update_on The date and time when the next update of the object's state is planned.
+     *
+     * @return self
+     */
+    public function setNextUpdateOn($next_update_on)
+    {
+        if (is_null($next_update_on)) {
+            throw new \InvalidArgumentException('non-nullable next_update_on cannot be null');
+        }
+        $this->container['next_update_on'] = $next_update_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets failure_reason
+     *
+     * @return \Wallee\Sdk\Model\FailureReason|null
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
+
+    /**
+     * Sets failure_reason
+     *
+     * @param \Wallee\Sdk\Model\FailureReason|null $failure_reason failure_reason
+     *
+     * @return self
+     */
+    public function setFailureReason($failure_reason)
+    {
+        if (is_null($failure_reason)) {
+            throw new \InvalidArgumentException('non-nullable failure_reason cannot be null');
+        }
+        $this->container['failure_reason'] = $failure_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets tax_amount
+     *
+     * @return float|null
+     */
+    public function getTaxAmount()
+    {
+        return $this->container['tax_amount'];
+    }
+
+    /**
+     * Sets tax_amount
+     *
+     * @param float|null $tax_amount The portion of the captured amount that corresponds to taxes.
+     *
+     * @return self
+     */
+    public function setTaxAmount($tax_amount)
+    {
+        if (is_null($tax_amount)) {
+            throw new \InvalidArgumentException('non-nullable tax_amount cannot be null');
+        }
+        $this->container['tax_amount'] = $tax_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed_on
+     *
+     * @return \DateTime|null
+     */
+    public function getFailedOn()
+    {
+        return $this->container['failed_on'];
+    }
+
+    /**
+     * Sets failed_on
+     *
+     * @param \DateTime|null $failed_on The date and time when the transaction completion failed.
+     *
+     * @return self
+     */
+    public function setFailedOn($failed_on)
+    {
+        if (is_null($failed_on)) {
+            throw new \InvalidArgumentException('non-nullable failed_on cannot be null');
+        }
+        $this->container['failed_on'] = $failed_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets processor_reference
+     *
+     * @return string|null
+     */
+    public function getProcessorReference()
+    {
+        return $this->container['processor_reference'];
+    }
+
+    /**
+     * Sets processor_reference
+     *
+     * @param string|null $processor_reference The reference ID provided by the payment processor, used to trace the completion through the external payment system.
+     *
+     * @return self
+     */
+    public function setProcessorReference($processor_reference)
+    {
+        if (is_null($processor_reference)) {
+            throw new \InvalidArgumentException('non-nullable processor_reference cannot be null');
+        }
+        $this->container['processor_reference'] = $processor_reference;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -1222,8 +1394,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -1233,24 +1404,23 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -1266,10 +1436,22 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1279,13 +1461,19 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }

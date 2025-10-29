@@ -1,8 +1,12 @@
 <?php
 /**
- * wallee SDK
+ * Wallee AG Php SDK
  *
- * This library allows to interact with the wallee payment service.
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace Wallee\Sdk\Model;
 
 use \ArrayAccess;
@@ -27,63 +30,168 @@ use \Wallee\Sdk\ObjectSerializer;
  * ChargeFlowLevel model
  *
  * @category    Class
- * @description 
  * @package     Wallee\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
+ * @implements \ArrayAccess<string, mixed>
  */
-class ChargeFlowLevel implements ModelInterface, ArrayAccess
+class ChargeFlowLevel implements ModelInterface, ArrayAccess, \JsonSerializable
 {
-    const DISCRIMINATOR = null;
+    public const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ChargeFlowLevel';
+    protected static $openAPIModelName = 'ChargeFlowLevel';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
       * @var string[]
       */
-    protected static $swaggerTypes = [
-        'asynchronous_charge' => 'int',
+    protected static $openAPITypes = [
+        'synchronous_charge' => '\Wallee\Sdk\Model\Charge',
         'configuration' => '\Wallee\Sdk\Model\ChargeFlowLevelConfiguration',
-        'created_on' => '\DateTime',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'planned_purge_date' => '\DateTime',
-        'state' => '\Wallee\Sdk\Model\ChargeFlowLevelState',
-        'synchronous_charge' => 'int',
+        'created_on' => '\DateTime',
+        'version' => 'int',
+        'linked_space_id' => 'int',
         'timeout_on' => '\DateTime',
-        'token_charge' => 'int',
-        'transaction' => '\Wallee\Sdk\Model\Transaction',
-        'version' => 'int'
+        'id' => 'int',
+        'state' => '\Wallee\Sdk\Model\ChargeFlowLevelState',
+        'asynchronous_charge' => '\Wallee\Sdk\Model\Charge',
+        'linked_transaction' => 'int',
+        'token_charge' => '\Wallee\Sdk\Model\Charge',
+        'transaction' => '\Wallee\Sdk\Model\Transaction'
     ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
       *
       * @var string[]
+      * @phpstan-var array<string, string|null>
+      * @psalm-var array<string, string|null>
       */
-    protected static $swaggerFormats = [
-        'asynchronous_charge' => 'int64',
+    protected static $openAPIFormats = [
+        'synchronous_charge' => null,
         'configuration' => null,
-        'created_on' => 'date-time',
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'planned_purge_date' => 'date-time',
-        'state' => null,
-        'synchronous_charge' => 'int64',
+        'created_on' => 'date-time',
+        'version' => 'int32',
+        'linked_space_id' => 'int64',
         'timeout_on' => 'date-time',
-        'token_charge' => 'int64',
-        'transaction' => null,
-        'version' => 'int32'
+        'id' => 'int64',
+        'state' => null,
+        'asynchronous_charge' => null,
+        'linked_transaction' => 'int64',
+        'token_charge' => null,
+        'transaction' => null
     ];
+
+    /**
+      * Array of nullable properties. Used for (de)serialization
+      *
+      * @var boolean[]
+      */
+    protected static array $openAPINullables = [
+        'synchronous_charge' => false,
+        'configuration' => false,
+        'planned_purge_date' => false,
+        'created_on' => false,
+        'version' => false,
+        'linked_space_id' => false,
+        'timeout_on' => false,
+        'id' => false,
+        'state' => false,
+        'asynchronous_charge' => false,
+        'linked_transaction' => false,
+        'token_charge' => false,
+        'transaction' => false
+    ];
+
+    /**
+      * If a nullable field gets set to null, insert it here
+      *
+      * @var boolean[]
+      */
+    protected array $openAPINullablesSetToNull = [];
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPITypes(): array
+    {
+        return self::$openAPITypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function openAPIFormats(): array
+    {
+        return self::$openAPIFormats;
+    }
+
+    /**
+     * Array of nullable properties
+     *
+     * @return array
+     */
+    protected static function openAPINullables(): array
+    {
+        return self::$openAPINullables;
+    }
+
+    /**
+     * Array of nullable field names deliberately set to null
+     *
+     * @return boolean[]
+     */
+    private function getOpenAPINullablesSetToNull(): array
+    {
+        return $this->openAPINullablesSetToNull;
+    }
+
+    /**
+     * Setter - Array of nullable field names deliberately set to null
+     *
+     * @param boolean[] $openAPINullablesSetToNull
+     */
+    private function setOpenAPINullablesSetToNull(array $openAPINullablesSetToNull): void
+    {
+        $this->openAPINullablesSetToNull = $openAPINullablesSetToNull;
+    }
+
+    /**
+     * Checks if a property is nullable
+     *
+     * @param string $property
+     * @return bool
+     */
+    public static function isNullable(string $property): bool
+    {
+        return self::openAPINullables()[$property] ?? false;
+    }
+
+    /**
+     * Checks if a nullable property is set to null.
+     *
+     * @param string $property
+     * @return bool
+     */
+    public function isNullableSetToNull(string $property): bool
+    {
+        return in_array($property, $this->getOpenAPINullablesSetToNull(), true);
+    }
 
     /**
      * Array of attributes where the key is the local name,
@@ -92,19 +200,19 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'asynchronous_charge' => 'asynchronousCharge',
-        'configuration' => 'configuration',
-        'created_on' => 'createdOn',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
-        'planned_purge_date' => 'plannedPurgeDate',
-        'state' => 'state',
         'synchronous_charge' => 'synchronousCharge',
+        'configuration' => 'configuration',
+        'planned_purge_date' => 'plannedPurgeDate',
+        'created_on' => 'createdOn',
+        'version' => 'version',
+        'linked_space_id' => 'linkedSpaceId',
         'timeout_on' => 'timeoutOn',
+        'id' => 'id',
+        'state' => 'state',
+        'asynchronous_charge' => 'asynchronousCharge',
+        'linked_transaction' => 'linkedTransaction',
         'token_charge' => 'tokenCharge',
-        'transaction' => 'transaction',
-        'version' => 'version'
+        'transaction' => 'transaction'
     ];
 
     /**
@@ -113,19 +221,19 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'asynchronous_charge' => 'setAsynchronousCharge',
-        'configuration' => 'setConfiguration',
-        'created_on' => 'setCreatedOn',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
-        'planned_purge_date' => 'setPlannedPurgeDate',
-        'state' => 'setState',
         'synchronous_charge' => 'setSynchronousCharge',
+        'configuration' => 'setConfiguration',
+        'planned_purge_date' => 'setPlannedPurgeDate',
+        'created_on' => 'setCreatedOn',
+        'version' => 'setVersion',
+        'linked_space_id' => 'setLinkedSpaceId',
         'timeout_on' => 'setTimeoutOn',
+        'id' => 'setId',
+        'state' => 'setState',
+        'asynchronous_charge' => 'setAsynchronousCharge',
+        'linked_transaction' => 'setLinkedTransaction',
         'token_charge' => 'setTokenCharge',
-        'transaction' => 'setTransaction',
-        'version' => 'setVersion'
+        'transaction' => 'setTransaction'
     ];
 
     /**
@@ -134,65 +242,109 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'asynchronous_charge' => 'getAsynchronousCharge',
-        'configuration' => 'getConfiguration',
-        'created_on' => 'getCreatedOn',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
-        'planned_purge_date' => 'getPlannedPurgeDate',
-        'state' => 'getState',
         'synchronous_charge' => 'getSynchronousCharge',
+        'configuration' => 'getConfiguration',
+        'planned_purge_date' => 'getPlannedPurgeDate',
+        'created_on' => 'getCreatedOn',
+        'version' => 'getVersion',
+        'linked_space_id' => 'getLinkedSpaceId',
         'timeout_on' => 'getTimeoutOn',
+        'id' => 'getId',
+        'state' => 'getState',
+        'asynchronous_charge' => 'getAsynchronousCharge',
+        'linked_transaction' => 'getLinkedTransaction',
         'token_charge' => 'getTokenCharge',
-        'transaction' => 'getTransaction',
-        'version' => 'getVersion'
+        'transaction' => 'getTransaction'
     ];
 
-    
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap(): array
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters(): array
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters(): array
+    {
+        return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName(): string
+    {
+        return self::$openAPIModelName;
+    }
+
 
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        
-        $this->container['asynchronous_charge'] = isset($data['asynchronous_charge']) ? $data['asynchronous_charge'] : null;
-        
-        $this->container['configuration'] = isset($data['configuration']) ? $data['configuration'] : null;
-        
-        $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
-        
-        $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
-        
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        
-        $this->container['synchronous_charge'] = isset($data['synchronous_charge']) ? $data['synchronous_charge'] : null;
-        
-        $this->container['timeout_on'] = isset($data['timeout_on']) ? $data['timeout_on'] : null;
-        
-        $this->container['token_charge'] = isset($data['token_charge']) ? $data['token_charge'] : null;
-        
-        $this->container['transaction'] = isset($data['transaction']) ? $data['transaction'] : null;
-        
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        
+        $this->setIfExists('synchronous_charge', $data ?? [], null);
+        $this->setIfExists('configuration', $data ?? [], null);
+        $this->setIfExists('planned_purge_date', $data ?? [], null);
+        $this->setIfExists('created_on', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('linked_space_id', $data ?? [], null);
+        $this->setIfExists('timeout_on', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('asynchronous_charge', $data ?? [], null);
+        $this->setIfExists('linked_transaction', $data ?? [], null);
+        $this->setIfExists('token_charge', $data ?? [], null);
+        $this->setIfExists('transaction', $data ?? [], null);
+    }
+
+    /**
+    * Sets $this->container[$variableName] to the given data or to the given default Value; if $variableName
+    * is nullable and its value is set to null in the $fields array, then mark it as "set to null" in the
+    * $this->openAPINullablesSetToNull array
+    *
+    * @param string $variableName
+    * @param array  $fields
+    * @param mixed  $defaultValue
+    */
+    private function setIfExists(string $variableName, array $fields, $defaultValue): void
+    {
+        if (self::isNullable($variableName) && array_key_exists($variableName, $fields) && is_null($fields[$variableName])) {
+            $this->openAPINullablesSetToNull[] = $variableName;
+        }
+
+        $this->container[$variableName] = $fields[$variableName] ?? $defaultValue;
     }
 
     /**
@@ -208,286 +360,21 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerTypes()
-    {
-        return self::$swaggerTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function swaggerFormats()
-    {
-        return self::$swaggerFormats;
-    }
-
-
-    /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * The original name of the model.
-     *
-     * @return string
-     */
-    public function getModelName()
-    {
-        return self::$swaggerModelName;
-    }
-
-    
-
-    /**
      * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
-    
-
-    /**
-     * Gets asynchronous_charge
-     *
-     * @return int
-     */
-    public function getAsynchronousCharge()
-    {
-        return $this->container['asynchronous_charge'];
-    }
-
-    /**
-     * Sets asynchronous_charge
-     *
-     * @param int $asynchronous_charge The charge to process the payment asynchronously.
-     *
-     * @return $this
-     */
-    public function setAsynchronousCharge($asynchronous_charge)
-    {
-        $this->container['asynchronous_charge'] = $asynchronous_charge;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets configuration
-     *
-     * @return \Wallee\Sdk\Model\ChargeFlowLevelConfiguration
-     */
-    public function getConfiguration()
-    {
-        return $this->container['configuration'];
-    }
-
-    /**
-     * Sets configuration
-     *
-     * @param \Wallee\Sdk\Model\ChargeFlowLevelConfiguration $configuration The configuration that was used for this charge flow level.
-     *
-     * @return $this
-     */
-    public function setConfiguration($configuration)
-    {
-        $this->container['configuration'] = $configuration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets created_on
-     *
-     * @return \DateTime
-     */
-    public function getCreatedOn()
-    {
-        return $this->container['created_on'];
-    }
-
-    /**
-     * Sets created_on
-     *
-     * @param \DateTime $created_on The date and time when the object was created.
-     *
-     * @return $this
-     */
-    public function setCreatedOn($created_on)
-    {
-        $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets planned_purge_date
-     *
-     * @return \DateTime
-     */
-    public function getPlannedPurgeDate()
-    {
-        return $this->container['planned_purge_date'];
-    }
-
-    /**
-     * Sets planned_purge_date
-     *
-     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-     *
-     * @return $this
-     */
-    public function setPlannedPurgeDate($planned_purge_date)
-    {
-        $this->container['planned_purge_date'] = $planned_purge_date;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets state
-     *
-     * @return \Wallee\Sdk\Model\ChargeFlowLevelState
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param \Wallee\Sdk\Model\ChargeFlowLevelState $state The object's current state.
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-    
 
     /**
      * Gets synchronous_charge
      *
-     * @return int
+     * @return \Wallee\Sdk\Model\Charge|null
      */
     public function getSynchronousCharge()
     {
@@ -497,97 +384,105 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets synchronous_charge
      *
-     * @param int $synchronous_charge The charge to process the payment synchronously.
+     * @param \Wallee\Sdk\Model\Charge|null $synchronous_charge synchronous_charge
      *
-     * @return $this
+     * @return self
      */
     public function setSynchronousCharge($synchronous_charge)
     {
+        if (is_null($synchronous_charge)) {
+            throw new \InvalidArgumentException('non-nullable synchronous_charge cannot be null');
+        }
         $this->container['synchronous_charge'] = $synchronous_charge;
 
         return $this;
     }
-    
 
     /**
-     * Gets timeout_on
+     * Gets configuration
      *
-     * @return \DateTime
+     * @return \Wallee\Sdk\Model\ChargeFlowLevelConfiguration|null
      */
-    public function getTimeoutOn()
+    public function getConfiguration()
     {
-        return $this->container['timeout_on'];
+        return $this->container['configuration'];
     }
 
     /**
-     * Sets timeout_on
+     * Sets configuration
      *
-     * @param \DateTime $timeout_on The date and time when the charge flow level will expire.
+     * @param \Wallee\Sdk\Model\ChargeFlowLevelConfiguration|null $configuration configuration
      *
-     * @return $this
+     * @return self
      */
-    public function setTimeoutOn($timeout_on)
+    public function setConfiguration($configuration)
     {
-        $this->container['timeout_on'] = $timeout_on;
+        if (is_null($configuration)) {
+            throw new \InvalidArgumentException('non-nullable configuration cannot be null');
+        }
+        $this->container['configuration'] = $configuration;
 
         return $this;
     }
-    
 
     /**
-     * Gets token_charge
+     * Gets planned_purge_date
      *
-     * @return int
+     * @return \DateTime|null
      */
-    public function getTokenCharge()
+    public function getPlannedPurgeDate()
     {
-        return $this->container['token_charge'];
+        return $this->container['planned_purge_date'];
     }
 
     /**
-     * Sets token_charge
+     * Sets planned_purge_date
      *
-     * @param int $token_charge The charge to process the payment using a token.
+     * @param \DateTime|null $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
-     * @return $this
+     * @return self
      */
-    public function setTokenCharge($token_charge)
+    public function setPlannedPurgeDate($planned_purge_date)
     {
-        $this->container['token_charge'] = $token_charge;
+        if (is_null($planned_purge_date)) {
+            throw new \InvalidArgumentException('non-nullable planned_purge_date cannot be null');
+        }
+        $this->container['planned_purge_date'] = $planned_purge_date;
 
         return $this;
     }
-    
 
     /**
-     * Gets transaction
+     * Gets created_on
      *
-     * @return \Wallee\Sdk\Model\Transaction
+     * @return \DateTime|null
      */
-    public function getTransaction()
+    public function getCreatedOn()
     {
-        return $this->container['transaction'];
+        return $this->container['created_on'];
     }
 
     /**
-     * Sets transaction
+     * Sets created_on
      *
-     * @param \Wallee\Sdk\Model\Transaction $transaction The transaction that the charge flow level belongs to.
+     * @param \DateTime|null $created_on The date and time when the object was created.
      *
-     * @return $this
+     * @return self
      */
-    public function setTransaction($transaction)
+    public function setCreatedOn($created_on)
     {
-        $this->container['transaction'] = $transaction;
+        if (is_null($created_on)) {
+            throw new \InvalidArgumentException('non-nullable created_on cannot be null');
+        }
+        $this->container['created_on'] = $created_on;
 
         return $this;
     }
-    
 
     /**
      * Gets version
      *
-     * @return int
+     * @return int|null
      */
     public function getVersion()
     {
@@ -597,17 +492,235 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
+     * @param int|null $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
-     * @return $this
+     * @return self
      */
     public function setVersion($version)
     {
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
+        }
         $this->container['version'] = $version;
 
         return $this;
     }
-    
+
+    /**
+     * Gets linked_space_id
+     *
+     * @return int|null
+     */
+    public function getLinkedSpaceId()
+    {
+        return $this->container['linked_space_id'];
+    }
+
+    /**
+     * Sets linked_space_id
+     *
+     * @param int|null $linked_space_id The ID of the space this object belongs to.
+     *
+     * @return self
+     */
+    public function setLinkedSpaceId($linked_space_id)
+    {
+        if (is_null($linked_space_id)) {
+            throw new \InvalidArgumentException('non-nullable linked_space_id cannot be null');
+        }
+        $this->container['linked_space_id'] = $linked_space_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets timeout_on
+     *
+     * @return \DateTime|null
+     */
+    public function getTimeoutOn()
+    {
+        return $this->container['timeout_on'];
+    }
+
+    /**
+     * Sets timeout_on
+     *
+     * @param \DateTime|null $timeout_on The date and time when the charge flow level will expire.
+     *
+     * @return self
+     */
+    public function setTimeoutOn($timeout_on)
+    {
+        if (is_null($timeout_on)) {
+            throw new \InvalidArgumentException('non-nullable timeout_on cannot be null');
+        }
+        $this->container['timeout_on'] = $timeout_on;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id A unique identifier for the object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets state
+     *
+     * @return \Wallee\Sdk\Model\ChargeFlowLevelState|null
+     */
+    public function getState()
+    {
+        return $this->container['state'];
+    }
+
+    /**
+     * Sets state
+     *
+     * @param \Wallee\Sdk\Model\ChargeFlowLevelState|null $state state
+     *
+     * @return self
+     */
+    public function setState($state)
+    {
+        if (is_null($state)) {
+            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        }
+        $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets asynchronous_charge
+     *
+     * @return \Wallee\Sdk\Model\Charge|null
+     */
+    public function getAsynchronousCharge()
+    {
+        return $this->container['asynchronous_charge'];
+    }
+
+    /**
+     * Sets asynchronous_charge
+     *
+     * @param \Wallee\Sdk\Model\Charge|null $asynchronous_charge asynchronous_charge
+     *
+     * @return self
+     */
+    public function setAsynchronousCharge($asynchronous_charge)
+    {
+        if (is_null($asynchronous_charge)) {
+            throw new \InvalidArgumentException('non-nullable asynchronous_charge cannot be null');
+        }
+        $this->container['asynchronous_charge'] = $asynchronous_charge;
+
+        return $this;
+    }
+
+    /**
+     * Gets linked_transaction
+     *
+     * @return int|null
+     */
+    public function getLinkedTransaction()
+    {
+        return $this->container['linked_transaction'];
+    }
+
+    /**
+     * Sets linked_transaction
+     *
+     * @param int|null $linked_transaction The payment transaction this object is linked to.
+     *
+     * @return self
+     */
+    public function setLinkedTransaction($linked_transaction)
+    {
+        if (is_null($linked_transaction)) {
+            throw new \InvalidArgumentException('non-nullable linked_transaction cannot be null');
+        }
+        $this->container['linked_transaction'] = $linked_transaction;
+
+        return $this;
+    }
+
+    /**
+     * Gets token_charge
+     *
+     * @return \Wallee\Sdk\Model\Charge|null
+     */
+    public function getTokenCharge()
+    {
+        return $this->container['token_charge'];
+    }
+
+    /**
+     * Sets token_charge
+     *
+     * @param \Wallee\Sdk\Model\Charge|null $token_charge token_charge
+     *
+     * @return self
+     */
+    public function setTokenCharge($token_charge)
+    {
+        if (is_null($token_charge)) {
+            throw new \InvalidArgumentException('non-nullable token_charge cannot be null');
+        }
+        $this->container['token_charge'] = $token_charge;
+
+        return $this;
+    }
+
+    /**
+     * Gets transaction
+     *
+     * @return \Wallee\Sdk\Model\Transaction|null
+     */
+    public function getTransaction()
+    {
+        return $this->container['transaction'];
+    }
+
+    /**
+     * Sets transaction
+     *
+     * @param \Wallee\Sdk\Model\Transaction|null $transaction transaction
+     *
+     * @return self
+     */
+    public function setTransaction($transaction)
+    {
+        if (is_null($transaction)) {
+            throw new \InvalidArgumentException('non-nullable transaction cannot be null');
+        }
+        $this->container['transaction'] = $transaction;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -615,8 +728,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -626,24 +738,23 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      *
      * @param integer $offset Offset
      *
-     * @return mixed
+     * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
-        return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        return $this->container[$offset] ?? null;
     }
 
     /**
      * Sets value based on offset.
      *
-     * @param integer $offset Offset
-     * @param mixed   $value  Value to be set
+     * @param int|null $offset Offset
+     * @param mixed    $value  Value to be set
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -659,10 +770,22 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
+    }
+
+    /**
+     * Serializes the object to a value that can be serialized natively by json_encode().
+     * @link https://www.php.net/manual/en/jsonserializable.jsonserialize.php
+     *
+     * @return mixed Returns data which can be serialized by json_encode(), which is a value
+     * of any type other than a resource.
+     */
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize(): mixed
+    {
+       return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -672,13 +795,19 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public function __toString()
     {
-        if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(
-                ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
-        }
+        return json_encode(
+            ObjectSerializer::sanitizeForSerialization($this),
+            JSON_PRETTY_PRINT
+        );
+    }
 
+    /**
+     * Gets a header-safe presentation of the object
+     *
+     * @return string
+     */
+    public function toHeaderValue(): string
+    {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
