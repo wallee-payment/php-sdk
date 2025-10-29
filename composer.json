@@ -1,6 +1,6 @@
 {
     "name": "wallee/sdk",
-    "version": "4.8.0",
+    "version": "4.8.1",
 	"description": "wallee SDK for PHP",
 	"keywords": [
 		"wallee",
