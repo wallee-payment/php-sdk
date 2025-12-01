@@ -29,13 +29,13 @@ use \Wallee\Sdk\ObjectSerializer;
 /**
  * SubscriptionProductVersion model
  *
- * @category Class
+ * @category    Class
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.1.0
  * @implements \ArrayAccess<string, mixed>
  */
 class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -153,7 +153,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return array
      */
-    public static function openAPITypes()
+    public static function openAPITypes(): array
     {
         return self::$openAPITypes;
     }
@@ -163,7 +163,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return array
      */
-    public static function openAPIFormats()
+    public static function openAPIFormats(): array
     {
         return self::$openAPIFormats;
     }
@@ -317,7 +317,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -327,7 +327,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -337,7 +337,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -347,7 +347,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$openAPIModelName;
     }
@@ -356,14 +356,14 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
@@ -432,7 +432,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
@@ -1057,7 +1057,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->container[$offset] ?? null;
     }
@@ -1070,7 +1070,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return void
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -1099,7 +1099,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -1122,7 +1122,7 @@ class SubscriptionProductVersion implements ModelInterface, ArrayAccess, \JsonSe
      *
      * @return string
      */
-    public function toHeaderValue()
+    public function toHeaderValue(): string
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }

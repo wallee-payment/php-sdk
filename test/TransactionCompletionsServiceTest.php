@@ -67,7 +67,7 @@ class TransactionCompletionsServiceTest extends TestCase
             'State must be FULFILL'
         );
 
-        $transactionCompletion = self::$transactionsService->postPaymentTransactionsIdCompleteOnline(
+        $transactionCompletion = self::$transactionsService->postPaymentTransactionsIdCompleteOffline(
             $transaction->getId(),
             Constants::$spaceId
         );

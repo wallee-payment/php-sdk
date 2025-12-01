@@ -30,11 +30,8 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Wallee\Sdk\ApiException;
 use Wallee\Sdk\Configuration;
-use Wallee\Sdk\FormDataProcessor;
 use Wallee\Sdk\HeaderSelector;
 use Wallee\Sdk\ObjectSerializer;
 use Wallee\Sdk\Auth\HttpBearerAuth;
@@ -47,7 +44,7 @@ use Wallee\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.0
+ * @version  5.1.0
  */
 class TransactionsService
 {
@@ -203,10 +200,10 @@ class TransactionsService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
-        $this->config = $config ?: Configuration::getDefaultConfiguration();
-        $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->config = $config;
         $this->hostIndex = $hostIndex;
+        $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->client = $client ?: new Client();
         $this->authentications = [
             "jwt" => new HttpBearerAuth($config->getUserId(), $config->getAuthenticationKey())
         ];
@@ -217,7 +214,7 @@ class TransactionsService
      *
      * @param int $hostIndex Host index (required)
      */
-    public function setHostIndex($hostIndex): void
+    public function setHostIndex(int $hostIndex): void
     {
         $this->hostIndex = $hostIndex;
     }
@@ -227,15 +224,15 @@ class TransactionsService
      *
      * @return int Host index
      */
-    public function getHostIndex()
+    public function getHostIndex(): int
     {
         return $this->hostIndex;
     }
 
     /**
-     * @return Configuration
+     * @return Returns|Configuration the Configuration instance.
      */
-    public function getConfig()
+    public function getConfig(): Returns|Configuration
     {
         return $this->config;
     }
@@ -252,6 +249,7 @@ class TransactionsService
      * Operation deletePaymentTransactionsByCredentialsCredentialsOneClickTokensId
      *
      * Delete a one-click token by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $id id (required)
@@ -271,6 +269,7 @@ class TransactionsService
      * Operation deletePaymentTransactionsByCredentialsCredentialsOneClickTokensIdWithHttpInfo
      *
      * Delete a one-click token by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $id (required)
@@ -308,8 +307,21 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 400:
@@ -319,7 +331,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -327,7 +339,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -335,7 +347,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -343,7 +355,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -351,7 +363,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -359,7 +371,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -367,7 +379,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -375,7 +387,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -384,19 +396,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -533,13 +534,14 @@ class TransactionsService
      * Operation getPaymentTransactions
      *
      * List all transactions
+     
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
-     * @param  int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
-     * @param  string[]|null $expand expand (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
-     * @param  \Wallee\Sdk\Model\SortingOrder|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. (optional)
+     * @param  int $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param  int $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param  string[] $expand expand (optional)
+     * @param  int $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param  SortingOrder $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactions'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -556,13 +558,14 @@ class TransactionsService
      * Operation getPaymentTransactionsWithHttpInfo
      *
      * List all transactions
+     
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
-     * @param  int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
-     * @param  string[]|null $expand (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
-     * @param  \Wallee\Sdk\Model\SortingOrder|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. (optional)
+     * @param  int $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param  int $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param  string[] $expand (optional)
+     * @param  int $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param  SortingOrder $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactions'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -596,79 +599,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -682,11 +612,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionListResponse',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionListResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionListResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionListResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionListResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -696,7 +923,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -704,7 +931,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -712,7 +939,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -720,7 +947,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -728,7 +955,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -736,7 +963,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -744,7 +971,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -752,7 +979,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -760,7 +987,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -769,19 +996,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -790,11 +1006,11 @@ class TransactionsService
      * Create request for operation 'getPaymentTransactions'
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  int|null $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
-     * @param  int|null $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
-     * @param  string[]|null $expand (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
-     * @param  \Wallee\Sdk\Model\SortingOrder|null $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. (optional)
+     * @param  int $after Set to an object&#39;s ID to retrieve the page of objects coming immediately after the named object. (optional)
+     * @param  int $before Set to an object&#39;s ID to retrieve the page of objects coming immediately before the named object. (optional)
+     * @param  string[] $expand (optional)
+     * @param  int $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param  SortingOrder $order Specify to retrieve objects in chronological (ASC) or reverse chronological (DESC) order. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -953,10 +1169,11 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentials
      *
      * Retrieve a transaction by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentials'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -973,10 +1190,11 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsWithHttpInfo
      *
      * Retrieve a transaction by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentials'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1010,79 +1228,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1096,11 +1241,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1110,7 +1552,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1118,7 +1560,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1126,7 +1568,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1134,7 +1576,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1142,7 +1584,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1150,7 +1592,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1158,7 +1600,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1166,7 +1608,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1174,7 +1616,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -1183,19 +1625,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -1205,7 +1636,7 @@ class TransactionsService
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentials'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1327,6 +1758,7 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsMobileSdkUrl
      *
      * Retrieve a Mobile SDK URL by credentials
+     
      *
      * @param  string $credentials The credentials identify the transaction and contain the security details which grant the access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -1346,6 +1778,7 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsMobileSdkUrlWithHttpInfo
      *
      * Retrieve a Mobile SDK URL by credentials
+     
      *
      * @param  string $credentials The credentials identify the transaction and contain the security details which grant the access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -1382,79 +1815,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1468,11 +1828,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1482,7 +2139,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1490,7 +2147,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1498,7 +2155,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1506,7 +2163,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1514,7 +2171,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1522,7 +2179,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1530,7 +2187,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1538,7 +2195,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1546,7 +2203,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -1555,19 +2212,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -1688,10 +2334,11 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsOneClickTokens
      *
      * List one-click tokens by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentialsOneClickTokens'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1708,10 +2355,11 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsOneClickTokensWithHttpInfo
      *
      * List one-click tokens by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentialsOneClickTokens'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1745,79 +2393,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TokenVersionListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1831,11 +2406,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TokenVersionListResponse',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TokenVersionListResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TokenVersionListResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TokenVersionListResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TokenVersionListResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1845,7 +2717,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1853,7 +2725,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1861,7 +2733,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1869,7 +2741,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1877,7 +2749,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1885,7 +2757,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1893,7 +2765,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1901,7 +2773,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1909,7 +2781,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -1918,19 +2790,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -1940,7 +2801,7 @@ class TransactionsService
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentialsOneClickTokens'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2062,11 +2923,12 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsPaymentMethodConfigurations
      *
      * List available payment method configurations by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  string $integration_mode integration_mode (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentialsPaymentMethodConfigurations'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2083,11 +2945,12 @@ class TransactionsService
      * Operation getPaymentTransactionsByCredentialsCredentialsPaymentMethodConfigurationsWithHttpInfo
      *
      * List available payment method configurations by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  string $integration_mode (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentialsPaymentMethodConfigurations'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2121,79 +2984,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2207,11 +2997,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2221,7 +3308,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2229,7 +3316,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2237,7 +3324,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2245,7 +3332,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2253,7 +3340,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2261,7 +3348,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2269,7 +3356,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2277,7 +3364,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2285,7 +3372,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -2294,19 +3381,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -2317,7 +3393,7 @@ class TransactionsService
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  string $integration_mode (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsByCredentialsCredentialsPaymentMethodConfigurations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2455,13 +3531,14 @@ class TransactionsService
      * Operation getPaymentTransactionsExport
      *
      * Export transactions
+     * (Timeout for this request is 60 seconds.)
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $fields The fields to be included in the export. (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned. Default is 2,000. (optional)
-     * @param  int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
-     * @param  string|null $order The fields and order to sort the objects by. (optional)
-     * @param  string|null $query The search query to filter the objects by. (optional)
+     * @param  string[] $fields The fields to be included in the export. (optional)
+     * @param  int $limit A limit on the number of objects to be returned. Default is 2,000. (optional)
+     * @param  int $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $order The fields and order to sort the objects by. (optional)
+     * @param  string $query The search query to filter the objects by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsExport'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2478,13 +3555,14 @@ class TransactionsService
      * Operation getPaymentTransactionsExportWithHttpInfo
      *
      * Export transactions
+     * (Timeout for this request is 60 seconds.)
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $fields The fields to be included in the export. (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned. Default is 2,000. (optional)
-     * @param  int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
-     * @param  string|null $order The fields and order to sort the objects by. (optional)
-     * @param  string|null $query The search query to filter the objects by. (optional)
+     * @param  string[] $fields The fields to be included in the export. (optional)
+     * @param  int $limit A limit on the number of objects to be returned. Default is 2,000. (optional)
+     * @param  int $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $order The fields and order to sort the objects by. (optional)
+     * @param  string $query The search query to filter the objects by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsExport'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2518,79 +3596,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\SplFileObject',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2604,11 +3609,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\SplFileObject',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SplFileObject' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SplFileObject';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2618,7 +3920,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2626,7 +3928,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2634,7 +3936,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2642,7 +3944,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2650,7 +3952,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2658,7 +3960,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2666,7 +3968,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2674,7 +3976,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -2682,7 +3984,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -2691,19 +3993,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -2712,11 +4003,11 @@ class TransactionsService
      * Create request for operation 'getPaymentTransactionsExport'
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $fields The fields to be included in the export. (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned. Default is 2,000. (optional)
-     * @param  int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
-     * @param  string|null $order The fields and order to sort the objects by. (optional)
-     * @param  string|null $query The search query to filter the objects by. (optional)
+     * @param  string[] $fields The fields to be included in the export. (optional)
+     * @param  int $limit A limit on the number of objects to be returned. Default is 2,000. (optional)
+     * @param  int $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $order The fields and order to sort the objects by. (optional)
+     * @param  string $query The search query to filter the objects by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsExport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2869,10 +4160,11 @@ class TransactionsService
      * Operation getPaymentTransactionsId
      *
      * Retrieve a transaction
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsId'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2889,10 +4181,11 @@ class TransactionsService
      * Operation getPaymentTransactionsIdWithHttpInfo
      *
      * Retrieve a transaction
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsId'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2926,79 +4219,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3012,11 +4232,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3026,7 +4543,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3034,7 +4551,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3042,7 +4559,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3050,7 +4567,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3058,7 +4575,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3066,7 +4583,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3074,7 +4591,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3082,7 +4599,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3090,7 +4607,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -3099,19 +4616,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -3121,7 +4627,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3243,6 +4749,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdChargeFlowPaymentPageUrl
      *
      * Retrieve a charge flow payment page URL
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -3262,6 +4769,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdChargeFlowPaymentPageUrlWithHttpInfo
      *
      * Retrieve a charge flow payment page URL
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -3298,79 +4806,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3384,11 +4819,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3398,7 +5130,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3406,7 +5138,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3414,7 +5146,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3422,7 +5154,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3430,7 +5162,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3438,7 +5170,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3446,7 +5178,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3454,7 +5186,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3462,7 +5194,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -3471,19 +5203,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -3604,6 +5325,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdCheckTokenCreationPossible
      *
      * Check if token can be created
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -3623,6 +5345,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdCheckTokenCreationPossibleWithHttpInfo
      *
      * Check if token can be created
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -3659,79 +5382,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'bool',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3745,11 +5395,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'bool',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('bool' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('bool' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'bool', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'bool';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3759,7 +5706,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3767,7 +5714,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3775,7 +5722,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3783,7 +5730,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3791,7 +5738,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3799,7 +5746,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3807,7 +5754,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3815,7 +5762,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3823,7 +5770,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -3832,19 +5779,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -3965,6 +5901,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdCredentials
      *
      * Retrieve transaction credentials
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -3984,6 +5921,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdCredentialsWithHttpInfo
      *
      * Retrieve transaction credentials
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -4020,79 +5958,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4106,11 +5971,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4120,7 +6282,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4128,7 +6290,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4136,7 +6298,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4144,7 +6306,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4152,7 +6314,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4160,7 +6322,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4168,7 +6330,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4176,7 +6338,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4184,7 +6346,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -4193,19 +6355,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -4326,6 +6477,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdIframeJavascriptUrl
      *
      * Retrieve an iFrame JavaScript URL
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -4345,6 +6497,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdIframeJavascriptUrlWithHttpInfo
      *
      * Retrieve an iFrame JavaScript URL
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -4381,79 +6534,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4467,11 +6547,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4481,7 +6858,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4489,7 +6866,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4497,7 +6874,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4505,7 +6882,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4513,7 +6890,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4521,7 +6898,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4529,7 +6906,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4537,7 +6914,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4545,7 +6922,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -4554,19 +6931,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -4687,6 +7053,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdInvoiceDocument
      *
      * Retrieve an invoice document
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -4706,6 +7073,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdInvoiceDocumentWithHttpInfo
      *
      * Retrieve an invoice document
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -4742,79 +7110,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RenderedDocument',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4828,11 +7123,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\RenderedDocument',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\RenderedDocument' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RenderedDocument' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RenderedDocument', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\RenderedDocument';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4842,7 +7434,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4850,7 +7442,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4858,7 +7450,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4866,7 +7458,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4874,7 +7466,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4882,7 +7474,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4890,7 +7482,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4898,7 +7490,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -4906,7 +7498,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -4915,19 +7507,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -5048,10 +7629,11 @@ class TransactionsService
      * Operation getPaymentTransactionsIdLatestLineItemVersion
      *
      * Retrieve the latest line item version
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdLatestLineItemVersion'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5068,10 +7650,11 @@ class TransactionsService
      * Operation getPaymentTransactionsIdLatestLineItemVersionWithHttpInfo
      *
      * Retrieve the latest line item version
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdLatestLineItemVersion'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5105,79 +7688,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionLineItemVersion',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -5191,11 +7701,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionLineItemVersion',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionLineItemVersion' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionLineItemVersion' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionLineItemVersion', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionLineItemVersion';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -5205,7 +8012,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5213,7 +8020,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5221,7 +8028,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5229,7 +8036,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5237,7 +8044,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5245,7 +8052,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5253,7 +8060,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5261,7 +8068,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5269,7 +8076,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -5278,19 +8085,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -5300,7 +8096,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdLatestLineItemVersion'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5422,6 +8218,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdLightboxJavascriptUrl
      *
      * Retrieve a Lightbox JavaScript URL
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -5441,6 +8238,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdLightboxJavascriptUrlWithHttpInfo
      *
      * Retrieve a Lightbox JavaScript URL
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -5477,79 +8275,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -5563,11 +8288,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -5577,7 +8599,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5585,7 +8607,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5593,7 +8615,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5601,7 +8623,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5609,7 +8631,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5617,7 +8639,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5625,7 +8647,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5633,7 +8655,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5641,7 +8663,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -5650,19 +8672,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -5783,6 +8794,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdPackingSlipDocument
      *
      * Retrieve a packing slip document
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -5802,6 +8814,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdPackingSlipDocumentWithHttpInfo
      *
      * Retrieve a packing slip document
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -5838,79 +8851,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RenderedDocument',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -5924,11 +8864,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\RenderedDocument',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\RenderedDocument' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RenderedDocument' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RenderedDocument', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\RenderedDocument';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -5938,7 +9175,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5946,7 +9183,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5954,7 +9191,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5962,7 +9199,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5970,7 +9207,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5978,7 +9215,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5986,7 +9223,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -5994,7 +9231,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6002,7 +9239,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -6011,19 +9248,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -6144,11 +9370,12 @@ class TransactionsService
      * Operation getPaymentTransactionsIdPaymentMethodConfigurations
      *
      * List available payment method configurations
+     
      *
      * @param  int $id id (required)
      * @param  string $integration_mode integration_mode (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdPaymentMethodConfigurations'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -6165,11 +9392,12 @@ class TransactionsService
      * Operation getPaymentTransactionsIdPaymentMethodConfigurationsWithHttpInfo
      *
      * List available payment method configurations
+     
      *
      * @param  int $id (required)
      * @param  string $integration_mode (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdPaymentMethodConfigurations'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -6203,79 +9431,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -6289,11 +9444,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\PaymentMethodConfigurationListResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -6303,7 +9755,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6311,7 +9763,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6319,7 +9771,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6327,7 +9779,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6335,7 +9787,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6343,7 +9795,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6351,7 +9803,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6359,7 +9811,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6367,7 +9819,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -6376,19 +9828,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -6399,7 +9840,7 @@ class TransactionsService
      * @param  int $id (required)
      * @param  string $integration_mode (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdPaymentMethodConfigurations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -6537,6 +9978,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdPaymentPageUrl
      *
      * Retrieve a payment page URL
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -6556,6 +9998,7 @@ class TransactionsService
      * Operation getPaymentTransactionsIdPaymentPageUrlWithHttpInfo
      *
      * Retrieve a payment page URL
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -6592,79 +10035,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -6678,11 +10048,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -6692,7 +10359,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6700,7 +10367,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6708,7 +10375,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6716,7 +10383,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6724,7 +10391,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6732,7 +10399,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6740,7 +10407,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6748,7 +10415,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -6756,7 +10423,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -6765,19 +10432,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -6898,9 +10554,10 @@ class TransactionsService
      * Operation getPaymentTransactionsIdTerminalReceipts
      *
      * List terminal receipts
+     
      *
      * @param  int $id id (required)
-     * @param  \Wallee\Sdk\Model\TerminalReceiptFormat $format The format specifies how the receipts will be presented in the response. (required)
+     * @param  TerminalReceiptFormat $format The format specifies how the receipts will be presented in the response. (required)
      * @param  int $width The width defines the dimensions for rendering the document. For PDF format, the width is specified in millimeters, while for text format, it represents the number of characters per line. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdTerminalReceipts'] to see the possible values for this operation
@@ -6919,9 +10576,10 @@ class TransactionsService
      * Operation getPaymentTransactionsIdTerminalReceiptsWithHttpInfo
      *
      * List terminal receipts
+     
      *
      * @param  int $id (required)
-     * @param  \Wallee\Sdk\Model\TerminalReceiptFormat $format The format specifies how the receipts will be presented in the response. (required)
+     * @param  TerminalReceiptFormat $format The format specifies how the receipts will be presented in the response. (required)
      * @param  int $width The width defines the dimensions for rendering the document. For PDF format, the width is specified in millimeters, while for text format, it represents the number of characters per line. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdTerminalReceipts'] to see the possible values for this operation
@@ -6957,79 +10615,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RenderedTerminalReceiptListResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -7043,11 +10628,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\RenderedTerminalReceiptListResponse',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\RenderedTerminalReceiptListResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RenderedTerminalReceiptListResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RenderedTerminalReceiptListResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\RenderedTerminalReceiptListResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -7057,7 +10939,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7065,7 +10947,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7073,7 +10955,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7081,7 +10963,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7089,7 +10971,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7097,7 +10979,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7105,7 +10987,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7113,7 +10995,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7121,7 +11003,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -7130,19 +11012,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -7151,7 +11022,7 @@ class TransactionsService
      * Create request for operation 'getPaymentTransactionsIdTerminalReceipts'
      *
      * @param  int $id (required)
-     * @param  \Wallee\Sdk\Model\TerminalReceiptFormat $format The format specifies how the receipts will be presented in the response. (required)
+     * @param  TerminalReceiptFormat $format The format specifies how the receipts will be presented in the response. (required)
      * @param  int $width The width defines the dimensions for rendering the document. For PDF format, the width is specified in millimeters, while for text format, it represents the number of characters per line. (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsIdTerminalReceipts'] to see the possible values for this operation
@@ -7297,13 +11168,14 @@ class TransactionsService
      * Operation getPaymentTransactionsSearch
      *
      * Search transactions
+     
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
-     * @param  int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
-     * @param  string|null $order The fields and order to sort the objects by. (optional)
-     * @param  string|null $query The search query to filter the objects by. (optional)
+     * @param  string[] $expand expand (optional)
+     * @param  int $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param  int $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $order The fields and order to sort the objects by. (optional)
+     * @param  string $query The search query to filter the objects by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsSearch'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -7320,13 +11192,14 @@ class TransactionsService
      * Operation getPaymentTransactionsSearchWithHttpInfo
      *
      * Search transactions
+     
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
-     * @param  int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
-     * @param  string|null $order The fields and order to sort the objects by. (optional)
-     * @param  string|null $query The search query to filter the objects by. (optional)
+     * @param  string[] $expand (optional)
+     * @param  int $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param  int $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $order The fields and order to sort the objects by. (optional)
+     * @param  string $query The search query to filter the objects by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsSearch'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -7360,79 +11233,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionSearchResponse',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -7446,11 +11246,308 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionSearchResponse',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionSearchResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionSearchResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionSearchResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionSearchResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -7460,7 +11557,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7468,7 +11565,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7476,7 +11573,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7484,7 +11581,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7492,7 +11589,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7500,7 +11597,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7508,7 +11605,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7516,7 +11613,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7524,7 +11621,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -7533,19 +11630,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -7554,11 +11640,11 @@ class TransactionsService
      * Create request for operation 'getPaymentTransactionsSearch'
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
-     * @param  int|null $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
-     * @param  int|null $offset A cursor for pagination, specifies the number of objects to skip. (optional)
-     * @param  string|null $order The fields and order to sort the objects by. (optional)
-     * @param  string|null $query The search query to filter the objects by. (optional)
+     * @param  string[] $expand (optional)
+     * @param  int $limit A limit on the number of objects to be returned, between 1 and 100. Default is 10. (optional)
+     * @param  int $offset A cursor for pagination, specifies the number of objects to skip. (optional)
+     * @param  string $order The fields and order to sort the objects by. (optional)
+     * @param  string $query The search query to filter the objects by. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaymentTransactionsSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -7714,11 +11800,12 @@ class TransactionsService
      * Operation patchPaymentTransactionsId
      *
      * Update a transaction
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionPending $transaction_pending transaction_pending (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchPaymentTransactionsId'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -7735,11 +11822,12 @@ class TransactionsService
      * Operation patchPaymentTransactionsIdWithHttpInfo
      *
      * Update a transaction
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionPending $transaction_pending (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchPaymentTransactionsId'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -7773,85 +11861,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -7865,11 +11874,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -7879,7 +12212,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7887,7 +12220,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7895,7 +12228,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7903,7 +12236,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7911,7 +12244,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7919,7 +12252,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7927,7 +12260,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7935,7 +12268,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7943,7 +12276,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -7951,7 +12284,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -7960,19 +12293,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -7983,7 +12305,7 @@ class TransactionsService
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionPending $transaction_pending (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchPaymentTransactionsId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -8119,10 +12441,11 @@ class TransactionsService
      * Operation postPaymentTransactions
      *
      * Create a transaction
+     
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCreate $transaction_create transaction_create (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactions'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -8139,10 +12462,11 @@ class TransactionsService
      * Operation postPaymentTransactionsWithHttpInfo
      *
      * Create a transaction
+     
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCreate $transaction_create (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactions'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -8176,85 +12500,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 201:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -8268,11 +12513,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 201:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 201:
@@ -8282,7 +12851,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8290,7 +12859,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8298,7 +12867,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8306,7 +12875,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8314,7 +12883,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8322,7 +12891,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8330,7 +12899,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8338,7 +12907,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8346,7 +12915,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8354,7 +12923,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -8363,19 +12932,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -8385,7 +12943,7 @@ class TransactionsService
      *
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCreate $transaction_create (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -8506,6 +13064,7 @@ class TransactionsService
      * Operation postPaymentTransactionsByCredentialsCredentialsOneClickTokensIdProcess
      *
      * Process via one-click token by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $id id (required)
@@ -8526,6 +13085,7 @@ class TransactionsService
      * Operation postPaymentTransactionsByCredentialsCredentialsOneClickTokensIdProcessWithHttpInfo
      *
      * Process via one-click token by credentials
+     
      *
      * @param  string $credentials Identifies the transaction and includes the security details required to authorize access to this operation. (required)
      * @param  int $id (required)
@@ -8563,85 +13123,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -8655,11 +13136,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -8669,7 +13474,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8677,7 +13482,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8685,7 +13490,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8693,7 +13498,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8701,7 +13506,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8709,7 +13514,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8717,7 +13522,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8725,7 +13530,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8733,7 +13538,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -8741,7 +13546,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -8750,19 +13555,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -8899,10 +13693,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdChargeFlowApply
      *
      * Process a transaction via charge flow
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdChargeFlowApply'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -8919,10 +13714,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdChargeFlowApplyWithHttpInfo
      *
      * Process a transaction via charge flow
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdChargeFlowApply'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -8956,85 +13752,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -9048,11 +13765,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -9062,7 +14103,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9070,7 +14111,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9078,7 +14119,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9086,7 +14127,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9094,7 +14135,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9102,7 +14143,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9110,7 +14151,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9118,7 +14159,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9126,7 +14167,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9134,7 +14175,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -9143,19 +14184,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -9165,7 +14195,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdChargeFlowApply'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -9287,10 +14317,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdChargeFlowCancel
      *
      * Cancel a charge flow
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdChargeFlowCancel'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -9307,10 +14338,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdChargeFlowCancelWithHttpInfo
      *
      * Cancel a charge flow
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdChargeFlowCancel'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -9344,85 +14376,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -9436,11 +14389,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -9450,7 +14727,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9458,7 +14735,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9466,7 +14743,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9474,7 +14751,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9482,7 +14759,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9490,7 +14767,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9498,7 +14775,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9506,7 +14783,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9514,7 +14791,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9522,7 +14799,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -9531,19 +14808,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -9553,7 +14819,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdChargeFlowCancel'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -9675,6 +14941,7 @@ class TransactionsService
      * Operation postPaymentTransactionsIdChargeFlowUpdateRecipient
      *
      * Update a charge flow recipient
+     
      *
      * @param  int $id id (required)
      * @param  int $type type (required)
@@ -9695,6 +14962,7 @@ class TransactionsService
      * Operation postPaymentTransactionsIdChargeFlowUpdateRecipientWithHttpInfo
      *
      * Update a charge flow recipient
+     
      *
      * @param  int $id (required)
      * @param  int $type (required)
@@ -9733,8 +15001,21 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
 
             return [null, $statusCode, $response->getHeaders()];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 400:
@@ -9744,7 +15025,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9752,7 +15033,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9760,7 +15041,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9768,7 +15049,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9776,7 +15057,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9784,7 +15065,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9792,7 +15073,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9800,7 +15081,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -9808,7 +15089,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -9817,19 +15098,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -9984,10 +15254,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompleteOffline
      *
      * Complete a transaction offline
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompleteOffline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -10004,10 +15275,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompleteOfflineWithHttpInfo
      *
      * Complete a transaction offline
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompleteOffline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -10041,85 +15313,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionCompletion',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -10133,11 +15326,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionCompletion',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionCompletion' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionCompletion' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionCompletion', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionCompletion';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -10147,7 +15664,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10155,7 +15672,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10163,7 +15680,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10171,7 +15688,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10179,7 +15696,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10187,7 +15704,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10195,7 +15712,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10203,7 +15720,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10211,7 +15728,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10219,7 +15736,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -10228,19 +15745,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -10250,7 +15756,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompleteOffline'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -10372,10 +15878,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompleteOnline
      *
      * Complete a transaction online
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompleteOnline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -10392,10 +15899,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompleteOnlineWithHttpInfo
      *
      * Complete a transaction online
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompleteOnline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -10429,85 +15937,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionCompletion',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -10521,11 +15950,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionCompletion',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionCompletion' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionCompletion' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionCompletion', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionCompletion';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -10535,7 +16288,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10543,7 +16296,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10551,7 +16304,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10559,7 +16312,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10567,7 +16320,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10575,7 +16328,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10583,7 +16336,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10591,7 +16344,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10599,7 +16352,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10607,7 +16360,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -10616,19 +16369,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -10638,7 +16380,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompleteOnline'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -10760,11 +16502,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompletePartiallyOffline
      *
      * Complete a transaction offline partially
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCompletionDetails $transaction_completion_details transaction_completion_details (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompletePartiallyOffline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -10781,11 +16524,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompletePartiallyOfflineWithHttpInfo
      *
      * Complete a transaction offline partially
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCompletionDetails $transaction_completion_details (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompletePartiallyOffline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -10819,85 +16563,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionCompletion',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -10911,11 +16576,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionCompletion',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionCompletion' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionCompletion' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionCompletion', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionCompletion';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -10925,7 +16914,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10933,7 +16922,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10941,7 +16930,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10949,7 +16938,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10957,7 +16946,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10965,7 +16954,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10973,7 +16962,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10981,7 +16970,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10989,7 +16978,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -10997,7 +16986,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -11006,19 +16995,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -11029,7 +17007,7 @@ class TransactionsService
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCompletionDetails $transaction_completion_details (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompletePartiallyOffline'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -11165,11 +17143,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompletePartiallyOnline
      *
      * Complete a transaction online partially
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCompletionDetails $transaction_completion_details transaction_completion_details (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompletePartiallyOnline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -11186,11 +17165,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdCompletePartiallyOnlineWithHttpInfo
      *
      * Complete a transaction online partially
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCompletionDetails $transaction_completion_details (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompletePartiallyOnline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -11224,85 +17204,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionCompletion',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -11316,11 +17217,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionCompletion',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionCompletion' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionCompletion' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionCompletion', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionCompletion';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -11330,7 +17555,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11338,7 +17563,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11346,7 +17571,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11354,7 +17579,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11362,7 +17587,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11370,7 +17595,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11378,7 +17603,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11386,7 +17611,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11394,7 +17619,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11402,7 +17627,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -11411,19 +17636,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -11434,7 +17648,7 @@ class TransactionsService
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionCompletionDetails $transaction_completion_details (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdCompletePartiallyOnline'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -11570,11 +17784,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdConfirm
      *
      * Confirm a transaction
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionPending $transaction_pending transaction_pending (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdConfirm'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -11591,11 +17806,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdConfirmWithHttpInfo
      *
      * Confirm a transaction
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionPending $transaction_pending (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdConfirm'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -11629,85 +17845,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -11721,11 +17858,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -11735,7 +18196,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11743,7 +18204,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11751,7 +18212,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11759,7 +18220,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11767,7 +18228,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11775,7 +18236,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11783,7 +18244,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11791,7 +18252,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11799,7 +18260,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -11807,7 +18268,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -11816,19 +18277,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -11839,7 +18289,7 @@ class TransactionsService
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\TransactionPending $transaction_pending (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdConfirm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -11975,11 +18425,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessCardDetails
      *
      * Process a card transaction
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\AuthenticatedCardRequest $authenticated_card_request authenticated_card_request (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessCardDetails'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -11996,11 +18447,12 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessCardDetailsWithHttpInfo
      *
      * Process a card transaction
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\AuthenticatedCardRequest $authenticated_card_request (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessCardDetails'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -12034,85 +18486,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -12126,11 +18499,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -12140,7 +18837,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12148,7 +18845,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12156,7 +18853,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12164,7 +18861,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12172,7 +18869,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12180,7 +18877,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12188,7 +18885,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12196,7 +18893,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12204,7 +18901,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12212,7 +18909,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -12221,19 +18918,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -12244,7 +18930,7 @@ class TransactionsService
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
      * @param  \Wallee\Sdk\Model\AuthenticatedCardRequest $authenticated_card_request (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessCardDetails'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -12380,6 +19066,7 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessCardDetailsThreed
      *
      * Process a card transaction with 3-D Secure
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -12400,6 +19087,7 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessCardDetailsThreedWithHttpInfo
      *
      * Process a card transaction with 3-D Secure
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
@@ -12437,85 +19125,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'string',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -12529,11 +19138,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                'string',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('string' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -12543,7 +19476,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12551,7 +19484,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12559,7 +19492,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12567,7 +19500,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12575,7 +19508,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12583,7 +19516,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12591,7 +19524,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12599,7 +19532,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12607,7 +19540,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12615,7 +19548,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -12624,19 +19557,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -12772,10 +19694,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessWithToken
      *
      * Process a transaction via token
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessWithToken'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -12792,10 +19715,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessWithTokenWithHttpInfo
      *
      * Process a transaction via token
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessWithToken'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -12829,85 +19753,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Charge',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -12921,11 +19766,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Charge',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Charge' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Charge' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Charge', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Charge';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -12935,7 +20104,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12943,7 +20112,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12951,7 +20120,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12959,7 +20128,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12967,7 +20136,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12975,7 +20144,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12983,7 +20152,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12991,7 +20160,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -12999,7 +20168,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13007,7 +20176,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -13016,19 +20185,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -13038,7 +20196,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessWithToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -13160,10 +20318,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessWithoutInteraction
      *
      * Process a transaction without user-interaction
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessWithoutInteraction'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -13180,10 +20339,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdProcessWithoutInteractionWithHttpInfo
      *
      * Process a transaction without user-interaction
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessWithoutInteraction'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -13217,85 +20377,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\Transaction',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -13309,11 +20390,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\Transaction',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\Transaction' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\Transaction' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\Transaction', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\Transaction';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -13323,7 +20728,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13331,7 +20736,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13339,7 +20744,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13347,7 +20752,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13355,7 +20760,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13363,7 +20768,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13371,7 +20776,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13379,7 +20784,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13387,7 +20792,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13395,7 +20800,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -13404,19 +20809,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -13426,7 +20820,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdProcessWithoutInteraction'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -13548,10 +20942,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdVoidOffline
      *
      * Void a transaction offline
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdVoidOffline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -13568,10 +20963,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdVoidOfflineWithHttpInfo
      *
      * Void a transaction offline
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdVoidOffline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -13605,85 +21001,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionVoid',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -13697,11 +21014,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionVoid',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionVoid' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionVoid' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionVoid', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionVoid';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -13711,7 +21352,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13719,7 +21360,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13727,7 +21368,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13735,7 +21376,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13743,7 +21384,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13751,7 +21392,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13759,7 +21400,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13767,7 +21408,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13775,7 +21416,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -13783,7 +21424,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -13792,19 +21433,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -13814,7 +21444,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdVoidOffline'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -13936,10 +21566,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdVoidOnline
      *
      * Void a transaction online
+     
      *
      * @param  int $id id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand expand (optional)
+     * @param  string[] $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdVoidOnline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -13956,10 +21587,11 @@ class TransactionsService
      * Operation postPaymentTransactionsIdVoidOnlineWithHttpInfo
      *
      * Void a transaction online
+     
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdVoidOnline'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
@@ -13993,85 +21625,6 @@ class TransactionsService
 
             $statusCode = $response->getStatusCode();
 
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\TransactionVoid',
-                        $request,
-                        $response,
-                    );
-                case 400:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 401:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 403:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 404:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 406:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 409:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 415:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 422:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                case 429:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-                
-                default:
-                    return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\RestApiErrorResponse',
-                        $request,
-                        $response,
-                    );
-            }
-
-            if ($this->responseWithinRangeCode('5XX', $statusCode)) {
-                return $this->handleResponseWithDataType(
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $request,
-                    $response,
-                );
-            }
-
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -14085,11 +21638,335 @@ class TransactionsService
                 );
             }
 
-            return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\TransactionVoid',
-                $request,
-                $response,
-            );
+            switch($statusCode) {
+                case 200:
+                    if ('\Wallee\Sdk\Model\TransactionVoid' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\TransactionVoid' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\TransactionVoid', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 409:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 415:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wallee\Sdk\Model\RestApiErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wallee\Sdk\Model\RestApiErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wallee\Sdk\Model\RestApiErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Wallee\Sdk\Model\TransactionVoid';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -14099,7 +21976,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14107,7 +21984,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14115,7 +21992,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14123,7 +22000,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14131,7 +22008,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14139,7 +22016,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14147,7 +22024,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 415:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14155,7 +22032,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14163,7 +22040,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -14171,7 +22048,7 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
                 
                 default:
                     $data = ObjectSerializer::deserialize(
@@ -14180,19 +22057,8 @@ class TransactionsService
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    throw $e;
+                    break;
             }
-        
-            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
-                $data = ObjectSerializer::deserialize(
-                    $e->getResponseBody(),
-                    '\Wallee\Sdk\Model\RestApiErrorResponse',
-                    $e->getResponseHeaders()
-                );
-                $e->setResponseObject($data);
-                throw $e;
-            }
-
             throw $e;
         }
     }
@@ -14202,7 +22068,7 @@ class TransactionsService
      *
      * @param  int $id (required)
      * @param  int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param  string[]|null $expand (optional)
+     * @param  string[] $expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postPaymentTransactionsIdVoidOnline'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -14341,49 +22207,6 @@ class TransactionsService
         }
 
         return $options;
-    }
-
-    private function handleResponseWithDataType(
-        string $dataType,
-        RequestInterface $request,
-        ResponseInterface $response
-    ): array {
-        if ($dataType === '\SplFileObject') {
-            $content = $response->getBody(); //stream goes to serializer
-        } else {
-            $content = (string) $response->getBody();
-            if ($dataType !== 'string') {
-                try {
-                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                } catch (\JsonException $exception) {
-                    throw new ApiException(
-                        sprintf(
-                            'Error JSON decoding server response (%s)',
-                            $request->getUri()
-                        ),
-                        $response->getStatusCode(),
-                        $response->getHeaders(),
-                        $content
-                    );
-                }
-            }
-        }
-
-        return [
-            ObjectSerializer::deserialize($content, $dataType, []),
-            $response->getStatusCode(),
-            $response->getHeaders()
-        ];
-    }
-
-    private function responseWithinRangeCode(
-        string $rangeCode,
-        int $statusCode
-    ): bool {
-        $left = (int) ($rangeCode[0].'00');
-        $right = (int) ($rangeCode[0].'99');
-
-        return $statusCode >= $left && $statusCode <= $right;
     }
 
 }

@@ -62,7 +62,7 @@ class RefundTest extends TestCase
             Constants::getMockCardData()
         );
 
-        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOnline(
+        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOffline(
             
             $transaction->getId(),
             Constants::$spaceId
@@ -111,7 +111,7 @@ class RefundTest extends TestCase
             Constants::getMockCardData()
         );
 
-        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOnline(
+        $transactionCompletion = self::$transactionService->postPaymentTransactionsIdCompleteOffline(
             $transaction->getId(),
             Constants::$spaceId
         );

@@ -29,13 +29,13 @@ use \Wallee\Sdk\ObjectSerializer;
 /**
  * SubscriptionUpdateRequest model
  *
- * @category Class
+ * @category    Class
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.1.0
  * @implements \ArrayAccess<string, mixed>
  */
 class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSerializable
@@ -55,10 +55,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'component_configurations' => '\Wallee\Sdk\Model\SubscriptionComponentReferenceConfiguration[]',
-        'product' => 'int',
-        'currency' => 'string',
-        'respect_termination_period' => 'bool'
+        'description' => 'string'
     ];
 
     /**
@@ -69,10 +66,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'component_configurations' => null,
-        'product' => 'int64',
-        'currency' => null,
-        'respect_termination_period' => null
+        'description' => null
     ];
 
     /**
@@ -81,10 +75,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'component_configurations' => false,
-        'product' => false,
-        'currency' => false,
-        'respect_termination_period' => false
+        'description' => false
     ];
 
     /**
@@ -99,7 +90,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return array
      */
-    public static function openAPITypes()
+    public static function openAPITypes(): array
     {
         return self::$openAPITypes;
     }
@@ -109,7 +100,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return array
      */
-    public static function openAPIFormats()
+    public static function openAPIFormats(): array
     {
         return self::$openAPIFormats;
     }
@@ -173,10 +164,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'component_configurations' => 'componentConfigurations',
-        'product' => 'product',
-        'currency' => 'currency',
-        'respect_termination_period' => 'respectTerminationPeriod'
+        'description' => 'description'
     ];
 
     /**
@@ -185,10 +173,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'component_configurations' => 'setComponentConfigurations',
-        'product' => 'setProduct',
-        'currency' => 'setCurrency',
-        'respect_termination_period' => 'setRespectTerminationPeriod'
+        'description' => 'setDescription'
     ];
 
     /**
@@ -197,10 +182,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'component_configurations' => 'getComponentConfigurations',
-        'product' => 'getProduct',
-        'currency' => 'getCurrency',
-        'respect_termination_period' => 'getRespectTerminationPeriod'
+        'description' => 'getDescription'
     ];
 
     /**
@@ -209,7 +191,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return array
      */
-    public static function attributeMap()
+    public static function attributeMap(): array
     {
         return self::$attributeMap;
     }
@@ -219,7 +201,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return array
      */
-    public static function setters()
+    public static function setters(): array
     {
         return self::$setters;
     }
@@ -229,7 +211,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return array
      */
-    public static function getters()
+    public static function getters(): array
     {
         return self::$getters;
     }
@@ -239,7 +221,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return string
      */
-    public function getModelName()
+    public function getModelName(): string
     {
         return self::$openAPIModelName;
     }
@@ -248,22 +230,19 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Associative array for storing property values
      *
-     * @var mixed[]
+     * @var array
      */
     protected $container = [];
 
     /**
      * Constructor
      *
-     * @param mixed[]|null $data Associated array of property values
+     * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('component_configurations', $data ?? [], null);
-        $this->setIfExists('product', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('respect_termination_period', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
     }
 
     /**
@@ -293,6 +272,10 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 200)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 200.";
+        }
+
         return $invalidProperties;
     }
 
@@ -302,118 +285,39 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return bool True if all properties are valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return count($this->listInvalidProperties()) === 0;
     }
 
 
     /**
-     * Gets component_configurations
-     *
-     * @return \Wallee\Sdk\Model\SubscriptionComponentReferenceConfiguration[]|null
-     */
-    public function getComponentConfigurations()
-    {
-        return $this->container['component_configurations'];
-    }
-
-    /**
-     * Sets component_configurations
-     *
-     * @param \Wallee\Sdk\Model\SubscriptionComponentReferenceConfiguration[]|null $component_configurations The configurations of the subscription's components.
-     *
-     * @return self
-     */
-    public function setComponentConfigurations($component_configurations)
-    {
-        if (is_null($component_configurations)) {
-            throw new \InvalidArgumentException('non-nullable component_configurations cannot be null');
-        }
-
-
-        $this->container['component_configurations'] = $component_configurations;
-
-        return $this;
-    }
-
-    /**
-     * Gets product
-     *
-     * @return int|null
-     */
-    public function getProduct()
-    {
-        return $this->container['product'];
-    }
-
-    /**
-     * Sets product
-     *
-     * @param int|null $product The product to subscribe to.
-     *
-     * @return self
-     */
-    public function setProduct($product)
-    {
-        if (is_null($product)) {
-            throw new \InvalidArgumentException('non-nullable product cannot be null');
-        }
-        $this->container['product'] = $product;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
+     * Gets description
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getDescription()
     {
-        return $this->container['currency'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets currency
+     * Sets description
      *
-     * @param string|null $currency The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
+     * @param string|null $description A description used to identify the subscription.
      *
      * @return self
      */
-    public function setCurrency($currency)
+    public function setDescription($description)
     {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets respect_termination_period
-     *
-     * @return bool|null
-     */
-    public function getRespectTerminationPeriod()
-    {
-        return $this->container['respect_termination_period'];
-    }
-
-    /**
-     * Sets respect_termination_period
-     *
-     * @param bool|null $respect_termination_period Whether the subscriptions' termination periods should be respected.
-     *
-     * @return self
-     */
-    public function setRespectTerminationPeriod($respect_termination_period)
-    {
-        if (is_null($respect_termination_period)) {
-            throw new \InvalidArgumentException('non-nullable respect_termination_period cannot be null');
+        if ((mb_strlen($description) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling SubscriptionUpdateRequest., must be smaller than or equal to 200.');
         }
-        $this->container['respect_termination_period'] = $respect_termination_period;
+
+        $this->container['description'] = $description;
 
         return $this;
     }
@@ -437,7 +341,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->container[$offset] ?? null;
     }
@@ -450,7 +354,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return void
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet($offset, mixed $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -479,7 +383,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      * of any type other than a resource.
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
        return ObjectSerializer::sanitizeForSerialization($this);
     }
@@ -502,7 +406,7 @@ class SubscriptionUpdateRequest implements ModelInterface, ArrayAccess, \JsonSer
      *
      * @return string
      */
-    public function toHeaderValue()
+    public function toHeaderValue(): string
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
