@@ -27,22 +27,22 @@ use \Wallee\Sdk\ObjectSerializer;
 /**
  * TaxCalculation model
  *
- * @category    Class
+ * @category Class
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class TaxCalculation
 {
     /**
      * Possible values of this enum
      */
-    public const INCLUDED = 'TAX_INCLUDED';
+    public const TAX_INCLUDED = 'TAX_INCLUDED';
 
-    public const NOT_INCLUDED = 'TAX_NOT_INCLUDED';
+    public const TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED';
 
     /**
      * Gets allowable values of the enum
@@ -51,8 +51,8 @@ class TaxCalculation
     public static function getAllowableEnumValues()
     {
         return [
-            self::INCLUDED,
-            self::NOT_INCLUDED
+            self::TAX_INCLUDED,
+            self::TAX_NOT_INCLUDED
         ];
     }
 }
