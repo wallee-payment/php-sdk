@@ -1,6 +1,6 @@
 <?php
 /**
- * Wallee AG Php SDK
+ * Wallee AG PHP SDK
  *
  * This library allows to interact with the Wallee AG payment service.
  *
@@ -67,7 +67,7 @@ class TransactionCompletionsServiceTest extends TestCase
             'State must be FULFILL'
         );
 
-        $transactionCompletion = self::$transactionsService->postPaymentTransactionsIdCompleteOffline(
+        $transactionCompletion = self::$transactionsService->postPaymentTransactionsIdCompleteOnline(
             $transaction->getId(),
             Constants::$spaceId
         );

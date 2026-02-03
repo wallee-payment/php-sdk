@@ -1,6 +1,6 @@
 <?php
 /**
- * Wallee AG Php SDK
+ * Wallee AG PHP SDK
  *
  * This library allows to interact with the Wallee AG payment service.
  *

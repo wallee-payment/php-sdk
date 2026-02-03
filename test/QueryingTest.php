@@ -1,6 +1,6 @@
 <?php
 /**
- * Wallee AG Php SDK
+ * Wallee AG PHP SDK
  *
  * This library allows to interact with the Wallee AG payment service.
  *
@@ -279,6 +279,24 @@ class QueryingTest extends TestCase
         $this->assertNotNull(
             $response->getPaymentConnectorConfiguration()->getProcessorConfiguration()->getLinkedSpaceId(),
             "Items in nested response should be present"
+        );
+    }
+
+    /**
+     * Transaction search with single quote sign in query parameter.
+     */
+    public function testSearchWithQuoteSignShouldReturnCorrectResponse()
+    {
+        $response = self::$transactionService->getPaymentTransactionsSearch(
+            Constants::$spaceId, [], 1, 0, '', "completedOn:<'2026-01-15'"
+        );
+
+        $this->assertNotNull($response, "Response should not be null");
+
+        $this->assertNotEquals(
+            0,
+            count($response->getData()),
+            "Response list should not be empty"
         );
     }
 }

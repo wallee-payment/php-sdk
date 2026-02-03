@@ -1,6 +1,6 @@
 <?php
 /**
- * Wallee AG Php SDK
+ * Wallee AG PHP SDK
  *
  * This library allows to interact with the Wallee AG payment service.
  *
@@ -24,7 +24,7 @@
 namespace Wallee\Sdk\Utils;
 
 use Wallee\Sdk\WalleeSdkException;
-use Wallee\Sdk\ErrorCode;
+use Wallee\Sdk\SdkExceptionErrorCodes;
 
 /**
  * EncryptionUtil class to verify content body with signature
@@ -35,7 +35,7 @@ use Wallee\Sdk\ErrorCode;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class EncryptionUtil
 {
@@ -55,8 +55,8 @@ class EncryptionUtil
 
             if (empty($signatureAlgorithm)) {
                 throw new WalleeSdkException(
-                    ErrorCode::MISSING_WEBHOOK_ENCRYPTION_ALGORYTHM,
-                    "Webhook signature algorythm was not provided"
+                    SdkExceptionErrorCodes::MISSING_WEBHOOK_ENCRYPTION_ALGORITHM,
+                    "Webhook signature algorithm was not provided"
                 );
             }
 
@@ -67,7 +67,7 @@ class EncryptionUtil
                     break;
                 default:
                     throw new WalleeSdkException(
-                        ErrorCode::UNSUPPORTED_WEBHOOK_ENCRYPTION_ALGORYTHM,
+                        SdkExceptionErrorCodes::UNSUPPORTED_WEBHOOK_ENCRYPTION_ALGORITHM,
                         "Unsupported webhook signature algorithm: '" . $signatureAlgorithm . "'. "
                         . "This may indicate that the REST API is using a new encryption algorithm for webhooks. "
                         . "Please check whether a newer version of the SDK is available."
@@ -77,7 +77,7 @@ class EncryptionUtil
             $decodedSignature = base64_decode($contentSignature, true);
             if ($decodedSignature === false) {
                 throw new WalleeSdkException(
-                    ErrorCode::INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE,
+                    SdkExceptionErrorCodes::INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE,
                     "Invalid base64 signature format"
                 );
             }
@@ -86,7 +86,7 @@ class EncryptionUtil
 
             if ($result === -1) {
                 throw new WalleeSdkException(
-                    ErrorCode::INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE,
+                    SdkExceptionErrorCodes::INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE,
                     "OpenSSL internal error during signature verification. Invalid content signature format"
                 );
             }
@@ -94,7 +94,7 @@ class EncryptionUtil
             return $result === 1;
         } catch (\ValueError|\TypeError $e) {
             throw new WalleeSdkException(
-                ErrorCode::WEBHOOK_ENCRYPTION_SIGNATURE_VERIFICATION_FAILED,
+                SdkExceptionErrorCodes::WEBHOOK_ENCRYPTION_SIGNATURE_VERIFICATION_FAILED,
                 "An error occurred during verification: " . $e->getMessage()
             );
         }
@@ -109,7 +109,7 @@ class EncryptionUtil
 
         if (!$publicKey) {
             throw new WalleeSdkException(
-                ErrorCode::INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY,
+                SdkExceptionErrorCodes::INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY,
                 "Invalid public key. Failed to create public key from base64 string"
             );
         }

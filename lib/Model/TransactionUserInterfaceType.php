@@ -1,6 +1,6 @@
 <?php
 /**
- * Wallee AG Php SDK
+ * Wallee AG PHP SDK
  *
  * This library allows to interact with the Wallee AG payment service.
  *
@@ -27,13 +27,13 @@ use \Wallee\Sdk\ObjectSerializer;
 /**
  * TransactionUserInterfaceType model
  *
- * @category    Class
+ * @category Class
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.1.0
+ * @version     5.2.0
  */
 class TransactionUserInterfaceType
 {
@@ -50,6 +50,8 @@ class TransactionUserInterfaceType
 
     public const TERMINAL = 'TERMINAL';
 
+    public const CLOUD_TILL_INTERFACE = 'CLOUD_TILL_INTERFACE';
+
     public const EXPRESS_CHECKOUT = 'EXPRESS_CHECKOUT';
 
     /**
@@ -64,6 +66,7 @@ class TransactionUserInterfaceType
             self::PAYMENT_PAGE,
             self::MOBILE_SDK,
             self::TERMINAL,
+            self::CLOUD_TILL_INTERFACE,
             self::EXPRESS_CHECKOUT
         ];
     }
