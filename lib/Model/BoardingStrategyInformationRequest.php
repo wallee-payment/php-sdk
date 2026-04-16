@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * BogusExpressCheckoutPaymentData model
+ * BoardingStrategyInformationRequest model
  *
  * @category Class
  * @package     Wallee\Sdk
@@ -35,10 +35,10 @@ use \Wallee\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \JsonSerializable
+class BoardingStrategyInformationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BogusExpressCheckoutPaymentData';
+    protected static $openAPIModelName = 'BoardingStrategyInformationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_token' => 'string',
-        'cryptogram' => 'string'
+        'billing_address' => '\Wallee\Sdk\Model\Setter'
     ];
 
     /**
@@ -67,8 +66,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'payment_token' => null,
-        'cryptogram' => null
+        'billing_address' => null
     ];
 
     /**
@@ -77,8 +75,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'payment_token' => false,
-        'cryptogram' => false
+        'billing_address' => false
     ];
 
     /**
@@ -167,8 +164,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'payment_token' => 'paymentToken',
-        'cryptogram' => 'cryptogram'
+        'billing_address' => 'billingAddress'
     ];
 
     /**
@@ -177,8 +173,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'payment_token' => 'setPaymentToken',
-        'cryptogram' => 'setCryptogram'
+        'billing_address' => 'setBillingAddress'
     ];
 
     /**
@@ -187,8 +182,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'payment_token' => 'getPaymentToken',
-        'cryptogram' => 'getCryptogram'
+        'billing_address' => 'getBillingAddress'
     ];
 
     /**
@@ -248,8 +242,7 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('payment_token', $data ?? [], null);
-        $this->setIfExists('cryptogram', $data ?? [], null);
+        $this->setIfExists('billing_address', $data ?? [], null);
     }
 
     /**
@@ -279,6 +272,9 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
     {
         $invalidProperties = [];
 
+        if ($this->container['billing_address'] === null) {
+            $invalidProperties[] = "'billing_address' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -295,55 +291,28 @@ class BogusExpressCheckoutPaymentData implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets payment_token
+     * Gets billing_address
      *
-     * @return string|null
+     * @return \Wallee\Sdk\Model\Setter
      */
-    public function getPaymentToken()
+    public function getBillingAddress()
     {
-        return $this->container['payment_token'];
+        return $this->container['billing_address'];
     }
 
     /**
-     * Sets payment_token
+     * Sets billing_address
      *
-     * @param string|null $payment_token Wallet-generated payment token collected during approval.
+     * @param \Wallee\Sdk\Model\Setter $billing_address billing_address
      *
      * @return self
      */
-    public function setPaymentToken($payment_token)
+    public function setBillingAddress($billing_address)
     {
-        if (is_null($payment_token)) {
-            throw new \InvalidArgumentException('non-nullable payment_token cannot be null');
+        if (is_null($billing_address)) {
+            throw new \InvalidArgumentException('non-nullable billing_address cannot be null');
         }
-        $this->container['payment_token'] = $payment_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets cryptogram
-     *
-     * @return string|null
-     */
-    public function getCryptogram()
-    {
-        return $this->container['cryptogram'];
-    }
-
-    /**
-     * Sets cryptogram
-     *
-     * @param string|null $cryptogram Wallet-generated cryptogram collected during approval.
-     *
-     * @return self
-     */
-    public function setCryptogram($cryptogram)
-    {
-        if (is_null($cryptogram)) {
-            throw new \InvalidArgumentException('non-nullable cryptogram cannot be null');
-        }
-        $this->container['cryptogram'] = $cryptogram;
+        $this->container['billing_address'] = $billing_address;
 
         return $this;
     }

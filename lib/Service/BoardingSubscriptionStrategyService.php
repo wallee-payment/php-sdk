@@ -40,7 +40,7 @@ use Wallee\Sdk\ObjectSerializer;
 use Wallee\Sdk\Auth\HttpBearerAuth;
 
 /**
- * BogusExpressCheckoutService service
+ * BoardingSubscriptionStrategyService service
  *
  * @category Class
  * @package  Wallee\Sdk
@@ -48,9 +48,9 @@ use Wallee\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.0
+ * @version  5.2.2
  */
-class BogusExpressCheckoutService
+class BoardingSubscriptionStrategyService
 {
     /**
      * @var ClientInterface
@@ -79,7 +79,10 @@ class BogusExpressCheckoutService
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'postBogusExpressCheckoutOnApprove' => [
+        'postBoardingSubscriptionStrategyInformation' => [
+            'application/json',
+        ],
+        'postBoardingSubscriptionStrategyPlans' => [
             'application/json',
         ],
     ];
@@ -142,42 +145,40 @@ class BogusExpressCheckoutService
     }
 
     /**
-     * Operation postBogusExpressCheckoutOnApprove
+     * Operation postBoardingSubscriptionStrategyInformation
      *
-     * Approve express checkout wallet payment
+     * Create a boarding subscription information for an account
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \Wallee\Sdk\Model\BogusExpressCheckoutApprovalRequest $bogus_express_checkout_approval_request bogus_express_checkout_approval_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBogusExpressCheckoutOnApprove'] to see the possible values for this operation
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \Wallee\Sdk\Model\BoardingStrategyInformationRequest $boarding_strategy_information_request boarding_strategy_information_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBoardingSubscriptionStrategyInformation'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wallee\Sdk\Model\ExpressCheckoutApprovalResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse
+     * @return \Wallee\Sdk\Model\BoardingStrategyInformationRequest|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse
      */
-    public function postBogusExpressCheckoutOnApprove(string $session_token, int $space, \Wallee\Sdk\Model\BogusExpressCheckoutApprovalRequest $bogus_express_checkout_approval_request, string $contentType = self::contentTypes['postBogusExpressCheckoutOnApprove'][0])
+    public function postBoardingSubscriptionStrategyInformation(int $account, \Wallee\Sdk\Model\BoardingStrategyInformationRequest $boarding_strategy_information_request, string $contentType = self::contentTypes['postBoardingSubscriptionStrategyInformation'][0])
     {
-        list($response) = $this->postBogusExpressCheckoutOnApproveWithHttpInfo($session_token, $space, $bogus_express_checkout_approval_request, $contentType);
+        list($response) = $this->postBoardingSubscriptionStrategyInformationWithHttpInfo($account, $boarding_strategy_information_request, $contentType);
         return $response;
     }
 
     /**
-     * Operation postBogusExpressCheckoutOnApproveWithHttpInfo
+     * Operation postBoardingSubscriptionStrategyInformationWithHttpInfo
      *
-     * Approve express checkout wallet payment
+     * Create a boarding subscription information for an account
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \Wallee\Sdk\Model\BogusExpressCheckoutApprovalRequest $bogus_express_checkout_approval_request bogus_express_checkout_approval_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBogusExpressCheckoutOnApprove'] to see the possible values for this operation
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \Wallee\Sdk\Model\BoardingStrategyInformationRequest $boarding_strategy_information_request boarding_strategy_information_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBoardingSubscriptionStrategyInformation'] to see the possible values for this operation
      *
      * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wallee\Sdk\Model\ExpressCheckoutApprovalResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wallee\Sdk\Model\BoardingStrategyInformationRequest|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postBogusExpressCheckoutOnApproveWithHttpInfo(string $session_token, int $space, \Wallee\Sdk\Model\BogusExpressCheckoutApprovalRequest $bogus_express_checkout_approval_request, string $contentType = self::contentTypes['postBogusExpressCheckoutOnApprove'][0])
+    public function postBoardingSubscriptionStrategyInformationWithHttpInfo(int $account, \Wallee\Sdk\Model\BoardingStrategyInformationRequest $boarding_strategy_information_request, string $contentType = self::contentTypes['postBoardingSubscriptionStrategyInformation'][0])
     {
-        $request = $this->postBogusExpressCheckoutOnApproveRequest($session_token, $space, $bogus_express_checkout_approval_request, $contentType);
+        $request = $this->postBoardingSubscriptionStrategyInformationRequest($account, $boarding_strategy_information_request, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -204,9 +205,9 @@ class BogusExpressCheckoutService
 
 
             switch($statusCode) {
-                case 200:
+                case 201:
                     return $this->handleResponseWithDataType(
-                        '\Wallee\Sdk\Model\ExpressCheckoutApprovalResponse',
+                        '\Wallee\Sdk\Model\BoardingStrategyInformationRequest',
                         $request,
                         $response,
                     );
@@ -295,16 +296,16 @@ class BogusExpressCheckoutService
             }
 
             return $this->handleResponseWithDataType(
-                '\Wallee\Sdk\Model\ExpressCheckoutApprovalResponse',
+                '\Wallee\Sdk\Model\BoardingStrategyInformationRequest',
                 $request,
                 $response,
             );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\ExpressCheckoutApprovalResponse',
+                        '\Wallee\Sdk\Model\BoardingStrategyInformationRequest',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -407,42 +408,34 @@ class BogusExpressCheckoutService
     }
 
     /**
-     * Create request for operation 'postBogusExpressCheckoutOnApprove'
+     * Create request for operation 'postBoardingSubscriptionStrategyInformation'
      *
-     * @param string $session_token session_token (required)
-     * @param int $space Specifies the ID of the space the operation should be executed in. (required)
-     * @param \Wallee\Sdk\Model\BogusExpressCheckoutApprovalRequest $bogus_express_checkout_approval_request bogus_express_checkout_approval_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBogusExpressCheckoutOnApprove'] to see the possible values for this operation
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \Wallee\Sdk\Model\BoardingStrategyInformationRequest $boarding_strategy_information_request boarding_strategy_information_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBoardingSubscriptionStrategyInformation'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postBogusExpressCheckoutOnApproveRequest(string $session_token, int $space, \Wallee\Sdk\Model\BogusExpressCheckoutApprovalRequest $bogus_express_checkout_approval_request, string $contentType = self::contentTypes['postBogusExpressCheckoutOnApprove'][0])
+    public function postBoardingSubscriptionStrategyInformationRequest(int $account, \Wallee\Sdk\Model\BoardingStrategyInformationRequest $boarding_strategy_information_request, string $contentType = self::contentTypes['postBoardingSubscriptionStrategyInformation'][0])
     {
 
-        // verify the required parameter 'session_token' is set
-        if ($session_token === null || (is_array($session_token) && count($session_token) === 0)) {
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $session_token when calling postBogusExpressCheckoutOnApprove'
+                'Missing the required parameter $account when calling postBoardingSubscriptionStrategyInformation'
             );
         }
 
-        // verify the required parameter 'space' is set
-        if ($space === null || (is_array($space) && count($space) === 0)) {
+        // verify the required parameter 'boarding_strategy_information_request' is set
+        if ($boarding_strategy_information_request === null || (is_array($boarding_strategy_information_request) && count($boarding_strategy_information_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $space when calling postBogusExpressCheckoutOnApprove'
-            );
-        }
-
-        // verify the required parameter 'bogus_express_checkout_approval_request' is set
-        if ($bogus_express_checkout_approval_request === null || (is_array($bogus_express_checkout_approval_request) && count($bogus_express_checkout_approval_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $bogus_express_checkout_approval_request when calling postBogusExpressCheckoutOnApprove'
+                'Missing the required parameter $boarding_strategy_information_request when calling postBoardingSubscriptionStrategyInformation'
             );
         }
 
 
-        $resourcePath = '/bogus-express-checkout/on-approve';
+        $resourcePath = '/boarding/subscription-strategy/information';
         $httpMethod = 'POST';
         $formParams = [];
         $queryParams = [];
@@ -450,19 +443,10 @@ class BogusExpressCheckoutService
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $session_token,
-            'sessionToken', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
 
         // header params
-        if ($space !== null) {
-            $headerParams['Space'] = ObjectSerializer::toHeaderValue($space);
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
         }
 
 
@@ -474,12 +458,282 @@ class BogusExpressCheckoutService
         );
 
         // for model (json/xml)
-        if (isset($bogus_express_checkout_approval_request)) {
+        if (isset($boarding_strategy_information_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($bogus_express_checkout_approval_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($boarding_strategy_information_request));
             } else {
-                $httpBody = $bogus_express_checkout_approval_request;
+                $httpBody = $boarding_strategy_information_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        $query = ObjectSerializer::buildQuery($queryParams);
+
+        $auth_headers = [];
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        foreach ($this->authentications as $auth) {
+            $auth_headers = $auth->generateAuthParams($resourcePath, $httpMethod, $query);
+        }
+
+        $defaultHeaders = $this->config->getDefaultHeaders();
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $auth_headers,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        return new Request(
+            $httpMethod,
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postBoardingSubscriptionStrategyPlans
+     *
+     * Create new Boarding Trial Subscription to Account
+     *
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \Wallee\Sdk\Model\StoreTrialSubscriptionRequestSetter $store_trial_subscription_request_setter store_trial_subscription_request_setter (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBoardingSubscriptionStrategyPlans'] to see the possible values for this operation
+     *
+     * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function postBoardingSubscriptionStrategyPlans(int $account, \Wallee\Sdk\Model\StoreTrialSubscriptionRequestSetter $store_trial_subscription_request_setter, string $contentType = self::contentTypes['postBoardingSubscriptionStrategyPlans'][0])
+    {
+        $this->postBoardingSubscriptionStrategyPlansWithHttpInfo($account, $store_trial_subscription_request_setter, $contentType);
+    }
+
+    /**
+     * Operation postBoardingSubscriptionStrategyPlansWithHttpInfo
+     *
+     * Create new Boarding Trial Subscription to Account
+     *
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \Wallee\Sdk\Model\StoreTrialSubscriptionRequestSetter $store_trial_subscription_request_setter store_trial_subscription_request_setter (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBoardingSubscriptionStrategyPlans'] to see the possible values for this operation
+     *
+     * @throws \Wallee\Sdk\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postBoardingSubscriptionStrategyPlansWithHttpInfo(int $account, \Wallee\Sdk\Model\StoreTrialSubscriptionRequestSetter $store_trial_subscription_request_setter, string $contentType = self::contentTypes['postBoardingSubscriptionStrategyPlans'][0])
+    {
+        $request = $this->postBoardingSubscriptionStrategyPlansRequest($account, $store_trial_subscription_request_setter, $contentType);
+
+        try {
+            $requestTimeout = $this->config->getRequestTimeout();
+            $options = $this->createHttpClientOption($requestTimeout);
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 415:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wallee\Sdk\Model\RestApiErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+            if ($this->responseWithinRangeCode('5XX', $e->getCode())) {
+                $data = ObjectSerializer::deserialize(
+                    $e->getResponseBody(),
+                    '\Wallee\Sdk\Model\RestApiErrorResponse',
+                    $e->getResponseHeaders()
+                );
+                $e->setResponseObject($data);
+                throw $e;
+            }
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Create request for operation 'postBoardingSubscriptionStrategyPlans'
+     *
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
+     * @param \Wallee\Sdk\Model\StoreTrialSubscriptionRequestSetter $store_trial_subscription_request_setter store_trial_subscription_request_setter (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postBoardingSubscriptionStrategyPlans'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function postBoardingSubscriptionStrategyPlansRequest(int $account, \Wallee\Sdk\Model\StoreTrialSubscriptionRequestSetter $store_trial_subscription_request_setter, string $contentType = self::contentTypes['postBoardingSubscriptionStrategyPlans'][0])
+    {
+
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account when calling postBoardingSubscriptionStrategyPlans'
+            );
+        }
+
+        // verify the required parameter 'store_trial_subscription_request_setter' is set
+        if ($store_trial_subscription_request_setter === null || (is_array($store_trial_subscription_request_setter) && count($store_trial_subscription_request_setter) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $store_trial_subscription_request_setter when calling postBoardingSubscriptionStrategyPlans'
+            );
+        }
+
+
+        $resourcePath = '/boarding/subscription-strategy/plans';
+        $httpMethod = 'POST';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($store_trial_subscription_request_setter)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($store_trial_subscription_request_setter));
+            } else {
+                $httpBody = $store_trial_subscription_request_setter;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

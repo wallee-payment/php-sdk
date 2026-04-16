@@ -27,18 +27,19 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * BogusExpressCheckoutApprovalRequest model
+ * StoreTrialSubscriptionRequestSetter model
  *
  * @category Class
+ * @description Model used to store a Trial Subscription, assigning it to an Account
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class StoreTrialSubscriptionRequestSetter implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +48,7 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'BogusExpressCheckoutApprovalRequest';
+    protected static $openAPIModelName = 'StoreTrialSubscriptionRequest.Setter';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +56,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_data' => '\Wallee\Sdk\Model\BogusExpressCheckoutPaymentData'
+        'coupon_codes' => 'string[]',
+        'component_configurations' => '\Wallee\Sdk\Model\SubscriptionComponentGroupConfigurationRequestSetter[]',
+        'product_id' => 'int',
+        'currency' => 'string',
+        'affiliate_id' => 'int'
     ];
 
     /**
@@ -66,7 +71,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'payment_data' => null
+        'coupon_codes' => null,
+        'component_configurations' => null,
+        'product_id' => 'int64',
+        'currency' => null,
+        'affiliate_id' => 'int64'
     ];
 
     /**
@@ -75,7 +84,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'payment_data' => false
+        'coupon_codes' => false,
+        'component_configurations' => false,
+        'product_id' => false,
+        'currency' => false,
+        'affiliate_id' => false
     ];
 
     /**
@@ -164,7 +177,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payment_data' => 'paymentData'
+        'coupon_codes' => 'couponCodes',
+        'component_configurations' => 'componentConfigurations',
+        'product_id' => 'productId',
+        'currency' => 'currency',
+        'affiliate_id' => 'affiliateId'
     ];
 
     /**
@@ -173,7 +190,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'payment_data' => 'setPaymentData'
+        'coupon_codes' => 'setCouponCodes',
+        'component_configurations' => 'setComponentConfigurations',
+        'product_id' => 'setProductId',
+        'currency' => 'setCurrency',
+        'affiliate_id' => 'setAffiliateId'
     ];
 
     /**
@@ -182,7 +203,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'payment_data' => 'getPaymentData'
+        'coupon_codes' => 'getCouponCodes',
+        'component_configurations' => 'getComponentConfigurations',
+        'product_id' => 'getProductId',
+        'currency' => 'getCurrency',
+        'affiliate_id' => 'getAffiliateId'
     ];
 
     /**
@@ -242,7 +267,11 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('payment_data', $data ?? [], null);
+        $this->setIfExists('coupon_codes', $data ?? [], null);
+        $this->setIfExists('component_configurations', $data ?? [], null);
+        $this->setIfExists('product_id', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
+        $this->setIfExists('affiliate_id', $data ?? [], null);
     }
 
     /**
@@ -272,6 +301,12 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['product_id'] === null) {
+            $invalidProperties[] = "'product_id' can't be null";
+        }
+        if ($this->container['currency'] === null) {
+            $invalidProperties[] = "'currency' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -288,28 +323,136 @@ class BogusExpressCheckoutApprovalRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets payment_data
+     * Gets coupon_codes
      *
-     * @return \Wallee\Sdk\Model\BogusExpressCheckoutPaymentData|null
+     * @return string[]|null
      */
-    public function getPaymentData()
+    public function getCouponCodes()
     {
-        return $this->container['payment_data'];
+        return $this->container['coupon_codes'];
     }
 
     /**
-     * Sets payment_data
+     * Sets coupon_codes
      *
-     * @param \Wallee\Sdk\Model\BogusExpressCheckoutPaymentData|null $payment_data payment_data
+     * @param string[]|null $coupon_codes coupon_codes
      *
      * @return self
      */
-    public function setPaymentData($payment_data)
+    public function setCouponCodes($coupon_codes)
     {
-        if (is_null($payment_data)) {
-            throw new \InvalidArgumentException('non-nullable payment_data cannot be null');
+        if (is_null($coupon_codes)) {
+            throw new \InvalidArgumentException('non-nullable coupon_codes cannot be null');
         }
-        $this->container['payment_data'] = $payment_data;
+        $this->container['coupon_codes'] = $coupon_codes;
+
+        return $this;
+    }
+
+    /**
+     * Gets component_configurations
+     *
+     * @return \Wallee\Sdk\Model\SubscriptionComponentGroupConfigurationRequestSetter[]|null
+     */
+    public function getComponentConfigurations()
+    {
+        return $this->container['component_configurations'];
+    }
+
+    /**
+     * Sets component_configurations
+     *
+     * @param \Wallee\Sdk\Model\SubscriptionComponentGroupConfigurationRequestSetter[]|null $component_configurations component_configurations
+     *
+     * @return self
+     */
+    public function setComponentConfigurations($component_configurations)
+    {
+        if (is_null($component_configurations)) {
+            throw new \InvalidArgumentException('non-nullable component_configurations cannot be null');
+        }
+        $this->container['component_configurations'] = $component_configurations;
+
+        return $this;
+    }
+
+    /**
+     * Gets product_id
+     *
+     * @return int
+     */
+    public function getProductId()
+    {
+        return $this->container['product_id'];
+    }
+
+    /**
+     * Sets product_id
+     *
+     * @param int $product_id ID of the product that will be used for the Trial Subscription assigned to the Account.
+     *
+     * @return self
+     */
+    public function setProductId($product_id)
+    {
+        if (is_null($product_id)) {
+            throw new \InvalidArgumentException('non-nullable product_id cannot be null');
+        }
+        $this->container['product_id'] = $product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string $currency currency
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        if (is_null($currency)) {
+            throw new \InvalidArgumentException('non-nullable currency cannot be null');
+        }
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets affiliate_id
+     *
+     * @return int|null
+     */
+    public function getAffiliateId()
+    {
+        return $this->container['affiliate_id'];
+    }
+
+    /**
+     * Sets affiliate_id
+     *
+     * @param int|null $affiliate_id ID of the affiliate to be added in the subscription assignment.
+     *
+     * @return self
+     */
+    public function setAffiliateId($affiliate_id)
+    {
+        if (is_null($affiliate_id)) {
+            throw new \InvalidArgumentException('non-nullable affiliate_id cannot be null');
+        }
+        $this->container['affiliate_id'] = $affiliate_id;
 
         return $this;
     }

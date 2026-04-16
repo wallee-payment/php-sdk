@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingOption model
+ * WalleejoinCreatePartnershipRequestDto model
  *
  * @category Class
  * @package     Wallee\Sdk
@@ -35,10 +35,10 @@ use \Wallee\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \JsonSerializable
+class WalleejoinCreatePartnershipRequestDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingOption';
+    protected static $openAPIModelName = 'WalleejoinCreatePartnershipRequestDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,13 +55,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'float',
-        'description' => 'string',
-        'currency' => 'string',
-        'id' => 'string',
-        'label' => 'string',
-        'tax_amount' => 'float',
-        'selected' => 'bool'
+        'partner_account_id' => 'int',
+        'pricing_profile_sell_rate_id' => 'int',
+        'subscription_product_id' => 'int',
+        'merchant_email_address' => 'string'
     ];
 
     /**
@@ -72,13 +69,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'amount' => null,
-        'description' => null,
-        'currency' => null,
-        'id' => null,
-        'label' => null,
-        'tax_amount' => null,
-        'selected' => null
+        'partner_account_id' => 'int64',
+        'pricing_profile_sell_rate_id' => 'int64',
+        'subscription_product_id' => 'int64',
+        'merchant_email_address' => null
     ];
 
     /**
@@ -87,13 +81,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'amount' => false,
-        'description' => false,
-        'currency' => false,
-        'id' => false,
-        'label' => false,
-        'tax_amount' => false,
-        'selected' => false
+        'partner_account_id' => false,
+        'pricing_profile_sell_rate_id' => false,
+        'subscription_product_id' => false,
+        'merchant_email_address' => false
     ];
 
     /**
@@ -182,13 +173,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'amount' => 'amount',
-        'description' => 'description',
-        'currency' => 'currency',
-        'id' => 'id',
-        'label' => 'label',
-        'tax_amount' => 'taxAmount',
-        'selected' => 'selected'
+        'partner_account_id' => 'partnerAccountId',
+        'pricing_profile_sell_rate_id' => 'pricingProfileSellRateId',
+        'subscription_product_id' => 'subscriptionProductId',
+        'merchant_email_address' => 'merchantEmailAddress'
     ];
 
     /**
@@ -197,13 +185,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'amount' => 'setAmount',
-        'description' => 'setDescription',
-        'currency' => 'setCurrency',
-        'id' => 'setId',
-        'label' => 'setLabel',
-        'tax_amount' => 'setTaxAmount',
-        'selected' => 'setSelected'
+        'partner_account_id' => 'setPartnerAccountId',
+        'pricing_profile_sell_rate_id' => 'setPricingProfileSellRateId',
+        'subscription_product_id' => 'setSubscriptionProductId',
+        'merchant_email_address' => 'setMerchantEmailAddress'
     ];
 
     /**
@@ -212,13 +197,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'amount' => 'getAmount',
-        'description' => 'getDescription',
-        'currency' => 'getCurrency',
-        'id' => 'getId',
-        'label' => 'getLabel',
-        'tax_amount' => 'getTaxAmount',
-        'selected' => 'getSelected'
+        'partner_account_id' => 'getPartnerAccountId',
+        'pricing_profile_sell_rate_id' => 'getPricingProfileSellRateId',
+        'subscription_product_id' => 'getSubscriptionProductId',
+        'merchant_email_address' => 'getMerchantEmailAddress'
     ];
 
     /**
@@ -278,13 +260,10 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('currency', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('label', $data ?? [], null);
-        $this->setIfExists('tax_amount', $data ?? [], null);
-        $this->setIfExists('selected', $data ?? [], null);
+        $this->setIfExists('partner_account_id', $data ?? [], null);
+        $this->setIfExists('pricing_profile_sell_rate_id', $data ?? [], null);
+        $this->setIfExists('subscription_product_id', $data ?? [], null);
+        $this->setIfExists('merchant_email_address', $data ?? [], null);
     }
 
     /**
@@ -330,190 +309,109 @@ class ExpressCheckoutShippingOption implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets amount
+     * Gets partner_account_id
      *
-     * @return float|null
+     * @return int|null
      */
-    public function getAmount()
+    public function getPartnerAccountId()
     {
-        return $this->container['amount'];
+        return $this->container['partner_account_id'];
     }
 
     /**
-     * Sets amount
+     * Sets partner_account_id
      *
-     * @param float|null $amount Total cost of this shipping option.
+     * @param int|null $partner_account_id partner_account_id
      *
      * @return self
      */
-    public function setAmount($amount)
+    public function setPartnerAccountId($partner_account_id)
     {
-        if (is_null($amount)) {
-            throw new \InvalidArgumentException('non-nullable amount cannot be null');
+        if (is_null($partner_account_id)) {
+            throw new \InvalidArgumentException('non-nullable partner_account_id cannot be null');
         }
-        $this->container['amount'] = $amount;
+        $this->container['partner_account_id'] = $partner_account_id;
 
         return $this;
     }
 
     /**
-     * Gets description
+     * Gets pricing_profile_sell_rate_id
+     *
+     * @return int|null
+     */
+    public function getPricingProfileSellRateId()
+    {
+        return $this->container['pricing_profile_sell_rate_id'];
+    }
+
+    /**
+     * Sets pricing_profile_sell_rate_id
+     *
+     * @param int|null $pricing_profile_sell_rate_id pricing_profile_sell_rate_id
+     *
+     * @return self
+     */
+    public function setPricingProfileSellRateId($pricing_profile_sell_rate_id)
+    {
+        if (is_null($pricing_profile_sell_rate_id)) {
+            throw new \InvalidArgumentException('non-nullable pricing_profile_sell_rate_id cannot be null');
+        }
+        $this->container['pricing_profile_sell_rate_id'] = $pricing_profile_sell_rate_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_product_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionProductId()
+    {
+        return $this->container['subscription_product_id'];
+    }
+
+    /**
+     * Sets subscription_product_id
+     *
+     * @param int|null $subscription_product_id subscription_product_id
+     *
+     * @return self
+     */
+    public function setSubscriptionProductId($subscription_product_id)
+    {
+        if (is_null($subscription_product_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_id cannot be null');
+        }
+        $this->container['subscription_product_id'] = $subscription_product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_email_address
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getMerchantEmailAddress()
     {
-        return $this->container['description'];
+        return $this->container['merchant_email_address'];
     }
 
     /**
-     * Sets description
+     * Sets merchant_email_address
      *
-     * @param string|null $description Description of the option
+     * @param string|null $merchant_email_address merchant_email_address
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setMerchantEmailAddress($merchant_email_address)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($merchant_email_address)) {
+            throw new \InvalidArgumentException('non-nullable merchant_email_address cannot be null');
         }
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return string|null
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param string|null $currency Currency code (ISO-4217) of this shipping option.
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-        if (is_null($currency)) {
-            throw new \InvalidArgumentException('non-nullable currency cannot be null');
-        }
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id Identifier of the option.
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets label
-     *
-     * @return string|null
-     */
-    public function getLabel()
-    {
-        return $this->container['label'];
-    }
-
-    /**
-     * Sets label
-     *
-     * @param string|null $label Label of the option.
-     *
-     * @return self
-     */
-    public function setLabel($label)
-    {
-        if (is_null($label)) {
-            throw new \InvalidArgumentException('non-nullable label cannot be null');
-        }
-        $this->container['label'] = $label;
-
-        return $this;
-    }
-
-    /**
-     * Gets tax_amount
-     *
-     * @return float|null
-     */
-    public function getTaxAmount()
-    {
-        return $this->container['tax_amount'];
-    }
-
-    /**
-     * Sets tax_amount
-     *
-     * @param float|null $tax_amount Amount related to taxes.
-     *
-     * @return self
-     */
-    public function setTaxAmount($tax_amount)
-    {
-        if (is_null($tax_amount)) {
-            throw new \InvalidArgumentException('non-nullable tax_amount cannot be null');
-        }
-        $this->container['tax_amount'] = $tax_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets selected
-     *
-     * @return bool|null
-     */
-    public function getSelected()
-    {
-        return $this->container['selected'];
-    }
-
-    /**
-     * Sets selected
-     *
-     * @param bool|null $selected Whether it was the option selected by the customer.
-     *
-     * @return self
-     */
-    public function setSelected($selected)
-    {
-        if (is_null($selected)) {
-            throw new \InvalidArgumentException('non-nullable selected cannot be null');
-        }
-        $this->container['selected'] = $selected;
+        $this->container['merchant_email_address'] = $merchant_email_address;
 
         return $this;
     }

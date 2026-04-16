@@ -25,7 +25,7 @@ namespace Wallee\Sdk\Model;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutSessionState model
+ * WalleejoinAdminPricingType model
  *
  * @category Class
  * @package     Wallee\Sdk
@@ -33,22 +33,18 @@ use \Wallee\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  */
-class ExpressCheckoutSessionState
+class WalleejoinAdminPricingType
 {
     /**
      * Possible values of this enum
      */
-    public const PENDING = 'PENDING';
+    public const PREDEFINED = 'PREDEFINED';
 
-    public const APPROVED = 'APPROVED';
+    public const POSITIVE_MARGIN_ONLY = 'POSITIVE_MARGIN_ONLY';
 
-    public const PROCESSING = 'PROCESSING';
-
-    public const AUTHORIZED = 'AUTHORIZED';
-
-    public const FAILED = 'FAILED';
+    public const FLEXIBLE = 'FLEXIBLE';
 
     /**
      * Gets allowable values of the enum
@@ -57,11 +53,9 @@ class ExpressCheckoutSessionState
     public static function getAllowableEnumValues()
     {
         return [
-            self::PENDING,
-            self::APPROVED,
-            self::PROCESSING,
-            self::AUTHORIZED,
-            self::FAILED
+            self::PREDEFINED,
+            self::POSITIVE_MARGIN_ONLY,
+            self::FLEXIBLE
         ];
     }
 }

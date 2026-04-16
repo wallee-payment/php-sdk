@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutWalletType model
+ * StateListResponse model
  *
  * @category Class
  * @package     Wallee\Sdk
@@ -35,10 +35,10 @@ use \Wallee\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSerializable
+class StateListResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutWalletType';
+    protected static $openAPIModelName = 'State_List_Response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'array<string,string>',
-        'description' => 'array<string,string>',
-        'id' => 'int'
+        'data' => '\Wallee\Sdk\Model\RestCountryState[]',
+        'has_more' => 'bool',
+        'limit' => 'int'
     ];
 
     /**
@@ -68,9 +68,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'description' => null,
-        'id' => 'int64'
+        'data' => null,
+        'has_more' => null,
+        'limit' => 'int32'
     ];
 
     /**
@@ -79,9 +79,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'description' => false,
-        'id' => false
+        'data' => false,
+        'has_more' => false,
+        'limit' => false
     ];
 
     /**
@@ -170,9 +170,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'description' => 'description',
-        'id' => 'id'
+        'data' => 'data',
+        'has_more' => 'hasMore',
+        'limit' => 'limit'
     ];
 
     /**
@@ -181,9 +181,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'description' => 'setDescription',
-        'id' => 'setId'
+        'data' => 'setData',
+        'has_more' => 'setHasMore',
+        'limit' => 'setLimit'
     ];
 
     /**
@@ -192,9 +192,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'description' => 'getDescription',
-        'id' => 'getId'
+        'data' => 'getData',
+        'has_more' => 'getHasMore',
+        'limit' => 'getLimit'
     ];
 
     /**
@@ -254,9 +254,9 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('has_more', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], null);
     }
 
     /**
@@ -302,82 +302,82 @@ class ExpressCheckoutWalletType implements ModelInterface, ArrayAccess, \JsonSer
 
 
     /**
-     * Gets name
+     * Gets data
      *
-     * @return array<string,string>|null
+     * @return \Wallee\Sdk\Model\RestCountryState[]|null
      */
-    public function getName()
+    public function getData()
     {
-        return $this->container['name'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets name
+     * Sets data
      *
-     * @param array<string,string>|null $name The localized name of the object.
+     * @param \Wallee\Sdk\Model\RestCountryState[]|null $data An array containing the actual response objects.
      *
      * @return self
      */
-    public function setName($name)
+    public function setData($data)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets description
+     * Gets has_more
      *
-     * @return array<string,string>|null
+     * @return bool|null
      */
-    public function getDescription()
+    public function getHasMore()
     {
-        return $this->container['description'];
+        return $this->container['has_more'];
     }
 
     /**
-     * Sets description
+     * Sets has_more
      *
-     * @param array<string,string>|null $description The localized description of the object.
+     * @param bool|null $has_more Whether there are more objects available after this set. If false, there are no more objects to retrieve.
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setHasMore($has_more)
     {
-        if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+        if (is_null($has_more)) {
+            throw new \InvalidArgumentException('non-nullable has_more cannot be null');
         }
-        $this->container['description'] = $description;
+        $this->container['has_more'] = $has_more;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets limit
      *
      * @return int|null
      */
-    public function getId()
+    public function getLimit()
     {
-        return $this->container['id'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets id
+     * Sets limit
      *
-     * @param int|null $id A unique identifier for the object.
+     * @param int|null $limit The applied limit on the number of objects returned.
      *
      * @return self
      */
-    public function setId($id)
+    public function setLimit($limit)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['limit'] = $limit;
 
         return $this;
     }

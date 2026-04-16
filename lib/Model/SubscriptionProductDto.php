@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingMethodChangeRequest model
+ * SubscriptionProductDto model
  *
  * @category Class
  * @package     Wallee\Sdk
@@ -35,10 +35,10 @@ use \Wallee\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class SubscriptionProductDto implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingMethodChangeRequest';
+    protected static $openAPIModelName = 'SubscriptionProductDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +55,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       * @var string[]
       */
     protected static $openAPITypes = [
-        'shipping_method_id' => 'string'
+        'name' => 'string',
+        'id' => 'int'
     ];
 
     /**
@@ -66,7 +67,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'shipping_method_id' => null
+        'name' => null,
+        'id' => 'int64'
     ];
 
     /**
@@ -75,7 +77,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'shipping_method_id' => false
+        'name' => false,
+        'id' => false
     ];
 
     /**
@@ -164,7 +167,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'shipping_method_id' => 'shippingMethodId'
+        'name' => 'name',
+        'id' => 'id'
     ];
 
     /**
@@ -173,7 +177,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      * @var string[]
      */
     protected static $setters = [
-        'shipping_method_id' => 'setShippingMethodId'
+        'name' => 'setName',
+        'id' => 'setId'
     ];
 
     /**
@@ -182,7 +187,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      * @var string[]
      */
     protected static $getters = [
-        'shipping_method_id' => 'getShippingMethodId'
+        'name' => 'getName',
+        'id' => 'getId'
     ];
 
     /**
@@ -242,7 +248,8 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('shipping_method_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -288,28 +295,55 @@ class ExpressCheckoutShippingMethodChangeRequest implements ModelInterface, Arra
 
 
     /**
-     * Gets shipping_method_id
+     * Gets name
      *
      * @return string|null
      */
-    public function getShippingMethodId()
+    public function getName()
     {
-        return $this->container['shipping_method_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets shipping_method_id
+     * Sets name
      *
-     * @param string|null $shipping_method_id Identifier of the selected shipping option.
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setShippingMethodId($shipping_method_id)
+    public function setName($name)
     {
-        if (is_null($shipping_method_id)) {
-            throw new \InvalidArgumentException('non-nullable shipping_method_id cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['shipping_method_id'] = $shipping_method_id;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
 
         return $this;
     }

@@ -27,18 +27,19 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutShippingAddressChangeResponse model
+ * SubscriptionComponentGroupConfigurationRequest model
  *
  * @category Class
+ * @description Model used to configure the Subscription Product to be assigned to the Account
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class SubscriptionComponentGroupConfigurationRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +48,7 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutShippingAddressChangeResponse';
+    protected static $openAPIModelName = 'SubscriptionComponentGroupConfigurationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +56,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       * @var string[]
       */
     protected static $openAPITypes = [
-        'order_total' => 'float',
-        'shipping_options' => '\Wallee\Sdk\Model\ExpressCheckoutShippingOption[]'
+        'quantity' => 'float',
+        'subscription_product_component_group_id' => 'int',
+        'subscription_product_component_reference_id' => 'int'
     ];
 
     /**
@@ -67,8 +69,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'order_total' => null,
-        'shipping_options' => null
+        'quantity' => null,
+        'subscription_product_component_group_id' => 'int64',
+        'subscription_product_component_reference_id' => 'int64'
     ];
 
     /**
@@ -77,8 +80,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'order_total' => false,
-        'shipping_options' => false
+        'quantity' => false,
+        'subscription_product_component_group_id' => false,
+        'subscription_product_component_reference_id' => false
     ];
 
     /**
@@ -167,8 +171,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      * @var string[]
      */
     protected static $attributeMap = [
-        'order_total' => 'orderTotal',
-        'shipping_options' => 'shippingOptions'
+        'quantity' => 'quantity',
+        'subscription_product_component_group_id' => 'subscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'subscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -177,8 +182,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      * @var string[]
      */
     protected static $setters = [
-        'order_total' => 'setOrderTotal',
-        'shipping_options' => 'setShippingOptions'
+        'quantity' => 'setQuantity',
+        'subscription_product_component_group_id' => 'setSubscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'setSubscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -187,8 +193,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      * @var string[]
      */
     protected static $getters = [
-        'order_total' => 'getOrderTotal',
-        'shipping_options' => 'getShippingOptions'
+        'quantity' => 'getQuantity',
+        'subscription_product_component_group_id' => 'getSubscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'getSubscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -248,8 +255,9 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('order_total', $data ?? [], null);
-        $this->setIfExists('shipping_options', $data ?? [], null);
+        $this->setIfExists('quantity', $data ?? [], null);
+        $this->setIfExists('subscription_product_component_group_id', $data ?? [], null);
+        $this->setIfExists('subscription_product_component_reference_id', $data ?? [], null);
     }
 
     /**
@@ -295,55 +303,82 @@ class ExpressCheckoutShippingAddressChangeResponse implements ModelInterface, Ar
 
 
     /**
-     * Gets order_total
+     * Gets quantity
      *
      * @return float|null
      */
-    public function getOrderTotal()
+    public function getQuantity()
     {
-        return $this->container['order_total'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets order_total
+     * Sets quantity
      *
-     * @param float|null $order_total order_total
+     * @param float|null $quantity quantity
      *
      * @return self
      */
-    public function setOrderTotal($order_total)
+    public function setQuantity($quantity)
     {
-        if (is_null($order_total)) {
-            throw new \InvalidArgumentException('non-nullable order_total cannot be null');
+        if (is_null($quantity)) {
+            throw new \InvalidArgumentException('non-nullable quantity cannot be null');
         }
-        $this->container['order_total'] = $order_total;
+        $this->container['quantity'] = $quantity;
 
         return $this;
     }
 
     /**
-     * Gets shipping_options
+     * Gets subscription_product_component_group_id
      *
-     * @return \Wallee\Sdk\Model\ExpressCheckoutShippingOption[]|null
+     * @return int|null
      */
-    public function getShippingOptions()
+    public function getSubscriptionProductComponentGroupId()
     {
-        return $this->container['shipping_options'];
+        return $this->container['subscription_product_component_group_id'];
     }
 
     /**
-     * Sets shipping_options
+     * Sets subscription_product_component_group_id
      *
-     * @param \Wallee\Sdk\Model\ExpressCheckoutShippingOption[]|null $shipping_options shipping_options
+     * @param int|null $subscription_product_component_group_id subscription_product_component_group_id
      *
      * @return self
      */
-    public function setShippingOptions($shipping_options)
+    public function setSubscriptionProductComponentGroupId($subscription_product_component_group_id)
     {
-        if (is_null($shipping_options)) {
-            throw new \InvalidArgumentException('non-nullable shipping_options cannot be null');
+        if (is_null($subscription_product_component_group_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_component_group_id cannot be null');
         }
-        $this->container['shipping_options'] = $shipping_options;
+        $this->container['subscription_product_component_group_id'] = $subscription_product_component_group_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_product_component_reference_id
+     *
+     * @return int|null
+     */
+    public function getSubscriptionProductComponentReferenceId()
+    {
+        return $this->container['subscription_product_component_reference_id'];
+    }
+
+    /**
+     * Sets subscription_product_component_reference_id
+     *
+     * @param int|null $subscription_product_component_reference_id subscription_product_component_reference_id
+     *
+     * @return self
+     */
+    public function setSubscriptionProductComponentReferenceId($subscription_product_component_reference_id)
+    {
+        if (is_null($subscription_product_component_reference_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_component_reference_id cannot be null');
+        }
+        $this->container['subscription_product_component_reference_id'] = $subscription_product_component_reference_id;
 
         return $this;
     }

@@ -27,18 +27,19 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutApprovalResponse model
+ * SubscriptionComponentGroupConfigurationRequestSetter model
  *
  * @category Class
+ * @description Model used to configure the Subscription Product to be assigned to the Account
  * @package     Wallee\Sdk
  * @author      wallee AG
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class SubscriptionComponentGroupConfigurationRequestSetter implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +48,7 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutApprovalResponse';
+    protected static $openAPIModelName = 'SubscriptionComponentGroupConfigurationRequest.Setter';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +56,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'merchant_redirect_url' => 'string',
-        'session_id' => 'int',
-        'state' => '\Wallee\Sdk\Model\ExpressCheckoutSessionState'
+        'quantity' => 'float',
+        'subscription_product_component_group_id' => 'int',
+        'subscription_product_component_reference_id' => 'int'
     ];
 
     /**
@@ -68,9 +69,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'merchant_redirect_url' => null,
-        'session_id' => 'int64',
-        'state' => null
+        'quantity' => null,
+        'subscription_product_component_group_id' => 'int64',
+        'subscription_product_component_reference_id' => 'int64'
     ];
 
     /**
@@ -79,9 +80,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'merchant_redirect_url' => false,
-        'session_id' => false,
-        'state' => false
+        'quantity' => false,
+        'subscription_product_component_group_id' => false,
+        'subscription_product_component_reference_id' => false
     ];
 
     /**
@@ -170,9 +171,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'merchant_redirect_url' => 'merchantRedirectUrl',
-        'session_id' => 'sessionId',
-        'state' => 'state'
+        'quantity' => 'quantity',
+        'subscription_product_component_group_id' => 'subscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'subscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -181,9 +182,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'merchant_redirect_url' => 'setMerchantRedirectUrl',
-        'session_id' => 'setSessionId',
-        'state' => 'setState'
+        'quantity' => 'setQuantity',
+        'subscription_product_component_group_id' => 'setSubscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'setSubscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -192,9 +193,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'merchant_redirect_url' => 'getMerchantRedirectUrl',
-        'session_id' => 'getSessionId',
-        'state' => 'getState'
+        'quantity' => 'getQuantity',
+        'subscription_product_component_group_id' => 'getSubscriptionProductComponentGroupId',
+        'subscription_product_component_reference_id' => 'getSubscriptionProductComponentReferenceId'
     ];
 
     /**
@@ -254,9 +255,9 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('merchant_redirect_url', $data ?? [], null);
-        $this->setIfExists('session_id', $data ?? [], null);
-        $this->setIfExists('state', $data ?? [], null);
+        $this->setIfExists('quantity', $data ?? [], null);
+        $this->setIfExists('subscription_product_component_group_id', $data ?? [], null);
+        $this->setIfExists('subscription_product_component_reference_id', $data ?? [], null);
     }
 
     /**
@@ -302,82 +303,82 @@ class ExpressCheckoutApprovalResponse implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets merchant_redirect_url
+     * Gets quantity
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getMerchantRedirectUrl()
+    public function getQuantity()
     {
-        return $this->container['merchant_redirect_url'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets merchant_redirect_url
+     * Sets quantity
      *
-     * @param string|null $merchant_redirect_url merchant_redirect_url
+     * @param float|null $quantity quantity
      *
      * @return self
      */
-    public function setMerchantRedirectUrl($merchant_redirect_url)
+    public function setQuantity($quantity)
     {
-        if (is_null($merchant_redirect_url)) {
-            throw new \InvalidArgumentException('non-nullable merchant_redirect_url cannot be null');
+        if (is_null($quantity)) {
+            throw new \InvalidArgumentException('non-nullable quantity cannot be null');
         }
-        $this->container['merchant_redirect_url'] = $merchant_redirect_url;
+        $this->container['quantity'] = $quantity;
 
         return $this;
     }
 
     /**
-     * Gets session_id
+     * Gets subscription_product_component_group_id
      *
      * @return int|null
      */
-    public function getSessionId()
+    public function getSubscriptionProductComponentGroupId()
     {
-        return $this->container['session_id'];
+        return $this->container['subscription_product_component_group_id'];
     }
 
     /**
-     * Sets session_id
+     * Sets subscription_product_component_group_id
      *
-     * @param int|null $session_id session_id
+     * @param int|null $subscription_product_component_group_id subscription_product_component_group_id
      *
      * @return self
      */
-    public function setSessionId($session_id)
+    public function setSubscriptionProductComponentGroupId($subscription_product_component_group_id)
     {
-        if (is_null($session_id)) {
-            throw new \InvalidArgumentException('non-nullable session_id cannot be null');
+        if (is_null($subscription_product_component_group_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_component_group_id cannot be null');
         }
-        $this->container['session_id'] = $session_id;
+        $this->container['subscription_product_component_group_id'] = $subscription_product_component_group_id;
 
         return $this;
     }
 
     /**
-     * Gets state
+     * Gets subscription_product_component_reference_id
      *
-     * @return \Wallee\Sdk\Model\ExpressCheckoutSessionState|null
+     * @return int|null
      */
-    public function getState()
+    public function getSubscriptionProductComponentReferenceId()
     {
-        return $this->container['state'];
+        return $this->container['subscription_product_component_reference_id'];
     }
 
     /**
-     * Sets state
+     * Sets subscription_product_component_reference_id
      *
-     * @param \Wallee\Sdk\Model\ExpressCheckoutSessionState|null $state state
+     * @param int|null $subscription_product_component_reference_id subscription_product_component_reference_id
      *
      * @return self
      */
-    public function setState($state)
+    public function setSubscriptionProductComponentReferenceId($subscription_product_component_reference_id)
     {
-        if (is_null($state)) {
-            throw new \InvalidArgumentException('non-nullable state cannot be null');
+        if (is_null($subscription_product_component_reference_id)) {
+            throw new \InvalidArgumentException('non-nullable subscription_product_component_reference_id cannot be null');
         }
-        $this->container['state'] = $state;
+        $this->container['subscription_product_component_reference_id'] = $subscription_product_component_reference_id;
 
         return $this;
     }

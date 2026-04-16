@@ -27,7 +27,7 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * ExpressCheckoutCreateResponse model
+ * WebUiAccountTheme model
  *
  * @category Class
  * @package     Wallee\Sdk
@@ -35,10 +35,10 @@ use \Wallee\Sdk\ObjectSerializer;
  * @license     Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version     5.2.0
+ * @version     5.2.2
  * @implements \ArrayAccess<string, mixed>
  */
-class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class WebUiAccountTheme implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ExpressCheckoutCreateResponse';
+    protected static $openAPIModelName = 'WebUiAccountTheme';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +55,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'iframe_src' => 'string',
-        'session' => 'int',
-        'session_token' => 'string'
+        'properties' => 'string'
     ];
 
     /**
@@ -68,9 +66,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'iframe_src' => null,
-        'session' => 'int64',
-        'session_token' => null
+        'properties' => null
     ];
 
     /**
@@ -79,9 +75,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'iframe_src' => false,
-        'session' => false,
-        'session_token' => false
+        'properties' => false
     ];
 
     /**
@@ -170,9 +164,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $attributeMap = [
-        'iframe_src' => 'iframeSrc',
-        'session' => 'session',
-        'session_token' => 'sessionToken'
+        'properties' => 'properties'
     ];
 
     /**
@@ -181,9 +173,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $setters = [
-        'iframe_src' => 'setIframeSrc',
-        'session' => 'setSession',
-        'session_token' => 'setSessionToken'
+        'properties' => 'setProperties'
     ];
 
     /**
@@ -192,9 +182,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      * @var string[]
      */
     protected static $getters = [
-        'iframe_src' => 'getIframeSrc',
-        'session' => 'getSession',
-        'session_token' => 'getSessionToken'
+        'properties' => 'getProperties'
     ];
 
     /**
@@ -254,9 +242,7 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('iframe_src', $data ?? [], null);
-        $this->setIfExists('session', $data ?? [], null);
-        $this->setIfExists('session_token', $data ?? [], null);
+        $this->setIfExists('properties', $data ?? [], null);
     }
 
     /**
@@ -302,82 +288,28 @@ class ExpressCheckoutCreateResponse implements ModelInterface, ArrayAccess, \Jso
 
 
     /**
-     * Gets iframe_src
+     * Gets properties
      *
      * @return string|null
      */
-    public function getIframeSrc()
+    public function getProperties()
     {
-        return $this->container['iframe_src'];
+        return $this->container['properties'];
     }
 
     /**
-     * Sets iframe_src
+     * Sets properties
      *
-     * @param string|null $iframe_src iframe_src
+     * @param string|null $properties properties
      *
      * @return self
      */
-    public function setIframeSrc($iframe_src)
+    public function setProperties($properties)
     {
-        if (is_null($iframe_src)) {
-            throw new \InvalidArgumentException('non-nullable iframe_src cannot be null');
+        if (is_null($properties)) {
+            throw new \InvalidArgumentException('non-nullable properties cannot be null');
         }
-        $this->container['iframe_src'] = $iframe_src;
-
-        return $this;
-    }
-
-    /**
-     * Gets session
-     *
-     * @return int|null
-     */
-    public function getSession()
-    {
-        return $this->container['session'];
-    }
-
-    /**
-     * Sets session
-     *
-     * @param int|null $session session
-     *
-     * @return self
-     */
-    public function setSession($session)
-    {
-        if (is_null($session)) {
-            throw new \InvalidArgumentException('non-nullable session cannot be null');
-        }
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets session_token
-     *
-     * @return string|null
-     */
-    public function getSessionToken()
-    {
-        return $this->container['session_token'];
-    }
-
-    /**
-     * Sets session_token
-     *
-     * @param string|null $session_token session_token
-     *
-     * @return self
-     */
-    public function setSessionToken($session_token)
-    {
-        if (is_null($session_token)) {
-            throw new \InvalidArgumentException('non-nullable session_token cannot be null');
-        }
-        $this->container['session_token'] = $session_token;
+        $this->container['properties'] = $properties;
 
         return $this;
     }
