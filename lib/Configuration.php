@@ -80,7 +80,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'Wallee\Sdk/4.9.1/php';
+    protected $userAgent = 'Wallee\Sdk/4.9.2/php';
 
     /**
      * Debug switch (default set to false)
