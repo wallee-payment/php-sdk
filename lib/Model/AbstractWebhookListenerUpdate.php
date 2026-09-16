@@ -125,6 +125,7 @@ class AbstractWebhookListenerUpdate implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
+        $this->container['enable_payload_signature_and_state'] = isset($data['enable_payload_signature_and_state']) ? $data['enable_payload_signature_and_state'] : null;
         
         $this->container['entity_states'] = isset($data['entity_states']) ? $data['entity_states'] : null;
         
