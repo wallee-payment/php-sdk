@@ -48,7 +48,7 @@ final class ApiClient {
 	 * @var array
 	 */
 	private $defaultHeaders = [
-        'x-meta-sdk-version' => "4.9.1",
+        'x-meta-sdk-version' => "4.9.2",
         'x-meta-sdk-language' => 'php',
         'x-meta-sdk-provider' => "wallee",
     ];
