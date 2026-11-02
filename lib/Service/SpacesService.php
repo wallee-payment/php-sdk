@@ -23,7 +23,6 @@
 
 namespace Wallee\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use Wallee\Sdk\ApiException;
 use Wallee\Sdk\Configuration;
 use Wallee\Sdk\FormDataProcessor;
 use Wallee\Sdk\HeaderSelector;
+use Wallee\Sdk\CaBundleFallbackClientFactory;
 use Wallee\Sdk\ObjectSerializer;
 use Wallee\Sdk\Auth\HttpBearerAuth;
 
@@ -48,7 +48,7 @@ use Wallee\Sdk\Auth\HttpBearerAuth;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class SpacesService
 {
@@ -111,7 +111,7 @@ class SpacesService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
@@ -1970,6 +1970,7 @@ class SpacesService
      *
      * Create a space
      *
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
      * @param \Wallee\Sdk\Model\SpaceCreate $space_create space_create (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postSpaces'] to see the possible values for this operation
@@ -1978,9 +1979,9 @@ class SpacesService
      * @throws \InvalidArgumentException
      * @return \Wallee\Sdk\Model\Space|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse
      */
-    public function postSpaces(\Wallee\Sdk\Model\SpaceCreate $space_create, ?array $expand = null, string $contentType = self::contentTypes['postSpaces'][0])
+    public function postSpaces(int $account, \Wallee\Sdk\Model\SpaceCreate $space_create, ?array $expand = null, string $contentType = self::contentTypes['postSpaces'][0])
     {
-        list($response) = $this->postSpacesWithHttpInfo($space_create, $expand, $contentType);
+        list($response) = $this->postSpacesWithHttpInfo($account, $space_create, $expand, $contentType);
         return $response;
     }
 
@@ -1989,6 +1990,7 @@ class SpacesService
      *
      * Create a space
      *
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
      * @param \Wallee\Sdk\Model\SpaceCreate $space_create space_create (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postSpaces'] to see the possible values for this operation
@@ -1997,9 +1999,9 @@ class SpacesService
      * @throws \InvalidArgumentException
      * @return array of \Wallee\Sdk\Model\Space|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse|\Wallee\Sdk\Model\RestApiErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postSpacesWithHttpInfo(\Wallee\Sdk\Model\SpaceCreate $space_create, ?array $expand = null, string $contentType = self::contentTypes['postSpaces'][0])
+    public function postSpacesWithHttpInfo(int $account, \Wallee\Sdk\Model\SpaceCreate $space_create, ?array $expand = null, string $contentType = self::contentTypes['postSpaces'][0])
     {
-        $request = $this->postSpacesRequest($space_create, $expand, $contentType);
+        $request = $this->postSpacesRequest($account, $space_create, $expand, $contentType);
 
         try {
             $requestTimeout = $this->config->getRequestTimeout();
@@ -2231,6 +2233,7 @@ class SpacesService
     /**
      * Create request for operation 'postSpaces'
      *
+     * @param int $account Specifies the ID of the account the operation should be executed in. (required)
      * @param \Wallee\Sdk\Model\SpaceCreate $space_create space_create (required)
      * @param string[]|null $expand expand (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postSpaces'] to see the possible values for this operation
@@ -2238,8 +2241,15 @@ class SpacesService
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postSpacesRequest(\Wallee\Sdk\Model\SpaceCreate $space_create, ?array $expand = null, string $contentType = self::contentTypes['postSpaces'][0])
+    public function postSpacesRequest(int $account, \Wallee\Sdk\Model\SpaceCreate $space_create, ?array $expand = null, string $contentType = self::contentTypes['postSpaces'][0])
     {
+
+        // verify the required parameter 'account' is set
+        if ($account === null || (is_array($account) && count($account) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $account when calling postSpaces'
+            );
+        }
 
         // verify the required parameter 'space_create' is set
         if ($space_create === null || (is_array($space_create) && count($space_create) === 0)) {
@@ -2268,6 +2278,10 @@ class SpacesService
             false // required
         ) ?? []);
 
+        // header params
+        if ($account !== null) {
+            $headerParams['account'] = ObjectSerializer::toHeaderValue($account);
+        }
 
 
 

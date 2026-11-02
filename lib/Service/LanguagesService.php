@@ -23,7 +23,6 @@
 
 namespace Wallee\Sdk\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
@@ -36,6 +35,7 @@ use Wallee\Sdk\ApiException;
 use Wallee\Sdk\Configuration;
 use Wallee\Sdk\FormDataProcessor;
 use Wallee\Sdk\HeaderSelector;
+use Wallee\Sdk\CaBundleFallbackClientFactory;
 use Wallee\Sdk\ObjectSerializer;
 use Wallee\Sdk\Auth\HttpBearerAuth;
 use Wallee\Sdk\WalleeSdkException;
@@ -50,7 +50,7 @@ use Wallee\Sdk\SdkExceptionErrorCodes;
  * @license  Apache-2.0
  * The Apache License, Version 2.0
  * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
- * @version  5.2.2
+ * @version  5.2.3
  */
 class LanguagesService
 {
@@ -104,7 +104,7 @@ class LanguagesService
         ?ClientInterface $client = null,
         ?HeaderSelector  $selector = null,
     ) {
-        $this->client = $client ?: new Client();
+        $this->client = $client ?: CaBundleFallbackClientFactory::create();
         $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;

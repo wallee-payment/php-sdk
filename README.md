@@ -196,36 +196,6 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /application-users/{userId}/keys
   &nbsp;&nbsp;&nbsp;&nbsp;Generate a new authentication key
   <br><br>
-- <strong>ApplicationUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>deleteApplicationUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /application-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Unassign a role from an application user for an account
-  <br><br>
-- <strong>ApplicationUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>deleteApplicationUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /application-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Unassign a role from an application user for a space
-  <br><br>
-- <strong>ApplicationUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>getApplicationUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /application-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;List all roles of an application user for an account
-  <br><br>
-- <strong>ApplicationUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>getApplicationUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /application-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;List all roles of an application user for a space
-  <br><br>
-- <strong>ApplicationUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>postApplicationUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /application-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Assign a role to an application user for an account
-  <br><br>
-- <strong>ApplicationUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>postApplicationUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /application-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Assign a role to an application user for a space
-  <br><br>
 - <strong>BankAccountsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentBankAccounts</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/bank-accounts
@@ -716,6 +686,21 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /document-templates/search
   &nbsp;&nbsp;&nbsp;&nbsp;Search document templates
   <br><br>
+- <strong>DunningCaseLevelsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentDunningCasesLevels</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/dunning-cases/levels
+  &nbsp;&nbsp;&nbsp;&nbsp;List all dunning case levels
+  <br><br>
+- <strong>DunningCaseLevelsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentDunningCasesLevelsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/dunning-cases/levels/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a dunning case level
+  <br><br>
+- <strong>DunningCaseLevelsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentDunningCasesLevelsSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/dunning-cases/levels/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search dunning case levels
+  <br><br>
 - <strong>DunningCasesService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentDunningCases</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/dunning-cases
@@ -786,6 +771,26 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/bank-transactions/external-transfers/search
   &nbsp;&nbsp;&nbsp;&nbsp;Search external transfer bank transactions
   <br><br>
+- <strong>FulfillmentsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentFacilitatorFulfillmentsSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/facilitator/fulfillments/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search fulfillments
+  <br><br>
+- <strong>FulfillmentsService</strong><br>
+  &nbsp;&nbsp;* <code>patchPaymentFacilitatorFulfillmentsIdTrackingNumber</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>PATCH</strong> /payment/facilitator/fulfillments/{id}/tracking-number
+  &nbsp;&nbsp;&nbsp;&nbsp;Update tracking number
+  <br><br>
+- <strong>FulfillmentsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentFacilitatorFulfillments</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/facilitator/fulfillments
+  &nbsp;&nbsp;&nbsp;&nbsp;Create a fulfillment
+  <br><br>
+- <strong>FulfillmentsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentFacilitatorFulfillmentsIdConfirmInStorePickup</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/facilitator/fulfillments/{id}/confirm-in-store-pickup
+  &nbsp;&nbsp;&nbsp;&nbsp;Confirm in-store pickup
+  <br><br>
 - <strong>HumanUsersService</strong><br>
   &nbsp;&nbsp;* <code>deleteHumanUsersId</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /human-users/{id}
@@ -821,36 +826,6 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /human-users
   &nbsp;&nbsp;&nbsp;&nbsp;Create a human user
   <br><br>
-- <strong>HumanUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>deleteHumanUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /human-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Unassign a role from a human user for an account
-  <br><br>
-- <strong>HumanUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>deleteHumanUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /human-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Unassign a role from a human user for a space
-  <br><br>
-- <strong>HumanUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>getHumanUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /human-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;List all roles of a human user for an account
-  <br><br>
-- <strong>HumanUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>getHumanUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /human-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;List all roles of a human user for a space
-  <br><br>
-- <strong>HumanUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>postHumanUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /human-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Assign a role to a human user for an account
-  <br><br>
-- <strong>HumanUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>postHumanUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /human-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Assign a role to a human user for a space
-  <br><br>
 - <strong>InternalTransferBankTransactionsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentBankTransactionsInternalTransfers</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/bank-transactions/internal-transfers
@@ -866,24 +841,99 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/bank-transactions/internal-transfers/search
   &nbsp;&nbsp;&nbsp;&nbsp;Search internal transfer bank transactions
   <br><br>
+- <strong>InvoiceReconciliationRecordInvoiceLinksService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReconciliationRecordInvoiceLinks</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reconciliation-record-invoice-links
+  &nbsp;&nbsp;&nbsp;&nbsp;List all invoice reconciliation record invoice links
+  <br><br>
+- <strong>InvoiceReconciliationRecordInvoiceLinksService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReconciliationRecordInvoiceLinksId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reconciliation-record-invoice-links/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve an invoice reconciliation record invoice link
+  <br><br>
+- <strong>InvoiceReconciliationRecordInvoiceLinksService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReconciliationRecordInvoiceLinksSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reconciliation-record-invoice-links/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search invoice reconciliation record invoice links
+  <br><br>
+- <strong>InvoiceReconciliationRecordInvoiceLinksService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentInvoiceReconciliationRecordInvoiceLinks</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/invoice-reconciliation-record-invoice-links
+  &nbsp;&nbsp;&nbsp;&nbsp;Link an invoice
+  <br><br>
+- <strong>InvoiceReconciliationRecordInvoiceLinksService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentInvoiceReconciliationRecordInvoiceLinksUnlink</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/invoice-reconciliation-record-invoice-links/unlink
+  &nbsp;&nbsp;&nbsp;&nbsp;Unlink an invoice
+  <br><br>
+- <strong>InvoiceReconciliationRecordsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReconciliationRecords</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reconciliation-records
+  &nbsp;&nbsp;&nbsp;&nbsp;List all invoice reconciliation records
+  <br><br>
+- <strong>InvoiceReconciliationRecordsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReconciliationRecordsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reconciliation-records/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve an invoice reconciliation record
+  <br><br>
+- <strong>InvoiceReconciliationRecordsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReconciliationRecordsSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reconciliation-records/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search invoice reconciliation records
+  <br><br>
+- <strong>InvoiceReconciliationRecordsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentInvoiceReconciliationRecordsIdDiscard</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/invoice-reconciliation-records/{id}/discard
+  &nbsp;&nbsp;&nbsp;&nbsp;Discard an invoice reconciliation record
+  <br><br>
+- <strong>InvoiceReconciliationRecordsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentInvoiceReconciliationRecordsIdResolve</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/invoice-reconciliation-records/{id}/resolve
+  &nbsp;&nbsp;&nbsp;&nbsp;Resolve an invoice reconciliation record
+  <br><br>
+- <strong>InvoiceReimbursementsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReimbursements</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reimbursements
+  &nbsp;&nbsp;&nbsp;&nbsp;List all invoice reimbursements
+  <br><br>
+- <strong>InvoiceReimbursementsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReimbursementsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reimbursements/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve an invoice reimbursement
+  <br><br>
+- <strong>InvoiceReimbursementsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentInvoiceReimbursementsSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/invoice-reimbursements/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search invoice reimbursements
+  <br><br>
+- <strong>InvoiceReimbursementsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentInvoiceReimbursementsIdConnector</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/invoice-reimbursements/{id}/connector
+  &nbsp;&nbsp;&nbsp;&nbsp;Update payment connector configuration
+  <br><br>
+- <strong>InvoiceReimbursementsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentInvoiceReimbursementsIdIban</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/invoice-reimbursements/{id}/iban
+  &nbsp;&nbsp;&nbsp;&nbsp;Update IBAN
+  <br><br>
 - <strong>JoinAdminPartnerConfigurationService</strong><br>
-  &nbsp;&nbsp;* <code>deleteAdminJoinProgramPartnersConfigurationsId</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /admin/join-program/partners/configurations/{id}
+  &nbsp;&nbsp;* <code>deleteScopeJoinProgramPartnersConfigurationsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /scope/join-program/partners/configurations/{id}
   &nbsp;&nbsp;&nbsp;&nbsp;Delete a join admin partner configuration
   <br><br>
 - <strong>JoinAdminPartnerConfigurationService</strong><br>
-  &nbsp;&nbsp;* <code>getAdminJoinProgramPartnersConfigurationsId</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /admin/join-program/partners/configurations/{id}
+  &nbsp;&nbsp;* <code>getScopeJoinProgramPartnersConfigurationsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /scope/join-program/partners/configurations/{id}
   &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a join admin partner configuration
   <br><br>
 - <strong>JoinAdminPartnerConfigurationService</strong><br>
-  &nbsp;&nbsp;* <code>patchAdminJoinProgramPartnersConfigurationsId</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>PATCH</strong> /admin/join-program/partners/configurations/{id}
+  &nbsp;&nbsp;* <code>patchScopeJoinProgramPartnersConfigurationsPartnerAccountId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>PATCH</strong> /scope/join-program/partners/configurations/{partnerAccountId}
   &nbsp;&nbsp;&nbsp;&nbsp;Update a join admin partner configuration
   <br><br>
 - <strong>JoinAdminPartnerConfigurationService</strong><br>
-  &nbsp;&nbsp;* <code>postAdminJoinProgramPartnersConfigurations</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /admin/join-program/partners/configurations
+  &nbsp;&nbsp;* <code>postScopeJoinProgramPartnersConfigurations</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /scope/join-program/partners/configurations
   &nbsp;&nbsp;&nbsp;&nbsp;Create a join admin partner configuration
   <br><br>
 - <strong>JoinPartnershipService</strong><br>
@@ -905,11 +955,6 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;* <code>getJoinProgramPartnershipsSearch</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /join-program/partnerships/search
   &nbsp;&nbsp;&nbsp;&nbsp;Search join partnerships
-  <br><br>
-- <strong>JoinPartnershipService</strong><br>
-  &nbsp;&nbsp;* <code>patchJoinProgramPartnershipsId</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>PATCH</strong> /join-program/partnerships/{id}
-  &nbsp;&nbsp;&nbsp;&nbsp;Update a join partnership
   <br><br>
 - <strong>JoinPartnershipService</strong><br>
   &nbsp;&nbsp;* <code>postJoinProgramPartnershipsCreateAffiliate</code>
@@ -1010,6 +1055,101 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;* <code>postManualTasksIdActionActionId</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /manual-tasks/{id}/action/{actionId}
   &nbsp;&nbsp;&nbsp;&nbsp;Process a manual task&#39;s action
+  <br><br>
+- <strong>MembersService</strong><br>
+  &nbsp;&nbsp;* <code>getMembersAccount</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /members/account
+  &nbsp;&nbsp;&nbsp;&nbsp;List all members of the account
+  <br><br>
+- <strong>MembersService</strong><br>
+  &nbsp;&nbsp;* <code>getMembersScope</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /members/scope
+  &nbsp;&nbsp;&nbsp;&nbsp;List all members of the scope
+  <br><br>
+- <strong>MembersService</strong><br>
+  &nbsp;&nbsp;* <code>getMembersSpace</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /members/space
+  &nbsp;&nbsp;&nbsp;&nbsp;List all members of the space
+  <br><br>
+- <strong>MerchantApplicationsService</strong><br>
+  &nbsp;&nbsp;* <code>getOnboardingMerchantApplicationsIdStatus</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /onboarding/merchant-applications/{id}/status
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a merchant application status
+  <br><br>
+- <strong>MerchantApplicationsService</strong><br>
+  &nbsp;&nbsp;* <code>getOnboardingMerchantApplicationsIdSubmissionUrl</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /onboarding/merchant-applications/{id}/submission-url
+  &nbsp;&nbsp;&nbsp;&nbsp;Return merchant application submission URL
+  <br><br>
+- <strong>MerchantApplicationsService</strong><br>
+  &nbsp;&nbsp;* <code>patchOnboardingMerchantApplicationsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>PATCH</strong> /onboarding/merchant-applications/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Update a merchant application
+  <br><br>
+- <strong>MerchantApplicationsService</strong><br>
+  &nbsp;&nbsp;* <code>postOnboardingMerchantApplications</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /onboarding/merchant-applications
+  &nbsp;&nbsp;&nbsp;&nbsp;Create a merchant application
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>deleteOauth2ClientsClientIdSecretsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /oauth2/clients/{clientId}/secrets/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Deactivate a client secret
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>deleteOauth2ClientsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /oauth2/clients/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Delete a OAuth Client
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>getOauth2Clients</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /oauth2/clients
+  &nbsp;&nbsp;&nbsp;&nbsp;List all OAuth Clients
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>getOauth2ClientsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /oauth2/clients/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve an OAuth Client
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>getOauth2ClientsSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /oauth2/clients/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search OAuth Clients
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>patchOauth2ClientsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>PATCH</strong> /oauth2/clients/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Update a OAuth Client
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>postOauth2Clients</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /oauth2/clients
+  &nbsp;&nbsp;&nbsp;&nbsp;Create a OAuth Client
+  <br><br>
+- <strong>OAuthClientsService</strong><br>
+  &nbsp;&nbsp;* <code>postOauth2ClientsClientIdSecrets</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /oauth2/clients/{clientId}/secrets
+  &nbsp;&nbsp;&nbsp;&nbsp;Generate a new client secret
+  <br><br>
+- <strong>OAuthConsentsService</strong><br>
+  &nbsp;&nbsp;* <code>deleteOauth2ConsentsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /oauth2/consents/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Revoke an OAuth Consent
+  <br><br>
+- <strong>OAuthConsentsService</strong><br>
+  &nbsp;&nbsp;* <code>getOauth2Consents</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /oauth2/consents
+  &nbsp;&nbsp;&nbsp;&nbsp;List all OAuth Consents
+  <br><br>
+- <strong>OAuthConsentsService</strong><br>
+  &nbsp;&nbsp;* <code>getOauth2ConsentsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /oauth2/consents/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve an OAuth Consent
+  <br><br>
+- <strong>OAuthConsentsService</strong><br>
+  &nbsp;&nbsp;* <code>getOauth2ConsentsSearch</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /oauth2/consents/search
+  &nbsp;&nbsp;&nbsp;&nbsp;Search OAuth Consents
   <br><br>
 - <strong>PaymentConnectorConfigurationsService</strong><br>
   &nbsp;&nbsp;* <code>deletePaymentConnectorConfigurationsId</code>
@@ -1242,6 +1382,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;List all payment terminals
   <br><br>
 - <strong>PaymentTerminalsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentTerminalsActivationStatus</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/terminals/activation-status
+  &nbsp;&nbsp;&nbsp;&nbsp;Search payment terminal activation status
+  <br><br>
+- <strong>PaymentTerminalsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentTerminalsId</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/terminals/{id}
   &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a payment terminal
@@ -1272,6 +1417,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;Perform a payment terminal transaction by identifier
   <br><br>
 - <strong>PaymentTerminalsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentTerminalsByIdentifierIdentifierRefresh</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/terminals/by-identifier/{identifier}/refresh
+  &nbsp;&nbsp;&nbsp;&nbsp;Refresh a physical terminal state by identifier
+  <br><br>
+- <strong>PaymentTerminalsService</strong><br>
   &nbsp;&nbsp;* <code>postPaymentTerminalsByIdentifierIdentifierTriggerConfiguration</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/terminals/by-identifier/{identifier}/trigger-configuration
   &nbsp;&nbsp;&nbsp;&nbsp;Remotely trigger the configuration by identifier
@@ -1292,6 +1442,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;Perform a payment terminal transaction
   <br><br>
 - <strong>PaymentTerminalsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentTerminalsIdRefresh</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/terminals/{id}/refresh
+  &nbsp;&nbsp;&nbsp;&nbsp;Refresh a physical terminal state
+  <br><br>
+- <strong>PaymentTerminalsService</strong><br>
   &nbsp;&nbsp;* <code>postPaymentTerminalsIdTriggerConfiguration</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/terminals/{id}/trigger-configuration
   &nbsp;&nbsp;&nbsp;&nbsp;Remotely trigger the configuration
@@ -1305,6 +1460,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;* <code>postPaymentTerminalsIdUnlink</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/terminals/{id}/unlink
   &nbsp;&nbsp;&nbsp;&nbsp;Unlink any device from a payment terminal
+  <br><br>
+- <strong>PaymentTerminalsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentTerminalsTriggerReversal</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/terminals/trigger-reversal
+  &nbsp;&nbsp;&nbsp;&nbsp;Revert terminal transaction
   <br><br>
 - <strong>PaymentWebAppsService</strong><br>
   &nbsp;&nbsp;* <code>deletePaymentWebAppsConnectorsConnectorExternalId</code>
@@ -1540,36 +1700,6 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;* <code>postSingleSignOnUsers</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /single-sign-on-users
   &nbsp;&nbsp;&nbsp;&nbsp;Create a single sign-on user
-  <br><br>
-- <strong>SingleSignOnUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>deleteSingleSignOnUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /single-sign-on-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Unassign a role from a single sign-on user for an account
-  <br><br>
-- <strong>SingleSignOnUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>deleteSingleSignOnUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>DELETE</strong> /single-sign-on-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Unassign a role from a single sign-on user for a space
-  <br><br>
-- <strong>SingleSignOnUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>getSingleSignOnUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /single-sign-on-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;List all roles of a single sign-on user for an account
-  <br><br>
-- <strong>SingleSignOnUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>getSingleSignOnUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /single-sign-on-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;List all roles of a single sign-on user for a space
-  <br><br>
-- <strong>SingleSignOnUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>postSingleSignOnUsersUserIdAccountRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /single-sign-on-users/{userId}/account-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Assign a role to a single sign-on user for an account
-  <br><br>
-- <strong>SingleSignOnUsersRolesService</strong><br>
-  &nbsp;&nbsp;* <code>postSingleSignOnUsersUserIdSpaceRoles</code>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /single-sign-on-users/{userId}/space-roles
-  &nbsp;&nbsp;&nbsp;&nbsp;Assign a role to a single sign-on user for a space
   <br><br>
 - <strong>SpacesService</strong><br>
   &nbsp;&nbsp;* <code>deleteSpacesId</code>
@@ -2161,6 +2291,21 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /subscriptions/{id}/upgrade-product
   &nbsp;&nbsp;&nbsp;&nbsp;Upgrade a subscription&#39;s product
   <br><br>
+- <strong>TerminalLocationsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentPointOfSaleLocations</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/point-of-sale/locations
+  &nbsp;&nbsp;&nbsp;&nbsp;List terminal locations
+  <br><br>
+- <strong>TerminalLocationsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentPointOfSaleLocationsId</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/point-of-sale/locations/{id}
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a terminal location
+  <br><br>
+- <strong>TerminalLocationsService</strong><br>
+  &nbsp;&nbsp;* <code>postPaymentPointOfSaleLocations</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /payment/point-of-sale/locations
+  &nbsp;&nbsp;&nbsp;&nbsp;Create a terminal location
+  <br><br>
 - <strong>TokenVersionsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentTokenVersions</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/token-versions
@@ -2482,6 +2627,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a Lightbox JavaScript URL
   <br><br>
 - <strong>TransactionsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentTransactionsIdOverview</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/transactions/{id}/overview
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a transaction overview
+  <br><br>
+- <strong>TransactionsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentTransactionsIdPackingSlipDocument</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/transactions/{id}/packing-slip-document
   &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a packing slip document
@@ -2495,6 +2645,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;* <code>getPaymentTransactionsIdPaymentPageUrl</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/transactions/{id}/payment-page-url
   &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a payment page URL
+  <br><br>
+- <strong>TransactionsService</strong><br>
+  &nbsp;&nbsp;* <code>getPaymentTransactionsIdSuccessfulChargeAttempt</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/transactions/{id}/successful-charge-attempt
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve the successful charge attempt
   <br><br>
 - <strong>TransactionsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentTransactionsIdTerminalReceipts</code>
@@ -2734,11 +2889,11 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>AbstractDebtCollectionCaseUpdate</strong>
 * <strong>AbstractDebtCollectorConfigurationUpdate</strong>
 * <strong>AbstractHumanUserUpdate</strong>
+* <strong>AbstractOAuthClientUpdate</strong>
 * <strong>AbstractPaymentConnectorConfigurationUpdate</strong>
 * <strong>AbstractPaymentLinkUpdate</strong>
 * <strong>AbstractPaymentMethodConfigurationUpdate</strong>
 * <strong>AbstractPaymentProcessorConfigurationActive</strong>
-* <strong>AbstractPaymentTerminalUpdate</strong>
 * <strong>AbstractRefundCommentActive</strong>
 * <strong>AbstractRoleUpdate</strong>
 * <strong>AbstractSingleSignOnUserUpdate</strong>
@@ -2756,6 +2911,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>AbstractWebhookUrlUpdate</strong>
 * <strong>Account</strong>
 * <strong>AccountCreate</strong>
+* <strong>AccountCreateWithOwner</strong>
 * <strong>AccountListResponse</strong>
 * <strong>AccountSearchResponse</strong>
 * <strong>AccountState</strong>
@@ -2781,6 +2937,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>BankAccountSearchResponse</strong>
 * <strong>BankAccountState</strong>
 * <strong>BankAccountType</strong>
+* <strong>BankPaymentType</strong>
 * <strong>BankTransaction</strong>
 * <strong>BankTransactionFlowDirection</strong>
 * <strong>BankTransactionListResponse</strong>
@@ -2788,6 +2945,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>BankTransactionSource</strong>
 * <strong>BankTransactionState</strong>
 * <strong>BankTransactionType</strong>
+* <strong>BasicAddress</strong>
 * <strong>BillingCycleModel</strong>
 * <strong>BillingCycleType</strong>
 * <strong>BillingDayCustomization</strong>
@@ -2802,6 +2960,8 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>ChargeAttempt</strong>
 * <strong>ChargeAttemptEnvironment</strong>
 * <strong>ChargeAttemptListResponse</strong>
+* <strong>ChargeAttemptLookupResult</strong>
+* <strong>ChargeAttemptProjection</strong>
 * <strong>ChargeAttemptSearchResponse</strong>
 * <strong>ChargeAttemptState</strong>
 * <strong>ChargeBankTransaction</strong>
@@ -2835,6 +2995,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>ConnectorInvocationStage</strong>
 * <strong>CountryListResponse</strong>
 * <strong>CountrySearchResponse</strong>
+* <strong>CreateFulfillmentRequest</strong>
 * <strong>CreationEntityState</strong>
 * <strong>CurrencyBankAccount</strong>
 * <strong>CurrencyBankAccountListResponse</strong>
@@ -2884,6 +3045,8 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>DebtCollectorConfigurationUpdate</strong>
 * <strong>DebtCollectorListResponse</strong>
 * <strong>DebtCollectorSearchResponse</strong>
+* <strong>DeliveryDaysRange</strong>
+* <strong>DeliveryDestination</strong>
 * <strong>DeliveryIndication</strong>
 * <strong>DeliveryIndicationDecisionReason</strong>
 * <strong>DeliveryIndicationListResponse</strong>
@@ -2899,6 +3062,10 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>DocumentTemplateTypeListResponse</strong>
 * <strong>DocumentTemplateTypeSearchResponse</strong>
 * <strong>DunningCase</strong>
+* <strong>DunningCaseLevel</strong>
+* <strong>DunningCaseLevelListResponse</strong>
+* <strong>DunningCaseLevelSearchResponse</strong>
+* <strong>DunningCaseLevelState</strong>
 * <strong>DunningCaseListResponse</strong>
 * <strong>DunningCaseSearchResponse</strong>
 * <strong>DunningCaseState</strong>
@@ -2913,6 +3080,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>DunningFlowSearchResponse</strong>
 * <strong>DunningFlowType</strong>
 * <strong>Environment</strong>
+* <strong>ExtendedRestOAuthClient</strong>
 * <strong>ExternalTransferBankTransaction</strong>
 * <strong>ExternalTransferBankTransactionListResponse</strong>
 * <strong>ExternalTransferBankTransactionSearchResponse</strong>
@@ -2921,18 +3089,36 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>FailureReason</strong>
 * <strong>Feature</strong>
 * <strong>FeatureCategory</strong>
+* <strong>Fulfillment</strong>
+* <strong>FulfillmentSearchResponse</strong>
+* <strong>FulfillmentState</strong>
 * <strong>Gender</strong>
 * <strong>HumanUser</strong>
 * <strong>HumanUserCreate</strong>
 * <strong>HumanUserListResponse</strong>
 * <strong>HumanUserSearchResponse</strong>
 * <strong>HumanUserUpdate</strong>
+* <strong>IdentityInfo</strong>
 * <strong>InternalTransferBankTransaction</strong>
 * <strong>InternalTransferBankTransactionListResponse</strong>
 * <strong>InternalTransferBankTransactionSearchResponse</strong>
 * <strong>InvoiceCommentListResponse</strong>
 * <strong>InvoiceCommentSearchResponse</strong>
 * <strong>InvoiceListResponse</strong>
+* <strong>InvoiceProcessor</strong>
+* <strong>InvoiceReconciliationRecord</strong>
+* <strong>InvoiceReconciliationRecordInvoiceLink</strong>
+* <strong>InvoiceReconciliationRecordInvoiceLinkListResponse</strong>
+* <strong>InvoiceReconciliationRecordInvoiceLinkSearchResponse</strong>
+* <strong>InvoiceReconciliationRecordListResponse</strong>
+* <strong>InvoiceReconciliationRecordRejectionStatus</strong>
+* <strong>InvoiceReconciliationRecordSearchResponse</strong>
+* <strong>InvoiceReconciliationRecordState</strong>
+* <strong>InvoiceReconciliationRecordType</strong>
+* <strong>InvoiceReimbursement</strong>
+* <strong>InvoiceReimbursementListResponse</strong>
+* <strong>InvoiceReimbursementSearchResponse</strong>
+* <strong>InvoiceReimbursementState</strong>
 * <strong>InvoiceSearchResponse</strong>
 * <strong>Label</strong>
 * <strong>LabelDescriptor</strong>
@@ -2945,6 +3131,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>LabelDescriptorType</strong>
 * <strong>LanguageListResponse</strong>
 * <strong>LanguageSearchResponse</strong>
+* <strong>LegalForm</strong>
 * <strong>LegalOrganizationForm</strong>
 * <strong>LegalOrganizationFormListResponse</strong>
 * <strong>LegalOrganizationFormSearchResponse</strong>
@@ -2965,12 +3152,30 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>ManualTaskSearchResponse</strong>
 * <strong>ManualTaskState</strong>
 * <strong>ManualTaskType</strong>
+* <strong>MerchantApplicationDataDto</strong>
+* <strong>MerchantApplicationState</strong>
+* <strong>MerchantApplicationStatusDto</strong>
+* <strong>MerchantBankDetailsDto</strong>
+* <strong>MerchantCompanyDetailsDto</strong>
+* <strong>MerchantContractRevenueDto</strong>
+* <strong>MerchantEcommerceDetailsDto</strong>
+* <strong>MerchantPaymentChannelsDto</strong>
+* <strong>MerchantRelatedPersonsDto</strong>
 * <strong>MetricListResponse</strong>
 * <strong>MetricSearchResponse</strong>
 * <strong>MetricUsage</strong>
 * <strong>MetricUsageListResponse</strong>
 * <strong>MetricUsageReportListResponse</strong>
 * <strong>MetricUsageReportSearchResponse</strong>
+* <strong>OAuthClient</strong>
+* <strong>OAuthClientCreate</strong>
+* <strong>OAuthClientListResponse</strong>
+* <strong>OAuthClientSearchResponse</strong>
+* <strong>OAuthClientUpdate</strong>
+* <strong>OAuthConsent</strong>
+* <strong>OAuthConsentListResponse</strong>
+* <strong>OAuthConsentSearchResponse</strong>
+* <strong>OAuthUser</strong>
 * <strong>OneClickPaymentMode</strong>
 * <strong>PanType</strong>
 * <strong>PaymentAdjustment</strong>
@@ -3011,6 +3216,8 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>PaymentFacilitatorPricingProfileState</strong>
 * <strong>PaymentInformationHash</strong>
 * <strong>PaymentInformationHashType</strong>
+* <strong>PaymentInitiationAdviceFile</strong>
+* <strong>PaymentInitiationAdviceFileState</strong>
 * <strong>PaymentLink</strong>
 * <strong>PaymentLinkActive</strong>
 * <strong>PaymentLinkAddressHandlingMode</strong>
@@ -3041,18 +3248,23 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>PaymentProcessorListResponse</strong>
 * <strong>PaymentProcessorSearchResponse</strong>
 * <strong>PaymentTerminal</strong>
+* <strong>PaymentTerminalActivationStatus</strong>
+* <strong>PaymentTerminalActivationStatusDetailSearchResponse</strong>
 * <strong>PaymentTerminalAddress</strong>
+* <strong>PaymentTerminalAddressCreate</strong>
 * <strong>PaymentTerminalConfiguration</strong>
 * <strong>PaymentTerminalConfigurationState</strong>
 * <strong>PaymentTerminalConfigurationVersion</strong>
 * <strong>PaymentTerminalConfigurationVersionState</strong>
-* <strong>PaymentTerminalCreate</strong>
+* <strong>PaymentTerminalCreationRequest</strong>
 * <strong>PaymentTerminalDccTransactionSum</strong>
 * <strong>PaymentTerminalLocation</strong>
+* <strong>PaymentTerminalLocationCrudModel</strong>
+* <strong>PaymentTerminalLocationCrudModelRestApiCreate</strong>
+* <strong>PaymentTerminalLocationListResponse</strong>
 * <strong>PaymentTerminalLocationState</strong>
 * <strong>PaymentTerminalLocationVersion</strong>
 * <strong>PaymentTerminalLocationVersionState</strong>
-* <strong>PaymentTerminalPreparing</strong>
 * <strong>PaymentTerminalReceiptType</strong>
 * <strong>PaymentTerminalState</strong>
 * <strong>PaymentTerminalTransactionSum</strong>
@@ -3060,11 +3272,14 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>PaymentTerminalTransactionSummaryReference</strong>
 * <strong>PaymentTerminalType</strong>
 * <strong>PaymentTerminalUpdate</strong>
+* <strong>PayoutAccountInfo</strong>
 * <strong>Permission</strong>
 * <strong>PermissionListResponse</strong>
 * <strong>PermissionSearchResponse</strong>
 * <strong>PersistableCurrencyAmount</strong>
 * <strong>PersistableCurrencyAmountUpdate</strong>
+* <strong>PersonSalutation</strong>
+* <strong>PricingHistoryDto</strong>
 * <strong>ProductComponentGroupListResponse</strong>
 * <strong>ProductComponentGroupSearchResponse</strong>
 * <strong>ProductComponentListResponse</strong>
@@ -3106,17 +3321,21 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>RefundCommentListResponse</strong>
 * <strong>RefundCommentSearchResponse</strong>
 * <strong>RefundCreate</strong>
+* <strong>RefundDaysRange</strong>
 * <strong>RefundListResponse</strong>
+* <strong>RefundPercentageRange</strong>
 * <strong>RefundRecoveryBankTransaction</strong>
 * <strong>RefundRecoveryBankTransactionListResponse</strong>
 * <strong>RefundRecoveryBankTransactionSearchResponse</strong>
 * <strong>RefundSearchResponse</strong>
 * <strong>RefundState</strong>
 * <strong>RefundType</strong>
+* <strong>RelatedPerson</strong>
 * <strong>RenderedDocument</strong>
 * <strong>RenderedTerminalReceipt</strong>
 * <strong>RenderedTerminalReceiptListResponse</strong>
 * <strong>RenderedTerminalTransactionSummary</strong>
+* <strong>RepresentativeInfo</strong>
 * <strong>RestAddressFormat</strong>
 * <strong>RestAddressFormatField</strong>
 * <strong>RestApiBulkOperationResult</strong>
@@ -3128,10 +3347,14 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>RestCurrency</strong>
 * <strong>RestCustomerEmailAddress</strong>
 * <strong>RestLanguage</strong>
+* <strong>RestMember</strong>
+* <strong>RestOAuthClientSecret</strong>
+* <strong>RestOAuthClientSecretCreated</strong>
 * <strong>ResultPortionModel</strong>
 * <strong>Role</strong>
 * <strong>RoleCreate</strong>
 * <strong>RoleListResponse</strong>
+* <strong>RoleRef</strong>
 * <strong>RoleSearchResponse</strong>
 * <strong>RoleState</strong>
 * <strong>RoleUpdate</strong>
@@ -3140,12 +3363,15 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>SalesChannelSearchResponse</strong>
 * <strong>Scope</strong>
 * <strong>ScopeSingleSignOnProvider</strong>
+* <strong>SecretKeyState</strong>
 * <strong>Setter</strong>
 * <strong>SingleSignOnUser</strong>
 * <strong>SingleSignOnUserCreate</strong>
 * <strong>SingleSignOnUserListResponse</strong>
 * <strong>SingleSignOnUserSearchResponse</strong>
 * <strong>SingleSignOnUserUpdate</strong>
+* <strong>SoleProprietorOwnershipType</strong>
+* <strong>SoleProprietorshipInfo</strong>
 * <strong>SortingOrder</strong>
 * <strong>Space</strong>
 * <strong>SpaceAddress</strong>
@@ -3266,6 +3492,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>TokenizedCardData</strong>
 * <strong>TokenizedCardDataCreate</strong>
 * <strong>TokenizedCardRequest</strong>
+* <strong>TrackingNumberRequest</strong>
 * <strong>Transaction</strong>
 * <strong>TransactionClientPlatformInformation</strong>
 * <strong>TransactionComment</strong>
@@ -3292,7 +3519,9 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>TransactionLineItemVersionCreate</strong>
 * <strong>TransactionLineItemVersionState</strong>
 * <strong>TransactionListResponse</strong>
+* <strong>TransactionOverview</strong>
 * <strong>TransactionPending</strong>
+* <strong>TransactionProjection</strong>
 * <strong>TransactionSearchResponse</strong>
 * <strong>TransactionState</strong>
 * <strong>TransactionUserInterfaceType</strong>
@@ -3303,19 +3532,16 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>TransactionVoidState</strong>
 * <strong>TwoFactorAuthenticationType</strong>
 * <strong>User</strong>
-* <strong>UserAccountRole</strong>
-* <strong>UserAccountRoleListResponse</strong>
-* <strong>UserSpaceRole</strong>
-* <strong>UserSpaceRoleListResponse</strong>
 * <strong>UserType</strong>
-* <strong>WalleeJoinPartnershipListResponse</strong>
-* <strong>WalleeJoinPartnershipSearchResponse</strong>
 * <strong>WalleejoinAdminPartnerConfigurationRequestDto</strong>
 * <strong>WalleejoinAdminPartnerConfigurationResponseDto</strong>
 * <strong>WalleejoinAdminPricingType</strong>
-* <strong>WalleejoinCreatePartnershipRequestDto</strong>
+* <strong>WalleejoinCreatePartnershipApiRequestDto</strong>
 * <strong>WalleejoinPartnership</strong>
 * <strong>WalleejoinPartnershipCreate</strong>
+* <strong>WalleejoinPartnershipResponseDto</strong>
+* <strong>WalleejoinPartnershipResponseDtoListResponse</strong>
+* <strong>WalleejoinPartnershipResponseDtoSearchResponse</strong>
 * <strong>WalleejoinPartnershipState</strong>
 * <strong>WalleejoinPartnershipType</strong>
 * <strong>WalleejoinPartnershipUpdate</strong>
